@@ -4,11 +4,11 @@ import { RootState, rootReducer } from "./reducers";
 
 let store: Store<RootState> | undefined;
 
-const configureStore = (initialState: RootState): Store<RootState> => {
+const configureStore = (initialState?: RootState): Store<RootState> => {
   return createStore(rootReducer, initialState, applyMiddleware());
 };
 
-const initStore = (preloadedState: RootState) => {
+export const initStore = (preloadedState?: RootState): Store<RootState> => {
   let newStore = store || configureStore(preloadedState);
 
   // After navigating to a page with an initial Redux state, merge that state
@@ -34,7 +34,7 @@ const initStore = (preloadedState: RootState) => {
   return newStore;
 };
 
-export const useStore = (initialState: RootState): Store<RootState> => {
+export const useStore = (initialState?: RootState): Store<RootState> => {
   return useMemo(() => initStore(initialState), [initialState]);
 };
 

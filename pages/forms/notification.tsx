@@ -7,6 +7,7 @@ import absoluteUrl from "next-absolute-url";
 import { NotificationAction } from "../../state/actions/types";
 import { setMessage } from "../../state/actions/notification";
 import { RootState } from "../../state/reducers";
+import { initStore } from "../../state/store";
 import Layout from "../../components/Layout";
 
 interface NotificationProps {
@@ -50,8 +51,13 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   const response = await fetch(`${origin}/backend/api/hello`);
   const hello = await response.json();
 
+  const reduxStore = initStore();
+  const { dispatch } = reduxStore;
+  dispatch(setMessage({ text: `SSR got message ${hello.message} at ${new Date().toLocaleString("fi-FI")}` }));
+
   return {
     props: {
+      initialReduxState: reduxStore.getState(),
       message: hello.message,
     },
   };
