@@ -1,8 +1,12 @@
-import React, { ReactElement } from "react";
+import React, { Dispatch, ReactElement } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import { GetServerSideProps } from "next";
 import Head from "next/head";
 import Link from "next/link";
 import absoluteUrl from "next-absolute-url";
+import { NotificationAction } from "../../state/actions/types";
+import { setMessage } from "../../state/actions/notification";
+import { RootState } from "../../state/reducers";
 import Layout from "../../components/Layout";
 
 interface NotificationProps {
@@ -10,6 +14,10 @@ interface NotificationProps {
 }
 
 const Notification = ({ message }: NotificationProps): ReactElement => {
+  const dispatch = useDispatch<Dispatch<NotificationAction>>();
+  const handleMessage = () => dispatch(setMessage({ text: `test message set at ${new Date().toLocaleString("fi-FI")}` }));
+  const message2 = useSelector((state: RootState) => state.notification.message.text);
+
   return (
     <Layout>
       <Head>
@@ -20,6 +28,12 @@ const Notification = ({ message }: NotificationProps): ReactElement => {
       </div>
       <div>
         <span>{message}</span>
+      </div>
+      <div>
+        <button type="button" onClick={handleMessage}>
+          Message
+        </button>
+        <span>{message2}</span>
       </div>
       <div>
         <Link href="/">HOME</Link>

@@ -12,10 +12,10 @@ const Main = (): ReactElement => {
       </Head>
       <div>HOME</div>
       <div>
-        <Link href="/form/notification">NOTIFICATION</Link>
+        <Link href="/forms/notification">NOTIFICATION</Link>
       </div>
       <div>
-        <Link href="/form/moderation">MODERATION</Link>
+        <Link href="/forms/moderation">MODERATION</Link>
       </div>
     </Layout>
   );
