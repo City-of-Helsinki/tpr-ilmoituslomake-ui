@@ -5,6 +5,7 @@ import Head from "next/head";
 import Link from "next/link";
 import { useI18n } from "next-localization";
 import absoluteUrl from "next-absolute-url";
+import { Button } from "hds-react";
 import i18nLoader from "../../utils/i18n";
 import { NotificationAction } from "../../state/actions/types";
 import { setMessage } from "../../state/actions/notification";
@@ -35,9 +36,7 @@ const Notification = ({ message }: NotificationProps): ReactElement => {
         <span>{message}</span>
       </div>
       <div>
-        <button type="button" onClick={handleMessage}>
-          Message
-        </button>
+        <Button onClick={handleMessage}>Message</Button>
         <span>{message2}</span>
       </div>
       <div>

@@ -10,6 +10,8 @@
     "lintcss": "stylelint --config .stylelintrc.json \"**/*.{css,scss}\"; exit 0"
   },
   "dependencies": {
+    "hds-core": "^0.15.0",
+    "hds-react": "^0.15.0",
     "next": "10.0.0",
     "next-absolute-url": "^1.2.2",
     "next-localization": "^0.8.5",
