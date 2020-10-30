@@ -3,7 +3,9 @@ import { useSelector, useDispatch } from "react-redux";
 import { GetServerSideProps } from "next";
 import Head from "next/head";
 import Link from "next/link";
+import { useI18n } from "next-localization";
 import absoluteUrl from "next-absolute-url";
+import i18nLoader from "../../utils/i18n";
 import { NotificationAction } from "../../state/actions/types";
 import { setMessage } from "../../state/actions/notification";
 import { RootState } from "../../state/reducers";
@@ -15,6 +17,8 @@ interface NotificationProps {
 }
 
 const Notification = ({ message }: NotificationProps): ReactElement => {
+  const i18n = useI18n();
+
   const dispatch = useDispatch<Dispatch<NotificationAction>>();
   const handleMessage = () => dispatch(setMessage({ text: `test message set at ${new Date().toLocaleString("fi-FI")}` }));
   const message2 = useSelector((state: RootState) => state.notification.message.text);
@@ -22,10 +26,10 @@ const Notification = ({ message }: NotificationProps): ReactElement => {
   return (
     <Layout>
       <Head>
-        <title>NOTIFICATION</title>
+        <title>{i18n.t("notification.title")}</title>
       </Head>
       <div>
-        <span>NOTIFICATION</span>
+        <span>{i18n.t("notification.title")}</span>
       </div>
       <div>
         <span>{message}</span>
@@ -44,8 +48,9 @@ const Notification = ({ message }: NotificationProps): ReactElement => {
 };
 
 // Server-side rendering
-export const getServerSideProps: GetServerSideProps = async (context) => {
-  const { req } = context;
+export const getServerSideProps: GetServerSideProps = async ({ req, locale }) => {
+  const lngDict = await i18nLoader(locale);
+
   const { origin } = absoluteUrl(req);
 
   const response = await fetch(`${origin}/backend/api/hello`);
@@ -58,6 +63,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   return {
     props: {
       initialReduxState: reduxStore.getState(),
+      lngDict,
       message: hello.message,
     },
   };
