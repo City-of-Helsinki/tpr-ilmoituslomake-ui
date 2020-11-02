@@ -2,6 +2,7 @@
   "notification": {
     "title": "Notification form",
     "skipToContent": "Skip to content",
+    "login": "Sign in",
     "button": {
       "next": "Next",
       "previous": "Previous"

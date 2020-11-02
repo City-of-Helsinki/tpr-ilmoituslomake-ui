@@ -2,6 +2,7 @@
   "notification": {
     "title": "Ilmoituslomake",
     "skipToContent": "Siirry sivun pääsisältöön",
+    "login": "Kirjaudu sisään",
     "button": {
       "next": "Seuraava",
       "previous": "Edellinen"

@@ -39,7 +39,7 @@ const Header = (): ReactElement => {
           <Navigation.Item label={`5 ${i18n.t("notification.page.notifier")}`} active={currentPage === 5} onClick={() => changePage(5)} />
         </Navigation.Row>
         <Navigation.Actions>
-          <Navigation.User label="Sign in" />
+          <Navigation.User label={i18n.t("notification.login")} />
           <Navigation.LanguageSelector label={(router.locale || defaultLocale).toUpperCase()}>
             <Navigation.Item label="Suomeksi" onClick={() => changeLanguage("fi")} />
             <Navigation.Item label="In English" onClick={() => changeLanguage("en")} />
