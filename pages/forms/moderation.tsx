@@ -17,9 +17,6 @@ const Moderation = (): ReactElement => {
       <div>
         <span>{i18n.t("moderation.title")}</span>
       </div>
-      <div>
-        <Link href="/">HOME</Link>
-      </div>
     </Layout>
   );
 };

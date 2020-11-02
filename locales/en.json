@@ -1,6 +1,33 @@
 {
   "notification": {
-    "title": "Notification form"
+    "title": "Notification form",
+    "skipToContent": "Skip to content",
+    "button": {
+      "next": "Next",
+      "previous": "Previous"
+    },
+    "page": {
+      "contact": "Contact info",
+      "description": "Name and description",
+      "notifier": "Notifier info",
+      "opening": "Opening and payment",
+      "photos": "Photos"
+    },
+    "description": {
+      "title": "Place's name and description"
+    },
+    "contact": {
+      "title": "Place's contact information"
+    },
+    "opening": {
+      "title": "Place's opening times and payment methods"
+    },
+    "photos": {
+      "title": "Place's photos"
+    },
+    "notifier": {
+      "title": "Place's notifier information"
+    }
   },
   "moderation": {
     "title": "Moderation"

@@ -1,6 +1,33 @@
 {
   "notification": {
-    "title": "Ilmoituslomake"
+    "title": "Ilmoituslomake",
+    "skipToContent": "Siirry sivun pääsisältöön",
+    "button": {
+      "next": "Seuraava",
+      "previous": "Edellinen"
+    },
+    "page": {
+      "contact": "Yhteystiedot",
+      "description": "Nimi ja kuvaus",
+      "notifier": "Ilmoittajan tiedot",
+      "opening": "Aukiolo ja maksut",
+      "photos": "Kuvat"
+    },
+    "description": {
+      "title": "Toimipisteen nimi ja kuvaus"
+    },
+    "contact": {
+      "title": "Toimipisteen yhteystiedot"
+    },
+    "opening": {
+      "title": "Toimipisteen aukioloajat ja maksutavat"
+    },
+    "photos": {
+      "title": "Toimipisteen kuvat"
+    },
+    "notifier": {
+      "title": "Toimipisteen ilmoittajan tiedot"
+    }
   },
   "moderation": {
     "title": "Moderointi"
