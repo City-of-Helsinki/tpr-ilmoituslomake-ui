@@ -48,6 +48,7 @@ const Description = (): ReactElement => {
 
       <h2>{i18n.t("notification.description.tag.title")}</h2>
       <Combobox
+        id="tag"
         options={tagOptions.map((tag) => ({ label: tag }))}
         label={i18n.t("notification.description.tag.add")}
         helper={i18n.t("notification.description.tag.helperText")}
