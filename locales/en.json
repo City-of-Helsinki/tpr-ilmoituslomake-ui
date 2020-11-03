@@ -53,7 +53,26 @@
       }
     },
     "contact": {
-      "title": "Place's contact information"
+      "title": "Place's contact information",
+      "address": {
+        "title": "Address",
+        "streetAddress": "Street address",
+        "postalCode": "Postal code",
+        "postalOffice": "Postal office"
+      },
+      "location": {
+        "title": "Place on the map"
+      },
+      "contact": {
+        "title": "Contact",
+        "phone": "Phone number",
+        "email": "Email address"
+      },
+      "link": {
+        "title": "Links",
+        "website": "Website address",
+        "socialMedia": "Social media"
+      }
     },
     "opening": {
       "title": "Place's opening times and payment methods"
