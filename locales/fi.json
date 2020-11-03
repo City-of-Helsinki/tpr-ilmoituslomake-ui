@@ -5,8 +5,11 @@
     "login": "Kirjaudu sisään",
     "button": {
       "next": "Seuraava",
-      "previous": "Edellinen"
-    },
+      "previous": "Edellinen",
+      "clearAllSelections": "Poista kaikki valinnat",
+      "remove": "Poista",
+      "toggleMenu": "Vaihdele valikko"
+  },
     "page": {
       "contact": "Yhteystiedot",
       "description": "Nimi ja kuvaus",
@@ -15,7 +18,39 @@
       "photos": "Kuvat"
     },
     "description": {
-      "title": "Toimipisteen nimi ja kuvaus"
+      "title": "Toimipisteen nimi ja kuvaus",
+      "placeType": {
+        "title": "Toimipisteen tyyppi",
+        "myPlace": "Ilmoittamani toimipiste on",
+        "private": "Yksityinen kohde",
+        "municipal": "Kunnallinen kohde",
+        "institution": "Säätiö- tai yhdistyskohde"
+      },
+      "information": {
+        "title": "Suomenkieliset tiedot"
+      },
+      "placeName": {
+        "title": "Toimipisteen nimi suomeksi"
+      },
+      "shortDescription": {
+        "title": "Toimipisteen lyhyt kuvaus suomeksi",
+        "helperText": "Huomioi, että teksti ei saa olla me-muodossa. Pituus max. 150 merkkiä",
+        "tooltipLabel": "Paranna löydettävyyttä",
+        "tooltipText": "Lyhyen kuvauksen avulla toimipaikka löytyy paremmin hakukoneella."
+      },
+      "longDescription": {
+        "title": "Toimipisteen pitkä kuvaus suomeksi",
+        "helperText": "Huomioi, että teksti ei saa olla me-muodossa. Pituus max. 4000 merkkiä",
+        "tooltipLabel": "TODO",
+        "tooltipText": "TODO"
+      },
+      "tag": {
+        "title": "Aihetunnisteet",
+        "add": "Lisää aihetunniste",
+        "helperText": "Kirjoita hakusana tai valitse listalta.",
+        "tooltipLabel": "TODO",
+        "tooltipText": "TODO"
+      }
     },
     "contact": {
       "title": "Toimipisteen yhteystiedot"

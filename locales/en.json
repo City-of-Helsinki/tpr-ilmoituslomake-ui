@@ -5,7 +5,10 @@
     "login": "Sign in",
     "button": {
       "next": "Next",
-      "previous": "Previous"
+      "previous": "Previous",
+      "clearAllSelections": "Clear all selections",
+      "remove": "Remove",
+      "toggleMenu": "Toggle menu"
     },
     "page": {
       "contact": "Contact info",
@@ -15,7 +18,39 @@
       "photos": "Photos"
     },
     "description": {
-      "title": "Place's name and description"
+      "title": "Place's name and description",
+      "placeType": {
+        "title": "Place's type",
+        "myPlace": "The place I'm notifying about is a",
+        "private": "Private place",
+        "municipal": "Municipal place",
+        "institution": "Institution place"
+      },
+      "information": {
+        "title": "Finnish language information"
+      },
+      "placeName": {
+        "title": "Place's name in Finnish"
+      },
+      "shortDescription": {
+        "title": "Place's short description in Finnish",
+        "helperText": "Note that the text cannot be in 'we' form. Length max. 150 characters",
+        "tooltipLabel": "Improve findability",
+        "tooltipText": "A short description helps the place to be found more easily with a search engine."
+      },
+      "longDescription": {
+        "title": "Place's long description in Finnish",
+        "helperText": "Note that the text cannot be in 'we' form. Length max. 4000 characters",
+        "tooltipLabel": "TODO",
+        "tooltipText": "TODO"
+      },
+      "tag": {
+        "title": "Tags",
+        "add": "Add tag",
+        "helperText": "Type a search word or select from the list.",
+        "tooltipLabel": "TODO",
+        "tooltipText": "TODO"
+      }
     },
     "contact": {
       "title": "Place's contact information"
