@@ -4,11 +4,12 @@ module.exports = {
     defaultLocale: "fi",
     localeDetection: false, // Not implemented yet
   },
+  trailingSlash: true,
   async rewrites() {
     return [
       {
-        source: "/backend/api/:method",
-        destination: "http://localhost:8008/api/:method/",
+        source: "/backend/api/:method*/",
+        destination: "http://localhost:8008/api/:method*/",
       },
     ];
   },
