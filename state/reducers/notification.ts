@@ -1,7 +1,7 @@
 import { AnyAction } from "redux";
 import { NotificationState } from "./types";
-const MAX_PAGE = 5;
 import { SET_PAGE, SET_NOTIFICATION_DATA, SET_MESSAGE, SET_SOMETHING_ELSE } from "../actions/types";
+import { MAX_PAGE } from "../../types/constants";
 
 const initialState: NotificationState = {
   page: 1,

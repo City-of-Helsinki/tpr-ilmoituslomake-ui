@@ -11,6 +11,7 @@
     "json2ts": "json2ts -i ./schemas/ -o ./types/"
   },
   "dependencies": {
+    "ajv": "^7.0.0-beta.2",
     "hds-core": "^0.15.0",
     "hds-react": "^0.15.0",
     "next": "10.0.0",
