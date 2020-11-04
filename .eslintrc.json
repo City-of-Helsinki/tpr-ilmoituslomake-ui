@@ -39,6 +39,10 @@
   "rules": {
     "react/react-in-jsx-scope": "off", // Needed for next.js
     "react/jsx-props-no-spreading": ["error", {"custom": "ignore"}],
-    "import/no-named-as-default": 0
+    "import/no-named-as-default": 0,
+    "@typescript-eslint/naming-convention": ["error", {
+      "selector": "variable",
+      "format": ["camelCase", "PascalCase", "UPPER_CASE", "snake_case"]
+    }]
   }
 }
