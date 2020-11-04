@@ -6,11 +6,10 @@ import { RootState } from "../../state/reducers";
 const Notifier = (): ReactElement => {
   const i18n = useI18n();
 
-  const currentPage = useSelector((state: RootState) => state.notification.page);
-
   return (
     <div>
-      <h1>{`${currentPage} ${i18n.t("notification.notifier.title")}`}</h1>
+      <h2>{i18n.t("notification.notifier.title")}</h2>
+      <div>NOTIFIER TODO</div>
     </div>
   );
 };

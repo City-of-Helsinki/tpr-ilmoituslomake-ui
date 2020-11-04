@@ -14,9 +14,15 @@ import Header from "../../components/notification/Header";
 import Footer from "../../components/notification/Footer";
 import Contact from "../../components/notification/Contact";
 import Description from "../../components/notification/Description";
+import Location from "../../components/notification/Location";
 import Notifier from "../../components/notification/Notifier";
 import Opening from "../../components/notification/Opening";
+import Payment from "../../components/notification/Payment";
 import Photos from "../../components/notification/Photos";
+import PlaceType from "../../components/notification/PlaceType";
+import Preview from "../../components/notification/Preview";
+import Prices from "../../components/notification/Prices";
+import Tags from "../../components/notification/Tags";
 
 interface NotificationProps {
   message: string;
@@ -39,11 +45,42 @@ const Notification = ({ message }: NotificationProps): ReactElement => {
         <title>{i18n.t("notification.title")}</title>
       </Head>
       <Header />
-      {currentPage === 1 && <Description />}
-      {currentPage === 2 && <Contact />}
-      {currentPage === 3 && <Opening />}
-      {currentPage === 4 && <Photos />}
-      {currentPage === 5 && <Notifier />}
+      {currentPage === 1 && (
+        <div>
+          <h1>{`${currentPage} ${i18n.t("notification.main.basic")}`}</h1>
+          <Description />
+          <PlaceType />
+          <Tags />
+          <Notifier />
+        </div>
+      )}
+      {currentPage === 2 && (
+        <div>
+          <h1>{`${currentPage} ${i18n.t("notification.main.contact")}`}</h1>
+          <Location />
+          <Contact />
+          <Opening />
+        </div>
+      )}
+      {currentPage === 3 && (
+        <div>
+          <h1>{`${currentPage} ${i18n.t("notification.main.photos")}`}</h1>
+          <Photos />
+        </div>
+      )}
+      {currentPage === 4 && (
+        <div>
+          <h1>{`${currentPage} ${i18n.t("notification.main.payment")}`}</h1>
+          <Prices />
+          <Payment />
+        </div>
+      )}
+      {currentPage === 5 && (
+        <div>
+          <h1>{`${currentPage} ${i18n.t("notification.main.send")}`}</h1>
+          <Preview />
+        </div>
+      )}
       <Footer />
       {/*
       <br />

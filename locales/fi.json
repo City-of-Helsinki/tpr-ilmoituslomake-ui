@@ -11,77 +11,103 @@
       "toggleMenu": "Vaihdele valikko"
     },
     "page": {
+      "basic": "Perustiedot",
       "contact": "Yhteystiedot",
-      "description": "Nimi ja kuvaus",
-      "notifier": "Ilmoittajan tiedot",
-      "opening": "Aukiolo ja maksut",
-      "photos": "Kuvat"
+      "payment": "Maksut",
+      "photos": "Kuvat",
+      "send": "Lähetä"
+    },
+    "main": {
+      "basic": "Kohteen perustiedot",
+      "contact": "Kohteen yhteystiedot",
+      "payment": "Kohteen hinnat ja maksutavat",
+      "photos": "Kohteen kuvat",
+      "send": "Esikatselu ja lähetys"
+    },
+    "contact": {
+      "title": "Kohteen yhteystiedot",
+      "phone": {
+        "label": "Puhelinnumero"
+      },
+      "email": {
+        "label": "Sähköpostiosoite"
+      }
     },
     "description": {
-      "title": "Toimipisteen nimi ja kuvaus",
-      "placeType": {
-        "title": "Toimipisteen tyyppi",
-        "myPlace": "Ilmoittamani toimipiste on",
-        "private": "Yksityinen kohde",
-        "municipal": "Kunnallinen kohde",
-        "institution": "Säätiö- tai yhdistyskohde"
-      },
-      "information": {
-        "title": "Suomenkieliset tiedot"
-      },
+      "title": "Kohteen nimi ja kuvaus",
       "placeName": {
-        "title": "Toimipisteen nimi suomeksi"
+        "label": "Kohteen nimi suomeksi"
       },
       "shortDescription": {
-        "title": "Toimipisteen lyhyt kuvaus suomeksi",
+        "label": "Kohteen lyhyt kuvaus suomeksi",
         "helperText": "Huomioi, että teksti ei saa olla me-muodossa. Pituus max. 150 merkkiä",
         "tooltipLabel": "Paranna löydettävyyttä",
         "tooltipText": "Lyhyen kuvauksen avulla toimipaikka löytyy paremmin hakukoneella."
       },
       "longDescription": {
-        "title": "Toimipisteen pitkä kuvaus suomeksi",
+        "label": "Kohteen pitkä kuvaus suomeksi",
         "helperText": "Huomioi, että teksti ei saa olla me-muodossa. Pituus max. 4000 merkkiä",
         "tooltipLabel": "TODO",
         "tooltipText": "TODO"
+      }
+    },
+    "links": {
+      "title": "Kohteen linkit",
+      "website": {
+        "label": "Verkkosivuston osoite"
       },
-      "tag": {
-        "title": "Aihetunnisteet",
-        "add": "Lisää aihetunniste",
+      "socialMedia": {
+        "label": "Sosiaalinen media"
+      }
+    },
+    "location": {
+      "title": "Kohteen sijainti",
+      "streetAddress": {
+        "label": "Katuosoite"
+      },
+      "postalCode": {
+        "label": "Postinumero"
+      },
+      "postalOffice": {
+        "label": "Postitoimipaikka"
+      }
+    },
+    "map": {
+      "title": "Kohde kartalla"
+    },
+    "opening": {
+      "title": "Aukioloajat"
+    },
+    "notifier": {
+      "title": "Ilmoittajan tiedot"
+    },
+    "payment": {
+      "title": "Maksutavat"
+    },
+    "photos": {
+      "title": "Kuvat"
+    },
+    "placeType": {
+      "title": "Kohteen tyyppi",
+      "myPlace": "Ilmoittamani toimipiste on",
+      "private": "Yksityinen kohde",
+      "municipal": "Kunnallinen kohde",
+      "institution": "Säätiö- tai yhdistyskohde"
+    },
+    "preview": {
+      "title": "Esikatselu"
+    },
+    "prices": {
+      "title": "Hinnat ja pääsymaksut"
+    },
+    "tags": {
+      "title": "Aihetunnisteet",
+      "add": {
+        "label": "Lisää aihetunniste",
         "helperText": "Kirjoita hakusana tai valitse listalta.",
         "tooltipLabel": "TODO",
         "tooltipText": "TODO"
       }
-    },
-    "contact": {
-      "title": "Toimipisteen yhteystiedot",
-      "address": {
-        "title": "Osoite",
-        "streetAddress": "Katuosoite",
-        "postalCode": "Postinumero",
-        "postalOffice": "Postitoimipaikka"
-      },
-      "location": {
-        "title": "Kohde kartalla"
-      },
-      "contact": {
-        "title": "Ota yhteyttä",
-        "phone": "Puhelinnumero",
-        "email": "Sähköpostiosoite"
-      },
-      "link": {
-        "title": "Linkit",
-        "website": "Verkkosivuston osoite",
-        "socialMedia": "Sosiaalinen media"
-      }
-    },
-    "opening": {
-      "title": "Toimipisteen aukioloajat ja maksutavat"
-    },
-    "photos": {
-      "title": "Toimipisteen kuvat"
-    },
-    "notifier": {
-      "title": "Toimipisteen ilmoittajan tiedot"
     }
   },
   "moderation": {

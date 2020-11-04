@@ -11,77 +11,103 @@
       "toggleMenu": "Toggle menu"
     },
     "page": {
+      "basic": "Basic info",
       "contact": "Contact info",
-      "description": "Name and description",
-      "notifier": "Notifier info",
-      "opening": "Opening and payment",
-      "photos": "Photos"
+      "payment": "Payments",
+      "photos": "Photos",
+      "send": "Send"
+    },
+    "main": {
+      "basic": "Place's basic information",
+      "contact": "Place's contact information",
+      "payment": "Place's prices and payment methods",
+      "photos": "Place's photos",
+      "send": "Preview and send"
+    },
+    "contact": {
+      "title": "Place's contact information",
+      "phone": {
+        "label": "Phone number"
+      },
+      "email": {
+        "label": "Email address"
+      }
     },
     "description": {
       "title": "Place's name and description",
-      "placeType": {
-        "title": "Place's type",
-        "myPlace": "The place I'm notifying about is a",
-        "private": "Private place",
-        "municipal": "Municipal place",
-        "institution": "Institution place"
-      },
-      "information": {
-        "title": "Finnish language information"
-      },
       "placeName": {
-        "title": "Place's name in Finnish"
+        "label": "Place's name in Finnish"
       },
       "shortDescription": {
-        "title": "Place's short description in Finnish",
+        "label": "Place's short description in Finnish",
         "helperText": "Note that the text cannot be in 'we' form. Length max. 150 characters",
         "tooltipLabel": "Improve findability",
         "tooltipText": "A short description helps the place to be found more easily with a search engine."
       },
       "longDescription": {
-        "title": "Place's long description in Finnish",
+        "label": "Place's long description in Finnish",
         "helperText": "Note that the text cannot be in 'we' form. Length max. 4000 characters",
         "tooltipLabel": "TODO",
         "tooltipText": "TODO"
+      }
+    },
+    "links": {
+      "title": "Place's links",
+      "website": {
+        "label": "Website address"
       },
-      "tag": {
-        "title": "Tags",
-        "add": "Add tag",
+      "socialMedia": {
+        "links": "Social media"
+      }
+    },
+    "location": {
+      "title": "Place's location",
+      "streetAddress": {
+        "label": "Street address"
+      },
+      "postalCode": {
+        "label": "Postal code"
+      },
+      "postalOffice": {
+        "label": "Postal office"
+      }
+    },
+    "map": {
+      "title": "Map of place"
+    },
+    "notifier": {
+      "title": "Notifier's information"
+    },
+    "opening": {
+      "title": "Opening times"
+    },
+    "payment": {
+      "title": "Payment methods"
+    },
+    "photos": {
+      "title": "Photos"
+    },
+    "placeType": {
+      "title": "Place's type",
+      "myPlace": "The place I'm notifying about is a",
+      "private": "Private place",
+      "municipal": "Municipal place",
+      "institution": "Institution place"
+    },
+    "preview": {
+      "title": "Preview"
+    },
+    "prices": {
+      "title": "Prices ja entrance fees"
+    },
+    "tags": {
+      "title": "Tags",
+      "add": {
+        "label": "Add tag",
         "helperText": "Type a search word or select from the list.",
         "tooltipLabel": "TODO",
         "tooltipText": "TODO"
       }
-    },
-    "contact": {
-      "title": "Place's contact information",
-      "address": {
-        "title": "Address",
-        "streetAddress": "Street address",
-        "postalCode": "Postal code",
-        "postalOffice": "Postal office"
-      },
-      "location": {
-        "title": "Place on the map"
-      },
-      "contact": {
-        "title": "Contact",
-        "phone": "Phone number",
-        "email": "Email address"
-      },
-      "link": {
-        "title": "Links",
-        "website": "Website address",
-        "socialMedia": "Social media"
-      }
-    },
-    "opening": {
-      "title": "Place's opening times and payment methods"
-    },
-    "photos": {
-      "title": "Place's photos"
-    },
-    "notifier": {
-      "title": "Place's notifier information"
     }
   },
   "moderation": {

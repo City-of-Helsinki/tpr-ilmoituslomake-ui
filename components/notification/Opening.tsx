@@ -6,13 +6,10 @@ import { RootState } from "../../state/reducers";
 const Opening = (): ReactElement => {
   const i18n = useI18n();
 
-  const currentPage = useSelector((state: RootState) => state.notification.page);
-
   return (
     <div>
-      <h1>{`${currentPage} ${i18n.t("notification.opening.title")}`}</h1>
-      <div>OPENING TIMES</div>
-      <div>PAYMENT METHODS</div>
+      <h2>{i18n.t("notification.opening.title")}</h2>
+      <div>OPENING TIMES TODO</div>
     </div>
   );
 };

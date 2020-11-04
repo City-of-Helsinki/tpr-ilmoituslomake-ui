@@ -32,11 +32,11 @@ const Header = (): ReactElement => {
         skipToContentLabel={i18n.t("notification.skipToContent")}
       >
         <Navigation.Row>
-          <Navigation.Item label={`1 ${i18n.t("notification.page.description")}`} active={currentPage === 1} onClick={() => changePage(1)} />
+          <Navigation.Item label={`1 ${i18n.t("notification.page.basic")}`} active={currentPage === 1} onClick={() => changePage(1)} />
           <Navigation.Item label={`2 ${i18n.t("notification.page.contact")}`} active={currentPage === 2} onClick={() => changePage(2)} />
-          <Navigation.Item label={`3 ${i18n.t("notification.page.opening")}`} active={currentPage === 3} onClick={() => changePage(3)} />
-          <Navigation.Item label={`4 ${i18n.t("notification.page.photos")}`} active={currentPage === 4} onClick={() => changePage(4)} />
-          <Navigation.Item label={`5 ${i18n.t("notification.page.notifier")}`} active={currentPage === 5} onClick={() => changePage(5)} />
+          <Navigation.Item label={`3 ${i18n.t("notification.page.photos")}`} active={currentPage === 3} onClick={() => changePage(3)} />
+          <Navigation.Item label={`4 ${i18n.t("notification.page.payment")}`} active={currentPage === 4} onClick={() => changePage(4)} />
+          <Navigation.Item label={`5 ${i18n.t("notification.page.send")}`} active={currentPage === 5} onClick={() => changePage(5)} />
         </Navigation.Row>
         <Navigation.Actions>
           <Navigation.User label={i18n.t("notification.login")} />
