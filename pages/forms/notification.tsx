@@ -1,11 +1,10 @@
-import React, { Dispatch, ReactElement } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import React, { ReactElement } from "react";
+import { useSelector } from "react-redux";
 import { GetServerSideProps } from "next";
 import Head from "next/head";
 import { useI18n } from "next-localization";
 import absoluteUrl from "next-absolute-url";
 import i18nLoader from "../../utils/i18n";
-import { NotificationAction } from "../../state/actions/types";
 import { setMessage } from "../../state/actions/notification";
 import { RootState } from "../../state/reducers";
 import { initStore } from "../../state/store";
@@ -19,23 +18,13 @@ import Notifier from "../../components/notification/Notifier";
 import Opening from "../../components/notification/Opening";
 import Payment from "../../components/notification/Payment";
 import Photos from "../../components/notification/Photos";
-import PlaceType from "../../components/notification/PlaceType";
+// import PlaceType from "../../components/notification/PlaceType";
 import Preview from "../../components/notification/Preview";
 import Prices from "../../components/notification/Prices";
 import Tags from "../../components/notification/Tags";
 
-interface NotificationProps {
-  message: string;
-}
-
-const Notification = ({ message }: NotificationProps): ReactElement => {
+const Notification = (): ReactElement => {
   const i18n = useI18n();
-
-  /*
-  const dispatch = useDispatch<Dispatch<NotificationAction>>();
-  const handleMessage = () => dispatch(setMessage({ text: `test message set at ${new Date().toLocaleString("fi-FI")}` }));
-  const message2 = useSelector((state: RootState) => state.notification.message.text);
-  */
 
   const currentPage = useSelector((state: RootState) => state.notification.page);
 
@@ -49,7 +38,7 @@ const Notification = ({ message }: NotificationProps): ReactElement => {
         <div>
           <h1>{`${currentPage} ${i18n.t("notification.main.basic")}`}</h1>
           <Description />
-          <PlaceType />
+          {/* <PlaceType /> */}
           <Tags />
           <Notifier />
         </div>
@@ -82,21 +71,6 @@ const Notification = ({ message }: NotificationProps): ReactElement => {
         </div>
       )}
       <Footer />
-      {/*
-      <br />
-      <br />
-      <br />
-      <div>TEST</div>
-      <div>
-        <span>{message}</span>
-      </div>
-      <div>
-        <button type="button" onClick={handleMessage}>
-          Message
-        </button>
-        <span>{message2}</span>
-      </div>
-      */}
     </Layout>
   );
 };
