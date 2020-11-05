@@ -1,0 +1,38 @@
+@import "~hds-design-tokens/lib/all.scss";
+@import "../styles/mixins";
+
+.layout {
+  display: flex;
+  flex-direction: row;
+
+  .left,
+  .right {
+    flex-grow: 1;
+  }
+
+  .main {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 0;
+
+    @include xs {
+      width: $container-width-xs;
+    }
+
+    @include s {
+      width: $container-width-s;
+    }
+
+    @include m {
+      width: $container-width-m;
+    }
+
+    @include l {
+      width: $container-width-l;
+    }
+
+    @include xl {
+      width: $container-width-xl;
+    }
+  }
+}

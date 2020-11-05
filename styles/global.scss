@@ -1,6 +1,8 @@
 @import "~hds-core/lib/base.css";
 @import "~hds-core/lib/components/all.css";
 @import "~hds-core/lib/icons/all.css";
+@import "~hds-design-tokens/lib/all.scss";
+@import "mixins";
 
 html,
 body {
