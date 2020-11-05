@@ -6,6 +6,7 @@
     "button": {
       "next": "Next",
       "previous": "Previous",
+      "cancel": "Cancel",
       "send": "Send",
       "clearAllSelections": "Clear all selections",
       "remove": "Remove",

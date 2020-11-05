@@ -6,6 +6,7 @@
     "button": {
       "next": "Seuraava",
       "previous": "Edellinen",
+      "cancel": "Keskeytä",
       "send": "Lähetä",
       "clearAllSelections": "Poista kaikki valinnat",
       "remove": "Poista",

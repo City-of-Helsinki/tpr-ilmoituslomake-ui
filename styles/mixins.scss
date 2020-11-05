@@ -1,29 +1,31 @@
-@mixin xs {
-  @media (min-width: $breakpoint-xs) {
-    @content;
-  }
-}
+$min-breakpoints: (
+  s: $breakpoint-s,
+  m: $breakpoint-m,
+  l: $breakpoint-l,
+  xl: $breakpoint-xl,
+);
 
-@mixin s {
-  @media (min-width: $breakpoint-s) {
-    @content;
-  }
-}
+$max-breakpoints: (
+  xs: $breakpoint-s,
+  s: $breakpoint-m,
+  m: $breakpoint-l,
+  l: $breakpoint-xl,
+);
 
-@mixin m {
-  @media (min-width: $breakpoint-m) {
-    @content;
-  }
-}
-
-@mixin l {
-  @media (min-width: $breakpoint-l) {
-    @content;
-  }
-}
-
-@mixin xl {
-  @media (min-width: $breakpoint-xl) {
-    @content;
+@mixin media($keys...) {
+  @each $key in $keys {
+    @if map-has-key($min-breakpoints, $key) and map-has-key($max-breakpoints, $key) {
+      @media only screen and (min-width: map-get($min-breakpoints, $key)) and (max-width: map-get($max-breakpoints, $key)) {
+        @content;
+      }
+    } @else if map-has-key($min-breakpoints, $key) {
+      @media only screen and (min-width: map-get($min-breakpoints, $key)) {
+        @content;
+      }
+    } @else if map-has-key($max-breakpoints, $key) {
+      @media only screen and (max-width: map-get($max-breakpoints, $key)) {
+        @content;
+      }
+    }
   }
 }

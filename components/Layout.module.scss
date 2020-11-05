@@ -15,23 +15,23 @@
     flex-direction: column;
     flex-grow: 0;
 
-    @include xs {
+    @include media(xs) {
       width: $container-width-xs;
     }
 
-    @include s {
+    @include media(s) {
       width: $container-width-s;
     }
 
-    @include m {
+    @include media(m) {
       width: $container-width-m;
     }
 
-    @include l {
+    @include media(l) {
       width: $container-width-l;
     }
 
-    @include xl {
+    @include media(xl) {
       width: $container-width-xl;
     }
   }

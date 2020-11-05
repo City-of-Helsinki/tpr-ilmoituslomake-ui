@@ -9,23 +9,23 @@
     position: relative;
     fill: $color-fog-medium-light;
 
-    @include xs {
+    @include media(xs) {
       width: $container-width-xs;
     }
 
-    @include s {
+    @include media(s) {
       width: $container-width-s;
     }
 
-    @include m {
+    @include media(m) {
       width: $container-width-m;
     }
 
-    @include l {
+    @include media(l) {
       width: $container-width-l;
     }
 
-    @include xl {
+    @include media(xl) {
       width: $container-width-xl;
     }
   }
@@ -34,5 +34,36 @@
     position: absolute;
     left: $spacing-m;
     bottom: $spacing-xs;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    .smallLogo {
+      display: none;
+
+      @include media(xs) {
+        display: inline;
+      }
+    }
+
+    .mediumLogo {
+      display: none;
+
+      @include media(s, m, l) {
+        display: inline;
+      }
+    }
+
+    .largeLogo {
+      display: none;
+
+      @include media(xl) {
+        display: inline;
+      }
+    }
+
+    .title {
+      margin-left: $spacing-m;
+    }
   }
 }
