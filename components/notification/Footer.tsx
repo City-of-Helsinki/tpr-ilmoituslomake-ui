@@ -7,6 +7,7 @@ import { setPage } from "../../state/actions/notification";
 import { RootState } from "../../state/reducers";
 import { MAX_PAGE } from "../../types/constants";
 import validateNotificationData from "../../utils/validation";
+import styles from "./Footer.module.scss";
 
 const Footer = (): ReactElement => {
   const i18n = useI18n();
@@ -43,10 +44,11 @@ const Footer = (): ReactElement => {
   };
 
   return (
-    <div>
+    <div className={styles.notificationFooter}>
       <Button variant="secondary" onClick={previousPage}>
         {i18n.t("notification.button.previous")}
       </Button>
+      <div className={styles.space} />
       {currentPage < MAX_PAGE && <Button onClick={nextPage}>{i18n.t("notification.button.next")}</Button>}
       {currentPage === MAX_PAGE && <Button onClick={sendNotification}>{i18n.t("notification.button.send")}</Button>}
     </div>

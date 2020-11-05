@@ -19,21 +19,19 @@ const Location = (): ReactElement => {
   };
 
   return (
-    <div>
+    <div className="formSection">
       <h2>{i18n.t("notification.location.title")}</h2>
       <TextInput
         id="streetAddress"
+        className="formInput"
         label={i18n.t("notification.location.streetAddress.label")}
         name="street_address"
         value={street_address}
         onChange={updateData}
         required
       />
-      <TextInput id="postalCode" label={i18n.t("notification.location.postalCode.label")} required />
-      <TextInput id="postalOffice" label={i18n.t("notification.location.postalOffice.label")} required />
-
-      <h2>{i18n.t("notification.map.title")}</h2>
-      <div>MAP TODO</div>
+      <TextInput id="postalCode" className="formInput" label={i18n.t("notification.location.postalCode.label")} required />
+      <TextInput id="postalOffice" className="formInput" label={i18n.t("notification.location.postalOffice.label")} required />
     </div>
   );
 };

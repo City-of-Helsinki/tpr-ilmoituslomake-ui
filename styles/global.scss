@@ -10,3 +10,11 @@ body {
   margin: 0;
   font-family: HelsinkiGrotesk, Arial, sans-serif;
 }
+
+.formSection {
+  margin-bottom: $spacing-layout-l;
+}
+
+.formInput {
+  margin-bottom: $spacing-layout-s;
+}

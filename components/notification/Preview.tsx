@@ -7,7 +7,7 @@ const Preview = (): ReactElement => {
   const i18n = useI18n();
 
   return (
-    <div>
+    <div className="formSection">
       <h2>{i18n.t("notification.preview.title")}</h2>
       <div>PREVIEW TODO</div>
     </div>

@@ -1,0 +1,8 @@
+.notificationFooter {
+  display: flex;
+  flex-direction: row;
+
+  .space {
+    flex-grow: 1;
+  }
+}

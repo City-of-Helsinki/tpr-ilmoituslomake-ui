@@ -8,14 +8,10 @@ const Contact = (): ReactElement => {
   const i18n = useI18n();
 
   return (
-    <div>
+    <div className="formSection">
       <h2>{i18n.t("notification.contact.title")}</h2>
-      <TextInput id="phone" label={i18n.t("notification.contact.phone.label")} />
-      <TextInput id="email" label={i18n.t("notification.contact.email.label")} />
-
-      <h2>{i18n.t("notification.links.title")}</h2>
-      <TextInput id="website" label={i18n.t("notification.links.website.label")} />
-      <TextInput id="socialMedia" label={i18n.t("notification.links.socialMedia.label")} />
+      <TextInput id="phone" className="formInput" label={i18n.t("notification.contact.phone.label")} />
+      <TextInput id="email" className="formInput" label={i18n.t("notification.contact.email.label")} />
     </div>
   );
 };

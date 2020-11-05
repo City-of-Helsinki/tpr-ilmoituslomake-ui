@@ -7,7 +7,7 @@ const Notifier = (): ReactElement => {
   const i18n = useI18n();
 
   return (
-    <div>
+    <div className="formSection">
       <h2>{i18n.t("notification.notifier.title")}</h2>
       <div>NOTIFIER TODO</div>
     </div>

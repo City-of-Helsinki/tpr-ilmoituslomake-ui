@@ -19,11 +19,20 @@ const Description = (): ReactElement => {
   };
 
   return (
-    <div>
+    <div className="formSection">
       <h2>{i18n.t("notification.description.title")}</h2>
-      <TextInput id="placeName" label={i18n.t("notification.description.placeName.label")} name="name" value={name} onChange={updateData} required />
+      <TextInput
+        id="placeName"
+        className="formInput"
+        label={i18n.t("notification.description.placeName.label")}
+        name="name"
+        value={name}
+        onChange={updateData}
+        required
+      />
       <TextArea
         id="shortDescription"
+        className="formInput"
         label={i18n.t("notification.description.shortDescription.label")}
         helperText={i18n.t("notification.description.shortDescription.helperText")}
         tooltipLabel={i18n.t("notification.description.shortDescription.tooltipLabel")}
@@ -32,6 +41,7 @@ const Description = (): ReactElement => {
       />
       <TextArea
         id="longDescription"
+        className="formInput"
         label={i18n.t("notification.description.longDescription.label")}
         helperText={i18n.t("notification.description.longDescription.helperText")}
         tooltipLabel={i18n.t("notification.description.longDescription.tooltipLabel")}

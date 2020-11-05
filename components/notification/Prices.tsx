@@ -7,7 +7,7 @@ const Prices = (): ReactElement => {
   const i18n = useI18n();
 
   return (
-    <div>
+    <div className="formSection">
       <h2>{i18n.t("notification.prices.title")}</h2>
       <div>PRICES TODO</div>
     </div>

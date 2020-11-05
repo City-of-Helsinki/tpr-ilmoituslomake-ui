@@ -8,7 +8,7 @@ const PlaceType = (): ReactElement => {
   const i18n = useI18n();
 
   return (
-    <div>
+    <div className="formSection">
       <h2>{i18n.t("notification.placeType.title")}</h2>
       <div role="group" aria-labelledby="myPlace">
         <div id="myPlace">

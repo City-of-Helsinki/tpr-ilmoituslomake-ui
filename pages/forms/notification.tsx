@@ -13,7 +13,9 @@ import Header from "../../components/notification/Header";
 import Footer from "../../components/notification/Footer";
 import Contact from "../../components/notification/Contact";
 import Description from "../../components/notification/Description";
+import Links from "../../components/notification/Links";
 import Location from "../../components/notification/Location";
+import Map from "../../components/notification/Map";
 import Notifier from "../../components/notification/Notifier";
 import Opening from "../../components/notification/Opening";
 import Payment from "../../components/notification/Payment";
@@ -47,7 +49,9 @@ const Notification = (): ReactElement => {
         <div>
           <h1>{`${currentPage} ${i18n.t("notification.main.contact")}`}</h1>
           <Location />
+          <Map />
           <Contact />
+          <Links />
           <Opening />
         </div>
       )}

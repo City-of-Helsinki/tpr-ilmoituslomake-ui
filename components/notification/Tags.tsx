@@ -10,10 +10,11 @@ const Tags = (): ReactElement => {
   const tagOptions = ["Ravintola", "Kasvisravintola", "TODO"];
 
   return (
-    <div>
+    <div className="formSection">
       <h2>{i18n.t("notification.tags.title")}</h2>
       <Combobox
         id="tag"
+        className="formInput"
         options={tagOptions.map((tag) => ({ label: tag }))}
         label={i18n.t("notification.tags.add.label")}
         helper={i18n.t("notification.tags.add.helperText")}
