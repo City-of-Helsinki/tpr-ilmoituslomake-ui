@@ -11,10 +11,32 @@ const Description = (): ReactElement => {
   const dispatch = useDispatch<Dispatch<NotificationAction>>();
 
   const notification = useSelector((state: RootState) => state.notification.notification);
-  const { name } = notification;
+  const {
+    name: { fi: nameFi },
+    description: {
+      short: { fi: shortDescFi },
+      long: { fi: longDescFi },
+    },
+  } = notification;
 
-  const updateData = (evt: ChangeEvent<HTMLInputElement>) => {
-    const newNotification = { ...notification, [evt.target.name]: evt.target.value };
+  const updateName = (evt: ChangeEvent<HTMLInputElement>) => {
+    const newNotification = { ...notification, name: { ...notification.name, [evt.target.name]: evt.target.value } };
+    dispatch(setNotificationData(newNotification));
+  };
+
+  const updateShortDescription = (evt: ChangeEvent<HTMLTextAreaElement>) => {
+    const newNotification = {
+      ...notification,
+      description: { ...notification.description, short: { ...notification.description.short, [evt.target.name]: evt.target.value } },
+    };
+    dispatch(setNotificationData(newNotification));
+  };
+
+  const updateLongDescription = (evt: ChangeEvent<HTMLTextAreaElement>) => {
+    const newNotification = {
+      ...notification,
+      description: { ...notification.description, long: { ...notification.description.long, [evt.target.name]: evt.target.value } },
+    };
     dispatch(setNotificationData(newNotification));
   };
 
@@ -25,15 +47,18 @@ const Description = (): ReactElement => {
         id="placeName"
         className="formInput"
         label={i18n.t("notification.description.placeName.label")}
-        name="name"
-        value={name}
-        onChange={updateData}
+        name="fi"
+        value={nameFi}
+        onChange={updateName}
         required
       />
       <TextArea
         id="shortDescription"
         className="formInput"
         label={i18n.t("notification.description.shortDescription.label")}
+        name="fi"
+        value={shortDescFi}
+        onChange={updateShortDescription}
         helperText={i18n.t("notification.description.shortDescription.helperText")}
         tooltipLabel={i18n.t("notification.description.shortDescription.tooltipLabel")}
         tooltipText={i18n.t("notification.description.shortDescription.tooltipText")}
@@ -43,6 +68,9 @@ const Description = (): ReactElement => {
         id="longDescription"
         className="formInput"
         label={i18n.t("notification.description.longDescription.label")}
+        name="fi"
+        value={longDescFi}
+        onChange={updateLongDescription}
         helperText={i18n.t("notification.description.longDescription.helperText")}
         tooltipLabel={i18n.t("notification.description.longDescription.tooltipLabel")}
         tooltipText={i18n.t("notification.description.longDescription.tooltipText")}

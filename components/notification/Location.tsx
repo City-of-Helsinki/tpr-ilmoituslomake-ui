@@ -11,10 +11,18 @@ const Location = (): ReactElement => {
   const dispatch = useDispatch<Dispatch<NotificationAction>>();
 
   const notification = useSelector((state: RootState) => state.notification.notification);
-  const { street_address } = notification;
+  const {
+    address: {
+      fi: { street: streetFi, postal_code: postalCodeFi, post_office: postOfficeFi },
+      sv: { street: streetSv, postal_code: postalCodeSv, post_office: postOfficeSv },
+    },
+  } = notification;
 
-  const updateData = (evt: ChangeEvent<HTMLInputElement>) => {
-    const newNotification = { ...notification, [evt.target.name]: evt.target.value };
+  const updateAddressFi = (evt: ChangeEvent<HTMLInputElement>) => {
+    const newNotification = {
+      ...notification,
+      address: { ...notification.address, fi: { ...notification.address.fi, [evt.target.name]: evt.target.value } },
+    };
     dispatch(setNotificationData(newNotification));
   };
 
@@ -25,13 +33,29 @@ const Location = (): ReactElement => {
         id="streetAddress"
         className="formInput"
         label={i18n.t("notification.location.streetAddress.label")}
-        name="street_address"
-        value={street_address}
-        onChange={updateData}
+        name="street"
+        value={streetFi}
+        onChange={updateAddressFi}
         required
       />
-      <TextInput id="postalCode" className="formInput" label={i18n.t("notification.location.postalCode.label")} required />
-      <TextInput id="postalOffice" className="formInput" label={i18n.t("notification.location.postalOffice.label")} required />
+      <TextInput
+        id="postalCode"
+        className="formInput"
+        label={i18n.t("notification.location.postalCode.label")}
+        name="postal_code"
+        value={postalCodeFi}
+        onChange={updateAddressFi}
+        required
+      />
+      <TextInput
+        id="postalOffice"
+        className="formInput"
+        label={i18n.t("notification.location.postalOffice.label")}
+        name="post_office"
+        value={postOfficeFi}
+        onChange={updateAddressFi}
+        required
+      />
     </div>
   );
 };
