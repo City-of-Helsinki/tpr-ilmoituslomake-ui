@@ -23,6 +23,10 @@ const Header = (): ReactElement => {
     router.push(router.pathname, router.pathname, { locale });
   };
 
+  const signIn = () => {
+    window.open("/admin/login/?next=/", "_self");
+  };
+
   return (
     <div>
       <Navigation
@@ -39,7 +43,7 @@ const Header = (): ReactElement => {
           <Navigation.Item label={`5 ${i18n.t("notification.page.send")}`} active={currentPage === 5} onClick={() => changePage(5)} />
         </Navigation.Row>
         <Navigation.Actions>
-          <Navigation.User label={i18n.t("notification.login")} />
+          <Navigation.User label={i18n.t("notification.login")} onSignIn={signIn} />
           <Navigation.LanguageSelector label={(router.locale || defaultLocale).toUpperCase()}>
             <Navigation.Item label="Suomeksi" onClick={() => changeLanguage("fi")} />
             <Navigation.Item label="In English" onClick={() => changeLanguage("en")} />

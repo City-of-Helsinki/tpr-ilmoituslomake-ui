@@ -83,20 +83,22 @@ const Notification = (): ReactElement => {
 export const getServerSideProps: GetServerSideProps = async ({ req, locale }) => {
   const lngDict = await i18nLoader(locale);
 
-  const { origin } = absoluteUrl(req);
+  // const { origin } = absoluteUrl(req);
+  // const origin = "http://tpr-ilmoituslomake";
 
-  const response = await fetch(`${origin}/backend/api/hello`);
-  const hello = await response.json();
+  // const response = await fetch(`${origin}/api/hello`);
+  // const hello = await response.json();
 
   const reduxStore = initStore();
-  const { dispatch } = reduxStore;
-  dispatch(setMessage({ text: `SSR got message ${hello.message} at ${new Date().toLocaleString("fi-FI")}` }));
+  // const { dispatch } = reduxStore;
+  // dispatch(setMessage({ text: `SSR got message ${hello.message} at ${new Date().toLocaleString("fi-FI")}` }));
 
   return {
     props: {
       initialReduxState: reduxStore.getState(),
       lngDict,
-      message: hello.message,
+      // message: hello.message,
+      message: "HELLO",
     },
   };
 };

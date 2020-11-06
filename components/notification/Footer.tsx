@@ -31,7 +31,7 @@ const Footer = (): ReactElement => {
       console.log("VALIDATED", validateNotificationData(notification));
       console.log("SENDING", notification);
 
-      const createRequest = await fetch("/backend/api/notification/create", {
+      const createRequest = await fetch("/api/notification/create/", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
