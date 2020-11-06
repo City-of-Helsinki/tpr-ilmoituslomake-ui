@@ -1,6 +1,6 @@
 import { AnyAction } from "redux";
 import { ModerationState } from "./types";
-import { SET_OTHER_THING } from "../actions/types";
+import { SET_OTHER_THING } from "../../types/constants";
 
 const initialState: ModerationState = {
   some: {

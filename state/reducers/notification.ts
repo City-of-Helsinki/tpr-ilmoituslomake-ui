@@ -1,7 +1,6 @@
 import { AnyAction } from "redux";
 import { NotificationState } from "./types";
-import { SET_PAGE, SET_NOTIFICATION_DATA, SET_MESSAGE, SET_SOMETHING_ELSE } from "../actions/types";
-import { MAX_PAGE } from "../../types/constants";
+import { MAX_PAGE, SET_PAGE, SET_USER, SET_NOTIFICATION_DATA } from "../../types/constants";
 
 const initialState: NotificationState = {
   page: 1,
@@ -27,20 +26,15 @@ const notification = (state = initialState, action: AnyAction): NotificationStat
         ...state,
         page: Math.min(Math.max(action.payload, 1), MAX_PAGE),
       };
+    case SET_USER:
+      return {
+        ...state,
+        user: action.payload,
+      };
     case SET_NOTIFICATION_DATA:
       return {
         ...state,
         notification: action.payload,
-      };
-    case SET_MESSAGE:
-      return {
-        ...state,
-        message: action.payload,
-      };
-    case SET_SOMETHING_ELSE:
-      return {
-        ...state,
-        thing: { something: { ...state.thing.something, somethingElse: action.payload } },
       };
     default:
       return state;

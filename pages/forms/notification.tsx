@@ -3,9 +3,8 @@ import { useSelector } from "react-redux";
 import { GetServerSideProps } from "next";
 import Head from "next/head";
 import { useI18n } from "next-localization";
-import absoluteUrl from "next-absolute-url";
+// import absoluteUrl from "next-absolute-url";
 import i18nLoader from "../../utils/i18n";
-import { setMessage } from "../../state/actions/notification";
 import { RootState } from "../../state/reducers";
 import { initStore } from "../../state/store";
 import Layout from "../../components/Layout";
@@ -90,15 +89,11 @@ export const getServerSideProps: GetServerSideProps = async ({ req, locale }) =>
   // const hello = await response.json();
 
   const reduxStore = initStore();
-  // const { dispatch } = reduxStore;
-  // dispatch(setMessage({ text: `SSR got message ${hello.message} at ${new Date().toLocaleString("fi-FI")}` }));
 
   return {
     props: {
       initialReduxState: reduxStore.getState(),
       lngDict,
-      // message: hello.message,
-      message: "HELLO",
     },
   };
 };

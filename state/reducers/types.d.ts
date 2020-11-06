@@ -1,11 +1,10 @@
-import { Message, Thing, OtherThing } from "../types";
+import { User, OtherThing } from "../../types/general";
 import { NotificationSchema } from "../../types/notification_schema";
 
 export interface NotificationState {
   page: number;
+  user?: User;
   notification: NotificationSchema;
-  message: Message;
-  thing: Thing;
 }
 
 export interface ModerationState {

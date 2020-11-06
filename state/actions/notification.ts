@@ -1,23 +1,19 @@
-import { Message } from "../types";
+import { SET_PAGE, SET_USER, SET_NOTIFICATION_DATA } from "../../types/constants";
+import { User } from "../../types/general";
 import { NotificationSchema } from "../../types/notification_schema";
-import { NotificationAction, SET_PAGE, SET_NOTIFICATION_DATA, SET_MESSAGE, SET_SOMETHING_ELSE } from "./types";
+import { NotificationAction } from "./types";
 
 export const setPage = (pageNumber: number): NotificationAction => ({
   type: SET_PAGE,
   payload: pageNumber,
 });
 
+export const setUser = (user: User): NotificationAction => ({
+  type: SET_USER,
+  payload: user,
+});
+
 export const setNotificationData = (notification: NotificationSchema): NotificationAction => ({
   type: SET_NOTIFICATION_DATA,
   payload: notification,
-});
-
-export const setMessage = (message: Message): NotificationAction => ({
-  type: SET_MESSAGE,
-  payload: message,
-});
-
-export const setSomethingElse = (somethingElse: string): NotificationAction => ({
-  type: SET_SOMETHING_ELSE,
-  payload: somethingElse,
 });
