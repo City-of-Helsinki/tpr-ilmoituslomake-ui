@@ -9,8 +9,71 @@
  * <description>
  */
 export interface NotificationSchema {
-  name: string;
-  postal_address: string;
-  street_address: string;
+  organization: {
+    [k: string]: unknown;
+  };
+  name: {
+    fi: string;
+    sv: string;
+    en: string;
+    [k: string]: unknown;
+  };
+  location: [number, number];
+  description: {
+    short: {
+      fi: string;
+      sv: string;
+      en: string;
+      [k: string]: unknown;
+    };
+    long: {
+      fi: string;
+      sv: string;
+      en: string;
+      [k: string]: unknown;
+    };
+    [k: string]: unknown;
+  };
+  address: {
+    fi: {
+      street: string;
+      postal_code: string;
+      post_office: string;
+      [k: string]: unknown;
+    };
+    sv: {
+      street: string;
+      postal_code: string;
+      post_office: string;
+      [k: string]: unknown;
+    };
+    [k: string]: unknown;
+  };
+  phone: string;
+  email: string;
+  website: {
+    fi: string;
+    sv: string;
+    en: string;
+    [k: string]: unknown;
+  };
+  images: {
+    [k: string]: unknown;
+  };
+  opening_times: {
+    [k: string]: unknown;
+  };
+  price: {
+    fi: string;
+    sv: string;
+    en: string;
+    [k: string]: unknown;
+  };
+  payment_options: {
+    name?: string;
+    [k: string]: unknown;
+  }[];
+  ontology_ids: string[];
+  comments: string;
   [k: string]: unknown;
 }

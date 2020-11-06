@@ -5,17 +5,54 @@ import { MAX_PAGE, SET_PAGE, SET_USER, SET_NOTIFICATION_DATA } from "../../types
 const initialState: NotificationState = {
   page: 1,
   notification: {
-    name: "",
-    street_address: "",
-    postal_address: "",
-  },
-  message: {
-    text: "",
-  },
-  thing: {
-    something: {
-      somethingElse: "",
+    organization: {},
+    name: {
+      fi: "",
+      sv: "",
+      en: "",
     },
+    location: [0, 0],
+    description: {
+      short: {
+        fi: "",
+        sv: "",
+        en: "",
+      },
+      long: {
+        fi: "",
+        sv: "",
+        en: "",
+      },
+    },
+    address: {
+      fi: {
+        street: "",
+        postal_code: "",
+        post_office: "",
+      },
+      sv: {
+        street: "",
+        postal_code: "",
+        post_office: "",
+      },
+    },
+    phone: "",
+    email: "",
+    website: {
+      fi: "",
+      sv: "",
+      en: "",
+    },
+    images: {},
+    opening_times: {},
+    price: {
+      fi: "",
+      sv: "",
+      en: "",
+    },
+    payment_options: [],
+    ontology_ids: [],
+    comments: "",
   },
 };
 

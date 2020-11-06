@@ -1,9 +1,11 @@
 import Ajv from "ajv";
+import apply from "ajv-formats-draft2019";
 import { NotificationSchema } from "../types/notification_schema";
 import notificationSchema from "../schemas/notification_schema.json";
 
 const validateNotificationData = (notification: NotificationSchema): boolean => {
   const ajv = new Ajv();
+  apply(ajv, { formats: ["idn-email", "iri-reference"] });
   const schema = notificationSchema;
   const validate = ajv.compile<NotificationSchema>(schema);
 
