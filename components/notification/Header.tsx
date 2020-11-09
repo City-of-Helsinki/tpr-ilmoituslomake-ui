@@ -7,6 +7,7 @@ import { defaultLocale } from "../../utils/i18n";
 import { NotificationAction } from "../../state/actions/types";
 import { setPage } from "../../state/actions/notification";
 import { RootState } from "../../state/reducers";
+import styles from "./Header.module.scss";
 
 const Header = (): ReactElement => {
   const i18n = useI18n();
@@ -28,7 +29,7 @@ const Header = (): ReactElement => {
   };
 
   return (
-    <div>
+    <div className={styles.notificationHeader}>
       <Navigation
         title={i18n.t("notification.title")}
         menuToggleAriaLabel="menu"
@@ -36,11 +37,36 @@ const Header = (): ReactElement => {
         skipToContentLabel={i18n.t("notification.skipToContent")}
       >
         <Navigation.Row>
-          <Navigation.Item label={`1 ${i18n.t("notification.page.basic")}`} active={currentPage === 1} onClick={() => changePage(1)} />
-          <Navigation.Item label={`2 ${i18n.t("notification.page.contact")}`} active={currentPage === 2} onClick={() => changePage(2)} />
-          <Navigation.Item label={`3 ${i18n.t("notification.page.photos")}`} active={currentPage === 3} onClick={() => changePage(3)} />
-          <Navigation.Item label={`4 ${i18n.t("notification.page.payment")}`} active={currentPage === 4} onClick={() => changePage(4)} />
-          <Navigation.Item label={`5 ${i18n.t("notification.page.send")}`} active={currentPage === 5} onClick={() => changePage(5)} />
+          <Navigation.Item
+            className={styles.navigationItem}
+            label={`${i18n.t("notification.page.basic")}`}
+            active={currentPage === 1}
+            onClick={() => changePage(1)}
+          />
+          <Navigation.Item
+            className={styles.navigationItem}
+            label={`${i18n.t("notification.page.contact")}`}
+            active={currentPage === 2}
+            onClick={() => changePage(2)}
+          />
+          <Navigation.Item
+            className={styles.navigationItem}
+            label={`${i18n.t("notification.page.photos")}`}
+            active={currentPage === 3}
+            onClick={() => changePage(3)}
+          />
+          <Navigation.Item
+            className={styles.navigationItem}
+            label={`${i18n.t("notification.page.payment")}`}
+            active={currentPage === 4}
+            onClick={() => changePage(4)}
+          />
+          <Navigation.Item
+            className={styles.navigationItem}
+            label={`${i18n.t("notification.page.send")}`}
+            active={currentPage === 5}
+            onClick={() => changePage(5)}
+          />
         </Navigation.Row>
         <Navigation.Actions>
           <Navigation.User label={i18n.t("notification.login")} onSignIn={signIn} />

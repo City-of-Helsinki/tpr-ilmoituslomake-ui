@@ -1,0 +1,7 @@
+@import "~hds-design-tokens/lib/all.scss";
+
+.notificationHeader {
+  .navigationItem:after {
+    background-color: $color-bus !important;
+  }
+}

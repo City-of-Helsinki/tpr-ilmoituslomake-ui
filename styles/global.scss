@@ -11,6 +11,10 @@ body {
   font-family: HelsinkiGrotesk, Arial, sans-serif;
 }
 
+h1 {
+  color: $color-bus;
+}
+
 .formSection {
   margin-bottom: $spacing-layout-l;
 }
