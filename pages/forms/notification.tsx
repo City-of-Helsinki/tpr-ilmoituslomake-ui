@@ -10,6 +10,7 @@ import { initStore } from "../../state/store";
 import Layout from "../../components/Layout";
 import Header from "../../components/notification/Header";
 import Footer from "../../components/notification/Footer";
+import Comments from "../../components/notification/Comments";
 import Contact from "../../components/notification/Contact";
 import Description from "../../components/notification/Description";
 import Links from "../../components/notification/Links";
@@ -70,6 +71,7 @@ const Notification = (): ReactElement => {
       {currentPage === 5 && (
         <div>
           <h1>{`${currentPage} ${i18n.t("notification.main.send")}`}</h1>
+          <Comments />
           <Preview />
         </div>
       )}

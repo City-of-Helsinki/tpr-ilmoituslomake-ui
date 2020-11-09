@@ -6,6 +6,20 @@ export interface User {
   email: string;
 }
 
+export interface NotificationExtra {
+  notifier: {
+    fullName: string;
+    email: string;
+    phone: string;
+  };
+  photos?: {
+    url: string;
+    description: string;
+    permission: boolean;
+    photographer: string;
+  }[];
+}
+
 export interface OtherThing {
   other: {
     thing: string;

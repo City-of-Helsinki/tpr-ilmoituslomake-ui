@@ -1,6 +1,6 @@
 import { AnyAction } from "redux";
 import { NotificationState } from "./types";
-import { MAX_PAGE, SET_PAGE, SET_USER, SET_NOTIFICATION_DATA } from "../../types/constants";
+import { MAX_PAGE, SET_PAGE, SET_USER, SET_NOTIFICATION_DATA, SET_NOTIFICATION_EXTRA } from "../../types/constants";
 
 const initialState: NotificationState = {
   page: 1,
@@ -54,6 +54,13 @@ const initialState: NotificationState = {
     ontology_ids: [],
     comments: "",
   },
+  notificationExtra: {
+    notifier: {
+      fullName: "",
+      email: "",
+      phone: "",
+    },
+  },
 };
 
 const notification = (state = initialState, action: AnyAction): NotificationState => {
@@ -72,6 +79,11 @@ const notification = (state = initialState, action: AnyAction): NotificationStat
       return {
         ...state,
         notification: action.payload,
+      };
+    case SET_NOTIFICATION_EXTRA:
+      return {
+        ...state,
+        notificationExtra: action.payload,
       };
     default:
       return state;

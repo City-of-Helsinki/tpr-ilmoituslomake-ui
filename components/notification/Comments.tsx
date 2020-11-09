@@ -1,39 +1,40 @@
 import React, { Dispatch, ChangeEvent, ReactElement } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useI18n } from "next-localization";
-import { TextInput } from "hds-react";
+import { TextArea } from "hds-react";
 import { NotificationAction } from "../../state/actions/types";
 import { setNotificationData } from "../../state/actions/notification";
 import { RootState } from "../../state/reducers";
 
-const Links = (): ReactElement => {
+const Comments = (): ReactElement => {
   const i18n = useI18n();
   const dispatch = useDispatch<Dispatch<NotificationAction>>();
 
   const notification = useSelector((state: RootState) => state.notification.notification);
-  const {
-    website: { fi: websiteFi },
-  } = notification;
+  const { comments } = notification;
 
-  const updateWebsite = (evt: ChangeEvent<HTMLInputElement>) => {
-    const newNotification = { ...notification, website: { ...notification.website, [evt.target.name]: evt.target.value } };
+  const updateComments = (evt: ChangeEvent<HTMLTextAreaElement>) => {
+    const newNotification = {
+      ...notification,
+      comments: evt.target.value,
+    };
     dispatch(setNotificationData(newNotification));
   };
 
   return (
     <div className="formSection">
-      <h2>{i18n.t("notification.links.title")}</h2>
-      <TextInput
-        id="website"
+      <h2>{i18n.t("notification.comments.title")}</h2>
+      <TextArea
+        id="comments"
         className="formInput"
-        label={i18n.t("notification.links.website.label")}
-        name="fi"
-        value={websiteFi}
-        onChange={updateWebsite}
+        label={i18n.t("notification.comments.comments.label")}
+        name="comments"
+        value={comments}
+        onChange={updateComments}
+        required
       />
-      {/* <TextInput id="socialMedia" className="formInput" label={i18n.t("notification.links.socialMedia.label")} /> */}
     </div>
   );
 };
 
-export default Links;
+export default Comments;

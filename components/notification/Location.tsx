@@ -14,14 +14,18 @@ const Location = (): ReactElement => {
   const {
     address: {
       fi: { street: streetFi, postal_code: postalCodeFi, post_office: postOfficeFi },
-      sv: { street: streetSv, postal_code: postalCodeSv, post_office: postOfficeSv },
+      // sv: { street: streetSv, postal_code: postalCodeSv, post_office: postOfficeSv },
     },
   } = notification;
 
-  const updateAddressFi = (evt: ChangeEvent<HTMLInputElement>) => {
+  const updateAddress = (evt: ChangeEvent<HTMLInputElement>) => {
     const newNotification = {
       ...notification,
-      address: { ...notification.address, fi: { ...notification.address.fi, [evt.target.name]: evt.target.value } },
+      address: {
+        ...notification.address,
+        fi: { ...notification.address.fi, [evt.target.name]: evt.target.value },
+        sv: { ...notification.address.sv, [evt.target.name]: evt.target.value },
+      },
     };
     dispatch(setNotificationData(newNotification));
   };
@@ -35,7 +39,7 @@ const Location = (): ReactElement => {
         label={i18n.t("notification.location.streetAddress.label")}
         name="street"
         value={streetFi}
-        onChange={updateAddressFi}
+        onChange={updateAddress}
         required
       />
       <TextInput
@@ -44,7 +48,7 @@ const Location = (): ReactElement => {
         label={i18n.t("notification.location.postalCode.label")}
         name="postal_code"
         value={postalCodeFi}
-        onChange={updateAddressFi}
+        onChange={updateAddress}
         required
       />
       <TextInput
@@ -53,7 +57,7 @@ const Location = (): ReactElement => {
         label={i18n.t("notification.location.postalOffice.label")}
         name="post_office"
         value={postOfficeFi}
-        onChange={updateAddressFi}
+        onChange={updateAddress}
         required
       />
     </div>

@@ -1,6 +1,6 @@
 {
   "notification": {
-    "title": "Ilmoituslomake",
+    "title": "My Helsinki Places",
     "skipToContent": "Siirry sivun pääsisältöön",
     "login": "Kirjaudu sisään",
     "button": {
@@ -22,9 +22,15 @@
     "main": {
       "basic": "Kohteen perustiedot",
       "contact": "Kohteen yhteystiedot",
-      "payment": "Kohteen hinnat ja maksutavat",
+      "payment": "Kohteen hinnat ja maksut",
       "photos": "Kohteen kuvat",
-      "send": "Esikatselu ja lähetys"
+      "send": "Tarkista tiedot ja lähetä"
+    },
+    "comments": {
+      "title": "Kommentteja",
+      "comments": {
+        "label": "Kommentteja tietojen moderoijalle"
+      }
     },
     "contact": {
       "title": "Kohteen yhteystiedot",
@@ -77,17 +83,39 @@
     "map": {
       "title": "Kohde kartalla"
     },
+    "notifier": {
+      "title": "Ilmoittajan tiedot",
+      "fullName": {
+        "label": "Ilmoittajan etunimi ja sukunimi"
+      },
+      "email": {
+        "label": "Ilmoittajan sähköpostiosoite"
+      },
+      "phone": {
+        "label": "Ilmoittajan puhelinnumero"
+      }
+    },
     "opening": {
       "title": "Aukioloajat"
     },
-    "notifier": {
-      "title": "Ilmoittajan tiedot"
-    },
     "payment": {
-      "title": "Maksutavat"
+      "title": "Maksutavat",
+      "options": "Maksutavat ja veronpalautus"
     },
     "photos": {
-      "title": "Kuvat"
+      "title": "Kuvat",
+      "url": {
+        "label": "Valokuvan verkko-osoite (url)"
+      },
+      "description": {
+        "label": "Kuvan lyhyt kuvailu (alt-teksti)"
+      },
+      "permission": {
+        "label": "Kuvan käyttöoikeus"
+      },
+      "photographer": {
+        "label": "Valokuvaajan nimi"
+      }
     },
     "placeType": {
       "title": "Kohteen tyyppi",
@@ -97,15 +125,18 @@
       "institution": "Säätiö- tai yhdistyskohde"
     },
     "preview": {
-      "title": "Esikatselu"
+      "title": "Yhteenveto kohteen tiedoista"
     },
     "prices": {
-      "title": "Hinnat ja pääsymaksut"
+      "title": "Hinnat ja pääsymaksut",
+      "price": {
+        "label": "Hinta ja/tai pääsymaksu"
+      }
     },
     "tags": {
-      "title": "Aihetunnisteet",
+      "title": "Asiasanat",
       "add": {
-        "label": "Lisää aihetunniste",
+        "label": "Lisää asiasana",
         "helperText": "Kirjoita hakusana tai valitse listalta.",
         "tooltipLabel": "TODO",
         "tooltipText": "TODO"

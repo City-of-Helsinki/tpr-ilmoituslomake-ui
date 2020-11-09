@@ -1,6 +1,6 @@
 {
   "notification": {
-    "title": "Notification form",
+    "title": "My Helsinki Places",
     "skipToContent": "Skip to content",
     "login": "Sign in",
     "button": {
@@ -22,9 +22,15 @@
     "main": {
       "basic": "Place's basic information",
       "contact": "Place's contact information",
-      "payment": "Place's prices and payment methods",
+      "payment": "Place's prices and payments",
       "photos": "Place's photos",
-      "send": "Preview and send"
+      "send": "Check information and send"
+    },
+    "comments": {
+      "title": "Comments",
+      "comments": {
+        "label": "Comments to the moderator of the information"
+      }
     },
     "contact": {
       "title": "Place's contact information",
@@ -59,7 +65,7 @@
         "label": "Website address"
       },
       "socialMedia": {
-        "links": "Social media"
+        "label": "Social media"
       }
     },
     "location": {
@@ -78,16 +84,38 @@
       "title": "Map of place"
     },
     "notifier": {
-      "title": "Notifier's information"
+      "title": "Notifier's information",
+      "fullName": {
+        "label": "Notifier's first and last name"
+      },
+      "email": {
+        "label": "Notifier's email address"
+      },
+      "phone": {
+        "label": "Notifier's phone number"
+      }
     },
     "opening": {
       "title": "Opening times"
     },
     "payment": {
-      "title": "Payment methods"
+      "title": "Payment methods",
+      "options": "Payment methods and tax refund"
     },
     "photos": {
-      "title": "Photos"
+      "title": "Photos",
+      "url": {
+        "label": "Photo's internet address (url)"
+      },
+      "description": {
+        "label": "Photo's short description (alt-text)"
+      },
+      "permission": {
+        "label": "Photo's usage permission"
+      },
+      "photographer": {
+        "label": "Photographer's name"
+      }
     },
     "placeType": {
       "title": "Place's type",
@@ -97,15 +125,18 @@
       "institution": "Institution place"
     },
     "preview": {
-      "title": "Preview"
+      "title": "Summary of the place's information"
     },
     "prices": {
-      "title": "Prices ja entrance fees"
+      "title": "Prices ja entrance fees",
+      "price": {
+        "label": "Price and/or entrance fee"
+      }
     },
     "tags": {
-      "title": "Tags",
+      "title": "Keywords",
       "add": {
-        "label": "Add tag",
+        "label": "Add keyword",
         "helperText": "Type a search word or select from the list.",
         "tooltipLabel": "TODO",
         "tooltipText": "TODO"
