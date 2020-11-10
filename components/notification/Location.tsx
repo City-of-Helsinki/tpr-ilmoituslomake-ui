@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { useI18n } from "next-localization";
 import { TextInput } from "hds-react";
 import { NotificationAction } from "../../state/actions/types";
-import { setNotificationData } from "../../state/actions/notification";
+import { setNotificationData, setNotificationValidation } from "../../state/actions/notification";
 import { RootState } from "../../state/reducers";
 
 const Location = (): ReactElement => {
@@ -18,6 +18,14 @@ const Location = (): ReactElement => {
     },
   } = notification;
 
+  const notificationValidation = useSelector((state: RootState) => state.notification.notificationValidation);
+  const {
+    address: {
+      fi: { street: streetFiValid = true, postal_code: postalCodeFiValid = true, post_office: postOfficeFiValid = true } = {},
+      // sv: { street: streetSvValid = true, postal_code: postalCodeSvValid = true, post_office: postOfficeSvValid = true } = {},
+    } = {},
+  } = notificationValidation;
+
   const updateAddress = (evt: ChangeEvent<HTMLInputElement>) => {
     const newNotification = {
       ...notification,
@@ -30,6 +38,19 @@ const Location = (): ReactElement => {
     dispatch(setNotificationData(newNotification));
   };
 
+  const validateAddress = (evt: ChangeEvent<HTMLInputElement>) => {
+    const valid = evt.target.value.length > 0;
+    const newValidation = {
+      ...notificationValidation,
+      address: {
+        ...notificationValidation.address,
+        fi: { ...(notificationValidation.address ?? {}).fi, [evt.target.name]: valid },
+        // sv: { ...(notificationValidation.address ?? {}).sv, [evt.target.name]: valid },
+      },
+    };
+    dispatch(setNotificationValidation(newValidation));
+  };
+
   return (
     <div className="formSection">
       <h2>{i18n.t("notification.location.title")}</h2>
@@ -40,6 +61,8 @@ const Location = (): ReactElement => {
         name="street"
         value={streetFi}
         onChange={updateAddress}
+        onBlur={validateAddress}
+        invalid={!streetFiValid}
         required
       />
       <TextInput
@@ -49,6 +72,8 @@ const Location = (): ReactElement => {
         name="postal_code"
         value={postalCodeFi}
         onChange={updateAddress}
+        onBlur={validateAddress}
+        invalid={!postalCodeFiValid}
         required
       />
       <TextInput
@@ -58,6 +83,8 @@ const Location = (): ReactElement => {
         name="post_office"
         value={postOfficeFi}
         onChange={updateAddress}
+        onBlur={validateAddress}
+        invalid={!postOfficeFiValid}
         required
       />
     </div>

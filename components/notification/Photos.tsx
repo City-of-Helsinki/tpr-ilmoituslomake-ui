@@ -11,7 +11,7 @@ const Photos = (): ReactElement => {
   const dispatch = useDispatch<Dispatch<NotificationAction>>();
 
   const notificationExtra = useSelector((state: RootState) => state.notification.notificationExtra);
-  const { photos = [{ url: "", description: "", permission: false, photographer: "" }] } = notificationExtra;
+  const { photos = [] } = notificationExtra;
 
   const updatePhoto = (index: number, evt: ChangeEvent<HTMLInputElement>) => {
     photos[index] = { ...photos[index], [evt.target.name]: evt.target.name === "permission" ? evt.target.checked : evt.target.value };

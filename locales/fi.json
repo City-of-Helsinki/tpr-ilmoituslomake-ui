@@ -54,9 +54,7 @@
       },
       "longDescription": {
         "label": "Kohteen pitkä kuvaus suomeksi",
-        "helperText": "Huomioi, että teksti ei saa olla me-muodossa. Pituus max. 4000 merkkiä",
-        "tooltipLabel": "TODO",
-        "tooltipText": "TODO"
+        "helperText": "Huomioi, että teksti ei saa olla me-muodossa. Pituus 120 - 4000 merkkiä"
       }
     },
     "links": {
@@ -85,6 +83,9 @@
     },
     "notifier": {
       "title": "Ilmoittajan tiedot",
+      "notifierType": "Ilmoittajan tyyppi",
+      "owner": "Olen kohteen edustaja tai omistaja",
+      "outsideSource":"Olen ulkopuolinen taho",
       "fullName": {
         "label": "Ilmoittajan etunimi ja sukunimi"
       },
@@ -138,9 +139,7 @@
       "title": "Asiasanat",
       "add": {
         "label": "Lisää asiasana",
-        "helperText": "Kirjoita hakusana tai valitse listalta.",
-        "tooltipLabel": "TODO",
-        "tooltipText": "TODO"
+        "helperText": "Kirjoita hakusana tai valitse listalta."
       }
     }
   },

@@ -28,19 +28,27 @@ const Footer = (): ReactElement => {
 
   const sendNotification = async () => {
     try {
-      console.log("VALIDATED", validateNotificationData(notification));
-      console.log("SENDING", notification);
+      const valid = validateNotificationData(notification);
 
-      const createRequest = await fetch("/api/notification/create/", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ data: notification }),
-      });
-      const createResponse = await createRequest.json();
-      console.log("RESPONSE", createResponse);
+      console.log("VALIDATED", valid);
+
+      if (valid) {
+        console.log("SENDING", notification);
+
+        const createRequest = await fetch("/api/notification/create/", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ data: notification }),
+        });
+        const createResponse = await createRequest.json();
+
+        // TODO - handle response
+        console.log("RESPONSE", createResponse);
+      }
     } catch (err) {
+      // TODO - handle error
       console.log("ERROR", err);
     }
   };

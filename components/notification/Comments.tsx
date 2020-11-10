@@ -31,7 +31,6 @@ const Comments = (): ReactElement => {
         name="comments"
         value={comments}
         onChange={updateComments}
-        required
       />
     </div>
   );

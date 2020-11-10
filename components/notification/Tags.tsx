@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { useI18n } from "next-localization";
 import { Combobox } from "hds-react";
 import { NotificationAction } from "../../state/actions/types";
-import { setNotificationData } from "../../state/actions/notification";
+import { setNotificationData, setNotificationValidation } from "../../state/actions/notification";
 import { RootState } from "../../state/reducers";
 
 type OptionType = {
@@ -17,18 +17,27 @@ const Tags = (): ReactElement => {
   const notification = useSelector((state: RootState) => state.notification.notification);
   const { ontology_ids } = notification;
 
+  const notificationValidation = useSelector((state: RootState) => state.notification.notificationValidation);
+  const { ontology_ids: tagsValid = true } = notificationValidation;
+
   const tagOptions = ["Ravintola", "Kasvisravintola", "TODO"];
 
   const convertOptions = (options: string[]) => {
     return options.map((tag) => ({ label: tag }));
   };
 
+  const validateTags = (selected: OptionType[]) => {
+    const valid = selected.length > 0;
+    const newValidation = { ...notificationValidation, ontology_ids: valid };
+    dispatch(setNotificationValidation(newValidation));
+  };
+
   const updateTags = (selected: OptionType[]) => {
-    const newNotification = {
-      ...notification,
-      ontology_ids: selected.map((s) => s.label),
-    };
+    const newNotification = { ...notification, ontology_ids: selected.map((s) => s.label) };
     dispatch(setNotificationData(newNotification));
+
+    // The validation needs to be done here since onBlur doesn't take any parameters
+    validateTags(selected);
   };
 
   return (
@@ -43,11 +52,10 @@ const Tags = (): ReactElement => {
         onChange={updateTags}
         label={i18n.t("notification.tags.add.label")}
         helper={i18n.t("notification.tags.add.helperText")}
-        tooltipLabel={i18n.t("notification.tags.add.tooltipLabel")}
-        tooltipText={i18n.t("notification.tags.add.tooltipText")}
         toggleButtonAriaLabel={i18n.t("notification.button.toggleMenu")}
         selectedItemRemoveButtonAriaLabel={i18n.t("notification.button.remove")}
         clearButtonAriaLabel={i18n.t("notification.button.clearAllSelections")}
+        invalid={!tagsValid}
         required
         multiselect
       />
