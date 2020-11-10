@@ -24,7 +24,7 @@ const Location = (): ReactElement => {
       address: {
         ...notification.address,
         fi: { ...notification.address.fi, [evt.target.name]: evt.target.value },
-        sv: { ...notification.address.sv, [evt.target.name]: evt.target.value },
+        // sv: { ...notification.address.sv, [evt.target.name]: evt.target.value },
       },
     };
     dispatch(setNotificationData(newNotification));

@@ -36,7 +36,7 @@ const Footer = (): ReactElement => {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(notification),
+        body: JSON.stringify({ data: notification }),
       });
       const createResponse = await createRequest.json();
       console.log("RESPONSE", createResponse);

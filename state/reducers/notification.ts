@@ -8,29 +8,18 @@ const initialState: NotificationState = {
     organization: {},
     name: {
       fi: "",
-      sv: "",
-      en: "",
     },
     location: [0, 0],
     description: {
       short: {
         fi: "",
-        sv: "",
-        en: "",
       },
       long: {
         fi: "",
-        sv: "",
-        en: "",
       },
     },
     address: {
       fi: {
-        street: "",
-        postal_code: "",
-        post_office: "",
-      },
-      sv: {
         street: "",
         postal_code: "",
         post_office: "",
@@ -40,15 +29,11 @@ const initialState: NotificationState = {
     email: "",
     website: {
       fi: "",
-      sv: "",
-      en: "",
     },
     images: {},
     opening_times: {},
     price: {
       fi: "",
-      sv: "",
-      en: "",
     },
     payment_options: [],
     ontology_ids: [],
