@@ -115,7 +115,8 @@
       },
       "photographer": {
         "label": "Photographer's name"
-      }
+      },
+      "addNew": "Add new photo"
     },
     "placeType": {
       "title": "Place's type",

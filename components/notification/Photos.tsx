@@ -1,7 +1,7 @@
 import React, { Dispatch, ChangeEvent, ReactElement } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useI18n } from "next-localization";
-import { TextInput, Checkbox } from "hds-react";
+import { TextInput, Checkbox, Button } from "hds-react";
 import { NotificationAction } from "../../state/actions/types";
 import { setNotificationExtra } from "../../state/actions/notification";
 import { RootState } from "../../state/reducers";
@@ -15,6 +15,13 @@ const Photos = (): ReactElement => {
 
   const updatePhoto = (index: number, evt: ChangeEvent<HTMLInputElement>) => {
     photos[index] = { ...photos[index], [evt.target.name]: evt.target.name === "permission" ? evt.target.checked : evt.target.value };
+
+    const newNotificationExtra = { ...notificationExtra, photos };
+    dispatch(setNotificationExtra(newNotificationExtra));
+  };
+
+  const addPhoto = () => {
+    photos.push({ url: "", description: "", permission: false, photographer: "" });
 
     const newNotificationExtra = { ...notificationExtra, photos };
     dispatch(setNotificationExtra(newNotificationExtra));
@@ -65,6 +72,10 @@ const Photos = (): ReactElement => {
           </div>
         );
       })}
+
+      <Button variant="secondary" onClick={addPhoto}>
+        {i18n.t("notification.photos.addNew")}
+      </Button>
     </div>
   );
 };

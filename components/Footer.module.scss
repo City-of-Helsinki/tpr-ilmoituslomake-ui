@@ -7,7 +7,7 @@
 
   .wave {
     position: relative;
-    fill: $color-fog-medium-light;
+    fill: $color-fog-light;
 
     @include media(xs) {
       width: $container-width-xs;

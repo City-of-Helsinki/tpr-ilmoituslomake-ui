@@ -115,7 +115,8 @@
       },
       "photographer": {
         "label": "Valokuvaajan nimi"
-      }
+      },
+      "addNew": "Lisää uusi kuva"
     },
     "placeType": {
       "title": "Kohteen tyyppi",
