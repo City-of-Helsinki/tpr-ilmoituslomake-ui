@@ -60,6 +60,15 @@ const notification = (state = initialState, action: AnyAction): NotificationStat
       return {
         ...state,
         user: action.payload,
+        // Also update the notifier values with the login user details if not already set
+        notificationExtra: {
+          ...state.notificationExtra,
+          notifier: {
+            ...state.notificationExtra.notifier,
+            fullName: state.notificationExtra.notifier.fullName || `${action.payload.first_name} ${action.payload.last_name}`.trim(),
+            email: state.notificationExtra.notifier.email || action.payload.email,
+          },
+        },
       };
     case SET_NOTIFICATION_DATA:
       return {

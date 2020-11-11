@@ -8,7 +8,7 @@ export interface User {
 
 export interface NotificationExtra {
   notifier: {
-    notifierType: string;
+    notifierType?: string;
     fullName: string;
     email: string;
     phone: string;
