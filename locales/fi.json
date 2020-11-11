@@ -3,6 +3,7 @@
     "title": "My Helsinki Places",
     "skipToContent": "Siirry sivun pääsisältöön",
     "login": "Kirjaudu sisään",
+    "logout": "Kirjaudu ulos",
     "mandatory": "Pakolliset tiedot on merkitty tähdellä *",
     "button": {
       "next": "Seuraava",

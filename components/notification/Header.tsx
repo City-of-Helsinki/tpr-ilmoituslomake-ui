@@ -1,11 +1,11 @@
-import React, { Dispatch, ReactElement } from "react";
+import React, { Dispatch, ReactElement, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useRouter } from "next/router";
 import { useI18n } from "next-localization";
-import { Navigation } from "hds-react";
+import { Navigation, IconSignout } from "hds-react";
 import { defaultLocale } from "../../utils/i18n";
 import { NotificationAction } from "../../state/actions/types";
-import { setPage } from "../../state/actions/notification";
+import { setPage, setUser } from "../../state/actions/notification";
 import { RootState } from "../../state/reducers";
 import styles from "./Header.module.scss";
 
@@ -15,6 +15,7 @@ const Header = (): ReactElement => {
   const router = useRouter();
 
   const currentPage = useSelector((state: RootState) => state.notification.page);
+  const currentUser = useSelector((state: RootState) => state.notification.user);
 
   const changePage = (pageNumber: number) => {
     dispatch(setPage(pageNumber));
@@ -24,8 +25,35 @@ const Header = (): ReactElement => {
     router.push(router.pathname, router.pathname, { locale });
   };
 
+  useEffect(() => {
+    const getUser = async () => {
+      const userResponse = await fetch("/api/user/?format=json");
+
+      if (userResponse.ok) {
+        const user = await userResponse.json();
+
+        if (currentUser === undefined || user.username !== currentUser.username) {
+          dispatch(setUser({ authenticated: true, ...user }));
+        }
+      }
+    };
+    getUser();
+  }, [dispatch, currentUser]);
+
   const signIn = () => {
-    window.open("/admin/login/?next=/", "_self");
+    const {
+      location: { protocol, hostname, pathname },
+    } = window;
+
+    window.open(`${protocol}//${hostname}/admin/login/?next=${pathname}`, "_self");
+  };
+
+  const signOut = () => {
+    const {
+      location: { protocol, hostname, pathname },
+    } = window;
+
+    window.open(`${protocol}//${hostname}/admin/logout/?next=${pathname}`, "_self");
   };
 
   return (
@@ -69,7 +97,21 @@ const Header = (): ReactElement => {
           />
         </Navigation.Row>
         <Navigation.Actions>
-          <Navigation.User label={i18n.t("notification.login")} onSignIn={signIn} />
+          <Navigation.User
+            label={i18n.t("notification.login")}
+            authenticated={currentUser?.authenticated}
+            userName={currentUser?.email}
+            onSignIn={signIn}
+          >
+            <Navigation.Item
+              as="a"
+              href="#"
+              variant="supplementary"
+              icon={<IconSignout aria-hidden />}
+              label={i18n.t("notification.logout")}
+              onClick={signOut}
+            />
+          </Navigation.User>
           <Navigation.LanguageSelector label={(router.locale || defaultLocale).toUpperCase()}>
             <Navigation.Item label="Suomeksi" onClick={() => changeLanguage("fi")} />
             <Navigation.Item label="In English" onClick={() => changeLanguage("en")} />

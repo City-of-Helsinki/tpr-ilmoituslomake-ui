@@ -3,6 +3,7 @@
     "title": "My Helsinki Places",
     "skipToContent": "Skip to content",
     "login": "Sign in",
+    "logout": "Sign out",
     "mandatory": "Mandatory information is marked with an asterisk *",
     "button": {
       "next": "Next",
