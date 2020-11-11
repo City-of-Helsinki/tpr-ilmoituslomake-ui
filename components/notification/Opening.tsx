@@ -8,7 +8,9 @@ const Opening = (): ReactElement => {
   return (
     <div className="formSection">
       <h2>{i18n.t("notification.opening.title")}</h2>
-      <HdsNotification size="small">{i18n.t("notification.opening.notice")}</HdsNotification>
+      <HdsNotification size="small" className="formNotification">
+        {i18n.t("notification.opening.notice")}
+      </HdsNotification>
     </div>
   );
 };

@@ -41,7 +41,9 @@ const Notification = (): ReactElement => {
       {currentPage === 1 && (
         <div>
           <h1>{`${currentPage} ${i18n.t("notification.main.basic")}`}</h1>
-          <HdsNotification size="small">{i18n.t("notification.mandatory")}</HdsNotification>
+          <HdsNotification size="small" className="formNotification">
+            {i18n.t("notification.mandatory")}
+          </HdsNotification>
           <Description />
           {/* <PlaceType /> */}
           <Tags />
@@ -51,7 +53,9 @@ const Notification = (): ReactElement => {
       {currentPage === 2 && (
         <div>
           <h1>{`${currentPage} ${i18n.t("notification.main.contact")}`}</h1>
-          <HdsNotification size="small">{i18n.t("notification.mandatory")}</HdsNotification>
+          <HdsNotification size="small" className="formNotification">
+            {i18n.t("notification.mandatory")}
+          </HdsNotification>
           <Location />
           <Map />
           <Contact />
@@ -62,14 +66,18 @@ const Notification = (): ReactElement => {
       {currentPage === 3 && (
         <div>
           <h1>{`${currentPage} ${i18n.t("notification.main.photos")}`}</h1>
-          <HdsNotification size="small">{i18n.t("notification.photos.notice")}</HdsNotification>
+          <HdsNotification size="small" className="formNotification">
+            {i18n.t("notification.photos.notice")}
+          </HdsNotification>
           <Photos />
         </div>
       )}
       {currentPage === 4 && (
         <div>
           <h1>{`${currentPage} ${i18n.t("notification.main.payment")}`}</h1>
-          <HdsNotification size="small">{i18n.t("notification.mandatory")}</HdsNotification>
+          <HdsNotification size="small" className="formNotification">
+            {i18n.t("notification.mandatory")}
+          </HdsNotification>
           <Prices />
           <Payment />
         </div>
@@ -77,7 +85,9 @@ const Notification = (): ReactElement => {
       {currentPage === 5 && (
         <div>
           <h1>{`${currentPage} ${i18n.t("notification.main.send")}`}</h1>
-          <HdsNotification size="small">{i18n.t("notification.comments.notice")}</HdsNotification>
+          <HdsNotification size="small" className="formNotification">
+            {i18n.t("notification.comments.notice")}
+          </HdsNotification>
           <Terms />
           <Comments />
           <Preview />

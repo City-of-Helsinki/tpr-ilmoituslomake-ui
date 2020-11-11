@@ -22,3 +22,7 @@ h1 {
 .formInput {
   margin-bottom: $spacing-layout-s;
 }
+
+.formNotification {
+  z-index: auto !important;
+}
