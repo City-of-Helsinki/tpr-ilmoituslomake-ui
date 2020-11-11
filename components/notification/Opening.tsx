@@ -1,7 +1,6 @@
 import React, { ReactElement } from "react";
-import { useSelector, useDispatch } from "react-redux";
 import { useI18n } from "next-localization";
-import { RootState } from "../../state/reducers";
+import { Notification as HdsNotification } from "hds-react";
 
 const Opening = (): ReactElement => {
   const i18n = useI18n();
@@ -9,7 +8,7 @@ const Opening = (): ReactElement => {
   return (
     <div className="formSection">
       <h2>{i18n.t("notification.opening.title")}</h2>
-      <div>OPENING TIMES TODO</div>
+      <HdsNotification size="small">{i18n.t("notification.opening.notice")}</HdsNotification>
     </div>
   );
 };

@@ -3,6 +3,7 @@
     "title": "My Helsinki Places",
     "skipToContent": "Siirry sivun pääsisältöön",
     "login": "Kirjaudu sisään",
+    "mandatory": "Pakolliset tiedot on merkitty tähdellä *",
     "button": {
       "next": "Seuraava",
       "previous": "Edellinen",
@@ -33,6 +34,7 @@
     },
     "comments": {
       "title": "Kommentteja",
+      "notice": "Tarkista vielä tiedot ja lähetä lomake. Jos haluat, voit lisätä kommentteja tietojen moderoijalle.",
       "comments": {
         "label": "Kommentteja tietojen moderoijalle"
       }
@@ -102,7 +104,8 @@
       }
     },
     "opening": {
-      "title": "Aukioloajat"
+      "title": "Aukioloajat",
+      "notice": "Aukioloajat ilmoitetaan eri lomakeella. Voit ilmoittaa aukioloajat heti, kun olet lähettänyt kohteen tiedot."
     },
     "payment": {
       "title": "Maksutavat",
@@ -110,6 +113,7 @@
     },
     "photos": {
       "title": "Kuvat",
+      "notice": "Lisää verkossa sijaitsevan kuvan url-osoite. Toistaiseksi valokuvia ei voi ladata laitteelta vaan ainoastaan kuvalinkit ovat mahdollisia. Kuvan lisääminen ei ole pakollista. Mikäli kuva on lisätty, siihen liittyvät pakolliset tiedot on merkitty tähdellä *",
       "url": {
         "label": "Valokuvan verkko-osoite (url)"
       },
@@ -146,6 +150,10 @@
         "label": "Lisää asiasana",
         "helperText": "Kirjoita hakusana tai valitse listalta."
       }
+    },
+    "terms": {
+      "heading": "Käyttöehdot",
+      "text": "TODO"
     }
   },
   "moderation": {

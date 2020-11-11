@@ -3,6 +3,7 @@
     "title": "My Helsinki Places",
     "skipToContent": "Skip to content",
     "login": "Sign in",
+    "mandatory": "Mandatory information is marked with an asterisk *",
     "button": {
       "next": "Next",
       "previous": "Previous",
@@ -33,6 +34,7 @@
     },
     "comments": {
       "title": "Comments",
+      "notice": "Check the information and send the form. If you want, you can add comments for the moderator of the information.",
       "comments": {
         "label": "Comments to the moderator of the information"
       }
@@ -102,7 +104,8 @@
       }
     },
     "opening": {
-      "title": "Opening times"
+      "title": "Opening times",
+      "notice": "Opening times are notified with a different form. You can state the opening times as soon as you have sent the place's information."
     },
     "payment": {
       "title": "Payment methods",
@@ -110,6 +113,7 @@
     },
     "photos": {
       "title": "Photos",
+      "notice": "Add a url-address for a photo located on the internet. For the time being photos cannot be uploaded from a device, so only links to photos are possible. Adding a photo is not required. In case a photo is added, its mandatory information is marked with an asterisk *",
       "url": {
         "label": "Photo's internet address (url)"
       },
@@ -146,6 +150,10 @@
         "label": "Add keyword",
         "helperText": "Type a search word or select from the list."
       }
+    },
+    "terms": {
+      "heading": "Terms of use",
+      "text": "TODO"
     }
   },
   "moderation": {
