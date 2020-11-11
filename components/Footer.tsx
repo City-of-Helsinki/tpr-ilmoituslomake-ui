@@ -1,6 +1,6 @@
 import React, { ReactElement } from "react";
 import { useI18n } from "next-localization";
-import { Koros, Logo } from "hds-react";
+import { Footer as HdsFooter } from "hds-react";
 import styles from "./Footer.module.scss";
 
 const Footer = (): ReactElement => {
@@ -8,13 +8,10 @@ const Footer = (): ReactElement => {
 
   return (
     <div className={styles.footer}>
-      <Koros type="basic" className={styles.wave} />
-      <div className={styles.content}>
-        <Logo language="fi" size="small" className={styles.smallLogo} />
-        <Logo language="fi" size="medium" className={styles.mediumLogo} />
-        <Logo language="fi" size="large" className={styles.largeLogo} />
-        <span className={styles.title}>{i18n.t("notification.title")}</span>
-      </div>
+      <HdsFooter korosType="basic" className={styles.wave} title={i18n.t("notification.title")}>
+        <HdsFooter.Utilities backToTopLabel={i18n.t("notification.footer.backToTop")} />
+        <HdsFooter.Base copyrightHolder={i18n.t("notification.footer.copyright")} copyrightText={i18n.t("notification.footer.rightsReserved")} />
+      </HdsFooter>
     </div>
   );
 };

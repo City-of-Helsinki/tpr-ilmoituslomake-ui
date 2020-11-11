@@ -26,6 +26,11 @@
       "photos": "Kohteen kuvat",
       "send": "Tarkista tiedot ja lähetä"
     },
+    "footer": {
+      "backToTop": "Takaisin ylös",
+      "copyright": "Copyright",
+      "rightsReserved": "Kaikki oikeudet pidätetään"
+    },
     "comments": {
       "title": "Kommentteja",
       "comments": {

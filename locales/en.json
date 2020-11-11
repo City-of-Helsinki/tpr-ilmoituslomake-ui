@@ -26,6 +26,11 @@
       "photos": "Place's photos",
       "send": "Check information and send"
     },
+    "footer": {
+      "backToTop": "Back to top",
+      "copyright": "Copyright",
+      "rightsReserved": "All rights reserved"
+    },
     "comments": {
       "title": "Comments",
       "comments": {

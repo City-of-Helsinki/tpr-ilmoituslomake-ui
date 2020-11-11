@@ -1,69 +1,15 @@
 @import "~hds-design-tokens/lib/all.scss";
-@import "../styles/mixins";
 
 .footer {
-  position: relative;
   margin-top: $spacing-layout-l;
 
   .wave {
-    position: relative;
-    fill: $color-fog-light;
-
-    @include media(xs) {
-      width: $container-width-xs;
+    div {
+      fill: $color-fog-light;
     }
 
-    @include media(s) {
-      width: $container-width-s;
-    }
-
-    @include media(m) {
-      width: $container-width-m;
-    }
-
-    @include media(l) {
-      width: $container-width-l;
-    }
-
-    @include media(xl) {
-      width: $container-width-xl;
-    }
-  }
-
-  .content {
-    position: absolute;
-    left: $spacing-m;
-    bottom: $spacing-xs;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-
-    .smallLogo {
-      display: none;
-
-      @include media(xs) {
-        display: inline;
-      }
-    }
-
-    .mediumLogo {
-      display: none;
-
-      @include media(s, m, l) {
-        display: inline;
-      }
-    }
-
-    .largeLogo {
-      display: none;
-
-      @include media(xl) {
-        display: inline;
-      }
-    }
-
-    .title {
-      margin-left: $spacing-m;
+    &:before {
+      background-color: $color-fog-light;
     }
   }
 }
