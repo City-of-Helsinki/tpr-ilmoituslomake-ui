@@ -33,6 +33,21 @@
       "copyright": "Copyright",
       "rightsReserved": "Kaikki oikeudet pidätetään"
     },
+    "toast": {
+      "validationFailed": {
+        "title": "Validointi epäonnistui",
+        "message": "Tarkista että tiedot ovat oikeita"
+      },
+      "saveFailed": {
+        "title": "Lähetys epäonnistui",
+        "message": ""
+      },
+      "saveSucceeded": {
+        "title": "Lähetys onnistui",
+        "message": ""
+      },
+      "close": "Sulje viesti"
+    },
     "comments": {
       "title": "Kommentteja",
       "notice": "Tarkista vielä tiedot ja lähetä lomake. Jos haluat, voit lisätä kommentteja tietojen moderoijalle.",

@@ -33,6 +33,21 @@
       "copyright": "Copyright",
       "rightsReserved": "All rights reserved"
     },
+    "toast": {
+      "validationFailed": {
+        "title": "Validation failed",
+        "message": "Check that the information is correct"
+      },
+      "saveFailed": {
+        "title": "Sending failed",
+        "message": ""
+      },
+      "saveSucceeded": {
+        "title": "Sending succeeded",
+        "message": ""
+      },
+      "close": "Close message"
+    },
     "comments": {
       "title": "Comments",
       "notice": "Check the information and send the form. If you want, you can add comments for the moderator of the information.",

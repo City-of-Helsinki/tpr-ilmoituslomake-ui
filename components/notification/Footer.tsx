@@ -1,8 +1,8 @@
-import React, { Dispatch, ReactElement } from "react";
+import React, { Dispatch, ReactElement, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useRouter } from "next/router";
 import { useI18n } from "next-localization";
-import { Button } from "hds-react";
+import { Button, Notification as HdsNotification } from "hds-react";
 import { NotificationAction } from "../../state/actions/types";
 import { setPage } from "../../state/actions/notification";
 import { RootState } from "../../state/reducers";
@@ -18,6 +18,13 @@ const Footer = (): ReactElement => {
   const currentPage = useSelector((state: RootState) => state.notification.page);
   const notification = useSelector((state: RootState) => state.notification.notification);
 
+  enum Toast {
+    ValidationFailed = "validationFailed",
+    SaveFailed = "saveFailed",
+    SaveSucceeded = "saveSucceeded",
+  }
+  const [toast, setToast] = useState<Toast>();
+
   const previousPage = () => {
     dispatch(setPage(currentPage - 1));
   };
@@ -29,8 +36,6 @@ const Footer = (): ReactElement => {
   const sendNotification = async () => {
     try {
       const valid = validateNotificationData(notification);
-
-      console.log("VALIDATED", valid);
 
       if (valid) {
         console.log("SENDING", notification);
@@ -46,15 +51,23 @@ const Footer = (): ReactElement => {
 
         // TODO - handle response
         console.log("RESPONSE", createResponse);
+
+        setToast(Toast.SaveSucceeded);
+      } else {
+        setToast(Toast.ValidationFailed);
       }
     } catch (err) {
-      // TODO - handle error
       console.log("ERROR", err);
+      setToast(Toast.SaveFailed);
     }
   };
 
   const cancelNotification = () => {
     router.push("/", "/");
+  };
+
+  const cleanupToast = () => {
+    setToast(undefined);
   };
 
   return (
@@ -69,9 +82,25 @@ const Footer = (): ReactElement => {
           {i18n.t("notification.button.previous")}
         </Button>
       )}
+
       <div className={styles.space} />
+
       {currentPage < MAX_PAGE && <Button onClick={nextPage}>{i18n.t("notification.button.next")}</Button>}
       {currentPage === MAX_PAGE && <Button onClick={sendNotification}>{i18n.t("notification.button.send")}</Button>}
+
+      {toast && (
+        <HdsNotification
+          position="top-right"
+          label={i18n.t(`notification.toast.${toast}.title`)}
+          type={toast === Toast.SaveSucceeded ? "success" : "error"}
+          closeButtonLabelText={i18n.t("notification.toast.close")}
+          onClose={cleanupToast}
+          autoClose
+          dismissible
+        >
+          {i18n.t(`notification.toast.${toast}.message`)}
+        </HdsNotification>
+      )}
     </div>
   );
 };
