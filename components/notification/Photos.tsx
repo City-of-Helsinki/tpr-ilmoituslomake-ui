@@ -5,6 +5,7 @@ import { TextInput, Checkbox, Button } from "hds-react";
 import { NotificationAction } from "../../state/actions/types";
 import { setNotificationExtra } from "../../state/actions/notification";
 import { RootState } from "../../state/reducers";
+import styles from "./Photos.module.scss";
 
 const Photos = (): ReactElement => {
   const i18n = useI18n();
@@ -28,14 +29,14 @@ const Photos = (): ReactElement => {
   };
 
   return (
-    <div className="formSection">
-      <h2>{i18n.t("notification.photos.title")}</h2>
+    <div className={styles.photos}>
       {photos.map(({ url, description, permission, photographer }, index) => {
         const key = `photo_${index}`;
         return (
           <div key={key}>
+            <h2>{`${i18n.t("notification.photos.photo")} ${index + 1}`}</h2>
             <TextInput
-              id="url"
+              id={`url_${index}`}
               className="formInput"
               label={i18n.t("notification.photos.url.label")}
               name="url"
@@ -44,7 +45,7 @@ const Photos = (): ReactElement => {
               required
             />
             <TextInput
-              id="description"
+              id={`description_${index}`}
               className="formInput"
               label={i18n.t("notification.photos.description.label")}
               name="description"
@@ -52,9 +53,9 @@ const Photos = (): ReactElement => {
               onChange={(evt) => updatePhoto(index, evt)}
             />
             <Checkbox
-              id="permission"
+              id={`permission_${index}`}
               className="formInput"
-              label={i18n.t("notification.photos.permission.label")}
+              label={`${i18n.t("notification.photos.permission.label")} *`}
               name="permission"
               value="permission"
               checked={permission}
@@ -62,18 +63,19 @@ const Photos = (): ReactElement => {
               required
             />
             <TextInput
-              id="photographer"
+              id={`photographer_${index}`}
               className="formInput"
               label={i18n.t("notification.photos.photographer.label")}
               name="photographer"
               value={photographer}
               onChange={(evt) => updatePhoto(index, evt)}
             />
+            <hr />
           </div>
         );
       })}
 
-      <Button variant="secondary" onClick={addPhoto}>
+      <Button variant="secondary" className={styles.addNew} onClick={addPhoto}>
         {i18n.t("notification.photos.addNew")}
       </Button>
     </div>

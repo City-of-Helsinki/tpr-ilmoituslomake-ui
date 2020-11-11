@@ -130,6 +130,7 @@
     "photos": {
       "title": "Kuvat",
       "notice": "Lisää verkossa sijaitsevan kuvan url-osoite. Toistaiseksi valokuvia ei voi ladata laitteelta vaan ainoastaan kuvalinkit ovat mahdollisia. Kuvan lisääminen ei ole pakollista. Mikäli kuva on lisätty, siihen liittyvät pakolliset tiedot on merkitty tähdellä *",
+      "photo": "Kuva",
       "url": {
         "label": "Valokuvan verkko-osoite (url)"
       },

@@ -1,0 +1,9 @@
+@import "~hds-design-tokens/lib/all.scss";
+
+.photos {
+  margin-bottom: $spacing-layout-l;
+
+  .addNew {
+    margin-top: $spacing-layout-s;
+  }
+}

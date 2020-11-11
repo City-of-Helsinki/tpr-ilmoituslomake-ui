@@ -2,7 +2,7 @@ import React, { Dispatch, ReactElement, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useRouter } from "next/router";
 import { useI18n } from "next-localization";
-import { Button, Notification as HdsNotification } from "hds-react";
+import { Button, IconArrowLeft, IconArrowRight, Notification as HdsNotification } from "hds-react";
 import { NotificationAction } from "../../state/actions/types";
 import { setPage } from "../../state/actions/notification";
 import { RootState } from "../../state/reducers";
@@ -73,20 +73,28 @@ const Footer = (): ReactElement => {
   return (
     <div className={styles.notificationFooter}>
       {currentPage === 1 && (
-        <Button variant="secondary" onClick={cancelNotification}>
+        <Button variant="secondary" iconLeft={<IconArrowLeft />} onClick={cancelNotification}>
           {i18n.t("notification.button.cancel")}
         </Button>
       )}
       {currentPage > 1 && (
-        <Button variant="secondary" onClick={previousPage}>
+        <Button variant="secondary" iconLeft={<IconArrowLeft />} onClick={previousPage}>
           {i18n.t("notification.button.previous")}
         </Button>
       )}
 
       <div className={styles.space} />
 
-      {currentPage < MAX_PAGE && <Button onClick={nextPage}>{i18n.t("notification.button.next")}</Button>}
-      {currentPage === MAX_PAGE && <Button onClick={sendNotification}>{i18n.t("notification.button.send")}</Button>}
+      {currentPage < MAX_PAGE && (
+        <Button iconRight={<IconArrowRight />} onClick={nextPage}>
+          {i18n.t("notification.button.next")}
+        </Button>
+      )}
+      {currentPage === MAX_PAGE && (
+        <Button iconRight={<IconArrowRight />} onClick={sendNotification}>
+          {i18n.t("notification.button.send")}
+        </Button>
+      )}
 
       {toast && (
         <HdsNotification

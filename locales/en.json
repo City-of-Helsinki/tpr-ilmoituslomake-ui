@@ -130,6 +130,7 @@
     "photos": {
       "title": "Photos",
       "notice": "Add a url-address for a photo located on the internet. For the time being photos cannot be uploaded from a device, so only links to photos are possible. Adding a photo is not required. In case a photo is added, its mandatory information is marked with an asterisk *",
+      "photo": "Photo",
       "url": {
         "label": "Photo's internet address (url)"
       },
