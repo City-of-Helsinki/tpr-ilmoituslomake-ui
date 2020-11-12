@@ -67,18 +67,24 @@
     "description": {
       "title": "Kohteen nimi ja kuvaus",
       "placeName": {
-        "label": "Kohteen nimi suomeksi"
+        "label": "Kohteen nimi"
       },
       "shortDescription": {
-        "label": "Kohteen lyhyt kuvaus suomeksi",
+        "label": "Kohteen lyhyt kuvaus",
         "helperText": "Huomioi, että teksti ei saa olla me-muodossa. Pituus max. 150 merkkiä",
         "tooltipLabel": "Paranna löydettävyyttä",
         "tooltipText": "Lyhyen kuvauksen avulla toimipaikka löytyy paremmin hakukoneella."
       },
       "longDescription": {
-        "label": "Kohteen pitkä kuvaus suomeksi",
+        "label": "Kohteen pitkä kuvaus",
         "helperText": "Huomioi, että teksti ei saa olla me-muodossa. Pituus 120 - 4000 merkkiä"
       }
+    },
+    "inputLanguage": {
+      "title": "Anna tiedot kielillä",
+      "fi": "suomeksi",
+      "sv": "ruotsiksi",
+      "en": "englanniksi"
     },
     "links": {
       "title": "Kohteen linkit",

@@ -1,19 +1,13 @@
 export interface NotificationValidation {
-  name?: {
-    fi?: boolean;
-    sv?: boolean;
-    en?: boolean;
+  name: {
+    [key: string]: boolean;
   };
-  description?: {
-    short?: {
-      fi?: boolean;
-      sv?: boolean;
-      en?: boolean;
+  description: {
+    short: {
+      [key: string]: boolean;
     };
-    long?: {
-      fi?: boolean;
-      sv?: boolean;
-      en?: boolean;
+    long: {
+      [key: string]: boolean;
     };
   };
   address?: {

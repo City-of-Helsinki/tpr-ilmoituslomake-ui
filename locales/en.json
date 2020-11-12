@@ -67,18 +67,24 @@
     "description": {
       "title": "Place's name and description",
       "placeName": {
-        "label": "Place's name in Finnish"
+        "label": "Place's name in"
       },
       "shortDescription": {
-        "label": "Place's short description in Finnish",
+        "label": "Place's short description in",
         "helperText": "Note that the text cannot be in 'we' form. Length max. 150 characters",
         "tooltipLabel": "Improve findability",
         "tooltipText": "A short description helps the place to be found more easily with a search engine."
       },
       "longDescription": {
-        "label": "Place's long description in Finnish",
+        "label": "Place's long description in",
         "helperText": "Note that the text cannot be in 'we' form. Length 120 - 4000 characters"
       }
+    },
+    "inputLanguage": {
+      "title": "Give the information in the languages",
+      "fi": "Finnish",
+      "sv": "Swedish",
+      "en": "English"
     },
     "links": {
       "title": "Place's links",

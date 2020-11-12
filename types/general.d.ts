@@ -7,6 +7,7 @@ export interface User {
 }
 
 export interface NotificationExtra {
+  inputLanguages: string[];
   notifier: {
     notifierType?: string;
     fullName: string;

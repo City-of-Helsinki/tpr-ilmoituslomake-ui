@@ -5,7 +5,7 @@ import Head from "next/head";
 import { useI18n } from "next-localization";
 // import absoluteUrl from "next-absolute-url";
 import { Notification as HdsNotification } from "hds-react";
-import i18nLoader from "../../utils/i18n";
+import i18nLoader, { defaultLocale } from "../../utils/i18n";
 import { RootState } from "../../state/reducers";
 import { initStore } from "../../state/store";
 import Layout from "../../components/Layout";
@@ -109,10 +109,12 @@ export const getServerSideProps: GetServerSideProps = async ({ req, locale }) =>
   // const hello = await response.json();
 
   const reduxStore = initStore();
+  const initialReduxState = reduxStore.getState();
+  initialReduxState.notification.notificationExtra.inputLanguages = [locale || defaultLocale];
 
   return {
     props: {
-      initialReduxState: reduxStore.getState(),
+      initialReduxState,
       lngDict,
     },
   };
