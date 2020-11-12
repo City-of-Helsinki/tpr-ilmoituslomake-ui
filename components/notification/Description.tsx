@@ -96,8 +96,8 @@ const Description = (): ReactElement => {
       <h2>{i18n.t("notification.description.title")}</h2>
       <InputLanguage />
 
-      <div className="languageSection">
-        <h3>{i18n.t("notification.description.placeName.label")}</h3>
+      <div className={inputLanguages.length > 1 ? "languageSection" : ""}>
+        {inputLanguages.length > 1 && <h3>{i18n.t("notification.description.placeName.label")}</h3>}
         {languageOptions.map((option) =>
           inputLanguages.includes(option) ? (
             <TextInput
@@ -116,8 +116,8 @@ const Description = (): ReactElement => {
         )}
       </div>
 
-      <div className="languageSection">
-        <h3>{i18n.t("notification.description.shortDescription.label")}</h3>
+      <div className={inputLanguages.length > 1 ? "languageSection" : ""}>
+        {inputLanguages.length > 1 && <h3>{i18n.t("notification.description.shortDescription.label")}</h3>}
         {languageOptions.map((option) =>
           inputLanguages.includes(option) ? (
             <TextArea
@@ -140,8 +140,8 @@ const Description = (): ReactElement => {
         )}
       </div>
 
-      <div className="languageSection">
-        <h3>{i18n.t("notification.description.longDescription.label")}</h3>
+      <div className={inputLanguages.length > 1 ? "languageSection" : ""}>
+        {inputLanguages.length > 1 && <h3>{i18n.t("notification.description.longDescription.label")}</h3>}
         {languageOptions.map((option) =>
           inputLanguages.includes(option) ? (
             <TextArea
