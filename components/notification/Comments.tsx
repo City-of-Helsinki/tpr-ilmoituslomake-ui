@@ -27,6 +27,7 @@ const Comments = (): ReactElement => {
       <TextArea
         id="comments"
         className="formInput"
+        rows={6}
         label={i18n.t("notification.comments.comments.label")}
         name="comments"
         value={comments}

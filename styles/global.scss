@@ -15,6 +15,10 @@ h1 {
   color: $color-bus;
 }
 
+textarea {
+  height: auto !important;
+}
+
 .formSection {
   margin-bottom: $spacing-layout-l;
 }
@@ -25,4 +29,14 @@ h1 {
 
 .formNotification {
   z-index: auto !important;
+}
+
+.languageSection {
+  border: solid $color-copper-light 0;
+  border-left-width: $spacing-2-xs;
+  padding-left: $spacing-2-xs;
+
+  h3 {
+    color: $color-bus;
+  }
 }

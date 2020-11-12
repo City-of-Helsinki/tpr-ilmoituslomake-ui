@@ -96,60 +96,71 @@ const Description = (): ReactElement => {
       <h2>{i18n.t("notification.description.title")}</h2>
       <InputLanguage />
 
-      {languageOptions.map((option) =>
-        inputLanguages.includes(option) ? (
-          <TextInput
-            id={`placeName_${option}`}
-            key={`placeName_${option}`}
-            className="formInput"
-            label={`${i18n.t("notification.description.placeName.label")} ${i18n.t(`notification.inputLanguage.${option}`)}`}
-            name={option}
-            value={placeName[option] as string}
-            onChange={updateName}
-            onBlur={validateName}
-            invalid={!nameValid[option]}
-            required={router.locale === option}
-          />
-        ) : null
-      )}
+      <div className="languageSection">
+        <h3>{i18n.t("notification.description.placeName.label")}</h3>
+        {languageOptions.map((option) =>
+          inputLanguages.includes(option) ? (
+            <TextInput
+              id={`placeName_${option}`}
+              key={`placeName_${option}`}
+              className="formInput"
+              label={`${i18n.t("notification.description.placeName.label")} ${i18n.t(`notification.inputLanguage.${option}`)}`}
+              name={option}
+              value={placeName[option] as string}
+              onChange={updateName}
+              onBlur={validateName}
+              invalid={!nameValid[option]}
+              required={router.locale === option}
+            />
+          ) : null
+        )}
+      </div>
 
-      {languageOptions.map((option) =>
-        inputLanguages.includes(option) ? (
-          <TextArea
-            id={`shortDescription_${option}`}
-            key={`shortDescription_${option}`}
-            className="formInput"
-            label={`${i18n.t("notification.description.shortDescription.label")} ${i18n.t(`notification.inputLanguage.${option}`)}`}
-            name={option}
-            value={shortDesc[option] as string}
-            onChange={updateShortDescription}
-            onBlur={validateShortDescription}
-            helperText={i18n.t("notification.description.shortDescription.helperText")}
-            tooltipLabel={i18n.t("notification.description.shortDescription.tooltipLabel")}
-            tooltipText={i18n.t("notification.description.shortDescription.tooltipText")}
-            invalid={!shortDescValid[option]}
-            required={router.locale === option}
-          />
-        ) : null
-      )}
+      <div className="languageSection">
+        <h3>{i18n.t("notification.description.shortDescription.label")}</h3>
+        {languageOptions.map((option) =>
+          inputLanguages.includes(option) ? (
+            <TextArea
+              id={`shortDescription_${option}`}
+              key={`shortDescription_${option}`}
+              className="formInput"
+              rows={3}
+              label={`${i18n.t("notification.description.shortDescription.label")} ${i18n.t(`notification.inputLanguage.${option}`)}`}
+              name={option}
+              value={shortDesc[option] as string}
+              onChange={updateShortDescription}
+              onBlur={validateShortDescription}
+              helperText={i18n.t("notification.description.shortDescription.helperText")}
+              tooltipLabel={i18n.t("notification.description.shortDescription.tooltipLabel")}
+              tooltipText={i18n.t("notification.description.shortDescription.tooltipText")}
+              invalid={!shortDescValid[option]}
+              required={router.locale === option}
+            />
+          ) : null
+        )}
+      </div>
 
-      {languageOptions.map((option) =>
-        inputLanguages.includes(option) ? (
-          <TextArea
-            id={`longDescription_${option}`}
-            key={`longDescription_${option}`}
-            className="formInput"
-            label={`${i18n.t("notification.description.longDescription.label")} ${i18n.t(`notification.inputLanguage.${option}`)}`}
-            name={option}
-            value={longDesc[option] as string}
-            onChange={updateLongDescription}
-            onBlur={validateLongDescription}
-            helperText={i18n.t("notification.description.longDescription.helperText")}
-            invalid={!longDescValid[option]}
-            required={router.locale === option}
-          />
-        ) : null
-      )}
+      <div className="languageSection">
+        <h3>{i18n.t("notification.description.longDescription.label")}</h3>
+        {languageOptions.map((option) =>
+          inputLanguages.includes(option) ? (
+            <TextArea
+              id={`longDescription_${option}`}
+              key={`longDescription_${option}`}
+              className="formInput"
+              rows={6}
+              label={`${i18n.t("notification.description.longDescription.label")} ${i18n.t(`notification.inputLanguage.${option}`)}`}
+              name={option}
+              value={longDesc[option] as string}
+              onChange={updateLongDescription}
+              onBlur={validateLongDescription}
+              helperText={i18n.t("notification.description.longDescription.helperText")}
+              invalid={!longDescValid[option]}
+              required={router.locale === option}
+            />
+          ) : null
+        )}
+      </div>
     </div>
   );
 };

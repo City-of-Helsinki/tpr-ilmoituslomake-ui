@@ -23,7 +23,15 @@ const Prices = (): ReactElement => {
   return (
     <div className="formSection">
       <h2>{i18n.t("notification.prices.title")}</h2>
-      <TextArea id="price" className="formInput" label={i18n.t("notification.prices.price.label")} name="fi" value={priceFi} onChange={updatePrice} />
+      <TextArea
+        id="price"
+        className="formInput"
+        rows={6}
+        label={i18n.t("notification.prices.price.label")}
+        name="fi"
+        value={priceFi}
+        onChange={updatePrice}
+      />
     </div>
   );
 };
