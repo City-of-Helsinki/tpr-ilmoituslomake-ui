@@ -62,10 +62,7 @@ const Description = (): ReactElement => {
     const valid = evt.target.value.length > 0;
     const newValidation = {
       ...notificationValidation,
-      description: {
-        ...notificationValidation.description,
-        short: { ...(notificationValidation.description ?? {}).short, [evt.target.name]: valid },
-      },
+      description: { ...notificationValidation.description, short: { ...shortDescValid, [evt.target.name]: valid } },
     };
     dispatch(setNotificationValidation(newValidation));
 
@@ -76,6 +73,12 @@ const Description = (): ReactElement => {
         description: { ...notification.description, long: { ...longDesc, [evt.target.name]: evt.target.value } },
       };
       dispatch(setNotificationData(newNotification));
+
+      const newValidationLong = {
+        ...notificationValidation,
+        description: { ...notificationValidation.description, long: { ...longDescValid, [evt.target.name]: valid } },
+      };
+      dispatch(setNotificationValidation(newValidationLong));
     }
   };
 
@@ -83,7 +86,7 @@ const Description = (): ReactElement => {
     const valid = evt.target.value.length > 0;
     const newValidation = {
       ...notificationValidation,
-      description: { ...notificationValidation.description, long: { ...(notificationValidation.description ?? {}).long, [evt.target.name]: valid } },
+      description: { ...notificationValidation.description, long: { ...longDescValid, [evt.target.name]: valid } },
     };
     dispatch(setNotificationValidation(newValidation));
   };
