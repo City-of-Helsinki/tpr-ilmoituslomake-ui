@@ -175,5 +175,8 @@
   },
   "moderation": {
     "title": "Moderation"
+  },
+  "changerequest": {
+    "title": "Change Form"
   }
 }

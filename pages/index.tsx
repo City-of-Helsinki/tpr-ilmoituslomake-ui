@@ -20,6 +20,9 @@ const Main = (): ReactElement => {
         <Link href="/forms/notification">{i18n.t("notification.title")}</Link>
       </div>
       <div>
+        <Link href="/forms/changerequest">{i18n.t("changerequest.title")}</Link>
+      </div>
+      <div>
         <Link href="/forms/moderation">{i18n.t("moderation.title")}</Link>
       </div>
     </Layout>
