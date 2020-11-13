@@ -7,6 +7,7 @@ import InputLanguage, { languageOptions } from "./InputLanguage";
 import { NotificationAction } from "../../state/actions/types";
 import { setNotificationData, setNotificationValidation } from "../../state/actions/notification";
 import { RootState } from "../../state/reducers";
+import { MAX_LENGTH_SHORT_DESC, MIN_LENGTH_LONG_DESC, MAX_LENGTH_LONG_DESC } from "../../types/constants";
 
 const Description = (): ReactElement => {
   const i18n = useI18n();
@@ -59,7 +60,7 @@ const Description = (): ReactElement => {
   };
 
   const validateShortDescription = (evt: ChangeEvent<HTMLTextAreaElement>) => {
-    const valid = evt.target.value.length > 0;
+    const valid = evt.target.value.length > 0 && evt.target.value.length <= MAX_LENGTH_SHORT_DESC;
     const newValidation = {
       ...notificationValidation,
       description: { ...notificationValidation.description, short: { ...shortDescValid, [evt.target.name]: valid } },
@@ -83,7 +84,7 @@ const Description = (): ReactElement => {
   };
 
   const validateLongDescription = (evt: ChangeEvent<HTMLTextAreaElement>) => {
-    const valid = evt.target.value.length > 0;
+    const valid = evt.target.value.length >= MIN_LENGTH_LONG_DESC && evt.target.value.length <= MAX_LENGTH_LONG_DESC;
     const newValidation = {
       ...notificationValidation,
       description: { ...notificationValidation.description, long: { ...longDescValid, [evt.target.name]: valid } },
