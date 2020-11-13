@@ -21,7 +21,6 @@ import Notifier from "../../components/notification/Notifier";
 import Opening from "../../components/notification/Opening";
 import Payment from "../../components/notification/Payment";
 import Photos from "../../components/notification/Photos";
-// import PlaceType from "../../components/notification/PlaceType";
 import Preview from "../../components/notification/Preview";
 import Prices from "../../components/notification/Prices";
 import Tags from "../../components/notification/Tags";
@@ -45,7 +44,6 @@ const Notification = (): ReactElement => {
             {i18n.t("notification.mandatory")}
           </HdsNotification>
           <Description />
-          {/* <PlaceType /> */}
           <Tags />
           <Notifier />
         </div>
