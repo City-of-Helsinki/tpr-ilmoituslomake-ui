@@ -1,0 +1,185 @@
+{
+  "notification": {
+    "title": "My Helsinki Places",
+    "skipToContent": "Siirry sivun pääsisältöön",
+    "login": "Kirjaudu sisään",
+    "logout": "Kirjaudu ulos",
+    "mandatory": "Pakolliset tiedot on merkitty tähdellä *",
+    "button": {
+      "next": "Seuraava",
+      "previous": "Edellinen",
+      "cancel": "Keskeytä",
+      "send": "Lähetä",
+      "clearAllSelections": "Poista kaikki valinnat",
+      "remove": "Poista",
+      "toggleMenu": "Vaihdele valikko"
+    },
+    "page": {
+      "basic": "Perustiedot",
+      "contact": "Yhteystiedot",
+      "payment": "Maksut",
+      "photos": "Kuvat",
+      "send": "Lähetä"
+    },
+    "main": {
+      "basic": "Kohteen perustiedot",
+      "contact": "Kohteen yhteystiedot",
+      "payment": "Kohteen hinnat ja maksut",
+      "photos": "Kohteen kuvat",
+      "send": "Tarkista tiedot ja lähetä"
+    },
+    "footer": {
+      "backToTop": "Takaisin ylös",
+      "copyright": "Copyright",
+      "rightsReserved": "Kaikki oikeudet pidätetään"
+    },
+    "toast": {
+      "validationFailed": {
+        "title": "Validointi epäonnistui",
+        "message": "Tarkista että tiedot ovat oikeita"
+      },
+      "saveFailed": {
+        "title": "Lähetys epäonnistui",
+        "message": ""
+      },
+      "saveSucceeded": {
+        "title": "Lähetys onnistui",
+        "message": ""
+      },
+      "close": "Sulje viesti"
+    },
+    "comments": {
+      "title": "Kommentteja",
+      "notice": "Tarkista vielä tiedot ja lähetä lomake. Jos haluat, voit lisätä kommentteja tietojen moderoijalle.",
+      "comments": {
+        "label": "Kommentteja tietojen moderoijalle"
+      }
+    },
+    "contact": {
+      "title": "Kohteen yhteystiedot",
+      "phone": {
+        "label": "Puhelinnumero"
+      },
+      "email": {
+        "label": "Sähköpostiosoite"
+      }
+    },
+    "description": {
+      "title": "Kohteen nimi ja kuvaus",
+      "placeName": {
+        "label": "Kohteen nimi"
+      },
+      "shortDescription": {
+        "label": "Kohteen lyhyt kuvaus",
+        "helperText": "Huomioi, että teksti ei saa olla me-muodossa. Pituus max. 150 merkkiä",
+        "tooltipLabel": "Paranna löydettävyyttä",
+        "tooltipText": "Lyhyen kuvauksen avulla toimipaikka löytyy paremmin hakukoneella."
+      },
+      "longDescription": {
+        "label": "Kohteen pitkä kuvaus",
+        "helperText": "Huomioi, että teksti ei saa olla me-muodossa. Pituus 120 - 4000 merkkiä"
+      }
+    },
+    "inputLanguage": {
+      "title": "Anna tiedot kielillä",
+      "fi": "suomeksi",
+      "sv": "ruotsiksi",
+      "en": "englanniksi"
+    },
+    "links": {
+      "title": "Kohteen linkit",
+      "website": {
+        "label": "Verkkosivuston osoite"
+      },
+      "socialMedia": {
+        "label": "Sosiaalinen media"
+      }
+    },
+    "location": {
+      "title": "Kohteen sijainti",
+      "streetAddress": {
+        "label": "Katuosoite"
+      },
+      "postalCode": {
+        "label": "Postinumero"
+      },
+      "postalOffice": {
+        "label": "Postitoimipaikka"
+      }
+    },
+    "map": {
+      "title": "Kohde kartalla"
+    },
+    "notifier": {
+      "title": "Ilmoittajan tiedot",
+      "notifierType": "Ilmoittajan tyyppi",
+      "owner": "Olen kohteen edustaja tai omistaja",
+      "outsideSource":"Olen ulkopuolinen taho",
+      "fullName": {
+        "label": "Ilmoittajan etunimi ja sukunimi"
+      },
+      "email": {
+        "label": "Ilmoittajan sähköpostiosoite"
+      },
+      "phone": {
+        "label": "Ilmoittajan puhelinnumero"
+      }
+    },
+    "opening": {
+      "title": "Aukioloajat",
+      "notice": "Aukioloajat ilmoitetaan eri lomakeella. Voit ilmoittaa aukioloajat heti, kun olet lähettänyt kohteen tiedot."
+    },
+    "payment": {
+      "title": "Maksutavat",
+      "options": "Maksutavat ja veronpalautus"
+    },
+    "photos": {
+      "title": "Kuvat",
+      "notice": "Lisää verkossa sijaitsevan kuvan url-osoite. Toistaiseksi valokuvia ei voi ladata laitteelta vaan ainoastaan kuvalinkit ovat mahdollisia. Kuvan lisääminen ei ole pakollista. Mikäli kuva on lisätty, siihen liittyvät pakolliset tiedot on merkitty tähdellä *",
+      "photo": "Kuva",
+      "url": {
+        "label": "Valokuvan verkko-osoite (url)"
+      },
+      "description": {
+        "label": "Kuvan lyhyt kuvailu (alt-teksti)"
+      },
+      "permission": {
+        "label": "Kuvan käyttöoikeus"
+      },
+      "photographer": {
+        "label": "Valokuvaajan nimi"
+      },
+      "addNew": "Lisää uusi kuva"
+    },
+    "placeType": {
+      "title": "Kohteen tyyppi",
+      "myPlace": "Ilmoittamani toimipiste on",
+      "private": "Yksityinen kohde",
+      "municipal": "Kunnallinen kohde",
+      "institution": "Säätiö- tai yhdistyskohde"
+    },
+    "preview": {
+      "title": "Yhteenveto kohteen tiedoista"
+    },
+    "prices": {
+      "title": "Hinnat ja pääsymaksut",
+      "price": {
+        "label": "Hinta ja/tai pääsymaksu"
+      }
+    },
+    "tags": {
+      "title": "Asiasanat",
+      "add": {
+        "label": "Lisää asiasana",
+        "helperText": "Kirjoita hakusana tai valitse listalta."
+      }
+    },
+    "terms": {
+      "heading": "Käyttöehdot",
+      "text": "TODO"
+    }
+  },
+  "moderation": {
+    "title": "Moderointi"
+  }
+}

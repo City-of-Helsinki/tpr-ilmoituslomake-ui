@@ -114,6 +114,7 @@ const Header = (): ReactElement => {
           </Navigation.User>
           <Navigation.LanguageSelector label={(router.locale || defaultLocale).toUpperCase()}>
             <Navigation.Item label="Suomeksi" onClick={() => changeLanguage("fi")} />
+            <Navigation.Item label="På svenska" onClick={() => changeLanguage("sv")} />
             <Navigation.Item label="In English" onClick={() => changeLanguage("en")} />
           </Navigation.LanguageSelector>
         </Navigation.Actions>
