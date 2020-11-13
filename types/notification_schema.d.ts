@@ -14,22 +14,22 @@ export interface NotificationSchema {
   };
   name: {
     fi: string;
-    sv?: string;
-    en?: string;
+    sv: string;
+    en: string;
     [k: string]: unknown;
   };
   location: [number, number];
   description: {
     short: {
       fi: string;
-      sv?: string;
-      en?: string;
+      sv: string;
+      en: string;
       [k: string]: unknown;
     };
     long: {
       fi: string;
-      sv?: string;
-      en?: string;
+      sv: string;
+      en: string;
       [k: string]: unknown;
     };
     [k: string]: unknown;
@@ -41,7 +41,7 @@ export interface NotificationSchema {
       post_office: string;
       [k: string]: unknown;
     };
-    sv?: {
+    sv: {
       street: string;
       postal_code: string;
       post_office: string;
@@ -53,8 +53,8 @@ export interface NotificationSchema {
   email: string;
   website: {
     fi: string;
-    sv?: string;
-    en?: string;
+    sv: string;
+    en: string;
     [k: string]: unknown;
   };
   images: {
@@ -65,8 +65,8 @@ export interface NotificationSchema {
   };
   price: {
     fi: string;
-    sv?: string;
-    en?: string;
+    sv: string;
+    en: string;
     [k: string]: unknown;
   };
   payment_options: {

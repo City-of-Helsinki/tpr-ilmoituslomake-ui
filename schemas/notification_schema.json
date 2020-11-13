@@ -22,7 +22,7 @@
                 "type": "string"
             }
           },
-          "required": ["fi"]
+          "required": ["fi", "sv", "en"]
         },
         "location": {
             "type": "array",
@@ -51,25 +51,52 @@
                             "maxLength": 150
                         }
                     },
-                    "required": ["fi"]
+                    "required": ["fi", "sv", "en"]
                 },
                 "long": {
                     "type": "object",
                     "properties": {
                         "fi": {
-                            "type": "string",
-                            "maxLength": 4000
+                            "oneOf": [
+                                {
+                                    "type": "string",
+                                    "minLength": 120,
+                                    "maxLength": 4000
+                                },
+                                {
+                                    "type": "string",
+                                    "maxLength": 0
+                                }
+                            ]
                         },
                         "sv": {
-                            "type": "string",
-                            "maxLength": 4000
+                            "oneOf": [
+                                {
+                                    "type": "string",
+                                    "minLength": 120,
+                                    "maxLength": 4000
+                                },
+                                {
+                                    "type": "string",
+                                    "maxLength": 0
+                                }
+                            ]
                         },
                         "en": {
-                            "type": "string",
-                            "maxLength": 4000
+                            "oneOf": [
+                                {
+                                    "type": "string",
+                                    "minLength": 120,
+                                    "maxLength": 4000
+                                },
+                                {
+                                    "type": "string",
+                                    "maxLength": 0
+                                }
+                            ]
                         }
                     },
-                    "required": ["fi"]
+                    "required": ["fi", "sv", "en"]
                 }
             },
             "required": ["short", "long"]        
@@ -84,8 +111,16 @@
                             "type": "string"
                         },
                         "postal_code": {
-                            "type": "string",
-                            "pattern": "^[0-9][0-9][0-9][0-9][0-9]$"
+                            "oneOf": [
+                                {
+                                    "type": "string",
+                                    "pattern": "^[0-9][0-9][0-9][0-9][0-9]$"
+                                },
+                                {
+                                    "type": "string",
+                                    "maxLength": 0
+                                }
+                            ]
                         },
                         "post_office": {
                             "type": "string"
@@ -100,8 +135,16 @@
                             "type": "string"
                         },
                         "postal_code": {
-                            "type": "string",
-                            "pattern": "^[0-9][0-9][0-9][0-9][0-9]$"
+                            "oneOf": [
+                                {
+                                    "type": "string",
+                                    "pattern": "^[0-9][0-9][0-9][0-9][0-9]$"
+                                },
+                                {
+                                    "type": "string",
+                                    "maxLength": 0
+                                }
+                            ]
                         },
                         "post_office": {
                             "type": "string"
@@ -110,33 +153,73 @@
                     "required": ["street", "postal_code", "post_office"]
                 }
             },
-            "required": ["fi"]
+            "required": ["fi", "sv"]
         },
         "phone": {
-            "type": "string",
-            "pattern": "^\\+?[0-9- ]+$"
+            "oneOf": [
+                {
+                    "type": "string",
+                    "pattern": "^\\+?[0-9- ]+$"
+                },
+                {
+                    "type": "string",
+                    "maxLength": 0
+                }
+            ]
         },
         "email": {
-            "type": "string",
-            "format": "email"
+            "oneOf": [
+                {
+                    "type": "string",
+                    "format": "email"
+                },
+                {
+                    "type": "string",
+                    "maxLength": 0
+                }
+            ]
         },
         "website": {
             "type": "object",
             "properties": {
                 "fi": {
-                    "type": "string",
-                    "format": "uri"
+                   "oneOf": [
+                        {
+                            "type": "string",
+                            "format": "uri"
+                        },
+                        {
+                            "type": "string",
+                            "maxLength": 0
+                        }
+                    ]
                 },
                 "sv": {
-                    "type": "string",
-                    "format": "uri"
+                    "oneOf": [
+                        {
+                            "type": "string",
+                            "format": "uri"
+                        },
+                        {
+                            "type": "string",
+                            "maxLength": 0
+                        }
+                    ]
                 },
                 "en": {
-                    "type": "string",
-                    "format": "uri"
+                    "oneOf": [
+                        {
+                            "type": "string",
+                            "format": "uri"
+                        },
+                        {
+                            "type": "string",
+                            "maxLength": 0
+                        }
+                    ]
                 }
             },
-            "required": ["fi"]
+            "required": ["fi", "sv", "en"]
         },
         "images": {
             "type": "object",
@@ -162,7 +245,7 @@
                     "maxLength": 500
                 }
           },
-          "required": ["fi"]
+          "required": ["fi", "sv", "en"]
         },
         "payment_options": {
             "type": "array",

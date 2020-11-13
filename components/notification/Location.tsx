@@ -16,7 +16,7 @@ const Location = (): ReactElement => {
   const {
     address: {
       fi: { street: streetFi, postal_code: postalCodeFi, post_office: postOfficeFi },
-      sv: { street: streetSv = "", postal_code: postalCodeSv, post_office: postOfficeSv } = {},
+      sv: { street: streetSv, postal_code: postalCodeSv, post_office: postOfficeSv },
     },
   } = notification;
 
