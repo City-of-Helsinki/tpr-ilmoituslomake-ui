@@ -1,0 +1,15 @@
+@import "~hds-design-tokens/lib/all.scss";
+
+.opening {
+  background-color: $color-silver-light;
+  padding: $spacing-m;
+  margin-bottom: $spacing-layout-l;
+
+  .icon {
+    margin-right: $spacing-2-xs;
+  }
+
+  .notice {
+    margin-top: $spacing-s;
+  }
+}

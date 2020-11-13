@@ -127,7 +127,7 @@
     },
     "opening": {
       "title": "Aukioloajat",
-      "notice": "Aukioloajat ilmoitetaan eri lomakeella. Voit ilmoittaa aukioloajat heti, kun olet lähettänyt kohteen tiedot."
+      "notice": "Aukioloajat ilmoitetaan viimeisessä vaiheessa."
     },
     "payment": {
       "title": "Maksutavat",
