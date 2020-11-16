@@ -2,20 +2,22 @@ import React, { Dispatch, ChangeEvent, ReactElement } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useI18n } from "next-localization";
 import { TextInput, RadioButton } from "hds-react";
-import { NotificationAction } from "../../state/actions/types";
-import { setNotificationExtra, setNotificationValidation } from "../../state/actions/notification";
+import { NotificationAction, NotificationValidationAction } from "../../state/actions/types";
+import { setNotificationExtra } from "../../state/actions/notification";
 import { RootState } from "../../state/reducers";
+import { isNotifierFieldValid } from "../../utils/validation";
 
 const Notifier = (): ReactElement => {
   const i18n = useI18n();
   const dispatch = useDispatch<Dispatch<NotificationAction>>();
+  const dispatchValidation = useDispatch<Dispatch<NotificationValidationAction>>();
 
   const notificationExtra = useSelector((state: RootState) => state.notification.notificationExtra);
   const {
     notifier: { notifierType = "owner", fullName, email, phone },
   } = notificationExtra;
 
-  const notificationValidation = useSelector((state: RootState) => state.notification.notificationValidation);
+  const notificationValidation = useSelector((state: RootState) => state.notificationValidation.notificationValidation);
   const { notifier: { fullName: fullNameValid = true, email: emailValid = true, phone: phoneValid = true } = {} } = notificationValidation;
 
   const updateNotifier = (evt: ChangeEvent<HTMLInputElement>) => {
@@ -24,9 +26,7 @@ const Notifier = (): ReactElement => {
   };
 
   const validateNotifier = (evt: ChangeEvent<HTMLInputElement>) => {
-    const valid = evt.target.value.length > 0;
-    const newValidation = { ...notificationValidation, notifier: { ...notificationValidation.notifier, [evt.target.name]: valid } };
-    dispatch(setNotificationValidation(newValidation));
+    isNotifierFieldValid(evt.target.name, notificationExtra, dispatchValidation);
   };
 
   return (

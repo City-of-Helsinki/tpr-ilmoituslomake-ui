@@ -7,6 +7,9 @@ export interface NotificationState {
   user?: User;
   notification: NotificationSchema;
   notificationExtra: NotificationExtra;
+}
+
+export interface NotificationValidationState {
   notificationValidation: NotificationValidation;
 }
 

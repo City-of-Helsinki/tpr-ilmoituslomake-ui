@@ -3,13 +3,15 @@ import { useSelector, useDispatch } from "react-redux";
 import { useRouter } from "next/router";
 import { useI18n } from "next-localization";
 import { TextInput } from "hds-react";
-import { NotificationAction } from "../../state/actions/types";
-import { setNotificationData, setNotificationValidation } from "../../state/actions/notification";
+import { NotificationAction, NotificationValidationAction } from "../../state/actions/types";
+import { setNotificationData } from "../../state/actions/notification";
 import { RootState } from "../../state/reducers";
+import { isAddressFieldValid } from "../../utils/validation";
 
 const Location = (): ReactElement => {
   const i18n = useI18n();
   const dispatch = useDispatch<Dispatch<NotificationAction>>();
+  const dispatchValidation = useDispatch<Dispatch<NotificationValidationAction>>();
   const router = useRouter();
 
   const notification = useSelector((state: RootState) => state.notification.notification);
@@ -20,7 +22,7 @@ const Location = (): ReactElement => {
     },
   } = notification;
 
-  const notificationValidation = useSelector((state: RootState) => state.notification.notificationValidation);
+  const notificationValidation = useSelector((state: RootState) => state.notificationValidation.notificationValidation);
   const {
     address: {
       fi: { street: streetFiValid = true, postal_code: postalCodeFiValid = true, post_office: postOfficeFiValid = true } = {},
@@ -41,16 +43,7 @@ const Location = (): ReactElement => {
   };
 
   const validateAddress = (language: string, evt: ChangeEvent<HTMLInputElement>) => {
-    const valid = evt.target.value.length > 0;
-    const { fi, sv } = notificationValidation.address ?? {};
-    const newValidation = {
-      ...notificationValidation,
-      address: {
-        ...notificationValidation.address,
-        [language]: { ...(language === "sv" ? sv : fi), [evt.target.name]: valid },
-      },
-    };
-    dispatch(setNotificationValidation(newValidation));
+    isAddressFieldValid(language, evt.target.name, notification, dispatchValidation);
   };
 
   return (

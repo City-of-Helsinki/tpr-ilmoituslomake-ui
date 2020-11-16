@@ -1,7 +1,6 @@
-import { SET_PAGE, SET_USER, SET_NOTIFICATION_DATA, SET_NOTIFICATION_EXTRA, SET_NOTIFICATION_VALIDATION } from "../../types/constants";
+import { SET_PAGE, SET_USER, SET_NOTIFICATION_DATA, SET_NOTIFICATION_EXTRA } from "../../types/constants";
 import { User, NotificationExtra } from "../../types/general";
 import { NotificationSchema } from "../../types/notification_schema";
-import { NotificationValidation } from "../../types/notification_validation";
 import { NotificationAction } from "./types";
 
 export const setPage = (pageNumber: number): NotificationAction => ({
@@ -22,9 +21,4 @@ export const setNotificationData = (notification: NotificationSchema): Notificat
 export const setNotificationExtra = (notificationExtra: NotificationExtra): NotificationAction => ({
   type: SET_NOTIFICATION_EXTRA,
   payload: notificationExtra,
-});
-
-export const setNotificationValidation = (notificationValidation: NotificationValidation): NotificationAction => ({
-  type: SET_NOTIFICATION_VALIDATION,
-  payload: notificationValidation,
 });

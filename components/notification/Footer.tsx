@@ -3,20 +3,22 @@ import { useSelector, useDispatch } from "react-redux";
 import { useRouter } from "next/router";
 import { useI18n } from "next-localization";
 import { Button, IconArrowLeft, IconArrowRight, Notification as HdsNotification } from "hds-react";
-import { NotificationAction } from "../../state/actions/types";
+import { NotificationAction, NotificationValidationAction } from "../../state/actions/types";
 import { setPage } from "../../state/actions/notification";
 import { RootState } from "../../state/reducers";
 import { MAX_PAGE } from "../../types/constants";
-import validateNotificationData from "../../utils/validation";
+import validateNotificationData, { isPageValid } from "../../utils/validation";
 import styles from "./Footer.module.scss";
 
 const Footer = (): ReactElement => {
   const i18n = useI18n();
   const dispatch = useDispatch<Dispatch<NotificationAction>>();
+  const dispatchValidation = useDispatch<Dispatch<NotificationValidationAction>>();
   const router = useRouter();
 
   const currentPage = useSelector((state: RootState) => state.notification.page);
   const notification = useSelector((state: RootState) => state.notification.notification);
+  const notificationExtra = useSelector((state: RootState) => state.notification.notificationExtra);
 
   enum Toast {
     ValidationFailed = "validationFailed",
@@ -30,7 +32,9 @@ const Footer = (): ReactElement => {
   };
 
   const nextPage = () => {
-    dispatch(setPage(currentPage + 1));
+    if (isPageValid(currentPage, router.locale, notification, notificationExtra, dispatchValidation)) {
+      dispatch(setPage(currentPage + 1));
+    }
   };
 
   const sendNotification = async () => {

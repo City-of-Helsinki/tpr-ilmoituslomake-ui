@@ -13,6 +13,7 @@ export interface NotificationExtra {
     fullName: string;
     email: string;
     phone: string;
+    [k: string]: unknown;
   };
   photos?: {
     url: string;

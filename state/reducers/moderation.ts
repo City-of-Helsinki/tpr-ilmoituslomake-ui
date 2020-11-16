@@ -12,13 +12,15 @@ const initialState: ModerationState = {
 
 const moderation = (state = initialState, action: AnyAction): ModerationState => {
   switch (action.type) {
-    case SET_OTHER_THING:
+    case SET_OTHER_THING: {
       return {
         ...state,
         some: { other: { ...state.some.other, thing: action.payload } },
       };
-    default:
+    }
+    default: {
       return state;
+    }
   }
 };
 

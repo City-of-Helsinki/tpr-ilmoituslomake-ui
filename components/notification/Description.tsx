@@ -4,14 +4,15 @@ import { useRouter } from "next/router";
 import { useI18n } from "next-localization";
 import { TextInput, TextArea } from "hds-react";
 import InputLanguage, { languageOptions } from "./InputLanguage";
-import { NotificationAction } from "../../state/actions/types";
-import { setNotificationData, setNotificationValidation } from "../../state/actions/notification";
+import { NotificationAction, NotificationValidationAction } from "../../state/actions/types";
+import { setNotificationData } from "../../state/actions/notification";
 import { RootState } from "../../state/reducers";
-import { MAX_LENGTH_SHORT_DESC, MIN_LENGTH_LONG_DESC, MAX_LENGTH_LONG_DESC } from "../../types/constants";
+import { isNameValid, isShortDescriptionValid, isLongDescriptionValid } from "../../utils/validation";
 
 const Description = (): ReactElement => {
   const i18n = useI18n();
   const dispatch = useDispatch<Dispatch<NotificationAction>>();
+  const dispatchValidation = useDispatch<Dispatch<NotificationValidationAction>>();
   const router = useRouter();
 
   // Fetch values from redux state
@@ -24,7 +25,7 @@ const Description = (): ReactElement => {
   const notificationExtra = useSelector((state: RootState) => state.notification.notificationExtra);
   const { inputLanguages } = notificationExtra;
 
-  const notificationValidation = useSelector((state: RootState) => state.notification.notificationValidation);
+  const notificationValidation = useSelector((state: RootState) => state.notificationValidation.notificationValidation);
   const {
     name: nameValid,
     description: { short: shortDescValid, long: longDescValid },
@@ -54,18 +55,11 @@ const Description = (): ReactElement => {
 
   // Functions for validating values and storing the results in redux state
   const validateName = (evt: ChangeEvent<HTMLInputElement>) => {
-    const valid = evt.target.value.length > 0;
-    const newValidation = { ...notificationValidation, name: { ...notificationValidation.name, [evt.target.name]: valid } };
-    dispatch(setNotificationValidation(newValidation));
+    isNameValid(evt.target.name, notification, dispatchValidation);
   };
 
   const validateShortDescription = (evt: ChangeEvent<HTMLTextAreaElement>) => {
-    const valid = evt.target.value.length > 0 && evt.target.value.length <= MAX_LENGTH_SHORT_DESC;
-    const newValidation = {
-      ...notificationValidation,
-      description: { ...notificationValidation.description, short: { ...shortDescValid, [evt.target.name]: valid } },
-    };
-    dispatch(setNotificationValidation(newValidation));
+    isShortDescriptionValid(evt.target.name, notification, dispatchValidation);
 
     // Also update the long description if it's empty to help the user
     if ((longDesc[evt.target.name] as string).length === 0) {
@@ -75,21 +69,12 @@ const Description = (): ReactElement => {
       };
       dispatch(setNotificationData(newNotification));
 
-      const newValidationLong = {
-        ...notificationValidation,
-        description: { ...notificationValidation.description, long: { ...longDescValid, [evt.target.name]: valid } },
-      };
-      dispatch(setNotificationValidation(newValidationLong));
+      isLongDescriptionValid(evt.target.name, notification, dispatchValidation);
     }
   };
 
   const validateLongDescription = (evt: ChangeEvent<HTMLTextAreaElement>) => {
-    const valid = evt.target.value.length >= MIN_LENGTH_LONG_DESC && evt.target.value.length <= MAX_LENGTH_LONG_DESC;
-    const newValidation = {
-      ...notificationValidation,
-      description: { ...notificationValidation.description, long: { ...longDescValid, [evt.target.name]: valid } },
-    };
-    dispatch(setNotificationValidation(newValidation));
+    isLongDescriptionValid(evt.target.name, notification, dispatchValidation);
   };
 
   return (

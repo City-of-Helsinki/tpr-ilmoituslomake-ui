@@ -1,6 +1,6 @@
 import { AnyAction } from "redux";
 import { NotificationState } from "./types";
-import { MAX_PAGE, SET_PAGE, SET_USER, SET_NOTIFICATION_DATA, SET_NOTIFICATION_EXTRA, SET_NOTIFICATION_VALIDATION } from "../../types/constants";
+import { MAX_PAGE, SET_PAGE, SET_USER, SET_NOTIFICATION_DATA, SET_NOTIFICATION_EXTRA } from "../../types/constants";
 import { defaultLocale } from "../../utils/i18n";
 
 const initialState: NotificationState = {
@@ -63,35 +63,20 @@ const initialState: NotificationState = {
       phone: "",
     },
   },
-  notificationValidation: {
-    name: {
-      fi: true,
-      sv: true,
-      en: true,
-    },
-    description: {
-      short: {
-        fi: true,
-        sv: true,
-        en: true,
-      },
-      long: {
-        fi: true,
-        sv: true,
-        en: true,
-      },
-    },
-  },
 };
 
 const notification = (state = initialState, action: AnyAction): NotificationState => {
   switch (action.type) {
-    case SET_PAGE:
+    case SET_PAGE: {
+      console.log("SET_PAGE", action.payload);
       return {
         ...state,
         page: Math.min(Math.max(action.payload, 1), MAX_PAGE),
       };
-    case SET_USER:
+    }
+
+    case SET_USER: {
+      console.log("SET_USER", action.payload);
       return {
         ...state,
         user: action.payload,
@@ -105,23 +90,27 @@ const notification = (state = initialState, action: AnyAction): NotificationStat
           },
         },
       };
-    case SET_NOTIFICATION_DATA:
+    }
+
+    case SET_NOTIFICATION_DATA: {
+      console.log("SET_NOTIFICATION_DATA", action.payload);
       return {
         ...state,
         notification: action.payload,
       };
-    case SET_NOTIFICATION_EXTRA:
+    }
+
+    case SET_NOTIFICATION_EXTRA: {
+      console.log("SET_NOTIFICATION_EXTRA", action.payload);
       return {
         ...state,
         notificationExtra: action.payload,
       };
-    case SET_NOTIFICATION_VALIDATION:
-      return {
-        ...state,
-        notificationValidation: action.payload,
-      };
-    default:
+    }
+
+    default: {
       return state;
+    }
   }
 };
 
