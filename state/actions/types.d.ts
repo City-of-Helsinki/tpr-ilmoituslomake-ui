@@ -22,8 +22,10 @@ import {
   SET_NOTIFICATION_TAG_VALIDATION,
   SET_NOTIFICATION_NOTIFIER_VALIDATION,
   SET_NOTIFICATION_ADDRESS_VALIDATION,
+  SET_NOTIFICATION_PHOTO_VALIDATION,
 } from "../../types/constants";
 import { User, KeyValueString, KeyValueBoolean, Photo } from "../../types/general";
+import { PhotoValidation } from "../../types/notification_validation";
 
 interface SetPageAction extends AnyAction {
   type: typeof SET_PAGE;
@@ -153,13 +155,19 @@ interface SetNotificationAddressValidationAction extends AnyAction {
   payload: { language: string; validation: KeyValueBoolean };
 }
 
+interface SetNotificationPhotoValidationAction extends AnyAction {
+  type: typeof SET_NOTIFICATION_PHOTO_VALIDATION;
+  payload: PhotoValidation[];
+}
+
 export type NotificationValidationAction =
   | SetNotificationNameValidationAction
   | SetNotificationShortDescriptionValidationAction
   | SetNotificationLongDescriptionValidationAction
   | SetNotificationTagValidationAction
   | SetNotificationNotifierValidationAction
-  | SetNotificationAddressValidationAction;
+  | SetNotificationAddressValidationAction
+  | SetNotificationPhotoUrlValidationAction;
 
 interface SetOtherThingAction extends AnyAction {
   type: typeof SET_OTHER_THING;

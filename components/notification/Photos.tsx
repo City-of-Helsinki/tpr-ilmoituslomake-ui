@@ -2,17 +2,22 @@ import React, { Dispatch, ChangeEvent, ReactElement } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useI18n } from "next-localization";
 import { TextInput, Checkbox, Button } from "hds-react";
-import { NotificationAction } from "../../state/actions/types";
+import { NotificationAction, NotificationValidationAction } from "../../state/actions/types";
 import { setNotificationPhoto, removeNotificationPhoto } from "../../state/actions/notification";
 import { RootState } from "../../state/reducers";
 import styles from "./Photos.module.scss";
+import { isPhotoUrlValid } from "../../utils/validation";
 
 const Photos = (): ReactElement => {
   const i18n = useI18n();
   const dispatch = useDispatch<Dispatch<NotificationAction>>();
+  const dispatchValidation = useDispatch<Dispatch<NotificationValidationAction>>();
 
   const notificationExtra = useSelector((state: RootState) => state.notification.notificationExtra);
   const { photos = [] } = notificationExtra;
+
+  const notificationValidation = useSelector((state: RootState) => state.notificationValidation.notificationValidation);
+  const { photos: photosValid } = notificationValidation;
 
   const updatePhoto = (index: number, evt: ChangeEvent<HTMLInputElement>) => {
     dispatch(
@@ -26,6 +31,10 @@ const Photos = (): ReactElement => {
 
   const removePhoto = (index: number) => {
     dispatch(removeNotificationPhoto(index));
+  };
+
+  const validateUrl = (index: number) => {
+    isPhotoUrlValid(index, notificationExtra, dispatchValidation);
   };
 
   return (
@@ -42,6 +51,8 @@ const Photos = (): ReactElement => {
               name="url"
               value={url}
               onChange={(evt) => updatePhoto(index, evt)}
+              onBlur={() => validateUrl(index)}
+              invalid={photosValid[index] && !photosValid[index].url}
               required
             />
             <TextInput

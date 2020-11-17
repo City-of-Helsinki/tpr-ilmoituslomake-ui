@@ -9,10 +9,12 @@ import {
   setNotificationTagValidation,
   setNotificationNotifierValidation,
   setNotificationAddressValidation,
+  setNotificationPhotoValidation,
 } from "../state/actions/notificationValidation";
 import { MAX_LENGTH_SHORT_DESC, MIN_LENGTH_LONG_DESC, MAX_LENGTH_LONG_DESC } from "../types/constants";
 import { NotificationSchema } from "../types/notification_schema";
 import { NotificationExtra } from "../types/general";
+import { PhotoValidation } from "../types/notification_validation";
 import notificationSchema from "../schemas/notification_schema.json";
 
 export const isNameValid = (language: string, notification: NotificationSchema, dispatch: Dispatch<NotificationValidationAction>): boolean => {
@@ -79,6 +81,22 @@ export const isAddressFieldValid = (
   return valid;
 };
 
+export const isPhotoValid = (notificationExtra: NotificationExtra, dispatch: Dispatch<NotificationValidationAction>): PhotoValidation[] => {
+  const { photos } = notificationExtra;
+  const photosValid = photos.map((photo) => {
+    const { url, permission } = photo;
+    const urlValid = url.length > 0;
+    return { url: urlValid, permission };
+  });
+  dispatch(setNotificationPhotoValidation(photosValid));
+  return photosValid;
+};
+
+export const isPhotoUrlValid = (index: number, notificationExtra: NotificationExtra, dispatch: Dispatch<NotificationValidationAction>): boolean => {
+  const photosValid = isPhotoValid(notificationExtra, dispatch);
+  return photosValid[index].url;
+};
+
 export const isPageValid = (
   page: number,
   locale: string | undefined,
@@ -124,7 +142,8 @@ export const isPageValid = (
     }
     case 3: {
       // Photos
-      return true;
+      const photosValid = isPhotoValid(notificationExtra, dispatch);
+      return photosValid.every((valid) => valid.url && valid.permission);
     }
     default: {
       // Payments

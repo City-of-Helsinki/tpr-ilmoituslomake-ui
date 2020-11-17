@@ -1,3 +1,10 @@
+export interface PhotoValidation {
+  url: boolean;
+  description?: boolean;
+  permission: boolean;
+  photographer?: boolean;
+}
+
 export interface NotificationValidation {
   name: {
     fi: boolean;
@@ -55,10 +62,5 @@ export interface NotificationValidation {
     phone: boolean;
     [key: string]: boolean;
   };
-  photos?: {
-    url?: boolean;
-    description?: boolean;
-    permission?: boolean;
-    photographer?: boolean;
-  }[];
+  photos: PhotoValidation[];
 }

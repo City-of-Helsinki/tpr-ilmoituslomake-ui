@@ -7,6 +7,7 @@ import {
   SET_NOTIFICATION_TAG_VALIDATION,
   SET_NOTIFICATION_NOTIFIER_VALIDATION,
   SET_NOTIFICATION_ADDRESS_VALIDATION,
+  SET_NOTIFICATION_PHOTO_VALIDATION,
 } from "../../types/constants";
 
 const initialState: NotificationValidationState = {
@@ -46,6 +47,7 @@ const initialState: NotificationValidationState = {
       email: true,
       phone: true,
     },
+    photos: [],
   },
 };
 
@@ -115,6 +117,14 @@ const notificationValidation = (state = initialState, action: AnyAction): Notifi
             [action.payload.language]: { ...(action.payload.language === "sv" ? sv : fi), ...action.payload.validation },
           },
         },
+      };
+    }
+
+    case SET_NOTIFICATION_PHOTO_VALIDATION: {
+      console.log("SET_NOTIFICATION_PHOTO_VALIDATION", action.payload);
+      return {
+        ...state,
+        notificationValidation: { ...state.notificationValidation, photos: action.payload },
       };
     }
 
