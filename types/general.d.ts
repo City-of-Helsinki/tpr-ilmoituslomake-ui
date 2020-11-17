@@ -6,6 +6,21 @@ export interface User {
   email: string;
 }
 
+export interface KeyValueString {
+  [key: string]: string;
+}
+
+export interface KeyValueBoolean {
+  [key: string]: boolean;
+}
+
+export interface Photo {
+  url: string;
+  description: string;
+  permission: boolean;
+  photographer: string;
+}
+
 export interface NotificationExtra {
   inputLanguages: string[];
   notifier: {
@@ -15,12 +30,7 @@ export interface NotificationExtra {
     phone: string;
     [k: string]: unknown;
   };
-  photos?: {
-    url: string;
-    description: string;
-    permission: boolean;
-    photographer: string;
-  }[];
+  photos: Photo[];
 }
 
 export interface OtherThing {

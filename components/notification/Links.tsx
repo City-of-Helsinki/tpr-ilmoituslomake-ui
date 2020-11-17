@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { useI18n } from "next-localization";
 import { TextInput } from "hds-react";
 import { NotificationAction } from "../../state/actions/types";
-import { setNotificationData } from "../../state/actions/notification";
+import { setNotificationLink } from "../../state/actions/notification";
 import { RootState } from "../../state/reducers";
 
 const Links = (): ReactElement => {
@@ -16,8 +16,7 @@ const Links = (): ReactElement => {
   } = notification;
 
   const updateWebsite = (evt: ChangeEvent<HTMLInputElement>) => {
-    const newNotification = { ...notification, website: { ...notification.website, [evt.target.name]: evt.target.value } };
-    dispatch(setNotificationData(newNotification));
+    dispatch(setNotificationLink({ [evt.target.name]: evt.target.value }));
   };
 
   return (

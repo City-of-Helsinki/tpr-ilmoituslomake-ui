@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { useI18n } from "next-localization";
 import { TextInput, RadioButton } from "hds-react";
 import { NotificationAction, NotificationValidationAction } from "../../state/actions/types";
-import { setNotificationExtra } from "../../state/actions/notification";
+import { setNotificationNotifier } from "../../state/actions/notification";
 import { RootState } from "../../state/reducers";
 import { isNotifierFieldValid } from "../../utils/validation";
 
@@ -21,8 +21,7 @@ const Notifier = (): ReactElement => {
   const { notifier: { fullName: fullNameValid = true, email: emailValid = true, phone: phoneValid = true } = {} } = notificationValidation;
 
   const updateNotifier = (evt: ChangeEvent<HTMLInputElement>) => {
-    const newNotificationExtra = { ...notificationExtra, notifier: { ...notificationExtra.notifier, [evt.target.name]: evt.target.value } };
-    dispatch(setNotificationExtra(newNotificationExtra));
+    dispatch(setNotificationNotifier({ [evt.target.name]: evt.target.value }));
   };
 
   const validateNotifier = (evt: ChangeEvent<HTMLInputElement>) => {

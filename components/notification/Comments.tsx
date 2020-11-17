@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { useI18n } from "next-localization";
 import { TextArea } from "hds-react";
 import { NotificationAction } from "../../state/actions/types";
-import { setNotificationData } from "../../state/actions/notification";
+import { setNotificationComments } from "../../state/actions/notification";
 import { RootState } from "../../state/reducers";
 
 const Comments = (): ReactElement => {
@@ -14,11 +14,7 @@ const Comments = (): ReactElement => {
   const { comments } = notification;
 
   const updateComments = (evt: ChangeEvent<HTMLTextAreaElement>) => {
-    const newNotification = {
-      ...notification,
-      comments: evt.target.value,
-    };
-    dispatch(setNotificationData(newNotification));
+    dispatch(setNotificationComments(evt.target.value));
   };
 
   return (

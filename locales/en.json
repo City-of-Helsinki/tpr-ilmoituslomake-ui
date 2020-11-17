@@ -149,7 +149,8 @@
       "photographer": {
         "label": "Photographer's name"
       },
-      "addNew": "Add new photo"
+      "addNew": "Add photo link",
+      "remove": "Remove photo"
     },
     "placeType": {
       "title": "Place's type",

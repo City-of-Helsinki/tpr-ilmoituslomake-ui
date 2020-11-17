@@ -4,7 +4,7 @@ import { useRouter } from "next/router";
 import { useI18n } from "next-localization";
 import { TextInput } from "hds-react";
 import { NotificationAction, NotificationValidationAction } from "../../state/actions/types";
-import { setNotificationData } from "../../state/actions/notification";
+import { setNotificationAddress } from "../../state/actions/notification";
 import { RootState } from "../../state/reducers";
 import { isAddressFieldValid } from "../../utils/validation";
 
@@ -31,15 +31,7 @@ const Location = (): ReactElement => {
   } = notificationValidation;
 
   const updateAddress = (language: string, evt: ChangeEvent<HTMLInputElement>) => {
-    const { fi, sv } = notification.address;
-    const newNotification = {
-      ...notification,
-      address: {
-        ...notification.address,
-        [language]: { ...(language === "sv" ? sv : fi), [evt.target.name]: evt.target.value },
-      },
-    };
-    dispatch(setNotificationData(newNotification));
+    dispatch(setNotificationAddress(language, { [evt.target.name]: evt.target.value }));
   };
 
   const validateAddress = (language: string, evt: ChangeEvent<HTMLInputElement>) => {

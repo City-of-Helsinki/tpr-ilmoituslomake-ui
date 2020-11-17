@@ -5,7 +5,7 @@ import { useI18n } from "next-localization";
 import { TextInput, TextArea } from "hds-react";
 import InputLanguage, { languageOptions } from "./InputLanguage";
 import { NotificationAction, NotificationValidationAction } from "../../state/actions/types";
-import { setNotificationData } from "../../state/actions/notification";
+import { setNotificationLongDescription, setNotificationName, setNotificationShortDescription } from "../../state/actions/notification";
 import { RootState } from "../../state/reducers";
 import { isNameValid, isShortDescriptionValid, isLongDescriptionValid } from "../../utils/validation";
 
@@ -33,24 +33,15 @@ const Description = (): ReactElement => {
 
   // Functions for updating values in redux state
   const updateName = (evt: ChangeEvent<HTMLInputElement>) => {
-    const newNotification = { ...notification, name: { ...placeName, [evt.target.name]: evt.target.value } };
-    dispatch(setNotificationData(newNotification));
+    dispatch(setNotificationName({ [evt.target.name]: evt.target.value }));
   };
 
   const updateShortDescription = (evt: ChangeEvent<HTMLTextAreaElement>) => {
-    const newNotification = {
-      ...notification,
-      description: { ...notification.description, short: { ...shortDesc, [evt.target.name]: evt.target.value } },
-    };
-    dispatch(setNotificationData(newNotification));
+    dispatch(setNotificationShortDescription({ [evt.target.name]: evt.target.value }));
   };
 
   const updateLongDescription = (evt: ChangeEvent<HTMLTextAreaElement>) => {
-    const newNotification = {
-      ...notification,
-      description: { ...notification.description, long: { ...longDesc, [evt.target.name]: evt.target.value } },
-    };
-    dispatch(setNotificationData(newNotification));
+    dispatch(setNotificationLongDescription({ [evt.target.name]: evt.target.value }));
   };
 
   // Functions for validating values and storing the results in redux state
@@ -63,11 +54,7 @@ const Description = (): ReactElement => {
 
     // Also update the long description if it's empty to help the user
     if ((longDesc[evt.target.name] as string).length === 0) {
-      const newNotification = {
-        ...notification,
-        description: { ...notification.description, long: { ...longDesc, [evt.target.name]: evt.target.value } },
-      };
-      dispatch(setNotificationData(newNotification));
+      dispatch(setNotificationLongDescription({ [evt.target.name]: evt.target.value }));
 
       isLongDescriptionValid(evt.target.name, notification, dispatchValidation);
     }
