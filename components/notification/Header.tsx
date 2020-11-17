@@ -45,7 +45,7 @@ const Header = (): ReactElement => {
       location: { protocol, hostname, pathname },
     } = window;
 
-    window.open(`${protocol}//${hostname}/admin/login/?next=${pathname}`, "_self");
+    window.open(`${protocol}//${hostname}/helauth/login/?next=${pathname}`, "_self");
   };
 
   const signOut = () => {
@@ -53,7 +53,7 @@ const Header = (): ReactElement => {
       location: { protocol, hostname, pathname },
     } = window;
 
-    window.open(`${protocol}//${hostname}/admin/logout/?next=${pathname}`, "_self");
+    window.open("https://api.hel.fi/sso/openid/end-session/", "_self");
   };
 
   return (
