@@ -48,11 +48,13 @@ const Header = (): ReactElement => {
     window.open(`${protocol}//${hostname}/helauth/login/?next=${pathname}`, "_self");
   };
 
-  const signOut = () => {
+  const signOut = async () => {
     const {
       location: { protocol, hostname, pathname },
     } = window;
 
+    // TODO: Improve logout: remove cookies?
+    await fetch("/api/user/logout/");
     window.open("https://api.hel.fi/sso/openid/end-session/", "_self");
   };
 
