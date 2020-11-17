@@ -4,7 +4,7 @@ import { useRouter } from "next/router";
 import { useI18n } from "next-localization";
 import { Checkbox } from "hds-react";
 import { NotificationAction } from "../../state/actions/types";
-import { setNotificationExtra } from "../../state/actions/notification";
+import { setNotificationInputLanguage } from "../../state/actions/notification";
 import { RootState } from "../../state/reducers";
 import styles from "./InputLanguage.module.scss";
 
@@ -19,14 +19,7 @@ const InputLanguage = (): ReactElement => {
   const { inputLanguages } = notificationExtra;
 
   const updateInputLanguage = (evt: ChangeEvent<HTMLInputElement>) => {
-    const newNotificationExtra = {
-      ...notificationExtra,
-      inputLanguages: [
-        ...(notificationExtra.inputLanguages || []).filter((o) => o !== evt.target.value),
-        ...(evt.target.checked ? [evt.target.value] : []),
-      ],
-    };
-    dispatch(setNotificationExtra(newNotificationExtra));
+    dispatch(setNotificationInputLanguage({ [evt.target.value]: evt.target.checked }));
   };
 
   return (

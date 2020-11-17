@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { useI18n } from "next-localization";
 import { TextArea } from "hds-react";
 import { NotificationAction } from "../../state/actions/types";
-import { setNotificationData } from "../../state/actions/notification";
+import { setNotificationPrice } from "../../state/actions/notification";
 import { RootState } from "../../state/reducers";
 
 const Prices = (): ReactElement => {
@@ -16,8 +16,7 @@ const Prices = (): ReactElement => {
   } = notification;
 
   const updatePrice = (evt: ChangeEvent<HTMLTextAreaElement>) => {
-    const newNotification = { ...notification, price: { ...notification.price, [evt.target.name]: evt.target.value } };
-    dispatch(setNotificationData(newNotification));
+    dispatch(setNotificationPrice({ [evt.target.name]: evt.target.value }));
   };
 
   return (

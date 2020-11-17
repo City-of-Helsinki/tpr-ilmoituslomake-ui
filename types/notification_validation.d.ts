@@ -1,7 +1,3 @@
-export interface NotificationValidationKeyValue {
-  [key: string]: boolean;
-}
-
 export interface NotificationValidation {
   name: {
     fi: boolean;

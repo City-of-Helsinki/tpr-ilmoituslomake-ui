@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { useI18n } from "next-localization";
 import { Combobox } from "hds-react";
 import { NotificationAction, NotificationValidationAction } from "../../state/actions/types";
-import { setNotificationData } from "../../state/actions/notification";
+import { setNotificationTag } from "../../state/actions/notification";
 import { RootState } from "../../state/reducers";
 import { isTagValid } from "../../utils/validation";
 
@@ -29,8 +29,7 @@ const Tags = (): ReactElement => {
   };
 
   const updateTags = (selected: OptionType[]) => {
-    const newNotification = { ...notification, ontology_ids: selected.map((s) => s.label) };
-    dispatch(setNotificationData(newNotification));
+    dispatch(setNotificationTag(selected.map((s) => s.label)));
   };
 
   const validateTags = () => {

@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { useI18n } from "next-localization";
 import { TextInput, Checkbox, Button } from "hds-react";
 import { NotificationAction } from "../../state/actions/types";
-import { setNotificationExtra } from "../../state/actions/notification";
+import { setNotificationPhoto, removeNotificationPhoto } from "../../state/actions/notification";
 import { RootState } from "../../state/reducers";
 import styles from "./Photos.module.scss";
 
@@ -15,17 +15,17 @@ const Photos = (): ReactElement => {
   const { photos = [] } = notificationExtra;
 
   const updatePhoto = (index: number, evt: ChangeEvent<HTMLInputElement>) => {
-    photos[index] = { ...photos[index], [evt.target.name]: evt.target.name === "permission" ? evt.target.checked : evt.target.value };
-
-    const newNotificationExtra = { ...notificationExtra, photos };
-    dispatch(setNotificationExtra(newNotificationExtra));
+    dispatch(
+      setNotificationPhoto(index, { ...photos[index], [evt.target.name]: evt.target.name === "permission" ? evt.target.checked : evt.target.value })
+    );
   };
 
   const addPhoto = () => {
-    photos.push({ url: "", description: "", permission: false, photographer: "" });
+    dispatch(setNotificationPhoto(-1, { url: "", description: "", permission: false, photographer: "" }));
+  };
 
-    const newNotificationExtra = { ...notificationExtra, photos };
-    dispatch(setNotificationExtra(newNotificationExtra));
+  const removePhoto = (index: number) => {
+    dispatch(removeNotificationPhoto(index));
   };
 
   return (
@@ -70,6 +70,9 @@ const Photos = (): ReactElement => {
               value={photographer}
               onChange={(evt) => updatePhoto(index, evt)}
             />
+            <Button variant="secondary" className="formInput" onClick={() => removePhoto(index)}>
+              {i18n.t("notification.photos.remove")}
+            </Button>
             <hr />
           </div>
         );

@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { useI18n } from "next-localization";
 import { Checkbox } from "hds-react";
 import { NotificationAction } from "../../state/actions/types";
-import { setNotificationData } from "../../state/actions/notification";
+import { setNotificationPayment } from "../../state/actions/notification";
 import { RootState } from "../../state/reducers";
 
 const Payment = (): ReactElement => {
@@ -16,14 +16,7 @@ const Payment = (): ReactElement => {
   const paymentOptions = ["GlobalBlue", "JCB", "WeChatPay", "AliPay"];
 
   const updatePayment = (evt: ChangeEvent<HTMLInputElement>) => {
-    const newNotification = {
-      ...notification,
-      payment_options: [
-        ...notification.payment_options.filter((o) => o.name !== evt.target.value),
-        ...(evt.target.checked ? [{ name: evt.target.value }] : []),
-      ],
-    };
-    dispatch(setNotificationData(newNotification));
+    dispatch(setNotificationPayment({ [evt.target.value]: evt.target.checked }));
   };
 
   const isChecked = (option: string) => payment_options.some((o) => o.name === option);

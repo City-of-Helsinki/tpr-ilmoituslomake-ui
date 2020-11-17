@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { useI18n } from "next-localization";
 import { TextInput } from "hds-react";
 import { NotificationAction } from "../../state/actions/types";
-import { setNotificationData } from "../../state/actions/notification";
+import { setNotificationContact } from "../../state/actions/notification";
 import { RootState } from "../../state/reducers";
 
 const Contact = (): ReactElement => {
@@ -14,8 +14,7 @@ const Contact = (): ReactElement => {
   const { phone, email } = notification;
 
   const updateContact = (evt: ChangeEvent<HTMLInputElement>) => {
-    const newNotification = { ...notification, [evt.target.name]: evt.target.value };
-    dispatch(setNotificationData(newNotification));
+    dispatch(setNotificationContact({ [evt.target.name]: evt.target.value }));
   };
 
   return (

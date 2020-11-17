@@ -149,7 +149,8 @@
       "photographer": {
         "label": "Valokuvaajan nimi"
       },
-      "addNew": "Lisää uusi kuva"
+      "addNew": "Lisää kuvalinkki",
+      "remove": "Poista kuva"
     },
     "placeType": {
       "title": "Kohteen tyyppi",
