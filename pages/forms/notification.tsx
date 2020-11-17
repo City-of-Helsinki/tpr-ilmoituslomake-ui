@@ -1,4 +1,4 @@
-import React, { ReactElement } from "react";
+import React, { ReactElement, useLayoutEffect, useRef } from "react";
 import { useSelector } from "react-redux";
 import { GetServerSideProps } from "next";
 import Head from "next/head";
@@ -31,6 +31,13 @@ const Notification = (): ReactElement => {
 
   const currentPage = useSelector((state: RootState) => state.notification.page);
   const pageValid = useSelector((state: RootState) => state.notificationValidation.pageValid);
+  const ref = useRef<HTMLDivElement>(null);
+
+  useLayoutEffect(() => {
+    if (ref.current) {
+      ref.current.scrollIntoView();
+    }
+  });
 
   return (
     <Layout>
@@ -39,7 +46,7 @@ const Notification = (): ReactElement => {
       </Head>
       <Header />
       {currentPage === 1 && (
-        <div>
+        <div id="content" ref={ref}>
           <h1>{`${currentPage} ${i18n.t("notification.main.basic")}`}</h1>
           <Notice messageKey="notification.mandatory" />
           {!pageValid && <ValidationSummary />}
@@ -49,7 +56,7 @@ const Notification = (): ReactElement => {
         </div>
       )}
       {currentPage === 2 && (
-        <div>
+        <div id="content" ref={ref}>
           <h1>{`${currentPage} ${i18n.t("notification.main.contact")}`}</h1>
           <Notice messageKey="notification.mandatory" />
           {!pageValid && <ValidationSummary />}
@@ -61,7 +68,7 @@ const Notification = (): ReactElement => {
         </div>
       )}
       {currentPage === 3 && (
-        <div>
+        <div id="content" ref={ref}>
           <h1>{`${currentPage} ${i18n.t("notification.main.photos")}`}</h1>
           <Notice messageKey="notification.photos.notice" />
           {!pageValid && <ValidationSummary />}
@@ -69,7 +76,7 @@ const Notification = (): ReactElement => {
         </div>
       )}
       {currentPage === 4 && (
-        <div>
+        <div id="content" ref={ref}>
           <h1>{`${currentPage} ${i18n.t("notification.main.payment")}`}</h1>
           <Notice messageKey="notification.mandatory" />
           <Prices />
@@ -77,7 +84,7 @@ const Notification = (): ReactElement => {
         </div>
       )}
       {currentPage === 5 && (
-        <div>
+        <div id="content" ref={ref}>
           <h1>{`${currentPage} ${i18n.t("notification.main.send")}`}</h1>
           <Notice messageKey="notification.comments.notice" />
           <Terms />
