@@ -34,6 +34,10 @@
       "rightsReserved": "All rights reserved"
     },
     "toast": {
+      "notAuthenticated": {
+        "title": "Not logged in",
+        "message": ""
+      },
       "validationFailed": {
         "title": "Validation failed",
         "message": "Check that the information is correct"

@@ -18,10 +18,12 @@ const Footer = (): ReactElement => {
   const router = useRouter();
 
   const currentPage = useSelector((state: RootState) => state.notification.page);
+  const currentUser = useSelector((state: RootState) => state.notification.user);
   const notification = useSelector((state: RootState) => state.notification.notification);
   const notificationExtra = useSelector((state: RootState) => state.notification.notificationExtra);
 
   enum Toast {
+    NotAuthenticated = "notAuthenticated",
     ValidationFailed = "validationFailed",
     SaveFailed = "saveFailed",
     SaveSucceeded = "saveSucceeded",
@@ -45,7 +47,7 @@ const Footer = (): ReactElement => {
     try {
       const valid = validateNotificationData(notification);
 
-      if (valid) {
+      if (currentUser?.authenticated && valid) {
         console.log("SENDING", notification);
 
         const createRequest = await fetch("/api/notification/create/", {
@@ -60,9 +62,15 @@ const Footer = (): ReactElement => {
         // TODO - handle response
         console.log("RESPONSE", createResponse);
 
-        setToast(Toast.SaveSucceeded);
-      } else {
+        if (createResponse.id) {
+          setToast(Toast.SaveSucceeded);
+        } else {
+          setToast(Toast.SaveFailed);
+        }
+      } else if (!valid) {
         setToast(Toast.ValidationFailed);
+      } else {
+        setToast(Toast.NotAuthenticated);
       }
     } catch (err) {
       console.log("ERROR", err);

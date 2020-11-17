@@ -34,6 +34,10 @@
       "rightsReserved": "Kaikki oikeudet pidätetään"
     },
     "toast": {
+      "notAuthenticated": {
+        "title": "Ei kirjautuneena",
+        "message": ""
+      },
       "validationFailed": {
         "title": "Validointi epäonnistui",
         "message": "Tarkista että tiedot ovat oikeita"
