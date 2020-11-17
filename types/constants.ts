@@ -4,6 +4,7 @@ export const MIN_LENGTH_LONG_DESC = 120;
 export const MAX_LENGTH_LONG_DESC = 4000;
 
 export const SET_PAGE = "SET_PAGE";
+export const SET_PAGE_VALID = "SET_PAGE_VALID";
 export const SET_USER = "SET_USER";
 
 export const SET_NOTIFICATION_INPUT_LANGUAGE = "SET_NOTIFICATION_INPUT_LANGUAGE";

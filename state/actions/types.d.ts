@@ -1,6 +1,7 @@
 import { AnyAction } from "redux";
 import {
   SET_PAGE,
+  SET_PAGE_VALID,
   SET_USER,
   SET_NOTIFICATION_INPUT_LANGUAGE,
   SET_NOTIFICATION_NAME,
@@ -125,6 +126,11 @@ export type NotificationAction =
   | SetNotificationPaymentAction
   | SetNotificationCommentsAction;
 
+interface SetPageValidAction extends AnyAction {
+  type: typeof SET_PAGE_VALID;
+  payload: boolean;
+}
+
 interface SetNotificationNameValidationAction extends AnyAction {
   type: typeof SET_NOTIFICATION_NAME_VALIDATION;
   payload: KeyValueBoolean;
@@ -161,6 +167,7 @@ interface SetNotificationPhotoValidationAction extends AnyAction {
 }
 
 export type NotificationValidationAction =
+  | SetPageValidAction
   | SetNotificationNameValidationAction
   | SetNotificationShortDescriptionValidationAction
   | SetNotificationLongDescriptionValidationAction

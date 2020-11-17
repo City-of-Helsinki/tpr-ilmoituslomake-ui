@@ -1,6 +1,7 @@
 import { AnyAction } from "redux";
 import { NotificationValidationState } from "./types";
 import {
+  SET_PAGE_VALID,
   SET_NOTIFICATION_NAME_VALIDATION,
   SET_NOTIFICATION_SHORT_DESCRIPTION_VALIDATION,
   SET_NOTIFICATION_LONG_DESCRIPTION_VALIDATION,
@@ -11,6 +12,7 @@ import {
 } from "../../types/constants";
 
 const initialState: NotificationValidationState = {
+  pageValid: true,
   notificationValidation: {
     name: {
       fi: true,
@@ -53,6 +55,14 @@ const initialState: NotificationValidationState = {
 
 const notificationValidation = (state = initialState, action: AnyAction): NotificationValidationState => {
   switch (action.type) {
+    case SET_PAGE_VALID: {
+      console.log("SET_PAGE_VALID", action.payload);
+      return {
+        ...state,
+        pageValid: action.payload,
+      };
+    }
+
     case SET_NOTIFICATION_NAME_VALIDATION: {
       console.log("SET_NOTIFICATION_NAME_VALIDATION", action.payload);
       return {

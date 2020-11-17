@@ -5,6 +5,7 @@ import { useI18n } from "next-localization";
 import { Button, IconArrowLeft, IconArrowRight, Notification as HdsNotification } from "hds-react";
 import { NotificationAction, NotificationValidationAction } from "../../state/actions/types";
 import { setPage } from "../../state/actions/notification";
+import { setPageValid } from "../../state/actions/notificationValidation";
 import { RootState } from "../../state/reducers";
 import { MAX_PAGE } from "../../types/constants";
 import validateNotificationData, { isPageValid } from "../../utils/validation";
@@ -34,6 +35,9 @@ const Footer = (): ReactElement => {
   const nextPage = () => {
     if (isPageValid(currentPage, router.locale, notification, notificationExtra, dispatchValidation)) {
       dispatch(setPage(currentPage + 1));
+      dispatchValidation(setPageValid(true));
+    } else {
+      dispatchValidation(setPageValid(false));
     }
   };
 

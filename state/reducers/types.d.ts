@@ -10,6 +10,7 @@ export interface NotificationState {
 }
 
 export interface NotificationValidationState {
+  pageValid: true;
   notificationValidation: NotificationValidation;
 }
 
