@@ -89,7 +89,7 @@
     "links": {
       "title": "Place's links",
       "website": {
-        "label": "Website address"
+        "label": "Website address in"
       },
       "socialMedia": {
         "label": "Social media"
@@ -165,7 +165,7 @@
     "prices": {
       "title": "Prices ja entrance fees",
       "price": {
-        "label": "Price and/or entrance fee"
+        "label": "Price and/or entrance fee in"
       }
     },
     "tags": {
