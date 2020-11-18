@@ -102,7 +102,7 @@ const Header = (): ReactElement => {
           <Navigation.User
             label={i18n.t("notification.login")}
             authenticated={currentUser?.authenticated}
-            userName={currentUser?.email}
+            userName={currentUser?.first_name || currentUser?.email}
             onSignIn={signIn}
           >
             <Navigation.Item
