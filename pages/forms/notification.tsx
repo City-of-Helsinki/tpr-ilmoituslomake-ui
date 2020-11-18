@@ -1,4 +1,4 @@
-import React, { ReactElement, useLayoutEffect, useRef } from "react";
+import React, { ReactElement, useEffect, useRef } from "react";
 import { useSelector } from "react-redux";
 import { GetServerSideProps } from "next";
 import Head from "next/head";
@@ -33,7 +33,7 @@ const Notification = (): ReactElement => {
   const pageValid = useSelector((state: RootState) => state.notificationValidation.pageValid);
   const ref = useRef<HTMLDivElement>(null);
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     if (ref.current) {
       ref.current.scrollIntoView();
     }
