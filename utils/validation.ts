@@ -1,6 +1,7 @@
 import { Dispatch } from "react";
 import Ajv from "ajv";
 import addFormats from "ajv-formats";
+import { string } from "yup";
 import { NotificationValidationAction } from "../state/actions/types";
 import {
   setNotificationNameValidation,
@@ -9,6 +10,8 @@ import {
   setNotificationTagValidation,
   setNotificationNotifierValidation,
   setNotificationAddressValidation,
+  setNotificationContactValidation,
+  setNotificationLinkValidation,
   setNotificationPhotoValidation,
 } from "../state/actions/notificationValidation";
 import { MAX_LENGTH_SHORT_DESC, MIN_LENGTH_LONG_DESC, MAX_LENGTH_LONG_DESC } from "../types/constants";
@@ -19,7 +22,8 @@ import notificationSchema from "../schemas/notification_schema.json";
 
 export const isNameValid = (language: string, notification: NotificationSchema, dispatch: Dispatch<NotificationValidationAction>): boolean => {
   const { name: placeName } = notification;
-  const valid = (placeName[language] as string).length > 0;
+  const schema = string().required();
+  const valid = schema.isValidSync(placeName[language]);
   dispatch(setNotificationNameValidation({ [language]: valid }));
   return valid;
 };
@@ -32,7 +36,8 @@ export const isShortDescriptionValid = (
   const {
     description: { short: shortDesc },
   } = notification;
-  const valid = (shortDesc[language] as string).length > 0 && (shortDesc[language] as string).length <= MAX_LENGTH_SHORT_DESC;
+  const schema = string().required().max(MAX_LENGTH_SHORT_DESC);
+  const valid = schema.isValidSync(shortDesc[language]);
   dispatch(setNotificationShortDescriptionValidation({ [language]: valid }));
   return valid;
 };
@@ -45,7 +50,8 @@ export const isLongDescriptionValid = (
   const {
     description: { long: longDesc },
   } = notification;
-  const valid = (longDesc[language] as string).length >= MIN_LENGTH_LONG_DESC && (longDesc[language] as string).length <= MAX_LENGTH_LONG_DESC;
+  const schema = string().required().min(MIN_LENGTH_LONG_DESC).max(MAX_LENGTH_LONG_DESC);
+  const valid = schema.isValidSync(longDesc[language]);
   dispatch(setNotificationLongDescriptionValidation({ [language]: valid }));
   return valid;
 };
@@ -57,13 +63,35 @@ export const isTagValid = (notification: NotificationSchema, dispatch: Dispatch<
   return valid;
 };
 
+const phoneSchema = () => {
+  return string().matches(/^\+?[0-9- ]+$/, { excludeEmptyString: true });
+};
+
+const postalCodeSchema = () => {
+  return string().matches(/^[0-9][0-9][0-9][0-9][0-9]$/, { excludeEmptyString: true });
+};
+
 export const isNotifierFieldValid = (
   notifierField: string,
   notificationExtra: NotificationExtra,
   dispatch: Dispatch<NotificationValidationAction>
 ): boolean => {
   const { notifier } = notificationExtra;
-  const valid = (notifier[notifierField] as string).length > 0;
+  let schema;
+  switch (notifierField) {
+    case "email": {
+      schema = string().required().email();
+      break;
+    }
+    case "phone": {
+      schema = phoneSchema().required();
+      break;
+    }
+    default: {
+      schema = string().required();
+    }
+  }
+  const valid = schema.isValidSync(notifier[notifierField]);
   dispatch(setNotificationNotifierValidation({ [notifierField]: valid }));
   return valid;
 };
@@ -76,16 +104,61 @@ export const isAddressFieldValid = (
 ): boolean => {
   const { address } = notification;
   const { fi, sv } = address;
-  const valid = (language === "fi" && (fi[addressField] as string).length > 0) || (language === "sv" && (sv[addressField] as string).length > 0);
+  let schema;
+  switch (addressField) {
+    case "postal_code": {
+      schema = postalCodeSchema().required();
+      break;
+    }
+    default: {
+      schema = string().required();
+    }
+  }
+  const valid = (language === "fi" && schema.isValidSync(fi[addressField])) || (language === "sv" && schema.isValidSync(sv[addressField]));
   dispatch(setNotificationAddressValidation(language, { [addressField]: valid }));
+  return valid;
+};
+
+export const isContactFieldValid = (
+  contactField: string,
+  notification: NotificationSchema,
+  dispatch: Dispatch<NotificationValidationAction>
+): boolean => {
+  const { phone, email } = notification;
+  let valid;
+  switch (contactField) {
+    case "phone": {
+      const schema = phoneSchema();
+      valid = schema.isValidSync(phone);
+      break;
+    }
+    case "email": {
+      const schema = string().email();
+      valid = schema.isValidSync(email);
+      break;
+    }
+    default: {
+      valid = true;
+    }
+  }
+  dispatch(setNotificationContactValidation({ [contactField]: valid }));
+  return valid;
+};
+
+export const isWebsiteValid = (language: string, notification: NotificationSchema, dispatch: Dispatch<NotificationValidationAction>): boolean => {
+  const { website } = notification;
+  const schema = string().url();
+  const valid = schema.isValidSync(website[language]);
+  dispatch(setNotificationLinkValidation({ [language]: valid }));
   return valid;
 };
 
 export const isPhotoValid = (notificationExtra: NotificationExtra, dispatch: Dispatch<NotificationValidationAction>): PhotoValidation[] => {
   const { photos } = notificationExtra;
+  const schema = string().required().url();
   const photosValid = photos.map((photo) => {
     const { url, permission } = photo;
-    const urlValid = url.length > 0;
+    const urlValid = schema.isValidSync(url);
     return { url: urlValid, permission };
   });
   dispatch(setNotificationPhotoValidation(photosValid));
@@ -104,17 +177,19 @@ export const isPageValid = (
   notificationExtra: NotificationExtra,
   dispatch: Dispatch<NotificationValidationAction>
 ): boolean => {
+  const { inputLanguages } = notificationExtra;
+
   // Check whether all data on the specific page is valid
   // Everything needs to be validated, so make sure lazy evaluation is not used
   switch (page) {
     case 1: {
       // Basic
-      const { inputLanguages } = notificationExtra;
-      const inputValid1 = inputLanguages.map((option) => {
-        const v1 = isNameValid(option, notification, dispatch);
-        const v2 = isShortDescriptionValid(option, notification, dispatch);
-        const v3 = isLongDescriptionValid(option, notification, dispatch);
-        return v1 && v2 && v3;
+      const inputValid1 = inputLanguages.flatMap((option) => {
+        return [
+          isNameValid(option, notification, dispatch),
+          isShortDescriptionValid(option, notification, dispatch),
+          isLongDescriptionValid(option, notification, dispatch),
+        ];
       });
       const inputValid2 = [
         isTagValid(notification, dispatch),
@@ -126,7 +201,7 @@ export const isPageValid = (
     }
     case 2: {
       // Contact
-      const inputValid =
+      const inputValid1 =
         locale === "sv"
           ? [
               isAddressFieldValid("sv", "street", notification, dispatch),
@@ -138,7 +213,11 @@ export const isPageValid = (
               isAddressFieldValid("fi", "postal_code", notification, dispatch),
               isAddressFieldValid("fi", "post_office", notification, dispatch),
             ];
-      return inputValid.every((valid) => valid);
+      const inputValid2 = [isContactFieldValid("phone", notification, dispatch), isContactFieldValid("email", notification, dispatch)];
+      const inputValid3 = inputLanguages.map((option) => {
+        return isWebsiteValid(option, notification, dispatch);
+      });
+      return inputValid1.every((valid) => valid) && inputValid2.every((valid) => valid) && inputValid3.every((valid) => valid);
     }
     case 3: {
       // Photos

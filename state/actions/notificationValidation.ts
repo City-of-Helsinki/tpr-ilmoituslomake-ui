@@ -6,6 +6,8 @@ import {
   SET_NOTIFICATION_TAG_VALIDATION,
   SET_NOTIFICATION_NOTIFIER_VALIDATION,
   SET_NOTIFICATION_ADDRESS_VALIDATION,
+  SET_NOTIFICATION_CONTACT_VALIDATION,
+  SET_NOTIFICATION_LINK_VALIDATION,
   SET_NOTIFICATION_PHOTO_VALIDATION,
 } from "../../types/constants";
 import { KeyValueBoolean } from "../../types/general";
@@ -45,6 +47,16 @@ export const setNotificationNotifierValidation = (validation: KeyValueBoolean): 
 export const setNotificationAddressValidation = (language: string, validation: KeyValueBoolean): NotificationValidationAction => ({
   type: SET_NOTIFICATION_ADDRESS_VALIDATION,
   payload: { language, validation },
+});
+
+export const setNotificationContactValidation = (validation: KeyValueBoolean): NotificationValidationAction => ({
+  type: SET_NOTIFICATION_CONTACT_VALIDATION,
+  payload: validation,
+});
+
+export const setNotificationLinkValidation = (validation: KeyValueBoolean): NotificationValidationAction => ({
+  type: SET_NOTIFICATION_LINK_VALIDATION,
+  payload: validation,
 });
 
 export const setNotificationPhotoValidation = (validation: PhotoValidation[]): NotificationValidationAction => ({

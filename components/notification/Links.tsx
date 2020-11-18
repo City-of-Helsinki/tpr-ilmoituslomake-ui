@@ -3,13 +3,15 @@ import { useSelector, useDispatch } from "react-redux";
 import { useI18n } from "next-localization";
 import { TextInput } from "hds-react";
 import { languageOptions } from "./InputLanguage";
-import { NotificationAction } from "../../state/actions/types";
+import { NotificationAction, NotificationValidationAction } from "../../state/actions/types";
 import { setNotificationLink } from "../../state/actions/notification";
 import { RootState } from "../../state/reducers";
+import { isWebsiteValid } from "../../utils/validation";
 
 const Links = (): ReactElement => {
   const i18n = useI18n();
   const dispatch = useDispatch<Dispatch<NotificationAction>>();
+  const dispatchValidation = useDispatch<Dispatch<NotificationValidationAction>>();
 
   const notification = useSelector((state: RootState) => state.notification.notification);
   const { website } = notification;
@@ -17,8 +19,15 @@ const Links = (): ReactElement => {
   const notificationExtra = useSelector((state: RootState) => state.notification.notificationExtra);
   const { inputLanguages } = notificationExtra;
 
+  const notificationValidation = useSelector((state: RootState) => state.notificationValidation.notificationValidation);
+  const { website: websiteValid } = notificationValidation;
+
   const updateWebsite = (evt: ChangeEvent<HTMLInputElement>) => {
     dispatch(setNotificationLink({ [evt.target.name]: evt.target.value }));
+  };
+
+  const validateWebsite = (evt: ChangeEvent<HTMLInputElement>) => {
+    isWebsiteValid(evt.target.name, notification, dispatchValidation);
   };
 
   return (
@@ -36,6 +45,8 @@ const Links = (): ReactElement => {
               name={option}
               value={website[option] as string}
               onChange={updateWebsite}
+              onBlur={validateWebsite}
+              invalid={!websiteValid[option]}
             />
           ) : null
         )}

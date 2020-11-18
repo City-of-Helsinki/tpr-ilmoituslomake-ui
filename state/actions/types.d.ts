@@ -23,6 +23,8 @@ import {
   SET_NOTIFICATION_TAG_VALIDATION,
   SET_NOTIFICATION_NOTIFIER_VALIDATION,
   SET_NOTIFICATION_ADDRESS_VALIDATION,
+  SET_NOTIFICATION_CONTACT_VALIDATION,
+  SET_NOTIFICATION_LINK_VALIDATION,
   SET_NOTIFICATION_PHOTO_VALIDATION,
 } from "../../types/constants";
 import { User, KeyValueString, KeyValueBoolean, Photo } from "../../types/general";
@@ -161,6 +163,16 @@ interface SetNotificationAddressValidationAction extends AnyAction {
   payload: { language: string; validation: KeyValueBoolean };
 }
 
+interface SetNotificationContactValidationAction extends AnyAction {
+  type: typeof SET_NOTIFICATION_CONTACT_VALIDATION;
+  payload: KeyValueBoolean;
+}
+
+interface SetNotificationLinkValidationAction extends AnyAction {
+  type: typeof SET_NOTIFICATION_LINK_VALIDATION;
+  payload: KeyValueBoolean;
+}
+
 interface SetNotificationPhotoValidationAction extends AnyAction {
   type: typeof SET_NOTIFICATION_PHOTO_VALIDATION;
   payload: PhotoValidation[];
@@ -174,6 +186,8 @@ export type NotificationValidationAction =
   | SetNotificationTagValidationAction
   | SetNotificationNotifierValidationAction
   | SetNotificationAddressValidationAction
+  | SetNotificationContactValidationAction
+  | SetNotificationLinkValidationAction
   | SetNotificationPhotoUrlValidationAction;
 
 interface SetOtherThingAction extends AnyAction {

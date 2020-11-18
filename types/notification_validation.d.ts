@@ -38,12 +38,13 @@ export interface NotificationValidation {
       post_office: boolean;
     };
   };
-  phone?: boolean;
-  email?: boolean;
-  website?: {
-    fi?: boolean;
-    sv?: boolean;
-    en?: boolean;
+  phone: boolean;
+  email: boolean;
+  website: {
+    fi: boolean;
+    sv: boolean;
+    en: boolean;
+    [key: string]: boolean;
   };
   price?: {
     fi?: boolean;

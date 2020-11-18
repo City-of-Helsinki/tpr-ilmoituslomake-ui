@@ -8,6 +8,8 @@ import {
   SET_NOTIFICATION_TAG_VALIDATION,
   SET_NOTIFICATION_NOTIFIER_VALIDATION,
   SET_NOTIFICATION_ADDRESS_VALIDATION,
+  SET_NOTIFICATION_CONTACT_VALIDATION,
+  SET_NOTIFICATION_LINK_VALIDATION,
   SET_NOTIFICATION_PHOTO_VALIDATION,
 } from "../../types/constants";
 
@@ -42,6 +44,13 @@ const initialState: NotificationValidationState = {
         postal_code: true,
         post_office: true,
       },
+    },
+    phone: true,
+    email: true,
+    website: {
+      fi: true,
+      sv: true,
+      en: true,
     },
     ontology_ids: true,
     notifier: {
@@ -127,6 +136,26 @@ const notificationValidation = (state = initialState, action: AnyAction): Notifi
             [action.payload.language]: { ...(action.payload.language === "sv" ? sv : fi), ...action.payload.validation },
           },
         },
+      };
+    }
+
+    case SET_NOTIFICATION_CONTACT_VALIDATION: {
+      console.log("SET_NOTIFICATION_CONTACT_VALIDATION", action.payload);
+      return {
+        ...state,
+        notificationValidation: {
+          ...state.notificationValidation,
+          phone: action.payload.phone ?? state.notificationValidation.phone,
+          email: action.payload.email ?? state.notificationValidation.email,
+        },
+      };
+    }
+
+    case SET_NOTIFICATION_LINK_VALIDATION: {
+      console.log("SET_NOTIFICATION_LINK_VALIDATION", action.payload);
+      return {
+        ...state,
+        notificationValidation: { ...state.notificationValidation, website: { ...state.notificationValidation.website, ...action.payload } },
       };
     }
 
