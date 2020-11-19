@@ -6,6 +6,8 @@ import { useI18n } from "next-localization";
 import i18nLoader from "../utils/i18n";
 import Layout from "../components/Layout";
 
+import Header from "../components/common/Header";
+
 const Main = (): ReactElement => {
   const i18n = useI18n();
 
@@ -15,6 +17,7 @@ const Main = (): ReactElement => {
         <title>TITLE</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
+      <Header />
       <div>HOME</div>
       <div>
         <Link href="/forms/notification">{i18n.t("notification.title")}</Link>
