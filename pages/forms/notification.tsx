@@ -7,7 +7,7 @@ import i18nLoader, { defaultLocale } from "../../utils/i18n";
 import { RootState } from "../../state/reducers";
 import { initStore } from "../../state/store";
 import Layout from "../../components/Layout";
-import Header from "../../components/notification/Header";
+import NotificationHeader from "../../components/notification/NotificationHeader";
 import Footer from "../../components/notification/Footer";
 import Comments from "../../components/notification/Comments";
 import Contact from "../../components/notification/Contact";
@@ -44,7 +44,7 @@ const Notification = (): ReactElement => {
       <Head>
         <title>{i18n.t("notification.title")}</title>
       </Head>
-      <Header />
+      <NotificationHeader />
       {currentPage === 1 && (
         <div id="content" ref={ref}>
           <h1>{`${currentPage} ${i18n.t("notification.main.basic")}`}</h1>

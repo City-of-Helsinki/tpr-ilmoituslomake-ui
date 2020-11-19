@@ -1,9 +1,12 @@
 {
-  "notification": {
+  "header": {
     "title": "My Helsinki Places",
     "skipToContent": "Skip to content",
     "login": "Sign in",
-    "logout": "Sign out",
+    "logout": "Sign out"
+  },
+  "notification": {
+    "title": "My Helsinki Places",
     "mandatory": "Mandatory information is marked with an asterisk *",
     "button": {
       "next": "Next",

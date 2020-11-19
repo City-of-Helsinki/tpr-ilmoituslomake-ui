@@ -5,21 +5,20 @@ import { useI18n } from "next-localization";
 import { Navigation, IconSignout } from "hds-react";
 import { defaultLocale } from "../../utils/i18n";
 import { NotificationAction } from "../../state/actions/types";
-import { setPage, setUser } from "../../state/actions/notification";
+import { setUser } from "../../state/actions/notification";
 import { RootState } from "../../state/reducers";
-import styles from "./Header.module.scss";
 
-const Header = (): ReactElement => {
+
+interface HeaderProps {
+  children?: React.ReactNode;
+}
+
+const Header = (props: HeaderProps): ReactElement => {
   const i18n = useI18n();
   const dispatch = useDispatch<Dispatch<NotificationAction>>();
   const router = useRouter();
 
-  const currentPage = useSelector((state: RootState) => state.notification.page);
   const currentUser = useSelector((state: RootState) => state.notification.user);
-
-  const changePage = (pageNumber: number) => {
-    dispatch(setPage(pageNumber));
-  };
 
   const changeLanguage = (locale: string) => {
     router.push(router.pathname, router.pathname, { locale });
@@ -59,48 +58,17 @@ const Header = (): ReactElement => {
   };
 
   return (
-    <div className={styles.notificationHeader}>
+    <div>
       <Navigation
-        title={i18n.t("notification.title")}
+        title={i18n.t("header.title")}
         menuToggleAriaLabel="menu"
         skipTo="#content"
-        skipToContentLabel={i18n.t("notification.skipToContent")}
+        skipToContentLabel={i18n.t("header.skipToContent")}
       >
-        <Navigation.Row>
-          <Navigation.Item
-            className={styles.navigationItem}
-            label={`${i18n.t("notification.page.basic")}`}
-            active={currentPage === 1}
-            onClick={() => changePage(1)}
-          />
-          <Navigation.Item
-            className={styles.navigationItem}
-            label={`${i18n.t("notification.page.contact")}`}
-            active={currentPage === 2}
-            onClick={() => changePage(2)}
-          />
-          <Navigation.Item
-            className={styles.navigationItem}
-            label={`${i18n.t("notification.page.photos")}`}
-            active={currentPage === 3}
-            onClick={() => changePage(3)}
-          />
-          <Navigation.Item
-            className={styles.navigationItem}
-            label={`${i18n.t("notification.page.payment")}`}
-            active={currentPage === 4}
-            onClick={() => changePage(4)}
-          />
-          <Navigation.Item
-            className={styles.navigationItem}
-            label={`${i18n.t("notification.page.send")}`}
-            active={currentPage === 5}
-            onClick={() => changePage(5)}
-          />
-        </Navigation.Row>
+        {props.children}
         <Navigation.Actions>
           <Navigation.User
-            label={i18n.t("notification.login")}
+            label={i18n.t("header.login")}
             authenticated={currentUser?.authenticated}
             userName={currentUser?.first_name || currentUser?.email}
             onSignIn={signIn}
@@ -110,7 +78,7 @@ const Header = (): ReactElement => {
               href="#"
               variant="supplementary"
               icon={<IconSignout aria-hidden />}
-              label={i18n.t("notification.logout")}
+              label={i18n.t("header.logout")}
               onClick={signOut}
             />
           </Navigation.User>
