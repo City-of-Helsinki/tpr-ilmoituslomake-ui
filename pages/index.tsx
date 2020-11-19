@@ -1,5 +1,5 @@
 import React, { ReactElement } from "react";
-import { Button, IconArrowLeft, Card, Koros } from "hds-react";
+import { Button, IconLocation, IconPenLine, IconEye, Card, Koros } from "hds-react";
 import { GetStaticProps } from "next";
 import Head from "next/head";
 import Link from "next/link";
@@ -29,33 +29,36 @@ const Main = (): ReactElement => {
           My Helsinki Places kerää ja ylläpitää tietoa Helsingin kohteista paikallisten ja matkailijoiden hyödyksi. Tässä palvelussa voit ilmoittaa kohteet tiedot tai tehdä muutoksia jo olemassa oleviin kohdetietoihin.
         </h3>
       </div>
+      <div>
+        <Link href="/forms/notification">{i18n.t("notification.title")}</Link>
+      </div>
+      <div>
+        <Link href="/forms/moderation">{i18n.t("moderation.title")}</Link>
+      </div>
       <div className={styles.infoLinkContainer}>
         <div>Lue tietojen ilmoittamisesta</div>
         <div>Lue saavutettavuusseloste</div>
         <div>Ilmoita kohteiden tietoja</div>
       </div>
       <div>
-        <Card heading={"Haluatko lisätä uuden kohteen palveluun?"} text={"Ilmoita palveluun uusia toimipisteitä ja kohteita. Kirjaudu ensin ja ilmoita puuttuva kohde jo tänään."}>
-          <Button variant="secondary" onClick={() => (null)}>
+        <Card className={styles.notificationBox} heading={"Haluatko lisätä uuden kohteen palveluun?"} text={"Ilmoita palveluun uusia toimipisteitä ja kohteita. Kirjaudu ensin ja ilmoita puuttuva kohde jo tänään."}>
+          <IconLocation className={styles.icon} size="xl" />
+          <Button variant="secondary" className={styles.button} onClick={() => (null)}>
             {"Ilmoita uusi kohde"}
           </Button>
         </Card>
-        <Card heading={"Anna meille vinkki!"} text={"Mikäli huomasit puuttuvan, virheellisen tai vanhentuneen tiedon, tee palvelus ja ilmoita siitä meille. Voit tehdä ilmoituksen vaivattomasti rekisteröitymättä."}>
-          <Button variant="secondary" onClick={() => (null)}>
+        <Card className={styles.changeRequestBox} heading={"Anna meille vinkki!"} text={"Mikäli huomasit puuttuvan, virheellisen tai vanhentuneen tiedon, tee palvelus ja ilmoita siitä meille. Voit tehdä ilmoituksen vaivattomasti rekisteröitymättä."}>
+          <IconPenLine className={styles.icon} size="xl" />
+          <Button variant="secondary" className={styles.button} onClick={() => (null)}>
             {"Vinkkaa meille"}
           </Button>
         </Card>
-        <Card heading={"Mistä tietoja kohteesta löytyy?"} text={"Tarkista, onko kohde jo ilmoitettu meille ja mitä tietoa siitä on olemassa."}>
-          <Button variant="secondary" onClick={() => (null)}>
+        <Card className={styles.inspectionBox} heading={"Mistä tietoja kohteesta löytyy?"} text={"Tarkista, onko kohde jo ilmoitettu meille ja mitä tietoa siitä on olemassa."}>
+          <IconEye className={styles.icon} size="xl" />
+          <Button variant="secondary" className={styles.button} onClick={() => (null)}>
             {"Tarkista kohteen tiedot"}
           </Button>
         </Card>
-      </div>
-      <div>
-        <Link href="/forms/notification">{i18n.t("notification.title")}</Link>
-      </div>
-      <div>
-        <Link href="/forms/moderation">{i18n.t("moderation.title")}</Link>
       </div>
     </Layout>
   );

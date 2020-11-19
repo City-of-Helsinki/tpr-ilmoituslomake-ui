@@ -33,3 +33,24 @@
     align-items: flex-start;
     justify-content: center;
 }
+
+.icon {
+    color: $color-bus !important;
+}
+
+.notificationBox {
+    background-color: $color-copper-light !important;
+}
+
+.changeRequestBox {
+    background-color: $color-coat-of-arms-light !important;
+}
+
+.inspectionBox {
+    background-color: $color-suomenlinna-light !important;
+}
+
+.button {
+    color: $color-bus !important;
+    background-color: $color-white !important;
+}
