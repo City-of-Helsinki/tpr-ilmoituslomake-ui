@@ -1,9 +1,11 @@
 {
-  "notification": {
+  "header": {
     "title": "My Helsinki Places",
     "skipToContent": "Siirry sivun pääsisältöön",
     "login": "Kirjaudu sisään",
-    "logout": "Kirjaudu ulos",
+    "logout": "Kirjaudu ulos"
+  },
+  "notification": {
     "mandatory": "Pakolliset tiedot on merkitty tähdellä *",
     "button": {
       "next": "Seuraava",

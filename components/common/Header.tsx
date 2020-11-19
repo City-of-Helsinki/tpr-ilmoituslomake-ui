@@ -60,15 +60,15 @@ const Header = (props: HeaderProps): ReactElement => {
   return (
     <div>
       <Navigation
-        title={i18n.t("notification.title")}
+        title={i18n.t("header.title")}
         menuToggleAriaLabel="menu"
         skipTo="#content"
-        skipToContentLabel={i18n.t("notification.skipToContent")}
+        skipToContentLabel={i18n.t("header.skipToContent")}
       >
         {props.children}
         <Navigation.Actions>
           <Navigation.User
-            label={i18n.t("notification.login")}
+            label={i18n.t("header.login")}
             authenticated={currentUser?.authenticated}
             userName={currentUser?.first_name || currentUser?.email}
             onSignIn={signIn}
@@ -78,7 +78,7 @@ const Header = (props: HeaderProps): ReactElement => {
               href="#"
               variant="supplementary"
               icon={<IconSignout aria-hidden />}
-              label={i18n.t("notification.logout")}
+              label={i18n.t("header.logout")}
               onClick={signOut}
             />
           </Navigation.User>
