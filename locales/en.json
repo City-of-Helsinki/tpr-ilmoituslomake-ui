@@ -6,6 +6,7 @@
     "logout": "Sign out"
   },
   "notification": {
+    "title": "My Helsinki Places",
     "mandatory": "Mandatory information is marked with an asterisk *",
     "button": {
       "next": "Next",

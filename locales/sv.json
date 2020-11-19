@@ -6,6 +6,7 @@
     "logout": "Kirjaudu ulos"
   },
   "notification": {
+    "title": "My Helsinki Places",
     "mandatory": "Pakolliset tiedot on merkitty tähdellä *",
     "button": {
       "next": "Seuraava",
