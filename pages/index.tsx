@@ -1,5 +1,5 @@
 import React, { ReactElement } from "react";
-import { Button, IconLocation, IconPenLine, IconEye, Card, Koros } from "hds-react";
+import { Button, IconAngleRight, IconLocation, IconPenLine, IconEye, Card, Koros } from "hds-react";
 import { GetStaticProps } from "next";
 import Head from "next/head";
 import Link from "next/link";
@@ -29,36 +29,33 @@ const Main = (): ReactElement => {
           My Helsinki Places kerää ja ylläpitää tietoa Helsingin kohteista paikallisten ja matkailijoiden hyödyksi. Tässä palvelussa voit ilmoittaa kohteet tiedot tai tehdä muutoksia jo olemassa oleviin kohdetietoihin.
         </h3>
       </div>
-      <div>
-        <Link href="/forms/notification">{i18n.t("notification.title")}</Link>
-      </div>
-      <div>
-        <Link href="/forms/moderation">{i18n.t("moderation.title")}</Link>
-      </div>
       <div className={styles.infoLinkContainer}>
-        <div>Lue tietojen ilmoittamisesta</div>
-        <div>Lue saavutettavuusseloste</div>
-        <div>Ilmoita kohteiden tietoja</div>
+        <h4>Lue tietojen ilmoittamisesta <IconAngleRight /></h4>
+        <h4>Lue saavutettavuusseloste <IconAngleRight /></h4>
       </div>
-      <div>
-        <Card className={styles.notificationBox} heading={"Haluatko lisätä uuden kohteen palveluun?"} text={"Ilmoita palveluun uusia toimipisteitä ja kohteita. Kirjaudu ensin ja ilmoita puuttuva kohde jo tänään."}>
+      <div className={styles.boxContainer}>
+        <h1>{"Ilmoita kohteiden tietoja"}</h1>
+        <div className={`${styles.notificationBox} ${styles.box}`}>
           <IconLocation className={styles.icon} size="xl" />
-          <Button variant="secondary" className={styles.button} onClick={() => (null)}>
-            {"Ilmoita uusi kohde"}
+          <Card className={styles.noBackground} heading={"Haluatko lisätä uuden kohteen palveluun?"} text={"Ilmoita palveluun uusia toimipisteitä ja kohteita. Kirjaudu ensin ja ilmoita puuttuva kohde jo tänään."} />
+          <Button variant="secondary" className={styles.button} onClick={() => (window.open("/forms/notification/", "_self"))}>
+              {"Ilmoita uusi kohde"}
           </Button>
-        </Card>
-        <Card className={styles.changeRequestBox} heading={"Anna meille vinkki!"} text={"Mikäli huomasit puuttuvan, virheellisen tai vanhentuneen tiedon, tee palvelus ja ilmoita siitä meille. Voit tehdä ilmoituksen vaivattomasti rekisteröitymättä."}>
+        </div>
+        <div className={`${styles.changeRequestBox} ${styles.box}`}>
           <IconPenLine className={styles.icon} size="xl" />
+          <Card className={styles.noBackground} heading={"Anna meille vinkki!"} text={"Mikäli huomasit puuttuvan, virheellisen tai vanhentuneen tiedon, tee palvelus ja ilmoita siitä meille. Voit tehdä ilmoituksen vaivattomasti rekisteröitymättä."} />
           <Button variant="secondary" className={styles.button} onClick={() => (null)}>
             {"Vinkkaa meille"}
           </Button>
-        </Card>
-        <Card className={styles.inspectionBox} heading={"Mistä tietoja kohteesta löytyy?"} text={"Tarkista, onko kohde jo ilmoitettu meille ja mitä tietoa siitä on olemassa."}>
+        </div>
+        <div className={`${styles.inspectionBox} ${styles.box}`}>
           <IconEye className={styles.icon} size="xl" />
+          <Card className={styles.noBackground} heading={"Mistä tietoja kohteesta löytyy?"} text={"Tarkista, onko kohde jo ilmoitettu meille ja mitä tietoa siitä on olemassa."} />
           <Button variant="secondary" className={styles.button} onClick={() => (null)}>
             {"Tarkista kohteen tiedot"}
           </Button>
-        </Card>
+        </div>
       </div>
     </Layout>
   );
