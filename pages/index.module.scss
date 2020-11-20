@@ -5,8 +5,8 @@
     background-color: $color-copper-medium-light;
 
     h1 {
-        margin-top: 100px;
-        margin-bottom: 25px;
+        margin-top: 150px;
+        margin-bottom: 75px;
         margin-left: 25%;
         margin-right: 25%;
         color: $color-bus;
@@ -28,14 +28,45 @@
 }
 
 .infoLinkContainer {
+    display: flex;
     flex: 1;
-    flex-direction: column;
+    flex-direction: row;
     align-items: flex-start;
     justify-content: center;
+
+    h4 {
+        color: $color-bus;
+        margin-left: 10px;
+        margin-right: 10px;
+    }
+}
+
+.boxContainer {
+    h1 {
+        color: $color-bus;
+    }
 }
 
 .icon {
     color: $color-bus !important;
+    margin-top: 20px;
+    margin-left: 20px;
+}
+
+.noBackground {
+    background-color: transparent !important;
+    max-width: 50%;
+    min-width: 50%;
+    margin-right: 10%;
+}
+
+.box {
+    margin-top: 15px;
+    display: flex;
+    flex: 1;
+    flex-direction: row;
+    align-items: flex-start;
+    align-content: center;
 }
 
 .notificationBox {
@@ -43,14 +74,24 @@
 }
 
 .changeRequestBox {
+
+    margin-top: 15px;
     background-color: $color-coat-of-arms-light !important;
 }
 
 .inspectionBox {
+    margin-top: 15px;
     background-color: $color-suomenlinna-light !important;
 }
 
 .button {
+    position: absolute;
+    width: 250px;
+    align-content: space-between;
+    margin-top: 20px;
     color: $color-bus !important;
     background-color: $color-white !important;
+    top: 50%;
+    -ms-transform: translateY(50%);
+    transform: translateY(50%);
 }
