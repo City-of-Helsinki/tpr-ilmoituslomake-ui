@@ -8,12 +8,15 @@ import { NotificationAction } from "../../state/actions/types";
 import { setUser } from "../../state/actions/notification";
 import { RootState } from "../../state/reducers";
 
-
 interface HeaderProps {
   children?: React.ReactNode;
 }
 
-const Header = (props: HeaderProps): ReactElement => {
+const defaultProps: HeaderProps = {
+  children: [],
+};
+
+const Header = ({ children }: HeaderProps): ReactElement => {
   const i18n = useI18n();
   const dispatch = useDispatch<Dispatch<NotificationAction>>();
   const router = useRouter();
@@ -59,13 +62,8 @@ const Header = (props: HeaderProps): ReactElement => {
 
   return (
     <div>
-      <Navigation
-        title={i18n.t("header.title")}
-        menuToggleAriaLabel="menu"
-        skipTo="#content"
-        skipToContentLabel={i18n.t("header.skipToContent")}
-      >
-        {props.children}
+      <Navigation title={i18n.t("header.title")} menuToggleAriaLabel="menu" skipTo="#content" skipToContentLabel={i18n.t("header.skipToContent")}>
+        {children}
         <Navigation.Actions>
           <Navigation.User
             label={i18n.t("header.login")}
@@ -93,4 +91,5 @@ const Header = (props: HeaderProps): ReactElement => {
   );
 };
 
+Header.defaultProps = defaultProps;
 export default Header;

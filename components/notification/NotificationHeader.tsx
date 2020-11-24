@@ -24,38 +24,38 @@ const NotificationHeader = (): ReactElement => {
 
   return (
     <Header>
-        <Navigation.Row>
-            <Navigation.Item
-            className={styles.navigationItem}
-            label={`${i18n.t("notification.page.basic")}`}
-            active={currentPage === 1}
-            onClick={() => changePage(1)}
-            />
-            <Navigation.Item
-            className={styles.navigationItem}
-            label={`${i18n.t("notification.page.contact")}`}
-            active={currentPage === 2}
-            onClick={() => changePage(2)}
-            />
-            <Navigation.Item
-            className={styles.navigationItem}
-            label={`${i18n.t("notification.page.photos")}`}
-            active={currentPage === 3}
-            onClick={() => changePage(3)}
-            />
-            <Navigation.Item
-            className={styles.navigationItem}
-            label={`${i18n.t("notification.page.payment")}`}
-            active={currentPage === 4}
-            onClick={() => changePage(4)}
-            />
-            <Navigation.Item
-            className={styles.navigationItem}
-            label={`${i18n.t("notification.page.send")}`}
-            active={currentPage === 5}
-            onClick={() => changePage(5)}
-            />
-        </Navigation.Row>
+      <Navigation.Row>
+        <Navigation.Item
+          className={styles.navigationItem}
+          label={`${i18n.t("notification.page.basic")}`}
+          active={currentPage === 1}
+          onClick={() => changePage(1)}
+        />
+        <Navigation.Item
+          className={styles.navigationItem}
+          label={`${i18n.t("notification.page.contact")}`}
+          active={currentPage === 2}
+          onClick={() => changePage(2)}
+        />
+        <Navigation.Item
+          className={styles.navigationItem}
+          label={`${i18n.t("notification.page.photos")}`}
+          active={currentPage === 3}
+          onClick={() => changePage(3)}
+        />
+        <Navigation.Item
+          className={styles.navigationItem}
+          label={`${i18n.t("notification.page.payment")}`}
+          active={currentPage === 4}
+          onClick={() => changePage(4)}
+        />
+        <Navigation.Item
+          className={styles.navigationItem}
+          label={`${i18n.t("notification.page.send")}`}
+          active={currentPage === 5}
+          onClick={() => changePage(5)}
+        />
+      </Navigation.Row>
     </Header>
   );
 };
