@@ -8,6 +8,7 @@ export const MAP_INITIAL_CENTER = [60.166, 24.942];
 export const MAP_INITIAL_ZOOM = 13;
 export const MAP_MIN_ZOOM = 10;
 export const MAP_MAX_ZOOM = 18;
+export const SEARCH_URL = "https://api.hel.fi/servicemap/v2/search/?format=json";
 
 export const SET_PAGE = "SET_PAGE";
 export const SET_PAGE_VALID = "SET_PAGE_VALID";

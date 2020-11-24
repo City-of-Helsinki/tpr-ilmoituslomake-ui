@@ -2,10 +2,11 @@ import React, { Dispatch, ChangeEvent, ReactElement } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useRouter } from "next/router";
 import { useI18n } from "next-localization";
-import { TextInput } from "hds-react";
+import { TextInput, Button } from "hds-react";
 import { NotificationAction, NotificationValidationAction } from "../../state/actions/types";
-import { setNotificationAddress } from "../../state/actions/notification";
+import { setNotificationAddress, setNotificationLocation } from "../../state/actions/notification";
 import { RootState } from "../../state/reducers";
+import { SEARCH_URL } from "../../types/constants";
 import { isAddressFieldValid } from "../../utils/validation";
 
 const Location = (): ReactElement => {
@@ -36,6 +37,28 @@ const Location = (): ReactElement => {
 
   const validateAddress = (language: string, evt: ChangeEvent<HTMLInputElement>) => {
     isAddressFieldValid(language, evt.target.name, notification, dispatchValidation);
+  };
+
+  const geocodeAddress = async () => {
+    // The Helsinki API does not use postal code
+    const input = router.locale === "sv" ? `${streetSv} ${postOfficeSv}` : `${streetFi} ${postOfficeFi}`;
+    const language = router.locale === "sv" ? "sv" : "fi";
+
+    const geocodeRequest = await fetch(`${SEARCH_URL}&type=address&input=${input}&language=${language}`);
+    const geocodeResponse = await geocodeRequest.json();
+
+    console.log("GEOCODE RESPONSE", geocodeResponse);
+
+    if (geocodeResponse.results && geocodeResponse.results.length > 0) {
+      // Use the first result
+      const { location: resultLocation } = geocodeResponse.results[0];
+      console.log(resultLocation.coordinates);
+
+      // Set the location in redux state using the geocoded position
+      // Note: this will cause the map to pan to centre on these coordinates
+      // The geocoder returns the coordinates as lon,lat but Leaflet needs them as lat,lon
+      dispatch(setNotificationLocation([resultLocation.coordinates[1], resultLocation.coordinates[0]]));
+    }
   };
 
   return (
@@ -115,6 +138,9 @@ const Location = (): ReactElement => {
           />
         </>
       )}
+      <Button variant="secondary" onClick={geocodeAddress}>
+        {i18n.t("notification.map.geocode")}
+      </Button>
     </div>
   );
 };
