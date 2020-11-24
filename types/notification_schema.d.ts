@@ -73,7 +73,7 @@ export interface NotificationSchema {
     name?: string;
     [k: string]: unknown;
   }[];
-  ontology_ids: string[];
+  ontology_ids: number[];
   comments: string;
   [k: string]: unknown;
 }

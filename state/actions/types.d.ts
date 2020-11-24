@@ -10,6 +10,7 @@ import {
   SET_NOTIFICATION_SHORT_DESCRIPTION,
   SET_NOTIFICATION_LONG_DESCRIPTION,
   SET_NOTIFICATION_TAG,
+  SET_NOTIFICATION_TAG_OPTIONS,
   SET_NOTIFICATION_NOTIFIER,
   SET_NOTIFICATION_ADDRESS,
   SET_NOTIFICATION_LOCATION,
@@ -30,7 +31,7 @@ import {
   SET_NOTIFICATION_LINK_VALIDATION,
   SET_NOTIFICATION_PHOTO_VALIDATION,
 } from "../../types/constants";
-import { User, KeyValueString, KeyValueBoolean, Photo } from "../../types/general";
+import { User, KeyValueString, KeyValueBoolean, Photo, TagOption } from "../../types/general";
 import { PhotoValidation } from "../../types/notification_validation";
 
 interface SetPageAction extends AnyAction {
@@ -70,7 +71,12 @@ interface SetNotificationLongDescriptionAction extends AnyAction {
 
 interface SetNotificationTagAction extends AnyAction {
   type: typeof SET_NOTIFICATION_TAG;
-  payload: string[];
+  payload: number[];
+}
+
+interface SetNotificationTagOptionsAction extends AnyAction {
+  type: typeof SET_NOTIFICATION_TAG_OPTIONS;
+  payload: TagOption[];
 }
 
 interface SetNotificationNotifierAction extends AnyAction {
@@ -132,6 +138,7 @@ export type NotificationAction =
   | SetNotificationShortDescriptionAction
   | SetNotificationLongDescriptionAction
   | SetNotificationTagAction
+  | SetNotificationTagOptionsAction
   | SetNotificationNotifierAction
   | SetNotificationAddressAction
   | SetNotificationLocationAction

@@ -21,6 +21,16 @@ export interface Photo {
   photographer: string;
 }
 
+export interface TagOption {
+  id: number;
+  ontologyword: {
+    fi: string;
+    sv: string;
+    en: string;
+    [k: string]: unknown;
+  };
+}
+
 export interface NotificationExtra {
   inputLanguages: string[];
   notifier: {
@@ -31,6 +41,7 @@ export interface NotificationExtra {
     [k: string]: unknown;
   };
   photos: Photo[];
+  tagOptions: TagOption[];
 }
 
 export interface OtherThing {

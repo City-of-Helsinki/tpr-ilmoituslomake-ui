@@ -261,7 +261,7 @@
         "ontology_ids": {
             "type": "array",
             "items": {
-                "type": "string"
+                "type": "number"
             }
         },
         "comments": {

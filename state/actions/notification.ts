@@ -8,6 +8,7 @@ import {
   SET_NOTIFICATION_SHORT_DESCRIPTION,
   SET_NOTIFICATION_LONG_DESCRIPTION,
   SET_NOTIFICATION_TAG,
+  SET_NOTIFICATION_TAG_OPTIONS,
   SET_NOTIFICATION_NOTIFIER,
   SET_NOTIFICATION_ADDRESS,
   SET_NOTIFICATION_LOCATION,
@@ -19,7 +20,7 @@ import {
   SET_NOTIFICATION_PAYMENT,
   SET_NOTIFICATION_COMMENTS,
 } from "../../types/constants";
-import { User, KeyValueString, KeyValueBoolean, Photo } from "../../types/general";
+import { User, KeyValueString, KeyValueBoolean, Photo, TagOption } from "../../types/general";
 import { NotificationAction } from "./types";
 
 export const setPage = (pageNumber: number): NotificationAction => ({
@@ -57,9 +58,14 @@ export const setNotificationLongDescription = (keyValue: KeyValueString): Notifi
   payload: keyValue,
 });
 
-export const setNotificationTag = (values: string[]): NotificationAction => ({
+export const setNotificationTag = (values: number[]): NotificationAction => ({
   type: SET_NOTIFICATION_TAG,
   payload: values,
+});
+
+export const setNotificationTagOptions = (options: TagOption[]): NotificationAction => ({
+  type: SET_NOTIFICATION_TAG_OPTIONS,
+  payload: options,
 });
 
 export const setNotificationNotifier = (keyValue: KeyValueString): NotificationAction => ({

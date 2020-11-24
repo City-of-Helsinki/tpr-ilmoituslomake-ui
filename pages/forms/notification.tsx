@@ -3,6 +3,7 @@ import { useSelector } from "react-redux";
 import { GetServerSideProps } from "next";
 import Head from "next/head";
 import { useI18n } from "next-localization";
+import absoluteUrl from "next-absolute-url";
 import i18nLoader, { defaultLocale } from "../../utils/i18n";
 import { RootState } from "../../state/reducers";
 import { initStore } from "../../state/store";
@@ -25,6 +26,7 @@ import Prices from "../../components/notification/Prices";
 import Tags from "../../components/notification/Tags";
 import Terms from "../../components/notification/Terms";
 import ValidationSummary from "../../components/notification/ValidationSummary";
+import { TagOption } from "../../types/general";
 
 const Notification = (): ReactElement => {
   const i18n = useI18n();
@@ -98,12 +100,25 @@ const Notification = (): ReactElement => {
 };
 
 // Server-side rendering
-export const getServerSideProps: GetServerSideProps = async ({ locale }) => {
+export const getServerSideProps: GetServerSideProps = async ({ req, locale }) => {
   const lngDict = await i18nLoader(locale);
+
+  // Note: this only fetches the first 50 tags
+  // TODO - fetch the rest
+  const { origin } = absoluteUrl(req);
+  const tagResponse = await fetch(`${origin}/api/ontologywords/?format=json&search=`);
+  let tagOptions = [];
+  if (tagResponse.ok) {
+    const tagResult = await tagResponse.json();
+    if (tagResult && tagResult.length > 0) {
+      tagOptions = tagResult.results.map((tag: TagOption) => ({ id: tag.id, ontologyword: tag.ontologyword }));
+    }
+  }
 
   const reduxStore = initStore();
   const initialReduxState = reduxStore.getState();
   initialReduxState.notification.notificationExtra.inputLanguages = [locale || defaultLocale];
+  initialReduxState.notification.notificationExtra.tagOptions = tagOptions;
 
   return {
     props: {

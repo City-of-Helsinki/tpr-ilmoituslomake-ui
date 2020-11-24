@@ -12,6 +12,7 @@ import {
   SET_NOTIFICATION_SHORT_DESCRIPTION,
   SET_NOTIFICATION_LONG_DESCRIPTION,
   SET_NOTIFICATION_TAG,
+  SET_NOTIFICATION_TAG_OPTIONS,
   SET_NOTIFICATION_NOTIFIER,
   SET_NOTIFICATION_ADDRESS,
   SET_NOTIFICATION_LOCATION,
@@ -89,6 +90,7 @@ const initialState: NotificationState = {
       phone: "",
     },
     photos: [],
+    tagOptions: [],
   },
 };
 
@@ -181,6 +183,14 @@ const notification = (state = initialState, action: AnyAction): NotificationStat
       return {
         ...state,
         notification: { ...state.notification, ontology_ids: action.payload },
+      };
+    }
+
+    case SET_NOTIFICATION_TAG_OPTIONS: {
+      console.log("SET_NOTIFICATION_TAG_OPTIONS", action.payload);
+      return {
+        ...state,
+        notificationExtra: { ...state.notificationExtra, tagOptions: action.payload },
       };
     }
 

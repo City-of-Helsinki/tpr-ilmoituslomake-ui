@@ -1,13 +1,17 @@
 import React, { Dispatch, ReactElement } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import { useRouter } from "next/router";
 import { useI18n } from "next-localization";
 import { Combobox } from "hds-react";
 import { NotificationAction, NotificationValidationAction } from "../../state/actions/types";
 import { setNotificationTag } from "../../state/actions/notification";
 import { RootState } from "../../state/reducers";
+import { TagOption } from "../../types/general";
+import { defaultLocale } from "../../utils/i18n";
 import { isTagValid } from "../../utils/validation";
 
 type OptionType = {
+  id: number;
   label: string;
 };
 
@@ -15,21 +19,27 @@ const Tags = (): ReactElement => {
   const i18n = useI18n();
   const dispatch = useDispatch<Dispatch<NotificationAction>>();
   const dispatchValidation = useDispatch<Dispatch<NotificationValidationAction>>();
+  const router = useRouter();
 
   const notification = useSelector((state: RootState) => state.notification.notification);
   const { ontology_ids } = notification;
 
+  const notificationExtra = useSelector((state: RootState) => state.notification.notificationExtra);
+  const { tagOptions } = notificationExtra;
+
   const notificationValidation = useSelector((state: RootState) => state.notificationValidation.notificationValidation);
   const { ontology_ids: tagsValid = true } = notificationValidation;
 
-  const tagOptions = ["Ravintola", "Kasvisravintola", "TODO"];
+  const convertOptions = (options: TagOption[]): OptionType[] => {
+    return options.map((tag) => ({ id: tag.id, label: tag.ontologyword[router.locale || defaultLocale] as string }));
+  };
 
-  const convertOptions = (options: string[]) => {
-    return options.map((tag) => ({ label: tag }));
+  const convertValues = (values: number[]): OptionType[] => {
+    return convertOptions(tagOptions.filter((tag) => values.includes(tag.id)));
   };
 
   const updateTags = (selected: OptionType[]) => {
-    dispatch(setNotificationTag(selected.map((s) => s.label)));
+    dispatch(setNotificationTag(selected.map((s) => s.id)));
   };
 
   const validateTags = () => {
@@ -44,7 +54,7 @@ const Tags = (): ReactElement => {
         className="formInput"
         // @ts-ignore: Erroneous error that the type for options should be OptionType[][]
         options={convertOptions(tagOptions)}
-        value={convertOptions(ontology_ids)}
+        value={convertValues(ontology_ids)}
         onChange={updateTags}
         onBlur={validateTags}
         label={i18n.t("notification.tags.add.label")}
