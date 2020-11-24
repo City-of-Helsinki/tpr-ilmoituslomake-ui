@@ -1,3 +1,16 @@
+@import "~hds-design-tokens/lib/all.scss";
+
+.geocode {
+  background-color: $color-copper-light;
+  padding: $spacing-m;
+  margin-bottom: $spacing-layout-s;
+
+  button {
+    margin-top: $spacing-layout-xs;
+    background-color: $color-white;
+  }
+}
+
 .map {
   height: 20rem;
 }

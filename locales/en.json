@@ -115,7 +115,9 @@
       }
     },
     "map": {
-      "title": "Map of place"
+      "title": "Map of place",
+      "notice": "The place is shown on the map based on the address given above. If the search result is imprecise or incorrect, you can correct it by moving the marker on the map to the right place. We recommend that the marker is located at the main entrance to the place.",
+      "geocode": "Show specified address on map"
     },
     "notifier": {
       "title": "Notifier's information",

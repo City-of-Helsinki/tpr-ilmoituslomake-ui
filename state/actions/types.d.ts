@@ -1,8 +1,10 @@
 import { AnyAction } from "redux";
+import { LatLngExpression } from "leaflet";
 import {
   SET_PAGE,
   SET_PAGE_VALID,
   SET_USER,
+  SET_MAP_VIEW,
   SET_NOTIFICATION_INPUT_LANGUAGE,
   SET_NOTIFICATION_NAME,
   SET_NOTIFICATION_SHORT_DESCRIPTION,
@@ -10,6 +12,7 @@ import {
   SET_NOTIFICATION_TAG,
   SET_NOTIFICATION_NOTIFIER,
   SET_NOTIFICATION_ADDRESS,
+  SET_NOTIFICATION_LOCATION,
   SET_NOTIFICATION_CONTACT,
   SET_NOTIFICATION_LINK,
   SET_NOTIFICATION_PHOTO,
@@ -38,6 +41,11 @@ interface SetPageAction extends AnyAction {
 interface SetUserAction extends AnyAction {
   type: typeof SET_USER;
   payload: User;
+}
+
+interface SetMapViewAction extends AnyAction {
+  type: typeof SET_MAP_VIEW;
+  payload: { center: LatLngExpression; zoom: number };
 }
 
 interface SetNotificationInputLanguage extends AnyAction {
@@ -73,6 +81,11 @@ interface SetNotificationNotifierAction extends AnyAction {
 interface SetNotificationAddressAction extends AnyAction {
   type: typeof SET_NOTIFICATION_ADDRESS;
   payload: { language: string; value: KeyValueString };
+}
+
+interface SetNotificationLocationAction extends AnyAction {
+  type: typeof SET_NOTIFICATION_LOCATION;
+  payload: [number, number];
 }
 
 interface SetNotificationContactAction extends AnyAction {
@@ -113,6 +126,7 @@ interface SetNotificationCommentsAction extends AnyAction {
 export type NotificationAction =
   | SetPageAction
   | SetUserAction
+  | SetMapViewAction
   | SetNotificationInputLanguage
   | SetNotificationNameAction
   | SetNotificationShortDescriptionAction
@@ -120,6 +134,7 @@ export type NotificationAction =
   | SetNotificationTagAction
   | SetNotificationNotifierAction
   | SetNotificationAddressAction
+  | SetNotificationLocationAction
   | SetNotificationContactAction
   | SetNotificationLinkAction
   | SetNotificationPhotoAction

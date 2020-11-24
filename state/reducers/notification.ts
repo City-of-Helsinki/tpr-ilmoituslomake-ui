@@ -1,9 +1,12 @@
 import { AnyAction } from "redux";
+import { LatLngExpression } from "leaflet";
 import { NotificationState } from "./types";
 import {
   MAX_PAGE,
+  MAP_INITIAL_ZOOM,
   SET_PAGE,
   SET_USER,
+  SET_MAP_VIEW,
   SET_NOTIFICATION_INPUT_LANGUAGE,
   SET_NOTIFICATION_NAME,
   SET_NOTIFICATION_SHORT_DESCRIPTION,
@@ -11,6 +14,7 @@ import {
   SET_NOTIFICATION_TAG,
   SET_NOTIFICATION_NOTIFIER,
   SET_NOTIFICATION_ADDRESS,
+  SET_NOTIFICATION_LOCATION,
   SET_NOTIFICATION_CONTACT,
   SET_NOTIFICATION_LINK,
   SET_NOTIFICATION_PHOTO,
@@ -18,12 +22,15 @@ import {
   SET_NOTIFICATION_PRICE,
   SET_NOTIFICATION_PAYMENT,
   SET_NOTIFICATION_COMMENTS,
+  MAP_INITIAL_CENTER,
 } from "../../types/constants";
 import { Photo } from "../../types/general";
 import { defaultLocale } from "../../utils/i18n";
 
 const initialState: NotificationState = {
   page: 1,
+  center: MAP_INITIAL_CENTER as LatLngExpression,
+  zoom: MAP_INITIAL_ZOOM,
   notification: {
     organization: {},
     name: {
@@ -112,6 +119,15 @@ const notification = (state = initialState, action: AnyAction): NotificationStat
       };
     }
 
+    case SET_MAP_VIEW: {
+      console.log("SET_MAP_VIEW", action.payload);
+      return {
+        ...state,
+        center: action.payload.center ?? state.notification.center,
+        zoom: action.payload.zoom ?? state.notification.zoom,
+      };
+    }
+
     case SET_NOTIFICATION_INPUT_LANGUAGE: {
       console.log("SET_NOTIFICATION_INPUT_LANGUAGE", action.payload);
       const [key, checked] = Object.entries(action.payload)[0];
@@ -188,6 +204,14 @@ const notification = (state = initialState, action: AnyAction): NotificationStat
             [action.payload.language]: { ...(action.payload.language === "sv" ? sv : fi), ...action.payload.value },
           },
         },
+      };
+    }
+
+    case SET_NOTIFICATION_LOCATION: {
+      console.log("SET_NOTIFICATION_LOCATION", action.payload);
+      return {
+        ...state,
+        notification: { ...state.notification, location: action.payload },
       };
     }
 

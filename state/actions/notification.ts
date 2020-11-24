@@ -1,6 +1,8 @@
+import { LatLngExpression } from "leaflet";
 import {
   SET_PAGE,
   SET_USER,
+  SET_MAP_VIEW,
   SET_NOTIFICATION_INPUT_LANGUAGE,
   SET_NOTIFICATION_NAME,
   SET_NOTIFICATION_SHORT_DESCRIPTION,
@@ -8,6 +10,7 @@ import {
   SET_NOTIFICATION_TAG,
   SET_NOTIFICATION_NOTIFIER,
   SET_NOTIFICATION_ADDRESS,
+  SET_NOTIFICATION_LOCATION,
   SET_NOTIFICATION_CONTACT,
   SET_NOTIFICATION_LINK,
   SET_NOTIFICATION_PHOTO,
@@ -27,6 +30,11 @@ export const setPage = (pageNumber: number): NotificationAction => ({
 export const setUser = (user: User): NotificationAction => ({
   type: SET_USER,
   payload: user,
+});
+
+export const setMapView = (center: LatLngExpression, zoom: number): NotificationAction => ({
+  type: SET_MAP_VIEW,
+  payload: { center, zoom },
 });
 
 export const setNotificationInputLanguage = (keyValue: KeyValueBoolean): NotificationAction => ({
@@ -62,6 +70,11 @@ export const setNotificationNotifier = (keyValue: KeyValueString): NotificationA
 export const setNotificationAddress = (language: string, value: KeyValueString): NotificationAction => ({
   type: SET_NOTIFICATION_ADDRESS,
   payload: { language, value },
+});
+
+export const setNotificationLocation = (coordinates: [number, number]): NotificationAction => ({
+  type: SET_NOTIFICATION_LOCATION,
+  payload: coordinates,
 });
 
 export const setNotificationContact = (keyValue: KeyValueString): NotificationAction => ({
