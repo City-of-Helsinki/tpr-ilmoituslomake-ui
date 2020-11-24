@@ -9,9 +9,9 @@ import { setPageValid } from "../../state/actions/notificationValidation";
 import { RootState } from "../../state/reducers";
 import { MAX_PAGE } from "../../types/constants";
 import validateNotificationData, { isPageValid } from "../../utils/validation";
-import styles from "./Footer.module.scss";
+import styles from "./NotificationFooter.module.scss";
 
-const Footer = (): ReactElement => {
+const NotificationFooter = (): ReactElement => {
   const i18n = useI18n();
   const dispatch = useDispatch<Dispatch<NotificationAction>>();
   const dispatchValidation = useDispatch<Dispatch<NotificationValidationAction>>();
@@ -133,4 +133,4 @@ const Footer = (): ReactElement => {
   );
 };
 
-export default Footer;
+export default NotificationFooter;

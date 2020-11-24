@@ -7,9 +7,9 @@ import absoluteUrl from "next-absolute-url";
 import i18nLoader, { defaultLocale } from "../../utils/i18n";
 import { RootState } from "../../state/reducers";
 import { initStore } from "../../state/store";
-import Layout from "../../components/Layout";
+import Layout from "../../components/common/Layout";
 import NotificationHeader from "../../components/notification/NotificationHeader";
-import Footer from "../../components/notification/Footer";
+import NotificationFooter from "../../components/notification/NotificationFooter";
 import Comments from "../../components/notification/Comments";
 import Contact from "../../components/notification/Contact";
 import Description from "../../components/notification/Description";
@@ -94,7 +94,7 @@ const Notification = (): ReactElement => {
           <Preview />
         </div>
       )}
-      <Footer />
+      <NotificationFooter />
     </Layout>
   );
 };

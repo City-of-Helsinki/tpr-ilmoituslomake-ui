@@ -1,20 +1,16 @@
 import React, { Dispatch, ReactElement } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { useRouter } from "next/router";
 import { useI18n } from "next-localization";
 import { Navigation } from "hds-react";
+import Header from "../common/Header";
 import { NotificationAction } from "../../state/actions/types";
 import { setPage } from "../../state/actions/notification";
 import { RootState } from "../../state/reducers";
-
-import Header from "../common/Header";
-
 import styles from "./NotificationHeader.module.scss";
 
 const NotificationHeader = (): ReactElement => {
   const i18n = useI18n();
   const dispatch = useDispatch<Dispatch<NotificationAction>>();
-  const router = useRouter();
 
   const currentPage = useSelector((state: RootState) => state.notification.page);
 

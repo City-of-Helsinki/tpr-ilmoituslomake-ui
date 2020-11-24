@@ -5,7 +5,7 @@ import Head from "next/head";
 import Link from "next/link";
 import { useI18n } from "next-localization";
 import i18nLoader from "../utils/i18n";
-import Layout from "../components/Layout";
+import Layout from "../components/common/Layout";
 import Header from "../components/common/Header";
 
 import styles from "./index.module.scss";

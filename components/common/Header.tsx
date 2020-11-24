@@ -60,6 +60,9 @@ const Header = ({ children }: HeaderProps): ReactElement => {
     window.open("https://api.hel.fi/sso/openid/end-session/", "_self");
   };
 
+  console.log("WTF", children);
+  console.log("WTF2", <Navigation.Row />);
+
   return (
     <div>
       <Navigation title={i18n.t("header.title")} menuToggleAriaLabel="menu" skipTo="#content" skipToContentLabel={i18n.t("header.skipToContent")}>

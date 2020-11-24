@@ -1,5 +1,4 @@
 import React, { ReactNode, ReactElement } from "react";
-// import Header from "./Header";
 import Footer from "./Footer";
 import styles from "./Layout.module.scss";
 
@@ -12,7 +11,6 @@ const Layout = ({ children }: LayoutProps): ReactElement => {
     <div className={styles.layout}>
       <div className={styles.left} />
       <div className={styles.main}>
-        {/* <Header /> */}
         {children}
         <Footer />
       </div>
