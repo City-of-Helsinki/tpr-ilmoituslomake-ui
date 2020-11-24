@@ -44,20 +44,22 @@ const Location = (): ReactElement => {
     const input = router.locale === "sv" ? `${streetSv} ${postOfficeSv}` : `${streetFi} ${postOfficeFi}`;
     const language = router.locale === "sv" ? "sv" : "fi";
 
-    const geocodeRequest = await fetch(`${SEARCH_URL}&type=address&input=${input}&language=${language}`);
-    const geocodeResponse = await geocodeRequest.json();
+    const geocodeResponse = await fetch(`${SEARCH_URL}&type=address&input=${input}&language=${language}`);
+    if (geocodeResponse.ok) {
+      const geocodeResult = await geocodeResponse.json();
 
-    console.log("GEOCODE RESPONSE", geocodeResponse);
+      console.log("GEOCODE RESPONSE", geocodeResult);
 
-    if (geocodeResponse.results && geocodeResponse.results.length > 0) {
-      // Use the first result
-      const { location: resultLocation } = geocodeResponse.results[0];
-      console.log(resultLocation.coordinates);
+      if (geocodeResult.results && geocodeResult.results.length > 0) {
+        // Use the first result
+        const { location: resultLocation } = geocodeResult.results[0];
+        console.log(resultLocation.coordinates);
 
-      // Set the location in redux state using the geocoded position
-      // Note: this will cause the map to pan to centre on these coordinates
-      // The geocoder returns the coordinates as lon,lat but Leaflet needs them as lat,lon
-      dispatch(setNotificationLocation([resultLocation.coordinates[1], resultLocation.coordinates[0]]));
+        // Set the location in redux state using the geocoded position
+        // Note: this will cause the map to pan to centre on these coordinates
+        // The geocoder returns the coordinates as lon,lat but Leaflet needs them as lat,lon
+        dispatch(setNotificationLocation([resultLocation.coordinates[1], resultLocation.coordinates[0]]));
+      }
     }
   };
 

@@ -50,20 +50,24 @@ const Footer = (): ReactElement => {
       if (currentUser?.authenticated && valid) {
         console.log("SENDING", notification);
 
-        const createRequest = await fetch("/api/notification/create/", {
+        const createResponse = await fetch("/api/notification/create/", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
           },
           body: JSON.stringify({ data: notification }),
         });
-        const createResponse = await createRequest.json();
+        if (createResponse.ok) {
+          const notificationResult = await createResponse.json();
 
-        // TODO - handle response
-        console.log("RESPONSE", createResponse);
+          // TODO - handle response
+          console.log("RESPONSE", notificationResult);
 
-        if (createResponse.id) {
-          setToast(Toast.SaveSucceeded);
+          if (notificationResult.id) {
+            setToast(Toast.SaveSucceeded);
+          } else {
+            setToast(Toast.SaveFailed);
+          }
         } else {
           setToast(Toast.SaveFailed);
         }
