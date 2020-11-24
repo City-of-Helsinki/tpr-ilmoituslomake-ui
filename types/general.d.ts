@@ -43,9 +43,3 @@ export interface NotificationExtra {
   photos: Photo[];
   tagOptions: TagOption[];
 }
-
-export interface OtherThing {
-  other: {
-    thing: string;
-  };
-}

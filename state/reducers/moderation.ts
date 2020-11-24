@@ -1,23 +1,21 @@
 import { AnyAction } from "redux";
 import { ModerationState } from "./types";
-import { SET_OTHER_THING } from "../../types/constants";
+import { MAX_PAGE, SET_PAGE } from "../../types/constants";
 
 const initialState: ModerationState = {
-  some: {
-    other: {
-      thing: "",
-    },
-  },
+  page: 1,
 };
 
 const moderation = (state = initialState, action: AnyAction): ModerationState => {
   switch (action.type) {
-    case SET_OTHER_THING: {
+    case SET_PAGE: {
+      console.log("SET_PAGE", action.payload);
       return {
         ...state,
-        some: { other: { ...state.some.other, thing: action.payload } },
+        page: Math.min(Math.max(action.payload, 1), MAX_PAGE),
       };
     }
+
     default: {
       return state;
     }

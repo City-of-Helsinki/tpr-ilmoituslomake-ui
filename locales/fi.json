@@ -190,6 +190,20 @@
     }
   },
   "moderation": {
-    "title": "Moderointi"
+    "title": "Moderointi",
+    "page": {
+      "front": "Etusivu",
+      "place": "Kohteet",
+      "request": "Tehtävät",
+      "organisation": "Organisaatiot",
+      "translation": "Käännökset"
+    },
+    "main": {
+      "front": "Etusivu",
+      "place": "Kohteet",
+      "request": "Tehtävät",
+      "organisation": "Organisaatiot",
+      "translation": "Käännökset"
+    }
   }
 }

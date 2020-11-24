@@ -1,9 +1,9 @@
-import { SET_OTHER_THING } from "../../types/constants";
+import { SET_PAGE } from "../../types/constants";
 import { ModerationAction } from "./types";
 
-export const setOtherThing = (thing: string): ModerationAction => ({
-  type: SET_OTHER_THING,
-  payload: thing,
+export const setPage = (pageNumber: number): ModerationAction => ({
+  type: SET_PAGE,
+  payload: pageNumber,
 });
 
-export default setOtherThing;
+export default setPage;

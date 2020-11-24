@@ -190,6 +190,20 @@
     }
   },
   "moderation": {
-    "title": "Moderation"
+    "title": "Moderation",
+    "page": {
+      "front": "Front page",
+      "place": "Places",
+      "request": "Requests",
+      "organisation": "Organisations",
+      "translation": "Translations"
+    },
+    "main": {
+      "front": "Front page",
+      "place": "Places",
+      "request": "Requests",
+      "organisation": "Organisations",
+      "translation": "Translations"
+    }
   }
 }

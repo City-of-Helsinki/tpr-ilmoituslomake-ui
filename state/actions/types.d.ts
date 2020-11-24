@@ -212,9 +212,4 @@ export type NotificationValidationAction =
   | SetNotificationLinkValidationAction
   | SetNotificationPhotoUrlValidationAction;
 
-interface SetOtherThingAction extends AnyAction {
-  type: typeof SET_OTHER_THING;
-  payload: string;
-}
-
-export type ModerationAction = SetOtherThingAction;
+export type ModerationAction = SetPageAction;

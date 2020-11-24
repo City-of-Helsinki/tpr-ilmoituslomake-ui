@@ -1,5 +1,5 @@
 import { LatLngExpression } from "leaflet";
-import { User, NotificationExtra, OtherThing } from "../../types/general";
+import { User, NotificationExtra } from "../../types/general";
 import { NotificationSchema } from "../../types/notification_schema";
 import { NotificationValidation } from "../../types/notification_validation";
 
@@ -18,5 +18,5 @@ export interface NotificationValidationState {
 }
 
 export interface ModerationState {
-  some: OtherThing;
+  page: number;
 }
