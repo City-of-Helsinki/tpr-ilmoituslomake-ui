@@ -8,6 +8,9 @@ import { RootState } from "../../state/reducers";
 import { initStore } from "../../state/store";
 import Layout from "../../components/common/Layout";
 import ModerationHeader from "../../components/moderation/ModerationHeader";
+import Intro from "../../components/moderation/Intro";
+import NewRequests from "../../components/moderation/NewRequests";
+import OrganisationNotice from "../../components/moderation/OrganisationNotice";
 
 const Moderation = (): ReactElement => {
   const i18n = useI18n();
@@ -29,7 +32,9 @@ const Moderation = (): ReactElement => {
       <ModerationHeader />
       {currentPage === 1 && (
         <div id="content" ref={ref}>
-          <h1>{i18n.t("moderation.main.front")}</h1>
+          <Intro />
+          <NewRequests />
+          <OrganisationNotice />
         </div>
       )}
       {currentPage === 2 && (

@@ -204,6 +204,21 @@
       "request": "Tehtävät",
       "organisation": "Organisaatiot",
       "translation": "Käännökset"
+    },
+    "button": {
+      "addNewPlace": "Lisää uusi kohde",
+      "searchPlace": "Hae kohdetta",
+      "showAllRequests": "Näytä kaikki tehtävät"
+    },
+    "intro": {
+      "title": "Tervetuloa moderoimaan!"
+    },
+    "newRequests": {
+      "title": "Uudet moderointitehtävät"
+    },
+    "organisationNotice": {
+      "title": "Organisaatiohallinta",
+      "manageOrganisation": "Hallinoi organisaatiota"
     }
   }
 }

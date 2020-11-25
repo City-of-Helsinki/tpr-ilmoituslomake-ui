@@ -204,6 +204,21 @@
       "request": "Requests",
       "organisation": "Organisations",
       "translation": "Translations"
+    },
+    "button": {
+      "addNewPlace": "Add new place",
+      "searchPlace": "Search places",
+      "showAllRequests": "Show all requests"
+    },
+    "intro": {
+      "title": "Welcome to moderation!"
+    },
+    "newRequests": {
+      "title": "New moderation requests"
+    },
+    "organisationNotice": {
+      "title": "Organisation management",
+      "manageOrganisation": "Manage organisation"
     }
   }
 }

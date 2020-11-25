@@ -1,0 +1,22 @@
+@import "~hds-design-tokens/lib/all.scss";
+
+.intro {
+  background-color: $color-copper-light;
+  padding: $spacing-m;
+
+  button {
+    margin-right: $spacing-s;
+
+    &.primary {
+      background-color: $color-bus;
+    }
+
+    &.secondary {
+      background-color: $color-white;
+    }
+  }
+}
+
+.wave {
+  fill: $color-copper-light;
+}
