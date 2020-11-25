@@ -48,7 +48,7 @@ const Tags = (): ReactElement => {
 
   return (
     <div className="formSection">
-      <h2>{i18n.t("notification.tags.title")}</h2>
+      <h3>{i18n.t("notification.tags.title")}</h3>
       <Combobox
         id="tag"
         className="formInput"

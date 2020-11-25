@@ -66,7 +66,7 @@ const Description = (): ReactElement => {
 
   return (
     <div className="formSection">
-      <h2>{i18n.t("notification.description.title")}</h2>
+      <h3>{i18n.t("notification.description.title")}</h3>
       <InputLanguage />
 
       <div className={inputLanguages.length > 1 ? "languageSection" : ""}>

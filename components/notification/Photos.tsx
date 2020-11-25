@@ -43,7 +43,7 @@ const Photos = (): ReactElement => {
         const key = `photo_${index}`;
         return (
           <div key={key}>
-            <h2>{`${i18n.t("notification.photos.photo")} ${index + 1}`}</h2>
+            <h3>{`${i18n.t("notification.photos.photo")} ${index + 1}`}</h3>
             <TextInput
               id={`url_${index}`}
               className="formInput"

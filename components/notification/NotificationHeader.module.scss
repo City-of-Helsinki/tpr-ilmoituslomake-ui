@@ -1,5 +1,9 @@
 @import "~hds-design-tokens/lib/all.scss";
 
+.header h1 {
+  color: $color-bus;
+}
+
 .navigationItem:after {
   background-color: $color-bus !important;
 }

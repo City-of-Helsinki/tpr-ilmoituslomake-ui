@@ -10,7 +10,7 @@ const Map = (): ReactElement => {
 
   return (
     <div className="formSection">
-      <h2>{i18n.t("notification.map.title")}</h2>
+      <h3>{i18n.t("notification.map.title")}</h3>
       <div className={styles.geocode}>
         <div>{i18n.t("notification.map.notice")}</div>
       </div>

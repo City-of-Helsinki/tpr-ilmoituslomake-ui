@@ -5,6 +5,7 @@ import { TextArea } from "hds-react";
 import { NotificationAction } from "../../state/actions/types";
 import { setNotificationComments } from "../../state/actions/notification";
 import { RootState } from "../../state/reducers";
+import styles from "./Comments.module.scss";
 
 const Comments = (): ReactElement => {
   const i18n = useI18n();
@@ -18,8 +19,7 @@ const Comments = (): ReactElement => {
   };
 
   return (
-    <div className="formSection">
-      <h2>{i18n.t("notification.comments.title")}</h2>
+    <div className={styles.comments}>
       <TextArea
         id="comments"
         className="formInput"

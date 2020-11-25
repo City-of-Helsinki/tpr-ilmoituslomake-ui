@@ -8,7 +8,7 @@ const Preview = (): ReactElement => {
 
   return (
     <div className="formSection">
-      <h2>{i18n.t("notification.preview.title")}</h2>
+      <h3>{i18n.t("notification.preview.title")}</h3>
       <div>PREVIEW TODO</div>
     </div>
   );

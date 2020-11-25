@@ -1,4 +1,4 @@
-export const MAX_PAGE = 5;
+export const MAX_PAGE = 4;
 export const MAX_LENGTH_SHORT_DESC = 150;
 export const MIN_LENGTH_LONG_DESC = 120;
 export const MAX_LENGTH_LONG_DESC = 4000;

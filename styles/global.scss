@@ -41,7 +41,23 @@ body {
 }
 
 h1 {
-  color: $color-bus;
+  font-size: $fontsize-heading-xl !important;
+}
+
+h2 {
+  font-size: $fontsize-heading-l !important;
+}
+
+h3 {
+  font-size: $fontsize-heading-m !important;
+}
+
+h4 {
+  font-size: $fontsize-heading-s !important;
+}
+
+h5 {
+  font-size: $fontsize-heading-xs !important;
 }
 
 textarea {

@@ -7,6 +7,7 @@
   },
   "notification": {
     "title": "My Helsinki Places",
+    "header": "Notify about a new place",
     "mandatory": "Mandatory information is marked with an asterisk *",
     "button": {
       "next": "Next",
@@ -63,7 +64,7 @@
       }
     },
     "contact": {
-      "title": "Place's contact information",
+      "title": "Other contact information",
       "phone": {
         "label": "Phone number"
       },
@@ -122,8 +123,8 @@
     "notifier": {
       "title": "Notifier's information",
       "notifierType": "Notifier's type",
-      "owner": "I am the place's representative or owner",
-      "outsideSource":"I am an outside source",
+      "owner": "I represent the place",
+      "outsideSource":"I don't represent the place",
       "fullName": {
         "label": "Notifier's first and last name"
       },

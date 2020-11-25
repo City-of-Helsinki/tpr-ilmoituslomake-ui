@@ -3,6 +3,11 @@
 .footer {
   margin-top: $spacing-layout-l;
 
+  h2 {
+    color: initial;
+    font-size: initial !important;
+  }
+
   .wave {
     div {
       fill: $color-fog-light;

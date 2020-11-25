@@ -103,7 +103,7 @@ const NotificationFooter = (): ReactElement => {
         </Button>
       )}
 
-      <div className={styles.space} />
+      <div className="flexSpace" />
 
       {currentPage < MAX_PAGE && (
         <Button iconRight={<IconArrowRight />} onClick={nextPage}>

@@ -30,7 +30,7 @@ const Notifier = (): ReactElement => {
 
   return (
     <div className="formSection">
-      <h2>{i18n.t("notification.notifier.title")}</h2>
+      <h3>{i18n.t("notification.notifier.title")}</h3>
       <div role="group" className="formInput" aria-labelledby="notifierType">
         <div id="notifierType">
           {i18n.t("notification.notifier.notifierType")}

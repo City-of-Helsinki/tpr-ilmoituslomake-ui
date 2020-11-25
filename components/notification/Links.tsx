@@ -32,7 +32,6 @@ const Links = (): ReactElement => {
 
   return (
     <div className="formSection">
-      <h2>{i18n.t("notification.links.title")}</h2>
       <div className={inputLanguages.length > 1 ? "languageSection" : ""}>
         {inputLanguages.length > 1 && <h3>{i18n.t("notification.links.website.label")}</h3>}
         {languageOptions.map((option) =>

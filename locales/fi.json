@@ -7,6 +7,7 @@
   },
   "notification": {
     "title": "My Helsinki Places",
+    "header": "Ilmoita uusi kohde",
     "mandatory": "Pakolliset tiedot on merkitty tähdellä *",
     "button": {
       "next": "Seuraava",
@@ -63,7 +64,7 @@
       }
     },
     "contact": {
-      "title": "Kohteen yhteystiedot",
+      "title": "Muut yhteystiedot",
       "phone": {
         "label": "Puhelinnumero"
       },
@@ -122,8 +123,8 @@
     "notifier": {
       "title": "Ilmoittajan tiedot",
       "notifierType": "Ilmoittajan tyyppi",
-      "owner": "Olen kohteen edustaja tai omistaja",
-      "outsideSource":"Olen ulkopuolinen taho",
+      "owner": "Edustan kohdetta",
+      "outsideSource":"En edusta kohdetta",
       "fullName": {
         "label": "Ilmoittajan etunimi ja sukunimi"
       },
