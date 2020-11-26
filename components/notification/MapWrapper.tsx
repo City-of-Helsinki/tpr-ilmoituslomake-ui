@@ -1,5 +1,6 @@
 import React, { Dispatch, ReactElement, useRef, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import { useI18n } from "next-localization";
 import { MapContainer, TileLayer, Marker, useMap, useMapEvents } from "react-leaflet";
 import { Marker as LeafletMarker, Icon } from "leaflet";
 import { setMapView, setNotificationLocation } from "../../state/actions/notification";
@@ -9,6 +10,7 @@ import { MAP_TILES_URL, MAP_MIN_ZOOM, MAP_MAX_ZOOM } from "../../types/constants
 import styles from "./Map.module.scss";
 
 const MapWrapper = (): ReactElement => {
+  const i18n = useI18n();
   const dispatch = useDispatch<Dispatch<NotificationAction>>();
 
   const markerRef = useRef<LeafletMarker>(null);
@@ -73,7 +75,10 @@ const MapWrapper = (): ReactElement => {
   return (
     <MapContainer className={styles.map} center={center} zoom={zoom} minZoom={MAP_MIN_ZOOM} maxZoom={MAP_MAX_ZOOM}>
       <CustomMapHandler />
-      <TileLayer url={MAP_TILES_URL} />
+      <TileLayer
+        url={MAP_TILES_URL}
+        attribution={`<a href="https://www.openstreetmap.org/copyright" target="_blank">© ${i18n.t("notification.map.osm")}</a>`}
+      />
       {isLocationValid() && <Marker ref={markerRef} icon={icon} position={location} draggable eventHandlers={markerEventHandlers} />}
     </MapContainer>
   );
