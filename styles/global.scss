@@ -89,3 +89,7 @@ textarea {
 .flexSpace {
   flex-grow: 1;
 }
+
+.MuiStepIcon-root.MuiStepIcon-active {
+  color: $color-bus;
+}

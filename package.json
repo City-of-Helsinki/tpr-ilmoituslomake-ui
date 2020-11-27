@@ -11,6 +11,7 @@
     "json2ts": "json2ts -i ./schemas/ -o ./types/"
   },
   "dependencies": {
+    "@material-ui/core": "^4.11.1",
     "ajv": "^7.0.0-beta.2",
     "ajv-formats": "^0.5.0",
     "hds-core": "^0.15.1",
