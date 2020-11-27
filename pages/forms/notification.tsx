@@ -104,8 +104,8 @@ export const getServerSideProps: GetServerSideProps = async ({ req, locale }) =>
   let tagOptions = [];
   if (tagResponse.ok) {
     const tagResult = await tagResponse.json();
-    if (tagResult && tagResult.results && tagResult.results.length > 0) {
-      tagOptions = tagResult.results.map((tag: TagOption) => ({ id: tag.id, ontologyword: tag.ontologyword }));
+    if (tagResult && tagResult.length > 0) {
+      tagOptions = tagResult.map((tag: TagOption) => ({ id: tag.id, ontologyword: tag.ontologyword }));
     }
   }
 
