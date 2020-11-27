@@ -1,21 +1,46 @@
-import React, { Dispatch, ReactElement } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import React, { ReactElement } from "react";
 import { useI18n } from "next-localization";
+import { useRouter } from "next/router";
 import { Navigation } from "hds-react";
 import Header from "../common/Header";
-import { ModerationAction } from "../../state/actions/types";
-import { setPage } from "../../state/actions/moderation";
-import { RootState } from "../../state/reducers";
 import styles from "./ModerationHeader.module.scss";
 
-const ModerationHeader = (): ReactElement => {
-  const i18n = useI18n();
-  const dispatch = useDispatch<Dispatch<ModerationAction>>();
+interface ModerationHeaderProps {
+  currentPage: number;
+}
 
-  const currentPage = useSelector((state: RootState) => state.moderation.page);
+const ModerationHeader = (props: ModerationHeaderProps): ReactElement => {
+  const i18n = useI18n();
+  const router = useRouter();
+
+  const { currentPage } = props;
 
   const changePage = (pageNumber: number) => {
-    dispatch(setPage(pageNumber));
+    switch (pageNumber) {
+      case 1: {
+        router.push("/moderation/front");
+        break;
+      }
+      case 2: {
+        router.push("/moderation/place");
+        break;
+      }
+      case 3: {
+        router.push("/moderation/task");
+        break;
+      }
+      case 4: {
+        router.push("/moderation/organisation");
+        break;
+      }
+      case 5: {
+        router.push("/moderation/translation");
+        break;
+      }
+      default: {
+        // Nothing to do
+      }
+    }
   };
 
   return (
@@ -35,7 +60,7 @@ const ModerationHeader = (): ReactElement => {
         />
         <Navigation.Item
           className={styles.navigationItem}
-          label={`${i18n.t("moderation.page.request")}`}
+          label={`${i18n.t("moderation.page.task")}`}
           active={currentPage === 3}
           onClick={() => changePage(3)}
         />

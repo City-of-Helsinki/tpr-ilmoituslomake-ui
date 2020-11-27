@@ -1,0 +1,13 @@
+@import "~hds-design-tokens/lib/all.scss";
+
+.notice {
+  background-color: $color-fog-light;
+  padding: $spacing-m;
+  display: flex;
+  flex-direction: row;
+
+  button {
+    margin-left: $spacing-s;
+    background-color: $color-white;
+  }
+}

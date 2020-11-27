@@ -97,8 +97,7 @@ const Notification = (): ReactElement => {
 export const getServerSideProps: GetServerSideProps = async ({ req, locale }) => {
   const lngDict = await i18nLoader(locale);
 
-  // Note: this only fetches the first 50 tags
-  // TODO - fetch the rest
+  // Note: this currently fetches all tags which may cause performance issues
   const { origin } = absoluteUrl(req);
   const tagResponse = await fetch(`${origin}/api/ontologywords/?format=json&search=`);
   let tagOptions = [];

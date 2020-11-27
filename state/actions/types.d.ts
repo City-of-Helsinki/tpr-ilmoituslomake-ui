@@ -30,8 +30,10 @@ import {
   SET_NOTIFICATION_CONTACT_VALIDATION,
   SET_NOTIFICATION_LINK_VALIDATION,
   SET_NOTIFICATION_PHOTO_VALIDATION,
+  SET_MODERATION_PLACE_SEARCH,
+  CLEAR_MODERATION_PLACE_SEARCH,
 } from "../../types/constants";
-import { User, KeyValueString, KeyValueBoolean, Photo, TagOption } from "../../types/general";
+import { User, KeyValueString, KeyValueBoolean, Photo, TagOption, PlaceSearch } from "../../types/general";
 import { PhotoValidation } from "../../types/notification_validation";
 
 interface SetPageAction extends AnyAction {
@@ -212,4 +214,14 @@ export type NotificationValidationAction =
   | SetNotificationLinkValidationAction
   | SetNotificationPhotoUrlValidationAction;
 
-export type ModerationAction = SetPageAction;
+interface SetModerationPlaceSearchAction extends AnyAction {
+  type: typeof SET_MODERATION_PLACE_SEARCH;
+  payload: PlaceSearch;
+}
+
+interface ClearModerationPlaceSearchAction extends AnyAction {
+  type: typeof CLEAR_MODERATION_PLACE_SEARCH;
+  payload: undefined;
+}
+
+export type ModerationAction = SetModerationPlaceSearchAction | ClearModerationPlaceSearchAction;

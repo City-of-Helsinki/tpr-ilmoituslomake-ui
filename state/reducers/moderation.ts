@@ -1,18 +1,34 @@
 import { AnyAction } from "redux";
 import { ModerationState } from "./types";
-import { MAX_PAGE, SET_PAGE } from "../../types/constants";
+import { SET_MODERATION_PLACE_SEARCH, CLEAR_MODERATION_PLACE_SEARCH } from "../../types/constants";
 
 const initialState: ModerationState = {
-  page: 1,
+  placeSearch: {
+    placeName: "",
+    language: "",
+    address: "",
+    district: "",
+    tag: "",
+    comment: "",
+    publishPermission: [],
+  },
 };
 
 const moderation = (state = initialState, action: AnyAction): ModerationState => {
   switch (action.type) {
-    case SET_PAGE: {
-      console.log("SET_PAGE", action.payload);
+    case SET_MODERATION_PLACE_SEARCH: {
+      console.log("SET_MODERATION_PLACE_SEARCH", action.payload);
       return {
         ...state,
-        page: Math.min(Math.max(action.payload, 1), MAX_PAGE),
+        placeSearch: action.payload,
+      };
+    }
+
+    case CLEAR_MODERATION_PLACE_SEARCH: {
+      console.log("CLEAR_MODERATION_PLACE_SEARCH", action.payload);
+      return {
+        ...state,
+        placeSearch: initialState.placeSearch,
       };
     }
 

@@ -196,31 +196,66 @@
     "page": {
       "front": "Etusivu",
       "place": "Kohteet",
-      "request": "Tehtävät",
+      "task": "Tehtävät",
       "organisation": "Organisaatiot",
       "translation": "Käännökset"
     },
     "main": {
       "front": "Etusivu",
       "place": "Kohteet",
-      "request": "Tehtävät",
+      "task": "Tehtävät",
       "organisation": "Organisaatiot",
       "translation": "Käännökset"
     },
     "button": {
+      "search": "Hae",
+      "clear": "Tyhjennä",
       "addNewPlace": "Lisää uusi kohde",
-      "searchPlace": "Hae kohdetta",
+      "allPlaces": "Kaikki kohteet",
       "showAllRequests": "Näytä kaikki tehtävät"
     },
     "intro": {
       "title": "Tervetuloa moderoimaan!"
     },
-    "newRequests": {
+    "newTasks": {
       "title": "Uudet moderointitehtävät"
     },
     "organisationNotice": {
       "title": "Organisaatiohallinta",
       "manageOrganisation": "Hallinoi organisaatiota"
+    },
+    "placeSearch": {
+      "title": "Hae kohteita",
+      "placeName": {
+        "label": "Kohteen nimi"
+      },
+      "language": {
+        "label": "Kieli",
+        "fi": "Suomi",
+        "sv": "Ruotsi",
+        "en": "Englanti"
+      },
+      "address": {
+        "label": "Kohteen osoite"
+      },
+      "district": {
+        "label": "Kaupunginosa"
+      },
+      "tag": {
+        "label": "Asiasana"
+      },
+      "comment": {
+        "label": "Moderoijan kommentti"
+      },
+      "publishPermission": {
+        "label": "Julkaisulupa",
+        "yes": "Kyllä",
+        "no": "Ei"
+      }
+    },
+    "translationNotice": {
+      "title": "Käännösten hallinta",
+      "manageTranslation": "Hallinoi käännöspyyntöjä"
     }
   }
 }

@@ -83,7 +83,7 @@ const NotificationFooter = (): ReactElement => {
   };
 
   const cancelNotification = () => {
-    router.push("/", "/");
+    router.push("/");
   };
 
   const cleanupToast = () => {

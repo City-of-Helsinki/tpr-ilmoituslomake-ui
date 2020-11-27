@@ -43,3 +43,13 @@ export interface NotificationExtra {
   photos: Photo[];
   tagOptions: TagOption[];
 }
+
+export interface PlaceSearch {
+  placeName: string;
+  language: string;
+  address: string;
+  district: string;
+  tag: string;
+  comment: string;
+  publishPermission: string[];
+}
