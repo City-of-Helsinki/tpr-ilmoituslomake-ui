@@ -90,6 +90,7 @@ textarea {
   flex-grow: 1;
 }
 
-.MuiStepIcon-root.MuiStepIcon-active {
+.MuiStepIcon-root.MuiStepIcon-active,
+.MuiStepIcon-root.MuiStepIcon-completed {
   color: $color-bus;
 }
