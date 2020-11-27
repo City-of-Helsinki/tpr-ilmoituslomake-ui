@@ -7,6 +7,7 @@ import { initStore } from "../../state/store";
 import Layout from "../../components/common/Layout";
 import ModerationHeader from "../../components/moderation/ModerationHeader";
 import PlaceSearch from "../../components/moderation/PlaceSearch";
+import PlaceResults from "../../components/moderation/PlaceResults";
 
 const ModerationPlace = (): ReactElement => {
   const i18n = useI18n();
@@ -27,6 +28,7 @@ const ModerationPlace = (): ReactElement => {
       <ModerationHeader currentPage={2} />
       <div id="content" ref={ref}>
         <PlaceSearch />
+        <PlaceResults />
       </div>
     </Layout>
   );

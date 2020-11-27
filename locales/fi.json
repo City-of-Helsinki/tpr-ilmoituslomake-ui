@@ -253,6 +253,10 @@
         "no": "Ei"
       }
     },
+    "placeResults": {
+      "found": "Löytyi",
+      "places": "kohdetta"
+    },
     "translationNotice": {
       "title": "Käännösten hallinta",
       "manageTranslation": "Hallinoi käännöspyyntöjä"
