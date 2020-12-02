@@ -1,4 +1,4 @@
-import React, { ReactElement, useEffect, useRef } from "react";
+import React, { ReactElement } from "react";
 import { GetServerSideProps } from "next";
 import Head from "next/head";
 import { useI18n } from "next-localization";
@@ -12,21 +12,13 @@ import PlaceResults from "../../components/moderation/PlaceResults";
 const ModerationPlace = (): ReactElement => {
   const i18n = useI18n();
 
-  const ref = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    if (ref.current) {
-      ref.current.scrollIntoView();
-    }
-  });
-
   return (
     <Layout>
       <Head>
         <title>{i18n.t("moderation.title")}</title>
       </Head>
       <ModerationHeader currentPage={2} />
-      <div id="content" ref={ref}>
+      <div id="content">
         <PlaceSearch />
         <PlaceResults />
       </div>
