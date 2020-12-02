@@ -6,6 +6,9 @@ import i18nLoader from "../../utils/i18n";
 import { initStore } from "../../state/store";
 import Layout from "../../components/common/Layout";
 import ModerationHeader from "../../components/moderation/ModerationHeader";
+import DescriptionModeration from "../../components/moderation/DescriptionModeration";
+import TaskSearch from "../../components/moderation/TaskSearch";
+import TaskResults from "../../components/moderation/TaskResults";
 
 const ModerationTask = (): ReactElement => {
   const i18n = useI18n();
@@ -25,7 +28,9 @@ const ModerationTask = (): ReactElement => {
       </Head>
       <ModerationHeader currentPage={3} />
       <div id="content" ref={ref}>
-        <h1>{i18n.t("moderation.main.task")}</h1>
+        <TaskSearch />
+        <TaskResults />
+        <DescriptionModeration />
       </div>
     </Layout>
   );

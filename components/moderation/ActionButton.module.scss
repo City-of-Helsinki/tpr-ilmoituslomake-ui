@@ -1,0 +1,19 @@
+@import "~hds-design-tokens/lib/all.scss";
+
+.action {
+  margin-top: $spacing-layout-xs;
+
+  button {
+    margin-right: $spacing-s;
+
+    &.approveSecondary {
+      color: $color-success;
+      border-color: $color-success;
+    }
+
+    &.rejectSecondary {
+      color: $color-error;
+      border-color: $color-error;
+    }
+  }
+}

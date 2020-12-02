@@ -86,6 +86,43 @@ textarea {
   }
 }
 
+.gridContainer {
+  display: grid;
+  grid-template-columns: 2fr 2fr 1fr;
+  margin-bottom: $spacing-layout-s;
+
+  @include media(xs) {
+    column-gap: $spacing-xs;
+    row-gap: $spacing-xs;
+  }
+
+  @include media(s) {
+    column-gap: $spacing-s;
+    row-gap: $spacing-s;
+  }
+
+  @include media(m, l, xl) {
+    column-gap: $spacing-m;
+    row-gap: $spacing-m;
+  }
+}
+
+.gridColumn1 {
+  grid-column: 1 / 1;
+}
+
+.gridColumn2 {
+  grid-column: 2 / 2;
+}
+
+.gridColumn3 {
+  grid-column: 3 / 3;
+}
+
+.gridButton {
+  margin-top: $spacing-layout-xs;
+}
+
 .flexSpace {
   flex-grow: 1;
 }

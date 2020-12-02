@@ -32,9 +32,23 @@ import {
   SET_NOTIFICATION_PHOTO_VALIDATION,
   SET_MODERATION_PLACE_SEARCH,
   CLEAR_MODERATION_PLACE_SEARCH,
+  SET_MODERATION_TASK_SEARCH,
+  SET_MODERATION_NAME,
+  SET_MODERATION_SHORT_DESCRIPTION,
+  SET_MODERATION_LONG_DESCRIPTION,
+  SET_MODERATION_NAME_STATUS,
+  SET_MODERATION_SHORT_DESCRIPTION_STATUS,
+  SET_MODERATION_LONG_DESCRIPTION_STATUS,
+  SET_MODERATION_TAG_STATUS,
+  SET_MODERATION_NOTIFIER_STATUS,
+  SET_MODERATION_ADDRESS_STATUS,
+  SET_MODERATION_CONTACT_STATUS,
+  SET_MODERATION_LINK_STATUS,
+  SET_MODERATION_PHOTO_STATUS,
 } from "../../types/constants";
-import { User, KeyValueString, KeyValueBoolean, Photo, TagOption, PlaceSearch } from "../../types/general";
+import { User, KeyValueString, KeyValueBoolean, Photo, TagOption, PlaceSearch, TaskSearch } from "../../types/general";
 import { PhotoValidation } from "../../types/notification_validation";
+import { PhotoStatus } from "../../types/moderation_status";
 
 interface SetPageAction extends AnyAction {
   type: typeof SET_PAGE;
@@ -224,4 +238,86 @@ interface ClearModerationPlaceSearchAction extends AnyAction {
   payload: undefined;
 }
 
-export type ModerationAction = SetModerationPlaceSearchAction | ClearModerationPlaceSearchAction;
+interface SetModerationTaskSearchAction extends AnyAction {
+  type: typeof SET_MODERATION_TASK_SEARCH;
+  payload: TaskSearch;
+}
+
+interface SetModerationNameAction extends AnyAction {
+  type: typeof SET_MODERATION_NAME;
+  payload: KeyValueString;
+}
+
+interface SetModerationShortDescriptionAction extends AnyAction {
+  type: typeof SET_MODERATION_SHORT_DESCRIPTION;
+  payload: KeyValueString;
+}
+
+interface SetModerationLongDescriptionAction extends AnyAction {
+  type: typeof SET_MODERATION_LONG_DESCRIPTION;
+  payload: KeyValueString;
+}
+
+export type ModerationAction =
+  | SetModerationPlaceSearchAction
+  | ClearModerationPlaceSearchAction
+  | SetModerationTaskSearchAction
+  | SetModerationNameAction
+  | SetModerationShortDescriptionAction
+  | SetModerationLongDescriptionAction;
+
+interface SetModerationNameStatusAction extends AnyAction {
+  type: typeof SET_MODERATION_NAME_STATUS;
+  payload: Status;
+}
+
+interface SetModerationShortDescriptionStatusAction extends AnyAction {
+  type: typeof SET_MODERATION_SHORT_DESCRIPTION_STATUS;
+  payload: Status;
+}
+
+interface SetModerationLongDescriptionStatusAction extends AnyAction {
+  type: typeof SET_MODERATION_LONG_DESCRIPTION_STATUS;
+  payload: Status;
+}
+
+interface SetModerationTagStatusAction extends AnyAction {
+  type: typeof SET_MODERATION_TAG_STATUS;
+  payload: boolean;
+}
+
+interface SetModerationNotifierStatusAction extends AnyAction {
+  type: typeof SET_MODERATION_NOTIFIER_STATUS;
+  payload: Status;
+}
+
+interface SetModerationAddressStatusAction extends AnyAction {
+  type: typeof SET_MODERATION_ADDRESS_STATUS;
+  payload: { language: string; status: Status };
+}
+
+interface SetModerationContactStatusAction extends AnyAction {
+  type: typeof SET_MODERATION_CONTACT_STATUS;
+  payload: Status;
+}
+
+interface SetModerationLinkStatusAction extends AnyAction {
+  type: typeof SET_MODERATION_LINK_STATUS;
+  payload: Status;
+}
+
+interface SetModerationPhotoStatusAction extends AnyAction {
+  type: typeof SET_MODERATION_PHOTO_STATUS;
+  payload: PhotoStatus[];
+}
+
+export type ModerationStatusAction =
+  | SetModerationNameStatusAction
+  | SetModerationShortDescriptionStatusAction
+  | SetModerationLongDescriptionStatusAction
+  | SetModerationTagStatusAction
+  | SetModerationNotifierStatusAction
+  | SetModerationAddressStatusAction
+  | SetModerationContactStatusAction
+  | SetModerationLinkStatusAction
+  | SetModerationPhotoUrlStatusAction;

@@ -1,3 +1,5 @@
+import { Status } from "./constants";
+
 export interface User {
   authenticated: boolean;
   username: string;
@@ -12,6 +14,10 @@ export interface KeyValueString {
 
 export interface KeyValueBoolean {
   [key: string]: boolean;
+}
+
+export interface KeyValueStatus {
+  [key: string]: Status;
 }
 
 export interface Photo {
@@ -52,4 +58,9 @@ export interface PlaceSearch {
   tag: string;
   comment: string;
   publishPermission: string[];
+}
+
+export interface TaskSearch {
+  placeName: string;
+  taskType: string;
 }

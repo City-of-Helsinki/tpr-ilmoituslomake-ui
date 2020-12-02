@@ -210,9 +210,43 @@
     "button": {
       "search": "Search",
       "clear": "Clear",
+      "approve": "Approve",
+      "approved": "Approved",
+      "reject": "Reject",
+      "rejected": "Rejected",
+      "modify": "Modify",
       "addNewPlace": "Add new place",
       "allPlaces": "All places",
       "showAllRequests": "Show all requests"
+    },
+    "description": {
+      "placeName": {
+        "label": "Place's name"
+      },
+      "placeNameSelected": {
+        "label": "Name - in the database"
+      },
+      "placeNameModified": {
+        "label": "Name - change"
+      },
+      "shortDescription": {
+        "label": "Place's short description"
+      },
+      "shortDescriptionSelected": {
+        "label": "Short description - in the database"
+      },
+      "shortDescriptionModified": {
+        "label": "Short description - change"
+      },
+      "longDescription": {
+        "label": "Place's long description"
+      },
+      "longDescriptionSelected": {
+        "label": "Long description - in the database"
+      },
+      "longDescriptionModified": {
+        "label": "Long description - change"
+      }
     },
     "intro": {
       "title": "Welcome to moderation!"
@@ -254,6 +288,19 @@
       }
     },
     "placeResults": {
+      "found": "Found",
+      "places": "places"
+    },
+    "taskSearch": {
+      "title": "Moderation tasks",
+      "placeName": {
+        "label": "Place's name"
+      },
+      "taskType": {
+        "label": "Type"
+      }
+    },
+    "taskResults": {
       "found": "Found",
       "places": "places"
     },

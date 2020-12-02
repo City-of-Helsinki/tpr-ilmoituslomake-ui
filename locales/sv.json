@@ -210,9 +210,43 @@
     "button": {
       "search": "Hae",
       "clear": "Tyhjennä",
+      "approve": "Hyväksy",
+      "approved": "Hyväksytty",
+      "reject": "Hylkää",
+      "rejected": "Hylätty",
+      "modify": "Muokkaa",
       "addNewPlace": "Lisää uusi kohde",
       "allPlaces": "Kaikki kohteet",
       "showAllRequests": "Näytä kaikki tehtävät"
+    },
+    "description": {
+      "placeName": {
+        "label": "Kohteen nimi"
+      },
+      "placeNameSelected": {
+        "label": "Nimi - tietokannassa"
+      },
+      "placeNameModified": {
+        "label": "Nimi - muutos"
+      },
+      "shortDescription": {
+        "label": "Kohteen lyhyt kuvaus"
+      },
+      "shortDescriptionSelected": {
+        "label": "Lyhyt kuvaus - tietokannassa"
+      },
+      "shortDescriptionModified": {
+        "label": "Lyhyt kuvaus - muutos"
+      },
+      "longDescription": {
+        "label": "Kohteen pitkä kuvaus"
+      },
+      "longDescriptionSelected": {
+        "label": "Pitkä kuvaus - tietokannassa"
+      },
+      "longDescriptionModified": {
+        "label": "Pitkä kuvaus - muutos"
+      }
     },
     "intro": {
       "title": "Tervetuloa moderoimaan!"
@@ -254,6 +288,19 @@
       }
     },
     "placeResults": {
+      "found": "Löytyi",
+      "places": "kohdetta"
+    },
+    "taskSearch": {
+      "title": "Moderointitehtävät",
+      "placeName": {
+        "label": "Kohteen nimi"
+      },
+      "taskType": {
+        "label": "Tyyppi"
+      }
+    },
+    "taskResults": {
       "found": "Löytyi",
       "places": "kohdetta"
     },
