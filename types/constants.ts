@@ -47,3 +47,65 @@ export const SET_NOTIFICATION_PHOTO_VALIDATION = "SET_NOTIFICATION_PHOTO_VALIDAT
 
 export const SET_MODERATION_PLACE_SEARCH = "SET_MODERATION_PLACE_SEARCH";
 export const CLEAR_MODERATION_PLACE_SEARCH = "CLEAR_MODERATION_PLACE_SEARCH";
+
+export const INITIAL_NOTIFICATION = {
+  organization: {},
+  name: {
+    fi: "",
+    sv: "",
+    en: "",
+  },
+  location: [0, 0],
+  description: {
+    short: {
+      fi: "",
+      sv: "",
+      en: "",
+    },
+    long: {
+      fi: "",
+      sv: "",
+      en: "",
+    },
+  },
+  address: {
+    fi: {
+      street: "",
+      postal_code: "",
+      post_office: "",
+    },
+    sv: {
+      street: "",
+      postal_code: "",
+      post_office: "",
+    },
+  },
+  phone: "",
+  email: "",
+  website: {
+    fi: "",
+    sv: "",
+    en: "",
+  },
+  images: {},
+  opening_times: {},
+  price: {
+    fi: "",
+    sv: "",
+    en: "",
+  },
+  payment_options: [],
+  ontology_ids: [],
+  comments: "",
+};
+
+export const INITIAL_NOTIFICATION_EXTRA = {
+  inputLanguages: [defaultLocale],
+  notifier: {
+    fullName: "",
+    email: "",
+    phone: "",
+  },
+  photos: [],
+  tagOptions: [],
+};

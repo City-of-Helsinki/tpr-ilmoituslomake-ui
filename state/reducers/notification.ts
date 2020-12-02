@@ -24,74 +24,17 @@ import {
   SET_NOTIFICATION_PAYMENT,
   SET_NOTIFICATION_COMMENTS,
   MAP_INITIAL_CENTER,
+  INITIAL_NOTIFICATION,
+  INITIAL_NOTIFICATION_EXTRA,
 } from "../../types/constants";
 import { Photo } from "../../types/general";
-import { defaultLocale } from "../../utils/i18n";
 
 const initialState: NotificationState = {
   page: 1,
   center: MAP_INITIAL_CENTER as LatLngExpression,
   zoom: MAP_INITIAL_ZOOM,
-  notification: {
-    organization: {},
-    name: {
-      fi: "",
-      sv: "",
-      en: "",
-    },
-    location: [0, 0],
-    description: {
-      short: {
-        fi: "",
-        sv: "",
-        en: "",
-      },
-      long: {
-        fi: "",
-        sv: "",
-        en: "",
-      },
-    },
-    address: {
-      fi: {
-        street: "",
-        postal_code: "",
-        post_office: "",
-      },
-      sv: {
-        street: "",
-        postal_code: "",
-        post_office: "",
-      },
-    },
-    phone: "",
-    email: "",
-    website: {
-      fi: "",
-      sv: "",
-      en: "",
-    },
-    images: {},
-    opening_times: {},
-    price: {
-      fi: "",
-      sv: "",
-      en: "",
-    },
-    payment_options: [],
-    ontology_ids: [],
-    comments: "",
-  },
-  notificationExtra: {
-    inputLanguages: [defaultLocale],
-    notifier: {
-      fullName: "",
-      email: "",
-      phone: "",
-    },
-    photos: [],
-    tagOptions: [],
-  },
+  notification: { ...INITIAL_NOTIFICATION, location: [0, 0] },
+  notificationExtra: INITIAL_NOTIFICATION_EXTRA,
 };
 
 const notification = (state = initialState, action: AnyAction): NotificationState => {
