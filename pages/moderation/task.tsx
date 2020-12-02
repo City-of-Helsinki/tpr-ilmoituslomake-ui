@@ -6,6 +6,7 @@ import i18nLoader from "../../utils/i18n";
 import { initStore } from "../../state/store";
 import Layout from "../../components/common/Layout";
 import ModerationHeader from "../../components/moderation/ModerationHeader";
+import Collapsible from "../../components/moderation/Collapsible";
 import DescriptionModeration from "../../components/moderation/DescriptionModeration";
 import TaskSearch from "../../components/moderation/TaskSearch";
 import TaskResults from "../../components/moderation/TaskResults";
@@ -22,7 +23,17 @@ const ModerationTask = (): ReactElement => {
       <div id="content">
         <TaskSearch />
         <TaskResults />
-        <DescriptionModeration />
+
+        <h3>{i18n.t("moderation.task.title")}</h3>
+        <Collapsible section={1} title={i18n.t("moderation.task.basic")}>
+          <DescriptionModeration />
+        </Collapsible>
+        <Collapsible section={2} title={i18n.t("moderation.task.contact")}>
+          TODO
+        </Collapsible>
+        <Collapsible section={3} title={i18n.t("moderation.task.photos")}>
+          TODO
+        </Collapsible>
       </div>
     </Layout>
   );

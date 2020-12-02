@@ -210,6 +210,8 @@
     "button": {
       "search": "Search",
       "clear": "Clear",
+      "expand": "Expand",
+      "collapse": "Collapse",
       "approve": "Approve",
       "approved": "Approved",
       "reject": "Reject",
@@ -290,6 +292,12 @@
     "placeResults": {
       "found": "Found",
       "places": "places"
+    },
+    "task": {
+      "title": "Place's information",
+      "basic": "Basic info",
+      "contact": "Contact info",
+      "photos": "Photos"
     },
     "taskSearch": {
       "title": "Moderation tasks",
