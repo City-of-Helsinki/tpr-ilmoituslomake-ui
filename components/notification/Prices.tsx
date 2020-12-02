@@ -2,10 +2,10 @@ import React, { Dispatch, ChangeEvent, ReactElement } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useI18n } from "next-localization";
 import { TextArea } from "hds-react";
-import { languageOptions } from "./InputLanguage";
 import { NotificationAction } from "../../state/actions/types";
 import { setNotificationPrice } from "../../state/actions/notification";
 import { RootState } from "../../state/reducers";
+import { LANGUAGE_OPTIONS } from "../../types/constants";
 
 const Prices = (): ReactElement => {
   const i18n = useI18n();
@@ -26,7 +26,7 @@ const Prices = (): ReactElement => {
       <h2>{i18n.t("notification.prices.title")}</h2>
       <div className={inputLanguages.length > 1 ? "languageSection" : ""}>
         {inputLanguages.length > 1 && <h3>{i18n.t("notification.prices.price.label")}</h3>}
-        {languageOptions.map((option) =>
+        {LANGUAGE_OPTIONS.map((option) =>
           inputLanguages.includes(option) ? (
             <TextArea
               id={`price_${option}`}

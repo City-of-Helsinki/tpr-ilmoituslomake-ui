@@ -3,10 +3,11 @@ import { useSelector, useDispatch } from "react-redux";
 import { useRouter } from "next/router";
 import { useI18n } from "next-localization";
 import { TextInput, TextArea } from "hds-react";
-import InputLanguage, { languageOptions } from "./InputLanguage";
+import InputLanguage from "./InputLanguage";
 import { NotificationAction, NotificationValidationAction } from "../../state/actions/types";
-import { setNotificationLongDescription, setNotificationName, setNotificationShortDescription } from "../../state/actions/notification";
+import { setNotificationName, setNotificationShortDescription, setNotificationLongDescription } from "../../state/actions/notification";
 import { RootState } from "../../state/reducers";
+import { LANGUAGE_OPTIONS } from "../../types/constants";
 import { isNameValid, isShortDescriptionValid, isLongDescriptionValid } from "../../utils/validation";
 
 const Description = (): ReactElement => {
@@ -71,7 +72,7 @@ const Description = (): ReactElement => {
 
       <div className={inputLanguages.length > 1 ? "languageSection" : ""}>
         {inputLanguages.length > 1 && <h3>{i18n.t("notification.description.placeName.label")}</h3>}
-        {languageOptions.map((option) =>
+        {LANGUAGE_OPTIONS.map((option) =>
           inputLanguages.includes(option) ? (
             <TextInput
               id={`placeName_${option}`}
@@ -91,7 +92,7 @@ const Description = (): ReactElement => {
 
       <div className={inputLanguages.length > 1 ? "languageSection" : ""}>
         {inputLanguages.length > 1 && <h3>{i18n.t("notification.description.shortDescription.label")}</h3>}
-        {languageOptions.map((option) =>
+        {LANGUAGE_OPTIONS.map((option) =>
           inputLanguages.includes(option) ? (
             <TextArea
               id={`shortDescription_${option}`}
@@ -115,7 +116,7 @@ const Description = (): ReactElement => {
 
       <div className={inputLanguages.length > 1 ? "languageSection" : ""}>
         {inputLanguages.length > 1 && <h3>{i18n.t("notification.description.longDescription.label")}</h3>}
-        {languageOptions.map((option) =>
+        {LANGUAGE_OPTIONS.map((option) =>
           inputLanguages.includes(option) ? (
             <TextArea
               id={`longDescription_${option}`}

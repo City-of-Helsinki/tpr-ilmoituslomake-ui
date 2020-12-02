@@ -2,10 +2,10 @@ import React, { Dispatch, ChangeEvent, ReactElement } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useI18n } from "next-localization";
 import { TextInput } from "hds-react";
-import { languageOptions } from "./InputLanguage";
 import { NotificationAction, NotificationValidationAction } from "../../state/actions/types";
 import { setNotificationLink } from "../../state/actions/notification";
 import { RootState } from "../../state/reducers";
+import { LANGUAGE_OPTIONS } from "../../types/constants";
 import { isWebsiteValid } from "../../utils/validation";
 
 const Links = (): ReactElement => {
@@ -34,7 +34,7 @@ const Links = (): ReactElement => {
     <div className="formSection">
       <div className={inputLanguages.length > 1 ? "languageSection" : ""}>
         {inputLanguages.length > 1 && <h3>{i18n.t("notification.links.website.label")}</h3>}
-        {languageOptions.map((option) =>
+        {LANGUAGE_OPTIONS.map((option) =>
           inputLanguages.includes(option) ? (
             <TextInput
               id={`website_${option}`}

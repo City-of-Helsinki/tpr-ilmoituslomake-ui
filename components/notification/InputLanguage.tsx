@@ -6,9 +6,8 @@ import { Checkbox } from "hds-react";
 import { NotificationAction } from "../../state/actions/types";
 import { setNotificationInputLanguage } from "../../state/actions/notification";
 import { RootState } from "../../state/reducers";
+import { LANGUAGE_OPTIONS } from "../../types/constants";
 import styles from "./InputLanguage.module.scss";
-
-export const languageOptions = ["fi", "sv", "en"];
 
 const InputLanguage = (): ReactElement => {
   const i18n = useI18n();
@@ -30,7 +29,7 @@ const InputLanguage = (): ReactElement => {
           *
         </span>
       </div>
-      {languageOptions.map((option) => (
+      {LANGUAGE_OPTIONS.map((option) => (
         <Checkbox
           id={`input_${option}`}
           key={`input_${option}`}
