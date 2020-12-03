@@ -7,9 +7,18 @@ import {
   SET_MODERATION_NAME,
   SET_MODERATION_SHORT_DESCRIPTION,
   SET_MODERATION_LONG_DESCRIPTION,
+  SET_MODERATION_TAG,
+  SET_MODERATION_TAG_OPTIONS,
+  SET_MODERATION_ADDRESS,
+  SET_MODERATION_LOCATION,
+  SET_MODERATION_CONTACT,
+  SET_MODERATION_LINK,
+  SET_MODERATION_PHOTO,
+  REMOVE_MODERATION_PHOTO,
   INITIAL_NOTIFICATION,
   INITIAL_NOTIFICATION_EXTRA,
 } from "../../types/constants";
+import { Photo } from "../../types/general";
 
 const initialState: ModerationState = {
   placeSearch: {
@@ -90,6 +99,97 @@ const moderation = (state = initialState, action: AnyAction): ModerationState =>
             long: { ...state.modifiedTask.description.long, ...action.payload },
           },
         },
+      };
+    }
+
+    case SET_MODERATION_TAG: {
+      console.log("SET_MODERATION_TAG", action.payload);
+      return {
+        ...state,
+        modifiedTask: { ...state.modifiedTask, ontology_ids: action.payload },
+      };
+    }
+
+    case SET_MODERATION_TAG_OPTIONS: {
+      console.log("SET_MODERATION_TAG_OPTIONS", action.payload);
+      return {
+        ...state,
+        modifiedTaskExtra: { ...state.modifiedTaskExtra, tagOptions: action.payload },
+      };
+    }
+
+    case SET_MODERATION_ADDRESS: {
+      console.log("SET_MODERATION_ADDRESS", action.payload);
+      const { fi, sv } = state.modifiedTask.address;
+      return {
+        ...state,
+        modifiedTask: {
+          ...state.modifiedTask,
+          address: {
+            ...state.modifiedTask.address,
+            [action.payload.language]: { ...(action.payload.language === "sv" ? sv : fi), ...action.payload.value },
+          },
+        },
+      };
+    }
+
+    case SET_MODERATION_LOCATION: {
+      console.log("SET_MODERATION_LOCATION", action.payload);
+      return {
+        ...state,
+        modifiedTask: { ...state.modifiedTask, location: action.payload },
+      };
+    }
+
+    case SET_MODERATION_CONTACT: {
+      console.log("SET_MODERATION_CONTACT", action.payload);
+      return {
+        ...state,
+        modifiedTask: {
+          ...state.modifiedTask,
+          phone: action.payload.phone ?? state.modifiedTask.phone,
+          email: action.payload.email ?? state.modifiedTask.email,
+        },
+      };
+    }
+
+    case SET_MODERATION_LINK: {
+      console.log("SET_MODERATION_LINK", action.payload);
+      return {
+        ...state,
+        modifiedTask: { ...state.modifiedTask, website: { ...state.modifiedTask.website, ...action.payload } },
+      };
+    }
+
+    case SET_MODERATION_PHOTO: {
+      console.log("SET_MODERATION_PHOTO", action.payload);
+
+      // If index -1 is specified, add the photo to the array
+      // Otherwise combine the field value with the existing photo in the array
+      const photos = [
+        ...state.modifiedTaskExtra.photos.reduce((acc: Photo[], photo, index) => {
+          return [...acc, action.payload.index === index ? { ...photo, ...action.payload.value } : photo];
+        }, []),
+        ...(action.payload.index === -1 ? [action.payload.value] : []),
+      ];
+
+      return {
+        ...state,
+        modifiedTaskExtra: { ...state.modifiedTaskExtra, photos },
+      };
+    }
+
+    case REMOVE_MODERATION_PHOTO: {
+      console.log("REMOVE_MODERATION_PHOTO", action.payload);
+
+      // Remove the photo at the specified index
+      const photos = state.modifiedTaskExtra.photos.reduce((acc: Photo[], photo, index) => {
+        return action.payload === index ? acc : [...acc, photo];
+      }, []);
+
+      return {
+        ...state,
+        modifiedTaskExtra: { ...state.modifiedTaskExtra, photos },
       };
     }
 

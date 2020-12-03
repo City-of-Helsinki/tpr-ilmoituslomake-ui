@@ -224,39 +224,39 @@
       "rejectChangeRequest": "Hylkää muutospyyntö",
       "removePlace": "Poista kohde",
       "saveIncomplete": "Tallenna keskeneräisenä",
-      "saveInformation": "Tallenna tiedot"
+      "saveInformation": "Tallenna tiedot",
+      "clearAllSelections": "Poista kaikki valinnat",
+      "remove": "Poista",
+      "toggleMenu": "Vaihdele valikko"
     },
     "description": {
       "placeName": {
+        "title": "Nimi",
         "label": "Kohteen nimi"
       },
-      "placeNameSelected": {
-        "label": "Nimi - tietokannassa"
-      },
-      "placeNameModified": {
-        "label": "Nimi - muutos"
-      },
       "shortDescription": {
+        "title": "Lyhyt kuvaus",
         "label": "Kohteen lyhyt kuvaus"
       },
-      "shortDescriptionSelected": {
-        "label": "Lyhyt kuvaus - tietokannassa"
-      },
-      "shortDescriptionModified": {
-        "label": "Lyhyt kuvaus - muutos"
-      },
       "longDescription": {
+        "title": "Pitkä kuvaus",
         "label": "Kohteen pitkä kuvaus"
-      },
-      "longDescriptionSelected": {
-        "label": "Pitkä kuvaus - tietokannassa"
-      },
-      "longDescriptionModified": {
-        "label": "Pitkä kuvaus - muutos"
       }
     },
     "intro": {
       "title": "Tervetuloa moderoimaan!"
+    },
+    "location": {
+      "address": "Osoite",
+      "streetAddress": {
+        "label": "Katuosoite"
+      },
+      "postalCode": {
+        "label": "Postinumero"
+      },
+      "postalOffice": {
+        "label": "Postitoimipaikka"
+      }
     },
     "newTasks": {
       "title": "Uudet moderointitehtävät"
@@ -298,11 +298,19 @@
       "found": "Löytyi",
       "places": "kohdetta"
     },
+    "tags": {
+      "title": "Asiasanat",
+      "add": {
+        "label": "Lisää asiasana"
+      }
+    },
     "task": {
       "title": "Kohteen tiedot",
       "basic": "Perustiedot",
       "contact": "Yhteystiedot",
-      "photos": "Kuvat"
+      "photos": "Kuvat",
+      "selected": " - tietokannassa",
+      "modified": " - muutos"
     },
     "taskHeader": {
       "taskType": "Tehtävätyyppi",

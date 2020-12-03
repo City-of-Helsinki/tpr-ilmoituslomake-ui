@@ -224,39 +224,39 @@
       "rejectChangeRequest": "Reject change request",
       "removePlace": "Remove place",
       "saveIncomplete": "Save as incomplete",
-      "saveInformation": "Save information"
+      "saveInformation": "Save information",
+      "clearAllSelections": "Clear all selections",
+      "remove": "Remove",
+      "toggleMenu": "Toggle menu"
     },
     "description": {
       "placeName": {
+        "title": "Name",
         "label": "Place's name"
       },
-      "placeNameSelected": {
-        "label": "Name - in the database"
-      },
-      "placeNameModified": {
-        "label": "Name - change"
-      },
       "shortDescription": {
+        "title": "Short description",
         "label": "Place's short description"
       },
-      "shortDescriptionSelected": {
-        "label": "Short description - in the database"
-      },
-      "shortDescriptionModified": {
-        "label": "Short description - change"
-      },
       "longDescription": {
+        "title": "Long description",
         "label": "Place's long description"
-      },
-      "longDescriptionSelected": {
-        "label": "Long description - in the database"
-      },
-      "longDescriptionModified": {
-        "label": "Long description - change"
       }
     },
     "intro": {
       "title": "Welcome to moderation!"
+    },
+    "location": {
+      "address": "Address",
+      "streetAddress": {
+        "label": "Street address"
+      },
+      "postalCode": {
+        "label": "Postal code"
+      },
+      "postalOffice": {
+        "label": "Postal office"
+      }
     },
     "newTasks": {
       "title": "New moderation requests"
@@ -298,11 +298,19 @@
       "found": "Found",
       "places": "places"
     },
+    "tags": {
+      "title": "Keywords",
+      "add": {
+        "label": "Add keyword"
+      }
+    },
     "task": {
       "title": "Place's information",
       "basic": "Basic info",
       "contact": "Contact info",
-      "photos": "Photos"
+      "photos": "Photos",
+      "selected": " - in the database",
+      "modified": " - change"
     },
     "taskHeader": {
       "taskType": "Task type",

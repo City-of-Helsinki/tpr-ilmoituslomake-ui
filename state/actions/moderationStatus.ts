@@ -1,9 +1,9 @@
 import {
+  Status,
   SET_MODERATION_NAME_STATUS,
   SET_MODERATION_SHORT_DESCRIPTION_STATUS,
   SET_MODERATION_LONG_DESCRIPTION_STATUS,
   SET_MODERATION_TAG_STATUS,
-  SET_MODERATION_NOTIFIER_STATUS,
   SET_MODERATION_ADDRESS_STATUS,
   SET_MODERATION_CONTACT_STATUS,
   SET_MODERATION_LINK_STATUS,
@@ -28,13 +28,8 @@ export const setModerationLongDescriptionStatus = (status: KeyValueStatus): Mode
   payload: status,
 });
 
-export const setModerationTagStatus = (status: KeyValueStatus): ModerationStatusAction => ({
+export const setModerationTagStatus = (status: Status): ModerationStatusAction => ({
   type: SET_MODERATION_TAG_STATUS,
-  payload: status,
-});
-
-export const setModerationNotifierStatus = (status: KeyValueStatus): ModerationStatusAction => ({
-  type: SET_MODERATION_NOTIFIER_STATUS,
   payload: status,
 });
 

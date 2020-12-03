@@ -48,22 +48,6 @@ export interface ModerationStatus {
     en: Status;
     [key: string]: Status;
   };
-  price?: {
-    fi?: Status;
-    sv?: Status;
-    en?: Status;
-  };
-  payment_options?: {
-    name?: Status;
-  }[];
   ontology_ids: Status;
-  comments?: Status;
-  notifier: {
-    notifierType?: string;
-    fullName: Status;
-    email: Status;
-    phone: Status;
-    [key: string]: Status;
-  };
   photos: PhotoStatus[];
 }

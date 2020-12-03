@@ -66,11 +66,9 @@ const DescriptionModeration = (): ReactElement => {
 
   return (
     <div className="formSection">
-      <h3>{i18n.t("moderation.description.title")}</h3>
-
       <div className="languageSection gridContainer">
-        <h3 className="gridColumn1">{i18n.t("moderation.description.placeNameSelected.label")}</h3>
-        <h3 className="gridColumn2">{i18n.t("moderation.description.placeNameModified.label")}</h3>
+        <h4 className="gridColumn1">{`${i18n.t("moderation.description.placeName.title")}${i18n.t("moderation.task.selected")}`}</h4>
+        <h4 className="gridColumn2">{`${i18n.t("moderation.description.placeName.title")}${i18n.t("moderation.task.modified")}`}</h4>
         {LANGUAGE_OPTIONS.map((option) => (
           <Fragment key={`placeName_${option}`}>
             <TextInput
@@ -79,7 +77,6 @@ const DescriptionModeration = (): ReactElement => {
               label={`${i18n.t("moderation.description.placeName.label")} ${i18n.t(`notification.inputLanguage.${option}`)}`}
               name={option}
               value={placeNameSelected[option] as string}
-              onChange={updateName}
               disabled
             />
             <ModifyButton
@@ -105,8 +102,8 @@ const DescriptionModeration = (): ReactElement => {
       </div>
 
       <div className="languageSection gridContainer">
-        <h3 className="gridColumn1">{i18n.t("moderation.description.shortDescriptionSelected.label")}</h3>
-        <h3 className="gridColumn2">{i18n.t("moderation.description.shortDescriptionModified.label")}</h3>
+        <h4 className="gridColumn1">{`${i18n.t("moderation.description.shortDescription.title")}${i18n.t("moderation.task.selected")}`}</h4>
+        <h4 className="gridColumn2">{`${i18n.t("moderation.description.shortDescription.title")}${i18n.t("moderation.task.modified")}`}</h4>
         {LANGUAGE_OPTIONS.map((option) => (
           <Fragment key={`shortDescription_${option}`}>
             <TextArea
@@ -116,7 +113,6 @@ const DescriptionModeration = (): ReactElement => {
               label={`${i18n.t("moderation.description.shortDescription.label")} ${i18n.t(`notification.inputLanguage.${option}`)}`}
               name={option}
               value={shortDescSelected[option] as string}
-              onChange={updateShortDescription}
               disabled
             />
             <ModifyButton
@@ -134,6 +130,7 @@ const DescriptionModeration = (): ReactElement => {
                 name={option}
                 value={shortDescModified[option] as string}
                 onChange={updateShortDescription}
+                disabled={shortDescStatus[option] === Status.Approved || shortDescStatus[option] === Status.Rejected}
               />
             </ModifyButton>
             <ActionButton
@@ -147,8 +144,8 @@ const DescriptionModeration = (): ReactElement => {
       </div>
 
       <div className="languageSection gridContainer">
-        <h3 className="gridColumn1">{i18n.t("moderation.description.longDescriptionSelected.label")}</h3>
-        <h3 className="gridColumn2">{i18n.t("moderation.description.longDescriptionModified.label")}</h3>
+        <h4 className="gridColumn1">{`${i18n.t("moderation.description.longDescription.title")}${i18n.t("moderation.task.selected")}`}</h4>
+        <h4 className="gridColumn2">{`${i18n.t("moderation.description.longDescription.title")}${i18n.t("moderation.task.modified")}`}</h4>
         {LANGUAGE_OPTIONS.map((option) => (
           <Fragment key={`longDescription_${option}`}>
             <TextArea
@@ -158,7 +155,6 @@ const DescriptionModeration = (): ReactElement => {
               label={`${i18n.t("moderation.description.longDescription.label")} ${i18n.t(`notification.inputLanguage.${option}`)}`}
               name={option}
               value={longDescSelected[option] as string}
-              onChange={updateLongDescription}
               disabled
             />
             <ModifyButton
@@ -176,6 +172,7 @@ const DescriptionModeration = (): ReactElement => {
                 name={option}
                 value={longDescModified[option] as string}
                 onChange={updateLongDescription}
+                disabled={longDescStatus[option] === Status.Approved || longDescStatus[option] === Status.Rejected}
               />
             </ModifyButton>
             <ActionButton className="gridColumn3" targetName={option} status={longDescStatus[option]} actionCallback={updateLongDescriptionStatus} />

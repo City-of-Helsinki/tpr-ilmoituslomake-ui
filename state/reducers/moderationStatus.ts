@@ -6,7 +6,6 @@ import {
   SET_MODERATION_SHORT_DESCRIPTION_STATUS,
   SET_MODERATION_LONG_DESCRIPTION_STATUS,
   SET_MODERATION_TAG_STATUS,
-  SET_MODERATION_NOTIFIER_STATUS,
   SET_MODERATION_ADDRESS_STATUS,
   SET_MODERATION_CONTACT_STATUS,
   SET_MODERATION_LINK_STATUS,
@@ -52,11 +51,6 @@ const initialState: ModerationStatusState = {
       en: Status.Unknown,
     },
     ontology_ids: Status.Unknown,
-    notifier: {
-      fullName: Status.Unknown,
-      email: Status.Unknown,
-      phone: Status.Unknown,
-    },
     photos: [],
   },
 };
@@ -107,14 +101,6 @@ const moderationStatus = (state = initialState, action: AnyAction): ModerationSt
       };
     }
 
-    case SET_MODERATION_NOTIFIER_STATUS: {
-      console.log("SET_MODERATION_NOTIFIER_STATUS", action.payload);
-      return {
-        ...state,
-        moderationStatus: { ...state.moderationStatus, notifier: { ...state.moderationStatus.notifier, ...action.payload } },
-      };
-    }
-
     case SET_MODERATION_ADDRESS_STATUS: {
       console.log("SET_MODERATION_ADDRESS_STATUS", action.payload);
       const { fi, sv } = state.moderationStatus.address;
@@ -124,7 +110,7 @@ const moderationStatus = (state = initialState, action: AnyAction): ModerationSt
           ...state.moderationStatus,
           address: {
             ...state.moderationStatus.address,
-            [action.payload.language]: { ...(action.payload.language === "sv" ? sv : fi), ...action.payload.validation },
+            [action.payload.language]: { ...(action.payload.language === "sv" ? sv : fi), ...action.payload.status },
           },
         },
       };
