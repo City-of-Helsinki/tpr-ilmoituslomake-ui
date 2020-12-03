@@ -219,7 +219,12 @@
       "modify": "Modify",
       "addNewPlace": "Add new place",
       "allPlaces": "All places",
-      "showAllRequests": "Show all requests"
+      "showAllRequests": "Show all requests",
+      "requestTranslation": "Request translation",
+      "rejectChangeRequest": "Reject change request",
+      "removePlace": "Remove place",
+      "saveIncomplete": "Save as incomplete",
+      "saveInformation": "Save information"
     },
     "description": {
       "placeName": {
@@ -298,6 +303,14 @@
       "basic": "Basic info",
       "contact": "Contact info",
       "photos": "Photos"
+    },
+    "taskHeader": {
+      "taskType": "Task type",
+      "publishPermission": "Publish permission",
+      "status": "Status",
+      "moderator": "Moderator",
+      "notifier": "Notifier",
+      "messageFromNotifier": "Message from notifier"
     },
     "taskSearch": {
       "title": "Moderation tasks",

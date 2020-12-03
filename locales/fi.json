@@ -219,7 +219,12 @@
       "modify": "Muokkaa",
       "addNewPlace": "Lisää uusi kohde",
       "allPlaces": "Kaikki kohteet",
-      "showAllRequests": "Näytä kaikki tehtävät"
+      "showAllRequests": "Näytä kaikki tehtävät",
+      "requestTranslation": "Pyydä käännös",
+      "rejectChangeRequest": "Hylkää muutospyyntö",
+      "removePlace": "Poista kohde",
+      "saveIncomplete": "Tallenna keskeneräisenä",
+      "saveInformation": "Tallenna tiedot"
     },
     "description": {
       "placeName": {
@@ -298,6 +303,14 @@
       "basic": "Perustiedot",
       "contact": "Yhteystiedot",
       "photos": "Kuvat"
+    },
+    "taskHeader": {
+      "taskType": "Tehtävätyyppi",
+      "publishPermission": "Julkaisulupa",
+      "status": "Tila",
+      "moderator": "Moderoija",
+      "notifier": "Ilmoittaja",
+      "messageFromNotifier": "Viesti ilmoittajalta"
     },
     "taskSearch": {
       "title": "Moderointitehtävät",

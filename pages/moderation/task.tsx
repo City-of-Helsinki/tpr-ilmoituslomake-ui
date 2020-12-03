@@ -8,6 +8,7 @@ import Layout from "../../components/common/Layout";
 import ModerationHeader from "../../components/moderation/ModerationHeader";
 import Collapsible from "../../components/moderation/Collapsible";
 import DescriptionModeration from "../../components/moderation/DescriptionModeration";
+import TaskHeader from "../../components/moderation/TaskHeader";
 import TaskSearch from "../../components/moderation/TaskSearch";
 import TaskResults from "../../components/moderation/TaskResults";
 
@@ -23,6 +24,8 @@ const ModerationTask = (): ReactElement => {
       <div id="content">
         <TaskSearch />
         <TaskResults />
+
+        <TaskHeader />
 
         <h3>{i18n.t("moderation.task.title")}</h3>
         <Collapsible section={1} title={i18n.t("moderation.task.basic")}>
