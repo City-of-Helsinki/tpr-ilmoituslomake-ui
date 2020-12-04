@@ -5,6 +5,13 @@
     "login": "Sign in",
     "logout": "Sign out"
   },
+  "general": {
+    "inLanguage": {
+      "fi": "in Finnish",
+      "sv": "in Swedish",
+      "en": "in English"
+    }
+  },
   "notification": {
     "title": "My Helsinki Places",
     "header": "Notify about a new place",
@@ -75,16 +82,16 @@
     "description": {
       "title": "Place's name and description",
       "placeName": {
-        "label": "Place's name in"
+        "label": "Place's name"
       },
       "shortDescription": {
-        "label": "Place's short description in",
+        "label": "Place's short description",
         "helperText": "Note that the text cannot be in 'we' form. Length max. 150 characters",
         "tooltipLabel": "Improve findability",
         "tooltipText": "A short description helps the place to be found more easily with a search engine."
       },
       "longDescription": {
-        "label": "Place's long description in",
+        "label": "Place's long description",
         "helperText": "Note that the text cannot be in 'we' form. Length 120 - 4000 characters"
       }
     },
@@ -97,7 +104,7 @@
     "links": {
       "title": "Place's links",
       "website": {
-        "label": "Website address in"
+        "label": "Website address"
       },
       "socialMedia": {
         "label": "Social media"
@@ -176,7 +183,7 @@
     "prices": {
       "title": "Prices ja entrance fees",
       "price": {
-        "label": "Price and/or entrance fee in"
+        "label": "Price and/or entrance fee"
       }
     },
     "tags": {

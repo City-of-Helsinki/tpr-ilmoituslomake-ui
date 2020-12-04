@@ -74,29 +74,29 @@ const DescriptionModeration = (): ReactElement => {
             <TextInput
               id={`placeNameSelected_${option}`}
               className="gridColumn1"
-              label={`${i18n.t("moderation.description.placeName.label")} ${i18n.t(`notification.inputLanguage.${option}`)}`}
+              label={`${i18n.t("moderation.description.placeName.label")} ${i18n.t(`general.inLanguage.${option}`)}`}
               name={option}
               value={placeNameSelected[option] as string}
               disabled
             />
             <ModifyButton
               className="gridColumn2"
-              label={`${i18n.t("moderation.description.placeName.label")} ${i18n.t(`notification.inputLanguage.${option}`)}`}
-              targetName={option}
+              label={`${i18n.t("moderation.description.placeName.label")} ${i18n.t(`general.inLanguage.${option}`)}`}
+              fieldName={option}
               status={placeNameStatus[option]}
               modifyCallback={updateNameStatus}
             >
               <TextInput
                 id={`placeNameModified_${option}`}
                 className="gridColumn2"
-                label={`${i18n.t("moderation.description.placeName.label")} ${i18n.t(`notification.inputLanguage.${option}`)}`}
+                label={`${i18n.t("moderation.description.placeName.label")} ${i18n.t(`general.inLanguage.${option}`)}`}
                 name={option}
                 value={placeNameModified[option] as string}
                 onChange={updateName}
                 disabled={placeNameStatus[option] === Status.Approved || placeNameStatus[option] === Status.Rejected}
               />
             </ModifyButton>
-            <ActionButton className="gridColumn3" targetName={option} status={placeNameStatus[option]} actionCallback={updateNameStatus} />
+            <ActionButton className="gridColumn3" fieldName={option} status={placeNameStatus[option]} actionCallback={updateNameStatus} />
           </Fragment>
         ))}
       </div>
@@ -110,15 +110,15 @@ const DescriptionModeration = (): ReactElement => {
               id={`shortDescriptionSelected_${option}`}
               className="gridColumn1"
               rows={3}
-              label={`${i18n.t("moderation.description.shortDescription.label")} ${i18n.t(`notification.inputLanguage.${option}`)}`}
+              label={`${i18n.t("moderation.description.shortDescription.label")} ${i18n.t(`general.inLanguage.${option}`)}`}
               name={option}
               value={shortDescSelected[option] as string}
               disabled
             />
             <ModifyButton
               className="gridColumn2"
-              label={`${i18n.t("moderation.description.shortDescription.label")} ${i18n.t(`notification.inputLanguage.${option}`)}`}
-              targetName={option}
+              label={`${i18n.t("moderation.description.shortDescription.label")} ${i18n.t(`general.inLanguage.${option}`)}`}
+              fieldName={option}
               status={shortDescStatus[option]}
               modifyCallback={updateShortDescriptionStatus}
             >
@@ -126,19 +126,14 @@ const DescriptionModeration = (): ReactElement => {
                 id={`shortDescriptionModified_${option}`}
                 className="gridColumn2"
                 rows={3}
-                label={`${i18n.t("moderation.description.shortDescription.label")} ${i18n.t(`notification.inputLanguage.${option}`)}`}
+                label={`${i18n.t("moderation.description.shortDescription.label")} ${i18n.t(`general.inLanguage.${option}`)}`}
                 name={option}
                 value={shortDescModified[option] as string}
                 onChange={updateShortDescription}
                 disabled={shortDescStatus[option] === Status.Approved || shortDescStatus[option] === Status.Rejected}
               />
             </ModifyButton>
-            <ActionButton
-              className="gridColumn3"
-              targetName={option}
-              status={shortDescStatus[option]}
-              actionCallback={updateShortDescriptionStatus}
-            />
+            <ActionButton className="gridColumn3" fieldName={option} status={shortDescStatus[option]} actionCallback={updateShortDescriptionStatus} />
           </Fragment>
         ))}
       </div>
@@ -152,15 +147,15 @@ const DescriptionModeration = (): ReactElement => {
               id={`longDescriptionSelected_${option}`}
               className="gridColumn1"
               rows={6}
-              label={`${i18n.t("moderation.description.longDescription.label")} ${i18n.t(`notification.inputLanguage.${option}`)}`}
+              label={`${i18n.t("moderation.description.longDescription.label")} ${i18n.t(`general.inLanguage.${option}`)}`}
               name={option}
               value={longDescSelected[option] as string}
               disabled
             />
             <ModifyButton
               className="gridColumn2"
-              label={`${i18n.t("moderation.description.longDescription.label")} ${i18n.t(`notification.inputLanguage.${option}`)}`}
-              targetName={option}
+              label={`${i18n.t("moderation.description.longDescription.label")} ${i18n.t(`general.inLanguage.${option}`)}`}
+              fieldName={option}
               status={longDescStatus[option]}
               modifyCallback={updateLongDescriptionStatus}
             >
@@ -168,14 +163,14 @@ const DescriptionModeration = (): ReactElement => {
                 id={`longDescriptionModified_${option}`}
                 className="gridColumn2"
                 rows={6}
-                label={`${i18n.t("moderation.description.longDescription.label")} ${i18n.t(`notification.inputLanguage.${option}`)}`}
+                label={`${i18n.t("moderation.description.longDescription.label")} ${i18n.t(`general.inLanguage.${option}`)}`}
                 name={option}
                 value={longDescModified[option] as string}
                 onChange={updateLongDescription}
                 disabled={longDescStatus[option] === Status.Approved || longDescStatus[option] === Status.Rejected}
               />
             </ModifyButton>
-            <ActionButton className="gridColumn3" targetName={option} status={longDescStatus[option]} actionCallback={updateLongDescriptionStatus} />
+            <ActionButton className="gridColumn3" fieldName={option} status={longDescStatus[option]} actionCallback={updateLongDescriptionStatus} />
           </Fragment>
         ))}
       </div>

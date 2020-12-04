@@ -40,7 +40,7 @@ const Links = (): ReactElement => {
               id={`website_${option}`}
               key={`website_${option}`}
               className="formInput"
-              label={`${i18n.t("notification.links.website.label")} ${i18n.t(`notification.inputLanguage.${option}`)}`}
+              label={`${i18n.t("notification.links.website.label")} ${i18n.t(`general.inLanguage.${option}`)}`}
               name={option}
               value={website[option] as string}
               onChange={updateWebsite}

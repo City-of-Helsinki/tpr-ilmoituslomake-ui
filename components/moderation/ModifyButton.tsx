@@ -6,19 +6,20 @@ import { Status } from "../../types/constants";
 interface ModifyButtonProps {
   className?: string;
   label: string;
-  targetName: string;
+  fieldName: string;
   status: Status;
-  modifyCallback: (targetName: string, status: Status) => void;
+  modifyCallback: (fieldName: string, status: Status) => void;
+  hidden?: boolean;
   children: ReactNode;
 }
 
-const ModifyButton = ({ className, label, targetName, status, modifyCallback, children }: ModifyButtonProps): ReactElement => {
+const ModifyButton = ({ className, label, fieldName, status, modifyCallback, hidden, children }: ModifyButtonProps): ReactElement => {
   const i18n = useI18n();
 
   return (
     <div className={className}>
-      {status === Status.Unknown && (
-        <Button className="gridButton" variant="secondary" onClick={() => modifyCallback(targetName, Status.Edited)}>{`${i18n.t(
+      {status === Status.Unknown && !hidden && (
+        <Button className="gridButton" variant="secondary" onClick={() => modifyCallback(fieldName, Status.Edited)}>{`${i18n.t(
           "moderation.button.modify"
         )} ${label.toLowerCase()}`}</Button>
       )}
@@ -26,7 +27,7 @@ const ModifyButton = ({ className, label, targetName, status, modifyCallback, ch
       {(status === Status.Approved || status === Status.Rejected) && (
         <>
           {children}
-          <Button variant="supplementary" size="small" iconLeft={<IconPen />} onClick={() => modifyCallback(targetName, Status.Edited)}>
+          <Button variant="supplementary" size="small" iconLeft={<IconPen />} onClick={() => modifyCallback(fieldName, Status.Edited)}>
             {i18n.t("moderation.button.modify")}
           </Button>
         </>
@@ -37,6 +38,7 @@ const ModifyButton = ({ className, label, targetName, status, modifyCallback, ch
 
 ModifyButton.defaultProps = {
   className: "",
+  hidden: false,
 };
 
 export default ModifyButton;

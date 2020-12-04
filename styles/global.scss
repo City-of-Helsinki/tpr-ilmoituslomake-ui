@@ -129,6 +129,10 @@ textarea {
   flex-grow: 1;
 }
 
+.hidden {
+  display: none;
+}
+
 .MuiStepIcon-root.MuiStepIcon-active,
 .MuiStepIcon-root.MuiStepIcon-completed {
   color: $color-bus;

@@ -30,8 +30,8 @@ const TagsModeration = (): ReactElement => {
   const modifiedTask = useSelector((state: RootState) => state.moderation.modifiedTask);
   const { ontology_ids: tagsModified } = modifiedTask;
 
-  const notificationExtra = useSelector((state: RootState) => state.notification.notificationExtra);
-  const { tagOptions } = notificationExtra;
+  const modifiedTaskExtra = useSelector((state: RootState) => state.moderation.modifiedTaskExtra);
+  const { tagOptions } = modifiedTaskExtra;
 
   const moderationStatus = useSelector((state: RootState) => state.moderationStatus.moderationStatus);
   const { ontology_ids: tagsStatus } = moderationStatus;
@@ -73,7 +73,7 @@ const TagsModeration = (): ReactElement => {
         <ModifyButton
           className="gridColumn2"
           label={i18n.t("moderation.tags.title")}
-          targetName="tagModified"
+          fieldName="tagModified"
           status={tagsStatus}
           modifyCallback={updateTagStatus}
         >
@@ -92,7 +92,7 @@ const TagsModeration = (): ReactElement => {
             disabled={tagsStatus === Status.Approved || tagsStatus === Status.Rejected}
           />
         </ModifyButton>
-        <ActionButton className="gridColumn3" targetName="tagModified" status={tagsStatus} actionCallback={updateTagStatus} />
+        <ActionButton className="gridColumn3" fieldName="tagModified" status={tagsStatus} actionCallback={updateTagStatus} />
       </div>
     </div>
   );

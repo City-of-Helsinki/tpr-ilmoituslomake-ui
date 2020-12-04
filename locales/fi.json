@@ -5,6 +5,13 @@
     "login": "Kirjaudu sisään",
     "logout": "Kirjaudu ulos"
   },
+  "general": {
+    "inLanguage": {
+      "fi": "suomeksi",
+      "sv": "ruotsiksi",
+      "en": "englanniksi"
+    }
+  },
   "notification": {
     "title": "My Helsinki Places",
     "header": "Ilmoita uusi kohde",

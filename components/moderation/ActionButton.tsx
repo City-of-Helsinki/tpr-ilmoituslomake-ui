@@ -6,12 +6,12 @@ import styles from "./ActionButton.module.scss";
 
 interface ActionButtonProps {
   className?: string;
-  targetName: string;
+  fieldName: string;
   status: Status;
-  actionCallback: (targetName: string, status: Status) => void;
+  actionCallback: (fieldName: string, status: Status) => void;
 }
 
-const ActionButton = ({ className, targetName, status, actionCallback }: ActionButtonProps): ReactElement => {
+const ActionButton = ({ className, fieldName, status, actionCallback }: ActionButtonProps): ReactElement => {
   const i18n = useI18n();
 
   return (
@@ -23,7 +23,7 @@ const ActionButton = ({ className, targetName, status, actionCallback }: ActionB
             variant="secondary"
             size="small"
             aria-label={i18n.t("moderation.button.approve")}
-            onClick={() => actionCallback(targetName, Status.Approved)}
+            onClick={() => actionCallback(fieldName, Status.Approved)}
           >
             <IconCheck />
           </Button>
@@ -32,19 +32,19 @@ const ActionButton = ({ className, targetName, status, actionCallback }: ActionB
             variant="secondary"
             size="small"
             aria-label={i18n.t("moderation.button.reject")}
-            onClick={() => actionCallback(targetName, Status.Rejected)}
+            onClick={() => actionCallback(fieldName, Status.Rejected)}
           >
             <IconCross />
           </Button>
         </div>
       )}
       {status === Status.Approved && (
-        <Button className={styles.approve} iconLeft={<IconCheck />} variant="success" onClick={() => actionCallback(targetName, Status.Edited)}>
+        <Button className={styles.approve} iconLeft={<IconCheck />} variant="success" onClick={() => actionCallback(fieldName, Status.Edited)}>
           {i18n.t("moderation.button.approved")}
         </Button>
       )}
       {status === Status.Rejected && (
-        <Button className={styles.reject} iconLeft={<IconCross />} variant="danger" onClick={() => actionCallback(targetName, Status.Edited)}>
+        <Button className={styles.reject} iconLeft={<IconCross />} variant="danger" onClick={() => actionCallback(fieldName, Status.Edited)}>
           {i18n.t("moderation.button.rejected")}
         </Button>
       )}

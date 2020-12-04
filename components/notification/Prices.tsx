@@ -33,7 +33,7 @@ const Prices = (): ReactElement => {
               key={`price_${option}`}
               className="formInput"
               rows={6}
-              label={`${i18n.t("notification.prices.price.label")} ${i18n.t(`notification.inputLanguage.${option}`)}`}
+              label={`${i18n.t("notification.prices.price.label")} ${i18n.t(`general.inLanguage.${option}`)}`}
               name={option}
               value={price[option] as string}
               onChange={updatePrice}

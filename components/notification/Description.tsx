@@ -78,7 +78,7 @@ const Description = (): ReactElement => {
               id={`placeName_${option}`}
               key={`placeName_${option}`}
               className="formInput"
-              label={`${i18n.t("notification.description.placeName.label")} ${i18n.t(`notification.inputLanguage.${option}`)}`}
+              label={`${i18n.t("notification.description.placeName.label")} ${i18n.t(`general.inLanguage.${option}`)}`}
               name={option}
               value={placeName[option] as string}
               onChange={updateName}
@@ -99,7 +99,7 @@ const Description = (): ReactElement => {
               key={`shortDescription_${option}`}
               className="formInput"
               rows={3}
-              label={`${i18n.t("notification.description.shortDescription.label")} ${i18n.t(`notification.inputLanguage.${option}`)}`}
+              label={`${i18n.t("notification.description.shortDescription.label")} ${i18n.t(`general.inLanguage.${option}`)}`}
               name={option}
               value={shortDesc[option] as string}
               onChange={updateShortDescription}
@@ -123,7 +123,7 @@ const Description = (): ReactElement => {
               key={`longDescription_${option}`}
               className="formInput"
               rows={6}
-              label={`${i18n.t("notification.description.longDescription.label")} ${i18n.t(`notification.inputLanguage.${option}`)}`}
+              label={`${i18n.t("notification.description.longDescription.label")} ${i18n.t(`general.inLanguage.${option}`)}`}
               name={option}
               value={longDesc[option] as string}
               onChange={updateLongDescription}
