@@ -67,7 +67,6 @@ const Notification = (): ReactElement => {
           <Map />
           <Contact />
           <Links />
-          <Opening />
         </div>
       )}
       {currentPage === 3 && (
@@ -82,6 +81,7 @@ const Notification = (): ReactElement => {
         <div id="content" className={styles.content} ref={ref}>
           <h2>{`${currentPage} ${i18n.t("notification.main.send")}`}</h2>
           <Notice messageKey="notification.comments.notice" />
+          <Opening />
           <Comments />
           <Terms />
           <NotificationFooter />

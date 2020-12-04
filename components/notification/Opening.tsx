@@ -1,6 +1,6 @@
 import React, { ReactElement } from "react";
 import { useI18n } from "next-localization";
-import { Notification as HdsNotification, IconClock } from "hds-react";
+import { IconClock } from "hds-react";
 import styles from "./Opening.module.scss";
 
 const Opening = (): ReactElement => {
