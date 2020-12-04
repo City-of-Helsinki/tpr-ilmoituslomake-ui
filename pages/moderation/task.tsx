@@ -11,7 +11,9 @@ import Collapsible from "../../components/moderation/Collapsible";
 import TaskHeader from "../../components/moderation/TaskHeader";
 import TaskSearch from "../../components/moderation/TaskSearch";
 import TaskResults from "../../components/moderation/TaskResults";
+import ContactModeration from "../../components/moderation/ContactModeration";
 import DescriptionModeration from "../../components/moderation/DescriptionModeration";
+import LinksModeration from "../../components/moderation/LinksModeration";
 import LocationModeration from "../../components/moderation/LocationModeration";
 import TagsModeration from "../../components/moderation/TagsModeration";
 import { TagOption } from "../../types/general";
@@ -38,6 +40,8 @@ const ModerationTask = (): ReactElement => {
         </Collapsible>
         <Collapsible section={2} title={i18n.t("moderation.task.contact")}>
           <LocationModeration />
+          <ContactModeration />
+          <LinksModeration />
         </Collapsible>
         <Collapsible section={3} title={i18n.t("moderation.task.photos")}>
           TODO

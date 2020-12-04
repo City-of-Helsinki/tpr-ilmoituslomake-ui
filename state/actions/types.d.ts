@@ -338,7 +338,7 @@ interface SetModerationLongDescriptionStatusAction extends AnyAction {
 
 interface SetModerationTagStatusAction extends AnyAction {
   type: typeof SET_MODERATION_TAG_STATUS;
-  payload: boolean;
+  payload: Status;
 }
 
 interface SetModerationAddressStatusAction extends AnyAction {

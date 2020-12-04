@@ -236,6 +236,15 @@
       "remove": "Poista",
       "toggleMenu": "Vaihdele valikko"
     },
+    "contact": {
+      "title": "Muut yhteystiedot",
+      "phone": {
+        "label": "Kohteen puhelinnumero"
+      },
+      "email": {
+        "label": "Kohteen sähköpostiosoite"
+      }
+    },
     "description": {
       "placeName": {
         "title": "Nimi",
@@ -252,6 +261,14 @@
     },
     "intro": {
       "title": "Tervetuloa moderoimaan!"
+    },
+    "links": {
+      "website": {
+        "label": "Verkkosivuston osoite"
+      },
+      "socialMedia": {
+        "label": "Sosiaalinen media"
+      }
     },
     "location": {
       "address": "Osoite",

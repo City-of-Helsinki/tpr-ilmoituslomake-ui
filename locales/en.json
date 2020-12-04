@@ -236,6 +236,15 @@
       "remove": "Remove",
       "toggleMenu": "Toggle menu"
     },
+    "contact": {
+      "title": "Other contact information",
+      "phone": {
+        "label": "Place's phone number"
+      },
+      "email": {
+        "label": "Place's email address"
+      }
+    },
     "description": {
       "placeName": {
         "title": "Name",
@@ -252,6 +261,14 @@
     },
     "intro": {
       "title": "Welcome to moderation!"
+    },
+    "links": {
+      "website": {
+        "label": "Website address"
+      },
+      "socialMedia": {
+        "label": "Social media"
+      }
     },
     "location": {
       "address": "Address",
