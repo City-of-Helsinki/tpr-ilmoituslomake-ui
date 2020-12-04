@@ -1,12 +1,30 @@
-import React, { ReactElement } from "react";
+import React, { Dispatch, ReactElement } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import dynamic from "next/dynamic";
 import { useI18n } from "next-localization";
+import { LatLngExpression } from "leaflet";
+import { setMapView, setNotificationLocation } from "../../state/actions/notification";
+import { NotificationAction } from "../../state/actions/types";
+import { RootState } from "../../state/reducers";
 import styles from "./Map.module.scss";
 
-const MapWrapper = dynamic(() => import("./MapWrapper"), { ssr: false });
+const MapWrapper = dynamic(() => import("../common/MapWrapper"), { ssr: false });
 
 const Map = (): ReactElement => {
   const i18n = useI18n();
+  const dispatch = useDispatch<Dispatch<NotificationAction>>();
+
+  const mapCenter = useSelector((state: RootState) => state.notification.center);
+  const initialZoom = useSelector((state: RootState) => state.notification.zoom);
+  const { location } = useSelector((state: RootState) => state.notification.notification);
+
+  const updateLocation = (coordinates: [number, number]) => {
+    dispatch(setNotificationLocation(coordinates));
+  };
+
+  const updateMapView = (center: LatLngExpression, zoom: number) => {
+    dispatch(setMapView(center, zoom));
+  };
 
   return (
     <div className="formSection">
@@ -14,7 +32,15 @@ const Map = (): ReactElement => {
       <div className={styles.geocode}>
         <div>{i18n.t("notification.map.notice")}</div>
       </div>
-      <MapWrapper />
+      <MapWrapper
+        className={styles.map}
+        initialCenter={mapCenter as [number, number]}
+        initialZoom={initialZoom}
+        location={location}
+        setLocation={updateLocation}
+        setMapView={updateMapView}
+        draggableMarker
+      />
     </div>
   );
 };
