@@ -11,10 +11,20 @@ interface MapWrapperProps {
   location: [number, number];
   setLocation?: (location: [number, number]) => void;
   setMapView?: (center: LatLngExpression, zoom: number) => void;
+  setMapReady?: (ready: boolean) => void;
   draggableMarker: boolean;
 }
 
-const MapWrapper = ({ className, initialCenter, initialZoom, location, setLocation, setMapView, draggableMarker }: MapWrapperProps): ReactElement => {
+const MapWrapper = ({
+  className,
+  initialCenter,
+  initialZoom,
+  location,
+  setLocation,
+  setMapView,
+  setMapReady,
+  draggableMarker,
+}: MapWrapperProps): ReactElement => {
   const i18n = useI18n();
 
   const markerRef = useRef<LeafletMarker>(null);
@@ -74,8 +84,14 @@ const MapWrapper = ({ className, initialCenter, initialZoom, location, setLocati
     return null;
   };
 
+  const whenReady = () => {
+    if (setMapReady) {
+      setMapReady(true);
+    }
+  };
+
   return (
-    <MapContainer className={className} center={center} zoom={initialZoom} minZoom={MAP_MIN_ZOOM} maxZoom={MAP_MAX_ZOOM}>
+    <MapContainer className={className} center={center} zoom={initialZoom} minZoom={MAP_MIN_ZOOM} maxZoom={MAP_MAX_ZOOM} whenReady={whenReady}>
       <CustomMapHandler />
       <TileLayer
         url={MAP_TILES_URL}
@@ -92,6 +108,7 @@ MapWrapper.defaultProps = {
   className: "",
   setLocation: undefined,
   setMapView: undefined,
+  setMapReady: undefined,
 };
 
 export default MapWrapper;

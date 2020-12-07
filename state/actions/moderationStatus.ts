@@ -5,6 +5,7 @@ import {
   SET_MODERATION_LONG_DESCRIPTION_STATUS,
   SET_MODERATION_TAG_STATUS,
   SET_MODERATION_ADDRESS_STATUS,
+  SET_MODERATION_LOCATION_STATUS,
   SET_MODERATION_CONTACT_STATUS,
   SET_MODERATION_LINK_STATUS,
   SET_MODERATION_PHOTO_STATUS,
@@ -36,6 +37,11 @@ export const setModerationTagStatus = (status: Status): ModerationStatusAction =
 export const setModerationAddressStatus = (language: string, status: KeyValueStatus): ModerationStatusAction => ({
   type: SET_MODERATION_ADDRESS_STATUS,
   payload: { language, status },
+});
+
+export const setModerationLocationStatus = (status: Status): ModerationStatusAction => ({
+  type: SET_MODERATION_LOCATION_STATUS,
+  payload: status,
 });
 
 export const setModerationContactStatus = (status: KeyValueStatus): ModerationStatusAction => ({

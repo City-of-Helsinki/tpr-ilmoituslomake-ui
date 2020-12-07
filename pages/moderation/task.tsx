@@ -1,4 +1,4 @@
-import React, { ReactElement } from "react";
+import React, { ReactElement, useState } from "react";
 import { GetServerSideProps } from "next";
 import Head from "next/head";
 import { useI18n } from "next-localization";
@@ -15,11 +15,15 @@ import ContactModeration from "../../components/moderation/ContactModeration";
 import DescriptionModeration from "../../components/moderation/DescriptionModeration";
 import LinksModeration from "../../components/moderation/LinksModeration";
 import LocationModeration from "../../components/moderation/LocationModeration";
+import MapModeration from "../../components/moderation/MapModeration";
 import TagsModeration from "../../components/moderation/TagsModeration";
 import { TagOption } from "../../types/general";
 
 const ModerationTask = (): ReactElement => {
   const i18n = useI18n();
+
+  // The maps only initialise properly when not hidden, so use a flag to only collapse the container after the maps are ready
+  const [mapsReady, setMapsReady] = useState<boolean>(false);
 
   return (
     <Layout>
@@ -38,8 +42,9 @@ const ModerationTask = (): ReactElement => {
           <DescriptionModeration />
           <TagsModeration />
         </Collapsible>
-        <Collapsible section={2} title={i18n.t("moderation.task.contact")}>
+        <Collapsible section={2} title={i18n.t("moderation.task.contact")} forceExpanded={!mapsReady}>
           <LocationModeration />
+          <MapModeration setMapsReady={setMapsReady} />
           <ContactModeration />
           <LinksModeration />
         </Collapsible>

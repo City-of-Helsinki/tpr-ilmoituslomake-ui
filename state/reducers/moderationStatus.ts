@@ -7,6 +7,7 @@ import {
   SET_MODERATION_LONG_DESCRIPTION_STATUS,
   SET_MODERATION_TAG_STATUS,
   SET_MODERATION_ADDRESS_STATUS,
+  SET_MODERATION_LOCATION_STATUS,
   SET_MODERATION_CONTACT_STATUS,
   SET_MODERATION_LINK_STATUS,
   SET_MODERATION_PHOTO_STATUS,
@@ -19,6 +20,7 @@ const initialState: ModerationStatusState = {
       sv: Status.Unknown,
       en: Status.Unknown,
     },
+    location: Status.Unknown,
     description: {
       short: {
         fi: Status.Unknown,
@@ -112,6 +114,17 @@ const moderationStatus = (state = initialState, action: AnyAction): ModerationSt
             ...state.moderationStatus.address,
             [action.payload.language]: { ...(action.payload.language === "sv" ? sv : fi), ...action.payload.status },
           },
+        },
+      };
+    }
+
+    case SET_MODERATION_LOCATION_STATUS: {
+      console.log("SET_MODERATION_LOCATION_STATUS", action.payload);
+      return {
+        ...state,
+        moderationStatus: {
+          ...state.moderationStatus,
+          location: action.payload,
         },
       };
     }

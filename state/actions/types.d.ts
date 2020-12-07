@@ -49,6 +49,7 @@ import {
   SET_MODERATION_LONG_DESCRIPTION_STATUS,
   SET_MODERATION_TAG_STATUS,
   SET_MODERATION_ADDRESS_STATUS,
+  SET_MODERATION_LOCATION_STATUS,
   SET_MODERATION_CONTACT_STATUS,
   SET_MODERATION_LINK_STATUS,
   SET_MODERATION_PHOTO_STATUS,
@@ -346,6 +347,11 @@ interface SetModerationAddressStatusAction extends AnyAction {
   payload: { language: string; status: Status };
 }
 
+interface SetModerationLocationStatusAction extends AnyAction {
+  type: typeof SET_MODERATION_LOCATION_STATUS;
+  payload: Status;
+}
+
 interface SetModerationContactStatusAction extends AnyAction {
   type: typeof SET_MODERATION_CONTACT_STATUS;
   payload: Status;
@@ -367,6 +373,7 @@ export type ModerationStatusAction =
   | SetModerationLongDescriptionStatusAction
   | SetModerationTagStatusAction
   | SetModerationAddressStatusAction
+  | SetModerationLocationStatusAction
   | SetModerationContactStatusAction
   | SetModerationLinkStatusAction
   | SetModerationPhotoUrlStatusAction;

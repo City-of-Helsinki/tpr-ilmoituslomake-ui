@@ -14,6 +14,7 @@ export interface ModerationStatus {
     en: Status;
     [key: string]: Status;
   };
+  location: Status;
   description: {
     short: {
       fi: Status;
