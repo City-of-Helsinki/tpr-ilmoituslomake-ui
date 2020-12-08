@@ -20,6 +20,11 @@ export interface KeyValueStatus {
   [key: string]: Status;
 }
 
+export type OptionType = {
+  id: string | number;
+  label: string;
+};
+
 export interface Photo {
   url: string;
   description: string;

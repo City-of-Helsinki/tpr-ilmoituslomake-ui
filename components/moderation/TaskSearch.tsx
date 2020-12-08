@@ -7,7 +7,7 @@ import { setModerationTaskSearch } from "../../state/actions/moderation";
 import { RootState } from "../../state/reducers";
 import styles from "./PlaceSearch.module.scss";
 
-type OptionType = {
+type OptionTypeWithoutId = {
   label: string;
 };
 
@@ -20,13 +20,13 @@ const TaskSearch = (): ReactElement => {
 
   const taskTypeOptions = [{ label: "Kaikki" }, { label: "Muutos" }, { label: "Uusi kohde" }, { label: "Vinkki" }];
 
-  const convertValue = (value: string | undefined): OptionType | undefined => ({ label: value ?? "" });
+  const convertValue = (value: string | undefined): OptionTypeWithoutId | undefined => ({ label: value ?? "" });
 
   const updateSearchText = (evt: ChangeEvent<HTMLInputElement>) => {
     dispatch(setModerationTaskSearch({ ...taskSearch, [evt.target.name]: evt.target.value }));
   };
 
-  const updateSearchTaskType = (selected: OptionType) => {
+  const updateSearchTaskType = (selected: OptionTypeWithoutId) => {
     dispatch(setModerationTaskSearch({ ...taskSearch, taskType: selected ? selected.label : "" }));
   };
 

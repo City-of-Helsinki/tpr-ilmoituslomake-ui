@@ -6,14 +6,9 @@ import { Combobox } from "hds-react";
 import { NotificationAction, NotificationValidationAction } from "../../state/actions/types";
 import { setNotificationTag } from "../../state/actions/notification";
 import { RootState } from "../../state/reducers";
-import { TagOption } from "../../types/general";
+import { OptionType, TagOption } from "../../types/general";
 import { defaultLocale } from "../../utils/i18n";
 import { isTagValid } from "../../utils/validation";
-
-type OptionType = {
-  id: number;
-  label: string;
-};
 
 const Tags = (): ReactElement => {
   const i18n = useI18n();
@@ -39,7 +34,7 @@ const Tags = (): ReactElement => {
   };
 
   const updateTags = (selected: OptionType[]) => {
-    dispatch(setNotificationTag(selected.map((s) => s.id)));
+    dispatch(setNotificationTag(selected.map((s) => s.id as number)));
   };
 
   const validateTags = () => {

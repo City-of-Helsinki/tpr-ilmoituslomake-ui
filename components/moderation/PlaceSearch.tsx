@@ -5,14 +5,10 @@ import { Button, Checkbox, Combobox, Select, TextInput } from "hds-react";
 import { ModerationAction } from "../../state/actions/types";
 import { setModerationPlaceSearch, clearModerationPlaceSearch } from "../../state/actions/moderation";
 import { RootState } from "../../state/reducers";
+import { OptionType } from "../../types/general";
 import styles from "./PlaceSearch.module.scss";
 
-type OptionType = {
-  label: string;
-};
-
-type OptionTypeWithId = {
-  id: string;
+type OptionTypeWithoutId = {
   label: string;
 };
 
@@ -32,22 +28,22 @@ const PlaceSearch = (): ReactElement => {
   const tagOptions = [{ label: "Test" }];
   const publishPermissionOptions = ["yes", "no"];
 
-  const convertValue = (value: string | undefined): OptionType | undefined => ({ label: value ?? "" });
-  const convertValueWithId = (value: string | undefined): OptionTypeWithId | undefined => languageOptions.find((l) => l.id === value);
+  const convertValue = (value: string | undefined): OptionTypeWithoutId | undefined => ({ label: value ?? "" });
+  const convertValueWithId = (value: string | undefined): OptionType | undefined => languageOptions.find((l) => l.id === value);
 
   const updateSearchText = (evt: ChangeEvent<HTMLInputElement>) => {
     dispatch(setModerationPlaceSearch({ ...placeSearch, [evt.target.name]: evt.target.value }));
   };
 
-  const updateSearchLanguage = (selected: OptionTypeWithId) => {
-    dispatch(setModerationPlaceSearch({ ...placeSearch, language: selected ? selected.id : "" }));
+  const updateSearchLanguage = (selected: OptionType) => {
+    dispatch(setModerationPlaceSearch({ ...placeSearch, language: selected ? (selected.id as string) : "" }));
   };
 
-  const updateSearchDistrict = (selected: OptionType) => {
+  const updateSearchDistrict = (selected: OptionTypeWithoutId) => {
     dispatch(setModerationPlaceSearch({ ...placeSearch, district: selected ? selected.label : "" }));
   };
 
-  const updateSearchTag = (selected: OptionType) => {
+  const updateSearchTag = (selected: OptionTypeWithoutId) => {
     dispatch(setModerationPlaceSearch({ ...placeSearch, tag: selected ? selected.label : "" }));
   };
 

@@ -8,15 +8,10 @@ import { setModerationTag } from "../../state/actions/moderation";
 import { setModerationTagStatus } from "../../state/actions/moderationStatus";
 import { RootState } from "../../state/reducers";
 import { Status } from "../../types/constants";
-import { TagOption } from "../../types/general";
+import { OptionType, TagOption } from "../../types/general";
 import { defaultLocale } from "../../utils/i18n";
 import ActionButton from "./ActionButton";
 import ModifyButton from "./ModifyButton";
-
-type OptionType = {
-  id: number;
-  label: string;
-};
 
 const TagsModeration = (): ReactElement => {
   const i18n = useI18n();
@@ -45,7 +40,7 @@ const TagsModeration = (): ReactElement => {
   };
 
   const updateTags = (selected: OptionType[]) => {
-    dispatch(setModerationTag(selected.map((s) => s.id)));
+    dispatch(setModerationTag(selected.map((s) => s.id as number)));
   };
 
   const updateTagStatus = (language: string, status: Status) => {
