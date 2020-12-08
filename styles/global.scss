@@ -109,6 +109,11 @@ textarea {
   }
 }
 
+.gridHeader {
+  background-color: $color-fog-light;
+  padding: $spacing-xs;
+}
+
 .gridColumn1 {
   grid-column: 1 / 1;
 }
@@ -119,6 +124,14 @@ textarea {
 
 .gridColumn3 {
   grid-column: 3 / 3;
+}
+
+.gridColumn4 {
+  grid-column: 4 / 4;
+}
+
+.gridColumn5 {
+  grid-column: 5 / 5;
 }
 
 .gridButton {

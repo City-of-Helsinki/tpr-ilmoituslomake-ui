@@ -4,6 +4,8 @@ import {
   SET_MODERATION_PLACE_SEARCH,
   CLEAR_MODERATION_PLACE_SEARCH,
   SET_MODERATION_TASK_SEARCH,
+  SET_MODERATION_TASK_RESULTS,
+  SELECT_MODERATION_TASK,
   SET_MODERATION_NAME,
   SET_MODERATION_SHORT_DESCRIPTION,
   SET_MODERATION_LONG_DESCRIPTION,
@@ -34,6 +36,8 @@ const initialState: ModerationState = {
     placeName: "",
     taskType: "",
   },
+  taskResults: [],
+  selectedTaskId: 0,
   selectedTask: { ...INITIAL_NOTIFICATION, location: [0, 0] },
   selectedTaskExtra: INITIAL_NOTIFICATION_EXTRA,
   modifiedTask: { ...INITIAL_NOTIFICATION, location: [0, 0] },
@@ -63,6 +67,22 @@ const moderation = (state = initialState, action: AnyAction): ModerationState =>
       return {
         ...state,
         taskSearch: action.payload,
+      };
+    }
+
+    case SET_MODERATION_TASK_RESULTS: {
+      console.log("SET_MODERATION_TASK_RESULTS", action.payload);
+      return {
+        ...state,
+        taskResults: action.payload || [],
+      };
+    }
+
+    case SELECT_MODERATION_TASK: {
+      console.log("SELECT_MODERATION_TASK", action.payload);
+      return {
+        ...state,
+        selectedTaskId: action.payload,
       };
     }
 

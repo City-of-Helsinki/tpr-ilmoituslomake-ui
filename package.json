@@ -18,6 +18,7 @@
     "hds-design-tokens": "^0.15.1",
     "hds-react": "^0.15.1",
     "leaflet": "^1.7.1",
+    "moment": "^2.29.1",
     "next": "10.0.1",
     "next-absolute-url": "^1.2.2",
     "next-localization": "^0.9.3",

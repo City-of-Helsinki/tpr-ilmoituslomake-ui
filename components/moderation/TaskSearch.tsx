@@ -2,9 +2,11 @@ import React, { Dispatch, ChangeEvent, ReactElement } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useI18n } from "next-localization";
 import { Button, Select, TextInput } from "hds-react";
+import moment from "moment";
 import { ModerationAction } from "../../state/actions/types";
-import { setModerationTaskSearch } from "../../state/actions/moderation";
+import { setModerationTaskSearch, setModerationTaskResults } from "../../state/actions/moderation";
 import { RootState } from "../../state/reducers";
+import { ModerationTask } from "../../types/general";
 import styles from "./PlaceSearch.module.scss";
 
 type OptionTypeWithoutId = {
@@ -30,8 +32,24 @@ const TaskSearch = (): ReactElement => {
     dispatch(setModerationTaskSearch({ ...taskSearch, taskType: selected ? selected.label : "" }));
   };
 
-  const searchTasks = () => {
-    console.log("TODO");
+  const searchTasks = async () => {
+    // TODO - search parameters
+    const taskResponse = await fetch("/api/moderation/todos/");
+    if (taskResponse.ok) {
+      const taskResult = await (taskResponse.json() as Promise<{ results: ModerationTask[] }>);
+
+      console.log("TASK RESPONSE", taskResult);
+
+      if (taskResult && taskResult.results && taskResult.results.length > 0) {
+        // Parse the date strings to date objects
+        const results = taskResult.results.map((result) => {
+          return { ...result, created: moment(result.created_at).toDate(), updated: moment(result.updated_at).toDate() };
+        });
+        dispatch(setModerationTaskResults(results));
+      } else {
+        dispatch(setModerationTaskResults([]));
+      }
+    }
   };
 
   return (

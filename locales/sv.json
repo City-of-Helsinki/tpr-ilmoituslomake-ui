@@ -355,7 +355,11 @@
     },
     "taskResults": {
       "found": "Löytyi",
-      "places": "kohdetta"
+      "places": "kohdetta",
+      "nameId": "Nimi (tunnus)",
+      "type": "Tyyppi",
+      "notified": "Ilmoitettu",
+      "status": "Status"
     },
     "translationNotice": {
       "title": "Käännösten hallinta",

@@ -33,6 +33,8 @@ import {
   SET_MODERATION_PLACE_SEARCH,
   CLEAR_MODERATION_PLACE_SEARCH,
   SET_MODERATION_TASK_SEARCH,
+  SET_MODERATION_TASK_RESULTS,
+  SELECT_MODERATION_TASK,
   SET_MODERATION_NAME,
   SET_MODERATION_SHORT_DESCRIPTION,
   SET_MODERATION_LONG_DESCRIPTION,
@@ -54,7 +56,7 @@ import {
   SET_MODERATION_LINK_STATUS,
   SET_MODERATION_PHOTO_STATUS,
 } from "../../types/constants";
-import { User, KeyValueString, KeyValueBoolean, Photo, TagOption, PlaceSearch, TaskSearch } from "../../types/general";
+import { User, KeyValueString, KeyValueBoolean, Photo, TagOption, PlaceSearch, TaskSearch, ModerationTask } from "../../types/general";
 import { PhotoValidation } from "../../types/notification_validation";
 import { PhotoStatus } from "../../types/moderation_status";
 
@@ -251,6 +253,16 @@ interface SetModerationTaskSearchAction extends AnyAction {
   payload: TaskSearch;
 }
 
+interface SetModerationTaskResultsAction extends AnyAction {
+  type: typeof SET_MODERATION_TASK_RESULTS;
+  payload: ModerationTask[];
+}
+
+interface SelectModerationTaskAction extends AnyAction {
+  type: typeof SELECT_MODERATION_TASK;
+  payload: number;
+}
+
 interface SetModerationNameAction extends AnyAction {
   type: typeof SET_MODERATION_NAME;
   payload: KeyValueString;
@@ -310,6 +322,8 @@ export type ModerationAction =
   | SetModerationPlaceSearchAction
   | ClearModerationPlaceSearchAction
   | SetModerationTaskSearchAction
+  | SetModerationTaskResultsAction
+  | SelectModerationTaskAction
   | SetModerationNameAction
   | SetModerationShortDescriptionAction
   | SetModerationLongDescriptionAction

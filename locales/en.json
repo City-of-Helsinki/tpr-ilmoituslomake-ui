@@ -355,7 +355,11 @@
     },
     "taskResults": {
       "found": "Found",
-      "places": "places"
+      "places": "places",
+      "nameId": "Name (id)",
+      "type": "Type",
+      "notified": "Notified",
+      "status": "Status"
     },
     "translationNotice": {
       "title": "Translation hallinta",

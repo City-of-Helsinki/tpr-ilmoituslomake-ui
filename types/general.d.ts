@@ -69,3 +69,19 @@ export interface TaskSearch {
   placeName: string;
   taskType: string;
 }
+
+export interface ModerationTask {
+  id: number;
+  target: {
+    id: number;
+    name: string;
+  };
+  category: string;
+  item_type: string;
+  status: string;
+  moderator: string;
+  created_at: string;
+  updated_at: string;
+  created: Date;
+  updated: Date;
+}

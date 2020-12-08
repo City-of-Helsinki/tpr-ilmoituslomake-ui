@@ -2,6 +2,8 @@ import {
   SET_MODERATION_PLACE_SEARCH,
   CLEAR_MODERATION_PLACE_SEARCH,
   SET_MODERATION_TASK_SEARCH,
+  SET_MODERATION_TASK_RESULTS,
+  SELECT_MODERATION_TASK,
   SET_MODERATION_NAME,
   SET_MODERATION_SHORT_DESCRIPTION,
   SET_MODERATION_LONG_DESCRIPTION,
@@ -15,7 +17,7 @@ import {
   REMOVE_MODERATION_PHOTO,
 } from "../../types/constants";
 import { ModerationAction } from "./types";
-import { KeyValueString, Photo, PlaceSearch, TagOption, TaskSearch } from "../../types/general";
+import { KeyValueString, Photo, PlaceSearch, TagOption, TaskSearch, ModerationTask } from "../../types/general";
 
 export const setModerationPlaceSearch = (placeSearch: PlaceSearch): ModerationAction => ({
   type: SET_MODERATION_PLACE_SEARCH,
@@ -30,6 +32,16 @@ export const clearModerationPlaceSearch = (): ModerationAction => ({
 export const setModerationTaskSearch = (taskSearch: TaskSearch): ModerationAction => ({
   type: SET_MODERATION_TASK_SEARCH,
   payload: taskSearch,
+});
+
+export const setModerationTaskResults = (taskResults: ModerationTask[]): ModerationAction => ({
+  type: SET_MODERATION_TASK_RESULTS,
+  payload: taskResults,
+});
+
+export const selectModerationTask = (taskId: number): ModerationAction => ({
+  type: SELECT_MODERATION_TASK,
+  payload: taskId,
 });
 
 export const setModerationName = (keyValue: KeyValueString): ModerationAction => ({
