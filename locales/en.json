@@ -65,9 +65,9 @@
     },
     "comments": {
       "title": "Comments",
-      "notice": "Check the information and send the form. If you want, you can add comments for the moderator of the information.",
+      "notice": "Check the information and send the form. If you want, you can also leave a message for the handler of the information.",
       "comments": {
-        "label": "Comments to the moderator of the information"
+        "label": "Message for the handler of the information"
       }
     },
     "contact": {
@@ -92,11 +92,13 @@
       },
       "longDescription": {
         "label": "Place's long description",
-        "helperText": "Note that the text cannot be in 'we' form. Length 120 - 4000 characters"
+        "helperText": "Note that the text cannot be in 'we' form. Length 120 - 4000 characters",
+        "tooltipLabel": "More detailed kuvaus",
+        "tooltipText": "You can if you want include the short description here and supplement the description according to your needs."
       }
     },
     "inputLanguage": {
-      "title": "Give the information in the languages",
+      "title": "First select the languages in which you will give the information (one language is mandatory)",
       "fi": "Finnish",
       "sv": "Swedish",
       "en": "English"
@@ -104,7 +106,9 @@
     "links": {
       "title": "Place's links",
       "website": {
-        "label": "Website address"
+        "label": "Website",
+        "tooltipLabel": "Link for more information",
+        "tooltipText": "You can add an address here to the place's webpage or social media account."
       },
       "socialMedia": {
         "label": "Social media"
@@ -125,7 +129,7 @@
     "map": {
       "title": "Map of place",
       "notice": "The place is shown on the map based on the address given above. If the search result is imprecise or incorrect, you can correct it by moving the marker on the map to the right place. We recommend that the marker is located at the main entrance to the place.",
-      "geocode": "Show specified address on map",
+      "geocode": "Show on the map",
       "osm": "OpenStreetMap contributors"
     },
     "notifier": {
@@ -133,6 +137,7 @@
       "notifierType": "Notifier's type",
       "owner": "I represent the place",
       "outsideSource":"I don't represent the place",
+      "tooltip": "The place's representative is the owner or someone else who indicates they represent the place's information. For example, a tourist or local resident do not represent the place.",
       "fullName": {
         "label": "Notifier's first and last name"
       },
@@ -145,7 +150,7 @@
     },
     "opening": {
       "title": "Opening times",
-      "notice": "Opening times are notified in the final stage."
+      "notice": "Opening times are notified after sending."
     },
     "payment": {
       "title": "Payment methods",
@@ -190,7 +195,7 @@
       "title": "Keywords",
       "add": {
         "label": "Add keyword",
-        "helperText": "Type a search word or select from the list."
+        "helperText": "Search or select from the list. Select max. 5 words"
       }
     },
     "terms": {
@@ -264,7 +269,7 @@
     },
     "links": {
       "website": {
-        "label": "Website address"
+        "label": "Website"
       },
       "socialMedia": {
         "label": "Social media"

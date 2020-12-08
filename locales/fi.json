@@ -65,9 +65,9 @@
     },
     "comments": {
       "title": "Kommentteja",
-      "notice": "Tarkista vielä tiedot ja lähetä lomake. Jos haluat, voit lisätä kommentteja tietojen moderoijalle.",
+      "notice": "Tarkista vielä tiedot ja lähetä lomake. Jos haluat, voit myös jättää viestin tietojen käsittelijälle.",
       "comments": {
-        "label": "Kommentteja tietojen moderoijalle"
+        "label": "Viesti tietojen käsittelijälle"
       }
     },
     "contact": {
@@ -92,11 +92,13 @@
       },
       "longDescription": {
         "label": "Kohteen pitkä kuvaus",
-        "helperText": "Huomioi, että teksti ei saa olla me-muodossa. Pituus 120 - 4000 merkkiä"
+        "helperText": "Huomioi, että teksti ei saa olla me-muodossa. Pituus 120 - 4000 merkkiä",
+        "tooltipLabel": "Laajempi kuvaus",
+        "tooltipText": "Voit halutessasi sisällyttää tähän lyhyen kuvauksen ja täydentää kuvausta tarpeesi mukaan."
       }
     },
     "inputLanguage": {
-      "title": "Anna tiedot kielillä",
+      "title": "Valitse ensin millä kielillä annat tiedot (yksi kieli on pakollinen)",
       "fi": "suomeksi",
       "sv": "ruotsiksi",
       "en": "englanniksi"
@@ -104,7 +106,9 @@
     "links": {
       "title": "Kohteen linkit",
       "website": {
-        "label": "Verkkosivuston osoite"
+        "label": "Verkkosivusto",
+        "tooltipLabel": "Linkki lisätietoihin",
+        "tooltipText": "Voit lisätä tähän kohteen verkkosivun tai sosiaallisen median tilin osoitteen."
       },
       "socialMedia": {
         "label": "Sosiaalinen media"
@@ -125,7 +129,7 @@
     "map": {
       "title": "Kohde kartalla",
       "notice": "Kohde näkyy kartalla yllä annetun osoitteen perusteella. Jos hakutulos on epätarkka tai virheellinen, voit korjata sen siirtämällä kartalla olevaa kohdistinta oikeaan kohtaan. Suosittelemme, että kohdistin merkitään pääsisäänkäynnin kohdalle.",
-      "geocode": "Päivitä annettu osoite kartalle",
+      "geocode": "Näytä kartalla",
       "osm": "OpenStreetMapin tekijät"
     },
     "notifier": {
@@ -133,6 +137,7 @@
       "notifierType": "Ilmoittajan tyyppi",
       "owner": "Edustan kohdetta",
       "outsideSource":"En edusta kohdetta",
+      "tooltip": "Kohteen edustaja on omistaja ja joku muu, joka ilmoittaa edustamansa kohteen tiedot. Esimerkiksi matkailija tai paikallinen asukas eivät edusta kohdetta.",
       "fullName": {
         "label": "Ilmoittajan etunimi ja sukunimi"
       },
@@ -145,7 +150,7 @@
     },
     "opening": {
       "title": "Aukioloajat",
-      "notice": "Aukioloajat ilmoitetaan viimeisessä vaiheessa."
+      "notice": "Aukioloajat ilmoitetaan lähetyksen jälkeen."
     },
     "payment": {
       "title": "Maksutavat",
@@ -190,7 +195,7 @@
       "title": "Asiasanat",
       "add": {
         "label": "Lisää asiasana",
-        "helperText": "Kirjoita hakusana tai valitse listalta."
+        "helperText": "Hae tai valitse listalta. Valitse max. 5 sanaa."
       }
     },
     "terms": {
@@ -264,7 +269,7 @@
     },
     "links": {
       "website": {
-        "label": "Verkkosivuston osoite"
+        "label": "Verkkosivusto"
       },
       "socialMedia": {
         "label": "Sosiaalinen media"

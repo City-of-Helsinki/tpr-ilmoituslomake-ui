@@ -1,7 +1,7 @@
 import React, { Dispatch, ChangeEvent, ReactElement } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useI18n } from "next-localization";
-import { TextInput, RadioButton } from "hds-react";
+import { TextInput, RadioButton, Tooltip } from "hds-react";
 import { NotificationAction, NotificationValidationAction } from "../../state/actions/types";
 import { setNotificationNotifier } from "../../state/actions/notification";
 import { RootState } from "../../state/reducers";
@@ -54,6 +54,7 @@ const Notifier = (): ReactElement => {
           checked={notifierType === "outsideSource"}
           onChange={updateNotifier}
         />
+        <Tooltip>{i18n.t("notification.notifier.tooltip")}</Tooltip>
       </div>
       <TextInput
         id="fullName"

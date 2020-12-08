@@ -129,6 +129,8 @@ const Description = (): ReactElement => {
               onChange={updateLongDescription}
               onBlur={validateLongDescription}
               helperText={i18n.t("notification.description.longDescription.helperText")}
+              tooltipLabel={i18n.t("notification.description.longDescription.tooltipLabel")}
+              tooltipText={i18n.t("notification.description.longDescription.tooltipText")}
               invalid={!longDescValid[option]}
               required={router.locale === option}
             />
