@@ -54,7 +54,7 @@ const TagsModeration = (): ReactElement => {
 
   return (
     <div className="formSection">
-      <div className="gridContainer">
+      <div className="gridLayoutContainer">
         <h4 className="gridColumn1">{`${i18n.t("moderation.tags.title")}${i18n.t("moderation.task.selected")}`}</h4>
         <h4 className="gridColumn2">{`${i18n.t("moderation.tags.title")}${i18n.t("moderation.task.modified")}`}</h4>
         <Combobox

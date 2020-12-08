@@ -54,7 +54,7 @@ const LocationModeration = (): ReactElement => {
 
   return (
     <div className="formSection">
-      <div className="gridContainer">
+      <div className="gridLayoutContainer">
         <h4 className="gridColumn1">{`${i18n.t("moderation.location.address")} ${i18n.t("general.inLanguage.fi")}${i18n.t(
           "moderation.task.selected"
         )}`}</h4>
@@ -141,7 +141,7 @@ const LocationModeration = (): ReactElement => {
         </ModifyButton>
       </div>
 
-      <div className="gridContainer">
+      <div className="gridLayoutContainer">
         <h4 className="gridColumn1">{`${i18n.t("moderation.location.address")} ${i18n.t("general.inLanguage.sv")}${i18n.t(
           "moderation.task.selected"
         )}`}</h4>

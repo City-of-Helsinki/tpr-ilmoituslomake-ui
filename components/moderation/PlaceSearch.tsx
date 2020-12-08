@@ -74,7 +74,7 @@ const PlaceSearch = (): ReactElement => {
     <div className={styles.placeSearch}>
       <h3>{i18n.t("moderation.placeSearch.title")}</h3>
 
-      <div className="gridContainer">
+      <div className="gridLayoutContainer">
         <TextInput
           id="placeName"
           className="gridColumn1"
