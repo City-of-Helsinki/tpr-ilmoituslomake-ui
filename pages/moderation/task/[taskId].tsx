@@ -93,7 +93,10 @@ export const getServerSideProps: GetServerSideProps = async ({ req, params, loca
             ...initialReduxState.moderation.moderationExtra,
             taskType: getTaskType(taskResult.category),
             status: getTaskStatus(taskResult.status),
-            moderator: { fullName: `${taskResult.moderator.first_name} ${taskResult.moderator.last_name}`, email: taskResult.moderator.email },
+            moderator: {
+              fullName: taskResult.moderator ? `${taskResult.moderator.first_name} ${taskResult.moderator.last_name}`.trim() : "",
+              email: taskResult.moderator ? taskResult.moderator.email : "",
+            },
           },
         };
       } catch (err) {
