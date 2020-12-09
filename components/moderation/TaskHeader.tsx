@@ -1,14 +1,35 @@
 import React, { ReactElement } from "react";
+import { useSelector } from "react-redux";
 import { useI18n } from "next-localization";
 import { Button, IconArrowRight, IconArrowUndo, IconTrash } from "hds-react";
+import { RootState } from "../../state/reducers";
+import { TaskType } from "../../types/constants";
+import TaskStatusLabel from "./TaskStatusLabel";
 import styles from "./TaskHeader.module.scss";
 
 const TaskHeader = (): ReactElement => {
   const i18n = useI18n();
 
+  const selectedTaskId = useSelector((state: RootState) => state.moderation.selectedTaskId);
+  const selectedTask = useSelector((state: RootState) => state.moderation.selectedTask);
+  const {
+    name: { fi, sv, en },
+    comments,
+  } = selectedTask;
+  const placeNameSelected = fi ?? sv ?? en;
+
+  const moderationExtra = useSelector((state: RootState) => state.moderation.moderationExtra);
+  const {
+    taskType,
+    status,
+    moderator: { fullName: moderatorName },
+  } = moderationExtra;
+
   return (
     <div className={styles.taskHeader}>
-      <h3>PLACE TITLE</h3>
+      <h3>
+        {placeNameSelected} ({selectedTaskId})
+      </h3>
 
       <div className={styles.buttonRow}>
         <Button variant="secondary">{i18n.t("moderation.button.requestTranslation")}</Button>
@@ -25,7 +46,7 @@ const TaskHeader = (): ReactElement => {
       <div className={styles.upperRow}>
         <div>
           <div className={styles.bold}>{i18n.t("moderation.taskHeader.taskType")}</div>
-          <div>TODO</div>
+          <div>{taskType !== TaskType.Unknown ? i18n.t(`moderation.taskType.${taskType}`) : ""}</div>
         </div>
         <div>
           <div className={styles.bold}>{i18n.t("moderation.taskHeader.publishPermission")}</div>
@@ -33,11 +54,13 @@ const TaskHeader = (): ReactElement => {
         </div>
         <div>
           <div className={styles.bold}>{i18n.t("moderation.taskHeader.status")}</div>
-          <div>TODO</div>
+          <div>
+            <TaskStatusLabel status={status} />
+          </div>
         </div>
         <div>
           <div className={styles.bold}>{i18n.t("moderation.taskHeader.moderator")}</div>
-          <div>TODO</div>
+          <div>{moderatorName}</div>
         </div>
       </div>
 
@@ -48,7 +71,7 @@ const TaskHeader = (): ReactElement => {
         </div>
         <div className={styles.comment}>
           <div className={styles.bold}>{i18n.t("moderation.taskHeader.messageFromNotifier")}</div>
-          <div>TODO</div>
+          <div>{comments}</div>
         </div>
       </div>
     </div>

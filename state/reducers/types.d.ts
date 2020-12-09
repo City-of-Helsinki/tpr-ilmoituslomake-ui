@@ -1,5 +1,5 @@
 import { LatLngExpression } from "leaflet";
-import { User, NotificationExtra, PlaceSearch, TaskSearch, ModerationTask } from "../../types/general";
+import { User, NotificationExtra, PlaceSearch, TaskSearch, ModerationTodo, ModerationExtra } from "../../types/general";
 import { ModerationStatus } from "../../types/moderation_status";
 import { NotificationSchema } from "../../types/notification_schema";
 import { NotificationValidation } from "../../types/notification_validation";
@@ -21,13 +21,12 @@ export interface NotificationValidationState {
 export interface ModerationState {
   placeSearch: PlaceSearch;
   taskSearch: TaskSearch;
-  taskResults: ModerationTask[];
+  taskResults: ModerationTodo[];
   selectedTaskId: number;
   selectedTask: NotificationSchema;
-  selectedTaskExtra: NotificationExtra;
   modifiedTaskId: number;
   modifiedTask: NotificationSchema;
-  modifiedTaskExtra: NotificationExtra;
+  moderationExtra: ModerationExtra;
 }
 
 export interface ModerationStatusState {

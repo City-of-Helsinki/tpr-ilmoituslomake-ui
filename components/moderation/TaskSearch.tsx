@@ -6,7 +6,8 @@ import moment from "moment";
 import { ModerationAction } from "../../state/actions/types";
 import { setModerationTaskSearch, setModerationTaskResults } from "../../state/actions/moderation";
 import { RootState } from "../../state/reducers";
-import { ModerationTask } from "../../types/general";
+import { ModerationTodo } from "../../types/general";
+import { getTaskStatus, getTaskType } from "../../utils/conversion";
 import styles from "./PlaceSearch.module.scss";
 
 type OptionTypeWithoutId = {
@@ -36,14 +37,20 @@ const TaskSearch = (): ReactElement => {
     // TODO - search parameters
     const taskResponse = await fetch("/api/moderation/todos/");
     if (taskResponse.ok) {
-      const taskResult = await (taskResponse.json() as Promise<{ results: ModerationTask[] }>);
+      const taskResult = await (taskResponse.json() as Promise<{ results: ModerationTodo[] }>);
 
       console.log("TASK RESPONSE", taskResult);
 
       if (taskResult && taskResult.results && taskResult.results.length > 0) {
         // Parse the date strings to date objects
         const results = taskResult.results.map((result) => {
-          return { ...result, created: moment(result.created_at).toDate(), updated: moment(result.updated_at).toDate() };
+          return {
+            ...result,
+            created: moment(result.created_at).toDate(),
+            updated: moment(result.updated_at).toDate(),
+            taskType: getTaskType(result.category),
+            taskStatus: getTaskStatus(result.status),
+          };
         });
         dispatch(setModerationTaskResults(results));
       } else {

@@ -366,6 +366,15 @@
       "notified": "Notified",
       "status": "Status"
     },
+    "taskStatus": {
+      "open": "New",
+      "inProgress": "Incomplete"
+    },
+    "taskType": {
+      "change": "Change",
+      "new": "New place",
+      "tip": "Tip"
+    },
     "translationNotice": {
       "title": "Translation hallinta",
       "manageTranslation": "Hallinoi translation requests"

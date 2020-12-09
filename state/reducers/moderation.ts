@@ -5,7 +5,6 @@ import {
   CLEAR_MODERATION_PLACE_SEARCH,
   SET_MODERATION_TASK_SEARCH,
   SET_MODERATION_TASK_RESULTS,
-  SELECT_MODERATION_TASK,
   SET_MODERATION_NAME,
   SET_MODERATION_SHORT_DESCRIPTION,
   SET_MODERATION_LONG_DESCRIPTION,
@@ -18,7 +17,7 @@ import {
   SET_MODERATION_PHOTO,
   REMOVE_MODERATION_PHOTO,
   INITIAL_NOTIFICATION,
-  INITIAL_NOTIFICATION_EXTRA,
+  INITIAL_MODERATION_EXTRA,
 } from "../../types/constants";
 import { Photo } from "../../types/general";
 
@@ -39,10 +38,9 @@ const initialState: ModerationState = {
   taskResults: [],
   selectedTaskId: 0,
   selectedTask: { ...INITIAL_NOTIFICATION, location: [0, 0] },
-  selectedTaskExtra: INITIAL_NOTIFICATION_EXTRA,
   modifiedTaskId: 0,
   modifiedTask: { ...INITIAL_NOTIFICATION, location: [0, 0] },
-  modifiedTaskExtra: INITIAL_NOTIFICATION_EXTRA,
+  moderationExtra: INITIAL_MODERATION_EXTRA,
 };
 
 const moderation = (state = initialState, action: AnyAction): ModerationState => {
@@ -76,14 +74,6 @@ const moderation = (state = initialState, action: AnyAction): ModerationState =>
       return {
         ...state,
         taskResults: action.payload || [],
-      };
-    }
-
-    case SELECT_MODERATION_TASK: {
-      console.log("SELECT_MODERATION_TASK", action.payload);
-      return {
-        ...state,
-        selectedTaskId: action.payload,
       };
     }
 
@@ -135,7 +125,7 @@ const moderation = (state = initialState, action: AnyAction): ModerationState =>
       console.log("SET_MODERATION_TAG_OPTIONS", action.payload);
       return {
         ...state,
-        modifiedTaskExtra: { ...state.modifiedTaskExtra, tagOptions: action.payload },
+        moderationExtra: { ...state.moderationExtra, tagOptions: action.payload },
       };
     }
 
@@ -188,7 +178,7 @@ const moderation = (state = initialState, action: AnyAction): ModerationState =>
       // If index -1 is specified, add the photo to the array
       // Otherwise combine the field value with the existing photo in the array
       const photos = [
-        ...state.modifiedTaskExtra.photos.reduce((acc: Photo[], photo, index) => {
+        ...state.moderationExtra.photos.reduce((acc: Photo[], photo, index) => {
           return [...acc, action.payload.index === index ? { ...photo, ...action.payload.value } : photo];
         }, []),
         ...(action.payload.index === -1 ? [action.payload.value] : []),
@@ -196,7 +186,7 @@ const moderation = (state = initialState, action: AnyAction): ModerationState =>
 
       return {
         ...state,
-        modifiedTaskExtra: { ...state.modifiedTaskExtra, photos },
+        moderationExtra: { ...state.moderationExtra, photos },
       };
     }
 
@@ -204,13 +194,13 @@ const moderation = (state = initialState, action: AnyAction): ModerationState =>
       console.log("REMOVE_MODERATION_PHOTO", action.payload);
 
       // Remove the photo at the specified index
-      const photos = state.modifiedTaskExtra.photos.reduce((acc: Photo[], photo, index) => {
+      const photos = state.moderationExtra.photos.reduce((acc: Photo[], photo, index) => {
         return action.payload === index ? acc : [...acc, photo];
       }, []);
 
       return {
         ...state,
-        modifiedTaskExtra: { ...state.modifiedTaskExtra, photos },
+        moderationExtra: { ...state.moderationExtra, photos },
       };
     }
 

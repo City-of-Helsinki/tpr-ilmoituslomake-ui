@@ -7,8 +7,9 @@ import absoluteUrl from "next-absolute-url";
 import i18nLoader from "../../../utils/i18n";
 import { initStore } from "../../../state/store";
 import { RootState } from "../../../state/reducers";
-import { INITIAL_NOTIFICATION } from "../../../types/constants";
+import { INITIAL_NOTIFICATION, TaskCategory, TaskType } from "../../../types/constants";
 import { TagOption } from "../../../types/general";
+import { getTaskStatus, getTaskType } from "../../../utils/conversion";
 import Layout from "../../../components/common/Layout";
 import ModerationHeader from "../../../components/moderation/ModerationHeader";
 import Collapsible from "../../../components/moderation/Collapsible";
@@ -81,10 +82,23 @@ export const getServerSideProps: GetServerSideProps = async ({ req, params, loca
     if (taskResponse.ok) {
       const taskResult = await taskResponse.json();
 
-      initialReduxState.moderation.selectedTaskId = taskResult.target.id;
-      initialReduxState.moderation.selectedTask = taskResult.target.data;
-      initialReduxState.moderation.modifiedTaskId = taskResult.id;
-      initialReduxState.moderation.modifiedTask = taskResult.data;
+      try {
+        initialReduxState.moderation = {
+          ...initialReduxState.moderation,
+          selectedTaskId: taskResult.target.id,
+          selectedTask: taskResult.target.data,
+          modifiedTaskId: taskResult.id,
+          modifiedTask: taskResult.data,
+          moderationExtra: {
+            ...initialReduxState.moderation.moderationExtra,
+            taskType: getTaskType(taskResult.category),
+            status: getTaskStatus(taskResult.status),
+            moderator: { fullName: `${taskResult.moderator.first_name} ${taskResult.moderator.last_name}`, email: taskResult.moderator.email },
+          },
+        };
+      } catch (err) {
+        console.log("ERROR", err);
+      }
     }
   }
 
@@ -94,7 +108,7 @@ export const getServerSideProps: GetServerSideProps = async ({ req, params, loca
     const tagResult = await tagResponse.json();
     if (tagResult && tagResult.length > 0) {
       const tagOptions = tagResult.map((tag: TagOption) => ({ id: tag.id, ontologyword: tag.ontologyword }));
-      initialReduxState.moderation.modifiedTaskExtra.tagOptions = tagOptions;
+      initialReduxState.moderation.moderationExtra.tagOptions = tagOptions;
     }
   }
 

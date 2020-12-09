@@ -7,6 +7,25 @@ export enum Status {
   Rejected = "rejected",
 }
 
+export enum TaskCategory {
+  Unknown = "unknown",
+  ChangeRequest = "change_request",
+  ModerationTask = "moderation_task",
+}
+
+export enum TaskStatus {
+  Unknown = "unknown",
+  Open = "open",
+  InProgress = "in_progress",
+}
+
+export enum TaskType {
+  Unknown = "unknown",
+  Change = "change",
+  New = "new",
+  Tip = "tip",
+}
+
 export const LANGUAGE_OPTIONS = ["fi", "sv", "en"];
 export const MAX_PAGE = 4;
 export const MAX_LENGTH_SHORT_DESC = 150;
@@ -56,7 +75,6 @@ export const SET_MODERATION_PLACE_SEARCH = "SET_MODERATION_PLACE_SEARCH";
 export const CLEAR_MODERATION_PLACE_SEARCH = "CLEAR_MODERATION_PLACE_SEARCH";
 export const SET_MODERATION_TASK_SEARCH = "SET_MODERATION_TASK_SEARCH";
 export const SET_MODERATION_TASK_RESULTS = "SET_MODERATION_TASK_RESULTS";
-export const SELECT_MODERATION_TASK = "SELECT_MODERATION_TASK";
 export const SET_MODERATION_NAME = "SET_MODERATION_NAME";
 export const SET_MODERATION_SHORT_DESCRIPTION = "SET_MODERATION_SHORT_DESCRIPTION";
 export const SET_MODERATION_LONG_DESCRIPTION = "SET_MODERATION_LONG_DESCRIPTION";
@@ -139,4 +157,15 @@ export const INITIAL_NOTIFICATION_EXTRA = {
   },
   photos: [],
   tagOptions: [],
+};
+
+export const INITIAL_MODERATION_EXTRA = {
+  photos: [],
+  tagOptions: [],
+  taskType: TaskType.Unknown,
+  status: TaskStatus.Unknown,
+  moderator: {
+    fullName: "",
+    email: "",
+  },
 };

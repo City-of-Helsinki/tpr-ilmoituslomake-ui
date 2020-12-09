@@ -25,8 +25,8 @@ const TagsModeration = (): ReactElement => {
   const modifiedTask = useSelector((state: RootState) => state.moderation.modifiedTask);
   const { ontology_ids: tagsModified } = modifiedTask;
 
-  const modifiedTaskExtra = useSelector((state: RootState) => state.moderation.modifiedTaskExtra);
-  const { tagOptions } = modifiedTaskExtra;
+  const moderationExtra = useSelector((state: RootState) => state.moderation.moderationExtra);
+  const { tagOptions } = moderationExtra;
 
   const moderationStatus = useSelector((state: RootState) => state.moderationStatus.moderationStatus);
   const { ontology_ids: tagsStatus } = moderationStatus;

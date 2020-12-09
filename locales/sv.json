@@ -366,6 +366,15 @@
       "notified": "Ilmoitettu",
       "status": "Status"
     },
+    "taskStatus": {
+      "open": "Uusi",
+      "inProgress": "Keskeneräinen"
+    },
+    "taskType": {
+      "change": "Muutos",
+      "new": "Uusi kohde",
+      "tip": "Vinkki"
+    },
     "translationNotice": {
       "title": "Käännösten hallinta",
       "manageTranslation": "Hallinoi käännöspyyntöjä"

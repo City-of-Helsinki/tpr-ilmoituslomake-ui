@@ -1,4 +1,4 @@
-import { Status } from "./constants";
+import { Status, TaskStatus } from "./constants";
 
 export interface User {
   authenticated: boolean;
@@ -70,7 +70,7 @@ export interface TaskSearch {
   taskType: string;
 }
 
-export interface ModerationTask {
+export interface ModerationTodo {
   id: number;
   target: {
     id: number;
@@ -79,9 +79,26 @@ export interface ModerationTask {
   category: string;
   item_type: string;
   status: string;
-  moderator: string;
+  moderator: {
+    first_name: string;
+    last_name: string;
+    email: string;
+  };
   created_at: string;
   updated_at: string;
   created: Date;
   updated: Date;
+  taskType: TaskType;
+  taskStatus: TaskStatus;
+}
+
+export interface ModerationExtra {
+  photos: Photo[];
+  tagOptions: TagOption[];
+  taskType: TaskType;
+  status: TaskStatus;
+  moderator: {
+    fullName: string;
+    email: string;
+  };
 }
