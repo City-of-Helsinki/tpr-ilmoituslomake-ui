@@ -9,10 +9,10 @@ import "../styles/global.scss";
 
 const App = ({ Component, pageProps }: AppProps): ReactElement => {
   const router = useRouter();
-  const { lngDict, ...rest } = pageProps;
+  const { lngDict, initialReduxState, ...rest } = pageProps;
   const locale = router.locale || router.defaultLocale || defaultLocale;
 
-  const store = useStore(pageProps.initialReduxState);
+  const store = useStore(initialReduxState);
 
   return (
     <I18nProvider lngDict={lngDict} locale={locale}>

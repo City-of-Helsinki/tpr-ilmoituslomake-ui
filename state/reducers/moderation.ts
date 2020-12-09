@@ -40,6 +40,7 @@ const initialState: ModerationState = {
   selectedTaskId: 0,
   selectedTask: { ...INITIAL_NOTIFICATION, location: [0, 0] },
   selectedTaskExtra: INITIAL_NOTIFICATION_EXTRA,
+  modifiedTaskId: 0,
   modifiedTask: { ...INITIAL_NOTIFICATION, location: [0, 0] },
   modifiedTaskExtra: INITIAL_NOTIFICATION_EXTRA,
 };

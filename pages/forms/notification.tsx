@@ -97,21 +97,20 @@ const Notification = (): ReactElement => {
 export const getServerSideProps: GetServerSideProps = async ({ req, locale }) => {
   const lngDict = await i18nLoader(locale);
 
-  // Note: this currently fetches all tags which may cause performance issues
-  const { origin } = absoluteUrl(req);
-  const tagResponse = await fetch(`${origin}/api/ontologywords/?format=json&search=`);
-  let tagOptions = [];
-  if (tagResponse.ok) {
-    const tagResult = await tagResponse.json();
-    if (tagResult && tagResult.length > 0) {
-      tagOptions = tagResult.map((tag: TagOption) => ({ id: tag.id, ontologyword: tag.ontologyword }));
-    }
-  }
-
   const reduxStore = initStore();
   const initialReduxState = reduxStore.getState();
   initialReduxState.notification.notificationExtra.inputLanguages = [locale || defaultLocale];
-  initialReduxState.notification.notificationExtra.tagOptions = tagOptions;
+
+  // Note: this currently fetches all tags which may cause performance issues
+  const { origin } = absoluteUrl(req);
+  const tagResponse = await fetch(`${origin}/api/ontologywords/?format=json&search=`);
+  if (tagResponse.ok) {
+    const tagResult = await tagResponse.json();
+    if (tagResult && tagResult.length > 0) {
+      const tagOptions = tagResult.map((tag: TagOption) => ({ id: tag.id, ontologyword: tag.ontologyword }));
+      initialReduxState.notification.notificationExtra.tagOptions = tagOptions;
+    }
+  }
 
   return {
     props: {

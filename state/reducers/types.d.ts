@@ -25,6 +25,7 @@ export interface ModerationState {
   selectedTaskId: number;
   selectedTask: NotificationSchema;
   selectedTaskExtra: NotificationExtra;
+  modifiedTaskId: number;
   modifiedTask: NotificationSchema;
   modifiedTaskExtra: NotificationExtra;
 }

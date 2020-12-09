@@ -1,23 +1,17 @@
-import React, { Dispatch, ReactElement, Fragment } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import React, { ReactElement, Fragment } from "react";
+import { useSelector } from "react-redux";
+import Link from "next/link";
 import { useI18n } from "next-localization";
 import { Button, IconPen } from "hds-react";
 import moment from "moment";
-import { ModerationAction } from "../../state/actions/types";
-import { selectModerationTask } from "../../state/actions/moderation";
 import { RootState } from "../../state/reducers";
 import { ModerationTask } from "../../types/general";
 import styles from "./TaskResults.module.scss";
 
 const TaskResults = (): ReactElement => {
   const i18n = useI18n();
-  const dispatch = useDispatch<Dispatch<ModerationAction>>();
 
   const taskResults = useSelector((state: RootState) => state.moderation.taskResults);
-
-  const selectResult = (id: number) => {
-    dispatch(selectModerationTask(id));
-  };
 
   return (
     <div className="formSection">
@@ -40,9 +34,11 @@ const TaskResults = (): ReactElement => {
             return (
               <Fragment key={`taskresult_${id}`}>
                 <div className={`gridColumn1 ${styles.gridContent} ${styles.gridButton}`}>
-                  <Button variant="supplementary" size="small" iconLeft={<IconPen />} onClick={() => selectResult(id)}>
-                    {`${name} (${targetId})`}
-                  </Button>
+                  <Link href={`/moderation/task/${id}`}>
+                    <Button variant="supplementary" size="small" iconLeft={<IconPen />}>
+                      {`${name} (${targetId})`}
+                    </Button>
+                  </Link>
                 </div>
                 <div className={`gridColumn2 ${styles.gridContent}`}>{category}</div>
                 <div className={`gridColumn3 ${styles.gridContent}`}>{moment(created).format("D.M.YYYY H:m")}</div>

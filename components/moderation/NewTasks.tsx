@@ -31,10 +31,6 @@ const NewTasks = (): ReactElement => {
     }
   };
 
-  const selectResult = (id: number) => {
-    console.log("TODO", id);
-  };
-
   useEffect(() => {
     if (init) {
       searchTasks();
@@ -64,9 +60,11 @@ const NewTasks = (): ReactElement => {
             return (
               <Fragment key={`taskresult_${id}`}>
                 <div className={`gridColumn1 ${styles.gridContent} ${styles.gridButton}`}>
-                  <Button variant="supplementary" size="small" iconLeft={<IconPen />} onClick={() => selectResult(id)}>
-                    {`${name} (${targetId})`}
-                  </Button>
+                  <Link href={`/moderation/task/${id}`}>
+                    <Button variant="supplementary" size="small" iconLeft={<IconPen />}>
+                      {`${name} (${targetId})`}
+                    </Button>
+                  </Link>
                 </div>
                 <div className={`gridColumn2 ${styles.gridContent}`}>{category}</div>
                 <div className={`gridColumn3 ${styles.gridContent}`}>{moment(created).format("D.M.YYYY H:m")}</div>
