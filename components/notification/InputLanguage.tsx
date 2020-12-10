@@ -2,7 +2,7 @@ import React, { Dispatch, ChangeEvent, ReactElement } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useRouter } from "next/router";
 import { useI18n } from "next-localization";
-import { Checkbox } from "hds-react";
+import { Checkbox, SelectionGroup } from "hds-react";
 import { NotificationAction } from "../../state/actions/types";
 import { setNotificationInputLanguage } from "../../state/actions/notification";
 import { RootState } from "../../state/reducers";
@@ -22,13 +22,7 @@ const InputLanguage = (): ReactElement => {
   };
 
   return (
-    <div role="group" className={styles.inputLanguage} aria-labelledby="inputLanguage">
-      <div id="inputLanguage">
-        {i18n.t("notification.inputLanguage.title")}
-        <span aria-hidden="true" className="hds-text-input__required">
-          *
-        </span>
-      </div>
+    <SelectionGroup direction="horizontal" className={styles.inputLanguage} label={i18n.t("notification.inputLanguage.title")} required>
       {LANGUAGE_OPTIONS.map((option) => (
         <Checkbox
           id={`input_${option}`}
@@ -42,7 +36,7 @@ const InputLanguage = (): ReactElement => {
           disabled={router.locale === option}
         />
       ))}
-    </div>
+    </SelectionGroup>
   );
 };
 

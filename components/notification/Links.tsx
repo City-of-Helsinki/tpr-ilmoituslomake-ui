@@ -45,6 +45,7 @@ const Links = (): ReactElement => {
               value={website[option] as string}
               onChange={updateWebsite}
               onBlur={validateWebsite}
+              tooltipButtonLabel={i18n.t("notification.links.website.tooltipLabel")}
               tooltipLabel={i18n.t("notification.links.website.tooltipLabel")}
               tooltipText={i18n.t("notification.links.website.tooltipText")}
               invalid={!websiteValid[option]}

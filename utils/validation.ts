@@ -63,13 +63,9 @@ export const isTagValid = (notification: NotificationSchema, dispatch: Dispatch<
   return valid;
 };
 
-const phoneSchema = () => {
-  return string().matches(/^\+?[0-9- ]+$/, { excludeEmptyString: true });
-};
+const phoneSchema = () => string().matches(/^\+?[0-9- ]+$/, { excludeEmptyString: true });
 
-const postalCodeSchema = () => {
-  return string().matches(/^[0-9][0-9][0-9][0-9][0-9]$/, { excludeEmptyString: true });
-};
+const postalCodeSchema = () => string().matches(/^[0-9][0-9][0-9][0-9][0-9]$/, { excludeEmptyString: true });
 
 export const isNotifierFieldValid = (
   notifierField: string,
@@ -184,13 +180,11 @@ export const isPageValid = (
   switch (page) {
     case 1: {
       // Basic
-      const inputValid1 = inputLanguages.flatMap((option) => {
-        return [
-          isNameValid(option, notification, dispatch),
-          isShortDescriptionValid(option, notification, dispatch),
-          isLongDescriptionValid(option, notification, dispatch),
-        ];
-      });
+      const inputValid1 = inputLanguages.flatMap((option) => [
+        isNameValid(option, notification, dispatch),
+        isShortDescriptionValid(option, notification, dispatch),
+        isLongDescriptionValid(option, notification, dispatch),
+      ]);
       const inputValid2 = [
         isTagValid(notification, dispatch),
         isNotifierFieldValid("fullName", notificationExtra, dispatch),
@@ -214,9 +208,7 @@ export const isPageValid = (
               isAddressFieldValid("fi", "post_office", notification, dispatch),
             ];
       const inputValid2 = [isContactFieldValid("phone", notification, dispatch), isContactFieldValid("email", notification, dispatch)];
-      const inputValid3 = inputLanguages.map((option) => {
-        return isWebsiteValid(option, notification, dispatch);
-      });
+      const inputValid3 = inputLanguages.map((option) => isWebsiteValid(option, notification, dispatch));
       return inputValid1.every((valid) => valid) && inputValid2.every((valid) => valid) && inputValid3.every((valid) => valid);
     }
     case 3: {

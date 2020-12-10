@@ -1,7 +1,7 @@
 import React, { Dispatch, ChangeEvent, ReactElement } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useI18n } from "next-localization";
-import { TextInput, RadioButton, Tooltip } from "hds-react";
+import { TextInput, RadioButton, Tooltip, SelectionGroup } from "hds-react";
 import { NotificationAction, NotificationValidationAction } from "../../state/actions/types";
 import { setNotificationNotifier } from "../../state/actions/notification";
 import { RootState } from "../../state/reducers";
@@ -31,13 +31,16 @@ const Notifier = (): ReactElement => {
   return (
     <div className="formSection">
       <h3>{i18n.t("notification.notifier.title")}</h3>
-      <div role="group" className="formInput" aria-labelledby="notifierType">
-        <div id="notifierType">
-          {i18n.t("notification.notifier.notifierType")}
-          <span aria-hidden="true" className="hds-text-input__required">
-            *
-          </span>
-        </div>
+
+      <SelectionGroup
+        direction="horizontal"
+        className="formInput"
+        label={i18n.t("notification.notifier.notifierType")}
+        tooltipButtonLabel={i18n.t("notification.notifier.tooltipLabel")}
+        tooltipLabel={i18n.t("notification.notifier.tooltipLabel")}
+        tooltipText={i18n.t("notification.notifier.tooltipText")}
+        required
+      >
         <RadioButton
           id="notifierType_owner"
           label={i18n.t("notification.notifier.owner")}
@@ -54,8 +57,8 @@ const Notifier = (): ReactElement => {
           checked={notifierType === "outsideSource"}
           onChange={updateNotifier}
         />
-        <Tooltip>{i18n.t("notification.notifier.tooltip")}</Tooltip>
-      </div>
+      </SelectionGroup>
+
       <TextInput
         id="fullName"
         className="formInput"

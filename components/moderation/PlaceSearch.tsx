@@ -1,7 +1,7 @@
 import React, { Dispatch, ChangeEvent, ReactElement } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useI18n } from "next-localization";
-import { Button, Checkbox, Combobox, Select, TextInput } from "hds-react";
+import { Button, Checkbox, Combobox, Select, SelectionGroup, TextInput } from "hds-react";
 import { ModerationAction } from "../../state/actions/types";
 import { setModerationPlaceSearch, clearModerationPlaceSearch } from "../../state/actions/moderation";
 import { RootState } from "../../state/reducers";
@@ -89,8 +89,7 @@ const PlaceSearch = (): ReactElement => {
           selectedItemRemoveButtonAriaLabel={i18n.t("notification.button.remove")}
           clearButtonAriaLabel={i18n.t("notification.button.clearAllSelections")}
         />
-        <div role="group" className="gridColumn3" aria-labelledby="payment">
-          <div id="payment">{i18n.t("moderation.placeSearch.publishPermission.label")}</div>
+        <SelectionGroup direction="horizontal" className="gridColumn3" label={i18n.t("moderation.placeSearch.publishPermission.label")}>
           {publishPermissionOptions.map((option) => (
             <Checkbox
               id={option}
@@ -101,7 +100,7 @@ const PlaceSearch = (): ReactElement => {
               onChange={updatePublishPermission}
             />
           ))}
-        </div>
+        </SelectionGroup>
         <TextInput
           id="address"
           className="gridColumn1"
