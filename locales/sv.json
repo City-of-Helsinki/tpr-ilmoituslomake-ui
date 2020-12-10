@@ -28,14 +28,12 @@
     "page": {
       "basic": "Perustiedot",
       "contact": "Yhteystiedot",
-      "payment": "Maksut",
       "photos": "Kuvat",
       "send": "Lähetä"
     },
     "main": {
       "basic": "Kohteen perustiedot",
       "contact": "Kohteen yhteystiedot",
-      "payment": "Kohteen hinnat ja maksut",
       "photos": "Kohteen kuvat",
       "send": "Tarkista tiedot ja lähetä"
     },
@@ -153,10 +151,6 @@
       "title": "Aukioloajat",
       "notice": "Aukioloajat ilmoitetaan lähetyksen jälkeen."
     },
-    "payment": {
-      "title": "Maksutavat",
-      "options": "Maksutavat ja veronpalautus"
-    },
     "photos": {
       "title": "Kuvat",
       "notice": "Lisää verkossa sijaitsevan kuvan url-osoite. Toistaiseksi valokuvia ei voi ladata laitteelta vaan ainoastaan kuvalinkit ovat mahdollisia. Kuvan lisääminen ei ole pakollista. Mikäli kuva on lisätty, siihen liittyvät pakolliset tiedot on merkitty tähdellä *",
@@ -185,12 +179,6 @@
     },
     "preview": {
       "title": "Yhteenveto kohteen tiedoista"
-    },
-    "prices": {
-      "title": "Hinnat ja pääsymaksut",
-      "price": {
-        "label": "Hinta ja/tai pääsymaksu"
-      }
     },
     "tags": {
       "title": "Asiasanat",

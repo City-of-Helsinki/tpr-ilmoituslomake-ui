@@ -28,14 +28,12 @@
     "page": {
       "basic": "Basic info",
       "contact": "Contact info",
-      "payment": "Payments",
       "photos": "Photos",
       "send": "Send"
     },
     "main": {
       "basic": "Place's basic information",
       "contact": "Place's contact information",
-      "payment": "Place's prices and payments",
       "photos": "Place's photos",
       "send": "Check information and send"
     },
@@ -153,10 +151,6 @@
       "title": "Opening times",
       "notice": "Opening times are notified after sending."
     },
-    "payment": {
-      "title": "Payment methods",
-      "options": "Payment methods and tax refund"
-    },
     "photos": {
       "title": "Photos",
       "notice": "Add a url-address for a photo located on the internet. For the time being photos cannot be uploaded from a device, so only links to photos are possible. Adding a photo is not required. In case a photo is added, its mandatory information is marked with an asterisk *",
@@ -185,12 +179,6 @@
     },
     "preview": {
       "title": "Summary of the place's information"
-    },
-    "prices": {
-      "title": "Prices ja entrance fees",
-      "price": {
-        "label": "Price and/or entrance fee"
-      }
     },
     "tags": {
       "title": "Keywords",
