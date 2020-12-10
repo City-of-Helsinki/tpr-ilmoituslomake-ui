@@ -84,6 +84,7 @@ const Description = (): ReactElement => {
               onChange={updateName}
               onBlur={validateName}
               invalid={!nameValid[option]}
+              errorText={!nameValid[option] ? i18n.t("notification.toast.validationFailed.title") : ""}
               required={router.locale === option}
             />
           ) : null
@@ -109,6 +110,7 @@ const Description = (): ReactElement => {
               tooltipLabel={i18n.t("notification.description.shortDescription.tooltipLabel")}
               tooltipText={i18n.t("notification.description.shortDescription.tooltipText")}
               invalid={!shortDescValid[option]}
+              errorText={!shortDescValid[option] ? i18n.t("notification.toast.validationFailed.title") : ""}
               required={router.locale === option}
             />
           ) : null
@@ -134,6 +136,7 @@ const Description = (): ReactElement => {
               tooltipLabel={i18n.t("notification.description.longDescription.tooltipLabel")}
               tooltipText={i18n.t("notification.description.longDescription.tooltipText")}
               invalid={!longDescValid[option]}
+              errorText={!longDescValid[option] ? i18n.t("notification.toast.validationFailed.title") : ""}
               required={router.locale === option}
             />
           ) : null

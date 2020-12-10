@@ -53,6 +53,7 @@ const Photos = (): ReactElement => {
               onChange={(evt) => updatePhoto(index, evt)}
               onBlur={() => validateUrl(index)}
               invalid={photosValid[index] && !photosValid[index].url}
+              errorText={photosValid[index] && !photosValid[index].url ? i18n.t("notification.toast.validationFailed.title") : ""}
               required
             />
             <TextInput

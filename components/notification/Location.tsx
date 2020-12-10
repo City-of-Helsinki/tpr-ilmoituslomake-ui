@@ -77,6 +77,7 @@ const Location = (): ReactElement => {
             onChange={(evt) => updateAddress("fi", evt)}
             onBlur={(evt) => validateAddress("fi", evt)}
             invalid={!streetFiValid}
+            errorText={!streetFiValid ? i18n.t("notification.toast.validationFailed.title") : ""}
             required
           />
           <TextInput
@@ -88,6 +89,7 @@ const Location = (): ReactElement => {
             onChange={(evt) => updateAddress("fi", evt)}
             onBlur={(evt) => validateAddress("fi", evt)}
             invalid={!postalCodeFiValid}
+            errorText={!postalCodeFiValid ? i18n.t("notification.toast.validationFailed.title") : ""}
             required
           />
           <TextInput
@@ -99,6 +101,7 @@ const Location = (): ReactElement => {
             onChange={(evt) => updateAddress("fi", evt)}
             onBlur={(evt) => validateAddress("fi", evt)}
             invalid={!postOfficeFiValid}
+            errorText={!postOfficeFiValid ? i18n.t("notification.toast.validationFailed.title") : ""}
             required
           />
         </>
@@ -114,6 +117,7 @@ const Location = (): ReactElement => {
             onChange={(evt) => updateAddress("sv", evt)}
             onBlur={(evt) => validateAddress("sv", evt)}
             invalid={!streetSvValid}
+            errorText={!streetSvValid ? i18n.t("notification.toast.validationFailed.title") : ""}
             required
           />
           <TextInput
@@ -125,6 +129,7 @@ const Location = (): ReactElement => {
             onChange={(evt) => updateAddress("sv", evt)}
             onBlur={(evt) => validateAddress("sv", evt)}
             invalid={!postalCodeSvValid}
+            errorText={!postalCodeSvValid ? i18n.t("notification.toast.validationFailed.title") : ""}
             required
           />
           <TextInput
@@ -136,6 +141,7 @@ const Location = (): ReactElement => {
             onChange={(evt) => updateAddress("sv", evt)}
             onBlur={(evt) => validateAddress("sv", evt)}
             invalid={!postOfficeSvValid}
+            errorText={!postOfficeSvValid ? i18n.t("notification.toast.validationFailed.title") : ""}
             required
           />
         </>

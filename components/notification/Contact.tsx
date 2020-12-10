@@ -38,6 +38,7 @@ const Contact = (): ReactElement => {
         onChange={updateContact}
         onBlur={validateContact}
         invalid={!phoneValid}
+        errorText={!phoneValid ? i18n.t("notification.toast.validationFailed.title") : ""}
       />
       <TextInput
         id="email"
@@ -48,6 +49,7 @@ const Contact = (): ReactElement => {
         onChange={updateContact}
         onBlur={validateContact}
         invalid={!emailValid}
+        errorText={!emailValid ? i18n.t("notification.toast.validationFailed.title") : ""}
       />
     </div>
   );

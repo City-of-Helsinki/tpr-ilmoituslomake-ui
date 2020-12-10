@@ -68,6 +68,7 @@ const Notifier = (): ReactElement => {
         onChange={updateNotifier}
         onBlur={validateNotifier}
         invalid={!fullNameValid}
+        errorText={!fullNameValid ? i18n.t("notification.toast.validationFailed.title") : ""}
         required
       />
       <TextInput
@@ -79,6 +80,7 @@ const Notifier = (): ReactElement => {
         onChange={updateNotifier}
         onBlur={validateNotifier}
         invalid={!emailValid}
+        errorText={!emailValid ? i18n.t("notification.toast.validationFailed.title") : ""}
         required
       />
       <TextInput
@@ -90,6 +92,7 @@ const Notifier = (): ReactElement => {
         onChange={updateNotifier}
         onBlur={validateNotifier}
         invalid={!phoneValid}
+        errorText={!phoneValid ? i18n.t("notification.toast.validationFailed.title") : ""}
         required
       />
     </div>

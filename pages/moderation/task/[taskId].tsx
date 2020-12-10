@@ -7,7 +7,7 @@ import absoluteUrl from "next-absolute-url";
 import i18nLoader from "../../../utils/i18n";
 import { initStore } from "../../../state/store";
 import { RootState } from "../../../state/reducers";
-import { INITIAL_NOTIFICATION, TaskCategory, TaskType } from "../../../types/constants";
+import { INITIAL_NOTIFICATION } from "../../../types/constants";
 import { TagOption } from "../../../types/general";
 import { getTaskStatus, getTaskType } from "../../../utils/conversion";
 import Layout from "../../../components/common/Layout";

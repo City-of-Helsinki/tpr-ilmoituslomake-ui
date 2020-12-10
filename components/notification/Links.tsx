@@ -49,6 +49,7 @@ const Links = (): ReactElement => {
               tooltipLabel={i18n.t("notification.links.website.tooltipLabel")}
               tooltipText={i18n.t("notification.links.website.tooltipText")}
               invalid={!websiteValid[option]}
+              errorText={!websiteValid[option] ? i18n.t("notification.toast.validationFailed.title") : ""}
             />
           ) : null
         )}

@@ -12,6 +12,4 @@ export const getTaskType = (category: string): TaskType => {
   return TaskType.Unknown;
 };
 
-export const getTaskStatus = (status: string): TaskStatus => {
-  return status ? (status as TaskStatus) : TaskStatus.Unknown;
-};
+export const getTaskStatus = (status: string): TaskStatus => (status ? (status as TaskStatus) : TaskStatus.Unknown);
