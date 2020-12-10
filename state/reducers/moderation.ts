@@ -1,6 +1,7 @@
 import { AnyAction } from "redux";
 import { ModerationState } from "./types";
 import {
+  TaskCategory,
   SET_MODERATION_PLACE_SEARCH,
   CLEAR_MODERATION_PLACE_SEARCH,
   SET_MODERATION_TASK_SEARCH,
@@ -33,7 +34,7 @@ const initialState: ModerationState = {
   },
   taskSearch: {
     placeName: "",
-    taskType: "",
+    taskType: TaskCategory.Unknown,
   },
   taskResults: [],
   selectedTaskId: 0,

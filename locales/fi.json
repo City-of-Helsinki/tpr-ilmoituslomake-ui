@@ -355,7 +355,8 @@
         "label": "Kohteen nimi"
       },
       "taskType": {
-        "label": "Tyyppi"
+        "label": "Tyyppi",
+        "all": "Kaikki"
       }
     },
     "taskResults": {

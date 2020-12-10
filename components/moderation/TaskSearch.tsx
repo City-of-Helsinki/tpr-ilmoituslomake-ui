@@ -6,11 +6,13 @@ import moment from "moment";
 import { ModerationAction } from "../../state/actions/types";
 import { setModerationTaskSearch, setModerationTaskResults } from "../../state/actions/moderation";
 import { RootState } from "../../state/reducers";
+import { TaskCategory } from "../../types/constants";
 import { ModerationTodo } from "../../types/general";
 import { getTaskStatus, getTaskType } from "../../utils/conversion";
 import styles from "./PlaceSearch.module.scss";
 
-type OptionTypeWithoutId = {
+type OptionTypeWithEnumId = {
+  id: TaskCategory;
   label: string;
 };
 
@@ -21,21 +23,26 @@ const TaskSearch = (): ReactElement => {
   const taskSearch = useSelector((state: RootState) => state.moderation.taskSearch);
   const { placeName, taskType } = taskSearch;
 
-  const taskTypeOptions = [{ label: "Kaikki" }, { label: "Muutos" }, { label: "Uusi kohde" }, { label: "Vinkki" }];
+  // TODO - improve this categorisation
+  const taskTypeOptions = [
+    { id: TaskCategory.Unknown, label: i18n.t("moderation.taskSearch.taskType.all") },
+    { id: TaskCategory.ChangeRequest, label: i18n.t("moderation.taskType.change") },
+    { id: TaskCategory.ModerationTask, label: i18n.t("moderation.taskType.new") },
+  ];
 
-  const convertValue = (value: string | undefined): OptionTypeWithoutId | undefined => ({ label: value ?? "" });
+  const convertValue = (value: string | undefined): OptionTypeWithEnumId | undefined => taskTypeOptions.find((t) => t.id === value);
 
   const updateSearchText = (evt: ChangeEvent<HTMLInputElement>) => {
     dispatch(setModerationTaskSearch({ ...taskSearch, [evt.target.name]: evt.target.value }));
   };
 
-  const updateSearchTaskType = (selected: OptionTypeWithoutId) => {
-    dispatch(setModerationTaskSearch({ ...taskSearch, taskType: selected ? selected.label : "" }));
+  const updateSearchTaskType = (selected: OptionTypeWithEnumId) => {
+    dispatch(setModerationTaskSearch({ ...taskSearch, taskType: selected.id }));
   };
 
   const searchTasks = async () => {
-    // TODO - search parameters
-    const taskResponse = await fetch("/api/moderation/todos/");
+    const searchCategory = taskType !== TaskCategory.Unknown ? `&category=${taskType}` : "";
+    const taskResponse = await fetch(`/api/moderation/todos/find/?search=${placeName}${searchCategory}`);
     if (taskResponse.ok) {
       const taskResult = await (taskResponse.json() as Promise<{ results: ModerationTodo[] }>);
 

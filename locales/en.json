@@ -355,7 +355,8 @@
         "label": "Place's name"
       },
       "taskType": {
-        "label": "Type"
+        "label": "Type",
+        "all": "All"
       }
     },
     "taskResults": {

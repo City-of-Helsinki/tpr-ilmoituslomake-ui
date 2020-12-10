@@ -7,6 +7,7 @@ import moment from "moment";
 import { RootState } from "../../state/reducers";
 import { TaskType } from "../../types/constants";
 import { ModerationTodo } from "../../types/general";
+import { getTaskStatus } from "../../utils/conversion";
 import TaskStatusLabel from "./TaskStatusLabel";
 import styles from "./TaskResults.module.scss";
 
@@ -47,7 +48,7 @@ const TaskResults = (): ReactElement => {
                 </div>
                 <div className={`gridColumn3 ${styles.gridContent}`}>{moment(created).format("D.M.YYYY H:m")}</div>
                 <div className={`gridColumn4 ${styles.gridContent}`}>
-                  <TaskStatusLabel status={status} />
+                  <TaskStatusLabel status={getTaskStatus(status)} />
                 </div>
               </Fragment>
             );

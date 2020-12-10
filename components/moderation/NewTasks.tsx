@@ -80,7 +80,7 @@ const NewTasks = (): ReactElement => {
                 </div>
                 <div className={`gridColumn3 ${styles.gridContent}`}>{moment(created).format("D.M.YYYY H:m")}</div>
                 <div className={`gridColumn4 ${styles.gridContent}`}>
-                  <TaskStatusLabel status={status} />
+                  <TaskStatusLabel status={getTaskStatus(status)} />
                 </div>
               </Fragment>
             );

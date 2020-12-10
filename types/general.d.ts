@@ -1,4 +1,4 @@
-import { Status, TaskStatus } from "./constants";
+import { Status, TaskStatus, TaskType } from "./constants";
 
 export interface User {
   authenticated: boolean;
@@ -67,7 +67,7 @@ export interface PlaceSearch {
 
 export interface TaskSearch {
   placeName: string;
-  taskType: string;
+  taskType: TaskCategory;
 }
 
 export interface ModerationTodo {
