@@ -3,6 +3,7 @@ import { LatLngExpression } from "leaflet";
 import { NotificationState } from "./types";
 import {
   MAX_PAGE,
+  MAX_PHOTOS,
   MAP_INITIAL_ZOOM,
   SET_PAGE,
   SET_USER,
@@ -194,10 +195,11 @@ const notification = (state = initialState, action: AnyAction): NotificationStat
       // If index -1 is specified, add the photo to the array
       // Otherwise combine the field value with the existing photo in the array
       const photos = [
-        ...state.notificationExtra.photos.reduce((acc: Photo[], photo, index) => {
-          return [...acc, action.payload.index === index ? { ...photo, ...action.payload.value } : photo];
-        }, []),
-        ...(action.payload.index === -1 ? [action.payload.value] : []),
+        ...state.notificationExtra.photos.reduce(
+          (acc: Photo[], photo, index) => [...acc, action.payload.index === index ? { ...photo, ...action.payload.value } : photo],
+          []
+        ),
+        ...(action.payload.index === -1 && state.notificationExtra.photos.length < MAX_PHOTOS ? [action.payload.value] : []),
       ];
 
       return {
@@ -210,9 +212,7 @@ const notification = (state = initialState, action: AnyAction): NotificationStat
       console.log("REMOVE_NOTIFICATION_PHOTO", action.payload);
 
       // Remove the photo at the specified index
-      const photos = state.notificationExtra.photos.reduce((acc: Photo[], photo, index) => {
-        return action.payload === index ? acc : [...acc, photo];
-      }, []);
+      const photos = state.notificationExtra.photos.reduce((acc: Photo[], photo, index) => (action.payload === index ? acc : [...acc, photo]), []);
 
       return {
         ...state,

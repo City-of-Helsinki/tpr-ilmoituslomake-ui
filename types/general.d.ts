@@ -1,4 +1,4 @@
-import { Status, TaskStatus, TaskType } from "./constants";
+import { PhotoSourceType, Status, TaskStatus, TaskType } from "./constants";
 
 export interface User {
   authenticated: boolean;
@@ -26,10 +26,12 @@ export type OptionType = {
 };
 
 export interface Photo {
+  sourceType: PhotoSourceType;
   url: string;
   description: string;
-  permission: boolean;
-  photographer: string;
+  permission: string;
+  source: string;
+  binary?: byte[];
 }
 
 export interface TagOption {

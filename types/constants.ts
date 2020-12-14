@@ -1,5 +1,10 @@
 import { defaultLocale } from "../utils/i18n";
 
+export enum PhotoSourceType {
+  Device = "device",
+  Link = "link",
+}
+
 export enum Status {
   Unknown = "unknown",
   Edited = "edited",
@@ -31,6 +36,7 @@ export const MAX_PAGE = 4;
 export const MAX_LENGTH_SHORT_DESC = 150;
 export const MIN_LENGTH_LONG_DESC = 120;
 export const MAX_LENGTH_LONG_DESC = 4000;
+export const MAX_PHOTOS = 3;
 
 export const MAP_TILES_URL = "https://tiles.hel.ninja/styles/hel-osm-bright/{z}/{x}/{y}.png";
 export const MAP_INITIAL_CENTER = [60.166, 24.942];

@@ -153,21 +153,37 @@
     },
     "photos": {
       "title": "Kuvat",
-      "notice": "Lisää verkossa sijaitsevan kuvan url-osoite. Toistaiseksi valokuvia ei voi ladata laitteelta vaan ainoastaan kuvalinkit ovat mahdollisia. Kuvan lisääminen ei ole pakollista. Mikäli kuva on lisätty, siihen liittyvät pakolliset tiedot on merkitty tähdellä *",
-      "photo": "Kuva",
+      "notice": "Tässä voit halutessasi lisätä 1-3 kuvaa kohteesta. Mikäli kuva on lisätty, siihen liittyvät pakolliset tiedot on merkitty tähdellä *",
+      "photo": {
+        "title": "Kuva",
+        "notice1": "Valitse kohdetta parhaiten kuvaavat houkuttelevat ja korkealaatuiset kuvat. Kuvien päälle ei tule lisätä tekstiä, päivämääriä, vesileimoja tai muuta vastaavaa.",
+        "notice2": "Kuvien koko tulee olla vähintään 1920 x 1080 pikseliä, tiedoston JPEG-muodossa, eikä sen koko saa ylittää 4 MB:a. Kuvat tulee olla mielellään vaakatasossa."
+      },
       "url": {
-        "label": "Valokuvan verkko-osoite (url)"
+        "labelDevice": "Valitse kuva laitteeltasi",
+        "labelLink": "Valokuvan verkko-osoite (url)"
       },
       "description": {
-        "label": "Kuvan lyhyt kuvailu (alt-teksti)"
+        "label": "Kuvan lyhyt kuvailu (alt-teksti)",
+        "helperText": "Kirjoita tiivis ja mahdollisimman lyhyt kuvailu kuvasta. Pituus max. 125 merkkiä",
+        "tooltipLabel": "Kuvailutekstin käyttö",
+        "tooltipText": "Kuvailun (alt-teksti) avulla kerrotaan kuvan sisältämä tieto hakukoneelle tai niille henkilöille, jotka eivät jostain syystä näe itse kuvaa. Syynä voi olla näkövamma tai se, että kuvat eivät ole latautuneet, tai henkilö ei ole halunnut ladata niitä."
       },
       "permission": {
-        "label": "Kuvan käyttöoikeus"
+        "title": "Käyttöoikeudet",
+        "notice": "HUOM! Sinulla pitää olla oikeudet lataamaasi kuvaan. Lataamalla kuvan myönnät Helsinki Marketingille oikeuden jakaa sitä eteenpäin avoimessa rajapinnassa. Sinun on valittava toinen alla olevista kuvan käyttöoikeuksista. Kts. tarkemmat tiedot käyttöehdoista.",
+        "label": "Kuvan käyttöoikeudet",
+        "myHelsinki": "Kuvaa saa käyttää ainoastaan ko. kohteen yhteydessä esim. myhelsinki.fi-sivustolla. Kuvaa voidaan jakaa myös avoimena datana kolmansille osapuolille MyHelsinki-avoimen rajapinnan kautta. Kuvan käyttö tai siirto muihin tarkoituksiin on kielletty. Kuvaa käytettäessä on ehdottomasti mainittava kuvan lähde ja kuvaaja.",
+        "creativeCommons1": "Kuvaa saa jakaa Creative Commons BY 4.0.-lisenssillä. Kuvaa käytettäessä on ehdottomasti mainittava kuvan lähde ja kuvaaja.",
+        "creativeCommons2": "Creative Commons BY 4.0.-lisenssi"
       },
-      "photographer": {
-        "label": "Valokuvaajan nimi"
+      "source": {
+        "label": "Kuvalähde",
+        "tooltipLabel": "Kuvalähde",
+        "tooltipText": "Valokuvaaja tai muu kuvan omistaja, esim. organisaatio."
       },
-      "addNew": "Lisää kuvalinkki",
+      "addNewFromDevice": "Lisää kuva laitteelta",
+      "addNewFromLink": "Lisää kuvalinkki",
       "remove": "Poista kuva"
     },
     "placeType": {

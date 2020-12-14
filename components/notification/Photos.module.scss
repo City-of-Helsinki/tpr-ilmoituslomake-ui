@@ -3,7 +3,16 @@
 .photos {
   margin-bottom: $spacing-layout-l;
 
+  section {
+    margin-bottom: $spacing-layout-s;
+  }
+
+  h5 {
+    margin-bottom: $spacing-layout-xs;
+  }
+
   .addNew {
     margin-top: $spacing-layout-s;
+    margin-right: $spacing-s;
   }
 }
