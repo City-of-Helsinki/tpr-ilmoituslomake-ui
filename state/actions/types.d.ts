@@ -18,8 +18,6 @@ import {
   SET_NOTIFICATION_LINK,
   SET_NOTIFICATION_PHOTO,
   REMOVE_NOTIFICATION_PHOTO,
-  SET_NOTIFICATION_PRICE,
-  SET_NOTIFICATION_PAYMENT,
   SET_NOTIFICATION_COMMENTS,
   SET_NOTIFICATION_NAME_VALIDATION,
   SET_NOTIFICATION_SHORT_DESCRIPTION_VALIDATION,
@@ -30,6 +28,7 @@ import {
   SET_NOTIFICATION_CONTACT_VALIDATION,
   SET_NOTIFICATION_LINK_VALIDATION,
   SET_NOTIFICATION_PHOTO_VALIDATION,
+  REMOVE_NOTIFICATION_PHOTO_VALIDATION,
   SET_MODERATION_PLACE_SEARCH,
   CLEAR_MODERATION_PLACE_SEARCH,
   SET_MODERATION_TASK_SEARCH,
@@ -139,16 +138,6 @@ interface RemoveNotificationPhotoAction extends AnyAction {
   payload: number;
 }
 
-interface SetNotificationPriceAction extends AnyAction {
-  type: typeof SET_NOTIFICATION_PRICE;
-  payload: KeyValueString;
-}
-
-interface SetNotificationPaymentAction extends AnyAction {
-  type: typeof SET_NOTIFICATION_PAYMENT;
-  payload: KeyValueBoolean;
-}
-
 interface SetNotificationCommentsAction extends AnyAction {
   type: typeof SET_NOTIFICATION_COMMENTS;
   payload: string;
@@ -171,8 +160,6 @@ export type NotificationAction =
   | SetNotificationLinkAction
   | SetNotificationPhotoAction
   | RemoveNotificationPhotoAction
-  | SetNotificationPriceAction
-  | SetNotificationPaymentAction
   | SetNotificationCommentsAction;
 
 interface SetPageValidAction extends AnyAction {
@@ -222,7 +209,12 @@ interface SetNotificationLinkValidationAction extends AnyAction {
 
 interface SetNotificationPhotoValidationAction extends AnyAction {
   type: typeof SET_NOTIFICATION_PHOTO_VALIDATION;
-  payload: PhotoValidation[];
+  payload: { index: number; value: PhotoValidation };
+}
+
+interface RemoveNotificationPhotoValidationAction extends AnyAction {
+  type: typeof REMOVE_NOTIFICATION_PHOTO_VALIDATION;
+  payload: number;
 }
 
 export type NotificationValidationAction =
@@ -235,7 +227,8 @@ export type NotificationValidationAction =
   | SetNotificationAddressValidationAction
   | SetNotificationContactValidationAction
   | SetNotificationLinkValidationAction
-  | SetNotificationPhotoUrlValidationAction;
+  | SetNotificationPhotoUrlValidationAction
+  | RemoveNotificationPhotoValidationAction;
 
 interface SetModerationPlaceSearchAction extends AnyAction {
   type: typeof SET_MODERATION_PLACE_SEARCH;

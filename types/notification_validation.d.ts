@@ -1,8 +1,9 @@
 export interface PhotoValidation {
   url: boolean;
-  description?: boolean;
+  description: boolean;
   permission: boolean;
-  photographer?: boolean;
+  source: boolean;
+  [key: string]: boolean;
 }
 
 export interface NotificationValidation {
@@ -46,14 +47,6 @@ export interface NotificationValidation {
     en: boolean;
     [key: string]: boolean;
   };
-  price?: {
-    fi?: boolean;
-    sv?: boolean;
-    en?: boolean;
-  };
-  payment_options?: {
-    name?: boolean;
-  }[];
   ontology_ids: boolean;
   comments?: boolean;
   notifier: {

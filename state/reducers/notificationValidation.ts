@@ -1,6 +1,7 @@
 import { AnyAction } from "redux";
 import { NotificationValidationState } from "./types";
 import {
+  MAX_PHOTOS,
   SET_PAGE_VALID,
   SET_NOTIFICATION_NAME_VALIDATION,
   SET_NOTIFICATION_SHORT_DESCRIPTION_VALIDATION,
@@ -11,7 +12,9 @@ import {
   SET_NOTIFICATION_CONTACT_VALIDATION,
   SET_NOTIFICATION_LINK_VALIDATION,
   SET_NOTIFICATION_PHOTO_VALIDATION,
+  REMOVE_NOTIFICATION_PHOTO_VALIDATION,
 } from "../../types/constants";
+import { PhotoValidation } from "../../types/notification_validation";
 
 const initialState: NotificationValidationState = {
   pageValid: true,
@@ -161,9 +164,38 @@ const notificationValidation = (state = initialState, action: AnyAction): Notifi
 
     case SET_NOTIFICATION_PHOTO_VALIDATION: {
       console.log("SET_NOTIFICATION_PHOTO_VALIDATION", action.payload);
+
+      // If index -1 is specified, add the photo to the array
+      // Otherwise combine the field value with the existing photo in the array
+      const photos = [
+        ...state.notificationValidation.photos.reduce(
+          (acc: PhotoValidation[], photoValid, index) => [
+            ...acc,
+            action.payload.index === index ? { ...photoValid, ...action.payload.validation } : photoValid,
+          ],
+          []
+        ),
+        ...(action.payload.index === -1 && state.notificationValidation.photos.length < MAX_PHOTOS ? [action.payload.validation] : []),
+      ];
+
       return {
         ...state,
-        notificationValidation: { ...state.notificationValidation, photos: action.payload },
+        notificationValidation: { ...state.notificationValidation, photos },
+      };
+    }
+
+    case REMOVE_NOTIFICATION_PHOTO_VALIDATION: {
+      console.log("REMOVE_NOTIFICATION_PHOTO_VALIDATION", action.payload);
+
+      // Remove the photo at the specified index
+      const photos = state.notificationValidation.photos.reduce(
+        (acc: PhotoValidation[], photoValid, index) => (action.payload === index ? acc : [...acc, photoValid]),
+        []
+      );
+
+      return {
+        ...state,
+        notificationValidation: { ...state.notificationValidation, photos },
       };
     }
 

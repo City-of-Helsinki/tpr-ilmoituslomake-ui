@@ -14,10 +14,9 @@ import {
   setNotificationLinkValidation,
   setNotificationPhotoValidation,
 } from "../state/actions/notificationValidation";
-import { MAX_LENGTH_SHORT_DESC, MIN_LENGTH_LONG_DESC, MAX_LENGTH_LONG_DESC } from "../types/constants";
+import { MAX_LENGTH_SHORT_DESC, MIN_LENGTH_LONG_DESC, MAX_LENGTH_LONG_DESC, MAX_LENGTH_PHOTO_DESC, PhotoSourceType } from "../types/constants";
 import { NotificationSchema } from "../types/notification_schema";
 import { NotificationExtra } from "../types/general";
-import { PhotoValidation } from "../types/notification_validation";
 import notificationSchema from "../schemas/notification_schema.json";
 
 export const isNameValid = (language: string, notification: NotificationSchema, dispatch: Dispatch<NotificationValidationAction>): boolean => {
@@ -149,21 +148,31 @@ export const isWebsiteValid = (language: string, notification: NotificationSchem
   return valid;
 };
 
-export const isPhotoValid = (notificationExtra: NotificationExtra, dispatch: Dispatch<NotificationValidationAction>): PhotoValidation[] => {
+export const isPhotoFieldValid = (
+  index: number,
+  photoField: string,
+  notificationExtra: NotificationExtra,
+  dispatch: Dispatch<NotificationValidationAction>
+): boolean => {
   const { photos } = notificationExtra;
-  const schema = string().required().url();
-  const photosValid = photos.map((photo) => {
-    const { url, permission } = photo;
-    const urlValid = schema.isValidSync(url);
-    return { url: urlValid, permission };
-  });
-  dispatch(setNotificationPhotoValidation(photosValid));
-  return photosValid;
-};
-
-export const isPhotoUrlValid = (index: number, notificationExtra: NotificationExtra, dispatch: Dispatch<NotificationValidationAction>): boolean => {
-  const photosValid = isPhotoValid(notificationExtra, dispatch);
-  return photosValid[index].url;
+  const photo = photos[index];
+  let schema;
+  switch (photoField) {
+    case "url": {
+      schema = photo.sourceType === PhotoSourceType.Link ? string().required().url() : string().required();
+      break;
+    }
+    case "description": {
+      schema = string().max(MAX_LENGTH_PHOTO_DESC);
+      break;
+    }
+    default: {
+      schema = string().required();
+    }
+  }
+  const valid = schema.isValidSync(photo[photoField]);
+  dispatch(setNotificationPhotoValidation(index, { [photoField]: valid }));
+  return valid;
 };
 
 export const isPageValid = (
@@ -173,7 +182,7 @@ export const isPageValid = (
   notificationExtra: NotificationExtra,
   dispatch: Dispatch<NotificationValidationAction>
 ): boolean => {
-  const { inputLanguages } = notificationExtra;
+  const { inputLanguages, photos } = notificationExtra;
 
   // Check whether all data on the specific page is valid
   // Everything needs to be validated, so make sure lazy evaluation is not used
@@ -213,11 +222,18 @@ export const isPageValid = (
     }
     case 3: {
       // Photos
-      const photosValid = isPhotoValid(notificationExtra, dispatch);
-      return photosValid.every((valid) => valid.url && valid.permission);
+      const photosValid = photos.map((photo, index) => {
+        const photoValid = [
+          isPhotoFieldValid(index, "url", notificationExtra, dispatch),
+          isPhotoFieldValid(index, "description", notificationExtra, dispatch),
+          isPhotoFieldValid(index, "permission", notificationExtra, dispatch),
+          isPhotoFieldValid(index, "source", notificationExtra, dispatch),
+        ];
+        return photoValid.every((valid) => valid);
+      });
+      return photosValid.every((valid) => valid);
     }
     default: {
-      // Payments
       // Send
       return true;
     }

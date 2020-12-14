@@ -23,7 +23,8 @@
       "send": "Lähetä",
       "clearAllSelections": "Poista kaikki valinnat",
       "remove": "Poista",
-      "toggleMenu": "Vaihdele valikko"
+      "toggleMenu": "Vaihdele valikko",
+      "selectFromDevice": "Valitse laitteelta"
     },
     "page": {
       "basic": "Perustiedot",

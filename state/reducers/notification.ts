@@ -21,8 +21,6 @@ import {
   SET_NOTIFICATION_LINK,
   SET_NOTIFICATION_PHOTO,
   REMOVE_NOTIFICATION_PHOTO,
-  SET_NOTIFICATION_PRICE,
-  SET_NOTIFICATION_PAYMENT,
   SET_NOTIFICATION_COMMENTS,
   MAP_INITIAL_CENTER,
   INITIAL_NOTIFICATION,
@@ -217,26 +215,6 @@ const notification = (state = initialState, action: AnyAction): NotificationStat
       return {
         ...state,
         notificationExtra: { ...state.notificationExtra, photos },
-      };
-    }
-
-    case SET_NOTIFICATION_PRICE: {
-      console.log("SET_NOTIFICATION_PRICE", action.payload);
-      return {
-        ...state,
-        notification: { ...state.notification, price: { ...state.notification.price, ...action.payload } },
-      };
-    }
-
-    case SET_NOTIFICATION_PAYMENT: {
-      console.log("SET_NOTIFICATION_PAYMENT", action.payload);
-      const [key, checked] = Object.entries(action.payload)[0];
-      return {
-        ...state,
-        notification: {
-          ...state.notification,
-          payment_options: [...state.notification.payment_options.filter((o) => o.name !== key), ...(checked ? [{ name: key }] : [])],
-        },
       };
     }
 

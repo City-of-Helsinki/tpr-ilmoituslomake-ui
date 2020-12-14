@@ -31,7 +31,9 @@ export interface Photo {
   description: string;
   permission: string;
   source: string;
-  binary?: byte[];
+  base64?: string;
+  preview?: string;
+  [key: string]: string;
 }
 
 export interface TagOption {
@@ -40,7 +42,7 @@ export interface TagOption {
     fi: string;
     sv: string;
     en: string;
-    [k: string]: unknown;
+    [key: string]: unknown;
   };
 }
 
@@ -51,7 +53,7 @@ export interface NotificationExtra {
     fullName: string;
     email: string;
     phone: string;
-    [k: string]: unknown;
+    [key: string]: unknown;
   };
   photos: Photo[];
   tagOptions: TagOption[];

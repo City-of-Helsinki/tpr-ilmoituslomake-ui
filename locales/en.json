@@ -23,7 +23,8 @@
       "send": "Send",
       "clearAllSelections": "Clear all selections",
       "remove": "Remove",
-      "toggleMenu": "Toggle menu"
+      "toggleMenu": "Toggle menu",
+      "selectFromDevice": "Select from device"
     },
     "page": {
       "basic": "Basic info",

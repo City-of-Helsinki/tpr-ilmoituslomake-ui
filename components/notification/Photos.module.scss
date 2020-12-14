@@ -1,4 +1,5 @@
 @import "~hds-design-tokens/lib/all.scss";
+@import "../../styles/mixins";
 
 .photos {
   margin-bottom: $spacing-layout-l;
@@ -11,8 +12,42 @@
     margin-bottom: $spacing-layout-xs;
   }
 
+  button {
+    margin-right: $spacing-s;
+  }
+
+  .imagePreview {
+    margin-bottom: $spacing-layout-xs;
+
+    img {
+      @include media(xs) {
+        max-width: $container-width-xs;
+      }
+
+      @include media(s) {
+        max-width: $container-width-s;
+      }
+
+      @include media(m) {
+        max-width: $container-width-m;
+      }
+
+      @include media(l) {
+        max-width: $container-width-l;
+      }
+
+      @include media(xl) {
+        max-width: $container-width-xl;
+      }
+    }
+  }
+
+  .creativeCommonsLink {
+    margin-left: $spacing-layout-s;
+    margin-bottom: $spacing-layout-s;
+  }
+
   .addNew {
     margin-top: $spacing-layout-s;
-    margin-right: $spacing-s;
   }
 }

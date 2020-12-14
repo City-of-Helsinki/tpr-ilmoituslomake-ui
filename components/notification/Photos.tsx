@@ -1,12 +1,13 @@
-import React, { Dispatch, ChangeEvent, ReactElement } from "react";
+import React, { Dispatch, ChangeEvent, ReactElement, useRef } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useI18n } from "next-localization";
 import { TextInput, Button, IconUpload, IconLink, TextArea, SelectionGroup, RadioButton, IconLinkExternal } from "hds-react";
 import { NotificationAction, NotificationValidationAction } from "../../state/actions/types";
 import { setNotificationPhoto, removeNotificationPhoto } from "../../state/actions/notification";
+import { setNotificationPhotoValidation, removeNotificationPhotoValidation } from "../../state/actions/notificationValidation";
 import { RootState } from "../../state/reducers";
 import { MAX_PHOTOS, PhotoSourceType } from "../../types/constants";
-import { isPhotoUrlValid } from "../../utils/validation";
+import { isPhotoFieldValid } from "../../utils/validation";
 import Notice from "./Notice";
 import styles from "./Photos.module.scss";
 
@@ -14,6 +15,7 @@ const Photos = (): ReactElement => {
   const i18n = useI18n();
   const dispatch = useDispatch<Dispatch<NotificationAction>>();
   const dispatchValidation = useDispatch<Dispatch<NotificationValidationAction>>();
+  const ref = useRef<HTMLInputElement>(null);
 
   const notificationExtra = useSelector((state: RootState) => state.notification.notificationExtra);
   const { photos = [] } = notificationExtra;
@@ -35,98 +37,207 @@ const Photos = (): ReactElement => {
         source: "",
       })
     );
+    dispatchValidation(
+      setNotificationPhotoValidation(-1, {
+        url: true,
+        description: true,
+        permission: true,
+        source: true,
+      })
+    );
   };
 
   const removePhoto = (index: number) => {
     dispatch(removeNotificationPhoto(index));
+    dispatchValidation(removeNotificationPhotoValidation(index));
+  };
+
+  const selectPhoto = () => {
+    if (ref.current) {
+      ref.current.click();
+    }
+  };
+
+  const validateUrl = (index: number) => {
+    isPhotoFieldValid(index, "url", notificationExtra, dispatchValidation);
+  };
+
+  const validatePhoto = (index: number, evt: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    isPhotoFieldValid(index, evt.target.name, notificationExtra, dispatchValidation);
+  };
+
+  const fetchPhoto = async (index: number, evt: ChangeEvent<HTMLInputElement>) => {
+    const { sourceType, url } = photos[index];
+
+    if (sourceType === PhotoSourceType.Device && evt && evt.target && evt.target.files && evt.target.files.length > 0) {
+      const file = evt.target.files[0];
+      dispatchValidation(setNotificationPhotoValidation(index, { url: true }));
+
+      // Read the image file and store it as a base64 string
+      const reader = new FileReader();
+      reader.onload = (fileEvt: ProgressEvent<FileReader>) => {
+        if (fileEvt && fileEvt.target && fileEvt.target.result) {
+          const base64 = fileEvt.target.result as string;
+          dispatch(setNotificationPhoto(index, { ...photos[index], url: file.name, base64, preview: base64 }));
+        } else {
+          dispatch(setNotificationPhoto(index, { ...photos[index], url: "", base64: "", preview: "" }));
+        }
+      };
+      reader.onerror = () => {
+        console.log("ERROR", reader.error);
+        dispatch(setNotificationPhoto(index, { ...photos[index], url: "", base64: "", preview: "" }));
+      };
+      reader.readAsDataURL(file);
+    }
+
+    if (sourceType === PhotoSourceType.Link) {
+      // The backend will fetch the image using the url, so just validate it here
+      validateUrl(index);
+      dispatch(setNotificationPhoto(index, { ...photos[index], base64: "", preview: url }));
+    }
   };
 
   const openCreativeCommons = () => {
     window.open("https://creativecommons.org/licenses/by/4.0/", "_blank");
   };
 
-  const validateUrl = (index: number) => {
-    isPhotoUrlValid(index, notificationExtra, dispatchValidation);
-  };
-
   return (
     <div className={styles.photos}>
-      {photos.map(({ sourceType, url, description, permission, source }, index) => {
+      {photos.map(({ sourceType, url, description, permission, source, preview }, index) => {
         const key = `photo_${index}`;
         return (
           <div key={key}>
             <h3>{`${i18n.t("notification.photos.photo.title")} ${index + 1}`}</h3>
             <Notice messageKey="notification.photos.photo.notice1" messageKey2="notification.photos.photo.notice2" />
 
-            <TextInput
-              id={`url_${index}`}
-              className="formInput"
-              label={
-                sourceType === PhotoSourceType.Device ? i18n.t("notification.photos.url.labelDevice") : i18n.t("notification.photos.url.labelLink")
-              }
-              name="url"
-              value={url}
-              onChange={(evt) => updatePhoto(index, evt)}
-              onBlur={() => validateUrl(index)}
-              invalid={photosValid[index] && !photosValid[index].url}
-              errorText={photosValid[index] && !photosValid[index].url ? i18n.t("notification.toast.validationFailed.title") : ""}
-              required
-            />
+            {sourceType === PhotoSourceType.Device && (
+              <>
+                <TextInput
+                  id={`url_${index}`}
+                  className="formInput"
+                  label={i18n.t("notification.photos.url.labelDevice")}
+                  name="url"
+                  value={url}
+                  invalid={photosValid[index] && !photosValid[index].url}
+                  errorText={photosValid[index] && !photosValid[index].url ? i18n.t("notification.toast.validationFailed.title") : ""}
+                  required
+                  disabled
+                />
 
-            <TextArea
-              id={`description_${index}`}
-              className="formInput"
-              rows={6}
-              label={i18n.t("notification.photos.description.label")}
-              name="description"
-              value={description}
-              onChange={(evt) => updatePhoto(index, evt)}
-              helperText={i18n.t("notification.photos.description.helperText")}
-              tooltipButtonLabel={i18n.t("notification.photos.description.tooltipLabel")}
-              tooltipLabel={i18n.t("notification.photos.description.tooltipLabel")}
-              tooltipText={i18n.t("notification.photos.description.tooltipText")}
-            />
+                <input className="hidden" type="file" ref={ref} onChange={(evt) => fetchPhoto(index, evt)} />
+                <Button variant="secondary" className="formInput" onClick={() => selectPhoto(index)}>
+                  {i18n.t("notification.button.selectFromDevice")}
+                </Button>
+                <Button variant="secondary" className="formInput" onClick={() => removePhoto(index)}>
+                  {i18n.t("notification.photos.remove")}
+                </Button>
 
-            <h5>{i18n.t("notification.photos.permission.title")}</h5>
-            <Notice messageKey="notification.photos.permission.notice" />
+                {preview && preview.length > 0 && (
+                  <div className={styles.imagePreview}>
+                    <img src={preview} alt="" />
+                  </div>
+                )}
+              </>
+            )}
 
-            <SelectionGroup direction="vertical" className="formInput" label={i18n.t("notification.photos.permission.label")} required>
-              <RadioButton
-                id={`permission_myHelsinki_${index}`}
-                label={i18n.t("notification.photos.permission.myHelsinki")}
-                name="permission"
-                value="myHelsinki"
-                checked={permission === "myHelsinki"}
-                onChange={(evt) => updatePhoto(index, evt)}
-              />
-              <RadioButton
-                id={`permission_creativeCommons_${index}`}
-                label={i18n.t("notification.photos.permission.creativeCommons1")}
-                name="permission"
-                value="creativeCommons"
-                checked={permission === "creativeCommons"}
-                onChange={(evt) => updatePhoto(index, evt)}
-              />
-              <Button variant="supplementary" size="small" iconRight={<IconLinkExternal />} onClick={openCreativeCommons}>
-                {i18n.t("notification.photos.permission.creativeCommons2")}
-              </Button>
-            </SelectionGroup>
+            {sourceType === PhotoSourceType.Link && (
+              <>
+                <TextInput
+                  id={`url_${index}`}
+                  className="formInput"
+                  label={i18n.t("notification.photos.url.labelLink")}
+                  name="url"
+                  value={url}
+                  onChange={(evt) => updatePhoto(index, evt)}
+                  onBlur={(evt) => fetchPhoto(index, evt)}
+                  invalid={photosValid[index] && !photosValid[index].url}
+                  errorText={photosValid[index] && !photosValid[index].url ? i18n.t("notification.toast.validationFailed.title") : ""}
+                  required
+                />
+                <Button variant="secondary" className="formInput" onClick={() => removePhoto(index)}>
+                  {i18n.t("notification.photos.remove")}
+                </Button>
 
-            <TextInput
-              id={`source_${index}`}
-              className="formInput"
-              label={i18n.t("notification.photos.source.label")}
-              name="source"
-              value={source}
-              onChange={(evt) => updatePhoto(index, evt)}
-              tooltipButtonLabel={i18n.t("notification.photos.source.tooltipLabel")}
-              tooltipLabel={i18n.t("notification.photos.source.tooltipLabel")}
-              tooltipText={i18n.t("notification.photos.source.tooltipText")}
-              required
-            />
-            <Button variant="secondary" className="formInput" onClick={() => removePhoto(index)}>
-              {i18n.t("notification.photos.remove")}
-            </Button>
+                {photosValid[index] && photosValid[index].url && preview && preview.length > 0 && (
+                  <div className={styles.imagePreview}>
+                    <img src={preview} alt="" />
+                  </div>
+                )}
+              </>
+            )}
+
+            {photosValid[index] && photosValid[index].url && preview && preview.length > 0 && (
+              <>
+                <TextArea
+                  id={`description_${index}`}
+                  className="formInput"
+                  rows={6}
+                  label={i18n.t("notification.photos.description.label")}
+                  name="description"
+                  value={description}
+                  onChange={(evt) => updatePhoto(index, evt)}
+                  onBlur={(evt) => validatePhoto(index, evt)}
+                  invalid={photosValid[index] && !photosValid[index].description}
+                  errorText={photosValid[index] && !photosValid[index].description ? i18n.t("notification.toast.validationFailed.title") : ""}
+                  helperText={i18n.t("notification.photos.description.helperText")}
+                  tooltipButtonLabel={i18n.t("notification.photos.description.tooltipLabel")}
+                  tooltipLabel={i18n.t("notification.photos.description.tooltipLabel")}
+                  tooltipText={i18n.t("notification.photos.description.tooltipText")}
+                />
+
+                <h5>{i18n.t("notification.photos.permission.title")}</h5>
+                <Notice messageKey="notification.photos.permission.notice" />
+
+                <SelectionGroup
+                  direction="vertical"
+                  label={i18n.t("notification.photos.permission.label")}
+                  errorText={photosValid[index] && !photosValid[index].permission ? i18n.t("notification.toast.validationFailed.title") : ""}
+                  required
+                >
+                  <RadioButton
+                    id={`permission_myHelsinki_${index}`}
+                    label={i18n.t("notification.photos.permission.myHelsinki")}
+                    name="permission"
+                    value="myHelsinki"
+                    checked={permission === "myHelsinki"}
+                    onChange={(evt) => updatePhoto(index, evt)}
+                  />
+                  <RadioButton
+                    id={`permission_creativeCommons_${index}`}
+                    label={i18n.t("notification.photos.permission.creativeCommons1")}
+                    name="permission"
+                    value="creativeCommons"
+                    checked={permission === "creativeCommons"}
+                    onChange={(evt) => updatePhoto(index, evt)}
+                  />
+                </SelectionGroup>
+                <Button
+                  variant="supplementary"
+                  size="small"
+                  className={styles.creativeCommonsLink}
+                  iconRight={<IconLinkExternal />}
+                  onClick={openCreativeCommons}
+                >
+                  {i18n.t("notification.photos.permission.creativeCommons2")}
+                </Button>
+
+                <TextInput
+                  id={`source_${index}`}
+                  className="formInput"
+                  label={i18n.t("notification.photos.source.label")}
+                  name="source"
+                  value={source}
+                  onChange={(evt) => updatePhoto(index, evt)}
+                  onBlur={(evt) => validatePhoto(index, evt)}
+                  invalid={photosValid[index] && !photosValid[index].source}
+                  errorText={photosValid[index] && !photosValid[index].source ? i18n.t("notification.toast.validationFailed.title") : ""}
+                  tooltipButtonLabel={i18n.t("notification.photos.source.tooltipLabel")}
+                  tooltipLabel={i18n.t("notification.photos.source.tooltipLabel")}
+                  tooltipText={i18n.t("notification.photos.source.tooltipText")}
+                  required
+                />
+              </>
+            )}
             <hr />
           </div>
         );

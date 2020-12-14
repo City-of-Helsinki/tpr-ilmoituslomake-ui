@@ -16,8 +16,6 @@ import {
   SET_NOTIFICATION_LINK,
   SET_NOTIFICATION_PHOTO,
   REMOVE_NOTIFICATION_PHOTO,
-  SET_NOTIFICATION_PRICE,
-  SET_NOTIFICATION_PAYMENT,
   SET_NOTIFICATION_COMMENTS,
 } from "../../types/constants";
 import { User, KeyValueString, KeyValueBoolean, Photo, TagOption } from "../../types/general";
@@ -101,16 +99,6 @@ export const setNotificationPhoto = (index: number, value: Photo): NotificationA
 export const removeNotificationPhoto = (index: number): NotificationAction => ({
   type: REMOVE_NOTIFICATION_PHOTO,
   payload: index,
-});
-
-export const setNotificationPrice = (keyValue: KeyValueString): NotificationAction => ({
-  type: SET_NOTIFICATION_PRICE,
-  payload: keyValue,
-});
-
-export const setNotificationPayment = (keyValue: KeyValueBoolean): NotificationAction => ({
-  type: SET_NOTIFICATION_PAYMENT,
-  payload: keyValue,
 });
 
 export const setNotificationComments = (value: string): NotificationAction => ({
