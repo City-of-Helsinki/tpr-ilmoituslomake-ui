@@ -1,7 +1,7 @@
 import React, { Dispatch, ChangeEvent, ReactElement } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useI18n } from "next-localization";
-import { TextInput, RadioButton, Tooltip, SelectionGroup } from "hds-react";
+import { TextInput, RadioButton, SelectionGroup } from "hds-react";
 import { NotificationAction, NotificationValidationAction } from "../../state/actions/types";
 import { setNotificationNotifier } from "../../state/actions/notification";
 import { RootState } from "../../state/reducers";

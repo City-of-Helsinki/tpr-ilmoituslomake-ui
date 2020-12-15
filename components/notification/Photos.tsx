@@ -142,7 +142,7 @@ const Photos = (): ReactElement => {
                 />
 
                 <input className="hidden" type="file" ref={ref} onChange={(evt) => fetchPhoto(index, evt)} />
-                <Button variant="secondary" className="formInput" onClick={() => selectPhoto(index)}>
+                <Button variant="secondary" className="formInput" onClick={() => selectPhoto()}>
                   {i18n.t("notification.button.selectFromDevice")}
                 </Button>
                 <Button variant="secondary" className="formInput" onClick={() => removePhoto(index)}>

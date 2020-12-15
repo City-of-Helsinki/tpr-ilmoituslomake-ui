@@ -18,7 +18,6 @@ import {
 import { MAX_LENGTH_SHORT_DESC, MIN_LENGTH_LONG_DESC, MAX_LENGTH_LONG_DESC, MAX_LENGTH_PHOTO_DESC, PhotoSourceType } from "../types/constants";
 import { NotificationSchema } from "../types/notification_schema";
 import { NotificationExtra } from "../types/general";
-import { PhotoValidation } from "../types/notification_validation";
 import notificationSchema from "../schemas/notification_schema.json";
 
 export const isNameValid = (language: string, notification: NotificationSchema, dispatch: Dispatch<NotificationValidationAction>): boolean => {

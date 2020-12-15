@@ -2,7 +2,7 @@ import React, { Dispatch, ReactElement } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useI18n } from "next-localization";
 import { Navigation } from "hds-react";
-import { Stepper, Step, StepLabel, StepIcon } from "@material-ui/core";
+import { Stepper, Step, StepLabel } from "@material-ui/core";
 import { StylesProvider } from "@material-ui/core/styles";
 import Header from "../common/Header";
 import { NotificationAction } from "../../state/actions/types";
