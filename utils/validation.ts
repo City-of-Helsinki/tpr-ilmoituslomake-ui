@@ -13,10 +13,12 @@ import {
   setNotificationContactValidation,
   setNotificationLinkValidation,
   setNotificationPhotoValidation,
+  setNotificationPhotoDescriptionValidation,
 } from "../state/actions/notificationValidation";
 import { MAX_LENGTH_SHORT_DESC, MIN_LENGTH_LONG_DESC, MAX_LENGTH_LONG_DESC, MAX_LENGTH_PHOTO_DESC, PhotoSourceType } from "../types/constants";
 import { NotificationSchema } from "../types/notification_schema";
 import { NotificationExtra } from "../types/general";
+import { PhotoValidation } from "../types/notification_validation";
 import notificationSchema from "../schemas/notification_schema.json";
 
 export const isNameValid = (language: string, notification: NotificationSchema, dispatch: Dispatch<NotificationValidationAction>): boolean => {
@@ -162,16 +164,27 @@ export const isPhotoFieldValid = (
       schema = photo.sourceType === PhotoSourceType.Link ? string().required().url() : string().required();
       break;
     }
-    case "description": {
-      schema = string().max(MAX_LENGTH_PHOTO_DESC);
-      break;
-    }
     default: {
       schema = string().required();
     }
   }
   const valid = schema.isValidSync(photo[photoField]);
   dispatch(setNotificationPhotoValidation(index, { [photoField]: valid }));
+  return valid;
+};
+
+export const isPhotoDescriptionValid = (
+  index: number,
+  language: string,
+  notificationExtra: NotificationExtra,
+  dispatch: Dispatch<NotificationValidationAction>
+): boolean => {
+  const { photos } = notificationExtra;
+  const photo = photos[index];
+  const { description } = photo;
+  const schema = string().max(MAX_LENGTH_PHOTO_DESC);
+  const valid = schema.isValidSync(description[language]);
+  dispatch(setNotificationPhotoDescriptionValidation(index, { [language]: valid }));
   return valid;
 };
 
@@ -223,13 +236,13 @@ export const isPageValid = (
     case 3: {
       // Photos
       const photosValid = photos.map((photo, index) => {
-        const photoValid = [
+        const photoValid1 = [
           isPhotoFieldValid(index, "url", notificationExtra, dispatch),
-          isPhotoFieldValid(index, "description", notificationExtra, dispatch),
           isPhotoFieldValid(index, "permission", notificationExtra, dispatch),
           isPhotoFieldValid(index, "source", notificationExtra, dispatch),
         ];
-        return photoValid.every((valid) => valid);
+        const photoValid2 = inputLanguages.flatMap((option) => [isPhotoDescriptionValid(index, option, notificationExtra, dispatch)]);
+        return photoValid1.every((valid) => valid) && photoValid2.every((valid) => valid);
       });
       return photosValid.every((valid) => valid);
     }

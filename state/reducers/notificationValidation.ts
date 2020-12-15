@@ -12,6 +12,7 @@ import {
   SET_NOTIFICATION_CONTACT_VALIDATION,
   SET_NOTIFICATION_LINK_VALIDATION,
   SET_NOTIFICATION_PHOTO_VALIDATION,
+  SET_NOTIFICATION_PHOTO_DESCRIPTION_VALIDATION,
   REMOVE_NOTIFICATION_PHOTO_VALIDATION,
 } from "../../types/constants";
 import { PhotoValidation } from "../../types/notification_validation";
@@ -166,7 +167,7 @@ const notificationValidation = (state = initialState, action: AnyAction): Notifi
       console.log("SET_NOTIFICATION_PHOTO_VALIDATION", action.payload);
 
       // If index -1 is specified, add the photo to the array
-      // Otherwise combine the field value with the existing photo in the array
+      // Otherwise combine the field validation with the existing photo validation in the array
       const photos = [
         ...state.notificationValidation.photos.reduce(
           (acc: PhotoValidation[], photoValid, index) => [
@@ -176,6 +177,26 @@ const notificationValidation = (state = initialState, action: AnyAction): Notifi
           []
         ),
         ...(action.payload.index === -1 && state.notificationValidation.photos.length < MAX_PHOTOS ? [action.payload.validation] : []),
+      ];
+
+      return {
+        ...state,
+        notificationValidation: { ...state.notificationValidation, photos },
+      };
+    }
+
+    case SET_NOTIFICATION_PHOTO_DESCRIPTION_VALIDATION: {
+      console.log("SET_NOTIFICATION_PHOTO_DESCRIPTION_VALIDATION", action.payload);
+
+      // Combine the field validation with the existing photo description validation in the array
+      const photos = [
+        ...state.notificationValidation.photos.reduce(
+          (acc: PhotoValidation[], photoValid, index) => [
+            ...acc,
+            action.payload.index === index ? { ...photoValid, description: { ...photoValid.description, ...action.payload.validation } } : photoValid,
+          ],
+          []
+        ),
       ];
 
       return {

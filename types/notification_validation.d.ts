@@ -1,6 +1,11 @@
 export interface PhotoValidation {
   url: boolean;
-  description: boolean;
+  description: {
+    fi: boolean;
+    sv: boolean;
+    en: boolean;
+    [key: string]: boolean;
+  };
   permission: boolean;
   source: boolean;
   [key: string]: boolean;

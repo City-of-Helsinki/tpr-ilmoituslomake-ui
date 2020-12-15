@@ -28,12 +28,17 @@ export type OptionType = {
 export interface Photo {
   sourceType: PhotoSourceType;
   url: string;
-  description: string;
+  description: {
+    fi: string;
+    sv: string;
+    en: string;
+    [key: string]: unknown;
+  };
   permission: string;
   source: string;
   base64?: string;
   preview?: string;
-  [key: string]: string;
+  [key: string]: unknown;
 }
 
 export interface TagOption {

@@ -9,9 +9,11 @@ import {
   SET_NOTIFICATION_CONTACT_VALIDATION,
   SET_NOTIFICATION_LINK_VALIDATION,
   SET_NOTIFICATION_PHOTO_VALIDATION,
+  SET_NOTIFICATION_PHOTO_DESCRIPTION_VALIDATION,
   REMOVE_NOTIFICATION_PHOTO_VALIDATION,
 } from "../../types/constants";
 import { KeyValueBoolean } from "../../types/general";
+import { PhotoValidation } from "../../types/notification_validation";
 import { NotificationValidationAction } from "./types";
 
 export const setPageValid = (valid: boolean): NotificationValidationAction => ({
@@ -59,8 +61,13 @@ export const setNotificationLinkValidation = (validation: KeyValueBoolean): Noti
   payload: validation,
 });
 
-export const setNotificationPhotoValidation = (index: number, validation: KeyValueBoolean): NotificationValidationAction => ({
+export const setNotificationPhotoValidation = (index: number, validation: PhotoValidation | KeyValueBoolean): NotificationValidationAction => ({
   type: SET_NOTIFICATION_PHOTO_VALIDATION,
+  payload: { index, validation },
+});
+
+export const setNotificationPhotoDescriptionValidation = (index: number, validation: KeyValueBoolean): NotificationValidationAction => ({
+  type: SET_NOTIFICATION_PHOTO_DESCRIPTION_VALIDATION,
   payload: { index, validation },
 });
 

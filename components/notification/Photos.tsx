@@ -6,8 +6,9 @@ import { NotificationAction, NotificationValidationAction } from "../../state/ac
 import { setNotificationPhoto, removeNotificationPhoto } from "../../state/actions/notification";
 import { setNotificationPhotoValidation, removeNotificationPhotoValidation } from "../../state/actions/notificationValidation";
 import { RootState } from "../../state/reducers";
-import { MAX_PHOTOS, PhotoSourceType } from "../../types/constants";
-import { isPhotoFieldValid } from "../../utils/validation";
+import { LANGUAGE_OPTIONS, MAX_PHOTOS, PhotoSourceType } from "../../types/constants";
+import { PhotoValidation } from "../../types/notification_validation";
+import { isPhotoFieldValid, isPhotoDescriptionValid } from "../../utils/validation";
 import Notice from "./Notice";
 import styles from "./Photos.module.scss";
 
@@ -18,13 +19,17 @@ const Photos = (): ReactElement => {
   const ref = useRef<HTMLInputElement>(null);
 
   const notificationExtra = useSelector((state: RootState) => state.notification.notificationExtra);
-  const { photos = [] } = notificationExtra;
+  const { inputLanguages, photos = [] } = notificationExtra;
 
   const notificationValidation = useSelector((state: RootState) => state.notificationValidation.notificationValidation);
   const { photos: photosValid } = notificationValidation;
 
-  const updatePhoto = (index: number, evt: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const updatePhoto = (index: number, evt: ChangeEvent<HTMLInputElement>) => {
     dispatch(setNotificationPhoto(index, { ...photos[index], [evt.target.name]: evt.target.value }));
+  };
+
+  const updatePhotoDescription = (index: number, evt: ChangeEvent<HTMLTextAreaElement>) => {
+    dispatch(setNotificationPhoto(index, { ...photos[index], description: { ...photos[index].description, [evt.target.name]: evt.target.value } }));
   };
 
   const addPhoto = (sourceType: PhotoSourceType) => {
@@ -32,7 +37,11 @@ const Photos = (): ReactElement => {
       setNotificationPhoto(-1, {
         sourceType,
         url: "",
-        description: "",
+        description: {
+          fi: "",
+          sv: "",
+          en: "",
+        },
         permission: "",
         source: "",
       })
@@ -40,10 +49,14 @@ const Photos = (): ReactElement => {
     dispatchValidation(
       setNotificationPhotoValidation(-1, {
         url: true,
-        description: true,
+        description: {
+          fi: true,
+          sv: true,
+          en: true,
+        },
         permission: true,
         source: true,
-      })
+      } as PhotoValidation)
     );
   };
 
@@ -62,8 +75,12 @@ const Photos = (): ReactElement => {
     isPhotoFieldValid(index, "url", notificationExtra, dispatchValidation);
   };
 
-  const validatePhoto = (index: number, evt: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const validatePhoto = (index: number, evt: ChangeEvent<HTMLInputElement>) => {
     isPhotoFieldValid(index, evt.target.name, notificationExtra, dispatchValidation);
+  };
+
+  const validatePhotoDescription = (index: number, evt: ChangeEvent<HTMLTextAreaElement>) => {
+    isPhotoDescriptionValid(index, evt.target.name, notificationExtra, dispatchValidation);
   };
 
   const fetchPhoto = async (index: number, evt: ChangeEvent<HTMLInputElement>) => {
@@ -168,22 +185,31 @@ const Photos = (): ReactElement => {
 
             {photosValid[index] && photosValid[index].url && preview && preview.length > 0 && (
               <>
-                <TextArea
-                  id={`description_${index}`}
-                  className="formInput"
-                  rows={6}
-                  label={i18n.t("notification.photos.description.label")}
-                  name="description"
-                  value={description}
-                  onChange={(evt) => updatePhoto(index, evt)}
-                  onBlur={(evt) => validatePhoto(index, evt)}
-                  invalid={photosValid[index] && !photosValid[index].description}
-                  errorText={photosValid[index] && !photosValid[index].description ? i18n.t("notification.toast.validationFailed.title") : ""}
-                  helperText={i18n.t("notification.photos.description.helperText")}
-                  tooltipButtonLabel={i18n.t("notification.photos.description.tooltipLabel")}
-                  tooltipLabel={i18n.t("notification.photos.description.tooltipLabel")}
-                  tooltipText={i18n.t("notification.photos.description.tooltipText")}
-                />
+                <div className={inputLanguages.length > 1 ? "languageSection" : ""}>
+                  {inputLanguages.length > 1 && <h3>{i18n.t("notification.photos.description.label")}</h3>}
+                  {LANGUAGE_OPTIONS.map((option) =>
+                    inputLanguages.includes(option) ? (
+                      <TextArea
+                        id={`description_${index}_${option}`}
+                        className="formInput"
+                        rows={6}
+                        label={`${i18n.t("notification.photos.description.label")} ${i18n.t(`general.inLanguage.${option}`)}`}
+                        name={option}
+                        value={description[option] as string}
+                        onChange={(evt) => updatePhotoDescription(index, evt)}
+                        onBlur={(evt) => validatePhotoDescription(index, evt)}
+                        helperText={i18n.t("notification.photos.description.helperText")}
+                        tooltipButtonLabel={i18n.t("notification.photos.description.tooltipLabel")}
+                        tooltipLabel={i18n.t("notification.photos.description.tooltipLabel")}
+                        tooltipText={i18n.t("notification.photos.description.tooltipText")}
+                        invalid={photosValid[index] && !photosValid[index].description[option]}
+                        errorText={
+                          photosValid[index] && !photosValid[index].description[option] ? i18n.t("notification.toast.validationFailed.title") : ""
+                        }
+                      />
+                    ) : null
+                  )}
+                </div>
 
                 <h5>{i18n.t("notification.photos.permission.title")}</h5>
                 <Notice messageKey="notification.photos.permission.notice" />
