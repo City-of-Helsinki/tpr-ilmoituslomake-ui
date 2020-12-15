@@ -28,7 +28,7 @@ import {
   SET_NOTIFICATION_CONTACT_VALIDATION,
   SET_NOTIFICATION_LINK_VALIDATION,
   SET_NOTIFICATION_PHOTO_VALIDATION,
-  SET_NOTIFICATION_PHOTO_DESCRIPTION_VALIDATION,
+  SET_NOTIFICATION_PHOTO_ALT_TEXT_VALIDATION,
   REMOVE_NOTIFICATION_PHOTO_VALIDATION,
   SET_MODERATION_PLACE_SEARCH,
   CLEAR_MODERATION_PLACE_SEARCH,
@@ -213,8 +213,8 @@ interface SetNotificationPhotoValidationAction extends AnyAction {
   payload: { index: number; validation: PhotoValidation | KeyValueBoolean };
 }
 
-interface SetNotificationPhotoDescriptionValidationAction extends AnyAction {
-  type: typeof SET_NOTIFICATION_PHOTO_DESCRIPTION_VALIDATION;
+interface SetNotificationPhotoAltTextValidationAction extends AnyAction {
+  type: typeof SET_NOTIFICATION_PHOTO_ALT_TEXT_VALIDATION;
   payload: { index: number; validation: KeyValueBoolean };
 }
 
@@ -234,7 +234,7 @@ export type NotificationValidationAction =
   | SetNotificationContactValidationAction
   | SetNotificationLinkValidationAction
   | SetNotificationPhotoUrlValidationAction
-  | SetNotificationPhotoDescriptionValidationAction
+  | SetNotificationPhotoAltTextValidationAction
   | RemoveNotificationPhotoValidationAction;
 
 interface SetModerationPlaceSearchAction extends AnyAction {

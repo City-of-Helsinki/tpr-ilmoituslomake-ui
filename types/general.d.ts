@@ -28,7 +28,7 @@ export type OptionType = {
 export interface Photo {
   sourceType: PhotoSourceType;
   url: string;
-  description: {
+  altText: {
     fi: string;
     sv: string;
     en: string;

@@ -12,7 +12,7 @@ import {
   SET_NOTIFICATION_CONTACT_VALIDATION,
   SET_NOTIFICATION_LINK_VALIDATION,
   SET_NOTIFICATION_PHOTO_VALIDATION,
-  SET_NOTIFICATION_PHOTO_DESCRIPTION_VALIDATION,
+  SET_NOTIFICATION_PHOTO_ALT_TEXT_VALIDATION,
   REMOVE_NOTIFICATION_PHOTO_VALIDATION,
 } from "../../types/constants";
 import { PhotoValidation } from "../../types/notification_validation";
@@ -185,15 +185,15 @@ const notificationValidation = (state = initialState, action: AnyAction): Notifi
       };
     }
 
-    case SET_NOTIFICATION_PHOTO_DESCRIPTION_VALIDATION: {
-      console.log("SET_NOTIFICATION_PHOTO_DESCRIPTION_VALIDATION", action.payload);
+    case SET_NOTIFICATION_PHOTO_ALT_TEXT_VALIDATION: {
+      console.log("SET_NOTIFICATION_PHOTO_ALT_TEXT_VALIDATION", action.payload);
 
-      // Combine the field validation with the existing photo description validation in the array
+      // Combine the field validation with the existing photo alt-text validation in the array
       const photos = [
         ...state.notificationValidation.photos.reduce(
           (acc: PhotoValidation[], photoValid, index) => [
             ...acc,
-            action.payload.index === index ? { ...photoValid, description: { ...photoValid.description, ...action.payload.validation } } : photoValid,
+            action.payload.index === index ? { ...photoValid, altText: { ...photoValid.altText, ...action.payload.validation } } : photoValid,
           ],
           []
         ),

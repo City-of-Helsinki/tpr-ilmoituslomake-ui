@@ -1,6 +1,6 @@
 export interface PhotoValidation {
   url: boolean;
-  description: {
+  altText: {
     fi: boolean;
     sv: boolean;
     en: boolean;

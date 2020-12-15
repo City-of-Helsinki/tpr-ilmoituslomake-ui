@@ -164,7 +164,7 @@
         "labelDevice": "Select a photo from your device",
         "labelLink": "Photo's internet address (url)"
       },
-      "description": {
+      "altText": {
         "label": "Photo's short description (alt-text)",
         "helperText": "Write a concise and as short as possible description of the photo. Length max. 125 characters.",
         "tooltipLabel": "Description text usage",

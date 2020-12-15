@@ -9,7 +9,7 @@ import {
   SET_NOTIFICATION_CONTACT_VALIDATION,
   SET_NOTIFICATION_LINK_VALIDATION,
   SET_NOTIFICATION_PHOTO_VALIDATION,
-  SET_NOTIFICATION_PHOTO_DESCRIPTION_VALIDATION,
+  SET_NOTIFICATION_PHOTO_ALT_TEXT_VALIDATION,
   REMOVE_NOTIFICATION_PHOTO_VALIDATION,
 } from "../../types/constants";
 import { KeyValueBoolean } from "../../types/general";
@@ -66,8 +66,8 @@ export const setNotificationPhotoValidation = (index: number, validation: PhotoV
   payload: { index, validation },
 });
 
-export const setNotificationPhotoDescriptionValidation = (index: number, validation: KeyValueBoolean): NotificationValidationAction => ({
-  type: SET_NOTIFICATION_PHOTO_DESCRIPTION_VALIDATION,
+export const setNotificationPhotoAltTextValidation = (index: number, validation: KeyValueBoolean): NotificationValidationAction => ({
+  type: SET_NOTIFICATION_PHOTO_ALT_TEXT_VALIDATION,
   payload: { index, validation },
 });
 

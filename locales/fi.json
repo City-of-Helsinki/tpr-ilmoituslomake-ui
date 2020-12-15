@@ -164,7 +164,7 @@
         "labelDevice": "Valitse kuva laitteeltasi",
         "labelLink": "Valokuvan verkko-osoite (url)"
       },
-      "description": {
+      "altText": {
         "label": "Kuvan lyhyt kuvailu (alt-teksti)",
         "helperText": "Kirjoita tiivis ja mahdollisimman lyhyt kuvailu kuvasta. Pituus max. 125 merkkiä",
         "tooltipLabel": "Kuvailutekstin käyttö",

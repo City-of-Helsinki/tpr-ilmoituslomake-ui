@@ -13,7 +13,7 @@ import {
   setNotificationContactValidation,
   setNotificationLinkValidation,
   setNotificationPhotoValidation,
-  setNotificationPhotoDescriptionValidation,
+  setNotificationPhotoAltTextValidation,
 } from "../state/actions/notificationValidation";
 import { MAX_LENGTH_SHORT_DESC, MIN_LENGTH_LONG_DESC, MAX_LENGTH_LONG_DESC, MAX_LENGTH_PHOTO_DESC, PhotoSourceType } from "../types/constants";
 import { NotificationSchema } from "../types/notification_schema";
@@ -172,7 +172,7 @@ export const isPhotoFieldValid = (
   return valid;
 };
 
-export const isPhotoDescriptionValid = (
+export const isPhotoAltTextValid = (
   index: number,
   language: string,
   notificationExtra: NotificationExtra,
@@ -180,10 +180,10 @@ export const isPhotoDescriptionValid = (
 ): boolean => {
   const { photos } = notificationExtra;
   const photo = photos[index];
-  const { description } = photo;
+  const { altText } = photo;
   const schema = string().max(MAX_LENGTH_PHOTO_DESC);
-  const valid = schema.isValidSync(description[language]);
-  dispatch(setNotificationPhotoDescriptionValidation(index, { [language]: valid }));
+  const valid = schema.isValidSync(altText[language]);
+  dispatch(setNotificationPhotoAltTextValidation(index, { [language]: valid }));
   return valid;
 };
 
@@ -240,7 +240,7 @@ export const isPageValid = (
           isPhotoFieldValid(index, "permission", notificationExtra, dispatch),
           isPhotoFieldValid(index, "source", notificationExtra, dispatch),
         ];
-        const photoValid2 = inputLanguages.flatMap((option) => [isPhotoDescriptionValid(index, option, notificationExtra, dispatch)]);
+        const photoValid2 = inputLanguages.flatMap((option) => [isPhotoAltTextValid(index, option, notificationExtra, dispatch)]);
         return photoValid1.every((valid) => valid) && photoValid2.every((valid) => valid);
       });
       return photosValid.every((valid) => valid);

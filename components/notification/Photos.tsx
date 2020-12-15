@@ -8,7 +8,7 @@ import { setNotificationPhotoValidation, removeNotificationPhotoValidation } fro
 import { RootState } from "../../state/reducers";
 import { LANGUAGE_OPTIONS, MAX_PHOTOS, PhotoSourceType } from "../../types/constants";
 import { PhotoValidation } from "../../types/notification_validation";
-import { isPhotoFieldValid, isPhotoDescriptionValid } from "../../utils/validation";
+import { isPhotoFieldValid, isPhotoAltTextValid } from "../../utils/validation";
 import Notice from "./Notice";
 import styles from "./Photos.module.scss";
 
@@ -28,8 +28,8 @@ const Photos = (): ReactElement => {
     dispatch(setNotificationPhoto(index, { ...photos[index], [evt.target.name]: evt.target.value }));
   };
 
-  const updatePhotoDescription = (index: number, evt: ChangeEvent<HTMLTextAreaElement>) => {
-    dispatch(setNotificationPhoto(index, { ...photos[index], description: { ...photos[index].description, [evt.target.name]: evt.target.value } }));
+  const updatePhotoAltText = (index: number, evt: ChangeEvent<HTMLTextAreaElement>) => {
+    dispatch(setNotificationPhoto(index, { ...photos[index], altText: { ...photos[index].altText, [evt.target.name]: evt.target.value } }));
   };
 
   const addPhoto = (sourceType: PhotoSourceType) => {
@@ -37,7 +37,7 @@ const Photos = (): ReactElement => {
       setNotificationPhoto(-1, {
         sourceType,
         url: "",
-        description: {
+        altText: {
           fi: "",
           sv: "",
           en: "",
@@ -49,7 +49,7 @@ const Photos = (): ReactElement => {
     dispatchValidation(
       setNotificationPhotoValidation(-1, {
         url: true,
-        description: {
+        altText: {
           fi: true,
           sv: true,
           en: true,
@@ -79,8 +79,8 @@ const Photos = (): ReactElement => {
     isPhotoFieldValid(index, evt.target.name, notificationExtra, dispatchValidation);
   };
 
-  const validatePhotoDescription = (index: number, evt: ChangeEvent<HTMLTextAreaElement>) => {
-    isPhotoDescriptionValid(index, evt.target.name, notificationExtra, dispatchValidation);
+  const validatePhotoAltText = (index: number, evt: ChangeEvent<HTMLTextAreaElement>) => {
+    isPhotoAltTextValid(index, evt.target.name, notificationExtra, dispatchValidation);
   };
 
   const fetchPhoto = async (index: number, evt: ChangeEvent<HTMLInputElement>) => {
@@ -120,7 +120,7 @@ const Photos = (): ReactElement => {
 
   return (
     <div className={styles.photos}>
-      {photos.map(({ sourceType, url, description, permission, source, preview }, index) => {
+      {photos.map(({ sourceType, url, altText, permission, source, preview }, index) => {
         const key = `photo_${index}`;
         return (
           <div key={key}>
@@ -186,25 +186,25 @@ const Photos = (): ReactElement => {
             {photosValid[index] && photosValid[index].url && preview && preview.length > 0 && (
               <>
                 <div className={inputLanguages.length > 1 ? "languageSection" : ""}>
-                  {inputLanguages.length > 1 && <h3>{i18n.t("notification.photos.description.label")}</h3>}
+                  {inputLanguages.length > 1 && <h3>{i18n.t("notification.photos.altText.label")}</h3>}
                   {LANGUAGE_OPTIONS.map((option) =>
                     inputLanguages.includes(option) ? (
                       <TextArea
-                        id={`description_${index}_${option}`}
+                        id={`altText_${index}_${option}`}
                         className="formInput"
                         rows={6}
-                        label={`${i18n.t("notification.photos.description.label")} ${i18n.t(`general.inLanguage.${option}`)}`}
+                        label={`${i18n.t("notification.photos.altText.label")} ${i18n.t(`general.inLanguage.${option}`)}`}
                         name={option}
-                        value={description[option] as string}
-                        onChange={(evt) => updatePhotoDescription(index, evt)}
-                        onBlur={(evt) => validatePhotoDescription(index, evt)}
-                        helperText={i18n.t("notification.photos.description.helperText")}
-                        tooltipButtonLabel={i18n.t("notification.photos.description.tooltipLabel")}
-                        tooltipLabel={i18n.t("notification.photos.description.tooltipLabel")}
-                        tooltipText={i18n.t("notification.photos.description.tooltipText")}
-                        invalid={photosValid[index] && !photosValid[index].description[option]}
+                        value={altText[option] as string}
+                        onChange={(evt) => updatePhotoAltText(index, evt)}
+                        onBlur={(evt) => validatePhotoAltText(index, evt)}
+                        helperText={i18n.t("notification.photos.altText.helperText")}
+                        tooltipButtonLabel={i18n.t("notification.photos.altText.tooltipLabel")}
+                        tooltipLabel={i18n.t("notification.photos.altText.tooltipLabel")}
+                        tooltipText={i18n.t("notification.photos.altText.tooltipText")}
+                        invalid={photosValid[index] && !photosValid[index].altText[option]}
                         errorText={
-                          photosValid[index] && !photosValid[index].description[option] ? i18n.t("notification.toast.validationFailed.title") : ""
+                          photosValid[index] && !photosValid[index].altText[option] ? i18n.t("notification.toast.validationFailed.title") : ""
                         }
                       />
                     ) : null
