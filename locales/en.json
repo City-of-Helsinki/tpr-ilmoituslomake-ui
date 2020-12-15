@@ -134,8 +134,8 @@
     "notifier": {
       "title": "Notifier's information",
       "notifierType": "Notifier's type",
-      "owner": "I represent the place",
-      "outsideSource":"I don't represent the place",
+      "representative": "I represent the place",
+      "notRepresentative": "I don't represent the place",
       "tooltipLabel": "Place's representative",
       "tooltipText": "The place's representative is the owner or someone else who indicates they represent the place's information. For example, a tourist or local resident do not represent the place.",
       "fullName": {

@@ -208,6 +208,7 @@ export const isPageValid = (
       ]);
       const inputValid2 = [
         isTagValid(notification, dispatch),
+        isNotifierFieldValid("notifierType", notificationExtra, dispatch),
         isNotifierFieldValid("fullName", notificationExtra, dispatch),
         isNotifierFieldValid("email", notificationExtra, dispatch),
         isNotifierFieldValid("phone", notificationExtra, dispatch),

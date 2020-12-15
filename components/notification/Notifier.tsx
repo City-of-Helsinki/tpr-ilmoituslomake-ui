@@ -14,11 +14,13 @@ const Notifier = (): ReactElement => {
 
   const notificationExtra = useSelector((state: RootState) => state.notification.notificationExtra);
   const {
-    notifier: { notifierType = "owner", fullName, email, phone },
+    notifier: { notifierType, fullName, email, phone },
   } = notificationExtra;
 
   const notificationValidation = useSelector((state: RootState) => state.notificationValidation.notificationValidation);
-  const { notifier: { fullName: fullNameValid = true, email: emailValid = true, phone: phoneValid = true } = {} } = notificationValidation;
+  const {
+    notifier: { notifierType: notifierTypeValid = true, fullName: fullNameValid = true, email: emailValid = true, phone: phoneValid = true } = {},
+  } = notificationValidation;
 
   const updateNotifier = (evt: ChangeEvent<HTMLInputElement>) => {
     dispatch(setNotificationNotifier({ [evt.target.name]: evt.target.value }));
@@ -39,22 +41,23 @@ const Notifier = (): ReactElement => {
         tooltipButtonLabel={i18n.t("notification.notifier.tooltipLabel")}
         tooltipLabel={i18n.t("notification.notifier.tooltipLabel")}
         tooltipText={i18n.t("notification.notifier.tooltipText")}
+        errorText={!notifierTypeValid ? i18n.t("notification.toast.validationFailed.title") : ""}
         required
       >
         <RadioButton
           id="notifierType_owner"
-          label={i18n.t("notification.notifier.owner")}
+          label={i18n.t("notification.notifier.representative")}
           name="notifierType"
-          value="owner"
-          checked={notifierType === "owner"}
+          value="representative"
+          checked={notifierType === "representative"}
           onChange={updateNotifier}
         />
         <RadioButton
           id="notifierType_outsideSource"
-          label={i18n.t("notification.notifier.outsideSource")}
+          label={i18n.t("notification.notifier.notRepresentative")}
           name="notifierType"
-          value="outsideSource"
-          checked={notifierType === "outsideSource"}
+          value="notRepresentative"
+          checked={notifierType === "notRepresentative"}
           onChange={updateNotifier}
         />
       </SelectionGroup>

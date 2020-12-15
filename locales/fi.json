@@ -134,8 +134,8 @@
     "notifier": {
       "title": "Ilmoittajan tiedot",
       "notifierType": "Ilmoittajan tyyppi",
-      "owner": "Edustan kohdetta",
-      "outsideSource":"En edusta kohdetta",
+      "representative": "Edustan kohdetta",
+      "notRepresentative": "En edusta kohdetta",
       "tooltipLabel": "Kohteen edustaja",
       "tooltipText": "Kohteen edustaja on omistaja ja joku muu, joka ilmoittaa edustamansa kohteen tiedot. Esimerkiksi matkailija tai paikallinen asukas eivät edusta kohdetta.",
       "fullName": {
