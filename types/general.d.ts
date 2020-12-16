@@ -1,4 +1,4 @@
-import { PhotoSourceType, Status, TaskStatus, TaskType } from "./constants";
+import { NotifierType, PhotoSourceType, Status, TaskStatus, TaskType } from "./constants";
 
 export interface User {
   authenticated: boolean;
@@ -54,7 +54,7 @@ export interface TagOption {
 export interface NotificationExtra {
   inputLanguages: string[];
   notifier: {
-    notifierType?: string;
+    notifierType?: NotifierType;
     fullName: string;
     email: string;
     phone: string;

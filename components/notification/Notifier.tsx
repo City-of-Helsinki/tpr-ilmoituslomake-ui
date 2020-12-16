@@ -5,6 +5,7 @@ import { TextInput, RadioButton, SelectionGroup } from "hds-react";
 import { NotificationAction, NotificationValidationAction } from "../../state/actions/types";
 import { setNotificationNotifier } from "../../state/actions/notification";
 import { RootState } from "../../state/reducers";
+import { NotifierType } from "../../types/constants";
 import { isNotifierFieldValid } from "../../utils/validation";
 
 const Notifier = (): ReactElement => {
@@ -48,16 +49,16 @@ const Notifier = (): ReactElement => {
           id="notifierType_owner"
           label={i18n.t("notification.notifier.representative")}
           name="notifierType"
-          value="representative"
-          checked={notifierType === "representative"}
+          value={NotifierType.Representative}
+          checked={notifierType === NotifierType.Representative}
           onChange={updateNotifier}
         />
         <RadioButton
           id="notifierType_outsideSource"
           label={i18n.t("notification.notifier.notRepresentative")}
           name="notifierType"
-          value="notRepresentative"
-          checked={notifierType === "notRepresentative"}
+          value={NotifierType.NotRepresentative}
+          checked={notifierType === NotifierType.NotRepresentative}
           onChange={updateNotifier}
         />
       </SelectionGroup>

@@ -1,5 +1,10 @@
 import { defaultLocale } from "../utils/i18n";
 
+export enum NotifierType {
+  Representative = "representative",
+  NotRepresentative = "notRepresentative",
+}
+
 export enum PhotoSourceType {
   Device = "device",
   Link = "link",
