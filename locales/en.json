@@ -195,7 +195,9 @@
       "institution": "Institution place"
     },
     "preview": {
-      "title": "Summary of the place's information"
+      "title": "Summary of the place's information",
+      "heading": "Heading",
+      "placeInfo": "Place's information"
     },
     "tags": {
       "title": "Keywords",

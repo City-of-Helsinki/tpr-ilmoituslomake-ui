@@ -1,0 +1,105 @@
+@import "~hds-design-tokens/lib/all.scss";
+@import "../../styles/mixins";
+
+.preview {
+  margin-top: $spacing-layout-l;
+  margin-bottom: $spacing-layout-l;
+
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+
+  .gridHeader {
+    padding: $spacing-xs;
+  }
+
+  .headerLine {
+    grid-column: 1 / span 2;
+  }
+
+  .gridSubHeader {
+    padding: $spacing-xs;
+  }
+
+  .gridContent {
+    padding: $spacing-xs;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+
+    @include media(xs) {
+      max-width: $container-width-xs / 2;
+    }
+
+    @include media(s) {
+      max-width: $container-width-s / 2;
+    }
+
+    @include media(m) {
+      max-width: $container-width-m / 2;
+    }
+
+    @include media(l) {
+      max-width: $container-width-l / 2;
+    }
+
+    @include media(xl) {
+      max-width: $container-width-xl / 2;
+    }
+
+    &.gridButton {
+      padding: 0;
+    }
+
+    &:nth-child(4n + 1),
+    &:nth-child(4n + 2) {
+      background-color: $color-silver-light;
+    }
+
+    .map {
+      @include media(xs) {
+        height: $container-width-xs / 4;
+      }
+
+      @include media(s) {
+        height: $container-width-s / 4;
+      }
+
+      @include media(m) {
+        height: $container-width-m / 4;
+      }
+
+      @include media(l) {
+        height: $container-width-l / 4;
+      }
+
+      @include media(xl) {
+        height: $container-width-xl / 4;
+      }
+    }
+
+    .imagePreview {
+      margin-top: $spacing-layout-xs;
+
+      img {
+        @include media(xs) {
+          max-width: $container-width-xs / 2;
+        }
+
+        @include media(s) {
+          max-width: $container-width-s / 2;
+        }
+
+        @include media(m) {
+          max-width: $container-width-m / 2;
+        }
+
+        @include media(l) {
+          max-width: $container-width-l / 2;
+        }
+
+        @include media(xl) {
+          max-width: $container-width-xl / 2;
+        }
+      }
+    }
+  }
+}

@@ -195,7 +195,9 @@
       "institution": "Säätiö- tai yhdistyskohde"
     },
     "preview": {
-      "title": "Yhteenveto kohteen tiedoista"
+      "title": "Yhteenveto kohteen tiedoista",
+      "heading": "Otsikko",
+      "placeInfo": "Kohteen tiedot"
     },
     "tags": {
       "title": "Asiasanat",
