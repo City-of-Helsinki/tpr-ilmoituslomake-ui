@@ -174,7 +174,7 @@
         "title": "Käyttöoikeudet",
         "notice": "HUOM! Sinulla pitää olla oikeudet lataamaasi kuvaan. Lataamalla kuvan myönnät Helsinki Marketingille oikeuden jakaa sitä eteenpäin avoimessa rajapinnassa. Sinun on valittava toinen alla olevista kuvan käyttöoikeuksista. Kts. tarkemmat tiedot käyttöehdoista.",
         "label": "Kuvan käyttöoikeudet",
-        "myHelsinki": "Kuvaa saa käyttää ainoastaan ko. kohteen yhteydessä esim. myhelsinki.fi-sivustolla. Kuvaa voidaan jakaa myös avoimena datana kolmansille osapuolille MyHelsinki-avoimen rajapinnan kautta. Kuvan käyttö tai siirto muihin tarkoituksiin on kielletty. Kuvaa käytettäessä on ehdottomasti mainittava kuvan lähde ja kuvaaja.",
+        "myHelsinki": "Kuvaa saa käyttää ainoastaan ko. kohteen yhteydessä esim. MyHelsinki.fi-sivustolla. Kuvaa voidaan jakaa myös avoimena datana kolmansille osapuolille MyHelsinki-avoimen rajapinnan kautta. Kuvan käyttö tai siirto muihin tarkoituksiin on kielletty. Kuvaa käytettäessä on ehdottomasti mainittava kuvan lähde ja kuvaaja.",
         "creativeCommons1": "Kuvaa saa jakaa Creative Commons BY 4.0.-lisenssillä. Kuvaa käytettäessä on ehdottomasti mainittava kuvan lähde ja kuvaaja.",
         "creativeCommons2": "Creative Commons BY 4.0.-lisenssi"
       },
@@ -206,7 +206,9 @@
     },
     "terms": {
       "heading": "Käyttöehdot",
-      "text": "TODO"
+      "text1": "Palveluun ilmoitettuja ja kerättyjä tietoja käytetään MyHelsinki.fi-verkkopalvelussa. Lisäksi tietoja tarjotaan Helsinki Marketingin ja Helsingin kaupungin avoimessa rajapinnassa kolmansille osapuolille. Tietokantaa ylläpitää Helsinki kaupunki, jolla on oikeus valita julkaistava materiaali ja editoida tekstiä sopivaan muotoon.",
+      "text2": "Lähettämällä tämän lomakkeen hyväksyt samalla käyttöehdot.",
+      "link": "Lue käyttöehdot täältä"
     }
   },
   "moderation": {
