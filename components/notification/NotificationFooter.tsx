@@ -48,14 +48,34 @@ const NotificationFooter = (): ReactElement => {
       const valid = validateNotificationData(notification);
 
       if (currentUser?.authenticated && valid) {
-        console.log("SENDING", notification);
+        // Add the photos to the post data
+        // TODO - add the id when available
+        const { photos } = notificationExtra;
+
+        const postData = {
+          data: {
+            ...notification,
+            images: photos.map((photo, index) => {
+              const { sourceType: source_type, url, altText: alt_text, permission, source } = photo;
+              return { index, source_type, url, alt_text, permission, source };
+            }),
+          },
+          images: photos
+            .map((photo, index) => {
+              const { base64 } = photo;
+              return { index, base64 };
+            })
+            .filter((photo) => photo.base64 && photo.base64.length > 0),
+        };
+
+        console.log("SENDING", postData);
 
         const createResponse = await fetch("/api/notification/create/", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify({ data: notification }),
+          body: JSON.stringify(postData),
         });
         if (createResponse.ok) {
           const notificationResult = await createResponse.json();
@@ -70,6 +90,13 @@ const NotificationFooter = (): ReactElement => {
           }
         } else {
           setToast(Toast.SaveFailed);
+
+          // TODO - handle error
+          const notificationResult = await createResponse.json();
+          console.log("RESPONSE", notificationResult);
+          if (notificationResult && notificationResult.data) {
+            console.log(notificationResult.data);
+          }
         }
       } else if (!valid) {
         setToast(Toast.ValidationFailed);
