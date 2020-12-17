@@ -15,6 +15,8 @@ const NotificationHeader = (): ReactElement => {
   const dispatch = useDispatch<Dispatch<NotificationAction>>();
 
   const currentPage = useSelector((state: RootState) => state.notification.page);
+  const notificationId = useSelector((state: RootState) => state.notification.notificationId);
+  const notificationName = useSelector((state: RootState) => state.notification.notificationName);
 
   const changePage = (pageNumber: number) => {
     dispatch(setPage(pageNumber));
@@ -51,7 +53,7 @@ const NotificationHeader = (): ReactElement => {
         </Navigation.Row>
       </Header>
       <div className={styles.header}>
-        <h1>{i18n.t("notification.header")}</h1>
+        <h1>{notificationId > 0 ? `${i18n.t("notification.headerModify")}: ${notificationName}` : i18n.t("notification.headerNew")}</h1>
         <StylesProvider injectFirst>
           <Stepper classes={{ root: styles.stepper }} activeStep={currentPage - 1} alternativeLabel>
             <Step>

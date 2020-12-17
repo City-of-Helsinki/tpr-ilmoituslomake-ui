@@ -47,7 +47,7 @@ const Main = (): ReactElement => {
             heading="Haluatko lisätä uuden kohteen palveluun?"
             text="Ilmoita palveluun uusia toimipisteitä ja kohteita. Kirjaudu ensin ja ilmoita puuttuva kohde jo tänään."
           />
-          <Button variant="secondary" className={styles.button} onClick={() => window.open("/forms/notification/", "_self")}>
+          <Button variant="secondary" className={styles.button} onClick={() => window.open("/notification/", "_self")}>
             Ilmoita uusi kohde
           </Button>
         </div>

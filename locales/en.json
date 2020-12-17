@@ -14,7 +14,8 @@
   },
   "notification": {
     "title": "My Helsinki Places",
-    "header": "Notify about a new place",
+    "headerNew": "Notify about a new place",
+    "headerModify": "Modify",
     "mandatory": "Mandatory information is marked with an asterisk *",
     "button": {
       "next": "Next",

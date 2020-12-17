@@ -9,6 +9,8 @@ export interface NotificationState {
   user?: User;
   center: LatLngExpression;
   zoom: number;
+  notificationId: number;
+  notificationName: string;
   notification: NotificationSchema;
   notificationExtra: NotificationExtra;
 }

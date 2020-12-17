@@ -19,6 +19,7 @@ const NotificationFooter = (): ReactElement => {
 
   const currentPage = useSelector((state: RootState) => state.notification.page);
   const currentUser = useSelector((state: RootState) => state.notification.user);
+  const notificationId = useSelector((state: RootState) => state.notification.notificationId);
   const notification = useSelector((state: RootState) => state.notification.notification);
   const notificationExtra = useSelector((state: RootState) => state.notification.notificationExtra);
 
@@ -48,11 +49,12 @@ const NotificationFooter = (): ReactElement => {
       const valid = validateNotificationData(notification);
 
       if (currentUser?.authenticated && valid) {
-        // Add the photos to the post data
-        // TODO - add the id when available
+        // Include all the notification details and also the photos in the post data
+        // The notification id is only included if it has a value, and is used for modifying existing notifications
         const { photos } = notificationExtra;
 
         const postData = {
+          ...(notificationId > 0 && { id: notificationId }),
           data: {
             ...notification,
             images: photos.map((photo, index) => {

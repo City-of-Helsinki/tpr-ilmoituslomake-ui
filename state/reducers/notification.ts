@@ -32,6 +32,8 @@ const initialState: NotificationState = {
   page: 1,
   center: MAP_INITIAL_CENTER as LatLngExpression,
   zoom: MAP_INITIAL_ZOOM,
+  notificationId: 0,
+  notificationName: "",
   notification: { ...INITIAL_NOTIFICATION, location: [0, 0] },
   notificationExtra: INITIAL_NOTIFICATION_EXTRA,
 };

@@ -24,10 +24,12 @@ import Preview from "../../components/notification/Preview";
 import Tags from "../../components/notification/Tags";
 import Terms from "../../components/notification/Terms";
 import ValidationSummary from "../../components/notification/ValidationSummary";
+import { INITIAL_NOTIFICATION, INITIAL_NOTIFICATION_EXTRA } from "../../types/constants";
 import { TagOption } from "../../types/general";
-import styles from "./notification.module.scss";
+import { NotificationSchema } from "../../types/notification_schema";
+import styles from "./[[...targetId]].module.scss";
 
-const Notification = (): ReactElement => {
+const NotificationDetail = (): ReactElement => {
   const i18n = useI18n();
 
   const currentPage = useSelector((state: RootState) => state.notification.page);
@@ -92,15 +94,71 @@ const Notification = (): ReactElement => {
 };
 
 // Server-side rendering
-export const getServerSideProps: GetServerSideProps = async ({ req, locale }) => {
+export const getServerSideProps: GetServerSideProps = async ({ req, params, locale }) => {
   const lngDict = await i18nLoader(locale);
 
   const reduxStore = initStore();
   const initialReduxState = reduxStore.getState();
   initialReduxState.notification.notificationExtra.inputLanguages = [locale || defaultLocale];
+  const { origin } = absoluteUrl(req);
+
+  // Reset the notification details in the state
+  initialReduxState.notification.notificationId = 0;
+  initialReduxState.notification.notificationName = "";
+  initialReduxState.notification.notification = { ...INITIAL_NOTIFICATION, location: [0, 0] };
+  initialReduxState.notification.notificationExtra = INITIAL_NOTIFICATION_EXTRA;
+
+  // Try to fetch the notification details for the specified id
+  if (params) {
+    const { targetId } = params;
+    const targetResponse = await fetch(`${origin}/api/notification/get/${targetId}/`, { headers: { cookie: req.headers.cookie as string } });
+
+    if (targetResponse.ok) {
+      const targetResult = await (targetResponse.json() as Promise<{ id: number; data: NotificationSchema }>);
+
+      console.log("targetResult", targetResult);
+
+      try {
+        // Merge the notification details from the backend, but remove the previous notifier details
+        // TODO - handle image base64 when implemented in backend
+        // TODO - handle inputLanguages here?
+        const { notifier, images, ...dataToUse } = targetResult.data;
+
+        initialReduxState.notification = {
+          ...initialReduxState.notification,
+          notificationId: targetResult.id,
+          notificationName: targetResult.data.name.fi || targetResult.data.name.sv || targetResult.data.name.en,
+          notification: {
+            ...initialReduxState.notification.notification,
+            ...dataToUse,
+            notifier: INITIAL_NOTIFICATION.notifier,
+          },
+          notificationExtra: {
+            ...initialReduxState.notification.notificationExtra,
+            photos: images.map((image) => {
+              return {
+                sourceType: image.source_type,
+                url: image.url,
+                altText: {
+                  fi: image.alt_text.fi,
+                  sv: image.alt_text.sv,
+                  en: image.alt_text.en,
+                },
+                permission: image.permission,
+                source: image.source,
+                base64: "",
+                preview: "",
+              };
+            }),
+          },
+        };
+      } catch (err) {
+        console.log("ERROR", err);
+      }
+    }
+  }
 
   // Note: this currently fetches all tags which may cause performance issues
-  const { origin } = absoluteUrl(req);
   const tagResponse = await fetch(`${origin}/api/ontologywords/?format=json&search=`);
   if (tagResponse.ok) {
     const tagResult = await tagResponse.json();
@@ -118,4 +176,4 @@ export const getServerSideProps: GetServerSideProps = async ({ req, locale }) =>
   };
 };
 
-export default Notification;
+export default NotificationDetail;

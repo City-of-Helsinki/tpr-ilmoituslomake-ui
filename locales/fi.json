@@ -14,7 +14,8 @@
   },
   "notification": {
     "title": "My Helsinki Places",
-    "header": "Ilmoita uusi kohde",
+    "headerNew": "Ilmoita uusi kohde",
+    "headerModify": "Muokkaa",
     "mandatory": "Pakolliset tiedot on merkitty tähdellä *",
     "button": {
       "next": "Seuraava",
