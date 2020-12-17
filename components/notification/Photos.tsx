@@ -194,7 +194,7 @@ const Photos = (): ReactElement => {
                         id={`altText_${index}_${option}`}
                         key={key2}
                         className="formInput"
-                        rows={6}
+                        rows={3}
                         label={`${i18n.t("notification.photos.altText.label")} ${i18n.t(`general.inLanguage.${option}`)}`}
                         name={option}
                         value={altText[option] as string}
