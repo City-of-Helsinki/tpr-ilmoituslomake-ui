@@ -187,10 +187,12 @@ const Photos = (): ReactElement => {
               <>
                 <div className={inputLanguages.length > 1 ? "languageSection" : ""}>
                   {inputLanguages.length > 1 && <h3>{i18n.t("notification.photos.altText.label")}</h3>}
-                  {LANGUAGE_OPTIONS.map((option) =>
-                    inputLanguages.includes(option) ? (
+                  {LANGUAGE_OPTIONS.map((option) => {
+                    const key2 = `altText_${index}_${option}`;
+                    return inputLanguages.includes(option) ? (
                       <TextArea
                         id={`altText_${index}_${option}`}
+                        key={key2}
                         className="formInput"
                         rows={6}
                         label={`${i18n.t("notification.photos.altText.label")} ${i18n.t(`general.inLanguage.${option}`)}`}
@@ -207,8 +209,8 @@ const Photos = (): ReactElement => {
                           photosValid[index] && !photosValid[index].altText[option] ? i18n.t("notification.toast.validationFailed.title") : ""
                         }
                       />
-                    ) : null
-                  )}
+                    ) : null;
+                  })}
                 </div>
 
                 <h5>{i18n.t("notification.photos.permission.title")}</h5>
