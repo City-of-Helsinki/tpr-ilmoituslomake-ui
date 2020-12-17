@@ -6,7 +6,7 @@ import { NotificationAction, NotificationValidationAction } from "../../state/ac
 import { setNotificationPhoto, removeNotificationPhoto } from "../../state/actions/notification";
 import { setNotificationPhotoValidation, removeNotificationPhotoValidation } from "../../state/actions/notificationValidation";
 import { RootState } from "../../state/reducers";
-import { LANGUAGE_OPTIONS, MAX_PHOTOS, PhotoSourceType } from "../../types/constants";
+import { LANGUAGE_OPTIONS, MAX_PHOTOS, PhotoPermission, PhotoSourceType } from "../../types/constants";
 import { PhotoValidation } from "../../types/notification_validation";
 import { isPhotoFieldValid, isPhotoAltTextValid } from "../../utils/validation";
 import Notice from "./Notice";
@@ -42,7 +42,7 @@ const Photos = (): ReactElement => {
           sv: "",
           en: "",
         },
-        permission: "",
+        permission: undefined,
         source: "",
       })
     );
@@ -224,16 +224,16 @@ const Photos = (): ReactElement => {
                     id={`permission_myHelsinki_${index}`}
                     label={i18n.t("notification.photos.permission.myHelsinki")}
                     name="permission"
-                    value="myHelsinki"
-                    checked={permission === "myHelsinki"}
+                    value={PhotoPermission.MyHelsinki}
+                    checked={permission === PhotoPermission.MyHelsinki}
                     onChange={(evt) => updatePhoto(index, evt)}
                   />
                   <RadioButton
                     id={`permission_creativeCommons_${index}`}
                     label={i18n.t("notification.photos.permission.creativeCommons1")}
                     name="permission"
-                    value="creativeCommons"
-                    checked={permission === "creativeCommons"}
+                    value={PhotoPermission.CreativeCommons}
+                    checked={permission === PhotoPermission.CreativeCommons}
                     onChange={(evt) => updatePhoto(index, evt)}
                   />
                 </SelectionGroup>

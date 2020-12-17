@@ -10,6 +10,11 @@ export enum PhotoSourceType {
   Link = "link",
 }
 
+export enum PhotoPermission {
+  MyHelsinki = "myHelsinki",
+  CreativeCommons = "creativeCommons",
+}
+
 export enum Status {
   Unknown = "unknown",
   Edited = "edited",

@@ -4,7 +4,7 @@ import dynamic from "next/dynamic";
 import { useRouter } from "next/router";
 import { useI18n } from "next-localization";
 import { RootState } from "../../state/reducers";
-import { NotifierType, LANGUAGE_OPTIONS, MAP_INITIAL_CENTER, MAP_INITIAL_ZOOM } from "../../types/constants";
+import { NotifierType, PhotoPermission, LANGUAGE_OPTIONS, MAP_INITIAL_CENTER, MAP_INITIAL_ZOOM } from "../../types/constants";
 import { defaultLocale } from "../../utils/i18n";
 import styles from "./Preview.module.scss";
 
@@ -147,7 +147,10 @@ const Preview = (): ReactElement => {
                 )}
               </div>
               <div className={`gridColumn1 ${styles.gridContent}`}>{i18n.t("notification.photos.permission.label")}</div>
-              <div className={`gridColumn2 ${styles.gridContent}`}>{permission}</div>
+              <div className={`gridColumn2 ${styles.gridContent}`}>
+                {permission === PhotoPermission.MyHelsinki && i18n.t("notification.photos.permission.myHelsinki2")}
+                {permission === PhotoPermission.CreativeCommons && i18n.t("notification.photos.permission.creativeCommons3")}
+              </div>
               <div className={`gridColumn1 ${styles.gridContent}`}>{i18n.t("notification.photos.source.label")}</div>
               <div className={`gridColumn2 ${styles.gridContent}`}>{source}</div>
             </>

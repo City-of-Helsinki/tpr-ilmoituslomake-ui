@@ -1,4 +1,4 @@
-import { NotifierType, PhotoSourceType, Status, TaskStatus, TaskType } from "./constants";
+import { NotifierType, PhotoPermission, PhotoSourceType, Status, TaskStatus, TaskType } from "./constants";
 
 export interface User {
   authenticated: boolean;
@@ -34,7 +34,7 @@ export interface Photo {
     en: string;
     [key: string]: unknown;
   };
-  permission: string;
+  permission?: PhotoPermission;
   source: string;
   base64?: string;
   preview?: string;

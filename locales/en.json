@@ -175,8 +175,10 @@
         "notice": "NOTE! You must have the rights to the photo you are uploading. By uploading the photo you grant Helsinki Marketing the right to distribute it forward in an open interface. You must choose one of the following usage rights for the photo. Check the terms of use for precise information.",
         "label": "Photo's usage rights",
         "myHelsinki": "The photo can only be used in connection with the place in question, for example the MyHelsinki.fi website. The photo can also be distributed as open data to third parties via the MyHelsinki open interface. The photo's usage or transfer for other purposes is forbidden. When using the photo, the photo's source and photographer must be mentioned.",
+        "myHelsinki2": "MyHelsinki",
         "creativeCommons1": "The photo can be distributed with the Creative Commons BY 4.0. license. When using the photo, the photo's source and photographer must be mentioned.",
-        "creativeCommons2": "Creative Commons BY 4.0. license"
+        "creativeCommons2": "Creative Commons BY 4.0. license",
+        "creativeCommons3": "Creative Commons"
       },
       "source": {
         "label": "Photo's source",
