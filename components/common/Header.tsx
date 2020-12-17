@@ -24,7 +24,7 @@ const Header = ({ children }: HeaderProps): ReactElement => {
   const currentUser = useSelector((state: RootState) => state.notification.user);
 
   const changeLanguage = (locale: string) => {
-    router.push(router.pathname, router.pathname, { locale });
+    router.push(router.pathname, router.asPath, { locale });
   };
 
   useEffect(() => {

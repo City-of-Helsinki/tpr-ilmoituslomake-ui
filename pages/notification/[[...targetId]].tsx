@@ -116,8 +116,6 @@ export const getServerSideProps: GetServerSideProps = async ({ req, params, loca
     if (targetResponse.ok) {
       const targetResult = await (targetResponse.json() as Promise<{ id: number; data: NotificationSchema }>);
 
-      console.log("targetResult", targetResult);
-
       try {
         // Merge the notification details from the backend, but remove the previous notifier details
         // TODO - handle image base64 when implemented in backend
