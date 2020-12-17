@@ -55,8 +55,8 @@ export interface NotificationValidation {
   ontology_ids: boolean;
   comments?: boolean;
   notifier: {
-    notifierType: boolean;
-    fullName: boolean;
+    notifier_type: boolean;
+    full_name: boolean;
     email: boolean;
     phone: boolean;
     [key: string]: boolean;

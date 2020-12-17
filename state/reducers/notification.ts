@@ -52,12 +52,12 @@ const notification = (state = initialState, action: AnyAction): NotificationStat
         ...state,
         user: action.payload,
         // Also update the notifier values with the login user details if not already set
-        notificationExtra: {
-          ...state.notificationExtra,
+        notification: {
+          ...state.notification,
           notifier: {
-            ...state.notificationExtra.notifier,
-            fullName: state.notificationExtra.notifier.fullName || `${action.payload.first_name} ${action.payload.last_name}`.trim(),
-            email: state.notificationExtra.notifier.email || action.payload.email,
+            ...state.notification.notifier,
+            full_name: state.notification.notifier.full_name || `${action.payload.first_name} ${action.payload.last_name}`.trim(),
+            email: state.notification.notifier.email || action.payload.email,
           },
         },
       };
@@ -140,7 +140,7 @@ const notification = (state = initialState, action: AnyAction): NotificationStat
       console.log("SET_NOTIFICATION_NOTIFIER", action.payload);
       return {
         ...state,
-        notificationExtra: { ...state.notificationExtra, notifier: { ...state.notificationExtra.notifier, ...action.payload } },
+        notification: { ...state.notification, notifier: { ...state.notification.notifier, ...action.payload } },
       };
     }
 

@@ -13,14 +13,14 @@ const Notifier = (): ReactElement => {
   const dispatch = useDispatch<Dispatch<NotificationAction>>();
   const dispatchValidation = useDispatch<Dispatch<NotificationValidationAction>>();
 
-  const notificationExtra = useSelector((state: RootState) => state.notification.notificationExtra);
+  const notification = useSelector((state: RootState) => state.notification.notification);
   const {
-    notifier: { notifierType, fullName, email, phone },
-  } = notificationExtra;
+    notifier: { notifier_type, full_name, email, phone },
+  } = notification;
 
   const notificationValidation = useSelector((state: RootState) => state.notificationValidation.notificationValidation);
   const {
-    notifier: { notifierType: notifierTypeValid = true, fullName: fullNameValid = true, email: emailValid = true, phone: phoneValid = true } = {},
+    notifier: { notifier_type: notifierTypeValid = true, full_name: fullNameValid = true, email: emailValid = true, phone: phoneValid = true } = {},
   } = notificationValidation;
 
   const updateNotifier = (evt: ChangeEvent<HTMLInputElement>) => {
@@ -28,7 +28,7 @@ const Notifier = (): ReactElement => {
   };
 
   const validateNotifier = (evt: ChangeEvent<HTMLInputElement>) => {
-    isNotifierFieldValid(evt.target.name, notificationExtra, dispatchValidation);
+    isNotifierFieldValid(evt.target.name, notification, dispatchValidation);
   };
 
   return (
@@ -48,17 +48,17 @@ const Notifier = (): ReactElement => {
         <RadioButton
           id="notifierType_owner"
           label={i18n.t("notification.notifier.representative")}
-          name="notifierType"
+          name="notifier_type"
           value={NotifierType.Representative}
-          checked={notifierType === NotifierType.Representative}
+          checked={notifier_type === NotifierType.Representative}
           onChange={updateNotifier}
         />
         <RadioButton
           id="notifierType_outsideSource"
           label={i18n.t("notification.notifier.notRepresentative")}
-          name="notifierType"
+          name="notifier_type"
           value={NotifierType.NotRepresentative}
-          checked={notifierType === NotifierType.NotRepresentative}
+          checked={notifier_type === NotifierType.NotRepresentative}
           onChange={updateNotifier}
         />
       </SelectionGroup>
@@ -67,8 +67,8 @@ const Notifier = (): ReactElement => {
         id="fullName"
         className="formInput"
         label={i18n.t("notification.notifier.fullName.label")}
-        name="fullName"
-        value={fullName}
+        name="full_name"
+        value={full_name}
         onChange={updateNotifier}
         onBlur={validateNotifier}
         invalid={!fullNameValid}

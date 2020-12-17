@@ -69,10 +69,10 @@ const postalCodeSchema = () => string().matches(/^[0-9][0-9][0-9][0-9][0-9]$/, {
 
 export const isNotifierFieldValid = (
   notifierField: string,
-  notificationExtra: NotificationExtra,
+  notification: NotificationSchema,
   dispatch: Dispatch<NotificationValidationAction>
 ): boolean => {
-  const { notifier } = notificationExtra;
+  const { notifier } = notification;
   let schema;
   switch (notifierField) {
     case "email": {
@@ -208,10 +208,10 @@ export const isPageValid = (
       ]);
       const inputValid2 = [
         isTagValid(notification, dispatch),
-        isNotifierFieldValid("notifierType", notificationExtra, dispatch),
-        isNotifierFieldValid("fullName", notificationExtra, dispatch),
-        isNotifierFieldValid("email", notificationExtra, dispatch),
-        isNotifierFieldValid("phone", notificationExtra, dispatch),
+        isNotifierFieldValid("notifier_type", notification, dispatch),
+        isNotifierFieldValid("full_name", notification, dispatch),
+        isNotifierFieldValid("email", notification, dispatch),
+        isNotifierFieldValid("phone", notification, dispatch),
       ];
       return inputValid1.every((valid) => valid) && inputValid2.every((valid) => valid);
     }

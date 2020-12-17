@@ -58,22 +58,30 @@ export interface NotificationSchema {
     [k: string]: unknown;
   };
   images: {
+    index: number;
+    source_type: string;
+    url: string;
+    permission: string;
+    source: string;
+    alt_text: {
+      fi: string;
+      sv: string;
+      en: string;
+      [k: string]: unknown;
+    };
     [k: string]: unknown;
-  };
+  }[];
   opening_times: {
     [k: string]: unknown;
   };
-  price: {
-    fi: string;
-    sv: string;
-    en: string;
-    [k: string]: unknown;
-  };
-  payment_options: {
-    name?: string;
-    [k: string]: unknown;
-  }[];
   ontology_ids: number[];
   comments: string;
+  notifier: {
+    notifier_type: string;
+    full_name: string;
+    email: string;
+    phone: string;
+    [k: string]: unknown;
+  };
   [k: string]: unknown;
 }

@@ -1,4 +1,4 @@
-import { NotifierType, PhotoPermission, PhotoSourceType, Status, TaskStatus, TaskType } from "./constants";
+import { Status, TaskStatus, TaskType } from "./constants";
 
 export interface User {
   authenticated: boolean;
@@ -26,7 +26,7 @@ export type OptionType = {
 };
 
 export interface Photo {
-  sourceType: PhotoSourceType;
+  sourceType: string;
   url: string;
   altText: {
     fi: string;
@@ -34,7 +34,7 @@ export interface Photo {
     en: string;
     [key: string]: unknown;
   };
-  permission?: PhotoPermission;
+  permission?: string;
   source: string;
   base64?: string;
   preview?: string;
@@ -53,13 +53,6 @@ export interface TagOption {
 
 export interface NotificationExtra {
   inputLanguages: string[];
-  notifier: {
-    notifierType?: NotifierType;
-    fullName: string;
-    email: string;
-    phone: string;
-    [key: string]: unknown;
-  };
   photos: Photo[];
   tagOptions: TagOption[];
 }

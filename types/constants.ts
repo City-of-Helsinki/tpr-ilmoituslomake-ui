@@ -153,25 +153,20 @@ export const INITIAL_NOTIFICATION = {
     sv: "",
     en: "",
   },
-  images: {},
+  images: [],
   opening_times: {},
-  price: {
-    fi: "",
-    sv: "",
-    en: "",
-  },
-  payment_options: [],
   ontology_ids: [],
   comments: "",
+  notifier: {
+    notifier_type: "",
+    full_name: "",
+    email: "",
+    phone: "",
+  },
 };
 
 export const INITIAL_NOTIFICATION_EXTRA = {
   inputLanguages: [defaultLocale],
-  notifier: {
-    fullName: "",
-    email: "",
-    phone: "",
-  },
   photos: [],
   tagOptions: [],
 };

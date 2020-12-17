@@ -27,15 +27,11 @@ const Preview = (): ReactElement => {
     phone,
     email,
     website,
+    notifier: { notifier_type: notifierType, full_name: notifierFullName, email: notifierEmail, phone: notifierPhone },
   } = notification;
 
   const notificationExtra = useSelector((state: RootState) => state.notification.notificationExtra);
-  const {
-    inputLanguages,
-    tagOptions,
-    notifier: { notifierType, fullName, email: notifierEmail, phone: notifierPhone },
-    photos = [],
-  } = notificationExtra;
+  const { inputLanguages, tagOptions, photos = [] } = notificationExtra;
 
   const initialCenter = MAP_INITIAL_CENTER;
   const initialZoom = MAP_INITIAL_ZOOM;
@@ -88,7 +84,7 @@ const Preview = (): ReactElement => {
         {notifierType === NotifierType.NotRepresentative && i18n.t("notification.notifier.notRepresentative")}
       </div>
       <div className={`gridColumn1 ${styles.gridContent}`}>{i18n.t("notification.notifier.fullName.label")}</div>
-      <div className={`gridColumn2 ${styles.gridContent}`}>{fullName}</div>
+      <div className={`gridColumn2 ${styles.gridContent}`}>{notifierFullName}</div>
       <div className={`gridColumn1 ${styles.gridContent}`}>{i18n.t("notification.notifier.email.label")}</div>
       <div className={`gridColumn2 ${styles.gridContent}`}>{notifierEmail}</div>
       <div className={`gridColumn1 ${styles.gridContent}`}>{i18n.t("notification.notifier.phone.label")}</div>

@@ -58,8 +58,8 @@ const initialState: NotificationValidationState = {
     },
     ontology_ids: true,
     notifier: {
-      notifierType: true,
-      fullName: true,
+      notifier_type: true,
+      full_name: true,
       email: true,
       phone: true,
     },
