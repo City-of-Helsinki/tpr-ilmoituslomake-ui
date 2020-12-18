@@ -39,7 +39,7 @@ const ContactModeration = (): ReactElement => {
         <h4 className="gridColumn2">{`${i18n.t("moderation.contact.title")}${i18n.t("moderation.task.modified")}`}</h4>
         <TextInput
           id="phoneSelected"
-          className="gridColumn1"
+          className="gridColumn1 disabledTextColor"
           label={i18n.t("moderation.contact.phone.label")}
           name="phone"
           value={phoneSelected}
@@ -54,7 +54,7 @@ const ContactModeration = (): ReactElement => {
         >
           <TextInput
             id="phoneModified"
-            className="gridColumn2"
+            className="gridColumn2 disabledTextColor"
             label={i18n.t("moderation.contact.phone.label")}
             name="phone"
             value={phoneModified}
@@ -68,7 +68,7 @@ const ContactModeration = (): ReactElement => {
       <div className="gridLayoutContainer">
         <TextInput
           id="emailSelected"
-          className="gridColumn1"
+          className="gridColumn1 disabledTextColor"
           label={i18n.t("moderation.contact.email.label")}
           name="email"
           value={emailSelected}
@@ -83,7 +83,7 @@ const ContactModeration = (): ReactElement => {
         >
           <TextInput
             id="emailModified"
-            className="gridColumn2"
+            className="gridColumn2 disabledTextColor"
             label={i18n.t("moderation.contact.email.label")}
             name="email"
             value={emailModified}

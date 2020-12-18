@@ -63,7 +63,7 @@ const LocationModeration = (): ReactElement => {
         )}`}</h4>
         <TextInput
           id="streetAddressFiSelected"
-          className="gridColumn1"
+          className="gridColumn1 disabledTextColor"
           label={`${i18n.t("moderation.location.streetAddress.label")} ${i18n.t("general.inLanguage.fi")}`}
           name="street"
           value={streetFiSelected}
@@ -78,7 +78,7 @@ const LocationModeration = (): ReactElement => {
         >
           <TextInput
             id="streetAddressFiModified"
-            className="gridColumn2"
+            className="gridColumn2 disabledTextColor"
             label={`${i18n.t("moderation.location.streetAddress.label")} ${i18n.t("general.inLanguage.fi")}`}
             name="street"
             value={streetFiModified}
@@ -89,7 +89,7 @@ const LocationModeration = (): ReactElement => {
         <ActionButton className="gridColumn3" fieldName="fi" status={addressFiStatus} actionCallback={updateAddressStatus} />
         <TextInput
           id="postalCodeFiSelected"
-          className="gridColumn1"
+          className="gridColumn1 disabledTextColor"
           label={`${i18n.t("moderation.location.postalCode.label")} ${i18n.t("general.inLanguage.fi")}`}
           name="postal_code"
           value={postalCodeFiSelected}
@@ -105,7 +105,7 @@ const LocationModeration = (): ReactElement => {
         >
           <TextInput
             id="postalCodeFiModified"
-            className="gridColumn2"
+            className="gridColumn2 disabledTextColor"
             label={`${i18n.t("moderation.location.postalCode.label")} ${i18n.t("general.inLanguage.fi")}`}
             name="postal_code"
             value={postalCodeFiModified}
@@ -115,7 +115,7 @@ const LocationModeration = (): ReactElement => {
         </ModifyButton>
         <TextInput
           id="postalOfficeFiSelected"
-          className="gridColumn1"
+          className="gridColumn1 disabledTextColor"
           label={`${i18n.t("moderation.location.postalOffice.label")} ${i18n.t("general.inLanguage.fi")}`}
           name="post_office"
           value={postOfficeFiSelected}
@@ -131,7 +131,7 @@ const LocationModeration = (): ReactElement => {
         >
           <TextInput
             id="postalOfficeFiModified"
-            className="gridColumn2"
+            className="gridColumn2 disabledTextColor"
             label={`${i18n.t("moderation.location.postalOffice.label")} ${i18n.t("general.inLanguage.fi")}`}
             name="post_office"
             value={postOfficeFiModified}
@@ -150,7 +150,7 @@ const LocationModeration = (): ReactElement => {
         )}`}</h4>
         <TextInput
           id="streetAddressSvSelected"
-          className="gridColumn1"
+          className="gridColumn1 disabledTextColor"
           label={`${i18n.t("moderation.location.streetAddress.label")} ${i18n.t("general.inLanguage.sv")}`}
           name="street"
           value={streetSvSelected}
@@ -165,7 +165,7 @@ const LocationModeration = (): ReactElement => {
         >
           <TextInput
             id="streetAddressSvModified"
-            className="gridColumn2"
+            className="gridColumn2 disabledTextColor"
             label={`${i18n.t("moderation.location.streetAddress.label")} ${i18n.t("general.inLanguage.sv")}`}
             name="street"
             value={streetSvModified}
@@ -176,7 +176,7 @@ const LocationModeration = (): ReactElement => {
         <ActionButton className="gridColumn3" fieldName="sv" status={addressSvStatus} actionCallback={updateAddressStatus} />
         <TextInput
           id="postalCodeSvSelected"
-          className="gridColumn1"
+          className="gridColumn1 disabledTextColor"
           label={`${i18n.t("moderation.location.postalCode.label")} ${i18n.t("general.inLanguage.sv")}`}
           name="postal_code"
           value={postalCodeSvSelected}
@@ -192,7 +192,7 @@ const LocationModeration = (): ReactElement => {
         >
           <TextInput
             id="postalCodeSvModified"
-            className="gridColumn2"
+            className="gridColumn2 disabledTextColor"
             label={`${i18n.t("moderation.location.postalCode.label")} ${i18n.t("general.inLanguage.sv")}`}
             name="postal_code"
             value={postalCodeSvModified}
@@ -202,7 +202,7 @@ const LocationModeration = (): ReactElement => {
         </ModifyButton>
         <TextInput
           id="postalOfficeSvSelected"
-          className="gridColumn1"
+          className="gridColumn1 disabledTextColor"
           label={`${i18n.t("moderation.location.postalOffice.label")} ${i18n.t("general.inLanguage.sv")}`}
           name="post_office"
           value={postOfficeSvSelected}
@@ -218,7 +218,7 @@ const LocationModeration = (): ReactElement => {
         >
           <TextInput
             id="postalOfficeSvModified"
-            className="gridColumn2"
+            className="gridColumn2 disabledTextColor"
             label={`${i18n.t("moderation.location.postalOffice.label")} ${i18n.t("general.inLanguage.sv")}`}
             name="post_office"
             value={postOfficeSvModified}

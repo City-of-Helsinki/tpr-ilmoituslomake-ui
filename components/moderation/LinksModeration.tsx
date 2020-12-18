@@ -41,7 +41,7 @@ const LinksModeration = (): ReactElement => {
           <Fragment key={`website_${option}`}>
             <TextInput
               id={`websiteSelected_${option}`}
-              className="gridColumn1"
+              className="gridColumn1 disabledTextColor"
               label={`${i18n.t("moderation.links.website.label")} ${i18n.t(`general.inLanguage.${option}`)}`}
               name={option}
               value={websiteSelected[option] as string}
@@ -56,7 +56,7 @@ const LinksModeration = (): ReactElement => {
             >
               <TextInput
                 id={`websiteModified_${option}`}
-                className="gridColumn2"
+                className="gridColumn2 disabledTextColor"
                 label={`${i18n.t("moderation.links.website.label")} ${i18n.t(`general.inLanguage.${option}`)}`}
                 name={option}
                 value={websiteModified[option] as string}

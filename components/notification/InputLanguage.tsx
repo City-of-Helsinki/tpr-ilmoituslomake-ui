@@ -27,6 +27,7 @@ const InputLanguage = (): ReactElement => {
         <Checkbox
           id={`input_${option}`}
           key={`input_${option}`}
+          className="disabledTextColor"
           label={i18n.t(`notification.inputLanguage.${option}`)}
           name={`input_${option}`}
           value={option}

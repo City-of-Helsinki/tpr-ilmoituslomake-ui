@@ -66,6 +66,12 @@ textarea {
   height: auto !important;
 }
 
+.disabledTextColor input[disabled],
+.disabledTextColor textarea[disabled],
+.disabledTextColor input[type="checkbox"][disabled] + label {
+  color: $color-black-70 !important;
+}
+
 .formSection {
   margin-bottom: $spacing-layout-l;
 }

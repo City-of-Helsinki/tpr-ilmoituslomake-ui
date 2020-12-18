@@ -73,7 +73,7 @@ const DescriptionModeration = (): ReactElement => {
           <Fragment key={`placeName_${option}`}>
             <TextInput
               id={`placeNameSelected_${option}`}
-              className="gridColumn1"
+              className="gridColumn1 disabledTextColor"
               label={`${i18n.t("moderation.description.placeName.label")} ${i18n.t(`general.inLanguage.${option}`)}`}
               name={option}
               value={placeNameSelected[option] as string}
@@ -88,7 +88,7 @@ const DescriptionModeration = (): ReactElement => {
             >
               <TextInput
                 id={`placeNameModified_${option}`}
-                className="gridColumn2"
+                className="gridColumn2 disabledTextColor"
                 label={`${i18n.t("moderation.description.placeName.label")} ${i18n.t(`general.inLanguage.${option}`)}`}
                 name={option}
                 value={placeNameModified[option] as string}
@@ -108,7 +108,7 @@ const DescriptionModeration = (): ReactElement => {
           <Fragment key={`shortDescription_${option}`}>
             <TextArea
               id={`shortDescriptionSelected_${option}`}
-              className="gridColumn1"
+              className="gridColumn1 disabledTextColor"
               rows={3}
               label={`${i18n.t("moderation.description.shortDescription.label")} ${i18n.t(`general.inLanguage.${option}`)}`}
               name={option}
@@ -124,7 +124,7 @@ const DescriptionModeration = (): ReactElement => {
             >
               <TextArea
                 id={`shortDescriptionModified_${option}`}
-                className="gridColumn2"
+                className="gridColumn2 disabledTextColor"
                 rows={3}
                 label={`${i18n.t("moderation.description.shortDescription.label")} ${i18n.t(`general.inLanguage.${option}`)}`}
                 name={option}
@@ -145,7 +145,7 @@ const DescriptionModeration = (): ReactElement => {
           <Fragment key={`longDescription_${option}`}>
             <TextArea
               id={`longDescriptionSelected_${option}`}
-              className="gridColumn1"
+              className="gridColumn1 disabledTextColor"
               rows={6}
               label={`${i18n.t("moderation.description.longDescription.label")} ${i18n.t(`general.inLanguage.${option}`)}`}
               name={option}
@@ -161,7 +161,7 @@ const DescriptionModeration = (): ReactElement => {
             >
               <TextArea
                 id={`longDescriptionModified_${option}`}
-                className="gridColumn2"
+                className="gridColumn2 disabledTextColor"
                 rows={6}
                 label={`${i18n.t("moderation.description.longDescription.label")} ${i18n.t(`general.inLanguage.${option}`)}`}
                 name={option}
