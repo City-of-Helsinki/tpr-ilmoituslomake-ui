@@ -23,7 +23,7 @@ const Tags = (): ReactElement => {
   const { tagOptions } = notificationExtra;
 
   const notificationValidation = useSelector((state: RootState) => state.notificationValidation.notificationValidation);
-  const { ontology_ids: tagsValid = true } = notificationValidation;
+  const { ontology_ids: tagsValid } = notificationValidation;
 
   const convertOptions = (options: TagOption[]): OptionType[] =>
     options.map((tag) => ({ id: tag.id, label: tag.ontologyword[router.locale || defaultLocale] as string }));
@@ -54,8 +54,8 @@ const Tags = (): ReactElement => {
         toggleButtonAriaLabel={i18n.t("notification.button.toggleMenu")}
         selectedItemRemoveButtonAriaLabel={i18n.t("notification.button.remove")}
         clearButtonAriaLabel={i18n.t("notification.button.clearAllSelections")}
-        invalid={!tagsValid}
-        error={i18n.t("notification.toast.validationFailed.title")}
+        invalid={!tagsValid.valid}
+        error={!tagsValid.valid ? i18n.t(tagsValid.message as string).replace("$fieldName", i18n.t("notification.tags.tagSelection")) : ""}
         required
         multiselect
       />

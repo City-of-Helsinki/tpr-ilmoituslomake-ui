@@ -16,6 +16,15 @@ export interface KeyValueBoolean {
   [key: string]: boolean;
 }
 
+export interface Validation {
+  valid: boolean;
+  message?: string;
+}
+
+export interface KeyValueValidation {
+  [key: string]: Validation;
+}
+
 export interface KeyValueStatus {
   [key: string]: Status;
 }

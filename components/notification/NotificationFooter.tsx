@@ -148,14 +148,14 @@ const NotificationFooter = (): ReactElement => {
       {toast && (
         <HdsNotification
           position="top-right"
-          label={i18n.t(`notification.toast.${toast}.title`)}
+          label={i18n.t(`notification.message.${toast}.title`)}
           type={toast === Toast.SaveSucceeded ? "success" : "error"}
-          closeButtonLabelText={i18n.t("notification.toast.close")}
+          closeButtonLabelText={i18n.t("notification.message.close")}
           onClose={cleanupToast}
           autoClose
           dismissible
         >
-          {i18n.t(`notification.toast.${toast}.message`)}
+          {i18n.t(`notification.message.${toast}.message`)}
         </HdsNotification>
       )}
     </div>

@@ -34,13 +34,14 @@ const Links = (): ReactElement => {
     <div className="formSection">
       <div className={inputLanguages.length > 1 ? "languageSection" : ""}>
         {inputLanguages.length > 1 && <h3>{i18n.t("notification.links.website.label")}</h3>}
-        {LANGUAGE_OPTIONS.map((option) =>
-          inputLanguages.includes(option) ? (
+        {LANGUAGE_OPTIONS.map((option) => {
+          const label = `${i18n.t("notification.links.website.label")} ${i18n.t(`general.inLanguage.${option}`)}`;
+          return inputLanguages.includes(option) ? (
             <TextInput
               id={`website_${option}`}
               key={`website_${option}`}
               className="formInput"
-              label={`${i18n.t("notification.links.website.label")} ${i18n.t(`general.inLanguage.${option}`)}`}
+              label={label}
               name={option}
               value={website[option] as string}
               onChange={updateWebsite}
@@ -48,11 +49,11 @@ const Links = (): ReactElement => {
               tooltipButtonLabel={i18n.t("notification.links.website.tooltipLabel")}
               tooltipLabel={i18n.t("notification.links.website.tooltipLabel")}
               tooltipText={i18n.t("notification.links.website.tooltipText")}
-              invalid={!websiteValid[option]}
-              errorText={!websiteValid[option] ? i18n.t("notification.toast.validationFailed.title") : ""}
+              invalid={!websiteValid[option].valid}
+              errorText={!websiteValid[option].valid ? i18n.t(websiteValid[option].message as string).replace("$fieldName", label) : ""}
             />
-          ) : null
-        )}
+          ) : null;
+        })}
       </div>
     </div>
   );

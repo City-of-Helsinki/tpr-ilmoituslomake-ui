@@ -2,6 +2,7 @@ import { Dispatch } from "react";
 import Ajv from "ajv";
 import addFormats from "ajv-formats";
 import { string } from "yup";
+import StringSchema from "yup/lib/string";
 import { NotificationValidationAction } from "../state/actions/types";
 import {
   setNotificationNameValidation,
@@ -20,12 +21,30 @@ import { NotificationSchema } from "../types/notification_schema";
 import { NotificationExtra } from "../types/general";
 import notificationSchema from "../schemas/notification_schema.json";
 
+const isValid = (schema: StringSchema<string | undefined>, fieldValue: string) => {
+  let valid = true;
+  let message;
+  try {
+    const validationResult = schema.validateSync(fieldValue);
+    valid = validationResult === fieldValue;
+    message = !valid ? "notification.message.fieldOther" : undefined;
+  } catch (err) {
+    valid = false;
+    if (err && err.errors && err.errors.length > 0) {
+      [message] = err.errors;
+    } else {
+      message = "notification.message.fieldOther";
+    }
+  }
+  return { valid, message };
+};
+
 export const isNameValid = (language: string, notification: NotificationSchema, dispatch: Dispatch<NotificationValidationAction>): boolean => {
   const { name: placeName } = notification;
-  const schema = string().required();
-  const valid = schema.isValidSync(placeName[language]);
-  dispatch(setNotificationNameValidation({ [language]: valid }));
-  return valid;
+  const schema = string().required("notification.message.fieldRequired");
+  const result = isValid(schema, placeName[language] as string);
+  dispatch(setNotificationNameValidation({ [language]: result }));
+  return result.valid;
 };
 
 export const isShortDescriptionValid = (
@@ -36,10 +55,10 @@ export const isShortDescriptionValid = (
   const {
     description: { short: shortDesc },
   } = notification;
-  const schema = string().required().max(MAX_LENGTH_SHORT_DESC);
-  const valid = schema.isValidSync(shortDesc[language]);
-  dispatch(setNotificationShortDescriptionValidation({ [language]: valid }));
-  return valid;
+  const schema = string().required("notification.message.fieldRequired").max(MAX_LENGTH_SHORT_DESC, "notification.message.fieldTooLong");
+  const result = isValid(schema, shortDesc[language] as string);
+  dispatch(setNotificationShortDescriptionValidation({ [language]: result }));
+  return result.valid;
 };
 
 export const isLongDescriptionValid = (
@@ -50,22 +69,35 @@ export const isLongDescriptionValid = (
   const {
     description: { long: longDesc },
   } = notification;
-  const schema = string().required().min(MIN_LENGTH_LONG_DESC).max(MAX_LENGTH_LONG_DESC);
-  const valid = schema.isValidSync(longDesc[language]);
-  dispatch(setNotificationLongDescriptionValidation({ [language]: valid }));
-  return valid;
+  const schema = string()
+    .required("notification.message.fieldRequired")
+    .min(MIN_LENGTH_LONG_DESC, "notification.message.fieldTooShort")
+    .max(MAX_LENGTH_LONG_DESC, "notification.message.fieldTooLong");
+  const result = isValid(schema, longDesc[language] as string);
+  dispatch(setNotificationLongDescriptionValidation({ [language]: result }));
+  return result.valid;
 };
 
 export const isTagValid = (notification: NotificationSchema, dispatch: Dispatch<NotificationValidationAction>): boolean => {
   const { ontology_ids } = notification;
-  const valid = ontology_ids.length > 0;
-  dispatch(setNotificationTagValidation(valid));
+  const valid = ontology_ids.length > 0 && ontology_ids.length <= 5;
+  if (!valid) {
+    dispatch(
+      setNotificationTagValidation({
+        valid,
+        message: ontology_ids.length === 0 ? "notification.message.fieldRequired" : "notification.message.fieldTooLong",
+      })
+    );
+  } else {
+    dispatch(setNotificationTagValidation({ valid, message: undefined }));
+  }
   return valid;
 };
 
-const phoneSchema = () => string().matches(/^\+?[0-9- ]+$/, { excludeEmptyString: true });
+const phoneSchema = () => string().matches(/^\+?[0-9- ]+$/, { excludeEmptyString: true, message: "notification.message.fieldFormat" });
 
-const postalCodeSchema = () => string().matches(/^[0-9][0-9][0-9][0-9][0-9]$/, { excludeEmptyString: true });
+const postalCodeSchema = () =>
+  string().matches(/^[0-9][0-9][0-9][0-9][0-9]$/, { excludeEmptyString: true, message: "notification.message.fieldFormat" });
 
 export const isNotifierFieldValid = (
   notifierField: string,
@@ -76,20 +108,20 @@ export const isNotifierFieldValid = (
   let schema;
   switch (notifierField) {
     case "email": {
-      schema = string().required().email();
+      schema = string().required("notification.message.fieldRequired").email("notification.message.fieldFormat");
       break;
     }
     case "phone": {
-      schema = phoneSchema().required();
+      schema = phoneSchema().required("notification.message.fieldRequired");
       break;
     }
     default: {
-      schema = string().required();
+      schema = string().required("notification.message.fieldRequired");
     }
   }
-  const valid = schema.isValidSync(notifier[notifierField]);
-  dispatch(setNotificationNotifierValidation({ [notifierField]: valid }));
-  return valid;
+  const result = isValid(schema, notifier[notifierField] as string);
+  dispatch(setNotificationNotifierValidation({ [notifierField]: result }));
+  return result.valid;
 };
 
 export const isAddressFieldValid = (
@@ -103,16 +135,16 @@ export const isAddressFieldValid = (
   let schema;
   switch (addressField) {
     case "postal_code": {
-      schema = postalCodeSchema().required();
+      schema = postalCodeSchema().required("notification.message.fieldRequired");
       break;
     }
     default: {
-      schema = string().required();
+      schema = string().required("notification.message.fieldRequired");
     }
   }
-  const valid = (language === "fi" && schema.isValidSync(fi[addressField])) || (language === "sv" && schema.isValidSync(sv[addressField]));
-  dispatch(setNotificationAddressValidation(language, { [addressField]: valid }));
-  return valid;
+  const result = isValid(schema, language === "sv" ? (sv[addressField] as string) : (fi[addressField] as string));
+  dispatch(setNotificationAddressValidation(language, { [addressField]: result }));
+  return result.valid;
 };
 
 export const isContactFieldValid = (
@@ -121,32 +153,32 @@ export const isContactFieldValid = (
   dispatch: Dispatch<NotificationValidationAction>
 ): boolean => {
   const { phone, email } = notification;
-  let valid;
+  let result;
   switch (contactField) {
     case "phone": {
       const schema = phoneSchema();
-      valid = schema.isValidSync(phone);
+      result = isValid(schema, phone);
       break;
     }
     case "email": {
-      const schema = string().email();
-      valid = schema.isValidSync(email);
+      const schema = string().email("notification.message.fieldFormat");
+      result = isValid(schema, email);
       break;
     }
     default: {
-      valid = true;
+      result = { valid: true };
     }
   }
-  dispatch(setNotificationContactValidation({ [contactField]: valid }));
-  return valid;
+  dispatch(setNotificationContactValidation({ [contactField]: result }));
+  return result.valid;
 };
 
 export const isWebsiteValid = (language: string, notification: NotificationSchema, dispatch: Dispatch<NotificationValidationAction>): boolean => {
   const { website } = notification;
-  const schema = string().url();
-  const valid = schema.isValidSync(website[language]);
-  dispatch(setNotificationLinkValidation({ [language]: valid }));
-  return valid;
+  const schema = string().url("notification.message.fieldFormat");
+  const result = isValid(schema, website[language] as string);
+  dispatch(setNotificationLinkValidation({ [language]: result }));
+  return result.valid;
 };
 
 export const isPhotoFieldValid = (
@@ -160,16 +192,19 @@ export const isPhotoFieldValid = (
   let schema;
   switch (photoField) {
     case "url": {
-      schema = photo.sourceType === PhotoSourceType.Link ? string().required().url() : string().required();
+      schema =
+        photo.sourceType === PhotoSourceType.Link
+          ? string().required("notification.message.fieldRequired").url("notification.message.fieldFormat")
+          : string().required("notification.message.fieldRequired");
       break;
     }
     default: {
-      schema = string().required();
+      schema = string().required("notification.message.fieldRequired");
     }
   }
-  const valid = schema.isValidSync(photo[photoField]);
-  dispatch(setNotificationPhotoValidation(index, { [photoField]: valid }));
-  return valid;
+  const result = isValid(schema, photo[photoField] as string);
+  dispatch(setNotificationPhotoValidation(index, { [photoField]: result }));
+  return result.valid;
 };
 
 export const isPhotoAltTextValid = (
@@ -181,10 +216,10 @@ export const isPhotoAltTextValid = (
   const { photos } = notificationExtra;
   const photo = photos[index];
   const { altText } = photo;
-  const schema = string().max(MAX_LENGTH_PHOTO_DESC);
-  const valid = schema.isValidSync(altText[language]);
-  dispatch(setNotificationPhotoAltTextValidation(index, { [language]: valid }));
-  return valid;
+  const schema = string().max(MAX_LENGTH_PHOTO_DESC, "notification.message.fieldTooLong");
+  const result = isValid(schema, altText[language] as string);
+  dispatch(setNotificationPhotoAltTextValidation(index, { [language]: result }));
+  return result.valid;
 };
 
 export const isPageValid = (

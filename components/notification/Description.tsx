@@ -72,35 +72,37 @@ const Description = (): ReactElement => {
 
       <div className={inputLanguages.length > 1 ? "languageSection" : ""}>
         {inputLanguages.length > 1 && <h3>{i18n.t("notification.description.placeName.label")}</h3>}
-        {LANGUAGE_OPTIONS.map((option) =>
-          inputLanguages.includes(option) ? (
+        {LANGUAGE_OPTIONS.map((option) => {
+          const label = `${i18n.t("notification.description.placeName.label")} ${i18n.t(`general.inLanguage.${option}`)}`;
+          return inputLanguages.includes(option) ? (
             <TextInput
               id={`placeName_${option}`}
               key={`placeName_${option}`}
               className="formInput"
-              label={`${i18n.t("notification.description.placeName.label")} ${i18n.t(`general.inLanguage.${option}`)}`}
+              label={label}
               name={option}
               value={placeName[option] as string}
               onChange={updateName}
               onBlur={validateName}
-              invalid={!nameValid[option]}
-              errorText={!nameValid[option] ? i18n.t("notification.toast.validationFailed.title") : ""}
+              invalid={!nameValid[option].valid}
+              errorText={!nameValid[option].valid ? i18n.t(nameValid[option].message as string).replace("$fieldName", label) : ""}
               required={router.locale === option}
             />
-          ) : null
-        )}
+          ) : null;
+        })}
       </div>
 
       <div className={inputLanguages.length > 1 ? "languageSection" : ""}>
         {inputLanguages.length > 1 && <h3>{i18n.t("notification.description.shortDescription.label")}</h3>}
-        {LANGUAGE_OPTIONS.map((option) =>
-          inputLanguages.includes(option) ? (
+        {LANGUAGE_OPTIONS.map((option) => {
+          const label = `${i18n.t("notification.description.shortDescription.label")} ${i18n.t(`general.inLanguage.${option}`)}`;
+          return inputLanguages.includes(option) ? (
             <TextArea
               id={`shortDescription_${option}`}
               key={`shortDescription_${option}`}
               className="formInput"
               rows={3}
-              label={`${i18n.t("notification.description.shortDescription.label")} ${i18n.t(`general.inLanguage.${option}`)}`}
+              label={label}
               name={option}
               value={shortDesc[option] as string}
               onChange={updateShortDescription}
@@ -109,24 +111,25 @@ const Description = (): ReactElement => {
               tooltipButtonLabel={i18n.t("notification.description.shortDescription.tooltipLabel")}
               tooltipLabel={i18n.t("notification.description.shortDescription.tooltipLabel")}
               tooltipText={i18n.t("notification.description.shortDescription.tooltipText")}
-              invalid={!shortDescValid[option]}
-              errorText={!shortDescValid[option] ? i18n.t("notification.toast.validationFailed.title") : ""}
+              invalid={!shortDescValid[option].valid}
+              errorText={!shortDescValid[option].valid ? i18n.t(shortDescValid[option].message as string).replace("$fieldName", label) : ""}
               required={router.locale === option}
             />
-          ) : null
-        )}
+          ) : null;
+        })}
       </div>
 
       <div className={inputLanguages.length > 1 ? "languageSection" : ""}>
         {inputLanguages.length > 1 && <h3>{i18n.t("notification.description.longDescription.label")}</h3>}
-        {LANGUAGE_OPTIONS.map((option) =>
-          inputLanguages.includes(option) ? (
+        {LANGUAGE_OPTIONS.map((option) => {
+          const label = `${i18n.t("notification.description.longDescription.label")} ${i18n.t(`general.inLanguage.${option}`)}`;
+          return inputLanguages.includes(option) ? (
             <TextArea
               id={`longDescription_${option}`}
               key={`longDescription_${option}`}
               className="formInput"
               rows={6}
-              label={`${i18n.t("notification.description.longDescription.label")} ${i18n.t(`general.inLanguage.${option}`)}`}
+              label={label}
               name={option}
               value={longDesc[option] as string}
               onChange={updateLongDescription}
@@ -135,12 +138,12 @@ const Description = (): ReactElement => {
               tooltipButtonLabel={i18n.t("notification.description.longDescription.tooltipLabel")}
               tooltipLabel={i18n.t("notification.description.longDescription.tooltipLabel")}
               tooltipText={i18n.t("notification.description.longDescription.tooltipText")}
-              invalid={!longDescValid[option]}
-              errorText={!longDescValid[option] ? i18n.t("notification.toast.validationFailed.title") : ""}
+              invalid={!longDescValid[option].valid}
+              errorText={!longDescValid[option].valid ? i18n.t(longDescValid[option].message as string).replace("$fieldName", label) : ""}
               required={router.locale === option}
             />
-          ) : null
-        )}
+          ) : null;
+        })}
       </div>
     </div>
   );

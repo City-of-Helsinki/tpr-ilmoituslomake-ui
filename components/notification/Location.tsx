@@ -26,9 +26,9 @@ const Location = (): ReactElement => {
   const notificationValidation = useSelector((state: RootState) => state.notificationValidation.notificationValidation);
   const {
     address: {
-      fi: { street: streetFiValid = true, postal_code: postalCodeFiValid = true, post_office: postOfficeFiValid = true } = {},
-      sv: { street: streetSvValid = true, postal_code: postalCodeSvValid = true, post_office: postOfficeSvValid = true } = {},
-    } = {},
+      fi: { street: streetFiValid, postal_code: postalCodeFiValid, post_office: postOfficeFiValid },
+      sv: { street: streetSvValid, postal_code: postalCodeSvValid, post_office: postOfficeSvValid },
+    },
   } = notificationValidation;
 
   const updateAddress = (language: string, evt: ChangeEvent<HTMLInputElement>) => {
@@ -76,8 +76,12 @@ const Location = (): ReactElement => {
             value={streetFi}
             onChange={(evt) => updateAddress("fi", evt)}
             onBlur={(evt) => validateAddress("fi", evt)}
-            invalid={!streetFiValid}
-            errorText={!streetFiValid ? i18n.t("notification.toast.validationFailed.title") : ""}
+            invalid={!streetFiValid.valid}
+            errorText={
+              !streetFiValid.valid
+                ? i18n.t(streetFiValid.message as string).replace("$fieldName", i18n.t("notification.location.streetAddress.label"))
+                : ""
+            }
             required
           />
           <TextInput
@@ -88,8 +92,12 @@ const Location = (): ReactElement => {
             value={postalCodeFi}
             onChange={(evt) => updateAddress("fi", evt)}
             onBlur={(evt) => validateAddress("fi", evt)}
-            invalid={!postalCodeFiValid}
-            errorText={!postalCodeFiValid ? i18n.t("notification.toast.validationFailed.title") : ""}
+            invalid={!postalCodeFiValid.valid}
+            errorText={
+              !postalCodeFiValid.valid
+                ? i18n.t(postalCodeFiValid.message as string).replace("$fieldName", i18n.t("notification.location.postalCode.label"))
+                : ""
+            }
             required
           />
           <TextInput
@@ -100,8 +108,12 @@ const Location = (): ReactElement => {
             value={postOfficeFi}
             onChange={(evt) => updateAddress("fi", evt)}
             onBlur={(evt) => validateAddress("fi", evt)}
-            invalid={!postOfficeFiValid}
-            errorText={!postOfficeFiValid ? i18n.t("notification.toast.validationFailed.title") : ""}
+            invalid={!postOfficeFiValid.valid}
+            errorText={
+              !postOfficeFiValid.valid
+                ? i18n.t(postOfficeFiValid.message as string).replace("$fieldName", i18n.t("notification.location.postalOffice.label"))
+                : ""
+            }
             required
           />
         </>
@@ -116,8 +128,12 @@ const Location = (): ReactElement => {
             value={streetSv}
             onChange={(evt) => updateAddress("sv", evt)}
             onBlur={(evt) => validateAddress("sv", evt)}
-            invalid={!streetSvValid}
-            errorText={!streetSvValid ? i18n.t("notification.toast.validationFailed.title") : ""}
+            invalid={!streetSvValid.valid}
+            errorText={
+              !streetSvValid.valid
+                ? i18n.t(streetSvValid.message as string).replace("$fieldName", i18n.t("notification.location.streetAddress.label"))
+                : ""
+            }
             required
           />
           <TextInput
@@ -128,8 +144,12 @@ const Location = (): ReactElement => {
             value={postalCodeSv}
             onChange={(evt) => updateAddress("sv", evt)}
             onBlur={(evt) => validateAddress("sv", evt)}
-            invalid={!postalCodeSvValid}
-            errorText={!postalCodeSvValid ? i18n.t("notification.toast.validationFailed.title") : ""}
+            invalid={!postalCodeSvValid.valid}
+            errorText={
+              !postalCodeSvValid.valid
+                ? i18n.t(postalCodeSvValid.message as string).replace("$fieldName", i18n.t("notification.location.postalCode.label"))
+                : ""
+            }
             required
           />
           <TextInput
@@ -140,8 +160,12 @@ const Location = (): ReactElement => {
             value={postOfficeSv}
             onChange={(evt) => updateAddress("sv", evt)}
             onBlur={(evt) => validateAddress("sv", evt)}
-            invalid={!postOfficeSvValid}
-            errorText={!postOfficeSvValid ? i18n.t("notification.toast.validationFailed.title") : ""}
+            invalid={!postOfficeSvValid.valid}
+            errorText={
+              !postOfficeSvValid.valid
+                ? i18n.t(postOfficeSvValid.message as string).replace("$fieldName", i18n.t("notification.location.postalOffice.label"))
+                : ""
+            }
             required
           />
         </>

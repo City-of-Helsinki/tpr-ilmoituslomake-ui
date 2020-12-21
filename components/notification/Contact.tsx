@@ -16,7 +16,7 @@ const Contact = (): ReactElement => {
   const { phone, email } = notification;
 
   const notificationValidation = useSelector((state: RootState) => state.notificationValidation.notificationValidation);
-  const { email: emailValid = true, phone: phoneValid = true } = notificationValidation;
+  const { email: emailValid, phone: phoneValid } = notificationValidation;
 
   const updateContact = (evt: ChangeEvent<HTMLInputElement>) => {
     dispatch(setNotificationContact({ [evt.target.name]: evt.target.value }));
@@ -37,8 +37,8 @@ const Contact = (): ReactElement => {
         value={phone}
         onChange={updateContact}
         onBlur={validateContact}
-        invalid={!phoneValid}
-        errorText={!phoneValid ? i18n.t("notification.toast.validationFailed.title") : ""}
+        invalid={!phoneValid.valid}
+        errorText={!phoneValid.valid ? i18n.t(phoneValid.message as string).replace("$fieldName", i18n.t("notification.contact.phone.label")) : ""}
       />
       <TextInput
         id="email"
@@ -48,8 +48,8 @@ const Contact = (): ReactElement => {
         value={email}
         onChange={updateContact}
         onBlur={validateContact}
-        invalid={!emailValid}
-        errorText={!emailValid ? i18n.t("notification.toast.validationFailed.title") : ""}
+        invalid={!emailValid.valid}
+        errorText={!emailValid.valid ? i18n.t(emailValid.message as string).replace("$fieldName", i18n.t("notification.contact.email.label")) : ""}
       />
     </div>
   );

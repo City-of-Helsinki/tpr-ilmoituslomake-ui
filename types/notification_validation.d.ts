@@ -1,65 +1,67 @@
+import { Validation } from "./general";
+
 export interface PhotoValidation {
-  url: boolean;
+  url: Validation;
   altText: {
-    fi: boolean;
-    sv: boolean;
-    en: boolean;
-    [key: string]: boolean;
+    fi: Validation;
+    sv: Validation;
+    en: Validation;
+    [key: string]: Validation;
   };
-  permission: boolean;
-  source: boolean;
-  [key: string]: boolean;
+  permission: Validation;
+  source: Validation;
+  [key: string]: Validation;
 }
 
 export interface NotificationValidation {
   name: {
-    fi: boolean;
-    sv: boolean;
-    en: boolean;
-    [key: string]: boolean;
+    fi: Validation;
+    sv: Validation;
+    en: Validation;
+    [key: string]: Validation;
   };
   description: {
     short: {
-      fi: boolean;
-      sv: boolean;
-      en: boolean;
-      [key: string]: boolean;
+      fi: Validation;
+      sv: Validation;
+      en: Validation;
+      [key: string]: Validation;
     };
     long: {
-      fi: boolean;
-      sv: boolean;
-      en: boolean;
-      [key: string]: boolean;
+      fi: Validation;
+      sv: Validation;
+      en: Validation;
+      [key: string]: Validation;
     };
   };
   address: {
     fi: {
-      street: boolean;
-      postal_code: boolean;
-      post_office: boolean;
+      street: Validation;
+      postal_code: Validation;
+      post_office: Validation;
     };
     sv: {
-      street: boolean;
-      postal_code: boolean;
-      post_office: boolean;
+      street: Validation;
+      postal_code: Validation;
+      post_office: Validation;
     };
   };
-  phone: boolean;
-  email: boolean;
+  phone: Validation;
+  email: Validation;
   website: {
-    fi: boolean;
-    sv: boolean;
-    en: boolean;
-    [key: string]: boolean;
+    fi: Validation;
+    sv: Validation;
+    en: Validation;
+    [key: string]: Validation;
   };
-  ontology_ids: boolean;
-  comments?: boolean;
+  ontology_ids: Validation;
+  comments?: Validation;
   notifier: {
-    notifier_type: boolean;
-    full_name: boolean;
-    email: boolean;
-    phone: boolean;
-    [key: string]: boolean;
+    notifier_type: Validation;
+    full_name: Validation;
+    email: Validation;
+    phone: Validation;
+    [key: string]: Validation;
   };
   photos: PhotoValidation[];
 }

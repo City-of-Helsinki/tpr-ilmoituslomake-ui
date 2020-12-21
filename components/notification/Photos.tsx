@@ -48,14 +48,14 @@ const Photos = (): ReactElement => {
     );
     dispatchValidation(
       setNotificationPhotoValidation(-1, {
-        url: true,
+        url: { valid: true },
         altText: {
-          fi: true,
-          sv: true,
-          en: true,
+          fi: { valid: true },
+          sv: { valid: true },
+          en: { valid: true },
         },
-        permission: true,
-        source: true,
+        permission: { valid: true },
+        source: { valid: true },
       } as PhotoValidation)
     );
   };
@@ -88,7 +88,7 @@ const Photos = (): ReactElement => {
 
     if (sourceType === PhotoSourceType.Device && evt && evt.target && evt.target.files && evt.target.files.length > 0) {
       const file = evt.target.files[0];
-      dispatchValidation(setNotificationPhotoValidation(index, { url: true }));
+      dispatchValidation(setNotificationPhotoValidation(index, { url: { valid: true } }));
 
       // Read the image file and store it as a base64 string
       const reader = new FileReader();
@@ -135,8 +135,12 @@ const Photos = (): ReactElement => {
                   label={i18n.t("notification.photos.url.labelDevice")}
                   name="url"
                   value={url}
-                  invalid={photosValid[index] && !photosValid[index].url}
-                  errorText={photosValid[index] && !photosValid[index].url ? i18n.t("notification.toast.validationFailed.title") : ""}
+                  invalid={!photosValid[index].url.valid}
+                  errorText={
+                    !photosValid[index].url.valid
+                      ? i18n.t(photosValid[index].url.message as string).replace("$fieldName", i18n.t("notification.photos.photo.title"))
+                      : ""
+                  }
                   required
                   disabled
                 />
@@ -167,15 +171,19 @@ const Photos = (): ReactElement => {
                   value={url}
                   onChange={(evt) => updatePhoto(index, evt)}
                   onBlur={(evt) => fetchPhoto(index, evt)}
-                  invalid={photosValid[index] && !photosValid[index].url}
-                  errorText={photosValid[index] && !photosValid[index].url ? i18n.t("notification.toast.validationFailed.title") : ""}
+                  invalid={!photosValid[index].url.valid}
+                  errorText={
+                    !photosValid[index].url.valid
+                      ? i18n.t(photosValid[index].url.message as string).replace("$fieldName", i18n.t("notification.photos.url.labelLink"))
+                      : ""
+                  }
                   required
                 />
                 <Button variant="secondary" className="formInput" onClick={() => removePhoto(index)}>
                   {i18n.t("notification.photos.remove")}
                 </Button>
 
-                {photosValid[index] && photosValid[index].url && preview && preview.length > 0 && (
+                {photosValid[index].url.valid && preview && preview.length > 0 && (
                   <div className={styles.imagePreview}>
                     <img src={preview} alt="" />
                   </div>
@@ -183,19 +191,20 @@ const Photos = (): ReactElement => {
               </>
             )}
 
-            {photosValid[index] && photosValid[index].url && preview && preview.length > 0 && (
+            {photosValid[index].url.valid && preview && preview.length > 0 && (
               <>
                 <div className={inputLanguages.length > 1 ? "languageSection" : ""}>
                   {inputLanguages.length > 1 && <h3>{i18n.t("notification.photos.altText.label")}</h3>}
                   {LANGUAGE_OPTIONS.map((option) => {
                     const key2 = `altText_${index}_${option}`;
+                    const label = `${i18n.t("notification.photos.altText.label")} ${i18n.t(`general.inLanguage.${option}`)}`;
                     return inputLanguages.includes(option) ? (
                       <TextArea
                         id={`altText_${index}_${option}`}
                         key={key2}
                         className="formInput"
                         rows={3}
-                        label={`${i18n.t("notification.photos.altText.label")} ${i18n.t(`general.inLanguage.${option}`)}`}
+                        label={label}
                         name={option}
                         value={altText[option] as string}
                         onChange={(evt) => updatePhotoAltText(index, evt)}
@@ -204,9 +213,11 @@ const Photos = (): ReactElement => {
                         tooltipButtonLabel={i18n.t("notification.photos.altText.tooltipLabel")}
                         tooltipLabel={i18n.t("notification.photos.altText.tooltipLabel")}
                         tooltipText={i18n.t("notification.photos.altText.tooltipText")}
-                        invalid={photosValid[index] && !photosValid[index].altText[option]}
+                        invalid={!photosValid[index].altText[option].valid}
                         errorText={
-                          photosValid[index] && !photosValid[index].altText[option] ? i18n.t("notification.toast.validationFailed.title") : ""
+                          !photosValid[index].altText[option].valid
+                            ? i18n.t(photosValid[index].altText[option].message as string).replace("$fieldName", label)
+                            : ""
                         }
                       />
                     ) : null;
@@ -219,7 +230,11 @@ const Photos = (): ReactElement => {
                 <SelectionGroup
                   direction="vertical"
                   label={i18n.t("notification.photos.permission.label")}
-                  errorText={photosValid[index] && !photosValid[index].permission ? i18n.t("notification.toast.validationFailed.title") : ""}
+                  errorText={
+                    !photosValid[index].permission.valid
+                      ? i18n.t(photosValid[index].permission.message as string).replace("$fieldName", i18n.t("notification.photos.permission.label"))
+                      : ""
+                  }
                   required
                 >
                   <RadioButton
@@ -257,8 +272,12 @@ const Photos = (): ReactElement => {
                   value={source}
                   onChange={(evt) => updatePhoto(index, evt)}
                   onBlur={(evt) => validatePhoto(index, evt)}
-                  invalid={photosValid[index] && !photosValid[index].source}
-                  errorText={photosValid[index] && !photosValid[index].source ? i18n.t("notification.toast.validationFailed.title") : ""}
+                  invalid={!photosValid[index].source.valid}
+                  errorText={
+                    !photosValid[index].source.valid
+                      ? i18n.t(photosValid[index].source.message as string).replace("$fieldName", i18n.t("notification.photos.source.label"))
+                      : ""
+                  }
                   tooltipButtonLabel={i18n.t("notification.photos.source.tooltipLabel")}
                   tooltipLabel={i18n.t("notification.photos.source.tooltipLabel")}
                   tooltipText={i18n.t("notification.photos.source.tooltipText")}

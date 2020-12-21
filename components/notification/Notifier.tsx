@@ -20,7 +20,7 @@ const Notifier = (): ReactElement => {
 
   const notificationValidation = useSelector((state: RootState) => state.notificationValidation.notificationValidation);
   const {
-    notifier: { notifier_type: notifierTypeValid = true, full_name: fullNameValid = true, email: emailValid = true, phone: phoneValid = true } = {},
+    notifier: { notifier_type: notifierTypeValid, full_name: fullNameValid, email: emailValid, phone: phoneValid },
   } = notificationValidation;
 
   const updateNotifier = (evt: ChangeEvent<HTMLInputElement>) => {
@@ -42,7 +42,11 @@ const Notifier = (): ReactElement => {
         tooltipButtonLabel={i18n.t("notification.notifier.tooltipLabel")}
         tooltipLabel={i18n.t("notification.notifier.tooltipLabel")}
         tooltipText={i18n.t("notification.notifier.tooltipText")}
-        errorText={!notifierTypeValid ? i18n.t("notification.toast.validationFailed.title") : ""}
+        errorText={
+          !notifierTypeValid.valid
+            ? i18n.t(notifierTypeValid.message as string).replace("$fieldName", i18n.t("notification.notifier.notifierType"))
+            : ""
+        }
         required
       >
         <RadioButton
@@ -71,8 +75,10 @@ const Notifier = (): ReactElement => {
         value={full_name}
         onChange={updateNotifier}
         onBlur={validateNotifier}
-        invalid={!fullNameValid}
-        errorText={!fullNameValid ? i18n.t("notification.toast.validationFailed.title") : ""}
+        invalid={!fullNameValid.valid}
+        errorText={
+          !fullNameValid.valid ? i18n.t(fullNameValid.message as string).replace("$fieldName", i18n.t("notification.notifier.fullName.label")) : ""
+        }
         required
       />
       <TextInput
@@ -83,8 +89,8 @@ const Notifier = (): ReactElement => {
         value={email}
         onChange={updateNotifier}
         onBlur={validateNotifier}
-        invalid={!emailValid}
-        errorText={!emailValid ? i18n.t("notification.toast.validationFailed.title") : ""}
+        invalid={!emailValid.valid}
+        errorText={!emailValid.valid ? i18n.t(emailValid.message as string).replace("$fieldName", i18n.t("notification.notifier.email.label")) : ""}
         required
       />
       <TextInput
@@ -95,8 +101,8 @@ const Notifier = (): ReactElement => {
         value={phone}
         onChange={updateNotifier}
         onBlur={validateNotifier}
-        invalid={!phoneValid}
-        errorText={!phoneValid ? i18n.t("notification.toast.validationFailed.title") : ""}
+        invalid={!phoneValid.valid}
+        errorText={!phoneValid.valid ? i18n.t(phoneValid.message as string).replace("$fieldName", i18n.t("notification.notifier.phone.label")) : ""}
         required
       />
     </div>

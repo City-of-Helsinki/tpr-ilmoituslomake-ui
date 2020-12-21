@@ -44,24 +44,29 @@
       "copyright": "Copyright",
       "rightsReserved": "Kaikki oikeudet pidätetään"
     },
-    "toast": {
+    "message": {
       "notAuthenticated": {
-        "title": "Ei kirjautuneena",
+        "title": "Kirjaudu sisään ennen lähettämistä",
         "message": ""
       },
       "validationFailed": {
-        "title": "Validointi epäonnistui",
-        "message": "Tarkista että tiedot ovat oikeita"
+        "title": "Lomakkeella on virheitä",
+        "message": "Tarkista tiedot, virheellisiä kohtia on korostettu alla"
       },
       "saveFailed": {
-        "title": "Lähetys epäonnistui",
-        "message": ""
+        "title": "Lomakkeen lähetys epäonnistui",
+        "message": "Valitettavasti tekninen virhe esti lomakkeen lähettämisen. Ole hyvä ja yritä uudelleen myöhemmin."
       },
       "saveSucceeded": {
-        "title": "Lähetys onnistui",
+        "title": "Lomakkeen lähetys onnistui",
         "message": ""
       },
-      "close": "Sulje viesti"
+      "close": "Sulje viesti",
+      "fieldRequired": "$fieldName on pakollinen tieto",
+      "fieldFormat": "$fieldName on annettava oikeassa muodossa",
+      "fieldTooLong": "$fieldName on liian pitkä",
+      "fieldTooShort": "$fieldName on liian lyhyt",
+      "fieldOther": "Tarkista tieto"
     },
     "comments": {
       "title": "Kommentteja",
@@ -204,6 +209,7 @@
     },
     "tags": {
       "title": "Asiasanat",
+      "tagSelection": "Asiasanojen valinta",
       "add": {
         "label": "Lisää asiasana",
         "helperText": "Hae tai valitse listalta. Valitse max. 5 sanaa."

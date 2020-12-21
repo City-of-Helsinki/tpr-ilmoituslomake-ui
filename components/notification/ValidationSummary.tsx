@@ -8,8 +8,8 @@ const ValidationSummary = (): ReactElement => {
 
   return (
     <div className={styles.validationSummary}>
-      <HdsNotification size="default" className="formNotification" type="error" label={i18n.t(`notification.toast.validationFailed.title`)}>
-        {i18n.t(`notification.toast.validationFailed.message`)}
+      <HdsNotification size="default" className="formNotification" type="error" label={i18n.t(`notification.message.validationFailed.title`)}>
+        {i18n.t(`notification.message.validationFailed.message`)}
       </HdsNotification>
     </div>
   );

@@ -170,17 +170,17 @@ interface SetPageValidAction extends AnyAction {
 
 interface SetNotificationNameValidationAction extends AnyAction {
   type: typeof SET_NOTIFICATION_NAME_VALIDATION;
-  payload: KeyValueBoolean;
+  payload: Validation;
 }
 
 interface SetNotificationShortDescriptionValidationAction extends AnyAction {
   type: typeof SET_NOTIFICATION_SHORT_DESCRIPTION_VALIDATION;
-  payload: KeyValueBoolean;
+  payload: Validation;
 }
 
 interface SetNotificationLongDescriptionValidationAction extends AnyAction {
   type: typeof SET_NOTIFICATION_LONG_DESCRIPTION_VALIDATION;
-  payload: KeyValueBoolean;
+  payload: Validation;
 }
 
 interface SetNotificationTagValidationAction extends AnyAction {
@@ -190,32 +190,32 @@ interface SetNotificationTagValidationAction extends AnyAction {
 
 interface SetNotificationNotifierValidationAction extends AnyAction {
   type: typeof SET_NOTIFICATION_NOTIFIER_VALIDATION;
-  payload: KeyValueBoolean;
+  payload: Validation;
 }
 
 interface SetNotificationAddressValidationAction extends AnyAction {
   type: typeof SET_NOTIFICATION_ADDRESS_VALIDATION;
-  payload: { language: string; validation: KeyValueBoolean };
+  payload: { language: string; validation: Validation };
 }
 
 interface SetNotificationContactValidationAction extends AnyAction {
   type: typeof SET_NOTIFICATION_CONTACT_VALIDATION;
-  payload: KeyValueBoolean;
+  payload: Validation;
 }
 
 interface SetNotificationLinkValidationAction extends AnyAction {
   type: typeof SET_NOTIFICATION_LINK_VALIDATION;
-  payload: KeyValueBoolean;
+  payload: Validation;
 }
 
 interface SetNotificationPhotoValidationAction extends AnyAction {
   type: typeof SET_NOTIFICATION_PHOTO_VALIDATION;
-  payload: { index: number; validation: PhotoValidation | KeyValueBoolean };
+  payload: { index: number; validation: PhotoValidation | Validation };
 }
 
 interface SetNotificationPhotoAltTextValidationAction extends AnyAction {
   type: typeof SET_NOTIFICATION_PHOTO_ALT_TEXT_VALIDATION;
-  payload: { index: number; validation: KeyValueBoolean };
+  payload: { index: number; validation: Validation };
 }
 
 interface RemoveNotificationPhotoValidationAction extends AnyAction {

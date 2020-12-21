@@ -44,24 +44,29 @@
       "copyright": "Copyright",
       "rightsReserved": "All rights reserved"
     },
-    "toast": {
+    "message": {
       "notAuthenticated": {
-        "title": "Not logged in",
+        "title": "Please login before sending",
         "message": ""
       },
       "validationFailed": {
-        "title": "Validation failed",
-        "message": "Check that the information is correct"
+        "title": "The form has errors",
+        "message": "Please check the information, the incorrect entries are highlighted below"
       },
       "saveFailed": {
-        "title": "Sending failed",
-        "message": ""
+        "title": "The form failed to be sent",
+        "message": "Unfortunately a technical error prevented the form from being sent. Please try again later."
       },
       "saveSucceeded": {
-        "title": "Sending succeeded",
+        "title": "The form was sent successfully",
         "message": ""
       },
-      "close": "Close message"
+      "close": "Close message",
+      "fieldRequired": "$fieldName is mandatory information",
+      "fieldFormat": "$fieldName must be entered in the right format",
+      "fieldTooLong": "$fieldName is too long",
+      "fieldTooShort": "$fieldName is too short",
+      "fieldOther": "Please check the information"
     },
     "comments": {
       "title": "Comments",
@@ -204,6 +209,7 @@
     },
     "tags": {
       "title": "Keywords",
+      "tagSelection": "Keywords selection",
       "add": {
         "label": "Add keyword",
         "helperText": "Search or select from the list. Select max. 5 words"

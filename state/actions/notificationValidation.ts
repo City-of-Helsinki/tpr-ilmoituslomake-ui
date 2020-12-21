@@ -12,7 +12,7 @@ import {
   SET_NOTIFICATION_PHOTO_ALT_TEXT_VALIDATION,
   REMOVE_NOTIFICATION_PHOTO_VALIDATION,
 } from "../../types/constants";
-import { KeyValueBoolean } from "../../types/general";
+import { KeyValueValidation, Validation } from "../../types/general";
 import { PhotoValidation } from "../../types/notification_validation";
 import { NotificationValidationAction } from "./types";
 
@@ -21,52 +21,52 @@ export const setPageValid = (valid: boolean): NotificationValidationAction => ({
   payload: valid,
 });
 
-export const setNotificationNameValidation = (validation: KeyValueBoolean): NotificationValidationAction => ({
+export const setNotificationNameValidation = (validation: KeyValueValidation): NotificationValidationAction => ({
   type: SET_NOTIFICATION_NAME_VALIDATION,
   payload: validation,
 });
 
-export const setNotificationShortDescriptionValidation = (validation: KeyValueBoolean): NotificationValidationAction => ({
+export const setNotificationShortDescriptionValidation = (validation: KeyValueValidation): NotificationValidationAction => ({
   type: SET_NOTIFICATION_SHORT_DESCRIPTION_VALIDATION,
   payload: validation,
 });
 
-export const setNotificationLongDescriptionValidation = (validation: KeyValueBoolean): NotificationValidationAction => ({
+export const setNotificationLongDescriptionValidation = (validation: KeyValueValidation): NotificationValidationAction => ({
   type: SET_NOTIFICATION_LONG_DESCRIPTION_VALIDATION,
   payload: validation,
 });
 
-export const setNotificationTagValidation = (validation: boolean): NotificationValidationAction => ({
+export const setNotificationTagValidation = (validation: Validation): NotificationValidationAction => ({
   type: SET_NOTIFICATION_TAG_VALIDATION,
   payload: validation,
 });
 
-export const setNotificationNotifierValidation = (validation: KeyValueBoolean): NotificationValidationAction => ({
+export const setNotificationNotifierValidation = (validation: KeyValueValidation): NotificationValidationAction => ({
   type: SET_NOTIFICATION_NOTIFIER_VALIDATION,
   payload: validation,
 });
 
-export const setNotificationAddressValidation = (language: string, validation: KeyValueBoolean): NotificationValidationAction => ({
+export const setNotificationAddressValidation = (language: string, validation: KeyValueValidation): NotificationValidationAction => ({
   type: SET_NOTIFICATION_ADDRESS_VALIDATION,
   payload: { language, validation },
 });
 
-export const setNotificationContactValidation = (validation: KeyValueBoolean): NotificationValidationAction => ({
+export const setNotificationContactValidation = (validation: KeyValueValidation): NotificationValidationAction => ({
   type: SET_NOTIFICATION_CONTACT_VALIDATION,
   payload: validation,
 });
 
-export const setNotificationLinkValidation = (validation: KeyValueBoolean): NotificationValidationAction => ({
+export const setNotificationLinkValidation = (validation: KeyValueValidation): NotificationValidationAction => ({
   type: SET_NOTIFICATION_LINK_VALIDATION,
   payload: validation,
 });
 
-export const setNotificationPhotoValidation = (index: number, validation: PhotoValidation | KeyValueBoolean): NotificationValidationAction => ({
+export const setNotificationPhotoValidation = (index: number, validation: PhotoValidation | KeyValueValidation): NotificationValidationAction => ({
   type: SET_NOTIFICATION_PHOTO_VALIDATION,
   payload: { index, validation },
 });
 
-export const setNotificationPhotoAltTextValidation = (index: number, validation: KeyValueBoolean): NotificationValidationAction => ({
+export const setNotificationPhotoAltTextValidation = (index: number, validation: KeyValueValidation): NotificationValidationAction => ({
   type: SET_NOTIFICATION_PHOTO_ALT_TEXT_VALIDATION,
   payload: { index, validation },
 });
