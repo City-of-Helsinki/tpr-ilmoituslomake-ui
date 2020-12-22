@@ -18,6 +18,9 @@ const NotificationHeader = (): ReactElement => {
   const notificationId = useSelector((state: RootState) => state.notification.notificationId);
   const notificationName = useSelector((state: RootState) => state.notification.notificationName);
 
+  // The header should only be visible for developer usage
+  const devHeader = false;
+
   const changePage = (pageNumber: number) => {
     dispatch(setPage(pageNumber));
   };
@@ -25,32 +28,34 @@ const NotificationHeader = (): ReactElement => {
   return (
     <div>
       <Header>
-        <Navigation.Row>
-          <Navigation.Item
-            className={styles.navigationItem}
-            label={i18n.t("notification.page.basic")}
-            active={currentPage === 1}
-            onClick={() => changePage(1)}
-          />
-          <Navigation.Item
-            className={styles.navigationItem}
-            label={i18n.t("notification.page.contact")}
-            active={currentPage === 2}
-            onClick={() => changePage(2)}
-          />
-          <Navigation.Item
-            className={styles.navigationItem}
-            label={i18n.t("notification.page.photos")}
-            active={currentPage === 3}
-            onClick={() => changePage(3)}
-          />
-          <Navigation.Item
-            className={styles.navigationItem}
-            label={i18n.t("notification.page.send")}
-            active={currentPage === 4}
-            onClick={() => changePage(4)}
-          />
-        </Navigation.Row>
+        {devHeader && (
+          <Navigation.Row>
+            <Navigation.Item
+              className={styles.navigationItem}
+              label={i18n.t("notification.page.basic")}
+              active={currentPage === 1}
+              onClick={() => changePage(1)}
+            />
+            <Navigation.Item
+              className={styles.navigationItem}
+              label={i18n.t("notification.page.contact")}
+              active={currentPage === 2}
+              onClick={() => changePage(2)}
+            />
+            <Navigation.Item
+              className={styles.navigationItem}
+              label={i18n.t("notification.page.photos")}
+              active={currentPage === 3}
+              onClick={() => changePage(3)}
+            />
+            <Navigation.Item
+              className={styles.navigationItem}
+              label={i18n.t("notification.page.send")}
+              active={currentPage === 4}
+              onClick={() => changePage(4)}
+            />
+          </Navigation.Row>
+        )}
       </Header>
       <div className={styles.header}>
         <h1>{notificationId > 0 ? `${i18n.t("notification.headerModify")}: ${notificationName}` : i18n.t("notification.headerNew")}</h1>
