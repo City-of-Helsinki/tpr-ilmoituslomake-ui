@@ -94,8 +94,8 @@ const NotificationDetail = (): ReactElement => {
 };
 
 // Server-side rendering
-export const getServerSideProps: GetServerSideProps = async ({ req, params, locale }) => {
-  const lngDict = await i18nLoader(locale);
+export const getServerSideProps: GetServerSideProps = async ({ req, params, locale, locales }) => {
+  const lngDict = await i18nLoader(locales);
 
   const reduxStore = initStore();
   const initialReduxState = reduxStore.getState();

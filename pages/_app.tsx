@@ -8,14 +8,21 @@ import { useStore } from "../state/store";
 import "../styles/global.scss";
 
 const App = ({ Component, pageProps }: AppProps): ReactElement => {
+  // This function is called when doing both server-side and client-side rendering
   const router = useRouter();
   const { lngDict, initialReduxState, ...rest } = pageProps;
   const locale = router.locale || router.defaultLocale || defaultLocale;
 
   const store = useStore(initialReduxState);
 
+  // In the notification form, when changing the application language, make sure it is included in the list of input languages
+  // Update the store state to preserve any previously selected input languages
+  if (store.getState().notification.notificationExtra.inputLanguages.indexOf(locale) < 0) {
+    store.getState().notification.notificationExtra.inputLanguages = [...store.getState().notification.notificationExtra.inputLanguages, locale];
+  }
+
   return (
-    <I18nProvider lngDict={lngDict} locale={locale}>
+    <I18nProvider lngDict={lngDict[locale]} locale={locale}>
       <Provider store={store}>
         <Component {...rest} />
       </Provider>

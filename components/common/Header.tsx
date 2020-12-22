@@ -24,7 +24,8 @@ const Header = ({ children }: HeaderProps): ReactElement => {
   const currentUser = useSelector((state: RootState) => state.notification.user);
 
   const changeLanguage = (locale: string) => {
-    router.push(router.pathname, router.asPath, { locale });
+    // Use the shallow option to avoid a server-side render in order to preserve the state
+    router.push(router.pathname, router.asPath, { locale, shallow: true });
   };
 
   useEffect(() => {

@@ -79,8 +79,8 @@ const Main = (): ReactElement => {
 };
 
 // Static Generation
-export const getStaticProps: GetStaticProps = async ({ locale }) => {
-  const lngDict = await i18nLoader(locale);
+export const getStaticProps: GetStaticProps = async ({ locales }) => {
+  const lngDict = await i18nLoader(locales);
 
   return {
     props: {
