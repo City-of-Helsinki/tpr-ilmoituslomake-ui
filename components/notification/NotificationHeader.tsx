@@ -1,13 +1,14 @@
 import React, { Dispatch, ReactElement } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useI18n } from "next-localization";
-import { Navigation } from "hds-react";
-import { Stepper, Step, StepLabel } from "@material-ui/core";
+import { Koros, Navigation } from "hds-react";
+import { Stepper, Step, StepLabel, CircularProgress } from "@material-ui/core";
 import { StylesProvider } from "@material-ui/core/styles";
 import Header from "../common/Header";
 import { NotificationAction } from "../../state/actions/types";
 import { setPage } from "../../state/actions/notification";
 import { RootState } from "../../state/reducers";
+import { MAX_PAGE } from "../../types/constants";
 import styles from "./NotificationHeader.module.scss";
 
 const NotificationHeader = (): ReactElement => {
@@ -58,22 +59,40 @@ const NotificationHeader = (): ReactElement => {
         )}
       </Header>
       <div className={styles.header}>
-        <h1>{notificationId > 0 ? `${i18n.t("notification.headerModify")}: ${notificationName}` : i18n.t("notification.headerNew")}</h1>
         <StylesProvider injectFirst>
-          <Stepper classes={{ root: styles.stepper }} activeStep={currentPage - 1} alternativeLabel>
-            <Step>
-              <StepLabel>{i18n.t("notification.page.basic")}</StepLabel>
-            </Step>
-            <Step>
-              <StepLabel>{i18n.t("notification.page.contact")}</StepLabel>
-            </Step>
-            <Step>
-              <StepLabel>{i18n.t("notification.page.photos")}</StepLabel>
-            </Step>
-            <Step>
-              <StepLabel>{i18n.t("notification.page.send")}</StepLabel>
-            </Step>
-          </Stepper>
+          <div className={styles.tabletContainer}>
+            <h1>{notificationId > 0 ? `${i18n.t("notification.headerModify")}: ${notificationName}` : i18n.t("notification.headerNew")}</h1>
+            <Stepper classes={{ root: styles.stepper }} activeStep={currentPage - 1} alternativeLabel>
+              <Step>
+                <StepLabel>{i18n.t("notification.page.basic")}</StepLabel>
+              </Step>
+              <Step>
+                <StepLabel>{i18n.t("notification.page.contact")}</StepLabel>
+              </Step>
+              <Step>
+                <StepLabel>{i18n.t("notification.page.photos")}</StepLabel>
+              </Step>
+              <Step>
+                <StepLabel>{i18n.t("notification.page.send")}</StepLabel>
+              </Step>
+            </Stepper>
+          </div>
+          <div className={styles.mobileContainer}>
+            <div className={styles.mobileHeader}>
+              <div className={styles.progressContainer}>
+                <div className={styles.progressItem}>
+                  <CircularProgress classes={{ root: styles.progress }} variant="determinate" value={(100 * currentPage) / MAX_PAGE} />
+                </div>
+                <div className={styles.progressItem}>
+                  <h3 className={styles.progressText}>{`${currentPage} / ${MAX_PAGE}`}</h3>
+                </div>
+              </div>
+              <div className={styles.mobileHeaderText}>
+                {notificationId > 0 ? `${i18n.t("notification.headerModify")}: ${notificationName}` : i18n.t("notification.headerNew")}
+              </div>
+            </div>
+            <Koros className={styles.wave} type="basic" flipHorizontal />
+          </div>
         </StylesProvider>
       </div>
     </div>

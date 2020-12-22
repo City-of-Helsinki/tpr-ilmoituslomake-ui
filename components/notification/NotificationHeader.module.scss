@@ -1,4 +1,5 @@
 @import "~hds-design-tokens/lib/all.scss";
+@import "../../styles/mixins";
 
 .header h1 {
   color: $color-bus;
@@ -8,6 +9,111 @@
   background-color: $color-bus !important;
 }
 
-.stepper {
-  padding: 0;
+.tabletContainer {
+  @include media(xs, s) {
+    display: none;
+  }
+
+  @include media(m, l, xl) {
+    display: block;
+  }
+
+  .stepper {
+    padding: 0;
+  }
+}
+
+.mobileContainer {
+  @include media(xs, s) {
+    display: block;
+  }
+
+  @include media(m, l, xl) {
+    display: none;
+  }
+
+  .mobileHeader {
+    display: flex;
+    flex-direction: row;
+    background-color: $color-copper-light;
+
+    @include media(xs) {
+      height: $spacing-layout-l;
+      padding-top: $spacing-s;
+      padding-left: $spacing-s;
+    }
+
+    @include media(s) {
+      height: $spacing-layout-xl;
+      padding-top: $spacing-m;
+      padding-left: $spacing-m;
+    }
+
+    .mobileHeaderText {
+      margin-left: $spacing-m;
+      font-weight: 500;
+      color: $color-bus;
+
+      @include media(xs) {
+        font-size: $fontsize-heading-xs !important;
+      }
+
+      @include media(s) {
+        font-size: $fontsize-heading-m !important;
+      }
+    }
+
+    .progressContainer {
+      position: relative;
+
+      @include media(xs) {
+        width: $spacing-layout-l;
+      }
+
+      @include media(s) {
+        width: $spacing-layout-xl;
+      }
+
+      .progressItem {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+
+        .progress {
+          @include media(xs) {
+            width: $spacing-layout-l !important;
+            height: $spacing-layout-l !important;
+          }
+
+          @include media(s) {
+            width: $spacing-layout-xl !important;
+            height: $spacing-layout-xl !important;
+          }
+        }
+
+        .progressText {
+          font-weight: 500;
+          color: $color-bus;
+
+          @include media(xs) {
+            font-size: $fontsize-heading-xs !important;
+          }
+
+          @include media(s) {
+            font-size: $fontsize-heading-m !important;
+          }
+        }
+      }
+    }
+  }
+
+  .wave {
+    fill: $color-copper-light;
+  }
 }
