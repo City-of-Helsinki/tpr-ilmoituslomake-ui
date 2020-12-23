@@ -95,6 +95,10 @@
             width: $spacing-layout-xl !important;
             height: $spacing-layout-xl !important;
           }
+
+          circle {
+            fill: $color-white;
+          }
         }
 
         .progressText {
