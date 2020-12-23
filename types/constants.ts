@@ -175,6 +175,8 @@ export const INITIAL_NOTIFICATION_EXTRA = {
 export const INITIAL_MODERATION_EXTRA = {
   photos: [],
   tagOptions: [],
+  created_at: "",
+  updated_at: "",
   taskType: TaskType.Unknown,
   status: TaskStatus.Unknown,
   moderator: {
