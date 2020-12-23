@@ -1,7 +1,7 @@
 import { AnyAction } from "redux";
 import { ModerationStatusState } from "./types";
 import {
-  Status,
+  ModerationStatus,
   SET_MODERATION_NAME_STATUS,
   SET_MODERATION_SHORT_DESCRIPTION_STATUS,
   SET_MODERATION_LONG_DESCRIPTION_STATUS,
@@ -16,43 +16,43 @@ import {
 const initialState: ModerationStatusState = {
   moderationStatus: {
     name: {
-      fi: Status.Unknown,
-      sv: Status.Unknown,
-      en: Status.Unknown,
+      fi: ModerationStatus.Unknown,
+      sv: ModerationStatus.Unknown,
+      en: ModerationStatus.Unknown,
     },
-    location: Status.Unknown,
+    location: ModerationStatus.Unknown,
     description: {
       short: {
-        fi: Status.Unknown,
-        sv: Status.Unknown,
-        en: Status.Unknown,
+        fi: ModerationStatus.Unknown,
+        sv: ModerationStatus.Unknown,
+        en: ModerationStatus.Unknown,
       },
       long: {
-        fi: Status.Unknown,
-        sv: Status.Unknown,
-        en: Status.Unknown,
+        fi: ModerationStatus.Unknown,
+        sv: ModerationStatus.Unknown,
+        en: ModerationStatus.Unknown,
       },
     },
     address: {
       fi: {
-        street: Status.Unknown,
-        postal_code: Status.Unknown,
-        post_office: Status.Unknown,
+        street: ModerationStatus.Unknown,
+        postal_code: ModerationStatus.Unknown,
+        post_office: ModerationStatus.Unknown,
       },
       sv: {
-        street: Status.Unknown,
-        postal_code: Status.Unknown,
-        post_office: Status.Unknown,
+        street: ModerationStatus.Unknown,
+        postal_code: ModerationStatus.Unknown,
+        post_office: ModerationStatus.Unknown,
       },
     },
-    phone: Status.Unknown,
-    email: Status.Unknown,
+    phone: ModerationStatus.Unknown,
+    email: ModerationStatus.Unknown,
     website: {
-      fi: Status.Unknown,
-      sv: Status.Unknown,
-      en: Status.Unknown,
+      fi: ModerationStatus.Unknown,
+      sv: ModerationStatus.Unknown,
+      en: ModerationStatus.Unknown,
     },
-    ontology_ids: Status.Unknown,
+    ontology_ids: ModerationStatus.Unknown,
     photos: [],
   },
 };

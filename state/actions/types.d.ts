@@ -331,42 +331,42 @@ export type ModerationAction =
 
 interface SetModerationNameStatusAction extends AnyAction {
   type: typeof SET_MODERATION_NAME_STATUS;
-  payload: Status;
+  payload: ModerationStatus;
 }
 
 interface SetModerationShortDescriptionStatusAction extends AnyAction {
   type: typeof SET_MODERATION_SHORT_DESCRIPTION_STATUS;
-  payload: Status;
+  payload: ModerationStatus;
 }
 
 interface SetModerationLongDescriptionStatusAction extends AnyAction {
   type: typeof SET_MODERATION_LONG_DESCRIPTION_STATUS;
-  payload: Status;
+  payload: ModerationStatus;
 }
 
 interface SetModerationTagStatusAction extends AnyAction {
   type: typeof SET_MODERATION_TAG_STATUS;
-  payload: Status;
+  payload: ModerationStatus;
 }
 
 interface SetModerationAddressStatusAction extends AnyAction {
   type: typeof SET_MODERATION_ADDRESS_STATUS;
-  payload: { language: string; status: Status };
+  payload: { language: string; status: ModerationStatus };
 }
 
 interface SetModerationLocationStatusAction extends AnyAction {
   type: typeof SET_MODERATION_LOCATION_STATUS;
-  payload: Status;
+  payload: ModerationStatus;
 }
 
 interface SetModerationContactStatusAction extends AnyAction {
   type: typeof SET_MODERATION_CONTACT_STATUS;
-  payload: Status;
+  payload: ModerationStatus;
 }
 
 interface SetModerationLinkStatusAction extends AnyAction {
   type: typeof SET_MODERATION_LINK_STATUS;
-  payload: Status;
+  payload: ModerationStatus;
 }
 
 interface SetModerationPhotoStatusAction extends AnyAction {

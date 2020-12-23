@@ -13,7 +13,7 @@ export interface PhotoValidation {
   [key: string]: Validation;
 }
 
-export interface NotificationValidation {
+export interface NotificationValidationSchema {
   name: {
     fi: Validation;
     sv: Validation;

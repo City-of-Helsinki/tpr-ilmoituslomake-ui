@@ -6,7 +6,7 @@ import { ModerationAction, ModerationStatusAction } from "../../state/actions/ty
 import { setModerationContact } from "../../state/actions/moderation";
 import { setModerationContactStatus } from "../../state/actions/moderationStatus";
 import { RootState } from "../../state/reducers";
-import { Status } from "../../types/constants";
+import { ModerationStatus } from "../../types/constants";
 import ActionButton from "./ActionButton";
 import ModifyButton from "./ModifyButton";
 
@@ -28,7 +28,7 @@ const ContactModeration = (): ReactElement => {
     dispatch(setModerationContact({ [evt.target.name]: evt.target.value }));
   };
 
-  const updateContactStatus = (contactField: string, status: Status) => {
+  const updateContactStatus = (contactField: string, status: ModerationStatus) => {
     dispatchStatus(setModerationContactStatus({ [contactField]: status }));
   };
 
@@ -59,7 +59,7 @@ const ContactModeration = (): ReactElement => {
             name="phone"
             value={phoneModified}
             onChange={updateContact}
-            disabled={phoneStatus === Status.Approved || phoneStatus === Status.Rejected}
+            disabled={phoneStatus === ModerationStatus.Approved || phoneStatus === ModerationStatus.Rejected}
           />
         </ModifyButton>
         <ActionButton className="gridColumn3" fieldName="phone" status={phoneStatus} actionCallback={updateContactStatus} />
@@ -88,7 +88,7 @@ const ContactModeration = (): ReactElement => {
             name="email"
             value={emailModified}
             onChange={updateContact}
-            disabled={emailStatus === Status.Approved || emailStatus === Status.Rejected}
+            disabled={emailStatus === ModerationStatus.Approved || emailStatus === ModerationStatus.Rejected}
           />
         </ModifyButton>
         <ActionButton className="gridColumn3" fieldName="email" status={emailStatus} actionCallback={updateContactStatus} />

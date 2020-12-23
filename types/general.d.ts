@@ -1,4 +1,4 @@
-import { Status, TaskStatus, TaskType } from "./constants";
+import { ModerationStatus, TaskStatus, TaskType } from "./constants";
 
 export interface User {
   authenticated: boolean;
@@ -26,7 +26,7 @@ export interface KeyValueValidation {
 }
 
 export interface KeyValueStatus {
-  [key: string]: Status;
+  [key: string]: ModerationStatus;
 }
 
 export type OptionType = {

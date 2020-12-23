@@ -6,7 +6,7 @@ import { ModerationAction, ModerationStatusAction } from "../../state/actions/ty
 import { setModerationLink } from "../../state/actions/moderation";
 import { setModerationLinkStatus } from "../../state/actions/moderationStatus";
 import { RootState } from "../../state/reducers";
-import { Status, LANGUAGE_OPTIONS } from "../../types/constants";
+import { ModerationStatus, LANGUAGE_OPTIONS } from "../../types/constants";
 import ActionButton from "./ActionButton";
 import ModifyButton from "./ModifyButton";
 
@@ -28,7 +28,7 @@ const LinksModeration = (): ReactElement => {
     dispatch(setModerationLink({ [evt.target.name]: evt.target.value }));
   };
 
-  const updateWebsiteStatus = (language: string, status: Status) => {
+  const updateWebsiteStatus = (language: string, status: ModerationStatus) => {
     dispatchStatus(setModerationLinkStatus({ [language]: status }));
   };
 
@@ -61,7 +61,7 @@ const LinksModeration = (): ReactElement => {
                 name={option}
                 value={websiteModified[option] as string}
                 onChange={updateWebsite}
-                disabled={websiteStatus[option] === Status.Approved || websiteStatus[option] === Status.Rejected}
+                disabled={websiteStatus[option] === ModerationStatus.Approved || websiteStatus[option] === ModerationStatus.Rejected}
               />
             </ModifyButton>
             <ActionButton className="gridColumn3" fieldName={option} status={websiteStatus[option]} actionCallback={updateWebsiteStatus} />

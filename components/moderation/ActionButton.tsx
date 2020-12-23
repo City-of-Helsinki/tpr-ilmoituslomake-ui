@@ -1,14 +1,14 @@
 import React, { ReactElement } from "react";
 import { useI18n } from "next-localization";
 import { Button, IconCheck, IconCross } from "hds-react";
-import { Status } from "../../types/constants";
+import { ModerationStatus } from "../../types/constants";
 import styles from "./ActionButton.module.scss";
 
 interface ActionButtonProps {
   className?: string;
   fieldName: string;
-  status: Status;
-  actionCallback: (fieldName: string, status: Status) => void;
+  status: ModerationStatus;
+  actionCallback: (fieldName: string, status: ModerationStatus) => void;
 }
 
 const ActionButton = ({ className, fieldName, status, actionCallback }: ActionButtonProps): ReactElement => {
@@ -16,14 +16,14 @@ const ActionButton = ({ className, fieldName, status, actionCallback }: ActionBu
 
   return (
     <div className={`${styles.action} ${className}`}>
-      {status === Status.Edited && (
+      {status === ModerationStatus.Edited && (
         <div>
           <Button
             className={styles.approveSecondary}
             variant="secondary"
             size="small"
             aria-label={i18n.t("moderation.button.approve")}
-            onClick={() => actionCallback(fieldName, Status.Approved)}
+            onClick={() => actionCallback(fieldName, ModerationStatus.Approved)}
           >
             <IconCheck />
           </Button>
@@ -32,19 +32,29 @@ const ActionButton = ({ className, fieldName, status, actionCallback }: ActionBu
             variant="secondary"
             size="small"
             aria-label={i18n.t("moderation.button.reject")}
-            onClick={() => actionCallback(fieldName, Status.Rejected)}
+            onClick={() => actionCallback(fieldName, ModerationStatus.Rejected)}
           >
             <IconCross />
           </Button>
         </div>
       )}
-      {status === Status.Approved && (
-        <Button className={styles.approve} iconLeft={<IconCheck />} variant="success" onClick={() => actionCallback(fieldName, Status.Edited)}>
+      {status === ModerationStatus.Approved && (
+        <Button
+          className={styles.approve}
+          iconLeft={<IconCheck />}
+          variant="success"
+          onClick={() => actionCallback(fieldName, ModerationStatus.Edited)}
+        >
           {i18n.t("moderation.button.approved")}
         </Button>
       )}
-      {status === Status.Rejected && (
-        <Button className={styles.reject} iconLeft={<IconCross />} variant="danger" onClick={() => actionCallback(fieldName, Status.Edited)}>
+      {status === ModerationStatus.Rejected && (
+        <Button
+          className={styles.reject}
+          iconLeft={<IconCross />}
+          variant="danger"
+          onClick={() => actionCallback(fieldName, ModerationStatus.Edited)}
+        >
           {i18n.t("moderation.button.rejected")}
         </Button>
       )}

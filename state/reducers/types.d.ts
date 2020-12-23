@@ -1,8 +1,8 @@
 import { LatLngExpression } from "leaflet";
 import { User, NotificationExtra, PlaceSearch, TaskSearch, ModerationTodo, ModerationExtra } from "../../types/general";
-import { ModerationStatus } from "../../types/moderation_status";
+import { ModerationStatusSchema } from "../../types/moderation_status";
 import { NotificationSchema } from "../../types/notification_schema";
-import { NotificationValidation } from "../../types/notification_validation";
+import { NotificationValidationSchema } from "../../types/notification_validation";
 
 export interface NotificationState {
   page: number;
@@ -17,7 +17,7 @@ export interface NotificationState {
 
 export interface NotificationValidationState {
   pageValid: true;
-  notificationValidation: NotificationValidation;
+  notificationValidation: NotificationValidationSchema;
 }
 
 export interface ModerationState {
@@ -32,5 +32,5 @@ export interface ModerationState {
 }
 
 export interface ModerationStatusState {
-  moderationStatus: ModerationStatus;
+  moderationStatus: ModerationStatusSchema;
 }

@@ -6,7 +6,7 @@ import { ModerationAction, ModerationStatusAction } from "../../state/actions/ty
 import { setModerationLocation } from "../../state/actions/moderation";
 import { setModerationLocationStatus } from "../../state/actions/moderationStatus";
 import { RootState } from "../../state/reducers";
-import { Status, MAP_INITIAL_CENTER, MAP_INITIAL_ZOOM } from "../../types/constants";
+import { ModerationStatus, MAP_INITIAL_CENTER, MAP_INITIAL_ZOOM } from "../../types/constants";
 import ActionButton from "./ActionButton";
 import ModifyButton from "./ModifyButton";
 import styles from "./MapModeration.module.scss";
@@ -38,14 +38,14 @@ const MapModeration = ({ setMapsReady }: MapModerationProps): ReactElement => {
     dispatch(setModerationLocation(coordinates));
   };
 
-  const updateLocationStatus = (fieldName: string, status: Status) => {
+  const updateLocationStatus = (fieldName: string, status: ModerationStatus) => {
     dispatchStatus(setModerationLocationStatus(status));
   };
 
   // The maps only initialise properly when not hidden, so use flags to only hide the maps after they are ready
   const [map1Ready, setMap1Ready] = useState<boolean>(false);
   const [map2Ready, setMap2Ready] = useState<boolean>(false);
-  const [initialLocationStatus, setInitialLocationStatus] = useState<Status | undefined>(Status.Edited);
+  const [initialLocationStatus, setInitialLocationStatus] = useState<ModerationStatus | undefined>(ModerationStatus.Edited);
 
   useEffect(() => {
     if (setMapsReady) {

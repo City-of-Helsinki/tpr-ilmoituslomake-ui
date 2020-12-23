@@ -10,7 +10,7 @@ import {
   setModerationLongDescriptionStatus,
 } from "../../state/actions/moderationStatus";
 import { RootState } from "../../state/reducers";
-import { Status, LANGUAGE_OPTIONS } from "../../types/constants";
+import { ModerationStatus, LANGUAGE_OPTIONS } from "../../types/constants";
 import ActionButton from "./ActionButton";
 import ModifyButton from "./ModifyButton";
 
@@ -52,15 +52,15 @@ const DescriptionModeration = (): ReactElement => {
   };
 
   // Functions for updating status values in redux state
-  const updateNameStatus = (language: string, status: Status) => {
+  const updateNameStatus = (language: string, status: ModerationStatus) => {
     dispatchStatus(setModerationNameStatus({ [language]: status }));
   };
 
-  const updateShortDescriptionStatus = (language: string, status: Status) => {
+  const updateShortDescriptionStatus = (language: string, status: ModerationStatus) => {
     dispatchStatus(setModerationShortDescriptionStatus({ [language]: status }));
   };
 
-  const updateLongDescriptionStatus = (language: string, status: Status) => {
+  const updateLongDescriptionStatus = (language: string, status: ModerationStatus) => {
     dispatchStatus(setModerationLongDescriptionStatus({ [language]: status }));
   };
 
@@ -93,7 +93,7 @@ const DescriptionModeration = (): ReactElement => {
                 name={option}
                 value={placeNameModified[option] as string}
                 onChange={updateName}
-                disabled={placeNameStatus[option] === Status.Approved || placeNameStatus[option] === Status.Rejected}
+                disabled={placeNameStatus[option] === ModerationStatus.Approved || placeNameStatus[option] === ModerationStatus.Rejected}
               />
             </ModifyButton>
             <ActionButton className="gridColumn3" fieldName={option} status={placeNameStatus[option]} actionCallback={updateNameStatus} />
@@ -130,7 +130,7 @@ const DescriptionModeration = (): ReactElement => {
                 name={option}
                 value={shortDescModified[option] as string}
                 onChange={updateShortDescription}
-                disabled={shortDescStatus[option] === Status.Approved || shortDescStatus[option] === Status.Rejected}
+                disabled={shortDescStatus[option] === ModerationStatus.Approved || shortDescStatus[option] === ModerationStatus.Rejected}
               />
             </ModifyButton>
             <ActionButton className="gridColumn3" fieldName={option} status={shortDescStatus[option]} actionCallback={updateShortDescriptionStatus} />
@@ -167,7 +167,7 @@ const DescriptionModeration = (): ReactElement => {
                 name={option}
                 value={longDescModified[option] as string}
                 onChange={updateLongDescription}
-                disabled={longDescStatus[option] === Status.Approved || longDescStatus[option] === Status.Rejected}
+                disabled={longDescStatus[option] === ModerationStatus.Approved || longDescStatus[option] === ModerationStatus.Rejected}
               />
             </ModifyButton>
             <ActionButton className="gridColumn3" fieldName={option} status={longDescStatus[option]} actionCallback={updateLongDescriptionStatus} />

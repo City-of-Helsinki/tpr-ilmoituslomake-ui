@@ -6,7 +6,7 @@ import { ModerationAction, ModerationStatusAction } from "../../state/actions/ty
 import { setModerationAddress } from "../../state/actions/moderation";
 import { setModerationAddressStatus } from "../../state/actions/moderationStatus";
 import { RootState } from "../../state/reducers";
-import { Status } from "../../types/constants";
+import { ModerationStatus } from "../../types/constants";
 import ActionButton from "./ActionButton";
 import ModifyButton from "./ModifyButton";
 
@@ -47,7 +47,7 @@ const LocationModeration = (): ReactElement => {
     dispatch(setModerationAddress(language, { [evt.target.name]: evt.target.value }));
   };
 
-  const updateAddressStatus = (language: string, status: Status) => {
+  const updateAddressStatus = (language: string, status: ModerationStatus) => {
     // Update all address fields to the same status
     dispatchStatus(setModerationAddressStatus(language, { street: status, postal_code: status, post_office: status }));
   };
@@ -83,7 +83,7 @@ const LocationModeration = (): ReactElement => {
             name="street"
             value={streetFiModified}
             onChange={(evt) => updateAddress("fi", evt)}
-            disabled={streetFiStatus === Status.Approved || streetFiStatus === Status.Rejected}
+            disabled={streetFiStatus === ModerationStatus.Approved || streetFiStatus === ModerationStatus.Rejected}
           />
         </ModifyButton>
         <ActionButton className="gridColumn3" fieldName="fi" status={addressFiStatus} actionCallback={updateAddressStatus} />
@@ -110,7 +110,7 @@ const LocationModeration = (): ReactElement => {
             name="postal_code"
             value={postalCodeFiModified}
             onChange={(evt) => updateAddress("fi", evt)}
-            disabled={postalCodeFiStatus === Status.Approved || postalCodeFiStatus === Status.Rejected}
+            disabled={postalCodeFiStatus === ModerationStatus.Approved || postalCodeFiStatus === ModerationStatus.Rejected}
           />
         </ModifyButton>
         <TextInput
@@ -136,7 +136,7 @@ const LocationModeration = (): ReactElement => {
             name="post_office"
             value={postOfficeFiModified}
             onChange={(evt) => updateAddress("fi", evt)}
-            disabled={postOfficeFiStatus === Status.Approved || postOfficeFiStatus === Status.Rejected}
+            disabled={postOfficeFiStatus === ModerationStatus.Approved || postOfficeFiStatus === ModerationStatus.Rejected}
           />
         </ModifyButton>
       </div>
@@ -170,7 +170,7 @@ const LocationModeration = (): ReactElement => {
             name="street"
             value={streetSvModified}
             onChange={(evt) => updateAddress("sv", evt)}
-            disabled={streetSvStatus === Status.Approved || streetSvStatus === Status.Rejected}
+            disabled={streetSvStatus === ModerationStatus.Approved || streetSvStatus === ModerationStatus.Rejected}
           />
         </ModifyButton>
         <ActionButton className="gridColumn3" fieldName="sv" status={addressSvStatus} actionCallback={updateAddressStatus} />
@@ -197,7 +197,7 @@ const LocationModeration = (): ReactElement => {
             name="postal_code"
             value={postalCodeSvModified}
             onChange={(evt) => updateAddress("sv", evt)}
-            disabled={postalCodeSvStatus === Status.Approved || postalCodeSvStatus === Status.Rejected}
+            disabled={postalCodeSvStatus === ModerationStatus.Approved || postalCodeSvStatus === ModerationStatus.Rejected}
           />
         </ModifyButton>
         <TextInput
@@ -223,7 +223,7 @@ const LocationModeration = (): ReactElement => {
             name="post_office"
             value={postOfficeSvModified}
             onChange={(evt) => updateAddress("sv", evt)}
-            disabled={postOfficeSvStatus === Status.Approved || postOfficeSvStatus === Status.Rejected}
+            disabled={postOfficeSvStatus === ModerationStatus.Approved || postOfficeSvStatus === ModerationStatus.Rejected}
           />
         </ModifyButton>
       </div>

@@ -1,54 +1,54 @@
-import { Status } from "./constants";
+import { ModerationStatus } from "./constants";
 
 export interface PhotoStatus {
-  url: Status;
-  description?: Status;
-  permission: Status;
-  photographer?: Status;
+  url: ModerationStatus;
+  description?: ModerationStatus;
+  permission: ModerationStatus;
+  photographer?: ModerationStatus;
 }
 
-export interface ModerationStatus {
+export interface ModerationStatusSchema {
   name: {
-    fi: Status;
-    sv: Status;
-    en: Status;
-    [key: string]: Status;
+    fi: ModerationStatus;
+    sv: ModerationStatus;
+    en: ModerationStatus;
+    [key: string]: ModerationStatus;
   };
-  location: Status;
+  location: ModerationStatus;
   description: {
     short: {
-      fi: Status;
-      sv: Status;
-      en: Status;
-      [key: string]: Status;
+      fi: ModerationStatus;
+      sv: ModerationStatus;
+      en: ModerationStatus;
+      [key: string]: ModerationStatus;
     };
     long: {
-      fi: Status;
-      sv: Status;
-      en: Status;
-      [key: string]: Status;
+      fi: ModerationStatus;
+      sv: ModerationStatus;
+      en: ModerationStatus;
+      [key: string]: ModerationStatus;
     };
   };
   address: {
     fi: {
-      street: Status;
-      postal_code: Status;
-      post_office: Status;
+      street: ModerationStatus;
+      postal_code: ModerationStatus;
+      post_office: ModerationStatus;
     };
     sv: {
-      street: Status;
-      postal_code: Status;
-      post_office: Status;
+      street: ModerationStatus;
+      postal_code: ModerationStatus;
+      post_office: ModerationStatus;
     };
   };
-  phone: Status;
-  email: Status;
+  phone: ModerationStatus;
+  email: ModerationStatus;
   website: {
-    fi: Status;
-    sv: Status;
-    en: Status;
-    [key: string]: Status;
+    fi: ModerationStatus;
+    sv: ModerationStatus;
+    en: ModerationStatus;
+    [key: string]: ModerationStatus;
   };
-  ontology_ids: Status;
+  ontology_ids: ModerationStatus;
   photos: PhotoStatus[];
 }

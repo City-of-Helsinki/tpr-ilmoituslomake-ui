@@ -7,7 +7,7 @@ import { ModerationAction, ModerationStatusAction } from "../../state/actions/ty
 import { setModerationTag } from "../../state/actions/moderation";
 import { setModerationTagStatus } from "../../state/actions/moderationStatus";
 import { RootState } from "../../state/reducers";
-import { Status } from "../../types/constants";
+import { ModerationStatus } from "../../types/constants";
 import { OptionType, TagOption } from "../../types/general";
 import { defaultLocale } from "../../utils/i18n";
 import ActionButton from "./ActionButton";
@@ -43,7 +43,7 @@ const TagsModeration = (): ReactElement => {
     dispatch(setModerationTag(selected.map((s) => s.id as number)));
   };
 
-  const updateTagStatus = (language: string, status: Status) => {
+  const updateTagStatus = (language: string, status: ModerationStatus) => {
     dispatchStatus(setModerationTagStatus(status));
   };
 
@@ -84,7 +84,7 @@ const TagsModeration = (): ReactElement => {
             selectedItemRemoveButtonAriaLabel={i18n.t("moderation.button.remove")}
             clearButtonAriaLabel={i18n.t("moderation.button.clearAllSelections")}
             multiselect
-            disabled={tagsStatus === Status.Approved || tagsStatus === Status.Rejected}
+            disabled={tagsStatus === ModerationStatus.Approved || tagsStatus === ModerationStatus.Rejected}
           />
         </ModifyButton>
         <ActionButton className="gridColumn3" fieldName="tagModified" status={tagsStatus} actionCallback={updateTagStatus} />

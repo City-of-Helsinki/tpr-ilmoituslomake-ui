@@ -1,5 +1,5 @@
 import {
-  Status,
+  ModerationStatus,
   SET_MODERATION_NAME_STATUS,
   SET_MODERATION_SHORT_DESCRIPTION_STATUS,
   SET_MODERATION_LONG_DESCRIPTION_STATUS,
@@ -29,7 +29,7 @@ export const setModerationLongDescriptionStatus = (status: KeyValueStatus): Mode
   payload: status,
 });
 
-export const setModerationTagStatus = (status: Status): ModerationStatusAction => ({
+export const setModerationTagStatus = (status: ModerationStatus): ModerationStatusAction => ({
   type: SET_MODERATION_TAG_STATUS,
   payload: status,
 });
@@ -39,7 +39,7 @@ export const setModerationAddressStatus = (language: string, status: KeyValueSta
   payload: { language, status },
 });
 
-export const setModerationLocationStatus = (status: Status): ModerationStatusAction => ({
+export const setModerationLocationStatus = (status: ModerationStatus): ModerationStatusAction => ({
   type: SET_MODERATION_LOCATION_STATUS,
   payload: status,
 });

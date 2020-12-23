@@ -15,7 +15,7 @@ export enum PhotoPermission {
   CreativeCommons = "creativeCommons",
 }
 
-export enum Status {
+export enum ModerationStatus {
   Unknown = "unknown",
   Edited = "edited",
   Approved = "approved",
