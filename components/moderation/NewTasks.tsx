@@ -3,7 +3,7 @@ import Link from "next/link";
 import { useI18n } from "next-localization";
 import { Button, IconPen } from "hds-react";
 import moment from "moment";
-import { TaskType } from "../../types/constants";
+import { DATETIME_FORMAT, TaskType } from "../../types/constants";
 import { ModerationTodo } from "../../types/general";
 import { getTaskStatus, getTaskType } from "../../utils/conversion";
 import TaskStatusLabel from "./TaskStatusLabel";
@@ -78,7 +78,7 @@ const NewTasks = (): ReactElement => {
                 <div className={`gridColumn2 ${styles.gridContent}`}>
                   {taskType !== TaskType.Unknown ? i18n.t(`moderation.taskType.${taskType}`) : ""}
                 </div>
-                <div className={`gridColumn3 ${styles.gridContent}`}>{moment(created).format("D.M.YYYY H:m")}</div>
+                <div className={`gridColumn3 ${styles.gridContent}`}>{moment(created).format(DATETIME_FORMAT)}</div>
                 <div className={`gridColumn4 ${styles.gridContent}`}>
                   <TaskStatusLabel status={getTaskStatus(status)} />
                 </div>
