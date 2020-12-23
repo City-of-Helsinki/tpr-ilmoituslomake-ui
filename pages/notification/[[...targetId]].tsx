@@ -16,7 +16,7 @@ import Description from "../../components/notification/Description";
 import Links from "../../components/notification/Links";
 import Location from "../../components/notification/Location";
 import Map from "../../components/notification/Map";
-import Notice from "../../components/notification/Notice";
+import NotificationNotice from "../../components/notification/NotificationNotice";
 import Notifier from "../../components/notification/Notifier";
 import Opening from "../../components/notification/Opening";
 import Photos from "../../components/notification/Photos";
@@ -51,7 +51,7 @@ const NotificationDetail = (): ReactElement => {
       {currentPage === 1 && (
         <div id="content" className={styles.content} ref={ref}>
           <h2>{`${currentPage} ${i18n.t("notification.main.basic")}`}</h2>
-          <Notice messageKey="notification.mandatory" />
+          <NotificationNotice messageKey="notification.mandatory" />
           {!pageValid && <ValidationSummary />}
           <Description />
           <Tags />
@@ -61,7 +61,7 @@ const NotificationDetail = (): ReactElement => {
       {currentPage === 2 && (
         <div id="content" className={styles.content} ref={ref}>
           <h2>{`${currentPage} ${i18n.t("notification.main.contact")}`}</h2>
-          <Notice messageKey="notification.mandatory" />
+          <NotificationNotice messageKey="notification.mandatory" />
           {!pageValid && <ValidationSummary />}
           <Location />
           <Map />
@@ -72,7 +72,7 @@ const NotificationDetail = (): ReactElement => {
       {currentPage === 3 && (
         <div id="content" className={styles.content} ref={ref}>
           <h2>{`${currentPage} ${i18n.t("notification.main.photos")}`}</h2>
-          <Notice messageKey="notification.photos.notice" />
+          <NotificationNotice messageKey="notification.photos.notice" />
           {!pageValid && <ValidationSummary />}
           <Photos />
         </div>
@@ -80,7 +80,7 @@ const NotificationDetail = (): ReactElement => {
       {currentPage === 4 && (
         <div id="content" className={styles.content} ref={ref}>
           <h2>{`${currentPage} ${i18n.t("notification.main.send")}`}</h2>
-          <Notice messageKey="notification.comments.notice" />
+          <NotificationNotice messageKey="notification.comments.notice" />
           <Opening />
           <Comments />
           <Terms />

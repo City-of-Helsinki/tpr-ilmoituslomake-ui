@@ -1,0 +1,28 @@
+@import "~hds-design-tokens/lib/all.scss";
+
+.notice {
+  margin-bottom: $spacing-layout-s;
+  border: solid $color-bus 0;
+  border-left-width: $spacing-2-xs;
+  background-color: $color-fog-light;
+  display: flex;
+  flex-direction: row;
+
+  div {
+    margin: $spacing-s;
+  }
+
+  .icon {
+    color: $color-bus;
+  }
+
+  .title {
+    font-size: $fontsize-heading-m;
+    font-weight: 700;
+  }
+
+  button {
+    margin-left: $spacing-s;
+    background-color: $color-white;
+  }
+}

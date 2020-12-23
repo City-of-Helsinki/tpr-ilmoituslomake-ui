@@ -9,7 +9,7 @@ import { RootState } from "../../state/reducers";
 import { LANGUAGE_OPTIONS, MAX_PHOTOS, PhotoPermission, PhotoSourceType } from "../../types/constants";
 import { PhotoValidation } from "../../types/notification_validation";
 import { isPhotoFieldValid, isPhotoAltTextValid } from "../../utils/validation";
-import Notice from "./Notice";
+import NotificationNotice from "./NotificationNotice";
 import styles from "./Photos.module.scss";
 
 const Photos = (): ReactElement => {
@@ -125,7 +125,7 @@ const Photos = (): ReactElement => {
         return (
           <div key={key}>
             <h3>{`${i18n.t("notification.photos.photo.title")} ${index + 1}`}</h3>
-            <Notice messageKey="notification.photos.photo.notice1" messageKey2="notification.photos.photo.notice2" />
+            <NotificationNotice messageKey="notification.photos.photo.notice1" messageKey2="notification.photos.photo.notice2" />
 
             {sourceType === PhotoSourceType.Device && (
               <>
@@ -225,7 +225,7 @@ const Photos = (): ReactElement => {
                 </div>
 
                 <h5>{i18n.t("notification.photos.permission.title")}</h5>
-                <Notice messageKey="notification.photos.permission.notice" />
+                <NotificationNotice messageKey="notification.photos.permission.notice" />
 
                 <SelectionGroup
                   direction="vertical"

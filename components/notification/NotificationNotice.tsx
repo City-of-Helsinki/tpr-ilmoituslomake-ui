@@ -7,7 +7,7 @@ interface NoticeProps {
   messageKey2?: string;
 }
 
-const Notice = ({ messageKey, messageKey2 }: NoticeProps): ReactElement => {
+const NotificationNotice = ({ messageKey, messageKey2 }: NoticeProps): ReactElement => {
   const i18n = useI18n();
 
   return (
@@ -26,8 +26,8 @@ const Notice = ({ messageKey, messageKey2 }: NoticeProps): ReactElement => {
   );
 };
 
-Notice.defaultProps = {
+NotificationNotice.defaultProps = {
   messageKey2: undefined,
 };
 
-export default Notice;
+export default NotificationNotice;
