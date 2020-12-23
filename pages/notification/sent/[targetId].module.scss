@@ -1,0 +1,29 @@
+@import "~hds-design-tokens/lib/all.scss";
+
+.content {
+  .header {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    h1 {
+      color: $color-bus;
+    }
+
+    button {
+      margin: 0 $spacing-2-xs;
+    }
+  }
+}
+
+.sent {
+  background-color: $color-copper-light;
+}
+
+.opening {
+  background-color: $color-silver-light;
+}
+
+.photos {
+  background-color: $color-silver-light;
+}

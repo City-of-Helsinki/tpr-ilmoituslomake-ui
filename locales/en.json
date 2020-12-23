@@ -10,11 +10,12 @@
       "fi": "in Finnish",
       "sv": "in Swedish",
       "en": "in English"
-    }
+    },
+    "todo": "TODO - TEXT HERE"
   },
   "notification": {
     "title": "My Helsinki Places",
-    "headerNew": "Notify about a new place",
+    "headerNew": "Register a new place",
     "headerModify": "Modify",
     "mandatory": "Mandatory information is marked with an asterisk *",
     "button": {
@@ -22,10 +23,16 @@
       "previous": "Previous",
       "cancel": "Cancel",
       "send": "Send",
+      "return": "Return",
       "clearAllSelections": "Clear all selections",
       "remove": "Remove",
       "toggleMenu": "Toggle menu",
-      "selectFromDevice": "Select from device"
+      "selectFromDevice": "Select from device",
+      "modifyInformation": "Modify place's information",
+      "modifyOpeningTimes": "Modify opening times",
+      "notifyOpeningTimes": "Register opening times",
+      "notifyClosingDown": "Notify place closing down",
+      "notifyNewPlace": "Register a new place"
     },
     "page": {
       "basic": "Basic info",
@@ -58,8 +65,16 @@
         "message": "Unfortunately a technical error prevented the form from being sent. Please try again later."
       },
       "saveSucceeded": {
-        "title": "The form was sent successfully",
-        "message": ""
+        "title": "Sending succeeded!",
+        "message": "Thank you for the notification! The information will be checked before publishing."
+      },
+      "completeOpeningTimes": {
+        "title": "Complete the place's information with opening times",
+        "message": "Let the visitors know when your place is open."
+      },
+      "completePhotos": {
+        "title": "Complete the place's information with photos",
+        "message": "Let the visitors know what your place looks like."
       },
       "close": "Close message",
       "fieldRequired": "$fieldName is mandatory information",
@@ -197,7 +212,7 @@
     },
     "placeType": {
       "title": "Place's type",
-      "myPlace": "The place I'm notifying about is a",
+      "myPlace": "The place I'm registering is a",
       "private": "Private place",
       "municipal": "Municipal place",
       "institution": "Institution place"

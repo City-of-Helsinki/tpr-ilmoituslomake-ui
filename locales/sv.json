@@ -10,7 +10,8 @@
       "fi": "suomeksi",
       "sv": "ruotsiksi",
       "en": "englanniksi"
-    }
+    },
+    "todo": "TODO - TEXT HERE"
   },
   "notification": {
     "title": "My Helsinki Places",
@@ -22,10 +23,16 @@
       "previous": "Edellinen",
       "cancel": "Keskeytä",
       "send": "Lähetä",
+      "return": "Palaa",
       "clearAllSelections": "Poista kaikki valinnat",
       "remove": "Poista",
       "toggleMenu": "Vaihdele valikko",
-      "selectFromDevice": "Valitse laitteelta"
+      "selectFromDevice": "Valitse laitteelta",
+      "modifyInformation": "Muokkaa kohteen tietoja",
+      "modifyOpeningTimes": "Muokkaa aukioloaikoja",
+      "notifyOpeningTimes": "Ilmoita aukioloajat",
+      "notifyClosingDown": "Ilmoita kohde lopettaneeksi",
+      "notifyNewPlace": "Ilmoita uusi kohde"
     },
     "page": {
       "basic": "Perustiedot",
@@ -58,8 +65,16 @@
         "message": "Valitettavasti tekninen virhe esti lomakkeen lähettämisen. Ole hyvä ja yritä uudelleen myöhemmin."
       },
       "saveSucceeded": {
-        "title": "Lomakkeen lähetys onnistui",
-        "message": ""
+        "title": "Lähetys onnistui!",
+        "message": "Kiitos ilmoituksesta! Tiedot tarkistetaan vielä ennen julkaisemista."
+      },
+      "completeOpeningTimes": {
+        "title": "Täydennä kohteen tietoja aukioloajoilla",
+        "message": "Kerro kävijöille, milloin kohteesi on avoinna."
+      },
+      "completePhotos": {
+        "title": "Täydennä kohteen tietoja kuvilla",
+        "message": "Kerro kävijöille, miltä kohteesi näyttää."
       },
       "close": "Sulje viesti",
       "fieldRequired": "$fieldName on pakollinen tieto",

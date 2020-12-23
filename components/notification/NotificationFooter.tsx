@@ -86,7 +86,8 @@ const NotificationFooter = (): ReactElement => {
           console.log("RESPONSE", notificationResult);
 
           if (notificationResult.id) {
-            setToast(Toast.SaveSucceeded);
+            // setToast(Toast.SaveSucceeded);
+            router.push(`/notification/sent/${notificationResult.id}`);
           } else {
             setToast(Toast.SaveFailed);
           }

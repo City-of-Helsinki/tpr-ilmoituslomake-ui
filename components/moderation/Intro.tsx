@@ -11,7 +11,7 @@ const Intro = (): ReactElement => {
     <div className="formSection">
       <div className={styles.intro}>
         <h1>{i18n.t("moderation.intro.title")}</h1>
-        <div className="formInput">TEXT HERE</div>
+        <div className="formInput">{i18n.t("general.todo")}</div>
         <Link href="/moderation/place">
           <Button className={styles.primary}>{i18n.t("moderation.button.allPlaces")}</Button>
         </Link>
