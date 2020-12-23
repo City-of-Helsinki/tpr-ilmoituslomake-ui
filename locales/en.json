@@ -381,6 +381,8 @@
       "status": "Status",
       "moderator": "Moderator",
       "notifier": "Notifier",
+      "representative": "Is the place's representative",
+      "notRepresentative": "Is not the place's representative",
       "messageFromNotifier": "Message from notifier"
     },
     "taskSearch": {

@@ -381,6 +381,8 @@
       "status": "Tila",
       "moderator": "Moderoija",
       "notifier": "Ilmoittaja",
+      "representative": "On kohteen edustaja",
+      "notRepresentative": "Ei ole kohteen edustaja",
       "messageFromNotifier": "Viesti ilmoittajalta"
     },
     "taskSearch": {

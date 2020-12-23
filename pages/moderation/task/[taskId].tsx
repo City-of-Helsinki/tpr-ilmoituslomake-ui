@@ -91,6 +91,8 @@ export const getServerSideProps: GetServerSideProps = async ({ req, params, loca
           modifiedTask: taskResult.data,
           moderationExtra: {
             ...initialReduxState.moderation.moderationExtra,
+            created_at: taskResult.created_at,
+            updated_at: taskResult.updated_at,
             taskType: getTaskType(taskResult.category),
             status: getTaskStatus(taskResult.status),
             moderator: {

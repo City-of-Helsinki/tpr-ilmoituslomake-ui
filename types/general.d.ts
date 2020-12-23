@@ -106,6 +106,8 @@ export interface ModerationTodo {
 export interface ModerationExtra {
   photos: Photo[];
   tagOptions: TagOption[];
+  created_at: string;
+  updated_at: string;
   taskType: TaskType;
   status: TaskStatus;
   moderator: {

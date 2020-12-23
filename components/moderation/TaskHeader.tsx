@@ -1,9 +1,10 @@
 import React, { ReactElement } from "react";
 import { useSelector } from "react-redux";
 import { useI18n } from "next-localization";
-import { Button, IconArrowRight, IconArrowUndo, IconTrash } from "hds-react";
+import { Button, IconArrowRight, IconArrowUndo, IconCheck, IconCross, IconTrash } from "hds-react";
+import moment from "moment";
 import { RootState } from "../../state/reducers";
-import { TaskType } from "../../types/constants";
+import { DATETIME_FORMAT, NotifierType, TaskType } from "../../types/constants";
 import TaskStatusLabel from "./TaskStatusLabel";
 import styles from "./TaskHeader.module.scss";
 
@@ -14,12 +15,14 @@ const TaskHeader = (): ReactElement => {
   const selectedTask = useSelector((state: RootState) => state.moderation.selectedTask);
   const {
     name: { fi, sv, en },
+    notifier: { notifier_type, full_name, email, phone },
     comments,
   } = selectedTask;
   const placeNameSelected = fi ?? sv ?? en;
 
   const moderationExtra = useSelector((state: RootState) => state.moderation.moderationExtra);
   const {
+    created_at,
     taskType,
     status,
     moderator: { fullName: moderatorName },
@@ -39,7 +42,6 @@ const TaskHeader = (): ReactElement => {
         <Button variant="secondary" iconRight={<IconTrash />}>
           {i18n.t("moderation.button.removePlace")}
         </Button>
-        <Button variant="secondary">{i18n.t("moderation.button.saveIncomplete")}</Button>
         <Button iconRight={<IconArrowRight />}>{i18n.t("moderation.button.saveInformation")}</Button>
       </div>
 
@@ -47,6 +49,7 @@ const TaskHeader = (): ReactElement => {
         <div>
           <div className={styles.bold}>{i18n.t("moderation.taskHeader.taskType")}</div>
           <div>{taskType !== TaskType.Unknown ? i18n.t(`moderation.taskType.${taskType}`) : ""}</div>
+          <div>{moment(created_at).format(DATETIME_FORMAT)}</div>
         </div>
         <div>
           <div className={styles.bold}>{i18n.t("moderation.taskHeader.publishPermission")}</div>
@@ -66,8 +69,23 @@ const TaskHeader = (): ReactElement => {
 
       <div className={styles.lowerRow}>
         <div className={styles.notifier}>
-          <div className={styles.bold}>{i18n.t("moderation.taskHeader.notifier")}</div>
-          <div>TODO</div>
+          <div className={styles.notifierType}>
+            <div className={styles.bold}>{i18n.t("moderation.taskHeader.notifier")}</div>
+            {notifier_type === NotifierType.Representative ? (
+              <>
+                <IconCheck size="s" aria-hidden="true" />
+                <div>{i18n.t("moderation.taskHeader.representative")}</div>
+              </>
+            ) : (
+              <>
+                <IconCross size="s" aria-hidden="true" />
+                <div>{i18n.t("moderation.taskHeader.notRepresentative")}</div>
+              </>
+            )}
+          </div>
+          <div>{full_name}</div>
+          <div>{email}</div>
+          <div>{phone}</div>
         </div>
         <div className={styles.comment}>
           <div className={styles.bold}>{i18n.t("moderation.taskHeader.messageFromNotifier")}</div>

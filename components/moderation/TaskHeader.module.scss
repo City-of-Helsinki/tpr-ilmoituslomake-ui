@@ -40,6 +40,12 @@
     .notifier {
       background-color: $color-fog-light;
       border: solid $color-fog-light $spacing-2-xs;
+
+      .notifierType {
+        display: flex;
+        flex-direction: row;
+        padding: 0;
+      }
     }
 
     .comment {
