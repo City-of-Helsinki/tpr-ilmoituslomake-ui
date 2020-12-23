@@ -51,7 +51,7 @@
 
     .mobileHeaderText {
       margin-left: $spacing-m;
-      font-weight: 500;
+      font-weight: 700;
       color: $color-bus;
 
       @include media(xs) {
@@ -102,7 +102,7 @@
         }
 
         .progressText {
-          font-weight: 500;
+          font-weight: 700;
           color: $color-bus;
 
           @include media(xs) {

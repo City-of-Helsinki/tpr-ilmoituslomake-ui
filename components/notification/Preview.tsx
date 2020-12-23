@@ -1,4 +1,4 @@
-import React, { ReactElement } from "react";
+import React, { ReactElement, Fragment } from "react";
 import { useSelector } from "react-redux";
 import dynamic from "next/dynamic";
 import { useRouter } from "next/router";
@@ -50,7 +50,7 @@ const Preview = (): ReactElement => {
       <div className={`gridColumn2 ${styles.gridContent}`}>
         {LANGUAGE_OPTIONS.map((option) =>
           inputLanguages.includes(option) && (placeName[option] as string).length > 0 ? (
-            <div>{`${option.toUpperCase()}: ${placeName[option] as string}`}</div>
+            <div key={`placeName_${option}`}>{`${option.toUpperCase()}: ${placeName[option] as string}`}</div>
           ) : null
         )}
       </div>
@@ -58,7 +58,7 @@ const Preview = (): ReactElement => {
       <div className={`gridColumn2 ${styles.gridContent}`}>
         {LANGUAGE_OPTIONS.map((option) =>
           inputLanguages.includes(option) && (shortDesc[option] as string).length > 0 ? (
-            <div>{`${option.toUpperCase()}: ${shortDesc[option] as string}`}</div>
+            <div key={`shortDesc_${option}`}>{`${option.toUpperCase()}: ${shortDesc[option] as string}`}</div>
           ) : null
         )}
       </div>
@@ -66,7 +66,7 @@ const Preview = (): ReactElement => {
       <div className={`gridColumn2 ${styles.gridContent}`}>
         {LANGUAGE_OPTIONS.map((option) =>
           inputLanguages.includes(option) && (longDesc[option] as string).length > 0 ? (
-            <div>{`${option.toUpperCase()}: ${longDesc[option] as string}`}</div>
+            <div key={`longDesc_${option}`}>{`${option.toUpperCase()}: ${longDesc[option] as string}`}</div>
           ) : null
         )}
       </div>
@@ -115,7 +115,7 @@ const Preview = (): ReactElement => {
       <div className={`gridColumn2 ${styles.gridContent}`}>
         {LANGUAGE_OPTIONS.map((option) =>
           inputLanguages.includes(option) && (website[option] as string).length > 0 ? (
-            <div>{`${option.toUpperCase()}: ${website[option] as string}`}</div>
+            <div key={`website_${option}`}>{`${option.toUpperCase()}: ${website[option] as string}`}</div>
           ) : null
         )}
       </div>
@@ -123,34 +123,38 @@ const Preview = (): ReactElement => {
         <>
           <h4 className={`gridColumn1 ${styles.gridSubHeader}`}>{i18n.t("notification.main.photos")}</h4>
           <div className={`gridColumn2 ${styles.gridSubHeader}`} />
-          {photos.map(({ url, altText, permission, source, preview }, index) => (
-            <>
-              <div className={`gridColumn1 ${styles.gridContent}`}>{`${i18n.t("notification.photos.photo.title")} ${index + 1}`}</div>
-              <div className={`gridColumn2 ${styles.gridContent}`}>
-                <div>{url}</div>
-                {preview && preview.length > 0 && (
-                  <div className={styles.imagePreview}>
-                    <img src={preview} alt="" />
-                  </div>
-                )}
-              </div>
-              <div className={`gridColumn1 ${styles.gridContent}`}>{i18n.t("notification.photos.altText.label")}</div>
-              <div className={`gridColumn2 ${styles.gridContent}`}>
-                {LANGUAGE_OPTIONS.map((option) =>
-                  inputLanguages.includes(option) && (altText[option] as string).length > 0 ? (
-                    <div>{`${option.toUpperCase()}: ${altText[option] as string}`}</div>
-                  ) : null
-                )}
-              </div>
-              <div className={`gridColumn1 ${styles.gridContent}`}>{i18n.t("notification.photos.permission.label")}</div>
-              <div className={`gridColumn2 ${styles.gridContent}`}>
-                {permission === PhotoPermission.MyHelsinki && i18n.t("notification.photos.permission.myHelsinki2")}
-                {permission === PhotoPermission.CreativeCommons && i18n.t("notification.photos.permission.creativeCommons3")}
-              </div>
-              <div className={`gridColumn1 ${styles.gridContent}`}>{i18n.t("notification.photos.source.label")}</div>
-              <div className={`gridColumn2 ${styles.gridContent}`}>{source}</div>
-            </>
-          ))}
+          {photos.map(({ url, altText, permission, source, preview }, index) => {
+            const key = `photo_${index}`;
+            return (
+              <Fragment key={key}>
+                <div className={`gridColumn1 ${styles.gridContent}`}>{`${i18n.t("notification.photos.photo.title")} ${index + 1}`}</div>
+                <div className={`gridColumn2 ${styles.gridContent}`}>
+                  <div>{url}</div>
+                  {preview && preview.length > 0 && (
+                    <div className={styles.imagePreview}>
+                      <img src={preview} alt="" />
+                    </div>
+                  )}
+                </div>
+                <div className={`gridColumn1 ${styles.gridContent}`}>{i18n.t("notification.photos.altText.label")}</div>
+                <div className={`gridColumn2 ${styles.gridContent}`}>
+                  {LANGUAGE_OPTIONS.map((option) => {
+                    const key2 = `altText_${index}_${option}`;
+                    return inputLanguages.includes(option) && (altText[option] as string).length > 0 ? (
+                      <div key={key2}>{`${option.toUpperCase()}: ${altText[option] as string}`}</div>
+                    ) : null;
+                  })}
+                </div>
+                <div className={`gridColumn1 ${styles.gridContent}`}>{i18n.t("notification.photos.permission.label")}</div>
+                <div className={`gridColumn2 ${styles.gridContent}`}>
+                  {permission === PhotoPermission.MyHelsinki && i18n.t("notification.photos.permission.myHelsinki2")}
+                  {permission === PhotoPermission.CreativeCommons && i18n.t("notification.photos.permission.creativeCommons3")}
+                </div>
+                <div className={`gridColumn1 ${styles.gridContent}`}>{i18n.t("notification.photos.source.label")}</div>
+                <div className={`gridColumn2 ${styles.gridContent}`}>{source}</div>
+              </Fragment>
+            );
+          })}
         </>
       )}
     </div>
