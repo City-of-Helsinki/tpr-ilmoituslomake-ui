@@ -22,7 +22,7 @@ const App = ({ Component, pageProps }: AppProps): ReactElement => {
   }
 
   return (
-    <I18nProvider lngDict={lngDict[locale]} locale={locale}>
+    <I18nProvider lngDict={lngDict ? lngDict[locale] : {}} locale={locale}>
       <Provider store={store}>
         <Component {...rest} />
       </Provider>

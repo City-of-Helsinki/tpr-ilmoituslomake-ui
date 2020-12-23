@@ -11,8 +11,6 @@ import Notice from "../../components/common/Notice";
 import ModerationHeader from "../../components/moderation/ModerationHeader";
 import Intro from "../../components/moderation/Intro";
 import NewTasks from "../../components/moderation/NewTasks";
-import OrganisationNotice from "../../components/moderation/OrganisationNotice";
-import TranslationNotice from "../../components/moderation/TranslationNotice";
 
 const ModerationFront = (): ReactElement => {
   const i18n = useI18n();
