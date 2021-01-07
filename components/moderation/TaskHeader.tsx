@@ -79,11 +79,8 @@ const TaskHeader = (): ReactElement => {
           setToast(Toast.SaveFailed);
 
           // TODO - handle error
-          const moderationResult = await createResponse.json();
-          console.log("RESPONSE", moderationResult);
-          if (moderationResult && moderationResult.data) {
-            console.log(moderationResult.data);
-          }
+          const moderationResult = await createResponse.text();
+          console.log("FAILED", moderationResult);
         }
       } else if (!valid) {
         setToast(Toast.ValidationFailed);

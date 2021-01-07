@@ -95,11 +95,8 @@ const NotificationFooter = (): ReactElement => {
           setToast(Toast.SaveFailed);
 
           // TODO - handle error
-          const notificationResult = await createResponse.json();
-          console.log("RESPONSE", notificationResult);
-          if (notificationResult && notificationResult.data) {
-            console.log(notificationResult.data);
-          }
+          const notificationResult = await createResponse.text();
+          console.log("FAILED", notificationResult);
         }
       } else if (!valid) {
         setToast(Toast.ValidationFailed);
