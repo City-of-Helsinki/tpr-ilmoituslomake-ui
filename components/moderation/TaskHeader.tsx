@@ -46,6 +46,32 @@ const TaskHeader = (): ReactElement => {
       const valid = validateNotificationData(modifiedTask);
 
       if (currentUser?.authenticated && valid) {
+        // Send the Cross Site Request Forgery token, otherwise the backend returns the error "CSRF Failed: CSRF token missing or incorrect."
+        const csrftoken = Cookies.get("csrftoken");
+
+        // Check if this task has already been assigned to a moderator
+        if (moderatorName.length === 0) {
+          // Assign the moderation task to the current user
+          const assignResponse = await fetch(`/api/moderation/assign/${modifiedTaskId}/`, {
+            method: "PUT",
+            headers: {
+              "X-CSRFToken": csrftoken as string,
+            },
+          });
+          if (assignResponse.ok) {
+            const assignResult = await assignResponse.json();
+
+            // TODO - handle response
+            console.log("ASSIGN RESPONSE", assignResult);
+          } else {
+            setToast(Toast.SaveFailed);
+
+            // TODO - handle error
+            const assignResult = await assignResponse.text();
+            console.log("ASSIGN FAILED", assignResult);
+          }
+        }
+
         // TODO - handle photos
         const postData = {
           data: { ...modifiedTask },
@@ -53,8 +79,7 @@ const TaskHeader = (): ReactElement => {
 
         console.log("SENDING", postData);
 
-        // Send the Cross Site Request Forgery token, otherwise the backend returns the error "CSRF Failed: CSRF token missing or incorrect."
-        const csrftoken = Cookies.get("csrftoken");
+        // Save the moderation task with the possibly modified data
         const createResponse = await fetch(`/api/moderation/todos/${modifiedTaskId}/`, {
           method: "PUT",
           headers: {
@@ -68,7 +93,7 @@ const TaskHeader = (): ReactElement => {
           const moderationResult = await createResponse.json();
 
           // TODO - handle response
-          console.log("RESPONSE", moderationResult);
+          console.log("SAVE RESPONSE", moderationResult);
 
           if (moderationResult.id) {
             setToast(Toast.SaveSucceeded);
@@ -80,7 +105,7 @@ const TaskHeader = (): ReactElement => {
 
           // TODO - handle error
           const moderationResult = await createResponse.text();
-          console.log("FAILED", moderationResult);
+          console.log("SAVE FAILED", moderationResult);
         }
       } else if (!valid) {
         setToast(Toast.ValidationFailed);
