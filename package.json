@@ -17,6 +17,7 @@
     "hds-core": "^0.18.0",
     "hds-design-tokens": "^0.18.0",
     "hds-react": "^0.18.0",
+    "js-cookie": "^2.2.1",
     "leaflet": "^1.7.1",
     "moment": "^2.29.1",
     "next": "10.0.3",
@@ -31,6 +32,7 @@
     "yup": "^0.32.6"
   },
   "devDependencies": {
+    "@types/js-cookie": "^2.2.6",
     "@types/leaflet": "^1.5.19",
     "@types/node": "^14.14.12",
     "@types/react": "^17.0.0",

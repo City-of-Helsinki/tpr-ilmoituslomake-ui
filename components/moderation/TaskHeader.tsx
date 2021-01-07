@@ -1,16 +1,19 @@
-import React, { ReactElement } from "react";
+import React, { ReactElement, useState } from "react";
 import { useSelector } from "react-redux";
 import { useI18n } from "next-localization";
-import { Button, IconArrowRight, IconArrowUndo, IconCheck, IconCross, IconTrash } from "hds-react";
+import { Button, IconArrowRight, IconArrowUndo, IconCheck, IconCross, IconTrash, Notification as HdsNotification } from "hds-react";
+import Cookies from "js-cookie";
 import moment from "moment";
 import { RootState } from "../../state/reducers";
 import { DATETIME_FORMAT, NotifierType, TaskType } from "../../types/constants";
+import validateNotificationData from "../../utils/validation";
 import TaskStatusLabel from "./TaskStatusLabel";
 import styles from "./TaskHeader.module.scss";
 
 const TaskHeader = (): ReactElement => {
   const i18n = useI18n();
 
+  const currentUser = useSelector((state: RootState) => state.notification.user);
   const selectedTaskId = useSelector((state: RootState) => state.moderation.selectedTaskId);
   const selectedTask = useSelector((state: RootState) => state.moderation.selectedTask);
   const {
@@ -20,6 +23,8 @@ const TaskHeader = (): ReactElement => {
   } = selectedTask;
   const placeNameSelected = fi ?? sv ?? en;
 
+  const modifiedTaskId = useSelector((state: RootState) => state.moderation.modifiedTaskId);
+  const modifiedTask = useSelector((state: RootState) => state.moderation.modifiedTask);
   const moderationExtra = useSelector((state: RootState) => state.moderation.moderationExtra);
   const {
     created_at,
@@ -27,6 +32,73 @@ const TaskHeader = (): ReactElement => {
     status,
     moderator: { fullName: moderatorName },
   } = moderationExtra;
+
+  enum Toast {
+    NotAuthenticated = "notAuthenticated",
+    ValidationFailed = "validationFailed",
+    SaveFailed = "saveFailed",
+    SaveSucceeded = "saveSucceeded",
+  }
+  const [toast, setToast] = useState<Toast>();
+
+  const saveModeration = async () => {
+    try {
+      const valid = validateNotificationData(modifiedTask);
+
+      if (currentUser?.authenticated && valid) {
+        // TODO - handle photos
+        const postData = {
+          data: { ...modifiedTask },
+        };
+
+        console.log("SENDING", postData);
+
+        // Send the Cross Site Request Forgery token, otherwise the backend returns the error "CSRF Failed: CSRF token missing or incorrect."
+        const csrftoken = Cookies.get("csrftoken");
+        const createResponse = await fetch(`/api/moderation/todos/${modifiedTaskId}/`, {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+            "X-CSRFToken": csrftoken as string,
+          },
+          mode: "same-origin",
+          body: JSON.stringify(postData),
+        });
+        if (createResponse.ok) {
+          const moderationResult = await createResponse.json();
+
+          // TODO - handle response
+          console.log("RESPONSE", moderationResult);
+
+          if (moderationResult.id) {
+            setToast(Toast.SaveSucceeded);
+          } else {
+            setToast(Toast.SaveFailed);
+          }
+        } else {
+          setToast(Toast.SaveFailed);
+
+          // TODO - handle error
+          const moderationResult = await createResponse.json();
+          console.log("RESPONSE", moderationResult);
+          if (moderationResult && moderationResult.data) {
+            console.log(moderationResult.data);
+          }
+        }
+      } else if (!valid) {
+        setToast(Toast.ValidationFailed);
+      } else {
+        setToast(Toast.NotAuthenticated);
+      }
+    } catch (err) {
+      console.log("ERROR", err);
+      setToast(Toast.SaveFailed);
+    }
+  };
+
+  const cleanupToast = () => {
+    setToast(undefined);
+  };
 
   return (
     <div className={styles.taskHeader}>
@@ -42,7 +114,9 @@ const TaskHeader = (): ReactElement => {
         <Button variant="secondary" iconRight={<IconTrash />}>
           {i18n.t("moderation.button.removePlace")}
         </Button>
-        <Button iconRight={<IconArrowRight />}>{i18n.t("moderation.button.saveInformation")}</Button>
+        <Button iconRight={<IconArrowRight />} onClick={saveModeration}>
+          {i18n.t("moderation.button.saveInformation")}
+        </Button>
       </div>
 
       <div className={styles.upperRow}>
@@ -92,6 +166,20 @@ const TaskHeader = (): ReactElement => {
           <div>{comments}</div>
         </div>
       </div>
+
+      {toast && (
+        <HdsNotification
+          position="top-right"
+          label={i18n.t(`notification.message.${toast}.title`)}
+          type={toast === Toast.SaveSucceeded ? "success" : "error"}
+          closeButtonLabelText={i18n.t("notification.message.close")}
+          onClose={cleanupToast}
+          autoClose
+          dismissible
+        >
+          {i18n.t(`notification.message.${toast}.message`)}
+        </HdsNotification>
+      )}
     </div>
   );
 };
