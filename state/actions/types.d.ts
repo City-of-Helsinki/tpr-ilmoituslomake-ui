@@ -54,6 +54,7 @@ import {
   SET_MODERATION_CONTACT_STATUS,
   SET_MODERATION_LINK_STATUS,
   SET_MODERATION_PHOTO_STATUS,
+  SET_MODERATION_PHOTO_ALT_TEXT_STATUS,
 } from "../../types/constants";
 import { User, KeyValueString, KeyValueBoolean, Photo, TagOption, PlaceSearch, TaskSearch, ModerationTodo } from "../../types/general";
 import { PhotoValidation } from "../../types/notification_validation";
@@ -374,6 +375,11 @@ interface SetModerationPhotoStatusAction extends AnyAction {
   payload: PhotoStatus[];
 }
 
+interface SetModerationPhotoAltTextStatusAction extends AnyAction {
+  type: typeof SET_MODERATION_PHOTO_ALT_TEXT_STATUS;
+  payload: PhotoStatus[];
+}
+
 export type ModerationStatusAction =
   | SetModerationNameStatusAction
   | SetModerationShortDescriptionStatusAction
@@ -383,4 +389,5 @@ export type ModerationStatusAction =
   | SetModerationLocationStatusAction
   | SetModerationContactStatusAction
   | SetModerationLinkStatusAction
-  | SetModerationPhotoUrlStatusAction;
+  | SetModerationPhotoUrlStatusAction
+  | SetModerationPhotoAltTextStatusAction;

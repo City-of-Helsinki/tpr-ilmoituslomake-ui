@@ -331,6 +331,31 @@
       "title": "Organisaatiohallinta",
       "manageOrganisation": "Hallinoi organisaatiota"
     },
+    "photos": {
+      "title": "Kuvat",
+      "photo": {
+        "title": "Kuva"
+      },
+      "url": {
+        "labelDevice": "Valokuvan lähde laitteelta",
+        "labelLink": "Valokuvan verkko-osoite (url)"
+      },
+      "altText": {
+        "label": "Kuvan lyhyt kuvailu (alt-teksti)"
+      },
+      "permission": {
+        "title": "Käyttöoikeudet",
+        "label": "Kuvan käyttöoikeudet",
+        "myHelsinki": "MyHelsinki",
+        "creativeCommons": "Creative Commons"
+      },
+      "source": {
+        "label": "Kuvalähde"
+      },
+      "addNewFromDevice": "Lisää kuva laitteelta",
+      "addNewFromLink": "Lisää kuvalinkki",
+      "remove": "Poista kuva"
+    },
     "placeSearch": {
       "title": "Hae kohteita",
       "placeName": {

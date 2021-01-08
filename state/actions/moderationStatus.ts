@@ -9,9 +9,9 @@ import {
   SET_MODERATION_CONTACT_STATUS,
   SET_MODERATION_LINK_STATUS,
   SET_MODERATION_PHOTO_STATUS,
+  SET_MODERATION_PHOTO_ALT_TEXT_STATUS,
 } from "../../types/constants";
 import { KeyValueStatus } from "../../types/general";
-import { PhotoStatus } from "../../types/moderation_status";
 import { ModerationStatusAction } from "./types";
 
 export const setModerationNameStatus = (status: KeyValueStatus): ModerationStatusAction => ({
@@ -54,7 +54,12 @@ export const setModerationLinkStatus = (status: KeyValueStatus): ModerationStatu
   payload: status,
 });
 
-export const setModerationPhotoStatus = (status: PhotoStatus[]): ModerationStatusAction => ({
+export const setModerationPhotoStatus = (index: number, status: KeyValueStatus): ModerationStatusAction => ({
   type: SET_MODERATION_PHOTO_STATUS,
-  payload: status,
+  payload: { index, status },
+});
+
+export const setModerationPhotoAltTextStatus = (index: number, status: KeyValueStatus): ModerationStatusAction => ({
+  type: SET_MODERATION_PHOTO_ALT_TEXT_STATUS,
+  payload: { index, status },
 });

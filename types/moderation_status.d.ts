@@ -2,9 +2,15 @@ import { ModerationStatus } from "./constants";
 
 export interface PhotoStatus {
   url: ModerationStatus;
-  description?: ModerationStatus;
+  altText: {
+    fi: ModerationStatus;
+    sv: ModerationStatus;
+    en: ModerationStatus;
+    [key: string]: ModerationStatus;
+  };
   permission: ModerationStatus;
-  photographer?: ModerationStatus;
+  source: ModerationStatus;
+  [key: string]: ModerationStatus;
 }
 
 export interface ModerationStatusSchema {

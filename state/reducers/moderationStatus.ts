@@ -10,8 +10,10 @@ import {
   SET_MODERATION_CONTACT_STATUS,
   SET_MODERATION_LINK_STATUS,
   SET_MODERATION_PHOTO_STATUS,
+  SET_MODERATION_PHOTO_ALT_TEXT_STATUS,
   INITIAL_MODERATION_STATUS,
 } from "../../types/constants";
+import { PhotoStatus } from "../../types/moderation_status";
 
 const initialState: ModerationStatusState = {
   moderationStatus: INITIAL_MODERATION_STATUS,
@@ -111,9 +113,43 @@ const moderationStatus = (state = initialState, action: AnyAction): ModerationSt
 
     case SET_MODERATION_PHOTO_STATUS: {
       console.log("SET_MODERATION_PHOTO_STATUS", action.payload);
+
+      // If index -1 is specified, add the photo to the array
+      // Otherwise combine the field status with the existing photo status in the array
+      const photos = [
+        ...state.moderationStatus.photos.reduce(
+          (acc: PhotoStatus[], photoStatus, index) => [
+            ...acc,
+            action.payload.index === index ? { ...photoStatus, ...action.payload.status } : photoStatus,
+          ],
+          []
+        ),
+        ...(action.payload.index === -1 ? [action.payload.status] : []),
+      ];
+
       return {
         ...state,
-        moderationStatus: { ...state.moderationStatus, photos: action.payload },
+        moderationStatus: { ...state.moderationStatus, photos },
+      };
+    }
+
+    case SET_MODERATION_PHOTO_ALT_TEXT_STATUS: {
+      console.log("SET_MODERATION_PHOTO_ALT_TEXT_STATUS", action.payload);
+
+      // Combine the field status with the existing photo alt-text status in the array
+      const photos = [
+        ...state.moderationStatus.photos.reduce(
+          (acc: PhotoStatus[], photoStatus, index) => [
+            ...acc,
+            action.payload.index === index ? { ...photoStatus, altText: { ...photoStatus.altText, ...action.payload.status } } : photoStatus,
+          ],
+          []
+        ),
+      ];
+
+      return {
+        ...state,
+        moderationStatus: { ...state.moderationStatus, photos },
       };
     }
 

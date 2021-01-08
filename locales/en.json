@@ -331,6 +331,31 @@
       "title": "Organisation management",
       "manageOrganisation": "Manage organisation"
     },
+    "photos": {
+      "title": "Photos",
+      "photo": {
+        "title": "Photo"
+      },
+      "url": {
+        "labelDevice": "Photo's source from the device",
+        "labelLink": "Photo's internet address (url)"
+      },
+      "altText": {
+        "label": "Photo's short description (alt-text)"
+      },
+      "permission": {
+        "title": "Usage rights",
+        "label": "Photo's usage rights",
+        "myHelsinki": "MyHelsinki",
+        "creativeCommons": "Creative Commons"
+      },
+      "source": {
+        "label": "Photo's source"
+      },
+      "addNewFromDevice": "Add photo from device",
+      "addNewFromLink": "Add photo link",
+      "remove": "Remove photo"
+    },
     "placeSearch": {
       "title": "Search places",
       "placeName": {

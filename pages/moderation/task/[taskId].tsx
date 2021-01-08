@@ -9,6 +9,7 @@ import { initStore } from "../../../state/store";
 import { RootState } from "../../../state/reducers";
 import { ModerationStatus, INITIAL_MODERATION_EXTRA, INITIAL_MODERATION_STATUS, INITIAL_NOTIFICATION } from "../../../types/constants";
 import { TagOption, ModerationTodoSchema } from "../../../types/general";
+import { PhotoStatus } from "../../../types/moderation_status";
 import { getTaskStatus, getTaskType } from "../../../utils/conversion";
 import Layout from "../../../components/common/Layout";
 import ModerationHeader from "../../../components/moderation/ModerationHeader";
@@ -19,6 +20,7 @@ import DescriptionModeration from "../../../components/moderation/DescriptionMod
 import LinksModeration from "../../../components/moderation/LinksModeration";
 import LocationModeration from "../../../components/moderation/LocationModeration";
 import MapModeration from "../../../components/moderation/MapModeration";
+import PhotosModeration from "../../../components/moderation/PhotosModeration";
 import TagsModeration from "../../../components/moderation/TagsModeration";
 
 const ModerationTaskDetail = (): ReactElement => {
@@ -52,7 +54,7 @@ const ModerationTaskDetail = (): ReactElement => {
             <LinksModeration />
           </Collapsible>
           <Collapsible section={3} title={i18n.t("moderation.task.photos")}>
-            TODO
+            <PhotosModeration />
           </Collapsible>
         </div>
       )}
@@ -101,6 +103,40 @@ export const getServerSideProps: GetServerSideProps = async ({ req, params, loca
               fullName: taskResult.moderator ? `${taskResult.moderator.first_name} ${taskResult.moderator.last_name}`.trim() : "",
               email: taskResult.moderator && taskResult.moderator.email ? taskResult.moderator.email : "",
             },
+            photos: taskResult.target.data.images.map((image) => {
+              return {
+                sourceType: image.source_type,
+                url: image.url,
+                altText: {
+                  fi: image.alt_text.fi,
+                  sv: image.alt_text.sv,
+                  en: image.alt_text.en,
+                },
+                permission: image.permission,
+                source: image.source,
+                base64: "",
+                preview: "",
+              };
+            }),
+          },
+        };
+
+        initialReduxState.moderationStatus = {
+          ...initialReduxState.moderationStatus,
+          moderationStatus: {
+            ...initialReduxState.moderationStatus.moderationStatus,
+            photos: taskResult.target.data.images.map(() => {
+              return {
+                url: ModerationStatus.Unknown,
+                altText: {
+                  fi: ModerationStatus.Unknown,
+                  sv: ModerationStatus.Unknown,
+                  en: ModerationStatus.Unknown,
+                },
+                permission: ModerationStatus.Unknown,
+                source: ModerationStatus.Unknown,
+              } as PhotoStatus;
+            }),
           },
         };
       } catch (err) {
