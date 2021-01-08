@@ -176,10 +176,16 @@ const moderation = (state = initialState, action: AnyAction): ModerationState =>
     case SET_MODERATION_PHOTO: {
       console.log("SET_MODERATION_PHOTO", action.payload);
 
-      // If index -1 is specified, add the photo to the array
-      // Otherwise combine the field value with the existing photo in the array
-      const photos = [
-        ...state.moderationExtra.photos.reduce((acc: Photo[], photo, index) => {
+      // If index -1 is specified, add the photo to both arrays
+      // Otherwise combine the field value with the existing photo in the modified array
+      const photosSelected = [
+        ...state.moderationExtra.photosSelected.reduce((acc: Photo[], photo) => {
+          return [...acc, photo];
+        }, []),
+        ...(action.payload.index === -1 ? [action.payload.value] : []),
+      ];
+      const photosModified = [
+        ...state.moderationExtra.photosModified.reduce((acc: Photo[], photo, index) => {
           return [...acc, action.payload.index === index ? { ...photo, ...action.payload.value } : photo];
         }, []),
         ...(action.payload.index === -1 ? [action.payload.value] : []),
@@ -187,7 +193,7 @@ const moderation = (state = initialState, action: AnyAction): ModerationState =>
 
       return {
         ...state,
-        moderationExtra: { ...state.moderationExtra, photos },
+        moderationExtra: { ...state.moderationExtra, photosSelected, photosModified },
       };
     }
 
@@ -195,13 +201,16 @@ const moderation = (state = initialState, action: AnyAction): ModerationState =>
       console.log("REMOVE_MODERATION_PHOTO", action.payload);
 
       // Remove the photo at the specified index
-      const photos = state.moderationExtra.photos.reduce((acc: Photo[], photo, index) => {
+      const photosSelected = state.moderationExtra.photosSelected.reduce((acc: Photo[], photo, index) => {
+        return action.payload === index ? acc : [...acc, photo];
+      }, []);
+      const photosModified = state.moderationExtra.photosModified.reduce((acc: Photo[], photo, index) => {
         return action.payload === index ? acc : [...acc, photo];
       }, []);
 
       return {
         ...state,
-        moderationExtra: { ...state.moderationExtra, photos },
+        moderationExtra: { ...state.moderationExtra, photosSelected, photosModified },
       };
     }
 

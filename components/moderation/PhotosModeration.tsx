@@ -3,8 +3,8 @@ import { useSelector, useDispatch } from "react-redux";
 import { useI18n } from "next-localization";
 import { TextInput, Button, IconUpload, IconLink, TextArea, SelectionGroup, RadioButton, IconLinkExternal } from "hds-react";
 import { ModerationAction, ModerationStatusAction } from "../../state/actions/types";
-import { setModerationPhoto } from "../../state/actions/moderation";
-import { setModerationPhotoAltTextStatus, setModerationPhotoStatus } from "../../state/actions/moderationStatus";
+import { removeModerationPhoto, setModerationPhoto } from "../../state/actions/moderation";
+import { removeModerationPhotoStatus, setModerationPhotoAltTextStatus, setModerationPhotoStatus } from "../../state/actions/moderationStatus";
 import { RootState } from "../../state/reducers";
 import { LANGUAGE_OPTIONS, ModerationStatus, PhotoPermission, PhotoSourceType } from "../../types/constants";
 import ActionButton from "./ActionButton";
@@ -15,11 +15,8 @@ const PhotosModeration = (): ReactElement => {
   const dispatch = useDispatch<Dispatch<ModerationAction>>();
   const dispatchStatus = useDispatch<Dispatch<ModerationStatusAction>>();
 
-  const selectedTask = useSelector((state: RootState) => state.moderation.selectedTask);
-  const { images: imagesSelected } = selectedTask;
-
   const moderationExtra = useSelector((state: RootState) => state.moderation.moderationExtra);
-  const { photos: photosModified } = moderationExtra;
+  const { photosSelected, photosModified } = moderationExtra;
 
   const moderationStatus = useSelector((state: RootState) => state.moderationStatus.moderationStatus);
   const { photos: photosStatus } = moderationStatus;
@@ -34,6 +31,11 @@ const PhotosModeration = (): ReactElement => {
     );
   };
 
+  const removePhoto = (index: number) => {
+    dispatch(removeModerationPhoto(index));
+    dispatchStatus(removeModerationPhotoStatus(index));
+  };
+
   const updatePhotoStatus = (index: number, photoField: string, status: ModerationStatus) => {
     dispatchStatus(setModerationPhotoStatus(index, { [photoField]: status }));
   };
@@ -45,9 +47,9 @@ const PhotosModeration = (): ReactElement => {
   return (
     <div className="formSection">
       <div className="gridLayoutContainer">
-        {imagesSelected.map(
+        {photosSelected.map(
           (
-            { source_type: sourceTypeSelected, url: urlSelected, alt_text: altTextSelected, permission: permissionSelected, source: sourceSelected },
+            { sourceType: sourceTypeSelected, url: urlSelected, altText: altTextSelected, permission: permissionSelected, source: sourceSelected },
             index
           ) => {
             const key = `photo_${index}`;
@@ -251,6 +253,12 @@ const PhotosModeration = (): ReactElement => {
                   status={photosStatus[index].source}
                   actionCallback={(fieldName, status) => updatePhotoStatus(index, fieldName, status)}
                 />
+
+                <div className="gridColumn1">
+                  <Button variant="secondary" onClick={() => removePhoto(index)}>
+                    {i18n.t("moderation.photos.remove")}
+                  </Button>
+                </div>
               </Fragment>
             );
           }

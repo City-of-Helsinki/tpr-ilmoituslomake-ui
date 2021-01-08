@@ -115,6 +115,7 @@ export const SET_MODERATION_CONTACT_STATUS = "SET_MODERATION_CONTACT_STATUS";
 export const SET_MODERATION_LINK_STATUS = "SET_MODERATION_LINK_STATUS";
 export const SET_MODERATION_PHOTO_STATUS = "SET_MODERATION_PHOTO_STATUS";
 export const SET_MODERATION_PHOTO_ALT_TEXT_STATUS = "SET_MODERATION_PHOTO_ALT_TEXT_STATUS";
+export const REMOVE_MODERATION_PHOTO_STATUS = "REMOVE_MODERATION_PHOTO_STATUS";
 
 export const INITIAL_NOTIFICATION = {
   organization: {},
@@ -221,7 +222,8 @@ export const INITIAL_NOTIFICATION_VALIDATION = {
 };
 
 export const INITIAL_MODERATION_EXTRA = {
-  photos: [],
+  photosSelected: [],
+  photosModified: [],
   tagOptions: [],
   created_at: "",
   updated_at: "",

@@ -380,6 +380,11 @@ interface SetModerationPhotoAltTextStatusAction extends AnyAction {
   payload: PhotoStatus[];
 }
 
+interface RemoveModerationPhotoStatusAction extends AnyAction {
+  type: typeof REMOVE_MODERATION_PHOTO_STATUS;
+  payload: number;
+}
+
 export type ModerationStatusAction =
   | SetModerationNameStatusAction
   | SetModerationShortDescriptionStatusAction
@@ -390,4 +395,5 @@ export type ModerationStatusAction =
   | SetModerationContactStatusAction
   | SetModerationLinkStatusAction
   | SetModerationPhotoUrlStatusAction
-  | SetModerationPhotoAltTextStatusAction;
+  | SetModerationPhotoAltTextStatusAction
+  | RemoveModerationPhotoStatusAction;

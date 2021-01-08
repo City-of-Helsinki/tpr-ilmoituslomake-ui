@@ -128,7 +128,8 @@ export interface ModerationTodoSchema {
 }
 
 export interface ModerationExtra {
-  photos: Photo[];
+  photosSelected: Photo[];
+  photosModified: Photo[];
   tagOptions: TagOption[];
   created_at: string;
   updated_at: string;

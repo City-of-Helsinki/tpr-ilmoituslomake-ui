@@ -11,6 +11,7 @@ import {
   SET_MODERATION_LINK_STATUS,
   SET_MODERATION_PHOTO_STATUS,
   SET_MODERATION_PHOTO_ALT_TEXT_STATUS,
+  REMOVE_MODERATION_PHOTO_STATUS,
   INITIAL_MODERATION_STATUS,
 } from "../../types/constants";
 import { PhotoStatus } from "../../types/moderation_status";
@@ -146,6 +147,20 @@ const moderationStatus = (state = initialState, action: AnyAction): ModerationSt
           []
         ),
       ];
+
+      return {
+        ...state,
+        moderationStatus: { ...state.moderationStatus, photos },
+      };
+    }
+
+    case REMOVE_MODERATION_PHOTO_STATUS: {
+      console.log("REMOVE_MODERATION_PHOTO_STATUS", action.payload);
+
+      // Remove the photo at the specified index
+      const photos = state.moderationStatus.photos.reduce((acc: PhotoStatus[], photoStatus, index) => {
+        return action.payload === index ? acc : [...acc, photoStatus];
+      }, []);
 
       return {
         ...state,

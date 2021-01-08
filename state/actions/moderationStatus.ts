@@ -10,6 +10,7 @@ import {
   SET_MODERATION_LINK_STATUS,
   SET_MODERATION_PHOTO_STATUS,
   SET_MODERATION_PHOTO_ALT_TEXT_STATUS,
+  REMOVE_MODERATION_PHOTO_STATUS,
 } from "../../types/constants";
 import { KeyValueStatus } from "../../types/general";
 import { ModerationStatusAction } from "./types";
@@ -62,4 +63,9 @@ export const setModerationPhotoStatus = (index: number, status: KeyValueStatus):
 export const setModerationPhotoAltTextStatus = (index: number, status: KeyValueStatus): ModerationStatusAction => ({
   type: SET_MODERATION_PHOTO_ALT_TEXT_STATUS,
   payload: { index, status },
+});
+
+export const removeModerationPhotoStatus = (index: number): ModerationStatusAction => ({
+  type: REMOVE_MODERATION_PHOTO_STATUS,
+  payload: index,
 });

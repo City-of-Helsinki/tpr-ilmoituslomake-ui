@@ -103,7 +103,22 @@ export const getServerSideProps: GetServerSideProps = async ({ req, params, loca
               fullName: taskResult.moderator ? `${taskResult.moderator.first_name} ${taskResult.moderator.last_name}`.trim() : "",
               email: taskResult.moderator && taskResult.moderator.email ? taskResult.moderator.email : "",
             },
-            photos: taskResult.target.data.images.map((image) => {
+            photosSelected: taskResult.target.data.images.map((image) => {
+              return {
+                sourceType: image.source_type,
+                url: image.url,
+                altText: {
+                  fi: image.alt_text.fi,
+                  sv: image.alt_text.sv,
+                  en: image.alt_text.en,
+                },
+                permission: image.permission,
+                source: image.source,
+                base64: "",
+                preview: "",
+              };
+            }),
+            photosModified: taskResult.target.data.images.map((image) => {
               return {
                 sourceType: image.source_type,
                 url: image.url,
