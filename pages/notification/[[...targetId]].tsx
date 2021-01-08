@@ -27,6 +27,7 @@ import ValidationSummary from "../../components/notification/ValidationSummary";
 import { INITIAL_NOTIFICATION, INITIAL_NOTIFICATION_EXTRA } from "../../types/constants";
 import { TagOption } from "../../types/general";
 import { NotificationSchema } from "../../types/notification_schema";
+import { PhotoValidation } from "../../types/notification_validation";
 import styles from "./[[...targetId]].module.scss";
 
 const NotificationDetail = (): ReactElement => {
@@ -147,6 +148,25 @@ export const getServerSideProps: GetServerSideProps = async ({ req, params, loca
                 base64: "",
                 preview: "",
               };
+            }),
+          },
+        };
+
+        initialReduxState.notificationValidation = {
+          ...initialReduxState.notificationValidation,
+          notificationValidation: {
+            ...initialReduxState.notificationValidation.notificationValidation,
+            photos: images.map(() => {
+              return {
+                url: { valid: true },
+                altText: {
+                  fi: { valid: true },
+                  sv: { valid: true },
+                  en: { valid: true },
+                },
+                permission: { valid: true },
+                source: { valid: true },
+              } as PhotoValidation;
             }),
           },
         };

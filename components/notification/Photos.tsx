@@ -191,7 +191,8 @@ const Photos = (): ReactElement => {
               </>
             )}
 
-            {photosValid[index].url.valid && preview && preview.length > 0 && (
+            {/* {photosValid[index].url.valid && preview && preview.length > 0 && ( */}
+            {true && (
               <>
                 <div className={inputLanguages.length > 1 ? "languageSection" : ""}>
                   {inputLanguages.length > 1 && <h3>{i18n.t("notification.photos.altText.label")}</h3>}
