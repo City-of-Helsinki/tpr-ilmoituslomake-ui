@@ -172,6 +172,53 @@ export const INITIAL_NOTIFICATION_EXTRA = {
   tagOptions: [],
 };
 
+export const INITIAL_NOTIFICATION_VALIDATION = {
+  name: {
+    fi: { valid: true },
+    sv: { valid: true },
+    en: { valid: true },
+  },
+  description: {
+    short: {
+      fi: { valid: true },
+      sv: { valid: true },
+      en: { valid: true },
+    },
+    long: {
+      fi: { valid: true },
+      sv: { valid: true },
+      en: { valid: true },
+    },
+  },
+  address: {
+    fi: {
+      street: { valid: true },
+      postal_code: { valid: true },
+      post_office: { valid: true },
+    },
+    sv: {
+      street: { valid: true },
+      postal_code: { valid: true },
+      post_office: { valid: true },
+    },
+  },
+  phone: { valid: true },
+  email: { valid: true },
+  website: {
+    fi: { valid: true },
+    sv: { valid: true },
+    en: { valid: true },
+  },
+  ontology_ids: { valid: true },
+  notifier: {
+    notifier_type: { valid: true },
+    full_name: { valid: true },
+    email: { valid: true },
+    phone: { valid: true },
+  },
+  photos: [],
+};
+
 export const INITIAL_MODERATION_EXTRA = {
   photos: [],
   tagOptions: [],

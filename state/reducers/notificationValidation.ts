@@ -14,57 +14,13 @@ import {
   SET_NOTIFICATION_PHOTO_VALIDATION,
   SET_NOTIFICATION_PHOTO_ALT_TEXT_VALIDATION,
   REMOVE_NOTIFICATION_PHOTO_VALIDATION,
+  INITIAL_NOTIFICATION_VALIDATION,
 } from "../../types/constants";
 import { PhotoValidation } from "../../types/notification_validation";
 
 const initialState: NotificationValidationState = {
   pageValid: true,
-  notificationValidation: {
-    name: {
-      fi: { valid: true },
-      sv: { valid: true },
-      en: { valid: true },
-    },
-    description: {
-      short: {
-        fi: { valid: true },
-        sv: { valid: true },
-        en: { valid: true },
-      },
-      long: {
-        fi: { valid: true },
-        sv: { valid: true },
-        en: { valid: true },
-      },
-    },
-    address: {
-      fi: {
-        street: { valid: true },
-        postal_code: { valid: true },
-        post_office: { valid: true },
-      },
-      sv: {
-        street: { valid: true },
-        postal_code: { valid: true },
-        post_office: { valid: true },
-      },
-    },
-    phone: { valid: true },
-    email: { valid: true },
-    website: {
-      fi: { valid: true },
-      sv: { valid: true },
-      en: { valid: true },
-    },
-    ontology_ids: { valid: true },
-    notifier: {
-      notifier_type: { valid: true },
-      full_name: { valid: true },
-      email: { valid: true },
-      phone: { valid: true },
-    },
-    photos: [],
-  },
+  notificationValidation: INITIAL_NOTIFICATION_VALIDATION,
 };
 
 const notificationValidation = (state = initialState, action: AnyAction): NotificationValidationState => {
