@@ -7,8 +7,8 @@ import absoluteUrl from "next-absolute-url";
 import i18nLoader from "../../../utils/i18n";
 import { initStore } from "../../../state/store";
 import { RootState } from "../../../state/reducers";
-import { INITIAL_NOTIFICATION } from "../../../types/constants";
-import { TagOption } from "../../../types/general";
+import { ModerationStatus, INITIAL_MODERATION_EXTRA, INITIAL_MODERATION_STATUS, INITIAL_NOTIFICATION } from "../../../types/constants";
+import { TagOption, ModerationTodoSchema } from "../../../types/general";
 import { getTaskStatus, getTaskType } from "../../../utils/conversion";
 import Layout from "../../../components/common/Layout";
 import ModerationHeader from "../../../components/moderation/ModerationHeader";
@@ -73,6 +73,8 @@ export const getServerSideProps: GetServerSideProps = async ({ req, params, loca
   initialReduxState.moderation.selectedTask = { ...INITIAL_NOTIFICATION, location: [0, 0] };
   initialReduxState.moderation.modifiedTaskId = 0;
   initialReduxState.moderation.modifiedTask = { ...INITIAL_NOTIFICATION, location: [0, 0] };
+  initialReduxState.moderation.moderationExtra = INITIAL_MODERATION_EXTRA;
+  initialReduxState.moderationStatus.moderationStatus = INITIAL_MODERATION_STATUS;
 
   // Try to fetch the task details for the specified id
   if (params) {
@@ -80,7 +82,7 @@ export const getServerSideProps: GetServerSideProps = async ({ req, params, loca
     const taskResponse = await fetch(`${origin}/api/moderation/todos/${taskId}/`, { headers: { cookie: req.headers.cookie as string } });
 
     if (taskResponse.ok) {
-      const taskResult = await taskResponse.json();
+      const taskResult = await (taskResponse.json() as Promise<ModerationTodoSchema>);
 
       try {
         initialReduxState.moderation = {
@@ -97,7 +99,7 @@ export const getServerSideProps: GetServerSideProps = async ({ req, params, loca
             status: getTaskStatus(taskResult.status),
             moderator: {
               fullName: taskResult.moderator ? `${taskResult.moderator.first_name} ${taskResult.moderator.last_name}`.trim() : "",
-              email: taskResult.moderator ? taskResult.moderator.email : "",
+              email: taskResult.moderator && taskResult.moderator.email ? taskResult.moderator.email : "",
             },
           },
         };

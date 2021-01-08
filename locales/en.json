@@ -321,6 +321,9 @@
         "label": "Postal office"
       }
     },
+    "map": {
+      "title": "Map of place"
+    },
     "newTasks": {
       "title": "New moderation requests"
     },

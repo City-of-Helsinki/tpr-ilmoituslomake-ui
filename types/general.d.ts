@@ -1,4 +1,5 @@
 import { ModerationStatus, TaskStatus, TaskType } from "./constants";
+import { NotificationSchema } from "./notification_schema";
 
 export interface User {
   authenticated: boolean;
@@ -90,6 +91,29 @@ export interface ModerationTodo {
   category: string;
   item_type: string;
   status: string;
+  moderator: {
+    first_name?: string;
+    last_name?: string;
+    email?: string;
+  };
+  created_at: string;
+  updated_at: string;
+  created: Date;
+  updated: Date;
+  taskType: TaskType;
+  taskStatus: TaskStatus;
+}
+
+export interface ModerationTodoSchema {
+  id: number;
+  target: {
+    id: number;
+    data: NotificationSchema;
+  };
+  category: string;
+  item_type: string;
+  status: string;
+  data: NotificationSchema;
   moderator: {
     first_name?: string;
     last_name?: string;

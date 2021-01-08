@@ -59,8 +59,8 @@ const MapModeration = ({ setMapsReady }: MapModerationProps): ReactElement => {
   return (
     <div className="formSection">
       <div className="gridLayoutContainer">
-        <h4 className="gridColumn1">{`${i18n.t("moderation.contact.title")}${i18n.t("moderation.task.selected")}`}</h4>
-        <h4 className="gridColumn2">{`${i18n.t("moderation.contact.title")}${i18n.t("moderation.task.modified")}`}</h4>
+        <h4 className="gridColumn1">{`${i18n.t("moderation.map.title")}${i18n.t("moderation.task.selected")}`}</h4>
+        <h4 className="gridColumn2">{`${i18n.t("moderation.map.title")}${i18n.t("moderation.task.modified")}`}</h4>
         <MapWrapper
           className={`gridColumn1 ${styles.map}`}
           initialCenter={initialCenter as [number, number]}
@@ -71,7 +71,7 @@ const MapModeration = ({ setMapsReady }: MapModerationProps): ReactElement => {
         />
         <ModifyButton
           className="gridColumn2"
-          label={i18n.t("moderation.contact.location.label")}
+          label={i18n.t("moderation.map.title")}
           fieldName="location"
           status={initialLocationStatus || locationStatus}
           modifyCallback={updateLocationStatus}

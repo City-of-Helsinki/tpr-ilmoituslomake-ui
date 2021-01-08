@@ -1,7 +1,6 @@
 import { AnyAction } from "redux";
 import { ModerationStatusState } from "./types";
 import {
-  ModerationStatus,
   SET_MODERATION_NAME_STATUS,
   SET_MODERATION_SHORT_DESCRIPTION_STATUS,
   SET_MODERATION_LONG_DESCRIPTION_STATUS,
@@ -11,50 +10,11 @@ import {
   SET_MODERATION_CONTACT_STATUS,
   SET_MODERATION_LINK_STATUS,
   SET_MODERATION_PHOTO_STATUS,
+  INITIAL_MODERATION_STATUS,
 } from "../../types/constants";
 
 const initialState: ModerationStatusState = {
-  moderationStatus: {
-    name: {
-      fi: ModerationStatus.Unknown,
-      sv: ModerationStatus.Unknown,
-      en: ModerationStatus.Unknown,
-    },
-    location: ModerationStatus.Unknown,
-    description: {
-      short: {
-        fi: ModerationStatus.Unknown,
-        sv: ModerationStatus.Unknown,
-        en: ModerationStatus.Unknown,
-      },
-      long: {
-        fi: ModerationStatus.Unknown,
-        sv: ModerationStatus.Unknown,
-        en: ModerationStatus.Unknown,
-      },
-    },
-    address: {
-      fi: {
-        street: ModerationStatus.Unknown,
-        postal_code: ModerationStatus.Unknown,
-        post_office: ModerationStatus.Unknown,
-      },
-      sv: {
-        street: ModerationStatus.Unknown,
-        postal_code: ModerationStatus.Unknown,
-        post_office: ModerationStatus.Unknown,
-      },
-    },
-    phone: ModerationStatus.Unknown,
-    email: ModerationStatus.Unknown,
-    website: {
-      fi: ModerationStatus.Unknown,
-      sv: ModerationStatus.Unknown,
-      en: ModerationStatus.Unknown,
-    },
-    ontology_ids: ModerationStatus.Unknown,
-    photos: [],
-  },
+  moderationStatus: INITIAL_MODERATION_STATUS,
 };
 
 const moderationStatus = (state = initialState, action: AnyAction): ModerationStatusState => {

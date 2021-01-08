@@ -321,6 +321,9 @@
         "label": "Postitoimipaikka"
       }
     },
+    "map": {
+      "title": "Kohde kartalla"
+    },
     "newTasks": {
       "title": "Uudet moderointitehtävät"
     },

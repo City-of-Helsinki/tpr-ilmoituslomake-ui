@@ -231,3 +231,45 @@ export const INITIAL_MODERATION_EXTRA = {
     email: "",
   },
 };
+
+export const INITIAL_MODERATION_STATUS = {
+  name: {
+    fi: ModerationStatus.Unknown,
+    sv: ModerationStatus.Unknown,
+    en: ModerationStatus.Unknown,
+  },
+  location: ModerationStatus.Unknown,
+  description: {
+    short: {
+      fi: ModerationStatus.Unknown,
+      sv: ModerationStatus.Unknown,
+      en: ModerationStatus.Unknown,
+    },
+    long: {
+      fi: ModerationStatus.Unknown,
+      sv: ModerationStatus.Unknown,
+      en: ModerationStatus.Unknown,
+    },
+  },
+  address: {
+    fi: {
+      street: ModerationStatus.Unknown,
+      postal_code: ModerationStatus.Unknown,
+      post_office: ModerationStatus.Unknown,
+    },
+    sv: {
+      street: ModerationStatus.Unknown,
+      postal_code: ModerationStatus.Unknown,
+      post_office: ModerationStatus.Unknown,
+    },
+  },
+  phone: ModerationStatus.Unknown,
+  email: ModerationStatus.Unknown,
+  website: {
+    fi: ModerationStatus.Unknown,
+    sv: ModerationStatus.Unknown,
+    en: ModerationStatus.Unknown,
+  },
+  ontology_ids: ModerationStatus.Unknown,
+  photos: [],
+};
