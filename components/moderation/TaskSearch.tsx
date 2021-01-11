@@ -7,7 +7,7 @@ import { ModerationAction } from "../../state/actions/types";
 import { setModerationTaskSearch, setModerationTaskResults } from "../../state/actions/moderation";
 import { RootState } from "../../state/reducers";
 import { TaskCategory } from "../../types/constants";
-import { ModerationTodo } from "../../types/general";
+import { ModerationTodoResult } from "../../types/general";
 import { getTaskStatus, getTaskType } from "../../utils/conversion";
 import styles from "./TaskSearch.module.scss";
 
@@ -44,7 +44,7 @@ const TaskSearch = (): ReactElement => {
     const searchCategory = taskType !== TaskCategory.Unknown ? `&category=${taskType}` : "";
     const taskResponse = await fetch(`/api/moderation/todos/find/?search=${placeName}${searchCategory}`);
     if (taskResponse.ok) {
-      const taskResult = await (taskResponse.json() as Promise<{ results: ModerationTodo[] }>);
+      const taskResult = await (taskResponse.json() as Promise<{ results: ModerationTodoResult[] }>);
 
       console.log("TASK RESPONSE", taskResult);
 

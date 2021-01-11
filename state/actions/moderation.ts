@@ -16,9 +16,9 @@ import {
   REMOVE_MODERATION_PHOTO,
 } from "../../types/constants";
 import { ModerationAction } from "./types";
-import { KeyValueString, Photo, PlaceSearch, TagOption, TaskSearch, ModerationTodo } from "../../types/general";
+import { KeyValueString, Photo, ModerationPlaceSearch, TagOption, TaskSearch, ModerationTodoResult } from "../../types/general";
 
-export const setModerationPlaceSearch = (placeSearch: PlaceSearch): ModerationAction => ({
+export const setModerationPlaceSearch = (placeSearch: ModerationPlaceSearch): ModerationAction => ({
   type: SET_MODERATION_PLACE_SEARCH,
   payload: placeSearch,
 });
@@ -33,7 +33,7 @@ export const setModerationTaskSearch = (taskSearch: TaskSearch): ModerationActio
   payload: taskSearch,
 });
 
-export const setModerationTaskResults = (taskResults: ModerationTodo[]): ModerationAction => ({
+export const setModerationTaskResults = (taskResults: ModerationTodoResult[]): ModerationAction => ({
   type: SET_MODERATION_TASK_RESULTS,
   payload: taskResults,
 });

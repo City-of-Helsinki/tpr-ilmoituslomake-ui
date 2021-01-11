@@ -67,7 +67,7 @@ export interface NotificationExtra {
   tagOptions: TagOption[];
 }
 
-export interface PlaceSearch {
+export interface ModerationPlaceSearch {
   placeName: string;
   language: string;
   address: string;
@@ -82,7 +82,7 @@ export interface TaskSearch {
   taskType: TaskCategory;
 }
 
-export interface ModerationTodo {
+export interface ModerationTodoResult {
   id: number;
   target: {
     id: number;

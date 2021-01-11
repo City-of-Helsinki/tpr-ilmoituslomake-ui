@@ -56,7 +56,16 @@ import {
   SET_MODERATION_PHOTO_STATUS,
   SET_MODERATION_PHOTO_ALT_TEXT_STATUS,
 } from "../../types/constants";
-import { User, KeyValueString, KeyValueBoolean, Photo, TagOption, PlaceSearch, TaskSearch, ModerationTodo } from "../../types/general";
+import {
+  User,
+  KeyValueString,
+  KeyValueBoolean,
+  Photo,
+  TagOption,
+  ModerationPlaceSearch,
+  TaskSearch,
+  ModerationTodoResult,
+} from "../../types/general";
 import { PhotoValidation } from "../../types/notification_validation";
 import { PhotoStatus } from "../../types/moderation_status";
 

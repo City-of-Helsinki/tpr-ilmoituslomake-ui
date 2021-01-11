@@ -6,7 +6,7 @@ import { Button, IconPen } from "hds-react";
 import moment from "moment";
 import { RootState } from "../../state/reducers";
 import { DATETIME_FORMAT, TaskType } from "../../types/constants";
-import { ModerationTodo } from "../../types/general";
+import { ModerationTodoResult } from "../../types/general";
 import { getTaskStatus } from "../../utils/conversion";
 import TaskStatusLabel from "./TaskStatusLabel";
 import styles from "./TaskResults.module.scss";
@@ -25,7 +25,7 @@ const TaskResults = (): ReactElement => {
         <h5 className="gridColumn3 gridHeader">{i18n.t("moderation.taskResults.notified")}</h5>
         <h5 className="gridColumn4 gridHeader">{i18n.t("moderation.taskResults.status")}</h5>
         {taskResults
-          .sort((a: ModerationTodo, b: ModerationTodo) => b.created.getTime() - a.created.getTime())
+          .sort((a: ModerationTodoResult, b: ModerationTodoResult) => b.created.getTime() - a.created.getTime())
           .map((result) => {
             const {
               id,

@@ -4,7 +4,7 @@ import { useI18n } from "next-localization";
 import { Button, IconPen } from "hds-react";
 import moment from "moment";
 import { DATETIME_FORMAT, TaskType } from "../../types/constants";
-import { ModerationTodo } from "../../types/general";
+import { ModerationTodoResult } from "../../types/general";
 import { getTaskStatus, getTaskType } from "../../utils/conversion";
 import TaskStatusLabel from "./TaskStatusLabel";
 import styles from "./NewTasks.module.scss";
@@ -13,12 +13,12 @@ const NewTasks = (): ReactElement => {
   const i18n = useI18n();
 
   const [init, setInit] = useState<boolean>(true);
-  const [taskResults, setTaskResults] = useState<ModerationTodo[]>([]);
+  const [taskResults, setTaskResults] = useState<ModerationTodoResult[]>([]);
 
   const searchTasks = async () => {
     const taskResponse = await fetch("/api/moderation/todos/recent/");
     if (taskResponse.ok) {
-      const taskResult = await (taskResponse.json() as Promise<{ results: ModerationTodo[] }>);
+      const taskResult = await (taskResponse.json() as Promise<{ results: ModerationTodoResult[] }>);
 
       console.log("TASK RESPONSE", taskResult);
 
@@ -57,7 +57,7 @@ const NewTasks = (): ReactElement => {
         <h5 className="gridColumn3 gridHeader">{i18n.t("moderation.taskResults.notified")}</h5>
         <h5 className="gridColumn4 gridHeader">{i18n.t("moderation.taskResults.status")}</h5>
         {taskResults
-          .sort((a: ModerationTodo, b: ModerationTodo) => b.created.getTime() - a.created.getTime())
+          .sort((a: ModerationTodoResult, b: ModerationTodoResult) => b.created.getTime() - a.created.getTime())
           .map((result) => {
             const {
               id,
