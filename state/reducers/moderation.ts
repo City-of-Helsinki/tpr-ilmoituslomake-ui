@@ -4,6 +4,7 @@ import {
   TaskCategory,
   SET_MODERATION_PLACE_SEARCH,
   CLEAR_MODERATION_PLACE_SEARCH,
+  SET_MODERATION_PLACE_RESULTS,
   SET_MODERATION_TASK_SEARCH,
   SET_MODERATION_TASK_RESULTS,
   SET_MODERATION_NAME,
@@ -32,6 +33,7 @@ const initialState: ModerationState = {
     comment: "",
     publishPermission: [],
   },
+  placeResults: [],
   taskSearch: {
     placeName: "",
     taskType: TaskCategory.Unknown,
@@ -59,6 +61,14 @@ const moderation = (state = initialState, action: AnyAction): ModerationState =>
       return {
         ...state,
         placeSearch: initialState.placeSearch,
+      };
+    }
+
+    case SET_MODERATION_PLACE_RESULTS: {
+      console.log("SET_MODERATION_PLACE_RESULTS", action.payload);
+      return {
+        ...state,
+        placeResults: action.payload || [],
       };
     }
 

@@ -1,6 +1,7 @@
 import {
   SET_MODERATION_PLACE_SEARCH,
   CLEAR_MODERATION_PLACE_SEARCH,
+  SET_MODERATION_PLACE_RESULTS,
   SET_MODERATION_TASK_SEARCH,
   SET_MODERATION_TASK_RESULTS,
   SET_MODERATION_NAME,
@@ -26,6 +27,12 @@ export const setModerationPlaceSearch = (placeSearch: ModerationPlaceSearch): Mo
 export const clearModerationPlaceSearch = (): ModerationAction => ({
   type: CLEAR_MODERATION_PLACE_SEARCH,
   payload: undefined,
+});
+
+// TODO - add place result type
+export const setModerationPlaceResults = (placeResults: string[]): ModerationAction => ({
+  type: SET_MODERATION_PLACE_RESULTS,
+  payload: placeResults,
 });
 
 export const setModerationTaskSearch = (taskSearch: TaskSearch): ModerationAction => ({

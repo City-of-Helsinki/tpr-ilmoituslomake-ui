@@ -32,6 +32,7 @@ import {
   REMOVE_NOTIFICATION_PHOTO_VALIDATION,
   SET_MODERATION_PLACE_SEARCH,
   CLEAR_MODERATION_PLACE_SEARCH,
+  SET_MODERATION_PLACE_RESULTS,
   SET_MODERATION_TASK_SEARCH,
   SET_MODERATION_TASK_RESULTS,
   SET_MODERATION_NAME,
@@ -249,12 +250,18 @@ export type NotificationValidationAction =
 
 interface SetModerationPlaceSearchAction extends AnyAction {
   type: typeof SET_MODERATION_PLACE_SEARCH;
-  payload: PlaceSearch;
+  payload: ModerationPlaceSearch;
 }
 
 interface ClearModerationPlaceSearchAction extends AnyAction {
   type: typeof CLEAR_MODERATION_PLACE_SEARCH;
   payload: undefined;
+}
+
+// TODO - add place result type
+interface SetModerationPlaceResultsAction extends AnyAction {
+  type: typeof SET_MODERATION_PLACE_RESULTS;
+  payload: string[];
 }
 
 interface SetModerationTaskSearchAction extends AnyAction {
@@ -264,7 +271,7 @@ interface SetModerationTaskSearchAction extends AnyAction {
 
 interface SetModerationTaskResultsAction extends AnyAction {
   type: typeof SET_MODERATION_TASK_RESULTS;
-  payload: ModerationTodo[];
+  payload: ModerationTodoResult[];
 }
 
 interface SetModerationNameAction extends AnyAction {
@@ -325,6 +332,7 @@ interface RemoveModerationPhotoAction extends AnyAction {
 export type ModerationAction =
   | SetModerationPlaceSearchAction
   | ClearModerationPlaceSearchAction
+  | SetModerationPlaceResultsAction
   | SetModerationTaskSearchAction
   | SetModerationTaskResultsAction
   | SetModerationNameAction

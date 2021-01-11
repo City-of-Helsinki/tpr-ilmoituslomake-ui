@@ -27,8 +27,10 @@ export interface NotificationValidationState {
   notificationValidation: NotificationValidationSchema;
 }
 
+// TODO - add place result type
 export interface ModerationState {
   placeSearch: ModerationPlaceSearch;
+  placeResults: string[];
   taskSearch: TaskSearch;
   taskResults: ModerationTodoResult[];
   selectedTaskId: number;
