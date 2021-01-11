@@ -19,11 +19,13 @@
     "headerModify": "Muokkaa",
     "mandatory": "Pakolliset tiedot on merkitty tähdellä *",
     "button": {
+      "search": "Hae",
       "next": "Seuraava",
       "previous": "Edellinen",
       "cancel": "Keskeytä",
       "send": "Lähetä",
       "return": "Palaa",
+      "returnToStart": "Palaa aloitussivulle",
       "clearAllSelections": "Poista kaikki valinnat",
       "remove": "Poista",
       "toggleMenu": "Vaihdele valikko",
@@ -209,6 +211,21 @@
       "addNewFromDevice": "Lisää kuva laitteelta",
       "addNewFromLink": "Lisää kuvalinkki",
       "remove": "Poista kuva"
+    },
+    "placeSearch": {
+      "title": "Kaikki kohteet",
+      "notice": "Hae nimellä kohdetta, jonka tietoja haluat tarkastella tai muuttaa. Voit tarkistaa tietojen paikkansapitävyyden ja ilmoittaa mahdollisista muutoksia.",
+      "placeName": {
+        "label": "Hae kohdetta nimellä"
+      }
+    },
+    "placeResults": {
+      "found": "Löytyi",
+      "places": "kohdetta",
+      "newPlace": {
+        "title": "Haluatko lisätä uuden kohteen palveluun?",
+        "notice": "Rekisteröidy ja ilmoita puuttuva kohde"
+      }
     },
     "placeType": {
       "title": "Kohteen tyyppi",

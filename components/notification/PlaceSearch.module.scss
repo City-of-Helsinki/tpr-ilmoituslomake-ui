@@ -1,0 +1,17 @@
+@import "~hds-design-tokens/lib/all.scss";
+
+.placeSearch {
+  margin-bottom: $spacing-layout-l;
+
+  h1 {
+    color: $color-bus;
+  }
+
+  .search {
+    grid-template-columns: 4fr 1fr;
+    align-items: end;
+    background-color: $color-copper-light;
+    padding: $spacing-m;
+    margin-top: $spacing-layout-xs;
+  }
+}

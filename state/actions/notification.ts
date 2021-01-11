@@ -3,6 +3,8 @@ import {
   SET_PAGE,
   SET_USER,
   SET_MAP_VIEW,
+  SET_NOTIFICATION_PLACE_SEARCH,
+  SET_NOTIFICATION_PLACE_RESULTS,
   SET_NOTIFICATION_INPUT_LANGUAGE,
   SET_NOTIFICATION_NAME,
   SET_NOTIFICATION_SHORT_DESCRIPTION,
@@ -18,7 +20,7 @@ import {
   REMOVE_NOTIFICATION_PHOTO,
   SET_NOTIFICATION_COMMENTS,
 } from "../../types/constants";
-import { User, KeyValueString, KeyValueBoolean, Photo, TagOption } from "../../types/general";
+import { User, KeyValueString, KeyValueBoolean, Photo, TagOption, NotificationPlaceSearch, NotificationPlaceResult } from "../../types/general";
 import { NotificationAction } from "./types";
 
 export const setPage = (pageNumber: number): NotificationAction => ({
@@ -34,6 +36,16 @@ export const setUser = (user: User): NotificationAction => ({
 export const setMapView = (center: LatLngExpression, zoom: number): NotificationAction => ({
   type: SET_MAP_VIEW,
   payload: { center, zoom },
+});
+
+export const setNotificationPlaceSearch = (placeSearch: NotificationPlaceSearch): NotificationAction => ({
+  type: SET_NOTIFICATION_PLACE_SEARCH,
+  payload: placeSearch,
+});
+
+export const setNotificationPlaceResults = (placeResults: NotificationPlaceResult[]): NotificationAction => ({
+  type: SET_NOTIFICATION_PLACE_RESULTS,
+  payload: placeResults,
 });
 
 export const setNotificationInputLanguage = (keyValue: KeyValueBoolean): NotificationAction => ({

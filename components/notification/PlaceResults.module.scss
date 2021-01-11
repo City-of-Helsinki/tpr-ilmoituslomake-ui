@@ -1,0 +1,44 @@
+@import "~hds-design-tokens/lib/all.scss";
+
+.placeResults {
+  .results {
+    grid-template-columns: 2fr 3fr;
+    column-gap: 0;
+    margin-bottom: $spacing-layout-l;
+
+    .gridContent {
+      padding: $spacing-xs;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      border-top: 2px solid $color-black-50;
+      border-bottom: 2px solid $color-black-50;
+
+      &.firstColumn {
+        border-left: 2px solid $color-black-50;
+      }
+
+      &.lastColumn {
+        border-right: 2px solid $color-black-50;
+      }
+
+      &.gridButton {
+        background-color: $color-copper-light;
+        padding: 0;
+        font-size: $fontsize-heading-s;
+      }
+
+      svg {
+        flex-shrink: 0;
+      }
+
+      span {
+        margin-left: $spacing-xs;
+      }
+    }
+  }
+
+  .newPlace {
+    background-color: $color-copper-light;
+  }
+}

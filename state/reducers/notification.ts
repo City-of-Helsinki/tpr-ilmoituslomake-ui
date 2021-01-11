@@ -8,6 +8,8 @@ import {
   SET_PAGE,
   SET_USER,
   SET_MAP_VIEW,
+  SET_NOTIFICATION_PLACE_SEARCH,
+  SET_NOTIFICATION_PLACE_RESULTS,
   SET_NOTIFICATION_INPUT_LANGUAGE,
   SET_NOTIFICATION_NAME,
   SET_NOTIFICATION_SHORT_DESCRIPTION,
@@ -32,6 +34,10 @@ const initialState: NotificationState = {
   page: 1,
   center: MAP_INITIAL_CENTER as LatLngExpression,
   zoom: MAP_INITIAL_ZOOM,
+  placeSearch: {
+    placeName: "",
+  },
+  placeResults: [],
   notificationId: 0,
   notificationName: "",
   notification: { ...INITIAL_NOTIFICATION, location: [0, 0] },
@@ -71,6 +77,22 @@ const notification = (state = initialState, action: AnyAction): NotificationStat
         ...state,
         center: action.payload.center ?? state.notification.center,
         zoom: action.payload.zoom ?? state.notification.zoom,
+      };
+    }
+
+    case SET_NOTIFICATION_PLACE_SEARCH: {
+      console.log("SET_NOTIFICATION_PLACE_SEARCH", action.payload);
+      return {
+        ...state,
+        placeSearch: action.payload,
+      };
+    }
+
+    case SET_NOTIFICATION_PLACE_RESULTS: {
+      console.log("SET_NOTIFICATION_PLACE_RESULTS", action.payload);
+      return {
+        ...state,
+        placeResults: action.payload || [],
       };
     }
 

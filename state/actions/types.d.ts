@@ -5,6 +5,8 @@ import {
   SET_PAGE_VALID,
   SET_USER,
   SET_MAP_VIEW,
+  SET_NOTIFICATION_PLACE_SEARCH,
+  SET_NOTIFICATION_PLACE_RESULTS,
   SET_NOTIFICATION_INPUT_LANGUAGE,
   SET_NOTIFICATION_NAME,
   SET_NOTIFICATION_SHORT_DESCRIPTION,
@@ -63,6 +65,8 @@ import {
   KeyValueBoolean,
   Photo,
   TagOption,
+  NotificationPlaceSearch,
+  NotificationPlaceResult,
   ModerationPlaceSearch,
   TaskSearch,
   ModerationTodoResult,
@@ -83,6 +87,16 @@ interface SetUserAction extends AnyAction {
 interface SetMapViewAction extends AnyAction {
   type: typeof SET_MAP_VIEW;
   payload: { center: LatLngExpression; zoom: number };
+}
+
+interface SetNotificationPlaceSearchAction extends AnyAction {
+  type: typeof SET_NOTIFICATION_PLACE_SEARCH;
+  payload: NotificationPlaceSearch;
+}
+
+interface SetNotificationPlaceResultsAction extends AnyAction {
+  type: typeof SET_NOTIFICATION_PLACE_RESULTS;
+  payload: NotificationPlaceResult[];
 }
 
 interface SetNotificationInputLanguage extends AnyAction {
@@ -159,6 +173,8 @@ export type NotificationAction =
   | SetPageAction
   | SetUserAction
   | SetMapViewAction
+  | SetNotificationPlaceSearchAction
+  | SetNotificationPlaceResultsAction
   | SetNotificationInputLanguage
   | SetNotificationNameAction
   | SetNotificationShortDescriptionAction

@@ -67,6 +67,15 @@ export interface NotificationExtra {
   tagOptions: TagOption[];
 }
 
+export interface NotificationPlaceSearch {
+  placeName: string;
+}
+
+export interface NotificationPlaceResult {
+  id: number;
+  data: NotificationSchema;
+}
+
 export interface ModerationPlaceSearch {
   placeName: string;
   language: string;

@@ -2,6 +2,8 @@ import { LatLngExpression } from "leaflet";
 import {
   User,
   NotificationExtra,
+  NotificationPlaceSearch,
+  NotificationPlaceResult,
   ModerationPlaceSearch,
   TaskSearch,
   ModerationTodoResult,
@@ -16,6 +18,8 @@ export interface NotificationState {
   user?: User;
   center: LatLngExpression;
   zoom: number;
+  placeSearch: NotificationPlaceSearch;
+  placeResults: NotificationPlaceResult[];
   notificationId: number;
   notificationName: string;
   notification: NotificationSchema;

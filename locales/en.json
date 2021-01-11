@@ -19,11 +19,13 @@
     "headerModify": "Modify",
     "mandatory": "Mandatory information is marked with an asterisk *",
     "button": {
+      "search": "Search",
       "next": "Next",
       "previous": "Previous",
       "cancel": "Cancel",
       "send": "Send",
       "return": "Return",
+      "returnToStart": "Return to the start page",
       "clearAllSelections": "Clear all selections",
       "remove": "Remove",
       "toggleMenu": "Toggle menu",
@@ -209,6 +211,21 @@
       "addNewFromDevice": "Add photo from device",
       "addNewFromLink": "Add photo link",
       "remove": "Remove photo"
+    },
+    "placeSearch": {
+      "title": "All places",
+      "notice": "With the name, search places whose information you want to view or change. You can check the information's correctness and notify about possible changes.",
+      "placeName": {
+        "label": "Search places with the name"
+      }
+    },
+    "placeResults": {
+      "found": "Found",
+      "places": "places",
+      "newPlace": {
+        "title": "Do you want to add a new place to the service?",
+        "notice": "Register and notify the missing place"
+      }
     },
     "placeType": {
       "title": "Place's type",
