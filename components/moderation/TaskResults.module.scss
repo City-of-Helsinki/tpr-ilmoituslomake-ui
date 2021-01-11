@@ -1,8 +1,8 @@
 @import "~hds-design-tokens/lib/all.scss";
 
 .taskResults {
-  display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
+  row-gap: 0;
 
   .gridContent {
     padding: $spacing-xs;

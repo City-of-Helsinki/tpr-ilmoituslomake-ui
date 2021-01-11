@@ -1,0 +1,6 @@
+@import "~hds-design-tokens/lib/all.scss";
+
+.search {
+  grid-template-columns: 2fr 2fr 1fr;
+  align-items: end;
+}

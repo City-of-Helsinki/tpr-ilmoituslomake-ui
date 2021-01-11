@@ -37,7 +37,7 @@ const Preview = (): ReactElement => {
   const initialZoom = MAP_INITIAL_ZOOM;
 
   return (
-    <div className={styles.preview}>
+    <div className={`gridLayoutContainer ${styles.preview}`}>
       <h3>{i18n.t("notification.preview.title")}</h3>
       <h5 className={`gridColumn1 ${styles.gridHeader}`}>{i18n.t("notification.preview.heading")}</h5>
       <h5 className={`gridColumn2 ${styles.gridHeader}`}>{i18n.t("notification.preview.placeInfo")}</h5>

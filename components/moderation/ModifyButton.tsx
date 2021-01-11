@@ -2,6 +2,7 @@ import React, { ReactElement, ReactNode } from "react";
 import { useI18n } from "next-localization";
 import { Button, IconPen } from "hds-react";
 import { ModerationStatus } from "../../types/constants";
+import styles from "./ModifyButton.module.scss";
 
 interface ModifyButtonProps {
   className?: string;
@@ -19,7 +20,7 @@ const ModifyButton = ({ className, label, fieldName, status, modifyCallback, hid
   return (
     <div className={className}>
       {status === ModerationStatus.Unknown && !hidden && (
-        <Button className="gridButton" variant="secondary" onClick={() => modifyCallback(fieldName, ModerationStatus.Edited)}>{`${i18n.t(
+        <Button className={styles.gridButton} variant="secondary" onClick={() => modifyCallback(fieldName, ModerationStatus.Edited)}>{`${i18n.t(
           "moderation.button.modify"
         )} ${label.toLowerCase()}`}</Button>
       )}

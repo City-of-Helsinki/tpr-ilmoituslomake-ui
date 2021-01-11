@@ -5,8 +5,8 @@
   margin-top: $spacing-layout-l;
   margin-bottom: $spacing-layout-l;
 
-  display: grid;
   grid-template-columns: 1fr 1fr;
+  row-gap: 0;
 
   .gridHeader {
     padding: $spacing-xs;
@@ -43,10 +43,6 @@
 
     @include media(xl) {
       max-width: $container-width-xl / 2;
-    }
-
-    &.gridButton {
-      padding: 0;
     }
 
     &:nth-child(4n + 1),

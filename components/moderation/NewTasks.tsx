@@ -51,7 +51,7 @@ const NewTasks = (): ReactElement => {
     <div className="formSection">
       <h3>{`${i18n.t("moderation.newTasks.title")} (${taskResults.length})`}</h3>
 
-      <div className={`formInput ${styles.taskResults}`}>
+      <div className={`formInput gridLayoutContainer ${styles.taskResults}`}>
         <h5 className="gridColumn1 gridHeader">{i18n.t("moderation.taskResults.nameId")}</h5>
         <h5 className="gridColumn2 gridHeader">{i18n.t("moderation.taskResults.type")}</h5>
         <h5 className="gridColumn3 gridHeader">{i18n.t("moderation.taskResults.notified")}</h5>

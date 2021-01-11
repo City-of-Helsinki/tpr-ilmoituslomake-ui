@@ -9,7 +9,7 @@ import { RootState } from "../../state/reducers";
 import { TaskCategory } from "../../types/constants";
 import { ModerationTodo } from "../../types/general";
 import { getTaskStatus, getTaskType } from "../../utils/conversion";
-import styles from "./PlaceSearch.module.scss";
+import styles from "./TaskSearch.module.scss";
 
 type OptionTypeWithEnumId = {
   id: TaskCategory;
@@ -67,9 +67,9 @@ const TaskSearch = (): ReactElement => {
   };
 
   return (
-    <div className={styles.placeSearch}>
+    <div className="formSection">
       <h3>{i18n.t("moderation.taskSearch.title")}</h3>
-      <div className="gridLayoutContainer">
+      <div className={`gridLayoutContainer ${styles.search}`}>
         <TextInput
           id="placeName"
           className="gridColumn1"
@@ -88,10 +88,8 @@ const TaskSearch = (): ReactElement => {
           selectedItemRemoveButtonAriaLabel={i18n.t("notification.button.remove")}
           clearButtonAriaLabel={i18n.t("notification.button.clearAllSelections")}
         />
-        <div className="gridButton">
-          <Button className="gridColumn3" onClick={searchTasks}>
-            {i18n.t("moderation.button.search")}
-          </Button>
+        <div className="gridColumn3 gridButton">
+          <Button onClick={searchTasks}>{i18n.t("moderation.button.search")}</Button>
         </div>
       </div>
     </div>
