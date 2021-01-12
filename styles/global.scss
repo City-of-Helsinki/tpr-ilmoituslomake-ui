@@ -96,7 +96,7 @@ textarea {
 
 .gridLayoutContainer {
   display: grid;
-  grid-template-columns: 2fr 2fr 1fr;
+  grid-template-columns: repeat(auto-fit, minmax($spacing-3-xl, 1fr));
   margin-bottom: $spacing-layout-s;
 
   @include media(xs) {

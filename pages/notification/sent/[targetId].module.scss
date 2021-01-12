@@ -2,16 +2,17 @@
 
 .content {
   .header {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-
     h1 {
+      grid-column: span 6;
       color: $color-bus;
     }
 
-    button {
-      margin: 0 $spacing-2-xs;
+    .gridButton {
+      grid-column: span 2;
+      justify-self: end;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
     }
   }
 }

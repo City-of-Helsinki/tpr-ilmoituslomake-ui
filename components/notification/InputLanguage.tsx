@@ -22,7 +22,7 @@ const InputLanguage = (): ReactElement => {
   };
 
   return (
-    <SelectionGroup direction="horizontal" className={styles.inputLanguage} label={i18n.t("notification.inputLanguage.title")} required>
+    <SelectionGroup direction="vertical" className={styles.inputLanguage} label={i18n.t("notification.inputLanguage.title")} required>
       {LANGUAGE_OPTIONS.map((option) => (
         <Checkbox
           id={`input_${option}`}

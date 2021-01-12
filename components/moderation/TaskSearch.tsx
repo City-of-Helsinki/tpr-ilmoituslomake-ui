@@ -72,7 +72,7 @@ const TaskSearch = (): ReactElement => {
       <div className={`gridLayoutContainer ${styles.search}`}>
         <TextInput
           id="placeName"
-          className="gridColumn1"
+          className={styles.gridInput}
           label={i18n.t("moderation.taskSearch.placeName.label")}
           name="placeName"
           value={placeName}
@@ -80,7 +80,7 @@ const TaskSearch = (): ReactElement => {
         />
         <Select
           id="taskType"
-          className="gridColumn2"
+          className={styles.gridInput}
           options={taskTypeOptions}
           defaultValue={convertValue(taskType)}
           onChange={updateSearchTaskType}
@@ -88,7 +88,7 @@ const TaskSearch = (): ReactElement => {
           selectedItemRemoveButtonAriaLabel={i18n.t("notification.button.remove")}
           clearButtonAriaLabel={i18n.t("notification.button.clearAllSelections")}
         />
-        <div className="gridColumn3 gridButton">
+        <div className={styles.gridButton}>
           <Button onClick={searchTasks}>{i18n.t("moderation.button.search")}</Button>
         </div>
       </div>

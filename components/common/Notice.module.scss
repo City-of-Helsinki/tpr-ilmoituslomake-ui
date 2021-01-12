@@ -5,24 +5,31 @@
   border: solid $color-bus 0;
   border-left-width: $spacing-2-xs;
   background-color: $color-fog-light;
-  display: flex;
-  flex-direction: row;
 
   div {
     margin: $spacing-s;
   }
 
   .icon {
+    grid-column: span 1;
     color: $color-bus;
   }
 
-  .title {
-    font-size: $fontsize-heading-m;
-    font-weight: 700;
+  .text {
+    grid-column: span 8;
+
+    .title {
+      font-size: $fontsize-heading-m;
+      font-weight: 700;
+    }
   }
 
-  button {
-    margin-left: $spacing-s;
-    background-color: $color-white;
+  .gridButton {
+    grid-column: span 3;
+    justify-self: end;
+
+    button {
+      background-color: $color-white;
+    }
   }
 }

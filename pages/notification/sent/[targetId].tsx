@@ -31,10 +31,9 @@ const Sent = (): ReactElement => {
       </Head>
       <Header />
       <div className={styles.content}>
-        <div className={styles.header}>
+        <div className={`gridLayoutContainer ${styles.header}`}>
           <h1>{notificationName}</h1>
-          <div className="flexSpace" />
-          <div>
+          <div className={styles.gridButton}>
             <Link href="/notification">
               <Button variant="secondary">{i18n.t("notification.button.notifyNewPlace")}</Button>
             </Link>

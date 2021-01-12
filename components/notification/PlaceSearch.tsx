@@ -35,20 +35,20 @@ const PlaceSearch = (): ReactElement => {
   };
 
   return (
-    <div className={styles.placeSearch}>
+    <div className={`formSection ${styles.placeSearch}`}>
       <h1>{i18n.t("notification.placeSearch.title")}</h1>
       <div>{i18n.t("notification.placeSearch.notice")}</div>
 
       <div className={`gridLayoutContainer ${styles.search}`}>
         <TextInput
           id="placeName"
-          className="gridColumn1"
+          className={styles.gridInput}
           label={i18n.t("notification.placeSearch.placeName.label")}
           name="placeName"
           value={placeName}
           onChange={updateSearchText}
         />
-        <div className="gridColumn2">
+        <div className={styles.gridButton}>
           <Button onClick={searchPlaces}>{i18n.t("notification.button.search")}</Button>
         </div>
       </div>

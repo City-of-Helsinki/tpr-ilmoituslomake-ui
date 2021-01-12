@@ -14,14 +14,13 @@ const Notice = ({ className, icon, titleKey, messageKey, button }: NoticeProps):
   const i18n = useI18n();
 
   return (
-    <div className={`${styles.notice} ${className}`}>
+    <div className={`gridLayoutContainer ${styles.notice} ${className}`}>
       <div className={styles.icon}>{icon}</div>
-      <div>
+      <div className={styles.text}>
         <div className={styles.title}>{i18n.t(titleKey as string)}</div>
-        <div>{i18n.t(messageKey)}</div>
+        <div className={styles.message}>{i18n.t(messageKey)}</div>
       </div>
-      <div className="flexSpace" />
-      <div>{button}</div>
+      <div className={styles.gridButton}>{button}</div>
     </div>
   );
 };

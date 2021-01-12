@@ -1,6 +1,13 @@
 @import "~hds-design-tokens/lib/all.scss";
 
 .search {
-  grid-template-columns: 2fr 2fr 1fr;
   align-items: end;
+
+  .gridInput {
+    grid-column: span 4;
+  }
+
+  .gridButton {
+    grid-column: span 2;
+  }
 }

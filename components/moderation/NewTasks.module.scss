@@ -1,7 +1,6 @@
 @import "~hds-design-tokens/lib/all.scss";
 
 .taskResults {
-  grid-template-columns: 1fr 1fr 1fr 1fr;
   row-gap: 0;
 
   .gridContent {

@@ -2,7 +2,6 @@
 
 .placeResults {
   .results {
-    grid-template-columns: 2fr 3fr;
     column-gap: 0;
     margin-bottom: $spacing-layout-l;
 
@@ -15,10 +14,12 @@
       border-bottom: 2px solid $color-black-50;
 
       &.firstColumn {
+        grid-column: 1 / span 2;
         border-left: 2px solid $color-black-50;
       }
 
       &.lastColumn {
+        grid-column: 3 / span 3;
         border-right: 2px solid $color-black-50;
       }
 

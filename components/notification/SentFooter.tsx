@@ -12,20 +12,27 @@ const SentFooter = (): ReactElement => {
   const notificationId = useSelector((state: RootState) => state.notification.notificationId);
 
   return (
-    <div className={styles.footer}>
-      <Link href={`/notification/${notificationId}`}>
-        <Button variant="secondary">{i18n.t("notification.button.modifyInformation")}</Button>
-      </Link>
-      <Button variant="secondary" iconRight={<IconLinkExternal />}>
-        {i18n.t("notification.button.modifyOpeningTimes")}
-      </Button>
-      <Button variant="secondary" iconRight={<IconLinkExternal />}>
-        {i18n.t("notification.button.notifyClosingDown")}
-      </Button>
-      <div className="flexSpace" />
-      <Link href="/">
-        <Button variant="secondary">{i18n.t("notification.button.return")}</Button>
-      </Link>
+    <div className={`gridLayoutContainer ${styles.footer}`}>
+      <div className={styles.gridButton}>
+        <Link href={`/notification/${notificationId}`}>
+          <Button variant="secondary">{i18n.t("notification.button.modifyInformation")}</Button>
+        </Link>
+      </div>
+      <div className={styles.gridButton}>
+        <Button variant="secondary" iconRight={<IconLinkExternal />}>
+          {i18n.t("notification.button.modifyOpeningTimes")}
+        </Button>
+      </div>
+      <div className={`${styles.gridButton} ${styles.closingDownButton}`}>
+        <Button variant="secondary" iconRight={<IconLinkExternal />}>
+          {i18n.t("notification.button.notifyClosingDown")}
+        </Button>
+      </div>
+      <div className={`${styles.gridButton} ${styles.returnButton}`}>
+        <Link href="/">
+          <Button variant="secondary">{i18n.t("notification.button.return")}</Button>
+        </Link>
+      </div>
     </div>
   );
 };
