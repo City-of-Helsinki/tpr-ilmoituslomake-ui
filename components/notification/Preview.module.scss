@@ -7,6 +7,14 @@
 
   row-gap: 0;
 
+  .gridHeading {
+    grid-column: 1 / 1;
+  }
+
+  .gridPlaceInfo {
+    grid-column: 2 / 2;
+  }
+
   .gridHeader {
     padding: $spacing-xs;
   }

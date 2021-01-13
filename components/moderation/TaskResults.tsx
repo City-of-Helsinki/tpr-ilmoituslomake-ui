@@ -17,13 +17,13 @@ const TaskResults = (): ReactElement => {
   const taskResults = useSelector((state: RootState) => state.moderation.taskResults);
 
   return (
-    <div className="formSection">
+    <div className={`formSection ${styles.taskResults}`}>
       <h3>{`${i18n.t("moderation.taskResults.found")} ${taskResults.length} ${i18n.t("moderation.taskResults.places")}`}</h3>
-      <div className={`gridLayoutContainer ${styles.taskResults}`}>
-        <h5 className="gridColumn1 gridHeader">{i18n.t("moderation.taskResults.nameId")}</h5>
-        <h5 className="gridColumn2 gridHeader">{i18n.t("moderation.taskResults.type")}</h5>
-        <h5 className="gridColumn3 gridHeader">{i18n.t("moderation.taskResults.notified")}</h5>
-        <h5 className="gridColumn4 gridHeader">{i18n.t("moderation.taskResults.status")}</h5>
+      <div className={`gridLayoutContainer ${styles.results}`}>
+        <h5 className={`${styles.gridColumn1} gridHeader`}>{i18n.t("moderation.taskResults.nameId")}</h5>
+        <h5 className={`${styles.gridColumn2} gridHeader`}>{i18n.t("moderation.taskResults.type")}</h5>
+        <h5 className={`${styles.gridColumn3} gridHeader`}>{i18n.t("moderation.taskResults.notified")}</h5>
+        <h5 className={`${styles.gridColumn4} gridHeader`}>{i18n.t("moderation.taskResults.status")}</h5>
         {taskResults
           .sort((a: ModerationTodoResult, b: ModerationTodoResult) => b.created.getTime() - a.created.getTime())
           .map((result) => {
@@ -36,18 +36,18 @@ const TaskResults = (): ReactElement => {
             } = result;
             return (
               <Fragment key={`taskresult_${id}`}>
-                <div className={`gridColumn1 ${styles.gridContent} ${styles.gridButton}`}>
+                <div className={`${styles.gridColumn1} ${styles.gridContent} ${styles.gridButton}`}>
                   <Link href={`/moderation/task/${id}`}>
                     <Button variant="supplementary" size="small" iconLeft={<IconPen />}>
                       {`${name} (${targetId})`}
                     </Button>
                   </Link>
                 </div>
-                <div className={`gridColumn2 ${styles.gridContent}`}>
+                <div className={`${styles.gridColumn2} ${styles.gridContent}`}>
                   {taskType !== TaskType.Unknown ? i18n.t(`moderation.taskType.${taskType}`) : ""}
                 </div>
-                <div className={`gridColumn3 ${styles.gridContent}`}>{moment(created).format(DATETIME_FORMAT)}</div>
-                <div className={`gridColumn4 ${styles.gridContent}`}>
+                <div className={`${styles.gridColumn3} ${styles.gridContent}`}>{moment(created).format(DATETIME_FORMAT)}</div>
+                <div className={`${styles.gridColumn4} ${styles.gridContent}`}>
                   <TaskStatusLabel status={getTaskStatus(status)} />
                 </div>
               </Fragment>

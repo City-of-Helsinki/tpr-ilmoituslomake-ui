@@ -67,13 +67,13 @@ const PlaceSearch = (): ReactElement => {
   };
 
   return (
-    <div className={styles.placeSearch}>
+    <div className={`formSection ${styles.placeSearch}`}>
       <h3>{i18n.t("moderation.placeSearch.title")}</h3>
 
       <div className="gridLayoutContainer">
         <TextInput
           id="placeName"
-          className="gridColumn1"
+          className={styles.gridColumn1}
           label={i18n.t("moderation.placeSearch.placeName.label")}
           name="placeName"
           value={placeName}
@@ -81,7 +81,7 @@ const PlaceSearch = (): ReactElement => {
         />
         <Select
           id="language"
-          className="gridColumn2"
+          className={styles.gridColumn2}
           options={languageOptions}
           defaultValue={convertValueWithId(language)}
           onChange={updateSearchLanguage}
@@ -89,7 +89,7 @@ const PlaceSearch = (): ReactElement => {
           selectedItemRemoveButtonAriaLabel={i18n.t("notification.button.remove")}
           clearButtonAriaLabel={i18n.t("notification.button.clearAllSelections")}
         />
-        <SelectionGroup direction="horizontal" className="gridColumn3" label={i18n.t("moderation.placeSearch.publishPermission.label")}>
+        <SelectionGroup direction="horizontal" className={styles.gridColumn3} label={i18n.t("moderation.placeSearch.publishPermission.label")}>
           {publishPermissionOptions.map((option) => (
             <Checkbox
               id={option}
@@ -103,7 +103,7 @@ const PlaceSearch = (): ReactElement => {
         </SelectionGroup>
         <TextInput
           id="address"
-          className="gridColumn1"
+          className={styles.gridColumn1}
           label={i18n.t("moderation.placeSearch.address.label")}
           name="address"
           value={address}
@@ -111,7 +111,7 @@ const PlaceSearch = (): ReactElement => {
         />
         <Combobox
           id="district"
-          className="gridColumn2"
+          className={styles.gridColumn2}
           options={districtOptions}
           defaultValue={convertValue(district)}
           onChange={updateSearchDistrict}
@@ -122,7 +122,7 @@ const PlaceSearch = (): ReactElement => {
         />
         <Combobox
           id="tag"
-          className="gridColumn1"
+          className={styles.gridColumn1}
           options={tagOptions}
           defaultValue={convertValue(tag)}
           onChange={updateSearchTag}
@@ -133,13 +133,13 @@ const PlaceSearch = (): ReactElement => {
         />
         <TextInput
           id="comment"
-          className="gridColumn1"
+          className={styles.gridColumn1}
           label={i18n.t("moderation.placeSearch.comment.label")}
           name="comment"
           value={comment}
           onChange={updateSearchText}
         />
-        <div className="gridColumn1">
+        <div className={styles.gridColumn1}>
           <Button onClick={searchPlaces}>{i18n.t("moderation.button.search")}</Button>
           <Button variant="secondary" onClick={clearPlaceSearch}>
             {i18n.t("moderation.button.clear")}
