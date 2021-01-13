@@ -3,7 +3,6 @@ import { useSelector } from "react-redux";
 import { GetServerSideProps } from "next";
 import Head from "next/head";
 import { useI18n } from "next-localization";
-import absoluteUrl from "next-absolute-url";
 import i18nLoader from "../../../utils/i18n";
 import { RootState } from "../../../state/reducers";
 import { initStore } from "../../../state/store";
@@ -13,6 +12,7 @@ import Preview from "../../../components/notification/Preview";
 import InfoFooter from "../../../components/notification/InfoFooter";
 import { INITIAL_NOTIFICATION, INITIAL_NOTIFICATION_EXTRA } from "../../../types/constants";
 import { NotificationSchema } from "../../../types/notification_schema";
+import { getOrigin } from "../../../utils/request";
 import styles from "./[infoId].module.scss";
 
 const Info = (): ReactElement => {
@@ -43,7 +43,6 @@ export const getServerSideProps: GetServerSideProps = async ({ req, params, loca
 
   const reduxStore = initStore();
   const initialReduxState = reduxStore.getState();
-  const { origin } = absoluteUrl(req);
 
   // Reset the notification details in the state
   initialReduxState.notification.notificationId = 0;
@@ -54,7 +53,7 @@ export const getServerSideProps: GetServerSideProps = async ({ req, params, loca
   // Try to fetch the notification details for the specified id
   if (params) {
     const { infoId } = params;
-    const targetResponse = await fetch(`${origin}/api/notification/get/${infoId}/`, { headers: { cookie: req.headers.cookie as string } });
+    const targetResponse = await fetch(`${getOrigin(req)}/api/notification/get/${infoId}/`, { headers: { cookie: req.headers.cookie as string } });
 
     if (targetResponse.ok) {
       const targetResult = await (targetResponse.json() as Promise<{ id: number; data: NotificationSchema }>);

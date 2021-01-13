@@ -3,7 +3,6 @@ import { useSelector } from "react-redux";
 import { GetServerSideProps } from "next";
 import Head from "next/head";
 import { useI18n } from "next-localization";
-import absoluteUrl from "next-absolute-url";
 import i18nLoader from "../../../utils/i18n";
 import { initStore } from "../../../state/store";
 import { RootState } from "../../../state/reducers";
@@ -11,6 +10,7 @@ import { ModerationStatus, INITIAL_MODERATION_EXTRA, INITIAL_MODERATION_STATUS, 
 import { TagOption, ModerationTodoSchema } from "../../../types/general";
 import { PhotoStatus } from "../../../types/moderation_status";
 import { getTaskStatus, getTaskType } from "../../../utils/conversion";
+import { getOrigin } from "../../../utils/request";
 import Layout from "../../../components/common/Layout";
 import ModerationHeader from "../../../components/moderation/ModerationHeader";
 import Collapsible from "../../../components/moderation/Collapsible";
@@ -68,7 +68,6 @@ export const getServerSideProps: GetServerSideProps = async ({ req, params, loca
 
   const reduxStore = initStore();
   const initialReduxState = reduxStore.getState();
-  const { origin } = absoluteUrl(req);
 
   // Reset the task details in the state
   initialReduxState.moderation.selectedTaskId = 0;
@@ -81,7 +80,7 @@ export const getServerSideProps: GetServerSideProps = async ({ req, params, loca
   // Try to fetch the task details for the specified id
   if (params) {
     const { taskId } = params;
-    const taskResponse = await fetch(`${origin}/api/moderation/todos/${taskId}/`, { headers: { cookie: req.headers.cookie as string } });
+    const taskResponse = await fetch(`${getOrigin(req)}/api/moderation/todos/${taskId}/`, { headers: { cookie: req.headers.cookie as string } });
 
     if (taskResponse.ok) {
       const taskResult = await (taskResponse.json() as Promise<ModerationTodoSchema>);
@@ -161,7 +160,7 @@ export const getServerSideProps: GetServerSideProps = async ({ req, params, loca
   }
 
   // Note: this currently fetches all tags which may cause performance issues
-  const tagResponse = await fetch(`${origin}/api/ontologywords/?format=json&search=`);
+  const tagResponse = await fetch(`${getOrigin(req)}/api/ontologywords/?format=json&search=`);
   if (tagResponse.ok) {
     const tagResult = await tagResponse.json();
     if (tagResult && tagResult.length > 0) {

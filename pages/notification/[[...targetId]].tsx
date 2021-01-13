@@ -3,7 +3,6 @@ import { useSelector } from "react-redux";
 import { GetServerSideProps } from "next";
 import Head from "next/head";
 import { useI18n } from "next-localization";
-import absoluteUrl from "next-absolute-url";
 import i18nLoader, { defaultLocale } from "../../utils/i18n";
 import { RootState } from "../../state/reducers";
 import { initStore } from "../../state/store";
@@ -28,6 +27,7 @@ import { INITIAL_NOTIFICATION, INITIAL_NOTIFICATION_EXTRA, INITIAL_NOTIFICATION_
 import { TagOption } from "../../types/general";
 import { NotificationSchema } from "../../types/notification_schema";
 import { PhotoValidation } from "../../types/notification_validation";
+import { getOrigin } from "../../utils/request";
 import styles from "./[[...targetId]].module.scss";
 
 const NotificationDetail = (): ReactElement => {
@@ -101,7 +101,6 @@ export const getServerSideProps: GetServerSideProps = async ({ req, params, loca
   const reduxStore = initStore();
   const initialReduxState = reduxStore.getState();
   initialReduxState.notification.notificationExtra.inputLanguages = [locale || defaultLocale];
-  const { origin } = absoluteUrl(req);
 
   // Reset the notification details in the state
   initialReduxState.notification.notificationId = 0;
@@ -113,7 +112,7 @@ export const getServerSideProps: GetServerSideProps = async ({ req, params, loca
   // Try to fetch the notification details for the specified id
   if (params) {
     const { targetId } = params;
-    const targetResponse = await fetch(`${origin}/api/notification/get/${targetId}/`, { headers: { cookie: req.headers.cookie as string } });
+    const targetResponse = await fetch(`${getOrigin(req)}/api/notification/get/${targetId}/`, { headers: { cookie: req.headers.cookie as string } });
 
     if (targetResponse.ok) {
       const targetResult = await (targetResponse.json() as Promise<{ id: number; data: NotificationSchema }>);
@@ -178,7 +177,7 @@ export const getServerSideProps: GetServerSideProps = async ({ req, params, loca
   }
 
   // Note: this currently fetches all tags which may cause performance issues
-  const tagResponse = await fetch(`${origin}/api/ontologywords/?format=json&search=`);
+  const tagResponse = await fetch(`${getOrigin(req)}/api/ontologywords/?format=json&search=`);
   if (tagResponse.ok) {
     const tagResult = await tagResponse.json();
     if (tagResult && tagResult.length > 0) {
