@@ -10,7 +10,11 @@ import styles from "./Preview.module.scss";
 
 const MapWrapper = dynamic(() => import("../common/MapWrapper"), { ssr: false });
 
-const Preview = (): ReactElement => {
+interface PreviewProps {
+  full?: boolean;
+}
+
+const Preview = ({ full }: PreviewProps): ReactElement => {
   const i18n = useI18n();
   const router = useRouter();
 
@@ -38,12 +42,14 @@ const Preview = (): ReactElement => {
 
   return (
     <div className={`gridLayoutContainer ${styles.preview}`}>
-      <h3>{i18n.t("notification.preview.title")}</h3>
+      {full && <h3>{i18n.t("notification.preview.title")}</h3>}
+
       <h5 className={`${styles.gridHeading} ${styles.gridHeader}`}>{i18n.t("notification.preview.heading")}</h5>
       <h5 className={`${styles.gridPlaceInfo} ${styles.gridHeader}`}>{i18n.t("notification.preview.placeInfo")}</h5>
       <div className={styles.headerLine}>
         <hr />
       </div>
+
       <h4 className={`${styles.gridHeading} ${styles.gridSubHeader}`}>{i18n.t("notification.main.basic")}</h4>
       <div className={`${styles.gridPlaceInfo} ${styles.gridSubHeader}`} />
       <div className={`${styles.gridHeading} ${styles.gridContent}`}>{i18n.t("notification.description.placeName.label")}</div>
@@ -78,17 +84,23 @@ const Preview = (): ReactElement => {
             <div key={`tag_${tag.id}`}>{tag.ontologyword[router.locale || defaultLocale] as string}</div>
           ))}
       </div>
-      <div className={`${styles.gridHeading} ${styles.gridContent}`}>{i18n.t("notification.notifier.notifierType")}</div>
-      <div className={`${styles.gridPlaceInfo} ${styles.gridContent}`}>
-        {notifierType === NotifierType.Representative && i18n.t("notification.notifier.representative")}
-        {notifierType === NotifierType.NotRepresentative && i18n.t("notification.notifier.notRepresentative")}
-      </div>
-      <div className={`${styles.gridHeading} ${styles.gridContent}`}>{i18n.t("notification.notifier.fullName.label")}</div>
-      <div className={`${styles.gridPlaceInfo} ${styles.gridContent}`}>{notifierFullName}</div>
-      <div className={`${styles.gridHeading} ${styles.gridContent}`}>{i18n.t("notification.notifier.email.label")}</div>
-      <div className={`${styles.gridPlaceInfo} ${styles.gridContent}`}>{notifierEmail}</div>
-      <div className={`${styles.gridHeading} ${styles.gridContent}`}>{i18n.t("notification.notifier.phone.label")}</div>
-      <div className={`${styles.gridPlaceInfo} ${styles.gridContent}`}>{notifierPhone}</div>
+
+      {full && (
+        <>
+          <div className={`${styles.gridHeading} ${styles.gridContent}`}>{i18n.t("notification.notifier.notifierType")}</div>
+          <div className={`${styles.gridPlaceInfo} ${styles.gridContent}`}>
+            {notifierType === NotifierType.Representative && i18n.t("notification.notifier.representative")}
+            {notifierType === NotifierType.NotRepresentative && i18n.t("notification.notifier.notRepresentative")}
+          </div>
+          <div className={`${styles.gridHeading} ${styles.gridContent}`}>{i18n.t("notification.notifier.fullName.label")}</div>
+          <div className={`${styles.gridPlaceInfo} ${styles.gridContent}`}>{notifierFullName}</div>
+          <div className={`${styles.gridHeading} ${styles.gridContent}`}>{i18n.t("notification.notifier.email.label")}</div>
+          <div className={`${styles.gridPlaceInfo} ${styles.gridContent}`}>{notifierEmail}</div>
+          <div className={`${styles.gridHeading} ${styles.gridContent}`}>{i18n.t("notification.notifier.phone.label")}</div>
+          <div className={`${styles.gridPlaceInfo} ${styles.gridContent}`}>{notifierPhone}</div>
+        </>
+      )}
+
       <h4 className={`${styles.gridHeading} ${styles.gridSubHeader}`}>{i18n.t("notification.main.contact")}</h4>
       <div className={`${styles.gridPlaceInfo} ${styles.gridSubHeader}`} />
       <div className={`${styles.gridHeading} ${styles.gridContent}`}>{i18n.t("notification.location.title")}</div>
@@ -107,6 +119,7 @@ const Preview = (): ReactElement => {
           draggableMarker={false}
         />
       </div>
+
       <div className={`${styles.gridHeading} ${styles.gridContent}`}>{i18n.t("notification.contact.phone.label")}</div>
       <div className={`${styles.gridPlaceInfo} ${styles.gridContent}`}>{phone}</div>
       <div className={`${styles.gridHeading} ${styles.gridContent}`}>{i18n.t("notification.contact.email.label")}</div>
@@ -119,7 +132,8 @@ const Preview = (): ReactElement => {
           ) : null
         )}
       </div>
-      {photos.length > 0 && (
+
+      {full && photos.length > 0 && (
         <>
           <h4 className={`${styles.gridHeading} ${styles.gridSubHeader}`}>{i18n.t("notification.main.photos")}</h4>
           <div className={`${styles.gridPlaceInfo} ${styles.gridSubHeader}`} />
@@ -159,6 +173,10 @@ const Preview = (): ReactElement => {
       )}
     </div>
   );
+};
+
+Preview.defaultProps = {
+  full: true,
 };
 
 export default Preview;

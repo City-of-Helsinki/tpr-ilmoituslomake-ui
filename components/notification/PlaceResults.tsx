@@ -41,7 +41,7 @@ const PlaceResults = (): ReactElement => {
             return (
               <Fragment key={`placeresult_${id}`}>
                 <div className={`${styles.gridContent} ${styles.firstColumn} ${styles.gridButton}`}>
-                  <Link href={`/notification/${id}`}>
+                  <Link href={`/notification/info/${id}`}>
                     <Button variant="supplementary" size="small" iconRight={<IconAngleRight />}>
                       {name[router.locale || defaultLocale] as string}
                     </Button>

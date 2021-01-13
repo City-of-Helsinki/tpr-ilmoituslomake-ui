@@ -4,9 +4,9 @@ import Link from "next/link";
 import { useI18n } from "next-localization";
 import { Button, IconLinkExternal } from "hds-react";
 import { RootState } from "../../state/reducers";
-import styles from "./SentFooter.module.scss";
+import styles from "./InfoFooter.module.scss";
 
-const SentFooter = (): ReactElement => {
+const InfoFooter = (): ReactElement => {
   const i18n = useI18n();
 
   const notificationId = useSelector((state: RootState) => state.notification.notificationId);
@@ -37,4 +37,4 @@ const SentFooter = (): ReactElement => {
   );
 };
 
-export default SentFooter;
+export default InfoFooter;
