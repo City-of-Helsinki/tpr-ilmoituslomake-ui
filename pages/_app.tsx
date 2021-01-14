@@ -1,4 +1,5 @@
 import React, { ReactElement } from "react";
+import ReactDOM from "react-dom";
 import { Provider } from "react-redux";
 import { AppProps } from "next/app";
 import { I18nProvider } from "next-localization";
@@ -19,6 +20,12 @@ const App = ({ Component, pageProps }: AppProps): ReactElement => {
   // Update the store state to preserve any previously selected input languages
   if (store.getState().notification.notificationExtra.inputLanguages.indexOf(locale) < 0) {
     store.getState().notification.notificationExtra.inputLanguages = [...store.getState().notification.notificationExtra.inputLanguages, locale];
+  }
+
+  if (typeof window !== "undefined" && process.env.NODE_ENV !== "production") {
+    import("@axe-core/react").then((axe) => {
+      axe.default(React, ReactDOM, 1000, {});
+    });
   }
 
   return (
