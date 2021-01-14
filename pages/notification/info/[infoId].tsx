@@ -26,13 +26,13 @@ const Info = (): ReactElement => {
         <title>{i18n.t("notification.title")}</title>
       </Head>
       <Header />
-      <div className={styles.content}>
+      <main id="content" className={styles.content}>
         <h1>{notificationName}</h1>
 
         <InfoFooter />
         <Preview full={false} />
         <InfoFooter />
-      </div>
+      </main>
     </Layout>
   );
 };

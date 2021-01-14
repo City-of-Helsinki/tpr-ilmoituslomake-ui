@@ -21,7 +21,7 @@ const ModerationFront = (): ReactElement => {
         <title>{i18n.t("moderation.title")}</title>
       </Head>
       <ModerationHeader currentPage={1} />
-      <div id="content">
+      <main id="content">
         <Intro />
         <NewTasks />
 
@@ -50,7 +50,7 @@ const ModerationFront = (): ReactElement => {
             </Link>
           }
         />
-      </div>
+      </main>
     </Layout>
   );
 };

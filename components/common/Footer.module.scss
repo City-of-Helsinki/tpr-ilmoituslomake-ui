@@ -8,13 +8,11 @@
     font-size: initial !important;
   }
 
-  .wave {
-    div {
-      fill: $color-fog-light;
-    }
+  div {
+    fill: $color-fog-light;
+  }
 
-    &:before {
-      background-color: $color-fog-light;
-    }
+  &:before {
+    background-color: $color-fog-light !important;
   }
 }

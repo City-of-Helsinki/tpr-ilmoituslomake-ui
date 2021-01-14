@@ -39,7 +39,7 @@ const ModerationTaskDetail = (): ReactElement => {
       </Head>
       <ModerationHeader currentPage={3} />
       {selectedTaskId > 0 && modifiedTaskId > 0 && (
-        <div id="content">
+        <main id="content">
           <TaskHeader />
 
           <h3>{i18n.t("moderation.task.title")}</h3>
@@ -56,7 +56,7 @@ const ModerationTaskDetail = (): ReactElement => {
           <Collapsible section={3} title={i18n.t("moderation.task.photos")}>
             <PhotosModeration />
           </Collapsible>
-        </div>
+        </main>
       )}
     </Layout>
   );

@@ -30,7 +30,7 @@ const Sent = (): ReactElement => {
         <title>{i18n.t("notification.title")}</title>
       </Head>
       <Header />
-      <div className={styles.content}>
+      <main id="content" className={styles.content}>
         <div className={`gridLayoutContainer ${styles.header}`}>
           <h1>{notificationName}</h1>
           <div className={styles.gridButton}>
@@ -72,7 +72,7 @@ const Sent = (): ReactElement => {
         <InfoFooter />
         <Preview />
         <InfoFooter />
-      </div>
+      </main>
     </Layout>
   );
 };

@@ -7,12 +7,10 @@ const Footer = (): ReactElement => {
   const i18n = useI18n();
 
   return (
-    <div className={styles.footer}>
-      <HdsFooter korosType="basic" className={styles.wave} title={i18n.t("notification.title")}>
-        <HdsFooter.Utilities backToTopLabel={i18n.t("notification.footer.backToTop")} />
-        <HdsFooter.Base copyrightHolder={i18n.t("notification.footer.copyright")} copyrightText={i18n.t("notification.footer.rightsReserved")} />
-      </HdsFooter>
-    </div>
+    <HdsFooter korosType="basic" className={styles.footer} title={i18n.t("notification.title")}>
+      <HdsFooter.Utilities backToTopLabel={i18n.t("notification.footer.backToTop")} />
+      <HdsFooter.Base copyrightHolder={i18n.t("notification.footer.copyright")} copyrightText={i18n.t("notification.footer.rightsReserved")} />
+    </HdsFooter>
   );
 };
 

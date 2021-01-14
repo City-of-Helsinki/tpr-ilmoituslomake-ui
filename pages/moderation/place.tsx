@@ -22,10 +22,10 @@ const ModerationPlace = (): ReactElement => {
         <title>{i18n.t("moderation.title")}</title>
       </Head>
       <ModerationHeader currentPage={2} />
-      <div id="content">
+      <main id="content">
         <PlaceSearch />
         {placeResults.length > 0 && <PlaceResults />}
-      </div>
+      </main>
     </Layout>
   );
 };

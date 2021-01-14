@@ -24,7 +24,7 @@ const NotificationSearch = (): ReactElement => {
         <title>{i18n.t("notification.title")}</title>
       </Head>
       <Header />
-      <div id="content">
+      <main id="content">
         <PlaceSearch />
         {placeResults.length > 0 && <PlaceResults />}
         <Link href="/">
@@ -32,7 +32,7 @@ const NotificationSearch = (): ReactElement => {
             {i18n.t("notification.button.returnToStart")}
           </Button>
         </Link>
-      </div>
+      </main>
     </Layout>
   );
 };

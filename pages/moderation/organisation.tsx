@@ -24,9 +24,9 @@ const ModerationOrganisation = (): ReactElement => {
         <title>{i18n.t("moderation.title")}</title>
       </Head>
       <ModerationHeader currentPage={4} />
-      <div id="content" ref={ref}>
+      <main id="content" ref={ref}>
         <h1>{i18n.t("moderation.main.organisation")}</h1>
-      </div>
+      </main>
     </Layout>
   );
 };

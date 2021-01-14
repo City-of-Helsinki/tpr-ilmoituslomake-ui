@@ -22,10 +22,10 @@ const ModerationTask = (): ReactElement => {
         <title>{i18n.t("moderation.title")}</title>
       </Head>
       <ModerationHeader currentPage={3} />
-      <div id="content">
+      <main id="content">
         <TaskSearch />
         {taskResults.length > 0 && <TaskResults />}
-      </div>
+      </main>
     </Layout>
   );
 };

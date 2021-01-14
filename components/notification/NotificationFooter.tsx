@@ -118,7 +118,7 @@ const NotificationFooter = (): ReactElement => {
   };
 
   return (
-    <div className={styles.notificationFooter}>
+    <section className={styles.notificationFooter}>
       {currentPage === 1 && (
         <Button variant="secondary" iconLeft={<IconArrowLeft />} onClick={cancelNotification}>
           {i18n.t("notification.button.cancel")}
@@ -156,7 +156,7 @@ const NotificationFooter = (): ReactElement => {
           {i18n.t(`notification.message.${toast}.message`)}
         </HdsNotification>
       )}
-    </div>
+    </section>
   );
 };
 

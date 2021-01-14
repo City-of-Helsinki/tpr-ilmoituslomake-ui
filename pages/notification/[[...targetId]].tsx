@@ -50,17 +50,17 @@ const NotificationDetail = (): ReactElement => {
       </Head>
       <NotificationHeader />
       {currentPage === 1 && (
-        <div id="content" className={styles.content} ref={ref}>
+        <main id="content" className={styles.content} ref={ref}>
           <h2>{`${currentPage} ${i18n.t("notification.main.basic")}`}</h2>
           <NotificationNotice messageKey="notification.mandatory" />
           {!pageValid && <ValidationSummary />}
           <Description />
           <Tags />
           <Notifier />
-        </div>
+        </main>
       )}
       {currentPage === 2 && (
-        <div id="content" className={styles.content} ref={ref}>
+        <main id="content" className={styles.content} ref={ref}>
           <h2>{`${currentPage} ${i18n.t("notification.main.contact")}`}</h2>
           <NotificationNotice messageKey="notification.mandatory" />
           {!pageValid && <ValidationSummary />}
@@ -68,18 +68,18 @@ const NotificationDetail = (): ReactElement => {
           <Map />
           <Contact />
           <Links />
-        </div>
+        </main>
       )}
       {currentPage === 3 && (
-        <div id="content" className={styles.content} ref={ref}>
+        <main id="content" className={styles.content} ref={ref}>
           <h2>{`${currentPage} ${i18n.t("notification.main.photos")}`}</h2>
           <NotificationNotice messageKey="notification.photos.notice" />
           {!pageValid && <ValidationSummary />}
           <Photos />
-        </div>
+        </main>
       )}
       {currentPage === 4 && (
-        <div id="content" className={styles.content} ref={ref}>
+        <main id="content" className={styles.content} ref={ref}>
           <h2>{`${currentPage} ${i18n.t("notification.main.send")}`}</h2>
           <NotificationNotice messageKey="notification.comments.notice" />
           <Opening />
@@ -87,7 +87,7 @@ const NotificationDetail = (): ReactElement => {
           <Terms />
           <NotificationFooter />
           <Preview />
-        </div>
+        </main>
       )}
       <NotificationFooter />
     </Layout>
