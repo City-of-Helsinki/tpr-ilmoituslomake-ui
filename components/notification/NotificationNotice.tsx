@@ -1,6 +1,6 @@
 import React, { ReactElement } from "react";
 import { useI18n } from "next-localization";
-import { Notification as HdsNotification } from "hds-react";
+import styles from "./NotificationNotice.module.scss";
 
 interface NoticeProps {
   messageKey: string;
@@ -11,17 +11,15 @@ const NotificationNotice = ({ messageKey, messageKey2 }: NoticeProps): ReactElem
   const i18n = useI18n();
 
   return (
-    <div>
-      <HdsNotification size="small" className="formNotification">
-        {i18n.t(messageKey)}
-        {messageKey2 && (
-          <>
-            <br />
-            <br />
-          </>
-        )}
-        {messageKey2 && i18n.t(messageKey2)}
-      </HdsNotification>
+    <div className={styles.notice}>
+      {i18n.t(messageKey)}
+      {messageKey2 && (
+        <>
+          <br />
+          <br />
+        </>
+      )}
+      {messageKey2 && i18n.t(messageKey2)}
     </div>
   );
 };

@@ -58,7 +58,7 @@ const NotificationHeader = (): ReactElement => {
           </Navigation.Row>
         )}
       </Header>
-      <section className={styles.header}>
+      <aside className={styles.header}>
         <StylesProvider injectFirst>
           <div className={styles.tabletContainer}>
             <h1>{notificationId > 0 ? `${i18n.t("notification.headerModify")}: ${notificationName}` : i18n.t("notification.headerNew")}</h1>
@@ -94,7 +94,7 @@ const NotificationHeader = (): ReactElement => {
             <Koros className={styles.wave} type="basic" flipHorizontal />
           </div>
         </StylesProvider>
-      </section>
+      </aside>
     </>
   );
 };
