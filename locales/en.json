@@ -458,8 +458,8 @@
       "tip": "Tip"
     },
     "translationNotice": {
-      "title": "Translation hallinta",
-      "manageTranslation": "Hallinoi translation requests"
+      "title": "Translation management",
+      "manageTranslation": "Manage translation requests"
     }
   }
 }

@@ -1,7 +1,8 @@
 import React, { Dispatch, ChangeEvent, ReactElement } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import Link from "next/link";
 import { useI18n } from "next-localization";
-import { Button, Checkbox, Combobox, Select, SelectionGroup, TextInput } from "hds-react";
+import { Button, Checkbox, Combobox, IconPlus, Select, SelectionGroup, TextInput } from "hds-react";
 import { ModerationAction } from "../../state/actions/types";
 import { setModerationPlaceSearch, clearModerationPlaceSearch } from "../../state/actions/moderation";
 import { RootState } from "../../state/reducers";
@@ -68,7 +69,17 @@ const PlaceSearch = (): ReactElement => {
 
   return (
     <div className={`formSection ${styles.placeSearch}`}>
-      <h3>{i18n.t("moderation.placeSearch.title")}</h3>
+      <div className={styles.header}>
+        <h3>{i18n.t("moderation.placeSearch.title")}</h3>
+        <div className="flexSpace" />
+        <div>
+          <Link href="/notification">
+            <Button className={styles.primary} iconLeft={<IconPlus />}>
+              {i18n.t("moderation.button.addNewPlace")}
+            </Button>
+          </Link>
+        </div>
+      </div>
 
       <div className="gridLayoutContainer">
         <TextInput

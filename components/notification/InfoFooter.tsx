@@ -29,7 +29,7 @@ const InfoFooter = (): ReactElement => {
         </Button>
       </div>
       <div className={`${styles.gridButton} ${styles.returnButton}`}>
-        <Link href="/">
+        <Link href="/search">
           <Button variant="secondary">{i18n.t("notification.button.return")}</Button>
         </Link>
       </div>

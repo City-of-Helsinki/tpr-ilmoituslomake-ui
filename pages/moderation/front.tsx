@@ -30,9 +30,9 @@ const ModerationFront = (): ReactElement => {
           icon={<IconGroup size="xl" />}
           messageKey="general.todo"
           button={
-            <Link href="/moderation/translation">
+            <Link href="/moderation/organisation">
               <Button variant="secondary" iconLeft={<IconArrowRight />}>
-                {i18n.t("moderation.translationNotice.manageTranslation")}
+                {i18n.t("moderation.organisationNotice.manageOrganisation")}
               </Button>
             </Link>
           }
@@ -43,9 +43,9 @@ const ModerationFront = (): ReactElement => {
           icon={<IconGroup size="xl" />}
           messageKey="general.todo"
           button={
-            <Link href="/moderation/organisation">
+            <Link href="/moderation/translation">
               <Button variant="secondary" iconLeft={<IconArrowRight />}>
-                {i18n.t("moderation.organisationNotice.manageOrganisation")}
+                {i18n.t("moderation.translationNotice.manageTranslation")}
               </Button>
             </Link>
           }
