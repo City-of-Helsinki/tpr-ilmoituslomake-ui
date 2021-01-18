@@ -453,9 +453,10 @@
       "inProgress": "Incomplete"
     },
     "taskType": {
-      "change": "Change",
-      "new": "New place",
-      "tip": "Tip"
+      "placeChange": "Place change",
+      "newPlace": "New place",
+      "changeTip": "Change tip",
+      "removeTip": "Remove tip"
     },
     "translationNotice": {
       "title": "Translation management",

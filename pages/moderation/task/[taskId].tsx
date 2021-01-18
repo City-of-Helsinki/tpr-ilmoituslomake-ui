@@ -96,7 +96,7 @@ export const getServerSideProps: GetServerSideProps = async ({ req, params, loca
             ...initialReduxState.moderation.moderationExtra,
             created_at: taskResult.created_at,
             updated_at: taskResult.updated_at,
-            taskType: getTaskType(taskResult.category),
+            taskType: getTaskType(taskResult.category, taskResult.item_type),
             status: getTaskStatus(taskResult.status),
             moderator: {
               fullName: taskResult.moderator ? `${taskResult.moderator.first_name} ${taskResult.moderator.last_name}`.trim() : "",

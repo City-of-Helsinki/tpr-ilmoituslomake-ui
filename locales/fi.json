@@ -453,9 +453,10 @@
       "inProgress": "Keskeneräinen"
     },
     "taskType": {
-      "change": "Muutos",
-      "new": "Uusi kohde",
-      "tip": "Vinkki"
+      "placeChange": "Kohde muutos",
+      "newPlace": "Uusi kohde",
+      "changeTip": "Muutos vinkki",
+      "removeTip": "Poisto vinkki"
     },
     "translationNotice": {
       "title": "Käännösten hallinta",

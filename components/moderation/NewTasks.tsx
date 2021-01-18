@@ -29,7 +29,7 @@ const NewTasks = (): ReactElement => {
             ...result,
             created: moment(result.created_at).toDate(),
             updated: moment(result.updated_at).toDate(),
-            taskType: getTaskType(result.category),
+            taskType: getTaskType(result.category, result.item_type),
             taskStatus: getTaskStatus(result.status),
           };
         });

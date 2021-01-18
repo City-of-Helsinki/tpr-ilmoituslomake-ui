@@ -88,7 +88,7 @@ export interface ModerationPlaceSearch {
 
 export interface TaskSearch {
   placeName: string;
-  taskType: TaskCategory;
+  taskType: TaskType;
 }
 
 export interface ModerationTodoResult {

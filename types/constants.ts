@@ -28,6 +28,14 @@ export enum TaskCategory {
   ModerationTask = "moderation_task",
 }
 
+export enum ItemType {
+  Unknown = "unknown",
+  ChangeRequestChange = "change",
+  ChangeRequestDelete = "delete",
+  ModerationTaskCreated = "created",
+  ModerationTaskModified = "modified",
+}
+
 export enum TaskStatus {
   Unknown = "unknown",
   Open = "open",
@@ -36,9 +44,10 @@ export enum TaskStatus {
 
 export enum TaskType {
   Unknown = "unknown",
-  Change = "change",
-  New = "new",
-  Tip = "tip",
+  PlaceChange = "placeChange",
+  NewPlace = "newPlace",
+  ChangeTip = "changeTip",
+  RemoveTip = "removeTip",
 }
 
 export const LANGUAGE_OPTIONS = ["fi", "sv", "en"];
