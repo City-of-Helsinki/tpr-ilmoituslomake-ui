@@ -6,7 +6,7 @@ import { useI18n } from "next-localization";
 import i18nLoader from "../../../utils/i18n";
 import { initStore } from "../../../state/store";
 import { RootState } from "../../../state/reducers";
-import { ModerationStatus, INITIAL_MODERATION_EXTRA, INITIAL_MODERATION_STATUS, INITIAL_NOTIFICATION } from "../../../types/constants";
+import { ModerationStatus, TaskType, INITIAL_MODERATION_EXTRA, INITIAL_MODERATION_STATUS, INITIAL_NOTIFICATION } from "../../../types/constants";
 import { TagOption, ModerationTodoSchema } from "../../../types/general";
 import { PhotoStatus } from "../../../types/moderation_status";
 import { getTaskStatus, getTaskType } from "../../../utils/conversion";
@@ -86,17 +86,19 @@ export const getServerSideProps: GetServerSideProps = async ({ req, params, loca
       const taskResult = await (taskResponse.json() as Promise<ModerationTodoSchema>);
 
       try {
+        const taskType = getTaskType(taskResult.category, taskResult.item_type);
+
         initialReduxState.moderation = {
           ...initialReduxState.moderation,
           selectedTaskId: taskResult.target.id,
           selectedTask: taskResult.target.data,
           modifiedTaskId: taskResult.id,
-          modifiedTask: taskResult.data,
+          modifiedTask: taskType === TaskType.NewPlace || taskType === TaskType.PlaceChange ? taskResult.data : taskResult.target.data,
           moderationExtra: {
             ...initialReduxState.moderation.moderationExtra,
             created_at: taskResult.created_at,
             updated_at: taskResult.updated_at,
-            taskType: getTaskType(taskResult.category, taskResult.item_type),
+            taskType,
             status: getTaskStatus(taskResult.status),
             moderator: {
               fullName: taskResult.moderator ? `${taskResult.moderator.first_name} ${taskResult.moderator.last_name}`.trim() : "",
