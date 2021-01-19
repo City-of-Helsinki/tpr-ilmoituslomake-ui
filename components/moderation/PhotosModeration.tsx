@@ -22,7 +22,8 @@ const PhotosModeration = (): ReactElement => {
   const { photos: photosStatus } = moderationStatus;
 
   const updatePhoto = (index: number, evt: ChangeEvent<HTMLInputElement>) => {
-    dispatch(setModerationPhoto(index, { ...photosModified[index], [evt.target.name]: evt.target.value }));
+    const fieldName = evt.target.name.indexOf("permission") >= 0 ? "permission" : evt.target.name;
+    dispatch(setModerationPhoto(index, { ...photosModified[index], [fieldName]: evt.target.value }));
   };
 
   const updatePhotoAltText = (index: number, evt: ChangeEvent<HTMLTextAreaElement>) => {
@@ -53,10 +54,6 @@ const PhotosModeration = (): ReactElement => {
             index
           ) => {
             const key = `photo_${index}`;
-            const myHelsinki = permissionSelected === PhotoPermission.MyHelsinki ? i18n.t("moderation.photos.permission.myHelsinki") : null;
-            const creativeCommons =
-              permissionSelected === PhotoPermission.CreativeCommons ? i18n.t("moderation.photos.permission.creativeCommons") : null;
-
             return (
               <Fragment key={key}>
                 <h4 className="gridColumn1">{`${i18n.t("moderation.photos.photo.title")} ${index + 1}`}</h4>
@@ -174,14 +171,28 @@ const PhotosModeration = (): ReactElement => {
                   </Fragment>
                 ))}
 
-                <TextInput
+                <SelectionGroup
                   id={`permissionSelected_${index}`}
-                  className="gridColumn1 disabledTextColor"
+                  className="gridColumn1"
+                  direction="horizontal"
                   label={i18n.t("moderation.photos.permission.label")}
-                  name="permission"
-                  value={myHelsinki || creativeCommons || ""}
                   disabled
-                />
+                >
+                  <RadioButton
+                    id={`permissionSelected_myHelsinki_${index}`}
+                    label={i18n.t("moderation.photos.permission.myHelsinki")}
+                    name={`permissionSelected_${index}`}
+                    value={PhotoPermission.MyHelsinki}
+                    checked={photosSelected[index].permission === PhotoPermission.MyHelsinki}
+                  />
+                  <RadioButton
+                    id={`permissionSelected_creativeCommons_${index}`}
+                    label={i18n.t("moderation.photos.permission.creativeCommons")}
+                    name={`permissionSelected_${index}`}
+                    value={PhotoPermission.CreativeCommons}
+                    checked={photosSelected[index].permission === PhotoPermission.CreativeCommons}
+                  />
+                </SelectionGroup>
                 <ModifyButton
                   className="gridColumn2"
                   label={i18n.t("moderation.photos.permission.label")}
@@ -190,6 +201,7 @@ const PhotosModeration = (): ReactElement => {
                   modifyCallback={(fieldName, status) => updatePhotoStatus(index, fieldName, status)}
                 >
                   <SelectionGroup
+                    id={`permissionModified_${index}`}
                     className="gridColumn2"
                     direction="horizontal"
                     label={i18n.t("moderation.photos.permission.label")}
@@ -200,15 +212,15 @@ const PhotosModeration = (): ReactElement => {
                     <RadioButton
                       id={`permissionModified_myHelsinki_${index}`}
                       label={i18n.t("moderation.photos.permission.myHelsinki")}
-                      name="permission"
+                      name={`permissionModified_${index}`}
                       value={PhotoPermission.MyHelsinki}
                       checked={photosModified[index].permission === PhotoPermission.MyHelsinki}
                       onChange={(evt) => updatePhoto(index, evt)}
                     />
                     <RadioButton
-                      id={`permission_creativeCommons_${index}`}
+                      id={`permissionModified_creativeCommons_${index}`}
                       label={i18n.t("moderation.photos.permission.creativeCommons")}
-                      name="permission"
+                      name={`permissionModified_${index}`}
                       value={PhotoPermission.CreativeCommons}
                       checked={photosModified[index].permission === PhotoPermission.CreativeCommons}
                       onChange={(evt) => updatePhoto(index, evt)}
