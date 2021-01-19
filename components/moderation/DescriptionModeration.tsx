@@ -1,4 +1,4 @@
-import React, { Dispatch, ChangeEvent, ReactElement, Fragment } from "react";
+import React, { Dispatch, ChangeEvent, ReactElement } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useI18n } from "next-localization";
 import { TextInput, TextArea } from "hds-react";
@@ -11,8 +11,7 @@ import {
 } from "../../state/actions/moderationStatus";
 import { RootState } from "../../state/reducers";
 import { ModerationStatus, LANGUAGE_OPTIONS } from "../../types/constants";
-import ActionButton from "./ActionButton";
-import ModifyButton from "./ModifyButton";
+import ModerationSection from "./ModerationSection";
 
 const DescriptionModeration = (): ReactElement => {
   const i18n = useI18n();
@@ -69,109 +68,80 @@ const DescriptionModeration = (): ReactElement => {
       <div className="languageSection gridLayoutContainer">
         <h4 className="gridColumn1">{`${i18n.t("moderation.description.placeName.title")}${i18n.t("moderation.task.selected")}`}</h4>
         <h4 className="gridColumn2">{`${i18n.t("moderation.description.placeName.title")}${i18n.t("moderation.task.modified")}`}</h4>
+
         {LANGUAGE_OPTIONS.map((option) => (
-          <Fragment key={`placeName_${option}`}>
-            <TextInput
-              id={`placeNameSelected_${option}`}
-              className="gridColumn1 disabledTextColor"
-              label={`${i18n.t("moderation.description.placeName.label")} ${i18n.t(`general.inLanguage.${option}`)}`}
-              name={option}
-              value={placeNameSelected[option] as string}
-              disabled
-            />
-            <ModifyButton
-              className="gridColumn2"
-              label={`${i18n.t("moderation.description.placeName.label")} ${i18n.t(`general.inLanguage.${option}`)}`}
-              fieldName={option}
-              status={placeNameStatus[option]}
-              modifyCallback={updateNameStatus}
-            >
+          <ModerationSection
+            id={`placeName_${option}`}
+            key={`placeName_${option}`}
+            fieldName={option}
+            selectedValue={placeNameSelected[option] as string}
+            modifiedValue={placeNameModified[option] as string}
+            status={placeNameStatus[option]}
+            modifyButtonLabel={`${i18n.t("moderation.description.placeName.label")} ${i18n.t(`general.inLanguage.${option}`)}`}
+            changeCallback={updateName}
+            statusCallback={updateNameStatus}
+            ModerationComponent={
               <TextInput
-                id={`placeNameModified_${option}`}
-                className="gridColumn2 disabledTextColor"
+                id={`placeName_${option}`}
                 label={`${i18n.t("moderation.description.placeName.label")} ${i18n.t(`general.inLanguage.${option}`)}`}
                 name={option}
-                value={placeNameModified[option] as string}
-                onChange={updateName}
-                disabled={placeNameStatus[option] === ModerationStatus.Approved || placeNameStatus[option] === ModerationStatus.Rejected}
               />
-            </ModifyButton>
-            <ActionButton className="gridColumn3" fieldName={option} status={placeNameStatus[option]} actionCallback={updateNameStatus} />
-          </Fragment>
+            }
+          />
         ))}
       </div>
 
       <div className="languageSection gridLayoutContainer">
         <h4 className="gridColumn1">{`${i18n.t("moderation.description.shortDescription.title")}${i18n.t("moderation.task.selected")}`}</h4>
         <h4 className="gridColumn2">{`${i18n.t("moderation.description.shortDescription.title")}${i18n.t("moderation.task.modified")}`}</h4>
+
         {LANGUAGE_OPTIONS.map((option) => (
-          <Fragment key={`shortDescription_${option}`}>
-            <TextArea
-              id={`shortDescriptionSelected_${option}`}
-              className="gridColumn1 disabledTextColor"
-              rows={3}
-              label={`${i18n.t("moderation.description.shortDescription.label")} ${i18n.t(`general.inLanguage.${option}`)}`}
-              name={option}
-              value={shortDescSelected[option] as string}
-              disabled
-            />
-            <ModifyButton
-              className="gridColumn2"
-              label={`${i18n.t("moderation.description.shortDescription.label")} ${i18n.t(`general.inLanguage.${option}`)}`}
-              fieldName={option}
-              status={shortDescStatus[option]}
-              modifyCallback={updateShortDescriptionStatus}
-            >
+          <ModerationSection
+            id={`shortDescription_${option}`}
+            key={`shortDescription_${option}`}
+            fieldName={option}
+            selectedValue={shortDescSelected[option] as string}
+            modifiedValue={shortDescModified[option] as string}
+            status={shortDescStatus[option]}
+            modifyButtonLabel={`${i18n.t("moderation.description.shortDescription.label")} ${i18n.t(`general.inLanguage.${option}`)}`}
+            changeCallback={updateShortDescription}
+            statusCallback={updateShortDescriptionStatus}
+            ModerationComponent={
               <TextArea
-                id={`shortDescriptionModified_${option}`}
-                className="gridColumn2 disabledTextColor"
+                id={`shortDescription_${option}`}
                 rows={3}
                 label={`${i18n.t("moderation.description.shortDescription.label")} ${i18n.t(`general.inLanguage.${option}`)}`}
                 name={option}
-                value={shortDescModified[option] as string}
-                onChange={updateShortDescription}
-                disabled={shortDescStatus[option] === ModerationStatus.Approved || shortDescStatus[option] === ModerationStatus.Rejected}
               />
-            </ModifyButton>
-            <ActionButton className="gridColumn3" fieldName={option} status={shortDescStatus[option]} actionCallback={updateShortDescriptionStatus} />
-          </Fragment>
+            }
+          />
         ))}
       </div>
 
       <div className="languageSection gridLayoutContainer">
         <h4 className="gridColumn1">{`${i18n.t("moderation.description.longDescription.title")}${i18n.t("moderation.task.selected")}`}</h4>
         <h4 className="gridColumn2">{`${i18n.t("moderation.description.longDescription.title")}${i18n.t("moderation.task.modified")}`}</h4>
+
         {LANGUAGE_OPTIONS.map((option) => (
-          <Fragment key={`longDescription_${option}`}>
-            <TextArea
-              id={`longDescriptionSelected_${option}`}
-              className="gridColumn1 disabledTextColor"
-              rows={6}
-              label={`${i18n.t("moderation.description.longDescription.label")} ${i18n.t(`general.inLanguage.${option}`)}`}
-              name={option}
-              value={longDescSelected[option] as string}
-              disabled
-            />
-            <ModifyButton
-              className="gridColumn2"
-              label={`${i18n.t("moderation.description.longDescription.label")} ${i18n.t(`general.inLanguage.${option}`)}`}
-              fieldName={option}
-              status={longDescStatus[option]}
-              modifyCallback={updateLongDescriptionStatus}
-            >
+          <ModerationSection
+            id={`longDescription_${option}`}
+            key={`longDescription_${option}`}
+            fieldName={option}
+            selectedValue={longDescSelected[option] as string}
+            modifiedValue={longDescModified[option] as string}
+            status={longDescStatus[option]}
+            modifyButtonLabel={`${i18n.t("moderation.description.longDescription.label")} ${i18n.t(`general.inLanguage.${option}`)}`}
+            changeCallback={updateLongDescription}
+            statusCallback={updateLongDescriptionStatus}
+            ModerationComponent={
               <TextArea
-                id={`longDescriptionModified_${option}`}
-                className="gridColumn2 disabledTextColor"
+                id={`longDescription_${option}`}
                 rows={6}
                 label={`${i18n.t("moderation.description.longDescription.label")} ${i18n.t(`general.inLanguage.${option}`)}`}
                 name={option}
-                value={longDescModified[option] as string}
-                onChange={updateLongDescription}
-                disabled={longDescStatus[option] === ModerationStatus.Approved || longDescStatus[option] === ModerationStatus.Rejected}
               />
-            </ModifyButton>
-            <ActionButton className="gridColumn3" fieldName={option} status={longDescStatus[option]} actionCallback={updateLongDescriptionStatus} />
-          </Fragment>
+            }
+          />
         ))}
       </div>
     </div>

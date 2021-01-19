@@ -7,8 +7,7 @@ import { setModerationContact } from "../../state/actions/moderation";
 import { setModerationContactStatus } from "../../state/actions/moderationStatus";
 import { RootState } from "../../state/reducers";
 import { ModerationStatus } from "../../types/constants";
-import ActionButton from "./ActionButton";
-import ModifyButton from "./ModifyButton";
+import ModerationSection from "./ModerationSection";
 
 const ContactModeration = (): ReactElement => {
   const i18n = useI18n();
@@ -37,61 +36,30 @@ const ContactModeration = (): ReactElement => {
       <div className="gridLayoutContainer">
         <h4 className="gridColumn1">{`${i18n.t("moderation.contact.title")}${i18n.t("moderation.task.selected")}`}</h4>
         <h4 className="gridColumn2">{`${i18n.t("moderation.contact.title")}${i18n.t("moderation.task.modified")}`}</h4>
-        <TextInput
-          id="phoneSelected"
-          className="gridColumn1 disabledTextColor"
-          label={i18n.t("moderation.contact.phone.label")}
-          name="phone"
-          value={phoneSelected}
-          disabled
-        />
-        <ModifyButton
-          className="gridColumn2"
-          label={i18n.t("moderation.contact.phone.label")}
-          fieldName="phone"
-          status={phoneStatus}
-          modifyCallback={updateContactStatus}
-        >
-          <TextInput
-            id="phoneModified"
-            className="gridColumn2 disabledTextColor"
-            label={i18n.t("moderation.contact.phone.label")}
-            name="phone"
-            value={phoneModified}
-            onChange={updateContact}
-            disabled={phoneStatus === ModerationStatus.Approved || phoneStatus === ModerationStatus.Rejected}
-          />
-        </ModifyButton>
-        <ActionButton className="gridColumn3" fieldName="phone" status={phoneStatus} actionCallback={updateContactStatus} />
-      </div>
 
-      <div className="gridLayoutContainer">
-        <TextInput
-          id="emailSelected"
-          className="gridColumn1 disabledTextColor"
-          label={i18n.t("moderation.contact.email.label")}
-          name="email"
-          value={emailSelected}
-          disabled
+        <ModerationSection
+          id="phone"
+          fieldName="phone"
+          selectedValue={phoneSelected}
+          modifiedValue={phoneModified}
+          status={phoneStatus}
+          modifyButtonLabel={i18n.t("moderation.contact.phone.label")}
+          changeCallback={updateContact}
+          statusCallback={updateContactStatus}
+          ModerationComponent={<TextInput id="phone" label={i18n.t("moderation.contact.phone.label")} name="phone" />}
         />
-        <ModifyButton
-          className="gridColumn2"
-          label={i18n.t("moderation.contact.email.label")}
+
+        <ModerationSection
+          id="email"
           fieldName="email"
+          selectedValue={emailSelected}
+          modifiedValue={emailModified}
           status={emailStatus}
-          modifyCallback={updateContactStatus}
-        >
-          <TextInput
-            id="emailModified"
-            className="gridColumn2 disabledTextColor"
-            label={i18n.t("moderation.contact.email.label")}
-            name="email"
-            value={emailModified}
-            onChange={updateContact}
-            disabled={emailStatus === ModerationStatus.Approved || emailStatus === ModerationStatus.Rejected}
-          />
-        </ModifyButton>
-        <ActionButton className="gridColumn3" fieldName="email" status={emailStatus} actionCallback={updateContactStatus} />
+          modifyButtonLabel={i18n.t("moderation.contact.email.label")}
+          changeCallback={updateContact}
+          statusCallback={updateContactStatus}
+          ModerationComponent={<TextInput id="email" label={i18n.t("moderation.contact.email.label")} name="email" />}
+        />
       </div>
     </div>
   );

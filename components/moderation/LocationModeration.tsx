@@ -7,8 +7,7 @@ import { setModerationAddress } from "../../state/actions/moderation";
 import { setModerationAddressStatus } from "../../state/actions/moderationStatus";
 import { RootState } from "../../state/reducers";
 import { ModerationStatus } from "../../types/constants";
-import ActionButton from "./ActionButton";
-import ModifyButton from "./ModifyButton";
+import ModerationSection from "./ModerationSection";
 
 const LocationModeration = (): ReactElement => {
   const i18n = useI18n();
@@ -31,17 +30,14 @@ const LocationModeration = (): ReactElement => {
     },
   } = modifiedTask;
 
+  // Use the street status for all the fields
   const moderationStatus = useSelector((state: RootState) => state.moderationStatus.moderationStatus);
   const {
     address: {
-      fi: { street: streetFiStatus, postal_code: postalCodeFiStatus, post_office: postOfficeFiStatus },
-      sv: { street: streetSvStatus, postal_code: postalCodeSvStatus, post_office: postOfficeSvStatus },
+      fi: { street: addressFiStatus },
+      sv: { street: addressSvStatus },
     },
   } = moderationStatus;
-
-  // Use the street status for all the fields
-  const addressFiStatus = streetFiStatus;
-  const addressSvStatus = streetSvStatus;
 
   const updateAddress = (language: string, evt: ChangeEvent<HTMLInputElement>) => {
     dispatch(setModerationAddress(language, { [evt.target.name]: evt.target.value }));
@@ -61,84 +57,64 @@ const LocationModeration = (): ReactElement => {
         <h4 className="gridColumn2">{`${i18n.t("moderation.location.address")} ${i18n.t("general.inLanguage.fi")}${i18n.t(
           "moderation.task.modified"
         )}`}</h4>
-        <TextInput
-          id="streetAddressFiSelected"
-          className="gridColumn1 disabledTextColor"
-          label={`${i18n.t("moderation.location.streetAddress.label")} ${i18n.t("general.inLanguage.fi")}`}
-          name="street"
-          value={streetFiSelected}
-          disabled
-        />
-        <ModifyButton
-          className="gridColumn2"
-          label={`${i18n.t("moderation.location.address")} ${i18n.t("general.inLanguage.fi")}`}
+
+        <ModerationSection
+          id="streetAddressFi"
           fieldName="fi"
+          selectedValue={streetFiSelected}
+          modifiedValue={streetFiModified}
           status={addressFiStatus}
-          modifyCallback={updateAddressStatus}
-        >
-          <TextInput
-            id="streetAddressFiModified"
-            className="gridColumn2 disabledTextColor"
-            label={`${i18n.t("moderation.location.streetAddress.label")} ${i18n.t("general.inLanguage.fi")}`}
-            name="street"
-            value={streetFiModified}
-            onChange={(evt) => updateAddress("fi", evt)}
-            disabled={streetFiStatus === ModerationStatus.Approved || streetFiStatus === ModerationStatus.Rejected}
-          />
-        </ModifyButton>
-        <ActionButton className="gridColumn3" fieldName="fi" status={addressFiStatus} actionCallback={updateAddressStatus} />
-        <TextInput
-          id="postalCodeFiSelected"
-          className="gridColumn1 disabledTextColor"
-          label={`${i18n.t("moderation.location.postalCode.label")} ${i18n.t("general.inLanguage.fi")}`}
-          name="postal_code"
-          value={postalCodeFiSelected}
-          disabled
+          modifyButtonLabel={`${i18n.t("moderation.location.address")} ${i18n.t("general.inLanguage.fi")}`}
+          changeCallback={(evt: ChangeEvent<HTMLInputElement>) => updateAddress("fi", evt)}
+          statusCallback={updateAddressStatus}
+          ModerationComponent={
+            <TextInput
+              id="streetAddressFi"
+              label={`${i18n.t("moderation.location.streetAddress.label")} ${i18n.t("general.inLanguage.fi")}`}
+              name="street"
+            />
+          }
         />
-        <ModifyButton
-          className="gridColumn2"
-          label={`${i18n.t("moderation.location.address")} ${i18n.t("general.inLanguage.fi")}`}
+
+        <ModerationSection
+          id="postalCodeFi"
           fieldName="fi"
+          selectedValue={postalCodeFiSelected}
+          modifiedValue={postalCodeFiModified}
           status={addressFiStatus}
-          modifyCallback={updateAddressStatus}
-          hidden
-        >
-          <TextInput
-            id="postalCodeFiModified"
-            className="gridColumn2 disabledTextColor"
-            label={`${i18n.t("moderation.location.postalCode.label")} ${i18n.t("general.inLanguage.fi")}`}
-            name="postal_code"
-            value={postalCodeFiModified}
-            onChange={(evt) => updateAddress("fi", evt)}
-            disabled={postalCodeFiStatus === ModerationStatus.Approved || postalCodeFiStatus === ModerationStatus.Rejected}
-          />
-        </ModifyButton>
-        <TextInput
-          id="postalOfficeFiSelected"
-          className="gridColumn1 disabledTextColor"
-          label={`${i18n.t("moderation.location.postalOffice.label")} ${i18n.t("general.inLanguage.fi")}`}
-          name="post_office"
-          value={postOfficeFiSelected}
-          disabled
+          modifyButtonLabel={`${i18n.t("moderation.location.address")} ${i18n.t("general.inLanguage.fi")}`}
+          modifyButtonHidden
+          actionButtonHidden
+          changeCallback={(evt: ChangeEvent<HTMLInputElement>) => updateAddress("fi", evt)}
+          statusCallback={updateAddressStatus}
+          ModerationComponent={
+            <TextInput
+              id="postalCodeFi"
+              label={`${i18n.t("moderation.location.postalCode.label")} ${i18n.t("general.inLanguage.fi")}`}
+              name="postal_code"
+            />
+          }
         />
-        <ModifyButton
-          className="gridColumn2"
-          label={`${i18n.t("moderation.location.address")} ${i18n.t("general.inLanguage.fi")}`}
+
+        <ModerationSection
+          id="postalOfficeFi"
           fieldName="fi"
+          selectedValue={postOfficeFiSelected}
+          modifiedValue={postOfficeFiModified}
           status={addressFiStatus}
-          modifyCallback={updateAddressStatus}
-          hidden
-        >
-          <TextInput
-            id="postalOfficeFiModified"
-            className="gridColumn2 disabledTextColor"
-            label={`${i18n.t("moderation.location.postalOffice.label")} ${i18n.t("general.inLanguage.fi")}`}
-            name="post_office"
-            value={postOfficeFiModified}
-            onChange={(evt) => updateAddress("fi", evt)}
-            disabled={postOfficeFiStatus === ModerationStatus.Approved || postOfficeFiStatus === ModerationStatus.Rejected}
-          />
-        </ModifyButton>
+          modifyButtonLabel={`${i18n.t("moderation.location.address")} ${i18n.t("general.inLanguage.fi")}`}
+          modifyButtonHidden
+          actionButtonHidden
+          changeCallback={(evt: ChangeEvent<HTMLInputElement>) => updateAddress("fi", evt)}
+          statusCallback={updateAddressStatus}
+          ModerationComponent={
+            <TextInput
+              id="postalOfficeFi"
+              label={`${i18n.t("moderation.location.postalOffice.label")} ${i18n.t("general.inLanguage.fi")}`}
+              name="post_office"
+            />
+          }
+        />
       </div>
 
       <div className="gridLayoutContainer">
@@ -148,84 +124,64 @@ const LocationModeration = (): ReactElement => {
         <h4 className="gridColumn2">{`${i18n.t("moderation.location.address")} ${i18n.t("general.inLanguage.sv")}${i18n.t(
           "moderation.task.modified"
         )}`}</h4>
-        <TextInput
-          id="streetAddressSvSelected"
-          className="gridColumn1 disabledTextColor"
-          label={`${i18n.t("moderation.location.streetAddress.label")} ${i18n.t("general.inLanguage.sv")}`}
-          name="street"
-          value={streetSvSelected}
-          disabled
-        />
-        <ModifyButton
-          className="gridColumn2"
-          label={`${i18n.t("moderation.location.address")} ${i18n.t("general.inLanguage.sv")}`}
+
+        <ModerationSection
+          id="streetAddressSv"
           fieldName="sv"
+          selectedValue={streetSvSelected}
+          modifiedValue={streetSvModified}
           status={addressSvStatus}
-          modifyCallback={updateAddressStatus}
-        >
-          <TextInput
-            id="streetAddressSvModified"
-            className="gridColumn2 disabledTextColor"
-            label={`${i18n.t("moderation.location.streetAddress.label")} ${i18n.t("general.inLanguage.sv")}`}
-            name="street"
-            value={streetSvModified}
-            onChange={(evt) => updateAddress("sv", evt)}
-            disabled={streetSvStatus === ModerationStatus.Approved || streetSvStatus === ModerationStatus.Rejected}
-          />
-        </ModifyButton>
-        <ActionButton className="gridColumn3" fieldName="sv" status={addressSvStatus} actionCallback={updateAddressStatus} />
-        <TextInput
-          id="postalCodeSvSelected"
-          className="gridColumn1 disabledTextColor"
-          label={`${i18n.t("moderation.location.postalCode.label")} ${i18n.t("general.inLanguage.sv")}`}
-          name="postal_code"
-          value={postalCodeSvSelected}
-          disabled
+          modifyButtonLabel={`${i18n.t("moderation.location.address")} ${i18n.t("general.inLanguage.sv")}`}
+          changeCallback={(evt: ChangeEvent<HTMLInputElement>) => updateAddress("sv", evt)}
+          statusCallback={updateAddressStatus}
+          ModerationComponent={
+            <TextInput
+              id="streetAddressSv"
+              label={`${i18n.t("moderation.location.streetAddress.label")} ${i18n.t("general.inLanguage.sv")}`}
+              name="street"
+            />
+          }
         />
-        <ModifyButton
-          className="gridColumn2"
-          label={`${i18n.t("moderation.location.address")} ${i18n.t("general.inLanguage.sv")}`}
+
+        <ModerationSection
+          id="postalCodeSv"
           fieldName="sv"
+          selectedValue={postalCodeSvSelected}
+          modifiedValue={postalCodeSvModified}
           status={addressSvStatus}
-          modifyCallback={updateAddressStatus}
-          hidden
-        >
-          <TextInput
-            id="postalCodeSvModified"
-            className="gridColumn2 disabledTextColor"
-            label={`${i18n.t("moderation.location.postalCode.label")} ${i18n.t("general.inLanguage.sv")}`}
-            name="postal_code"
-            value={postalCodeSvModified}
-            onChange={(evt) => updateAddress("sv", evt)}
-            disabled={postalCodeSvStatus === ModerationStatus.Approved || postalCodeSvStatus === ModerationStatus.Rejected}
-          />
-        </ModifyButton>
-        <TextInput
-          id="postalOfficeSvSelected"
-          className="gridColumn1 disabledTextColor"
-          label={`${i18n.t("moderation.location.postalOffice.label")} ${i18n.t("general.inLanguage.sv")}`}
-          name="post_office"
-          value={postOfficeSvSelected}
-          disabled
+          modifyButtonLabel={`${i18n.t("moderation.location.address")} ${i18n.t("general.inLanguage.sv")}`}
+          modifyButtonHidden
+          actionButtonHidden
+          changeCallback={(evt: ChangeEvent<HTMLInputElement>) => updateAddress("sv", evt)}
+          statusCallback={updateAddressStatus}
+          ModerationComponent={
+            <TextInput
+              id="postalCodeSv"
+              label={`${i18n.t("moderation.location.postalCode.label")} ${i18n.t("general.inLanguage.sv")}`}
+              name="postal_code"
+            />
+          }
         />
-        <ModifyButton
-          className="gridColumn2"
-          label={`${i18n.t("moderation.location.address")} ${i18n.t("general.inLanguage.sv")}`}
+
+        <ModerationSection
+          id="postalOfficeSv"
           fieldName="sv"
+          selectedValue={postOfficeSvSelected}
+          modifiedValue={postOfficeSvModified}
           status={addressSvStatus}
-          modifyCallback={updateAddressStatus}
-          hidden
-        >
-          <TextInput
-            id="postalOfficeSvModified"
-            className="gridColumn2 disabledTextColor"
-            label={`${i18n.t("moderation.location.postalOffice.label")} ${i18n.t("general.inLanguage.sv")}`}
-            name="post_office"
-            value={postOfficeSvModified}
-            onChange={(evt) => updateAddress("sv", evt)}
-            disabled={postOfficeSvStatus === ModerationStatus.Approved || postOfficeSvStatus === ModerationStatus.Rejected}
-          />
-        </ModifyButton>
+          modifyButtonLabel={`${i18n.t("moderation.location.address")} ${i18n.t("general.inLanguage.sv")}`}
+          modifyButtonHidden
+          actionButtonHidden
+          changeCallback={(evt: ChangeEvent<HTMLInputElement>) => updateAddress("sv", evt)}
+          statusCallback={updateAddressStatus}
+          ModerationComponent={
+            <TextInput
+              id="postalOfficeSv"
+              label={`${i18n.t("moderation.location.postalOffice.label")} ${i18n.t("general.inLanguage.sv")}`}
+              name="post_office"
+            />
+          }
+        />
       </div>
     </div>
   );

@@ -61,6 +61,7 @@ const MapModeration = ({ setMapsReady }: MapModerationProps): ReactElement => {
       <div className="gridLayoutContainer">
         <h4 className="gridColumn1">{`${i18n.t("moderation.map.title")}${i18n.t("moderation.task.selected")}`}</h4>
         <h4 className="gridColumn2">{`${i18n.t("moderation.map.title")}${i18n.t("moderation.task.modified")}`}</h4>
+
         <MapWrapper
           className={`gridColumn1 ${styles.map}`}
           initialCenter={initialCenter as [number, number]}
@@ -83,7 +84,7 @@ const MapModeration = ({ setMapsReady }: MapModerationProps): ReactElement => {
             location={locationModified}
             setLocation={updateLocation}
             setMapReady={setMap2Ready}
-            draggableMarker
+            draggableMarker={locationStatus !== ModerationStatus.Approved && locationStatus !== ModerationStatus.Rejected}
           />
         </ModifyButton>
         <ActionButton className="gridColumn3" fieldName="location" status={locationStatus} actionCallback={updateLocationStatus} />

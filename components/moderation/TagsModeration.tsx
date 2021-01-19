@@ -10,8 +10,7 @@ import { RootState } from "../../state/reducers";
 import { ModerationStatus } from "../../types/constants";
 import { OptionType, TagOption } from "../../types/general";
 import { defaultLocale } from "../../utils/i18n";
-import ActionButton from "./ActionButton";
-import ModifyButton from "./ModifyButton";
+import ModerationSection from "./ModerationSection";
 
 const TagsModeration = (): ReactElement => {
   const i18n = useI18n();
@@ -52,42 +51,28 @@ const TagsModeration = (): ReactElement => {
       <div className="gridLayoutContainer">
         <h4 className="gridColumn1">{`${i18n.t("moderation.tags.title")}${i18n.t("moderation.task.selected")}`}</h4>
         <h4 className="gridColumn2">{`${i18n.t("moderation.tags.title")}${i18n.t("moderation.task.modified")}`}</h4>
-        <Combobox
-          id="tagSelected"
-          className="gridColumn1"
-          // @ts-ignore: Erroneous error that the type for options should be OptionType[][]
-          options={convertOptions(tagOptions)}
-          value={convertValues(tagsSelected)}
-          label={i18n.t("moderation.tags.add.label")}
-          toggleButtonAriaLabel={i18n.t("moderation.button.toggleMenu")}
-          selectedItemRemoveButtonAriaLabel={i18n.t("moderation.button.remove")}
-          clearButtonAriaLabel={i18n.t("moderation.button.clearAllSelections")}
-          multiselect
-          disabled
-        />
-        <ModifyButton
-          className="gridColumn2"
-          label={i18n.t("moderation.tags.title")}
+
+        <ModerationSection
+          id="tag"
           fieldName="tagModified"
+          selectedValue={convertValues(tagsSelected)}
+          modifiedValue={convertValues(tagsModified)}
           status={tagsStatus}
-          modifyCallback={updateTagStatus}
-        >
-          <Combobox
-            id="tagModified"
-            className="gridColumn2"
-            // @ts-ignore: Erroneous error that the type for options should be OptionType[][]
-            options={convertOptions(tagOptions)}
-            value={convertValues(tagsModified)}
-            onChange={updateTags}
-            label={i18n.t("moderation.tags.add.label")}
-            toggleButtonAriaLabel={i18n.t("moderation.button.toggleMenu")}
-            selectedItemRemoveButtonAriaLabel={i18n.t("moderation.button.remove")}
-            clearButtonAriaLabel={i18n.t("moderation.button.clearAllSelections")}
-            multiselect
-            disabled={tagsStatus === ModerationStatus.Approved || tagsStatus === ModerationStatus.Rejected}
-          />
-        </ModifyButton>
-        <ActionButton className="gridColumn3" fieldName="tagModified" status={tagsStatus} actionCallback={updateTagStatus} />
+          modifyButtonLabel={i18n.t("moderation.tags.title")}
+          changeCallback={updateTags}
+          statusCallback={updateTagStatus}
+          ModerationComponent={
+            <Combobox
+              id="tag"
+              options={convertOptions(tagOptions)}
+              label={i18n.t("moderation.tags.title")}
+              toggleButtonAriaLabel={i18n.t("moderation.button.toggleMenu")}
+              selectedItemRemoveButtonAriaLabel={i18n.t("moderation.button.remove")}
+              clearButtonAriaLabel={i18n.t("moderation.button.clearAllSelections")}
+              multiselect
+            />
+          }
+        />
       </div>
     </div>
   );
