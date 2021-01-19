@@ -25,7 +25,8 @@ const Photos = (): ReactElement => {
   const { photos: photosValid } = notificationValidation;
 
   const updatePhoto = (index: number, evt: ChangeEvent<HTMLInputElement>) => {
-    dispatch(setNotificationPhoto(index, { ...photos[index], [evt.target.name]: evt.target.value }));
+    const fieldName = evt.target.name.indexOf("permission") >= 0 ? "permission" : evt.target.name;
+    dispatch(setNotificationPhoto(index, { ...photos[index], [fieldName]: evt.target.value }));
   };
 
   const updatePhotoAltText = (index: number, evt: ChangeEvent<HTMLTextAreaElement>) => {
@@ -119,13 +120,15 @@ const Photos = (): ReactElement => {
   };
 
   return (
-    <div className={styles.photos}>
+    <div className={`formSection ${styles.photos}`}>
       {photos.map(({ sourceType, url, altText, permission, source, preview }, index) => {
         const key = `photo_${index}`;
         return (
           <div key={key}>
             <h3>{`${i18n.t("notification.photos.photo.title")} ${index + 1}`}</h3>
-            <NotificationNotice messageKey="notification.photos.photo.notice1" messageKey2="notification.photos.photo.notice2" />
+            <div className={styles.notice}>
+              <NotificationNotice messageKey="notification.photos.photo.notice1" messageKey2="notification.photos.photo.notice2" />
+            </div>
 
             {sourceType === PhotoSourceType.Device && (
               <>
@@ -226,9 +229,12 @@ const Photos = (): ReactElement => {
                 </div>
 
                 <h5>{i18n.t("notification.photos.permission.title")}</h5>
-                <NotificationNotice messageKey="notification.photos.permission.notice" />
+                <div className={styles.notice}>
+                  <NotificationNotice messageKey="notification.photos.permission.notice" />
+                </div>
 
                 <SelectionGroup
+                  id={`permission_${index}`}
                   direction="vertical"
                   label={i18n.t("notification.photos.permission.label")}
                   errorText={
@@ -241,7 +247,7 @@ const Photos = (): ReactElement => {
                   <RadioButton
                     id={`permission_myHelsinki_${index}`}
                     label={i18n.t("notification.photos.permission.myHelsinki")}
-                    name="permission"
+                    name={`permission_${index}`}
                     value={PhotoPermission.MyHelsinki}
                     checked={permission === PhotoPermission.MyHelsinki}
                     onChange={(evt) => updatePhoto(index, evt)}
@@ -249,7 +255,7 @@ const Photos = (): ReactElement => {
                   <RadioButton
                     id={`permission_creativeCommons_${index}`}
                     label={i18n.t("notification.photos.permission.creativeCommons1")}
-                    name="permission"
+                    name={`permission_${index}`}
                     value={PhotoPermission.CreativeCommons}
                     checked={permission === PhotoPermission.CreativeCommons}
                     onChange={(evt) => updatePhoto(index, evt)}

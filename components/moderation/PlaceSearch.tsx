@@ -100,7 +100,12 @@ const PlaceSearch = (): ReactElement => {
           selectedItemRemoveButtonAriaLabel={i18n.t("notification.button.remove")}
           clearButtonAriaLabel={i18n.t("notification.button.clearAllSelections")}
         />
-        <SelectionGroup direction="horizontal" className={styles.gridColumn3} label={i18n.t("moderation.placeSearch.publishPermission.label")}>
+        <SelectionGroup
+          id="publishPermission"
+          direction="horizontal"
+          className={styles.gridColumn3}
+          label={i18n.t("moderation.placeSearch.publishPermission.label")}
+        >
           {publishPermissionOptions.map((option) => (
             <Checkbox
               id={option}

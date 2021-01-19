@@ -2,13 +2,8 @@
 @import "../../styles/mixins";
 
 .photos {
-  margin-bottom: $spacing-layout-l;
-
-  section {
-    margin-bottom: $spacing-layout-s;
-  }
-
-  h5 {
+  h5,
+  .notice {
     margin-bottom: $spacing-layout-xs;
   }
 

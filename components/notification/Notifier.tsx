@@ -36,6 +36,7 @@ const Notifier = (): ReactElement => {
       <h3>{i18n.t("notification.notifier.title")}</h3>
 
       <SelectionGroup
+        id="notifierType"
         direction="horizontal"
         className="formInput"
         label={i18n.t("notification.notifier.notifierType")}
