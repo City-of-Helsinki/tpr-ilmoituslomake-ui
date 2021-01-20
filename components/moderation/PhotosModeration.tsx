@@ -54,7 +54,7 @@ const PhotosModeration = (): ReactElement => {
 
         return (
           <Fragment key={key}>
-            <div className="gridLayoutContainer">
+            <div className="gridLayoutContainer moderation">
               <h4 className="gridColumn1">{`${i18n.t("moderation.photos.photo.title")} ${index + 1}${i18n.t("moderation.task.selected")}`}</h4>
               <h4 className="gridColumn2">{`${i18n.t("moderation.photos.photo.title")} ${index + 1}${i18n.t("moderation.task.modified")}`}</h4>
 
@@ -72,7 +72,7 @@ const PhotosModeration = (): ReactElement => {
               />
             </div>
 
-            <div className="languageSection gridLayoutContainer">
+            <div className="languageSection gridLayoutContainer moderation">
               {LANGUAGE_OPTIONS.map((option) => (
                 <ModerationSection
                   id={`altText_${option}`}
@@ -96,7 +96,7 @@ const PhotosModeration = (): ReactElement => {
               ))}
             </div>
 
-            <div className="gridLayoutContainer">
+            <div className="gridLayoutContainer moderation">
               <SelectionGroup
                 id={`permissionSelected_${index}`}
                 className="gridColumn1"

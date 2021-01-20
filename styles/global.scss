@@ -84,20 +84,14 @@ textarea {
   z-index: auto !important;
 }
 
-.languageSection {
-  border: solid $color-copper-light 0;
-  border-left-width: $spacing-2-xs;
-  padding-left: $spacing-2-xs;
-
-  h3 {
-    color: $color-bus;
-  }
-}
-
 .gridLayoutContainer {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax($spacing-3-xl, 1fr));
   margin-bottom: $spacing-layout-s;
+
+  &.moderation {
+    padding-left: $spacing-s;
+  }
 
   @include media(xs) {
     column-gap: $spacing-xs;
@@ -131,6 +125,20 @@ textarea {
 
 .gridColumn3 {
   grid-column: 5 / 5;
+}
+
+.languageSection {
+  border: solid $color-copper-light 0;
+  border-left-width: $spacing-2-xs;
+  padding-left: $spacing-2-xs;
+
+  &.moderation {
+    padding-left: $spacing-2-xs;
+  }
+
+  h3 {
+    color: $color-bus;
+  }
 }
 
 .flexSpace {
