@@ -50,6 +50,13 @@ export enum TaskType {
   RemoveTip = "removeTip",
 }
 
+export enum Toast {
+  NotAuthenticated = "notAuthenticated",
+  ValidationFailed = "validationFailed",
+  SaveFailed = "saveFailed",
+  SaveSucceeded = "saveSucceeded",
+}
+
 export const LANGUAGE_OPTIONS = ["fi", "sv", "en"];
 export const MAX_PAGE = 4;
 export const MAX_LENGTH_SHORT_DESC = 150;

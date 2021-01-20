@@ -7,8 +7,9 @@ import { NotificationAction, NotificationValidationAction } from "../../state/ac
 import { setPage } from "../../state/actions/notification";
 import { setPageValid } from "../../state/actions/notificationValidation";
 import { RootState } from "../../state/reducers";
-import { MAX_PAGE } from "../../types/constants";
-import validateNotificationData, { isPageValid } from "../../utils/validation";
+import { MAX_PAGE, Toast } from "../../types/constants";
+import { saveNotification } from "../../utils/save";
+import { isPageValid } from "../../utils/validation";
 import styles from "./NotificationFooter.module.scss";
 
 const NotificationFooter = (): ReactElement => {
@@ -23,12 +24,6 @@ const NotificationFooter = (): ReactElement => {
   const notification = useSelector((state: RootState) => state.notification.notification);
   const notificationExtra = useSelector((state: RootState) => state.notification.notificationExtra);
 
-  enum Toast {
-    NotAuthenticated = "notAuthenticated",
-    ValidationFailed = "validationFailed",
-    SaveFailed = "saveFailed",
-    SaveSucceeded = "saveSucceeded",
-  }
   const [toast, setToast] = useState<Toast>();
 
   const previousPage = () => {
@@ -41,71 +36,6 @@ const NotificationFooter = (): ReactElement => {
       dispatchValidation(setPageValid(true));
     } else {
       dispatchValidation(setPageValid(false));
-    }
-  };
-
-  const sendNotification = async () => {
-    try {
-      const valid = validateNotificationData(notification);
-
-      if (currentUser?.authenticated && valid) {
-        // Include all the notification details and also the photos in the post data
-        // The notification id is only included if it has a value, and is used for modifying existing notifications
-        const { photos } = notificationExtra;
-
-        const postData = {
-          ...(notificationId > 0 && { id: notificationId }),
-          data: {
-            ...notification,
-            images: photos.map((photo, index) => {
-              const { sourceType: source_type, url, altText: alt_text, permission, source } = photo;
-              return { index, source_type, url, alt_text, permission, source };
-            }),
-          },
-          images: photos
-            .map((photo, index) => {
-              const { base64 } = photo;
-              return { index, base64 };
-            })
-            .filter((photo) => photo.base64 && photo.base64.length > 0),
-        };
-
-        console.log("SENDING", postData);
-
-        const createResponse = await fetch("/api/notification/create/", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(postData),
-        });
-        if (createResponse.ok) {
-          const notificationResult = await createResponse.json();
-
-          // TODO - handle response
-          console.log("RESPONSE", notificationResult);
-
-          if (notificationResult.id) {
-            // setToast(Toast.SaveSucceeded);
-            router.push(`/notification/sent/${notificationResult.id}`);
-          } else {
-            setToast(Toast.SaveFailed);
-          }
-        } else {
-          setToast(Toast.SaveFailed);
-
-          // TODO - handle error
-          const notificationResult = await createResponse.text();
-          console.log("FAILED", notificationResult);
-        }
-      } else if (!valid) {
-        setToast(Toast.ValidationFailed);
-      } else {
-        setToast(Toast.NotAuthenticated);
-      }
-    } catch (err) {
-      console.log("ERROR", err);
-      setToast(Toast.SaveFailed);
     }
   };
 
@@ -138,7 +68,10 @@ const NotificationFooter = (): ReactElement => {
         </Button>
       )}
       {currentPage === MAX_PAGE && (
-        <Button iconRight={<IconArrowRight />} onClick={sendNotification}>
+        <Button
+          iconRight={<IconArrowRight />}
+          onClick={() => saveNotification(currentUser, notificationId, notification, notificationExtra, router, setToast)}
+        >
           {i18n.t("notification.button.send")}
         </Button>
       )}
