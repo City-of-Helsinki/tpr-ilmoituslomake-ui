@@ -91,6 +91,11 @@ export interface TaskSearch {
   taskType: TaskType;
 }
 
+export interface ChangeRequestSchema {
+  description: string;
+  contact_details: string;
+}
+
 export interface ModerationTodoResult {
   id: number;
   target: {
@@ -122,7 +127,7 @@ export interface ModerationTodoSchema {
   category: string;
   item_type: string;
   status: string;
-  data: NotificationSchema;
+  data: NotificationSchema | ChangeRequestSchema;
   moderator: {
     first_name?: string;
     last_name?: string;
@@ -140,6 +145,7 @@ export interface ModerationExtra {
   photosSelected: Photo[];
   photosModified: Photo[];
   tagOptions: TagOption[];
+  changeRequest?: ChangeRequestSchema;
   created_at: string;
   updated_at: string;
   taskType: TaskType;

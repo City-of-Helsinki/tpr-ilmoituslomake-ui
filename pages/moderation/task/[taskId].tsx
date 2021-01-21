@@ -7,8 +7,9 @@ import i18nLoader from "../../../utils/i18n";
 import { initStore } from "../../../state/store";
 import { RootState } from "../../../state/reducers";
 import { ModerationStatus, TaskType, INITIAL_MODERATION_EXTRA, INITIAL_MODERATION_STATUS, INITIAL_NOTIFICATION } from "../../../types/constants";
-import { TagOption, ModerationTodoSchema } from "../../../types/general";
+import { TagOption, ChangeRequestSchema, ModerationTodoSchema } from "../../../types/general";
 import { PhotoStatus } from "../../../types/moderation_status";
+import { NotificationSchema } from "../../../types/notification_schema";
 import { getTaskStatus, getTaskType } from "../../../utils/conversion";
 import { getOrigin } from "../../../utils/request";
 import Layout from "../../../components/common/Layout";
@@ -93,7 +94,8 @@ export const getServerSideProps: GetServerSideProps = async ({ req, params, loca
           selectedTaskId: taskResult.target.id,
           selectedTask: taskResult.target.data,
           modifiedTaskId: taskResult.id,
-          modifiedTask: taskType === TaskType.NewPlace || taskType === TaskType.PlaceChange ? taskResult.data : taskResult.target.data,
+          modifiedTask:
+            taskType === TaskType.ChangeTip || taskType === TaskType.RemoveTip ? taskResult.target.data : (taskResult.data as NotificationSchema),
           moderationExtra: {
             ...initialReduxState.moderation.moderationExtra,
             created_at: taskResult.created_at,
@@ -136,6 +138,10 @@ export const getServerSideProps: GetServerSideProps = async ({ req, params, loca
             }),
           },
         };
+
+        if (taskType === TaskType.ChangeTip || taskType === TaskType.RemoveTip) {
+          initialReduxState.moderation.moderationExtra.changeRequest = taskResult.data as ChangeRequestSchema;
+        }
 
         initialReduxState.moderationStatus = {
           ...initialReduxState.moderationStatus,

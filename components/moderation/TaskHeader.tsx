@@ -26,6 +26,7 @@ const TaskHeader = (): ReactElement => {
   const modifiedTask = useSelector((state: RootState) => state.moderation.modifiedTask);
   const moderationExtra = useSelector((state: RootState) => state.moderation.moderationExtra);
   const {
+    changeRequest: { description, contact_details } = {},
     created_at,
     taskType,
     status,
@@ -44,18 +45,30 @@ const TaskHeader = (): ReactElement => {
         {placeNameSelected} ({selectedTaskId})
       </h1>
 
-      <div className={styles.buttonRow}>
-        <Button variant="secondary">{i18n.t("moderation.button.requestTranslation")}</Button>
-        <Button variant="secondary" iconRight={<IconArrowUndo />}>
-          {i18n.t("moderation.button.rejectChangeRequest")}
-        </Button>
-        <Button variant="secondary" iconRight={<IconTrash />}>
-          {i18n.t("moderation.button.removePlace")}
-        </Button>
-        <Button iconRight={<IconArrowRight />} onClick={() => saveModeration(currentUser, modifiedTaskId, modifiedTask, moderationExtra, setToast)}>
-          {i18n.t("moderation.button.saveInformation")}
-        </Button>
-      </div>
+      {(taskType === TaskType.NewPlace || taskType === TaskType.PlaceChange) && (
+        <div className={styles.buttonRow}>
+          <Button variant="secondary">{i18n.t("moderation.button.requestTranslation")}</Button>
+          <Button variant="secondary" iconRight={<IconArrowUndo />}>
+            {i18n.t("moderation.button.rejectChangeRequest")}
+          </Button>
+          <Button variant="secondary" iconRight={<IconTrash />}>
+            {i18n.t("moderation.button.removePlace")}
+          </Button>
+          <Button iconRight={<IconArrowRight />} onClick={() => saveModeration(currentUser, modifiedTaskId, modifiedTask, moderationExtra, setToast)}>
+            {i18n.t("moderation.button.saveInformation")}
+          </Button>
+        </div>
+      )}
+
+      {(taskType === TaskType.ChangeTip || taskType === TaskType.RemoveTip) && (
+        <div className={styles.buttonRow}>
+          <Button variant="secondary">{i18n.t("moderation.button.requestTranslation")}</Button>
+          <Button variant="secondary">{i18n.t("moderation.button.openForModifying")}</Button>
+          <Button variant="secondary" iconRight={<IconArrowUndo />}>
+            {i18n.t("moderation.button.rejectChangeRequest")}
+          </Button>
+        </div>
+      )}
 
       <div className={styles.upperRow}>
         <div>
@@ -95,13 +108,18 @@ const TaskHeader = (): ReactElement => {
               </>
             )}
           </div>
-          <div>{full_name}</div>
-          <div>{email}</div>
-          <div>{phone}</div>
+          {(taskType === TaskType.ChangeTip || taskType === TaskType.RemoveTip) && <div>{contact_details}</div>}
+          {(taskType === TaskType.NewPlace || taskType === TaskType.PlaceChange) && (
+            <>
+              <div>{full_name}</div>
+              <div>{email}</div>
+              <div>{phone}</div>
+            </>
+          )}
         </div>
         <div className={styles.comment}>
           <div className={styles.bold}>{i18n.t("moderation.taskHeader.messageFromNotifier")}</div>
-          <div>{comments}</div>
+          <div>{taskType === TaskType.ChangeTip || taskType === TaskType.RemoveTip ? description : comments}</div>
         </div>
       </div>
 

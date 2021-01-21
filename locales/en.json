@@ -285,6 +285,7 @@
       "showAllRequests": "Show all requests",
       "requestTranslation": "Request translation",
       "rejectChangeRequest": "Reject change request",
+      "openForModifying": "Open for modifying",
       "removePlace": "Remove place",
       "saveIncomplete": "Save as incomplete",
       "saveInformation": "Save information",
