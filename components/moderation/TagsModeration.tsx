@@ -25,7 +25,7 @@ const TagsModeration = (): ReactElement => {
   const { ontology_ids: tagsModified } = modifiedTask;
 
   const moderationExtra = useSelector((state: RootState) => state.moderation.moderationExtra);
-  const { tagOptions } = moderationExtra;
+  const { taskType, tagOptions } = moderationExtra;
 
   const moderationStatus = useSelector((state: RootState) => state.moderationStatus.moderationStatus);
   const { ontology_ids: tagsStatus } = moderationStatus;
@@ -58,6 +58,7 @@ const TagsModeration = (): ReactElement => {
           selectedValue={convertValues(tagsSelected)}
           modifiedValue={convertValues(tagsModified)}
           status={tagsStatus}
+          taskType={taskType}
           modifyButtonLabel={i18n.t("moderation.tags.title")}
           changeCallback={updateTags}
           statusCallback={updateTagStatus}

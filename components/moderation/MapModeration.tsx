@@ -6,7 +6,7 @@ import { ModerationAction, ModerationStatusAction } from "../../state/actions/ty
 import { setModerationLocation } from "../../state/actions/moderation";
 import { setModerationLocationStatus } from "../../state/actions/moderationStatus";
 import { RootState } from "../../state/reducers";
-import { ModerationStatus, MAP_INITIAL_CENTER, MAP_INITIAL_ZOOM } from "../../types/constants";
+import { ModerationStatus, TaskType, MAP_INITIAL_CENTER, MAP_INITIAL_ZOOM } from "../../types/constants";
 import ActionButton from "./ActionButton";
 import ModifyButton from "./ModifyButton";
 import styles from "./MapModeration.module.scss";
@@ -28,6 +28,9 @@ const MapModeration = ({ setMapsReady }: MapModerationProps): ReactElement => {
   const modifiedTask = useSelector((state: RootState) => state.moderation.modifiedTask);
   const { location: locationModified } = modifiedTask;
 
+  const moderationExtra = useSelector((state: RootState) => state.moderation.moderationExtra);
+  const { taskType } = moderationExtra;
+
   const moderationStatus = useSelector((state: RootState) => state.moderationStatus.moderationStatus);
   const { location: locationStatus } = moderationStatus;
 
@@ -48,13 +51,19 @@ const MapModeration = ({ setMapsReady }: MapModerationProps): ReactElement => {
   const [initialLocationStatus, setInitialLocationStatus] = useState<ModerationStatus | undefined>(ModerationStatus.Edited);
 
   useEffect(() => {
-    if (setMapsReady) {
-      setMapsReady(map1Ready && map2Ready);
+    if (taskType === TaskType.NewPlace || taskType === TaskType.PlaceChange) {
+      // Both maps are needed
+      if (setMapsReady) {
+        setMapsReady(map1Ready && map2Ready);
+      }
+      if (map2Ready) {
+        setInitialLocationStatus(undefined);
+      }
+    } else if (setMapsReady) {
+      // Only one map is needed
+      setMapsReady(map1Ready);
     }
-    if (map2Ready) {
-      setInitialLocationStatus(undefined);
-    }
-  }, [map1Ready, map2Ready, setMapsReady, setInitialLocationStatus]);
+  }, [taskType, map1Ready, map2Ready, setMapsReady, setInitialLocationStatus]);
 
   return (
     <div className="formSection">
@@ -70,24 +79,28 @@ const MapModeration = ({ setMapsReady }: MapModerationProps): ReactElement => {
           setMapReady={setMap1Ready}
           draggableMarker={false}
         />
-        <ModifyButton
-          className="gridColumn2"
-          label={i18n.t("moderation.map.title")}
-          fieldName="location"
-          status={initialLocationStatus || locationStatus}
-          modifyCallback={updateLocationStatus}
-        >
-          <MapWrapper
-            className={`gridColumn2 ${styles.map}`}
-            initialCenter={initialCenter as [number, number]}
-            initialZoom={initialZoom}
-            location={locationModified}
-            setLocation={updateLocation}
-            setMapReady={setMap2Ready}
-            draggableMarker={locationStatus !== ModerationStatus.Approved && locationStatus !== ModerationStatus.Rejected}
-          />
-        </ModifyButton>
-        <ActionButton className="gridColumn3" fieldName="location" status={locationStatus} actionCallback={updateLocationStatus} />
+        {(taskType === TaskType.NewPlace || taskType === TaskType.PlaceChange) && (
+          <>
+            <ModifyButton
+              className="gridColumn2"
+              label={i18n.t("moderation.map.title")}
+              fieldName="location"
+              status={initialLocationStatus || locationStatus}
+              modifyCallback={updateLocationStatus}
+            >
+              <MapWrapper
+                className={`gridColumn2 ${styles.map}`}
+                initialCenter={initialCenter as [number, number]}
+                initialZoom={initialZoom}
+                location={locationModified}
+                setLocation={updateLocation}
+                setMapReady={setMap2Ready}
+                draggableMarker={locationStatus !== ModerationStatus.Approved && locationStatus !== ModerationStatus.Rejected}
+              />
+            </ModifyButton>
+            <ActionButton className="gridColumn3" fieldName="location" status={locationStatus} actionCallback={updateLocationStatus} />
+          </>
+        )}
       </div>
     </div>
   );

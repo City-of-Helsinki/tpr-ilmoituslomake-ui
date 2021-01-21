@@ -31,6 +31,9 @@ const DescriptionModeration = (): ReactElement => {
     description: { short: shortDescModified, long: longDescModified },
   } = modifiedTask;
 
+  const moderationExtra = useSelector((state: RootState) => state.moderation.moderationExtra);
+  const { taskType } = moderationExtra;
+
   const moderationStatus = useSelector((state: RootState) => state.moderationStatus.moderationStatus);
   const {
     name: placeNameStatus,
@@ -77,6 +80,7 @@ const DescriptionModeration = (): ReactElement => {
             selectedValue={placeNameSelected[option] as string}
             modifiedValue={placeNameModified[option] as string}
             status={placeNameStatus[option]}
+            taskType={taskType}
             modifyButtonLabel={`${i18n.t("moderation.description.placeName.label")} ${i18n.t(`general.inLanguage.${option}`)}`}
             changeCallback={updateName}
             statusCallback={updateNameStatus}
@@ -107,6 +111,7 @@ const DescriptionModeration = (): ReactElement => {
             selectedValue={shortDescSelected[option] as string}
             modifiedValue={shortDescModified[option] as string}
             status={shortDescStatus[option]}
+            taskType={taskType}
             modifyButtonLabel={`${i18n.t("moderation.description.shortDescription.label")} ${i18n.t(`general.inLanguage.${option}`)}`}
             changeCallback={updateShortDescription}
             statusCallback={updateShortDescriptionStatus}
@@ -134,6 +139,7 @@ const DescriptionModeration = (): ReactElement => {
             selectedValue={longDescSelected[option] as string}
             modifiedValue={longDescModified[option] as string}
             status={longDescStatus[option]}
+            taskType={taskType}
             modifyButtonLabel={`${i18n.t("moderation.description.longDescription.label")} ${i18n.t(`general.inLanguage.${option}`)}`}
             changeCallback={updateLongDescription}
             statusCallback={updateLongDescriptionStatus}

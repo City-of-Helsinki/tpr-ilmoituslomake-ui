@@ -1,5 +1,5 @@
 import React, { ChangeEvent, ReactElement, cloneElement } from "react";
-import { ModerationStatus } from "../../types/constants";
+import { ModerationStatus, TaskType } from "../../types/constants";
 import { OptionType } from "../../types/general";
 import ActionButton from "./ActionButton";
 import ModifyButton from "./ModifyButton";
@@ -10,6 +10,7 @@ interface ModerationSectionProps {
   selectedValue: string | OptionType[];
   modifiedValue: string | OptionType[];
   status: ModerationStatus;
+  taskType: TaskType;
   modifyButtonLabel: string;
   modifyButtonHidden?: boolean;
   actionButtonHidden?: boolean;
@@ -28,6 +29,7 @@ const ModerationSection = ({
   selectedValue,
   modifiedValue,
   status,
+  taskType,
   modifyButtonLabel,
   modifyButtonHidden,
   actionButtonHidden,
@@ -44,23 +46,29 @@ const ModerationSection = ({
         value: selectedValue,
         disabled: true,
       })}
-      <ModifyButton
-        className="gridColumn2"
-        label={modifyButtonLabel}
-        fieldName={fieldName}
-        status={status}
-        modifyCallback={statusCallback}
-        hidden={modifyButtonHidden}
-      >
-        {cloneElement(ModerationComponent, {
-          id: `${id}_Modified`,
-          className: "gridColumn2 disabledTextColor",
-          value: modifiedValue,
-          onChange: changeCallback,
-          disabled: status === ModerationStatus.Approved || status === ModerationStatus.Rejected || forceModifiedDisabled,
-        })}
-      </ModifyButton>
-      {!actionButtonHidden && <ActionButton className="gridColumn3" fieldName={fieldName} status={status} actionCallback={statusCallback} />}
+
+      {(taskType === TaskType.NewPlace || taskType === TaskType.PlaceChange) && (
+        <ModifyButton
+          className="gridColumn2"
+          label={modifyButtonLabel}
+          fieldName={fieldName}
+          status={status}
+          modifyCallback={statusCallback}
+          hidden={modifyButtonHidden}
+        >
+          {cloneElement(ModerationComponent, {
+            id: `${id}_Modified`,
+            className: "gridColumn2 disabledTextColor",
+            value: modifiedValue,
+            onChange: changeCallback,
+            disabled: status === ModerationStatus.Approved || status === ModerationStatus.Rejected || forceModifiedDisabled,
+          })}
+        </ModifyButton>
+      )}
+
+      {!actionButtonHidden && (taskType === TaskType.NewPlace || taskType === TaskType.PlaceChange) && (
+        <ActionButton className="gridColumn3" fieldName={fieldName} status={status} actionCallback={statusCallback} />
+      )}
     </>
   );
 };

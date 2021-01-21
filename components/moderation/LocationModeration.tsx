@@ -30,6 +30,9 @@ const LocationModeration = (): ReactElement => {
     },
   } = modifiedTask;
 
+  const moderationExtra = useSelector((state: RootState) => state.moderation.moderationExtra);
+  const { taskType } = moderationExtra;
+
   // Use the street status for all the fields
   const moderationStatus = useSelector((state: RootState) => state.moderationStatus.moderationStatus);
   const {
@@ -64,6 +67,7 @@ const LocationModeration = (): ReactElement => {
           selectedValue={streetFiSelected}
           modifiedValue={streetFiModified}
           status={addressFiStatus}
+          taskType={taskType}
           modifyButtonLabel={`${i18n.t("moderation.location.address")} ${i18n.t("general.inLanguage.fi")}`}
           changeCallback={(evt: ChangeEvent<HTMLInputElement>) => updateAddress("fi", evt)}
           statusCallback={updateAddressStatus}
@@ -82,6 +86,7 @@ const LocationModeration = (): ReactElement => {
           selectedValue={postalCodeFiSelected}
           modifiedValue={postalCodeFiModified}
           status={addressFiStatus}
+          taskType={taskType}
           modifyButtonLabel={`${i18n.t("moderation.location.address")} ${i18n.t("general.inLanguage.fi")}`}
           modifyButtonHidden
           actionButtonHidden
@@ -102,6 +107,7 @@ const LocationModeration = (): ReactElement => {
           selectedValue={postOfficeFiSelected}
           modifiedValue={postOfficeFiModified}
           status={addressFiStatus}
+          taskType={taskType}
           modifyButtonLabel={`${i18n.t("moderation.location.address")} ${i18n.t("general.inLanguage.fi")}`}
           modifyButtonHidden
           actionButtonHidden
@@ -131,6 +137,7 @@ const LocationModeration = (): ReactElement => {
           selectedValue={streetSvSelected}
           modifiedValue={streetSvModified}
           status={addressSvStatus}
+          taskType={taskType}
           modifyButtonLabel={`${i18n.t("moderation.location.address")} ${i18n.t("general.inLanguage.sv")}`}
           changeCallback={(evt: ChangeEvent<HTMLInputElement>) => updateAddress("sv", evt)}
           statusCallback={updateAddressStatus}
@@ -149,6 +156,7 @@ const LocationModeration = (): ReactElement => {
           selectedValue={postalCodeSvSelected}
           modifiedValue={postalCodeSvModified}
           status={addressSvStatus}
+          taskType={taskType}
           modifyButtonLabel={`${i18n.t("moderation.location.address")} ${i18n.t("general.inLanguage.sv")}`}
           modifyButtonHidden
           actionButtonHidden
@@ -169,6 +177,7 @@ const LocationModeration = (): ReactElement => {
           selectedValue={postOfficeSvSelected}
           modifiedValue={postOfficeSvModified}
           status={addressSvStatus}
+          taskType={taskType}
           modifyButtonLabel={`${i18n.t("moderation.location.address")} ${i18n.t("general.inLanguage.sv")}`}
           modifyButtonHidden
           actionButtonHidden

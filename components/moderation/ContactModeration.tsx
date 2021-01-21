@@ -20,6 +20,9 @@ const ContactModeration = (): ReactElement => {
   const modifiedTask = useSelector((state: RootState) => state.moderation.modifiedTask);
   const { phone: phoneModified, email: emailModified } = modifiedTask;
 
+  const moderationExtra = useSelector((state: RootState) => state.moderation.moderationExtra);
+  const { taskType } = moderationExtra;
+
   const moderationStatus = useSelector((state: RootState) => state.moderationStatus.moderationStatus);
   const { phone: phoneStatus, email: emailStatus } = moderationStatus;
 
@@ -43,6 +46,7 @@ const ContactModeration = (): ReactElement => {
           selectedValue={phoneSelected}
           modifiedValue={phoneModified}
           status={phoneStatus}
+          taskType={taskType}
           modifyButtonLabel={i18n.t("moderation.contact.phone.label")}
           changeCallback={updateContact}
           statusCallback={updateContactStatus}
@@ -55,6 +59,7 @@ const ContactModeration = (): ReactElement => {
           selectedValue={emailSelected}
           modifiedValue={emailModified}
           status={emailStatus}
+          taskType={taskType}
           modifyButtonLabel={i18n.t("moderation.contact.email.label")}
           changeCallback={updateContact}
           statusCallback={updateContactStatus}
