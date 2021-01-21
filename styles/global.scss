@@ -42,24 +42,44 @@ body {
 
 h1 {
   font-size: $fontsize-heading-xl !important;
+
+  &.moderation {
+    font-size: $fontsize-heading-l !important;
+  }
 }
 
 h2 {
   font-size: $fontsize-heading-l !important;
+
+  &.moderation {
+    font-size: $fontsize-heading-m !important;
+  }
 }
 
 h3 {
   font-size: $fontsize-heading-m !important;
+
+  &.moderation {
+    font-size: $fontsize-heading-s !important;
+  }
 }
 
 h4 {
   font-size: $fontsize-heading-s !important;
   margin: 0;
+
+  &.moderation {
+    font-size: $fontsize-heading-xs !important;
+  }
 }
 
 h5 {
   font-size: $fontsize-heading-xs !important;
   margin: 0;
+
+  &.moderation {
+    font-size: $fontsize-heading-xxs !important;
+  }
 }
 
 textarea {

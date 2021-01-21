@@ -34,8 +34,8 @@ const LinksModeration = (): ReactElement => {
   return (
     <div className="formSection">
       <div className="languageSection gridLayoutContainer moderation">
-        <h4 className="gridColumn1">{`${i18n.t("moderation.links.website.label")}${i18n.t("moderation.task.selected")}`}</h4>
-        <h4 className="gridColumn2">{`${i18n.t("moderation.links.website.label")}${i18n.t("moderation.task.modified")}`}</h4>
+        <h4 className="gridColumn1 moderation">{`${i18n.t("moderation.links.website.label")}${i18n.t("moderation.task.selected")}`}</h4>
+        <h4 className="gridColumn2 moderation">{`${i18n.t("moderation.links.website.label")}${i18n.t("moderation.task.modified")}`}</h4>
 
         {LANGUAGE_OPTIONS.map((option) => (
           <ModerationSection

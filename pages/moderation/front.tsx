@@ -25,7 +25,7 @@ const ModerationFront = (): ReactElement => {
         <Intro />
         <NewTasks />
 
-        <h3>{i18n.t("moderation.organisationNotice.title")}</h3>
+        <h2 className="moderation">{i18n.t("moderation.organisationNotice.title")}</h2>
         <Notice
           icon={<IconGroup size="xl" />}
           messageKey="general.todo"
@@ -38,7 +38,7 @@ const ModerationFront = (): ReactElement => {
           }
         />
 
-        <h3>{i18n.t("moderation.translationNotice.title")}</h3>
+        <h2 className="moderation">{i18n.t("moderation.translationNotice.title")}</h2>
         <Notice
           icon={<IconGroup size="xl" />}
           messageKey="general.todo"

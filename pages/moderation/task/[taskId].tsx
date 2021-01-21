@@ -42,7 +42,7 @@ const ModerationTaskDetail = (): ReactElement => {
         <main id="content">
           <TaskHeader />
 
-          <h3>{i18n.t("moderation.task.title")}</h3>
+          <h2 className="moderation">{i18n.t("moderation.task.title")}</h2>
           <Collapsible section={1} title={i18n.t("moderation.task.basic")}>
             <DescriptionModeration />
             <TagsModeration />

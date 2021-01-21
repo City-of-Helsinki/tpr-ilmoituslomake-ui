@@ -28,10 +28,10 @@ const Collapsible = ({ section, title, forceExpanded, children }: CollapsiblePro
     <div className={styles.collapsible}>
       <div className={styles.header}>
         <div className={styles.section}>
-          <h3>{section}</h3>
+          <h2 className="moderation">{section}</h2>
         </div>
         <div className={styles.title}>
-          <h4>{title}</h4>
+          <h3 className="moderation">{title}</h3>
         </div>
         <div className={styles.button}>
           {expanded && (

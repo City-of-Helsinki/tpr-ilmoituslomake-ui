@@ -40,9 +40,9 @@ const TaskHeader = (): ReactElement => {
 
   return (
     <div className={styles.taskHeader}>
-      <h3>
+      <h1 className="moderation">
         {placeNameSelected} ({selectedTaskId})
-      </h3>
+      </h1>
 
       <div className={styles.buttonRow}>
         <Button variant="secondary">{i18n.t("moderation.button.requestTranslation")}</Button>

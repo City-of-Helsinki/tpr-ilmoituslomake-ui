@@ -10,7 +10,7 @@ const Intro = (): ReactElement => {
   return (
     <div className="formSection">
       <div className={styles.intro}>
-        <h1>{i18n.t("moderation.intro.title")}</h1>
+        <h1 className="moderation">{i18n.t("moderation.intro.title")}</h1>
         <div className="formInput">{i18n.t("general.todo")}</div>
         <Link href="/moderation/place">
           <Button className={styles.primary}>{i18n.t("moderation.button.allPlaces")}</Button>

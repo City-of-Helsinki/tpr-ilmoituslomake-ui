@@ -18,12 +18,12 @@ const TaskResults = (): ReactElement => {
 
   return (
     <div className={`formSection ${styles.taskResults}`}>
-      <h3>{`${i18n.t("moderation.taskResults.found")} ${taskResults.length} ${i18n.t("moderation.taskResults.places")}`}</h3>
+      <h2 className="moderation">{`${i18n.t("moderation.taskResults.found")} ${taskResults.length} ${i18n.t("moderation.taskResults.places")}`}</h2>
       <div className={`gridLayoutContainer ${styles.results}`}>
-        <h5 className={`${styles.gridColumn1} gridHeader`}>{i18n.t("moderation.taskResults.nameId")}</h5>
-        <h5 className={`${styles.gridColumn2} gridHeader`}>{i18n.t("moderation.taskResults.type")}</h5>
-        <h5 className={`${styles.gridColumn3} gridHeader`}>{i18n.t("moderation.taskResults.notified")}</h5>
-        <h5 className={`${styles.gridColumn4} gridHeader`}>{i18n.t("moderation.taskResults.status")}</h5>
+        <h3 className={`${styles.gridColumn1} gridHeader moderation`}>{i18n.t("moderation.taskResults.nameId")}</h3>
+        <h3 className={`${styles.gridColumn2} gridHeader moderation`}>{i18n.t("moderation.taskResults.type")}</h3>
+        <h3 className={`${styles.gridColumn3} gridHeader moderation`}>{i18n.t("moderation.taskResults.notified")}</h3>
+        <h3 className={`${styles.gridColumn4} gridHeader moderation`}>{i18n.t("moderation.taskResults.status")}</h3>
         {taskResults
           .sort((a: ModerationTodoResult, b: ModerationTodoResult) => b.created.getTime() - a.created.getTime())
           .map((result) => {

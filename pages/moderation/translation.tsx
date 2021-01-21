@@ -25,7 +25,7 @@ const ModerationTranslation = (): ReactElement => {
       </Head>
       <ModerationHeader currentPage={5} />
       <main id="content" ref={ref}>
-        <h1>{i18n.t("moderation.main.translation")}</h1>
+        <h1 className="moderation">{i18n.t("moderation.main.translation")}</h1>
       </main>
     </Layout>
   );

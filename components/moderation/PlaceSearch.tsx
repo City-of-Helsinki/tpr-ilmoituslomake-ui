@@ -70,7 +70,7 @@ const PlaceSearch = (): ReactElement => {
   return (
     <div className={`formSection ${styles.placeSearch}`}>
       <div className={styles.header}>
-        <h3>{i18n.t("moderation.placeSearch.title")}</h3>
+        <h1 className="moderation">{i18n.t("moderation.placeSearch.title")}</h1>
         <div className="flexSpace" />
         <div>
           <Link href="/notification">
