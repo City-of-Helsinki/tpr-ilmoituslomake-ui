@@ -54,13 +54,6 @@ const LocationModeration = (): ReactElement => {
   return (
     <div className="formSection">
       <div className="gridLayoutContainer moderation">
-        <h4 className="gridColumn1 moderation">{`${i18n.t("moderation.location.address")} ${i18n.t("general.inLanguage.fi")}${i18n.t(
-          "moderation.task.selected"
-        )}`}</h4>
-        <h4 className="gridColumn2 moderation">{`${i18n.t("moderation.location.address")} ${i18n.t("general.inLanguage.fi")}${i18n.t(
-          "moderation.task.modified"
-        )}`}</h4>
-
         <ModerationSection
           id="streetAddressFi"
           fieldName="fi"
@@ -68,6 +61,8 @@ const LocationModeration = (): ReactElement => {
           modifiedValue={streetFiModified}
           status={addressFiStatus}
           taskType={taskType}
+          selectedHeaderText={`${i18n.t("moderation.location.address")} ${i18n.t("general.inLanguage.fi")}${i18n.t("moderation.task.selected")}`}
+          modifiedHeaderText={`${i18n.t("moderation.location.address")} ${i18n.t("general.inLanguage.fi")}${i18n.t("moderation.task.modified")}`}
           modifyButtonLabel={`${i18n.t("moderation.location.address")} ${i18n.t("general.inLanguage.fi")}`}
           changeCallback={(evt: ChangeEvent<HTMLInputElement>) => updateAddress("fi", evt)}
           statusCallback={updateAddressStatus}
@@ -124,13 +119,6 @@ const LocationModeration = (): ReactElement => {
       </div>
 
       <div className="gridLayoutContainer moderation">
-        <h4 className="gridColumn1 moderation">{`${i18n.t("moderation.location.address")} ${i18n.t("general.inLanguage.sv")}${i18n.t(
-          "moderation.task.selected"
-        )}`}</h4>
-        <h4 className="gridColumn2 moderation">{`${i18n.t("moderation.location.address")} ${i18n.t("general.inLanguage.sv")}${i18n.t(
-          "moderation.task.modified"
-        )}`}</h4>
-
         <ModerationSection
           id="streetAddressSv"
           fieldName="sv"
@@ -138,6 +126,8 @@ const LocationModeration = (): ReactElement => {
           modifiedValue={streetSvModified}
           status={addressSvStatus}
           taskType={taskType}
+          selectedHeaderText={`${i18n.t("moderation.location.address")} ${i18n.t("general.inLanguage.sv")}${i18n.t("moderation.task.selected")}`}
+          modifiedHeaderText={`${i18n.t("moderation.location.address")} ${i18n.t("general.inLanguage.sv")}${i18n.t("moderation.task.modified")}`}
           modifyButtonLabel={`${i18n.t("moderation.location.address")} ${i18n.t("general.inLanguage.sv")}`}
           changeCallback={(evt: ChangeEvent<HTMLInputElement>) => updateAddress("sv", evt)}
           statusCallback={updateAddressStatus}

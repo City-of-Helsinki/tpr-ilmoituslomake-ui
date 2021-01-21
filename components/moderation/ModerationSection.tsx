@@ -11,6 +11,8 @@ interface ModerationSectionProps {
   modifiedValue: string | OptionType[];
   status: ModerationStatus;
   taskType: TaskType;
+  selectedHeaderText?: string;
+  modifiedHeaderText?: string;
   modifyButtonLabel: string;
   modifyButtonHidden?: boolean;
   actionButtonHidden?: boolean;
@@ -30,6 +32,8 @@ const ModerationSection = ({
   modifiedValue,
   status,
   taskType,
+  selectedHeaderText,
+  modifiedHeaderText,
   modifyButtonLabel,
   modifyButtonHidden,
   actionButtonHidden,
@@ -40,6 +44,11 @@ const ModerationSection = ({
 }: ModerationSectionProps): ReactElement => {
   return (
     <>
+      {selectedHeaderText && <h4 className="gridColumn1 moderation">{selectedHeaderText}</h4>}
+      {modifiedHeaderText && (taskType === TaskType.NewPlace || taskType === TaskType.PlaceChange) && (
+        <h4 className="gridColumn2 moderation">{modifiedHeaderText}</h4>
+      )}
+
       {cloneElement(ModerationComponent, {
         id: `${id}_Selected`,
         className: "gridColumn1 disabledTextColor",
@@ -74,6 +83,8 @@ const ModerationSection = ({
 };
 
 ModerationSection.defaultProps = {
+  selectedHeaderText: undefined,
+  modifiedHeaderText: undefined,
   modifyButtonHidden: false,
   actionButtonHidden: false,
   forceModifiedDisabled: false,

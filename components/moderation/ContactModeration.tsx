@@ -37,9 +37,6 @@ const ContactModeration = (): ReactElement => {
   return (
     <div className="formSection">
       <div className="gridLayoutContainer moderation">
-        <h4 className="gridColumn1 moderation">{`${i18n.t("moderation.contact.title")}${i18n.t("moderation.task.selected")}`}</h4>
-        <h4 className="gridColumn2 moderation">{`${i18n.t("moderation.contact.title")}${i18n.t("moderation.task.modified")}`}</h4>
-
         <ModerationSection
           id="phone"
           fieldName="phone"
@@ -47,6 +44,8 @@ const ContactModeration = (): ReactElement => {
           modifiedValue={phoneModified}
           status={phoneStatus}
           taskType={taskType}
+          selectedHeaderText={`${i18n.t("moderation.contact.title")}${i18n.t("moderation.task.selected")}`}
+          modifiedHeaderText={`${i18n.t("moderation.contact.title")}${i18n.t("moderation.task.modified")}`}
           modifyButtonLabel={i18n.t("moderation.contact.phone.label")}
           changeCallback={updateContact}
           statusCallback={updateContactStatus}

@@ -55,13 +55,6 @@ const PhotosModeration = (): ReactElement => {
         return (
           <Fragment key={key}>
             <div className="gridLayoutContainer moderation">
-              <h4 className="gridColumn1 moderation">{`${i18n.t("moderation.photos.photo.title")} ${index + 1}${i18n.t(
-                "moderation.task.selected"
-              )}`}</h4>
-              <h4 className="gridColumn2 moderation">{`${i18n.t("moderation.photos.photo.title")} ${index + 1}${i18n.t(
-                "moderation.task.modified"
-              )}`}</h4>
-
               <ModerationSection
                 id={`url_${index}`}
                 fieldName="url"
@@ -69,6 +62,8 @@ const PhotosModeration = (): ReactElement => {
                 modifiedValue={photosModified[index].url}
                 status={photosStatus[index].url}
                 taskType={taskType}
+                selectedHeaderText={`${i18n.t("moderation.photos.photo.title")} ${index + 1}${i18n.t("moderation.task.selected")}`}
+                modifiedHeaderText={`${i18n.t("moderation.photos.photo.title")} ${index + 1}${i18n.t("moderation.task.modified")}`}
                 modifyButtonLabel={i18n.t(urlLabelKey)}
                 forceModifiedDisabled={sourceTypeSelected === PhotoSourceType.Device}
                 changeCallback={(evt: ChangeEvent<HTMLInputElement>) => updatePhoto(index, evt)}

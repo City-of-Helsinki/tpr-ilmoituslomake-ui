@@ -49,9 +49,6 @@ const TagsModeration = (): ReactElement => {
   return (
     <div className="formSection">
       <div className="gridLayoutContainer moderation">
-        <h4 className="gridColumn1 moderation">{`${i18n.t("moderation.tags.title")}${i18n.t("moderation.task.selected")}`}</h4>
-        <h4 className="gridColumn2 moderation">{`${i18n.t("moderation.tags.title")}${i18n.t("moderation.task.modified")}`}</h4>
-
         <ModerationSection
           id="tag"
           fieldName="tagModified"
@@ -59,6 +56,8 @@ const TagsModeration = (): ReactElement => {
           modifiedValue={convertValues(tagsModified)}
           status={tagsStatus}
           taskType={taskType}
+          selectedHeaderText={`${i18n.t("moderation.tags.title")}${i18n.t("moderation.task.selected")}`}
+          modifiedHeaderText={`${i18n.t("moderation.tags.title")}${i18n.t("moderation.task.modified")}`}
           modifyButtonLabel={i18n.t("moderation.tags.title")}
           changeCallback={updateTags}
           statusCallback={updateTagStatus}

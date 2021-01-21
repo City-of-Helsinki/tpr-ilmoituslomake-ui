@@ -69,7 +69,9 @@ const MapModeration = ({ setMapsReady }: MapModerationProps): ReactElement => {
     <div className="formSection">
       <div className="gridLayoutContainer moderation">
         <h4 className="gridColumn1 moderation">{`${i18n.t("moderation.map.title")}${i18n.t("moderation.task.selected")}`}</h4>
-        <h4 className="gridColumn2 moderation">{`${i18n.t("moderation.map.title")}${i18n.t("moderation.task.modified")}`}</h4>
+        {(taskType === TaskType.NewPlace || taskType === TaskType.PlaceChange) && (
+          <h4 className="gridColumn2 moderation">{`${i18n.t("moderation.map.title")}${i18n.t("moderation.task.modified")}`}</h4>
+        )}
 
         <MapWrapper
           className={`gridColumn1 ${styles.map}`}

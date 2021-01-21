@@ -69,10 +69,7 @@ const DescriptionModeration = (): ReactElement => {
   return (
     <div className="formSection">
       <div className="languageSection gridLayoutContainer moderation">
-        <h4 className="gridColumn1 moderation">{`${i18n.t("moderation.description.placeName.title")}${i18n.t("moderation.task.selected")}`}</h4>
-        <h4 className="gridColumn2 moderation">{`${i18n.t("moderation.description.placeName.title")}${i18n.t("moderation.task.modified")}`}</h4>
-
-        {LANGUAGE_OPTIONS.map((option) => (
+        {LANGUAGE_OPTIONS.map((option, index) => (
           <ModerationSection
             id={`placeName_${option}`}
             key={`placeName_${option}`}
@@ -81,6 +78,8 @@ const DescriptionModeration = (): ReactElement => {
             modifiedValue={placeNameModified[option] as string}
             status={placeNameStatus[option]}
             taskType={taskType}
+            selectedHeaderText={index === 0 ? `${i18n.t("moderation.description.placeName.title")}${i18n.t("moderation.task.selected")}` : undefined}
+            modifiedHeaderText={index === 0 ? `${i18n.t("moderation.description.placeName.title")}${i18n.t("moderation.task.modified")}` : undefined}
             modifyButtonLabel={`${i18n.t("moderation.description.placeName.label")} ${i18n.t(`general.inLanguage.${option}`)}`}
             changeCallback={updateName}
             statusCallback={updateNameStatus}
@@ -96,14 +95,7 @@ const DescriptionModeration = (): ReactElement => {
       </div>
 
       <div className="languageSection gridLayoutContainer moderation">
-        <h4 className="gridColumn1 moderation">{`${i18n.t("moderation.description.shortDescription.title")}${i18n.t(
-          "moderation.task.selected"
-        )}`}</h4>
-        <h4 className="gridColumn2 moderation">{`${i18n.t("moderation.description.shortDescription.title")}${i18n.t(
-          "moderation.task.modified"
-        )}`}</h4>
-
-        {LANGUAGE_OPTIONS.map((option) => (
+        {LANGUAGE_OPTIONS.map((option, index) => (
           <ModerationSection
             id={`shortDescription_${option}`}
             key={`shortDescription_${option}`}
@@ -112,6 +104,12 @@ const DescriptionModeration = (): ReactElement => {
             modifiedValue={shortDescModified[option] as string}
             status={shortDescStatus[option]}
             taskType={taskType}
+            selectedHeaderText={
+              index === 0 ? `${i18n.t("moderation.description.shortDescription.title")}${i18n.t("moderation.task.selected")}` : undefined
+            }
+            modifiedHeaderText={
+              index === 0 ? `${i18n.t("moderation.description.shortDescription.title")}${i18n.t("moderation.task.modified")}` : undefined
+            }
             modifyButtonLabel={`${i18n.t("moderation.description.shortDescription.label")} ${i18n.t(`general.inLanguage.${option}`)}`}
             changeCallback={updateShortDescription}
             statusCallback={updateShortDescriptionStatus}
@@ -128,10 +126,7 @@ const DescriptionModeration = (): ReactElement => {
       </div>
 
       <div className="languageSection gridLayoutContainer moderation">
-        <h4 className="gridColumn1 moderation">{`${i18n.t("moderation.description.longDescription.title")}${i18n.t("moderation.task.selected")}`}</h4>
-        <h4 className="gridColumn2 moderation">{`${i18n.t("moderation.description.longDescription.title")}${i18n.t("moderation.task.modified")}`}</h4>
-
-        {LANGUAGE_OPTIONS.map((option) => (
+        {LANGUAGE_OPTIONS.map((option, index) => (
           <ModerationSection
             id={`longDescription_${option}`}
             key={`longDescription_${option}`}
@@ -140,6 +135,12 @@ const DescriptionModeration = (): ReactElement => {
             modifiedValue={longDescModified[option] as string}
             status={longDescStatus[option]}
             taskType={taskType}
+            selectedHeaderText={
+              index === 0 ? `${i18n.t("moderation.description.longDescription.title")}${i18n.t("moderation.task.selected")}` : undefined
+            }
+            modifiedHeaderText={
+              index === 0 ? `${i18n.t("moderation.description.longDescription.title")}${i18n.t("moderation.task.modified")}` : undefined
+            }
             modifyButtonLabel={`${i18n.t("moderation.description.longDescription.label")} ${i18n.t(`general.inLanguage.${option}`)}`}
             changeCallback={updateLongDescription}
             statusCallback={updateLongDescriptionStatus}
