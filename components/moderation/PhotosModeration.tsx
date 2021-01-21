@@ -73,28 +73,32 @@ const PhotosModeration = (): ReactElement => {
             </div>
 
             <div className="languageSection gridLayoutContainer moderation">
-              {LANGUAGE_OPTIONS.map((option) => (
-                <ModerationSection
-                  id={`altText_${option}`}
-                  key={`altText_${option}`}
-                  fieldName={option}
-                  selectedValue={photosSelected[index].altText[option] as string}
-                  modifiedValue={photosModified[index].altText[option] as string}
-                  status={photosStatus[index].altText[option]}
-                  taskType={taskType}
-                  modifyButtonLabel={`${i18n.t("moderation.photos.altText.label")} ${i18n.t(`general.inLanguage.${option}`)}`}
-                  changeCallback={(evt: ChangeEvent<HTMLTextAreaElement>) => updatePhotoAltText(index, evt)}
-                  statusCallback={(language, status) => updatePhotoAltTextStatus(index, language, status)}
-                  ModerationComponent={
-                    <TextArea
-                      id={`altText_${option}`}
-                      rows={3}
-                      label={`${i18n.t("moderation.photos.altText.label")} ${i18n.t(`general.inLanguage.${option}`)}`}
-                      name={option}
-                    />
-                  }
-                />
-              ))}
+              {LANGUAGE_OPTIONS.map((option) => {
+                const altTextKey = `altText_${option}_${index}`;
+
+                return (
+                  <ModerationSection
+                    id={altTextKey}
+                    key={altTextKey}
+                    fieldName={option}
+                    selectedValue={photosSelected[index].altText[option] as string}
+                    modifiedValue={photosModified[index].altText[option] as string}
+                    status={photosStatus[index].altText[option]}
+                    taskType={taskType}
+                    modifyButtonLabel={`${i18n.t("moderation.photos.altText.label")} ${i18n.t(`general.inLanguage.${option}`)}`}
+                    changeCallback={(evt: ChangeEvent<HTMLTextAreaElement>) => updatePhotoAltText(index, evt)}
+                    statusCallback={(language, status) => updatePhotoAltTextStatus(index, language, status)}
+                    ModerationComponent={
+                      <TextArea
+                        id={altTextKey}
+                        rows={3}
+                        label={`${i18n.t("moderation.photos.altText.label")} ${i18n.t(`general.inLanguage.${option}`)}`}
+                        name={option}
+                      />
+                    }
+                  />
+                );
+              })}
             </div>
 
             <div className="gridLayoutContainer moderation">
