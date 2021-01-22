@@ -30,10 +30,11 @@ const TaskHeader = (): ReactElement => {
   const moderationExtra = useSelector((state: RootState) => state.moderation.moderationExtra);
   const {
     photosSelected,
-    changeRequest: { description, contact_details } = {},
     created_at,
     taskType,
     status,
+    userComments,
+    userDetails,
     moderator: { fullName: moderatorName },
   } = moderationExtra;
   const pageStatus = useSelector((state: RootState) => state.moderationStatus.pageStatus);
@@ -129,7 +130,7 @@ const TaskHeader = (): ReactElement => {
               </>
             )}
           </div>
-          {(taskType === TaskType.ChangeTip || taskType === TaskType.RemoveTip) && <div>{contact_details}</div>}
+          {(taskType === TaskType.ChangeTip || taskType === TaskType.RemoveTip) && <div>{userDetails}</div>}
           {(taskType === TaskType.NewPlace || taskType === TaskType.PlaceChange) && (
             <>
               <div>{full_name}</div>
@@ -140,7 +141,7 @@ const TaskHeader = (): ReactElement => {
         </div>
         <div className={styles.comment}>
           <div className={styles.bold}>{i18n.t("moderation.taskHeader.messageFromNotifier")}</div>
-          <div>{taskType === TaskType.ChangeTip || taskType === TaskType.RemoveTip ? description : comments}</div>
+          <div>{taskType === TaskType.ChangeTip || taskType === TaskType.RemoveTip ? userComments : comments}</div>
         </div>
       </div>
 

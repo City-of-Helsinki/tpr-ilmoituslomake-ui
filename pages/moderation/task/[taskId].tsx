@@ -7,7 +7,7 @@ import i18nLoader from "../../../utils/i18n";
 import { initStore } from "../../../state/store";
 import { RootState } from "../../../state/reducers";
 import { ModerationStatus, TaskType, INITIAL_MODERATION_EXTRA, INITIAL_MODERATION_STATUS, INITIAL_NOTIFICATION } from "../../../types/constants";
-import { TagOption, ChangeRequestSchema, ModerationTodoSchema } from "../../../types/general";
+import { TagOption, ModerationTodoSchema } from "../../../types/general";
 import { PhotoStatus } from "../../../types/moderation_status";
 import { NotificationSchema } from "../../../types/notification_schema";
 import { getTaskStatus, getTaskType } from "../../../utils/conversion";
@@ -88,20 +88,22 @@ export const getServerSideProps: GetServerSideProps = async ({ req, params, loca
 
       try {
         const taskType = getTaskType(taskResult.category, taskResult.item_type);
+        const modifiedTask = !taskResult.data || !taskResult.data.name ? taskResult.target.data : (taskResult.data as NotificationSchema);
 
         initialReduxState.moderation = {
           ...initialReduxState.moderation,
           selectedTaskId: taskResult.target.id,
           selectedTask: taskResult.target.data,
           modifiedTaskId: taskResult.id,
-          modifiedTask:
-            taskType === TaskType.ChangeTip || taskType === TaskType.RemoveTip ? taskResult.target.data : (taskResult.data as NotificationSchema),
+          modifiedTask,
           moderationExtra: {
             ...initialReduxState.moderation.moderationExtra,
             created_at: taskResult.created_at,
             updated_at: taskResult.updated_at,
             taskType,
             status: getTaskStatus(taskResult.status),
+            userComments: taskResult.user_comments,
+            userDetails: taskResult.user_details,
             moderator: {
               fullName: taskResult.moderator ? `${taskResult.moderator.first_name} ${taskResult.moderator.last_name}`.trim() : "",
               email: taskResult.moderator && taskResult.moderator.email ? taskResult.moderator.email : "",
@@ -121,7 +123,7 @@ export const getServerSideProps: GetServerSideProps = async ({ req, params, loca
                 preview: "",
               };
             }),
-            photosModified: taskResult.target.data.images.map((image) => {
+            photosModified: modifiedTask.images.map((image) => {
               return {
                 sourceType: image.source_type,
                 url: image.url,
@@ -139,15 +141,11 @@ export const getServerSideProps: GetServerSideProps = async ({ req, params, loca
           },
         };
 
-        if (taskType === TaskType.ChangeTip || taskType === TaskType.RemoveTip) {
-          initialReduxState.moderation.moderationExtra.changeRequest = taskResult.data as ChangeRequestSchema;
-        }
-
         initialReduxState.moderationStatus = {
           ...initialReduxState.moderationStatus,
           moderationStatus: {
             ...initialReduxState.moderationStatus.moderationStatus,
-            photos: taskResult.target.data.images.map(() => {
+            photos: modifiedTask.images.map(() => {
               return {
                 url: ModerationStatus.Unknown,
                 altText: {

@@ -249,6 +249,8 @@ export const INITIAL_MODERATION_EXTRA = {
   updated_at: "",
   taskType: TaskType.Unknown,
   status: TaskStatus.Unknown,
+  userComments: "",
+  userDetails: "",
   moderator: {
     fullName: "",
     email: "",
