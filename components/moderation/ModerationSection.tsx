@@ -7,8 +7,8 @@ import ModifyButton from "./ModifyButton";
 interface ModerationSectionProps {
   id: string;
   fieldName: string;
-  selectedValue: string | OptionType[];
-  modifiedValue: string | OptionType[];
+  selectedValue?: string | OptionType[];
+  modifiedValue?: string | OptionType[];
   status: ModerationStatus;
   taskType: TaskType;
   selectedHeaderText?: string;
@@ -23,6 +23,7 @@ interface ModerationSectionProps {
     | ((selected: OptionType[]) => void);
   statusCallback: (fieldName: string, status: ModerationStatus) => void;
   ModerationComponent: ReactElement;
+  isSelectionGroupWrapper?: boolean;
 }
 
 const ModerationSection = ({
@@ -41,6 +42,7 @@ const ModerationSection = ({
   changeCallback,
   statusCallback,
   ModerationComponent,
+  isSelectionGroupWrapper,
 }: ModerationSectionProps): ReactElement => {
   if (taskType === TaskType.ChangeTip || taskType === TaskType.RemoveTip) {
     return (
@@ -54,6 +56,7 @@ const ModerationSection = ({
           value: status !== ModerationStatus.Edited ? selectedValue : modifiedValue,
           onChange: status === ModerationStatus.Edited ? changeCallback : undefined,
           disabled: status !== ModerationStatus.Edited,
+          radioButtonName: isSelectionGroupWrapper ? id : undefined,
         })}
       </>
     );
@@ -70,6 +73,7 @@ const ModerationSection = ({
           className: "gridColumn1 disabledTextColor",
           value: selectedValue,
           disabled: true,
+          radioButtonName: isSelectionGroupWrapper ? `${id}_Selected` : undefined,
         })}
 
         <ModifyButton
@@ -86,6 +90,7 @@ const ModerationSection = ({
             value: modifiedValue,
             onChange: changeCallback,
             disabled: status === ModerationStatus.Approved || status === ModerationStatus.Rejected || forceModifiedDisabled,
+            radioButtonName: isSelectionGroupWrapper ? `${id}_Modified` : undefined,
           })}
         </ModifyButton>
 
@@ -98,11 +103,14 @@ const ModerationSection = ({
 };
 
 ModerationSection.defaultProps = {
+  selectedValue: undefined,
+  modifiedValue: undefined,
   selectedHeaderText: undefined,
   modifiedHeaderText: undefined,
   modifyButtonHidden: false,
   actionButtonHidden: false,
   forceModifiedDisabled: false,
+  isSelectionGroupWrapper: false,
 };
 
 export default ModerationSection;

@@ -10,6 +10,7 @@ import { LANGUAGE_OPTIONS, ModerationStatus, PhotoPermission, PhotoSourceType, T
 import ActionButton from "./ActionButton";
 import ModifyButton from "./ModifyButton";
 import ModerationSection from "./ModerationSection";
+import SelectionGroupWrapper from "./SelectionGroupWrapper";
 
 const PhotosModeration = (): ReactElement => {
   const i18n = useI18n();
@@ -102,72 +103,26 @@ const PhotosModeration = (): ReactElement => {
             </div>
 
             <div className="gridLayoutContainer moderation">
-              <SelectionGroup
-                id={`permissionSelected_${index}`}
-                className="gridColumn1"
-                direction="horizontal"
-                label={i18n.t("moderation.photos.permission.label")}
-                disabled
-              >
-                <RadioButton
-                  id={`permissionSelected_myHelsinki_${index}`}
-                  label={i18n.t("moderation.photos.permission.myHelsinki")}
-                  name={`permissionSelected_${index}`}
-                  value={PhotoPermission.MyHelsinki}
-                  checked={photosSelected[index].permission === PhotoPermission.MyHelsinki}
-                />
-                <RadioButton
-                  id={`permissionSelected_creativeCommons_${index}`}
-                  label={i18n.t("moderation.photos.permission.creativeCommons")}
-                  name={`permissionSelected_${index}`}
-                  value={PhotoPermission.CreativeCommons}
-                  checked={photosSelected[index].permission === PhotoPermission.CreativeCommons}
-                />
-              </SelectionGroup>
-              {(taskType === TaskType.NewPlace || taskType === TaskType.PlaceChange) && (
-                <>
-                  <ModifyButton
-                    className="gridColumn2"
+              <ModerationSection
+                id={`permission_${index}`}
+                fieldName="permission"
+                selectedValue={photosSelected[index].permission}
+                modifiedValue={photosModified[index].permission}
+                status={photosStatus[index].permission}
+                taskType={taskType}
+                modifyButtonLabel={i18n.t("moderation.photos.permission.label")}
+                changeCallback={(evt: ChangeEvent<HTMLInputElement>) => updatePhoto(index, evt)}
+                statusCallback={(fieldName, status) => updatePhotoStatus(index, fieldName, status)}
+                ModerationComponent={
+                  <SelectionGroupWrapper
+                    id={`permission_${index}`}
                     label={i18n.t("moderation.photos.permission.label")}
-                    fieldName="permission"
-                    status={photosStatus[index].permission}
-                    modifyCallback={(fieldName, status) => updatePhotoStatus(index, fieldName, status)}
-                  >
-                    <SelectionGroup
-                      id={`permissionModified_${index}`}
-                      className="gridColumn2"
-                      direction="horizontal"
-                      label={i18n.t("moderation.photos.permission.label")}
-                      disabled={
-                        photosStatus[index].permission === ModerationStatus.Approved || photosStatus[index].permission === ModerationStatus.Rejected
-                      }
-                    >
-                      <RadioButton
-                        id={`permissionModified_myHelsinki_${index}`}
-                        label={i18n.t("moderation.photos.permission.myHelsinki")}
-                        name={`permissionModified_${index}`}
-                        value={PhotoPermission.MyHelsinki}
-                        checked={photosModified[index].permission === PhotoPermission.MyHelsinki}
-                        onChange={(evt) => updatePhoto(index, evt)}
-                      />
-                      <RadioButton
-                        id={`permissionModified_creativeCommons_${index}`}
-                        label={i18n.t("moderation.photos.permission.creativeCommons")}
-                        name={`permissionModified_${index}`}
-                        value={PhotoPermission.CreativeCommons}
-                        checked={photosModified[index].permission === PhotoPermission.CreativeCommons}
-                        onChange={(evt) => updatePhoto(index, evt)}
-                      />
-                    </SelectionGroup>
-                  </ModifyButton>
-                  <ActionButton
-                    className="gridColumn3"
-                    fieldName="permission"
-                    status={photosStatus[index].permission}
-                    actionCallback={(fieldName, status) => updatePhotoStatus(index, fieldName, status)}
+                    radioButtonLabels={[i18n.t("moderation.photos.permission.myHelsinki"), i18n.t("moderation.photos.permission.creativeCommons")]}
+                    radioButtonValues={[PhotoPermission.MyHelsinki, PhotoPermission.CreativeCommons]}
                   />
-                </>
-              )}
+                }
+                isSelectionGroupWrapper
+              />
 
               <ModerationSection
                 id={`source_${index}`}
