@@ -1,11 +1,12 @@
 import React, { ChangeEvent, ReactElement } from "react";
 import { RadioButton, SelectionGroup } from "hds-react";
 
+// Note: radiobuttonname is lowercase to prevent a warning from React when calling cloneElement in ModerationSection.tsx
 interface SelectionGroupWrapperProps {
   id: string;
   className?: string;
   label: string;
-  radioButtonName?: string;
+  radiobuttonname?: string;
   radioButtonLabels: string[];
   radioButtonValues: string[];
   value?: string;
@@ -17,7 +18,7 @@ const SelectionGroupWrapper = ({
   id,
   className,
   label,
-  radioButtonName,
+  radiobuttonname,
   radioButtonLabels,
   radioButtonValues,
   value,
@@ -31,7 +32,7 @@ const SelectionGroupWrapper = ({
           id={`${id}_${rbValue}`}
           key={`${id}_${rbValue}`}
           label={radioButtonLabels[index]}
-          name={radioButtonName}
+          name={radiobuttonname}
           value={rbValue}
           checked={value === rbValue}
           onChange={onChange}
@@ -43,7 +44,7 @@ const SelectionGroupWrapper = ({
 
 SelectionGroupWrapper.defaultProps = {
   className: "",
-  radioButtonName: "",
+  radiobuttonname: "",
   value: undefined,
   onChange: undefined,
   disabled: false,

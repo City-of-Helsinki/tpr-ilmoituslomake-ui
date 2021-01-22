@@ -7,7 +7,6 @@ import {
   NotificationPlaceResult,
   ModerationPlaceSearch,
   TaskSearch,
-  ChangeRequestSchema,
   ModerationTodoResult,
   ModerationExtra,
 } from "../../types/general";
@@ -29,7 +28,7 @@ export interface NotificationState {
 }
 
 export interface NotificationValidationState {
-  pageValid: true;
+  pageValid: boolean;
   notificationValidation: NotificationValidationSchema;
 }
 

@@ -56,7 +56,7 @@ const ModerationSection = ({
           value: status !== ModerationStatus.Edited ? selectedValue : modifiedValue,
           onChange: status === ModerationStatus.Edited ? changeCallback : undefined,
           disabled: status !== ModerationStatus.Edited,
-          radioButtonName: isSelectionGroupWrapper ? id : undefined,
+          radiobuttonname: isSelectionGroupWrapper ? id : undefined,
         })}
       </>
     );
@@ -73,7 +73,7 @@ const ModerationSection = ({
           className: "gridColumn1 disabledTextColor",
           value: selectedValue,
           disabled: true,
-          radioButtonName: isSelectionGroupWrapper ? `${id}_Selected` : undefined,
+          radiobuttonname: isSelectionGroupWrapper ? `${id}_Selected` : undefined,
         })}
 
         <ModifyButton
@@ -90,7 +90,7 @@ const ModerationSection = ({
             value: modifiedValue,
             onChange: changeCallback,
             disabled: status === ModerationStatus.Approved || status === ModerationStatus.Rejected || forceModifiedDisabled,
-            radioButtonName: isSelectionGroupWrapper ? `${id}_Modified` : undefined,
+            radiobuttonname: isSelectionGroupWrapper ? `${id}_Modified` : undefined,
           })}
         </ModifyButton>
 
