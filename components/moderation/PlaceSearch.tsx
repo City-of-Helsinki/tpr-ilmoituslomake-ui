@@ -97,8 +97,8 @@ const PlaceSearch = (): ReactElement => {
           defaultValue={convertValueWithId(language)}
           onChange={updateSearchLanguage}
           label={i18n.t("moderation.placeSearch.language.label")}
-          selectedItemRemoveButtonAriaLabel={i18n.t("notification.button.remove")}
-          clearButtonAriaLabel={i18n.t("notification.button.clearAllSelections")}
+          selectedItemRemoveButtonAriaLabel={i18n.t("moderation.button.remove")}
+          clearButtonAriaLabel={i18n.t("moderation.button.clearAllSelections")}
         />
         <SelectionGroup
           id="publishPermission"
@@ -132,9 +132,9 @@ const PlaceSearch = (): ReactElement => {
           defaultValue={convertValue(district)}
           onChange={updateSearchDistrict}
           label={i18n.t("moderation.placeSearch.district.label")}
-          toggleButtonAriaLabel={i18n.t("notification.button.toggleMenu")}
-          selectedItemRemoveButtonAriaLabel={i18n.t("notification.button.remove")}
-          clearButtonAriaLabel={i18n.t("notification.button.clearAllSelections")}
+          toggleButtonAriaLabel={i18n.t("moderation.button.toggleMenu")}
+          selectedItemRemoveButtonAriaLabel={i18n.t("moderation.button.remove")}
+          clearButtonAriaLabel={i18n.t("moderation.button.clearAllSelections")}
         />
         <Combobox
           id="tag"
@@ -143,9 +143,9 @@ const PlaceSearch = (): ReactElement => {
           defaultValue={convertValue(tag)}
           onChange={updateSearchTag}
           label={i18n.t("moderation.placeSearch.tag.label")}
-          toggleButtonAriaLabel={i18n.t("notification.button.toggleMenu")}
-          selectedItemRemoveButtonAriaLabel={i18n.t("notification.button.remove")}
-          clearButtonAriaLabel={i18n.t("notification.button.clearAllSelections")}
+          toggleButtonAriaLabel={i18n.t("moderation.button.toggleMenu")}
+          selectedItemRemoveButtonAriaLabel={i18n.t("moderation.button.remove")}
+          clearButtonAriaLabel={i18n.t("moderation.button.clearAllSelections")}
         />
         <TextInput
           id="comment"

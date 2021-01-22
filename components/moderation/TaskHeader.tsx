@@ -148,14 +148,14 @@ const TaskHeader = (): ReactElement => {
       {toast && (
         <HdsNotification
           position="top-right"
-          label={i18n.t(`notification.message.${toast}.title`)}
+          label={i18n.t(`moderation.message.${toast}.title`)}
           type={toast === Toast.SaveSucceeded ? "success" : "error"}
-          closeButtonLabelText={i18n.t("notification.message.close")}
+          closeButtonLabelText={i18n.t("moderation.message.close")}
           onClose={cleanupToast}
           autoClose
           dismissible
         >
-          {i18n.t(`notification.message.${toast}.message`)}
+          {i18n.t(`moderation.message.${toast}.message`)}
         </HdsNotification>
       )}
     </div>

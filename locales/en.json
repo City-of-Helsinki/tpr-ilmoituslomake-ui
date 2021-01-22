@@ -293,6 +293,30 @@
       "remove": "Remove",
       "toggleMenu": "Toggle menu"
     },
+    "message": {
+      "notAuthenticated": {
+        "title": "Please login before saving",
+        "message": ""
+      },
+      "validationFailed": {
+        "title": "The form has errors",
+        "message": "Please check the information, the incorrect entries are highlighted below"
+      },
+      "saveFailed": {
+        "title": "The information failed to be saved",
+        "message": "Unfortunately a technical error prevented the information from being saved. Please try again later."
+      },
+      "saveSucceeded": {
+        "title": "Save succeeded!",
+        "message": ""
+      },
+      "close": "Close message",
+      "fieldRequired": "$fieldName is mandatory information",
+      "fieldFormat": "$fieldName must be entered in the right format",
+      "fieldTooLong": "$fieldName is too long",
+      "fieldTooShort": "$fieldName is too short",
+      "fieldOther": "Please check the information"
+    },
     "contact": {
       "title": "Other contact information",
       "phone": {

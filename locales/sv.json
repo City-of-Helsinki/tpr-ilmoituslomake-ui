@@ -293,6 +293,30 @@
       "remove": "Poista",
       "toggleMenu": "Vaihdele valikko"
     },
+    "message": {
+      "notAuthenticated": {
+        "title": "Kirjaudu sisään ennen tallentamista",
+        "message": ""
+      },
+      "validationFailed": {
+        "title": "Lomakkeella on virheitä",
+        "message": "Tarkista tiedot, virheellisiä kohtia on korostettu alla"
+      },
+      "saveFailed": {
+        "title": "Tietojen tallennus epäonnistui",
+        "message": "Valitettavasti tekninen virhe esti tietojen tallentamisen. Ole hyvä ja yritä uudelleen myöhemmin."
+      },
+      "saveSucceeded": {
+        "title": "Tallennus onnistui!",
+        "message": ""
+      },
+      "close": "Sulje viesti",
+      "fieldRequired": "$fieldName on pakollinen tieto",
+      "fieldFormat": "$fieldName on annettava oikeassa muodossa",
+      "fieldTooLong": "$fieldName on liian pitkä",
+      "fieldTooShort": "$fieldName on liian lyhyt",
+      "fieldOther": "Tarkista tieto"
+    },
     "contact": {
       "title": "Muut yhteystiedot",
       "phone": {
