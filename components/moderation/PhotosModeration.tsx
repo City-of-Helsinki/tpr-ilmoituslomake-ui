@@ -1,14 +1,12 @@
 import React, { Dispatch, ChangeEvent, ReactElement, Fragment } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useI18n } from "next-localization";
-import { TextInput, Button, IconUpload, IconLink, TextArea, SelectionGroup, RadioButton, IconLinkExternal } from "hds-react";
+import { TextInput, Button, TextArea } from "hds-react";
 import { ModerationAction, ModerationStatusAction } from "../../state/actions/types";
 import { removeModerationPhoto, setModerationPhoto } from "../../state/actions/moderation";
 import { removeModerationPhotoStatus, setModerationPhotoAltTextStatus, setModerationPhotoStatus } from "../../state/actions/moderationStatus";
 import { RootState } from "../../state/reducers";
-import { LANGUAGE_OPTIONS, ModerationStatus, PhotoPermission, PhotoSourceType, TaskType } from "../../types/constants";
-import ActionButton from "./ActionButton";
-import ModifyButton from "./ModifyButton";
+import { LANGUAGE_OPTIONS, ModerationStatus, PhotoPermission, PhotoSourceType } from "../../types/constants";
 import ModerationSection from "./ModerationSection";
 import SelectionGroupWrapper from "./SelectionGroupWrapper";
 
