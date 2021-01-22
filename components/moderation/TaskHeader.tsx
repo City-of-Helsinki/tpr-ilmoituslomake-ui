@@ -1,5 +1,6 @@
 import React, { Dispatch, ReactElement, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import { useRouter } from "next/router";
 import { useI18n } from "next-localization";
 import { Button, IconArrowRight, IconArrowUndo, IconCheck, IconCross, IconTrash, Notification as HdsNotification } from "hds-react";
 import moment from "moment";
@@ -14,6 +15,7 @@ import styles from "./TaskHeader.module.scss";
 const TaskHeader = (): ReactElement => {
   const i18n = useI18n();
   const dispatchStatus = useDispatch<Dispatch<ModerationStatusAction>>();
+  const router = useRouter();
 
   const currentUser = useSelector((state: RootState) => state.notification.user);
   const selectedTaskId = useSelector((state: RootState) => state.moderation.selectedTaskId);
@@ -64,7 +66,10 @@ const TaskHeader = (): ReactElement => {
           <Button variant="secondary" iconRight={<IconTrash />}>
             {i18n.t("moderation.button.removePlace")}
           </Button>
-          <Button iconRight={<IconArrowRight />} onClick={() => saveModeration(currentUser, modifiedTaskId, modifiedTask, moderationExtra, setToast)}>
+          <Button
+            iconRight={<IconArrowRight />}
+            onClick={() => saveModeration(currentUser, modifiedTaskId, modifiedTask, moderationExtra, router, setToast)}
+          >
             {i18n.t("moderation.button.saveInformation")}
           </Button>
         </div>
@@ -84,7 +89,7 @@ const TaskHeader = (): ReactElement => {
           {pageStatus === ModerationStatus.Edited && (
             <Button
               iconRight={<IconArrowRight />}
-              onClick={() => saveModeration(currentUser, modifiedTaskId, modifiedTask, moderationExtra, setToast)}
+              onClick={() => saveModeration(currentUser, modifiedTaskId, modifiedTask, moderationExtra, router, setToast)}
             >
               {i18n.t("moderation.button.saveInformation")}
             </Button>

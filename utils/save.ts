@@ -84,6 +84,7 @@ export const saveModeration = async (
   modifiedTaskId: number,
   modifiedTask: NotificationSchema,
   moderationExtra: ModerationExtra,
+  router: NextRouter,
   setToast: Dispatch<SetStateAction<Toast | undefined>>
 ): Promise<void> => {
   try {
@@ -145,6 +146,7 @@ export const saveModeration = async (
 
         if (moderationResult.id) {
           setToast(Toast.SaveSucceeded);
+          router.push(`/moderation/task`);
         } else {
           setToast(Toast.SaveFailed);
         }
