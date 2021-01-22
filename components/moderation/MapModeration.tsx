@@ -65,47 +65,71 @@ const MapModeration = ({ setMapsReady }: MapModerationProps): ReactElement => {
     }
   }, [taskType, map1Ready, map2Ready, setMapsReady, setInitialLocationStatus]);
 
-  return (
-    <div className="formSection">
-      <div className="gridLayoutContainer moderation">
-        <h4 className="gridColumn1 moderation">{`${i18n.t("moderation.map.title")}${i18n.t("moderation.task.selected")}`}</h4>
-        {(taskType === TaskType.NewPlace || taskType === TaskType.PlaceChange) && (
-          <h4 className="gridColumn2 moderation">{`${i18n.t("moderation.map.title")}${i18n.t("moderation.task.modified")}`}</h4>
-        )}
+  if (taskType === TaskType.ChangeTip || taskType === TaskType.RemoveTip) {
+    return (
+      <div className="formSection">
+        <div className="gridLayoutContainer moderation">
+          {locationStatus !== ModerationStatus.Edited && (
+            <h4 className="gridColumn1 moderation">{`${i18n.t("moderation.map.title")}${i18n.t("moderation.task.selected")}`}</h4>
+          )}
+          {locationStatus === ModerationStatus.Edited && (
+            <h4 className="gridColumn1 moderation">{`${i18n.t("moderation.map.title")}${i18n.t("moderation.task.modified")}`}</h4>
+          )}
 
-        <MapWrapper
-          className={`gridColumn1 ${styles.map}`}
-          initialCenter={initialCenter as [number, number]}
-          initialZoom={initialZoom}
-          location={locationSelected}
-          setMapReady={setMap1Ready}
-          draggableMarker={false}
-        />
-        {(taskType === TaskType.NewPlace || taskType === TaskType.PlaceChange) && (
-          <>
-            <ModifyButton
-              className="gridColumn2"
-              label={i18n.t("moderation.map.title")}
-              fieldName="location"
-              status={initialLocationStatus || locationStatus}
-              modifyCallback={updateLocationStatus}
-            >
-              <MapWrapper
-                className={`gridColumn2 ${styles.map}`}
-                initialCenter={initialCenter as [number, number]}
-                initialZoom={initialZoom}
-                location={locationModified}
-                setLocation={updateLocation}
-                setMapReady={setMap2Ready}
-                draggableMarker={locationStatus !== ModerationStatus.Approved && locationStatus !== ModerationStatus.Rejected}
-              />
-            </ModifyButton>
-            <ActionButton className="gridColumn3" fieldName="location" status={locationStatus} actionCallback={updateLocationStatus} />
-          </>
-        )}
+          <MapWrapper
+            className={`gridColumn1 ${styles.map}`}
+            initialCenter={initialCenter as [number, number]}
+            initialZoom={initialZoom}
+            location={locationStatus !== ModerationStatus.Edited ? locationSelected : locationModified}
+            setLocation={locationStatus === ModerationStatus.Edited ? updateLocation : undefined}
+            setMapReady={setMap1Ready}
+            draggableMarker={locationStatus === ModerationStatus.Edited}
+          />
+        </div>
       </div>
-    </div>
-  );
+    );
+  }
+
+  if (taskType === TaskType.NewPlace || taskType === TaskType.PlaceChange) {
+    return (
+      <div className="formSection">
+        <div className="gridLayoutContainer moderation">
+          <h4 className="gridColumn1 moderation">{`${i18n.t("moderation.map.title")}${i18n.t("moderation.task.selected")}`}</h4>
+          <h4 className="gridColumn2 moderation">{`${i18n.t("moderation.map.title")}${i18n.t("moderation.task.modified")}`}</h4>
+
+          <MapWrapper
+            className={`gridColumn1 ${styles.map}`}
+            initialCenter={initialCenter as [number, number]}
+            initialZoom={initialZoom}
+            location={locationSelected}
+            setMapReady={setMap1Ready}
+            draggableMarker={false}
+          />
+
+          <ModifyButton
+            className="gridColumn2"
+            label={i18n.t("moderation.map.title")}
+            fieldName="location"
+            status={initialLocationStatus || locationStatus}
+            modifyCallback={updateLocationStatus}
+          >
+            <MapWrapper
+              className={`gridColumn2 ${styles.map}`}
+              initialCenter={initialCenter as [number, number]}
+              initialZoom={initialZoom}
+              location={locationModified}
+              setLocation={updateLocation}
+              setMapReady={setMap2Ready}
+              draggableMarker={locationStatus !== ModerationStatus.Approved && locationStatus !== ModerationStatus.Rejected}
+            />
+          </ModifyButton>
+          <ActionButton className="gridColumn3" fieldName="location" status={locationStatus} actionCallback={updateLocationStatus} />
+        </div>
+      </div>
+    );
+  }
+
+  return <></>;
 };
 
 MapModeration.defaultProps = {
