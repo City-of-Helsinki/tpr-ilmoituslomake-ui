@@ -42,21 +42,36 @@ const ModerationSection = ({
   statusCallback,
   ModerationComponent,
 }: ModerationSectionProps): ReactElement => {
-  return (
-    <>
-      {selectedHeaderText && <h4 className="gridColumn1 moderation">{selectedHeaderText}</h4>}
-      {modifiedHeaderText && (taskType === TaskType.NewPlace || taskType === TaskType.PlaceChange) && (
-        <h4 className="gridColumn2 moderation">{modifiedHeaderText}</h4>
-      )}
+  if (taskType === TaskType.ChangeTip || taskType === TaskType.RemoveTip) {
+    return (
+      <>
+        {selectedHeaderText && status !== ModerationStatus.Edited && <h4 className="gridColumn1 moderation">{selectedHeaderText}</h4>}
+        {modifiedHeaderText && status === ModerationStatus.Edited && <h4 className="gridColumn1 moderation">{modifiedHeaderText}</h4>}
 
-      {cloneElement(ModerationComponent, {
-        id: `${id}_Selected`,
-        className: "gridColumn1 disabledTextColor",
-        value: selectedValue,
-        disabled: true,
-      })}
+        {cloneElement(ModerationComponent, {
+          id: status !== ModerationStatus.Edited ? `${id}_Selected` : `${id}_Modified`,
+          className: "gridColumn1 disabledTextColor",
+          value: status !== ModerationStatus.Edited ? selectedValue : modifiedValue,
+          onChange: status === ModerationStatus.Edited ? changeCallback : undefined,
+          disabled: status !== ModerationStatus.Edited,
+        })}
+      </>
+    );
+  }
 
-      {(taskType === TaskType.NewPlace || taskType === TaskType.PlaceChange) && (
+  if (taskType === TaskType.NewPlace || taskType === TaskType.PlaceChange) {
+    return (
+      <>
+        {selectedHeaderText && <h4 className="gridColumn1 moderation">{selectedHeaderText}</h4>}
+        {modifiedHeaderText && <h4 className="gridColumn2 moderation">{modifiedHeaderText}</h4>}
+
+        {cloneElement(ModerationComponent, {
+          id: `${id}_Selected`,
+          className: "gridColumn1 disabledTextColor",
+          value: selectedValue,
+          disabled: true,
+        })}
+
         <ModifyButton
           className="gridColumn2"
           label={modifyButtonLabel}
@@ -73,13 +88,13 @@ const ModerationSection = ({
             disabled: status === ModerationStatus.Approved || status === ModerationStatus.Rejected || forceModifiedDisabled,
           })}
         </ModifyButton>
-      )}
 
-      {!actionButtonHidden && (taskType === TaskType.NewPlace || taskType === TaskType.PlaceChange) && (
-        <ActionButton className="gridColumn3" fieldName={fieldName} status={status} actionCallback={statusCallback} />
-      )}
-    </>
-  );
+        {!actionButtonHidden && <ActionButton className="gridColumn3" fieldName={fieldName} status={status} actionCallback={statusCallback} />}
+      </>
+    );
+  }
+
+  return <></>;
 };
 
 ModerationSection.defaultProps = {
