@@ -75,6 +75,7 @@ export const SEARCH_URL = "https://api.hel.fi/servicemap/v2/search/?format=json"
 
 export const SET_PAGE = "SET_PAGE";
 export const SET_PAGE_VALID = "SET_PAGE_VALID";
+export const SET_PAGE_STATUS = "SET_PAGE_STATUS";
 export const SET_USER = "SET_USER";
 export const SET_MAP_VIEW = "SET_MAP_VIEW";
 

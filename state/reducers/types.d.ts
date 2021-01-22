@@ -1,4 +1,5 @@
 import { LatLngExpression } from "leaflet";
+import { ModerationStatus } from "../../types/constants";
 import {
   User,
   NotificationExtra,
@@ -46,5 +47,6 @@ export interface ModerationState {
 }
 
 export interface ModerationStatusState {
+  pageStatus: ModerationStatus;
   moderationStatus: ModerationStatusSchema;
 }

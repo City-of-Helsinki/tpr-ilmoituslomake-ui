@@ -3,6 +3,7 @@ import { LatLngExpression } from "leaflet";
 import {
   SET_PAGE,
   SET_PAGE_VALID,
+  SET_PAGE_STATUS,
   SET_USER,
   SET_MAP_VIEW,
   SET_NOTIFICATION_PLACE_SEARCH,
@@ -363,6 +364,11 @@ export type ModerationAction =
   | SetModerationPhotoAction
   | RemoveModerationPhotoAction;
 
+interface SetPageStatusAction extends AnyAction {
+  type: typeof SET_PAGE_STATUS;
+  payload: ModerationStatus;
+}
+
 interface SetModerationNameStatusAction extends AnyAction {
   type: typeof SET_MODERATION_NAME_STATUS;
   payload: ModerationStatus;
@@ -419,6 +425,7 @@ interface RemoveModerationPhotoStatusAction extends AnyAction {
 }
 
 export type ModerationStatusAction =
+  | SetPageStatusAction
   | SetModerationNameStatusAction
   | SetModerationShortDescriptionStatusAction
   | SetModerationLongDescriptionStatusAction

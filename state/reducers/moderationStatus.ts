@@ -1,6 +1,8 @@
 import { AnyAction } from "redux";
 import { ModerationStatusState } from "./types";
 import {
+  ModerationStatus,
+  SET_PAGE_STATUS,
   SET_MODERATION_NAME_STATUS,
   SET_MODERATION_SHORT_DESCRIPTION_STATUS,
   SET_MODERATION_LONG_DESCRIPTION_STATUS,
@@ -17,11 +19,20 @@ import {
 import { PhotoStatus } from "../../types/moderation_status";
 
 const initialState: ModerationStatusState = {
+  pageStatus: ModerationStatus.Unknown,
   moderationStatus: INITIAL_MODERATION_STATUS,
 };
 
 const moderationStatus = (state = initialState, action: AnyAction): ModerationStatusState => {
   switch (action.type) {
+    case SET_PAGE_STATUS: {
+      console.log("SET_PAGE_STATUS", action.payload);
+      return {
+        ...state,
+        pageStatus: action.payload,
+      };
+    }
+
     case SET_MODERATION_NAME_STATUS: {
       console.log("SET_MODERATION_NAME_STATUS", action.payload);
       return {

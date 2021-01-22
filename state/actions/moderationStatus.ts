@@ -1,5 +1,6 @@
 import {
   ModerationStatus,
+  SET_PAGE_STATUS,
   SET_MODERATION_NAME_STATUS,
   SET_MODERATION_SHORT_DESCRIPTION_STATUS,
   SET_MODERATION_LONG_DESCRIPTION_STATUS,
@@ -14,6 +15,11 @@ import {
 } from "../../types/constants";
 import { KeyValueStatus } from "../../types/general";
 import { ModerationStatusAction } from "./types";
+
+export const setPageStatus = (status: ModerationStatus): ModerationStatusAction => ({
+  type: SET_PAGE_STATUS,
+  payload: status,
+});
 
 export const setModerationNameStatus = (status: KeyValueStatus): ModerationStatusAction => ({
   type: SET_MODERATION_NAME_STATUS,
