@@ -2,7 +2,7 @@ import React, { Dispatch, ReactElement, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useRouter } from "next/router";
 import { useI18n } from "next-localization";
-import { Button, IconArrowLeft, IconArrowRight, Notification as HdsNotification } from "hds-react";
+import { Button, IconArrowLeft, IconArrowRight } from "hds-react";
 import { NotificationAction, NotificationValidationAction } from "../../state/actions/types";
 import { setPage } from "../../state/actions/notification";
 import { setPageValid } from "../../state/actions/notificationValidation";
@@ -10,6 +10,7 @@ import { RootState } from "../../state/reducers";
 import { MAX_PAGE, Toast } from "../../types/constants";
 import { saveNotification } from "../../utils/save";
 import { isPageValid } from "../../utils/validation";
+import ToastNotification from "../common/ToastNotification";
 import styles from "./NotificationFooter.module.scss";
 
 const NotificationFooter = (): ReactElement => {
@@ -43,10 +44,6 @@ const NotificationFooter = (): ReactElement => {
     router.push("/");
   };
 
-  const cleanupToast = () => {
-    setToast(undefined);
-  };
-
   return (
     <nav className={styles.notificationFooter}>
       {currentPage === 1 && (
@@ -76,19 +73,7 @@ const NotificationFooter = (): ReactElement => {
         </Button>
       )}
 
-      {toast && (
-        <HdsNotification
-          position="top-right"
-          label={i18n.t(`notification.message.${toast}.title`)}
-          type={toast === Toast.SaveSucceeded ? "success" : "error"}
-          closeButtonLabelText={i18n.t("notification.message.close")}
-          onClose={cleanupToast}
-          autoClose
-          dismissible
-        >
-          {i18n.t(`notification.message.${toast}.message`)}
-        </HdsNotification>
-      )}
+      {toast && <ToastNotification prefix="notification" toast={toast} setToast={setToast} />}
     </nav>
   );
 };

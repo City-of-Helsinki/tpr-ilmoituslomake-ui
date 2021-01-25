@@ -2,13 +2,14 @@ import React, { Dispatch, ReactElement, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useRouter } from "next/router";
 import { useI18n } from "next-localization";
-import { Button, IconArrowRight, IconArrowUndo, IconCheck, IconCross, IconTrash, Notification as HdsNotification } from "hds-react";
+import { Button, IconArrowRight, IconArrowUndo, IconCheck, IconCross, IconTrash } from "hds-react";
 import moment from "moment";
 import { ModerationStatusAction } from "../../state/actions/types";
 import { RootState } from "../../state/reducers";
 import { DATETIME_FORMAT, ModerationStatus, NotifierType, TaskType, Toast } from "../../types/constants";
 import { saveModeration } from "../../utils/save";
 import setModerationStatus from "../../utils/status";
+import ToastNotification from "../common/ToastNotification";
 import TaskStatusLabel from "./TaskStatusLabel";
 import styles from "./TaskHeader.module.scss";
 
@@ -42,10 +43,6 @@ const TaskHeader = (): ReactElement => {
   const pageStatus = useSelector((state: RootState) => state.moderationStatus.pageStatus);
 
   const [toast, setToast] = useState<Toast>();
-
-  const cleanupToast = () => {
-    setToast(undefined);
-  };
 
   const openForModifying = () => {
     setModerationStatus(photosSelected, dispatchStatus);
@@ -150,19 +147,7 @@ const TaskHeader = (): ReactElement => {
         </div>
       </div>
 
-      {toast && (
-        <HdsNotification
-          position="top-right"
-          label={i18n.t(`moderation.message.${toast}.title`)}
-          type={toast === Toast.SaveSucceeded ? "success" : "error"}
-          closeButtonLabelText={i18n.t("moderation.message.close")}
-          onClose={cleanupToast}
-          autoClose
-          dismissible
-        >
-          {i18n.t(`moderation.message.${toast}.message`)}
-        </HdsNotification>
-      )}
+      {toast && <ToastNotification prefix="moderation" toast={toast} setToast={setToast} />}
     </div>
   );
 };
