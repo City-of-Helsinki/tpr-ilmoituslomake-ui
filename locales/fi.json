@@ -34,7 +34,10 @@
       "modifyOpeningTimes": "Muokkaa aukioloaikoja",
       "notifyOpeningTimes": "Ilmoita aukioloajat",
       "notifyClosingDown": "Ilmoita kohde lopettaneeksi",
-      "notifyNewPlace": "Ilmoita uusi kohde"
+      "notifyNewPlace": "Ilmoita uusi kohde",
+      "continueToOpeningTimes": "Jatka aukioloaikojen ilmoittamiseen",
+      "noOpeningTimes": "Kohteella ei ole aukioloaikoja",
+      "continueLater": "Jatkan myöhemmin"
     },
     "page": {
       "basic": "Perustiedot",
@@ -77,6 +80,10 @@
       "completePhotos": {
         "title": "Täydennä kohteen tietoja kuvilla",
         "message": "Kerro kävijöille, miltä kohteesi näyttää."
+      },
+      "sentModal": {
+        "title": "Melkein valmista...",
+        "message": "Kiitos, kohteen tiedot on nyt lähetetty tarkistettavaksi. Jatka kertomalla, milloin kohteesi on avoinna yleisölle."
       },
       "close": "Sulje viesti",
       "fieldRequired": "$fieldName on pakollinen tieto",

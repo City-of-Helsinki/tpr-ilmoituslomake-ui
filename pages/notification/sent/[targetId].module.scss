@@ -15,16 +15,37 @@
       align-items: center;
     }
   }
+
+  .sent {
+    background-color: $color-copper-light;
+  }
+
+  .opening {
+    background-color: $color-silver-light;
+  }
+
+  .photos {
+    background-color: $color-silver-light;
+  }
 }
 
-.sent {
-  background-color: $color-copper-light;
+.dialog {
+  text-align: center;
+  padding: $spacing-m;
+
+  h1 {
+    color: $color-bus;
+  }
+
+  div {
+    margin: $spacing-s;
+  }
+
+  .message {
+    margin-bottom: $spacing-l;
+  }
 }
 
-.opening {
-  background-color: $color-silver-light;
-}
-
-.photos {
-  background-color: $color-silver-light;
+.wave {
+  fill: $color-copper-light;
 }

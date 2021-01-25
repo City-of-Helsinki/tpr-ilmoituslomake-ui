@@ -34,7 +34,10 @@
       "modifyOpeningTimes": "Modify opening times",
       "notifyOpeningTimes": "Register opening times",
       "notifyClosingDown": "Notify place closing down",
-      "notifyNewPlace": "Register a new place"
+      "notifyNewPlace": "Register a new place",
+      "continueToOpeningTimes": "Continue to opening times registration",
+      "noOpeningTimes": "The place does not have opening times",
+      "continueLater": "Continue later"
     },
     "page": {
       "basic": "Basic info",
@@ -77,6 +80,10 @@
       "completePhotos": {
         "title": "Complete the place's information with photos",
         "message": "Let the visitors know what your place looks like."
+      },
+      "sentModal": {
+        "title": "Melkein valmista...",
+        "message": "Thank you, the place's information has now been sent for review. Please continue by telling when the place is open to the public."
       },
       "close": "Close message",
       "fieldRequired": "$fieldName is mandatory information",

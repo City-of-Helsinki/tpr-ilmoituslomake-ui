@@ -1,10 +1,11 @@
-import React, { ReactElement } from "react";
+import React, { ReactElement, useState } from "react";
 import { useSelector } from "react-redux";
 import { GetServerSideProps } from "next";
 import Head from "next/head";
 import Link from "next/link";
 import { useI18n } from "next-localization";
-import { Button, IconCheckCircleFill, IconClockPlus, IconLinkExternal, IconPhotoPlus } from "hds-react";
+import { Button, IconCheckCircleFill, IconClockPlus, IconInfoCircle, IconLinkExternal, IconPhotoPlus, Koros } from "hds-react";
+import { Dialog } from "@material-ui/core";
 import i18nLoader from "../../../utils/i18n";
 import { RootState } from "../../../state/reducers";
 import { initStore } from "../../../state/store";
@@ -23,6 +24,12 @@ const Sent = (): ReactElement => {
 
   const notificationId = useSelector((state: RootState) => state.notification.notificationId);
   const notificationName = useSelector((state: RootState) => state.notification.notificationName);
+
+  const [modalOpen, setModalOpen] = useState(true);
+
+  const closeModal = () => {
+    setModalOpen(false);
+  };
 
   return (
     <Layout>
@@ -72,6 +79,29 @@ const Sent = (): ReactElement => {
         <InfoFooter />
         <Preview />
         <InfoFooter />
+
+        <Dialog open={modalOpen} onClose={closeModal} aria-labelledby="modal-dialog-title" aria-describedby="modal-dialog-description">
+          <div className={styles.dialog}>
+            <h1 id="modal-dialog-title">{i18n.t("notification.message.sentModal.title")}</h1>
+            <div id="modal-dialog-description" className={styles.message}>
+              {i18n.t("notification.message.sentModal.message")}
+            </div>
+            <div>
+              <Button iconRight={<IconLinkExternal />}>{i18n.t("notification.button.continueToOpeningTimes")}</Button>
+            </div>
+            <div>
+              <Button variant="supplementary" iconRight={<IconInfoCircle />} onClick={closeModal}>
+                {i18n.t("notification.button.noOpeningTimes")}
+              </Button>
+            </div>
+            <div>
+              <Button variant="supplementary" iconRight={<IconInfoCircle />} onClick={closeModal}>
+                {i18n.t("notification.button.continueLater")}
+              </Button>
+            </div>
+          </div>
+          <Koros className={styles.wave} type="storm" />
+        </Dialog>
       </main>
     </Layout>
   );
