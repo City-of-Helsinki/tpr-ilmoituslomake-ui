@@ -40,6 +40,10 @@ const NotificationFooter = (): ReactElement => {
     }
   };
 
+  const sendNotification = () => {
+    saveNotification(currentUser, notificationId, notification, notificationExtra, router, setToast);
+  };
+
   const cancelNotification = () => {
     router.push("/");
   };
@@ -65,10 +69,7 @@ const NotificationFooter = (): ReactElement => {
         </Button>
       )}
       {currentPage === MAX_PAGE && (
-        <Button
-          iconRight={<IconArrowRight />}
-          onClick={() => saveNotification(currentUser, notificationId, notification, notificationExtra, router, setToast)}
-        >
+        <Button iconRight={<IconArrowRight />} onClick={sendNotification}>
           {i18n.t("notification.button.send")}
         </Button>
       )}

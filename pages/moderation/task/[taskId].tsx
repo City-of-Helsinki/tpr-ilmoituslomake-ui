@@ -6,7 +6,7 @@ import { useI18n } from "next-localization";
 import i18nLoader from "../../../utils/i18n";
 import { initStore } from "../../../state/store";
 import { RootState } from "../../../state/reducers";
-import { ModerationStatus, TaskType, INITIAL_MODERATION_EXTRA, INITIAL_MODERATION_STATUS, INITIAL_NOTIFICATION } from "../../../types/constants";
+import { ModerationStatus, INITIAL_MODERATION_EXTRA, INITIAL_MODERATION_STATUS, INITIAL_NOTIFICATION } from "../../../types/constants";
 import { TagOption, ModerationTodoSchema } from "../../../types/general";
 import { PhotoStatus } from "../../../types/moderation_status";
 import { NotificationSchema } from "../../../types/notification_schema";
@@ -42,7 +42,6 @@ const ModerationTaskDetail = (): ReactElement => {
       {selectedTaskId > 0 && modifiedTaskId > 0 && (
         <main id="content">
           <TaskHeader />
-
           <h2 className="moderation">{i18n.t("moderation.task.title")}</h2>
           <Collapsible section={1} title={i18n.t("moderation.task.basic")}>
             <DescriptionModeration />

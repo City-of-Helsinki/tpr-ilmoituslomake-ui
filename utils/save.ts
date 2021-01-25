@@ -50,9 +50,8 @@ export const saveNotification = async (
         body: JSON.stringify(postData),
       });
       if (createResponse.ok) {
-        const notificationResult = await createResponse.json();
-
         // TODO - handle response
+        const notificationResult = await createResponse.json();
         console.log("RESPONSE", notificationResult);
 
         if (notificationResult.id) {
@@ -108,9 +107,8 @@ export const saveModeration = async (
           },
         });
         if (assignResponse.ok) {
-          const assignResult = await assignResponse.json();
-
           // TODO - handle response
+          const assignResult = await assignResponse.json();
           console.log("ASSIGN RESPONSE", assignResult);
         } else {
           setToast(Toast.SaveFailed);
@@ -139,14 +137,15 @@ export const saveModeration = async (
         body: JSON.stringify(postData),
       });
       if (createResponse.ok) {
-        const moderationResult = await createResponse.json();
-
         // TODO - handle response
+        const moderationResult = await createResponse.json();
         console.log("SAVE RESPONSE", moderationResult);
 
         if (moderationResult.id) {
           setToast(Toast.SaveSucceeded);
-          router.push(`/moderation/task`);
+
+          // TODO - handle page transition
+          // router.push(`/moderation/task`);
         } else {
           setToast(Toast.SaveFailed);
         }
@@ -159,6 +158,73 @@ export const saveModeration = async (
       }
     } else if (!valid) {
       setToast(Toast.ValidationFailed);
+    } else {
+      setToast(Toast.NotAuthenticated);
+    }
+  } catch (err) {
+    console.log("ERROR", err);
+    setToast(Toast.SaveFailed);
+  }
+};
+
+export const rejectModeration = async (
+  currentUser: User | undefined,
+  modifiedTaskId: number,
+  moderationExtra: ModerationExtra,
+  router: NextRouter,
+  setToast: Dispatch<SetStateAction<Toast | undefined>>
+): Promise<void> => {
+  try {
+    if (currentUser?.authenticated) {
+      // Send the Cross Site Request Forgery token, otherwise the backend returns the error "CSRF Failed: CSRF token missing or incorrect."
+      const csrftoken = Cookies.get("csrftoken");
+
+      const {
+        moderator: { fullName: moderatorName },
+      } = moderationExtra;
+
+      // Check if this task has already been assigned to a moderator
+      if (moderatorName.length === 0) {
+        // Assign the moderation task to the current user
+        const assignResponse = await fetch(`/api/moderation/assign/${modifiedTaskId}/`, {
+          method: "PUT",
+          headers: {
+            "X-CSRFToken": csrftoken as string,
+          },
+        });
+        if (assignResponse.ok) {
+          // TODO - handle response
+          const assignResult = await assignResponse.json();
+          console.log("ASSIGN RESPONSE", assignResult);
+        } else {
+          setToast(Toast.SaveFailed);
+
+          // TODO - handle error
+          const assignResult = await assignResponse.text();
+          console.log("ASSIGN FAILED", assignResult);
+        }
+      }
+
+      // Reject the moderation task
+      const rejectResponse = await fetch(`/api/moderation/reject/${modifiedTaskId}/`, {
+        method: "DELETE",
+        headers: {
+          "X-CSRFToken": csrftoken as string,
+        },
+      });
+      if (rejectResponse.ok) {
+        setToast(Toast.SaveSucceeded);
+
+        // TODO - handle response
+        const rejectResult = await rejectResponse.text();
+        console.log("REJECT RESPONSE", rejectResult);
+      } else {
+        setToast(Toast.SaveFailed);
+
+        // TODO - handle error
+        const rejectResult = await rejectResponse.text();
+        console.log("REJECT FAILED", rejectResult);
+      }
     } else {
       setToast(Toast.NotAuthenticated);
     }

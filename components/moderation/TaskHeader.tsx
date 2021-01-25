@@ -7,8 +7,9 @@ import moment from "moment";
 import { ModerationStatusAction } from "../../state/actions/types";
 import { RootState } from "../../state/reducers";
 import { DATETIME_FORMAT, ModerationStatus, NotifierType, TaskType, Toast } from "../../types/constants";
-import { saveModeration } from "../../utils/save";
+import { rejectModeration, saveModeration } from "../../utils/save";
 import setModerationStatus from "../../utils/status";
+import ModalConfirmation from "../common/ModalConfirmation";
 import ToastNotification from "../common/ToastNotification";
 import TaskStatusLabel from "./TaskStatusLabel";
 import styles from "./TaskHeader.module.scss";
@@ -43,9 +44,42 @@ const TaskHeader = (): ReactElement => {
   const pageStatus = useSelector((state: RootState) => state.moderationStatus.pageStatus);
 
   const [toast, setToast] = useState<Toast>();
+  const [confirmRejection, setConfirmRejection] = useState(false);
+  const [confirmDeletion, setConfirmDeletion] = useState(false);
 
-  const openForModifying = () => {
+  const modifyTask = () => {
     setModerationStatus(photosSelected, dispatchStatus);
+  };
+
+  const openRejectionConfirmation = () => {
+    setConfirmRejection(true);
+  };
+
+  const closeRejectionConfirmation = () => {
+    setConfirmRejection(false);
+  };
+
+  const openDeletionConfirmation = () => {
+    setConfirmDeletion(true);
+  };
+
+  const closeDeletionConfirmation = () => {
+    setConfirmDeletion(false);
+  };
+
+  const saveTask = () => {
+    saveModeration(currentUser, modifiedTaskId, modifiedTask, moderationExtra, router, setToast);
+  };
+
+  const rejectTask = () => {
+    closeRejectionConfirmation();
+    rejectModeration(currentUser, modifiedTaskId, moderationExtra, router, setToast);
+  };
+
+  const removePlace = () => {
+    closeDeletionConfirmation();
+
+    // TODO - remove place
   };
 
   return (
@@ -57,16 +91,13 @@ const TaskHeader = (): ReactElement => {
       {(taskType === TaskType.NewPlace || taskType === TaskType.PlaceChange) && (
         <div className={styles.buttonRow}>
           <Button variant="secondary">{i18n.t("moderation.button.requestTranslation")}</Button>
-          <Button variant="secondary" iconRight={<IconArrowUndo />}>
+          <Button variant="secondary" iconRight={<IconArrowUndo />} onClick={openRejectionConfirmation}>
             {i18n.t("moderation.button.rejectChangeRequest")}
           </Button>
-          <Button variant="secondary" iconRight={<IconTrash />}>
+          <Button variant="secondary" iconRight={<IconTrash />} onClick={openDeletionConfirmation}>
             {i18n.t("moderation.button.removePlace")}
           </Button>
-          <Button
-            iconRight={<IconArrowRight />}
-            onClick={() => saveModeration(currentUser, modifiedTaskId, modifiedTask, moderationExtra, router, setToast)}
-          >
+          <Button iconRight={<IconArrowRight />} onClick={saveTask}>
             {i18n.t("moderation.button.saveInformation")}
           </Button>
         </div>
@@ -75,19 +106,16 @@ const TaskHeader = (): ReactElement => {
       {(taskType === TaskType.ChangeTip || taskType === TaskType.RemoveTip) && (
         <div className={styles.buttonRow}>
           <Button variant="secondary">{i18n.t("moderation.button.requestTranslation")}</Button>
-          <Button variant="secondary" iconRight={<IconArrowUndo />}>
+          <Button variant="secondary" iconRight={<IconArrowUndo />} onClick={openRejectionConfirmation}>
             {i18n.t("moderation.button.rejectChangeRequest")}
           </Button>
           {pageStatus !== ModerationStatus.Edited && (
-            <Button variant="secondary" onClick={openForModifying}>
+            <Button variant="secondary" onClick={modifyTask}>
               {i18n.t("moderation.button.openForModifying")}
             </Button>
           )}
           {pageStatus === ModerationStatus.Edited && (
-            <Button
-              iconRight={<IconArrowRight />}
-              onClick={() => saveModeration(currentUser, modifiedTaskId, modifiedTask, moderationExtra, router, setToast)}
-            >
+            <Button iconRight={<IconArrowRight />} onClick={saveTask}>
               {i18n.t("moderation.button.saveInformation")}
             </Button>
           )}
@@ -146,6 +174,30 @@ const TaskHeader = (): ReactElement => {
           <div>{taskType === TaskType.ChangeTip || taskType === TaskType.RemoveTip ? userComments : comments}</div>
         </div>
       </div>
+
+      {confirmRejection && (
+        <ModalConfirmation
+          open={confirmRejection}
+          titleKey="moderation.button.rejectChangeRequest"
+          messageKey="moderation.confirmation.rejectChangeRequest"
+          cancelKey="moderation.button.cancel"
+          confirmKey="moderation.button.reject"
+          closeCallback={closeRejectionConfirmation}
+          confirmCallback={rejectTask}
+        />
+      )}
+
+      {confirmDeletion && (
+        <ModalConfirmation
+          open={confirmDeletion}
+          titleKey="moderation.button.removePlace"
+          messageKey="moderation.confirmation.removePlace"
+          cancelKey="moderation.button.cancel"
+          confirmKey="moderation.button.remove"
+          closeCallback={closeDeletionConfirmation}
+          confirmCallback={removePlace}
+        />
+      )}
 
       {toast && <ToastNotification prefix="moderation" toast={toast} setToast={setToast} />}
     </div>

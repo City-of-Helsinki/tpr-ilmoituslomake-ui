@@ -280,6 +280,7 @@
       "reject": "Hylkää",
       "rejected": "Hylätty",
       "modify": "Muokkaa",
+      "cancel": "Keskeytä",
       "addNewPlace": "Lisää uusi kohde",
       "allPlaces": "Kaikki kohteet",
       "showAllRequests": "Näytä kaikki tehtävät",
@@ -316,6 +317,10 @@
       "fieldTooLong": "$fieldName on liian pitkä",
       "fieldTooShort": "$fieldName on liian lyhyt",
       "fieldOther": "Tarkista tieto"
+    },
+    "confirmation": {
+      "rejectChangeRequest": "Haluatko varmasti hylätä muutospyynnön?",
+      "removePlace": "Haluatko varmasti poistaa kohteen?"
     },
     "contact": {
       "title": "Muut yhteystiedot",

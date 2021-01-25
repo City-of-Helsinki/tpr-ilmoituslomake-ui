@@ -280,6 +280,7 @@
       "reject": "Reject",
       "rejected": "Rejected",
       "modify": "Modify",
+      "cancel": "Cancel",
       "addNewPlace": "Add new place",
       "allPlaces": "All places",
       "showAllRequests": "Show all requests",
@@ -316,6 +317,10 @@
       "fieldTooLong": "$fieldName is too long",
       "fieldTooShort": "$fieldName is too short",
       "fieldOther": "Please check the information"
+    },
+    "confirmation": {
+      "rejectChangeRequest": "Are you sure you want to reject the change request?",
+      "removePlace": "Are you sure you want to remove the place?"
     },
     "contact": {
       "title": "Other contact information",
