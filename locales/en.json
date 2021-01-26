@@ -35,6 +35,9 @@
       "notifyOpeningTimes": "Register opening times",
       "notifyClosingDown": "Notify place closing down",
       "notifyNewPlace": "Register a new place",
+      "giveTip": "Give a tip to us",
+      "checkPlace": "Check place's info",
+      "modifyOwnPlace": "Modify own place",
       "continueToOpeningTimes": "Continue to opening times registration",
       "noOpeningTimes": "The place does not have opening times",
       "continueLater": "Continue later"
@@ -50,6 +53,13 @@
       "contact": "Place's contact information",
       "photos": "Place's photos",
       "send": "Check information and send"
+    },
+    "index": {
+      "title": "Together we'll keep the information of Helsinki's best places up-to-date!",
+      "message": "My Helsinki Places collects and maintains information about Helsinki's places for the benefit of locals and tourists. In this service you can register information for new places or make changes to the information of existing places.",
+      "notify": "Register places information",
+      "terms": "Read terms of use",
+      "accessibility": "Read accessibility statement"
     },
     "footer": {
       "backToTop": "Back to top",
@@ -72,6 +82,22 @@
       "saveSucceeded": {
         "title": "Sending succeeded!",
         "message": "Thank you for the notification! The information will be checked before publishing."
+      },
+      "notifyNewPlace": {
+        "title": "Do you want to add a new place to the service?",
+        "message": "Register new places to the service. Login first and register the missing place today!"
+      },
+      "giveTip": {
+        "title": "Give us a tip!",
+        "message": "In case you notice missing, incorrect or old information, do us a favour and notify us about it. You can make the notification with ease without registering."
+      },
+      "checkPlace": {
+        "title": "What information can be found about a place?",
+        "message": "Check if the place has already been registered with us and what information exists about it."
+      },
+      "modifyOwnPlace": {
+        "title": "Modify your own place's information",
+        "message": "You can at any time notify new or changed information about your own place. Login first and modify."
       },
       "completeOpeningTimes": {
         "title": "Complete the place's information with opening times",

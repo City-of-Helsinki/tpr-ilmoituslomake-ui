@@ -35,6 +35,9 @@
       "notifyOpeningTimes": "Ilmoita aukioloajat",
       "notifyClosingDown": "Ilmoita kohde lopettaneeksi",
       "notifyNewPlace": "Ilmoita uusi kohde",
+      "giveTip": "Vinkkaa meille",
+      "checkPlace": "Tarkista kohteen tiedot",
+      "modifyOwnPlace": "Muokkaa omaa kohdetta",
       "continueToOpeningTimes": "Jatka aukioloaikojen ilmoittamiseen",
       "noOpeningTimes": "Kohteella ei ole aukioloaikoja",
       "continueLater": "Jatkan myöhemmin"
@@ -50,6 +53,13 @@
       "contact": "Kohteen yhteystiedot",
       "photos": "Kohteen kuvat",
       "send": "Tarkista tiedot ja lähetä"
+    },
+    "index": {
+      "title": "Pidetään yhdessä Helsingin parhaiden paikkojen tiedot ajantasalla!",
+      "message": "My Helsinki Places kerää ja ylläpitää tietoa Helsingin kohteista paikallisten ja matkailijoiden hyödyksi. Tässä palvelussa voit ilmoittaa kohteet tiedot tai tehdä muutoksia jo olemassa oleviin kohdetietoihin.",
+      "notify": "Ilmoita kohteiden tietoja",
+      "terms": "Lue käyttöehdot",
+      "accessibility": "Lue saavutettavuusseloste"
     },
     "footer": {
       "backToTop": "Takaisin ylös",
@@ -72,6 +82,22 @@
       "saveSucceeded": {
         "title": "Lähetys onnistui!",
         "message": "Kiitos ilmoituksesta! Tiedot tarkistetaan vielä ennen julkaisemista."
+      },
+      "notifyNewPlace": {
+        "title": "Haluatko lisätä uuden kohteen palveluun?",
+        "message": "Ilmoita palveluun uusia toimipisteitä ja kohteita. Kirjaudu ensin ja ilmoita puuttuva kohde jo tänään!"
+      },
+      "giveTip": {
+        "title": "Anna meille vinkki!",
+        "message": "Mikäli huomasit puuttuvan, virheellisen tai vanhentuneen tiedon, tee palvelus ja ilmoita siitä meille. Voit tehdä ilmoituksen vaivattomasti rekisteröitymättä."
+      },
+      "checkPlace": {
+        "title": "Mitä tietoja kohteesta löytyy?",
+        "message": "Tarkista, onko kohde jo ilmoitettu meille ja mitä tietoa siitä on olemassa."
+      },
+      "modifyOwnPlace": {
+        "title": "Muokkaa oman kohteesi tietoja",
+        "message": "Voit milloin tahansa ilmoittaa uusia tai muuttuneita tietoja omasta kohteestasi. Kirjaudu ensin ja muokkaa."
       },
       "completeOpeningTimes": {
         "title": "Täydennä kohteen tietoja aukioloajoilla",

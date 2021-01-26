@@ -1,13 +1,13 @@
 import React, { ReactElement } from "react";
-import { Button, IconAngleRight, IconLocation, IconPenLine, IconEye, Card, Koros } from "hds-react";
 import { GetStaticProps } from "next";
 import Head from "next/head";
 import Link from "next/link";
 import { useI18n } from "next-localization";
+import { Button, IconAngleRight, IconEye, IconLocation, IconPenLine, IconStar, Koros } from "hds-react";
 import i18nLoader from "../utils/i18n";
 import Layout from "../components/common/Layout";
 import Header from "../components/common/Header";
-
+import Notice from "../components/common/Notice";
 import styles from "./index.module.scss";
 
 const Main = (): ReactElement => {
@@ -16,64 +16,70 @@ const Main = (): ReactElement => {
   return (
     <Layout>
       <Head>
-        <title>TITLE</title>
-        <link rel="icon" href="/favicon.ico" />
+        <title>{i18n.t("notification.title")}</title>
       </Head>
       <Header />
-      <div className={styles.korosTextBox}>
-        <h1>Pidetään yhdessä Helsingin parhaiden paikkojen tiedot ajantasalla!</h1>
-      </div>
-      <Koros flipHorizontal className={styles.koros} />
-      <div className={styles.infoTextBox}>
-        <h3>
-          My Helsinki Places kerää ja ylläpitää tietoa Helsingin kohteista paikallisten ja matkailijoiden hyödyksi. Tässä palvelussa voit ilmoittaa
-          kohteet tiedot tai tehdä muutoksia jo olemassa oleviin kohdetietoihin.
-        </h3>
-      </div>
-      <div className={styles.infoLinkContainer}>
-        <h4>
-          Lue tietojen ilmoittamisesta <IconAngleRight />
-        </h4>
-        <h4>
-          Lue saavutettavuusseloste <IconAngleRight />
-        </h4>
-      </div>
-      <div className={styles.boxContainer}>
-        <h1>Ilmoita kohteiden tietoja</h1>
-        <div className={`${styles.notificationBox} ${styles.box}`}>
-          <IconLocation className={styles.icon} size="xl" />
-          <Card
-            className={styles.noBackground}
-            heading="Haluatko lisätä uuden kohteen palveluun?"
-            text="Ilmoita palveluun uusia toimipisteitä ja kohteita. Kirjaudu ensin ja ilmoita puuttuva kohde jo tänään."
-          />
-          <Button variant="secondary" className={styles.button} onClick={() => window.open("/notification/", "_self")}>
-            Ilmoita uusi kohde
+      <main id="content" className={styles.content}>
+        <div className={styles.korosTextBox}>
+          <h1>{i18n.t("notification.index.title")}</h1>
+        </div>
+        <Koros className={styles.koros} type="basic" flipHorizontal />
+
+        <div className={styles.infoTextBox}>{i18n.t("notification.index.message")}</div>
+        <div className={styles.infoLinkContainer}>
+          <Button variant="supplementary" size="small" iconRight={<IconAngleRight />}>
+            {i18n.t("notification.index.terms")}
+          </Button>
+          <Button variant="supplementary" size="small" iconRight={<IconAngleRight />}>
+            {i18n.t("notification.index.accessibility")}
           </Button>
         </div>
-        <div className={`${styles.changeRequestBox} ${styles.box}`}>
-          <IconPenLine className={styles.icon} size="xl" />
-          <Card
-            className={styles.noBackground}
-            heading="Anna meille vinkki!"
-            text="Mikäli huomasit puuttuvan, virheellisen tai vanhentuneen tiedon, tee palvelus ja ilmoita siitä meille. Voit tehdä ilmoituksen vaivattomasti rekisteröitymättä."
-          />
-          <Button variant="secondary" className={styles.button} onClick={() => null}>
-            Vinkkaa meille
-          </Button>
-        </div>
-        <div className={`${styles.inspectionBox} ${styles.box}`}>
-          <IconEye className={styles.icon} size="xl" />
-          <Card
-            className={styles.noBackground}
-            heading="Mistä tietoja kohteesta löytyy?"
-            text="Tarkista, onko kohde jo ilmoitettu meille ja mitä tietoa siitä on olemassa."
-          />
-          <Button variant="secondary" className={styles.button} onClick={() => null}>
-            Tarkista kohteen tiedot
-          </Button>
-        </div>
-      </div>
+
+        <h2>{i18n.t("notification.index.notify")}</h2>
+
+        <Notice
+          className={styles.newPlace}
+          icon={<IconLocation size="xl" />}
+          titleKey="notification.message.notifyNewPlace.title"
+          messageKey="notification.message.notifyNewPlace.message"
+          button={
+            <Link href="/notification">
+              <Button variant="secondary">{i18n.t("notification.button.notifyNewPlace")}</Button>
+            </Link>
+          }
+        />
+        <Notice
+          icon={<IconPenLine size="xl" />}
+          titleKey="notification.message.giveTip.title"
+          messageKey="notification.message.giveTip.message"
+          button={
+            <Link href="/notification">
+              <Button variant="secondary">{i18n.t("notification.button.giveTip")}</Button>
+            </Link>
+          }
+        />
+        <Notice
+          className={styles.checkPlace}
+          icon={<IconEye size="xl" />}
+          titleKey="notification.message.checkPlace.title"
+          messageKey="notification.message.checkPlace.message"
+          button={
+            <Link href="/search">
+              <Button variant="secondary">{i18n.t("notification.button.checkPlace")}</Button>
+            </Link>
+          }
+        />
+        <Notice
+          icon={<IconStar size="xl" />}
+          titleKey="notification.message.modifyOwnPlace.title"
+          messageKey="notification.message.modifyOwnPlace.message"
+          button={
+            <Link href="/search">
+              <Button variant="secondary">{i18n.t("notification.button.modifyOwnPlace")}</Button>
+            </Link>
+          }
+        />
+      </main>
     </Layout>
   );
 };

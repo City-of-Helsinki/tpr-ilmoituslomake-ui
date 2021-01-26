@@ -1,97 +1,41 @@
 @import "~hds-design-tokens/lib/all.scss";
 
-.korosTextBox {
+.content {
+  .korosTextBox {
     text-align: center;
-    background-color: $color-copper-medium-light;
+    background-color: $color-copper-light;
+    padding: $spacing-xl $spacing-xl 0;
 
     h1 {
-        margin-top: 150px;
-        margin-bottom: 75px;
-        margin-left: 25%;
-        margin-right: 25%;
-        color: $color-bus;
+      color: $color-bus;
+      margin-bottom: 0;
     }
-}
+  }
 
-.koros {
-    fill: $color-copper-medium-light !important;
-}
+  .koros {
+    fill: $color-copper-light;
+  }
 
-.infoTextBox {
+  .infoTextBox {
     text-align: center;
+    padding: $spacing-xl;
+    font-size: $fontsize-heading-xs;
+    font-weight: 700;
+  }
 
-    h3 {
-        margin-top: 30px;
-        margin-left: 33%;
-        margin-right: 33%;
-    }
-}
+  .infoLinkContainer {
+    text-align: center;
+  }
 
-.infoLinkContainer {
-    display: flex;
-    flex: 1;
-    flex-direction: row;
-    align-items: flex-start;
-    justify-content: center;
+  h2 {
+    color: $color-bus;
+  }
 
-    h4 {
-        color: $color-bus;
-        margin-left: 10px;
-        margin-right: 10px;
-    }
-}
+  .newPlace {
+    background-color: $color-copper-light;
+  }
 
-.boxContainer {
-    h1 {
-        color: $color-bus;
-    }
-}
-
-.icon {
-    color: $color-bus !important;
-    margin-top: 20px;
-    margin-left: 20px;
-}
-
-.noBackground {
-    background-color: transparent !important;
-    max-width: 50%;
-    min-width: 50%;
-    margin-right: 10%;
-}
-
-.box {
-    margin-top: 15px;
-    display: flex;
-    flex: 1;
-    flex-direction: row;
-    align-items: flex-start;
-    align-content: center;
-}
-
-.notificationBox {
-    background-color: $color-copper-light !important;
-}
-
-.changeRequestBox {
-
-    margin-top: 15px;
-    background-color: $color-coat-of-arms-light !important;
-}
-
-.inspectionBox {
-    margin-top: 15px;
-    background-color: $color-suomenlinna-light !important;
-}
-
-.button {
-    position: absolute;
-    width: 250px;
-    align-content: space-between;
-    margin-top: 20px;
-    color: $color-bus !important;
-    background-color: $color-white !important;
-    top: 50%;
-    -ms-transform: translateY(50%);
-    transform: translateY(50%);
+  .checkPlace {
+    background-color: $color-suomenlinna-light;
+  }
 }
