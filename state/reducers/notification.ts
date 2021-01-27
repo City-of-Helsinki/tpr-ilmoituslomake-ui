@@ -2,6 +2,7 @@ import { AnyAction } from "redux";
 import { LatLngExpression } from "leaflet";
 import { NotificationState } from "./types";
 import {
+  ItemType,
   MAX_PAGE,
   MAX_PHOTOS,
   MAP_INITIAL_ZOOM,
@@ -10,6 +11,7 @@ import {
   SET_MAP_VIEW,
   SET_NOTIFICATION_PLACE_SEARCH,
   SET_NOTIFICATION_PLACE_RESULTS,
+  SET_NOTIFICATION_TIP,
   SET_NOTIFICATION_INPUT_LANGUAGE,
   SET_NOTIFICATION_NAME,
   SET_NOTIFICATION_SHORT_DESCRIPTION,
@@ -38,6 +40,12 @@ const initialState: NotificationState = {
     placeName: "",
   },
   placeResults: [],
+  tip: {
+    target: 0,
+    item_type: ItemType.ChangeRequestChange,
+    user_comments: "",
+    user_details: "",
+  },
   notificationId: 0,
   notificationName: "",
   notification: { ...INITIAL_NOTIFICATION, location: [0, 0] },
@@ -93,6 +101,14 @@ const notification = (state = initialState, action: AnyAction): NotificationStat
       return {
         ...state,
         placeResults: action.payload || [],
+      };
+    }
+
+    case SET_NOTIFICATION_TIP: {
+      console.log("SET_NOTIFICATION_TIP", action.payload);
+      return {
+        ...state,
+        tip: action.payload,
       };
     }
 

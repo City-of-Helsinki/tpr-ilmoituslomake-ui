@@ -19,7 +19,7 @@ import { NotificationSchema } from "../../../types/notification_schema";
 import { getOrigin } from "../../../utils/request";
 import styles from "./[targetId].module.scss";
 
-const Sent = (): ReactElement => {
+const NotificationSent = (): ReactElement => {
   const i18n = useI18n();
 
   const notificationId = useSelector((state: RootState) => state.notification.notificationId);
@@ -175,4 +175,4 @@ export const getServerSideProps: GetServerSideProps = async ({ req, params, loca
   };
 };
 
-export default Sent;
+export default NotificationSent;

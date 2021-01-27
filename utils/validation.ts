@@ -1,8 +1,9 @@
 import { Dispatch } from "react";
 import Ajv from "ajv";
 import addFormats from "ajv-formats";
-import { string } from "yup";
+import { string, number } from "yup";
 import StringSchema from "yup/lib/string";
+import NumberSchema from "yup/lib/number";
 import { NotificationValidationAction } from "../state/actions/types";
 import {
   setNotificationNameValidation,
@@ -15,13 +16,14 @@ import {
   setNotificationLinkValidation,
   setNotificationPhotoValidation,
   setNotificationPhotoAltTextValidation,
+  setNotificationTipValidation,
 } from "../state/actions/notificationValidation";
 import { MAX_LENGTH_SHORT_DESC, MIN_LENGTH_LONG_DESC, MAX_LENGTH_LONG_DESC, MAX_LENGTH_PHOTO_DESC, PhotoSourceType } from "../types/constants";
 import { NotificationSchema } from "../types/notification_schema";
-import { NotificationExtra } from "../types/general";
+import { ChangeRequestSchema, NotificationExtra } from "../types/general";
 import notificationSchema from "../schemas/notification_schema.json";
 
-const isValid = (schema: StringSchema<string | undefined>, fieldValue: string) => {
+const isValid = (schema: StringSchema<string | undefined> | NumberSchema<number | undefined>, fieldValue: string | number) => {
   let valid = true;
   let message;
   try {
@@ -286,6 +288,34 @@ export const isPageValid = (
       return true;
     }
   }
+};
+
+export const isTipFieldValid = (tipField: string, tip: ChangeRequestSchema, dispatch: Dispatch<NotificationValidationAction>): boolean => {
+  let schema;
+  switch (tipField) {
+    case "target": {
+      schema = number().required("notification.message.fieldRequired").moreThan(0, "notification.message.fieldRequired");
+      break;
+    }
+    default: {
+      schema = string().required("notification.message.fieldRequired");
+    }
+  }
+  const result = isValid(schema, tip[tipField]);
+  dispatch(setNotificationTipValidation({ [tipField]: result }));
+  return result.valid;
+};
+
+export const isTipPageValid = (tip: ChangeRequestSchema, dispatch: Dispatch<NotificationValidationAction>): boolean => {
+  // Check whether all data on the page is valid
+  // Everything needs to be validated, so make sure lazy evaluation is not used
+  const inputValid = [
+    isTipFieldValid("target", tip, dispatch),
+    isTipFieldValid("item_type", tip, dispatch),
+    isTipFieldValid("user_comments", tip, dispatch),
+    isTipFieldValid("user_details", tip, dispatch),
+  ];
+  return inputValid.every((valid) => valid);
 };
 
 const validateNotificationData = (notification: NotificationSchema): boolean => {

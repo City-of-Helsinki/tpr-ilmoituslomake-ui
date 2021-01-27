@@ -285,6 +285,29 @@
       "text1": "The information notified and collected by the service is used in the MyHelsinki.fi web service. In addition, the information is offered by Helsinki Marketing's and Helsinki City's open interface to third parties. The database is maintained by Helsinki City, who has the right to select the material to be published and edit the text into a suitable form.",
       "text2": "By sending this form, you accept the terms of use.",
       "link": "Read the terms of use here"
+    },
+    "tip": {
+      "title": "Give a tip about incorrect information",
+      "placeName": {
+        "label": "Search places with the name",
+        "helperText": "Write a keyword then select from the list below"
+      },
+      "placeResults": {
+        "label": "Place's name"
+      },
+      "itemType": {
+        "label": "Tip type",
+        "change": "Change to place's information",
+        "delete": "Place closed down"
+      },
+      "comments": {
+        "label": "Change tip",
+        "helperText": "Describe your desired change as precisely as possible"
+      },
+      "details": {
+        "label": "Your own contact information",
+        "helperText": "If you want tell your name, phone number and email address"
+      }
     }
   },
   "moderation": {

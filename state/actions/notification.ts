@@ -19,8 +19,18 @@ import {
   SET_NOTIFICATION_PHOTO,
   REMOVE_NOTIFICATION_PHOTO,
   SET_NOTIFICATION_COMMENTS,
+  SET_NOTIFICATION_TIP,
 } from "../../types/constants";
-import { User, KeyValueString, KeyValueBoolean, Photo, TagOption, NotificationPlaceSearch, NotificationPlaceResult } from "../../types/general";
+import {
+  User,
+  KeyValueString,
+  KeyValueBoolean,
+  Photo,
+  TagOption,
+  NotificationPlaceSearch,
+  NotificationPlaceResult,
+  ChangeRequestSchema,
+} from "../../types/general";
 import { NotificationAction } from "./types";
 
 export const setPage = (pageNumber: number): NotificationAction => ({
@@ -116,4 +126,9 @@ export const removeNotificationPhoto = (index: number): NotificationAction => ({
 export const setNotificationComments = (value: string): NotificationAction => ({
   type: SET_NOTIFICATION_COMMENTS,
   payload: value,
+});
+
+export const setNotificationTip = (tip: ChangeRequestSchema): NotificationAction => ({
+  type: SET_NOTIFICATION_TIP,
+  payload: tip,
 });

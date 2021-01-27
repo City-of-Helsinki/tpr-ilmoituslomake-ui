@@ -11,6 +11,7 @@ import {
   SET_NOTIFICATION_PHOTO_VALIDATION,
   SET_NOTIFICATION_PHOTO_ALT_TEXT_VALIDATION,
   REMOVE_NOTIFICATION_PHOTO_VALIDATION,
+  SET_NOTIFICATION_TIP_VALIDATION,
 } from "../../types/constants";
 import { KeyValueValidation, Validation } from "../../types/general";
 import { PhotoValidation } from "../../types/notification_validation";
@@ -74,4 +75,9 @@ export const setNotificationPhotoAltTextValidation = (index: number, validation:
 export const removeNotificationPhotoValidation = (index: number): NotificationValidationAction => ({
   type: REMOVE_NOTIFICATION_PHOTO_VALIDATION,
   payload: index,
+});
+
+export const setNotificationTipValidation = (validation: KeyValueValidation): NotificationValidationAction => ({
+  type: SET_NOTIFICATION_TIP_VALIDATION,
+  payload: validation,
 });

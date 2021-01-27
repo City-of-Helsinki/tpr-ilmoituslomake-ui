@@ -1,0 +1,14 @@
+@import "~hds-design-tokens/lib/all.scss";
+
+.content {
+  margin-top: $spacing-l;
+
+  .sent {
+    background-color: $color-copper-light;
+  }
+
+  .footer {
+    display: flex;
+    flex-direction: row;
+  }
+}

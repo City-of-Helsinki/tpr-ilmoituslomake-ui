@@ -22,6 +22,7 @@ import {
   SET_NOTIFICATION_PHOTO,
   REMOVE_NOTIFICATION_PHOTO,
   SET_NOTIFICATION_COMMENTS,
+  SET_NOTIFICATION_TIP,
   SET_NOTIFICATION_NAME_VALIDATION,
   SET_NOTIFICATION_SHORT_DESCRIPTION_VALIDATION,
   SET_NOTIFICATION_LONG_DESCRIPTION_VALIDATION,
@@ -33,6 +34,7 @@ import {
   SET_NOTIFICATION_PHOTO_VALIDATION,
   SET_NOTIFICATION_PHOTO_ALT_TEXT_VALIDATION,
   REMOVE_NOTIFICATION_PHOTO_VALIDATION,
+  SET_NOTIFICATION_TIP_VALIDATION,
   SET_MODERATION_PLACE_SEARCH,
   CLEAR_MODERATION_PLACE_SEARCH,
   SET_MODERATION_PLACE_RESULTS,
@@ -68,6 +70,7 @@ import {
   TagOption,
   NotificationPlaceSearch,
   NotificationPlaceResult,
+  ChangeRequestSchema,
   ModerationPlaceSearch,
   TaskSearch,
   ModerationTodoResult,
@@ -170,6 +173,11 @@ interface SetNotificationCommentsAction extends AnyAction {
   payload: string;
 }
 
+interface SetNotificationTipAction extends AnyAction {
+  type: typeof SET_NOTIFICATION_TIP;
+  payload: ChangeRequestSchema;
+}
+
 export type NotificationAction =
   | SetPageAction
   | SetUserAction
@@ -189,7 +197,8 @@ export type NotificationAction =
   | SetNotificationLinkAction
   | SetNotificationPhotoAction
   | RemoveNotificationPhotoAction
-  | SetNotificationCommentsAction;
+  | SetNotificationCommentsAction
+  | SetNotificationTipAction;
 
 interface SetPageValidAction extends AnyAction {
   type: typeof SET_PAGE_VALID;
@@ -251,6 +260,11 @@ interface RemoveNotificationPhotoValidationAction extends AnyAction {
   payload: number;
 }
 
+interface SetNotificationTipValidationAction extends AnyAction {
+  type: typeof SET_NOTIFICATION_TIP_VALIDATION;
+  payload: Validation;
+}
+
 export type NotificationValidationAction =
   | SetPageValidAction
   | SetNotificationNameValidationAction
@@ -263,7 +277,8 @@ export type NotificationValidationAction =
   | SetNotificationLinkValidationAction
   | SetNotificationPhotoUrlValidationAction
   | SetNotificationPhotoAltTextValidationAction
-  | RemoveNotificationPhotoValidationAction;
+  | RemoveNotificationPhotoValidationAction
+  | SetNotificationTipValidationAction;
 
 interface SetModerationPlaceSearchAction extends AnyAction {
   type: typeof SET_MODERATION_PLACE_SEARCH;

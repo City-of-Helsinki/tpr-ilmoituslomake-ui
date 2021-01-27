@@ -5,6 +5,8 @@ import {
   NotificationExtra,
   NotificationPlaceSearch,
   NotificationPlaceResult,
+  ChangeRequestSchema,
+  ChangeRequestValidationSchema,
   ModerationPlaceSearch,
   TaskSearch,
   ModerationTodoResult,
@@ -21,6 +23,7 @@ export interface NotificationState {
   zoom: number;
   placeSearch: NotificationPlaceSearch;
   placeResults: NotificationPlaceResult[];
+  tip: ChangeRequestSchema;
   notificationId: number;
   notificationName: string;
   notification: NotificationSchema;
@@ -30,6 +33,7 @@ export interface NotificationState {
 export interface NotificationValidationState {
   pageValid: boolean;
   notificationValidation: NotificationValidationSchema;
+  tipValidation: ChangeRequestValidationSchema;
 }
 
 // TODO - add place result type

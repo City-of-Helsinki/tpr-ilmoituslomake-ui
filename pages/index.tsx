@@ -53,7 +53,7 @@ const Main = (): ReactElement => {
           titleKey="notification.message.giveTip.title"
           messageKey="notification.message.giveTip.message"
           button={
-            <Link href="/notification">
+            <Link href="/tip">
               <Button variant="secondary">{i18n.t("notification.button.giveTip")}</Button>
             </Link>
           }

@@ -1,10 +1,11 @@
 import { Dispatch, SetStateAction } from "react";
 import { NextRouter } from "next/router";
 import Cookies from "js-cookie";
+import { NotificationValidationAction } from "../state/actions/types";
 import { Toast } from "../types/constants";
-import { ModerationExtra, NotificationExtra, User } from "../types/general";
+import { ChangeRequestSchema, ModerationExtra, NotificationExtra, User } from "../types/general";
 import { NotificationSchema } from "../types/notification_schema";
-import validateNotificationData from "./validation";
+import validateNotificationData, { isTipPageValid } from "./validation";
 
 export const saveNotification = async (
   currentUser: User | undefined,
@@ -18,6 +19,9 @@ export const saveNotification = async (
     const valid = validateNotificationData(notification);
 
     if (currentUser?.authenticated && valid) {
+      // Send the Cross Site Request Forgery token, otherwise the backend returns the error "CSRF Failed: CSRF token missing or incorrect."
+      const csrftoken = Cookies.get("csrftoken");
+
       // Include all the notification details and also the photos in the post data
       // The notification id is only included if it has a value, and is used for modifying existing notifications
       const { photos } = notificationExtra;
@@ -46,6 +50,7 @@ export const saveNotification = async (
         // method: notificationId > 0 ? "PUT" : "POST",
         headers: {
           "Content-Type": "application/json",
+          "X-CSRFToken": csrftoken as string,
         },
         body: JSON.stringify(postData),
       });
@@ -66,6 +71,60 @@ export const saveNotification = async (
         // TODO - handle error
         const notificationResult = await createResponse.text();
         console.log("FAILED", notificationResult);
+      }
+    } else if (!valid) {
+      setToast(Toast.ValidationFailed);
+    } else {
+      setToast(Toast.NotAuthenticated);
+    }
+  } catch (err) {
+    console.log("ERROR", err);
+    setToast(Toast.SaveFailed);
+  }
+};
+
+export const saveTip = async (
+  tip: ChangeRequestSchema,
+  router: NextRouter,
+  dispatchValidation: Dispatch<NotificationValidationAction>,
+  setToast: Dispatch<SetStateAction<Toast | undefined>>
+): Promise<void> => {
+  try {
+    const valid = isTipPageValid(tip, dispatchValidation);
+
+    if (valid) {
+      // Send the Cross Site Request Forgery token, otherwise the backend returns the error "CSRF Failed: CSRF token missing or incorrect."
+      const csrftoken = Cookies.get("csrftoken");
+
+      const postData = tip;
+
+      console.log("SENDING", postData);
+
+      const changeRequestResponse = await fetch("/api/change_request/", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "X-CSRFToken": csrftoken as string,
+        },
+        body: JSON.stringify(postData),
+      });
+      if (changeRequestResponse.ok) {
+        // TODO - handle response
+        const changeRequestResult = await changeRequestResponse.json();
+        console.log("RESPONSE", changeRequestResult);
+
+        if (changeRequestResult.target) {
+          // setToast(Toast.SaveSucceeded);
+          router.push("/tip/sent");
+        } else {
+          setToast(Toast.SaveFailed);
+        }
+      } else {
+        setToast(Toast.SaveFailed);
+
+        // TODO - handle error
+        const changeRequestResult = await changeRequestResponse.text();
+        console.log("FAILED", changeRequestResult);
       }
     } else if (!valid) {
       setToast(Toast.ValidationFailed);

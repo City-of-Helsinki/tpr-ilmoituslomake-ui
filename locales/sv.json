@@ -285,6 +285,29 @@
       "text1": "Palveluun ilmoitettuja ja kerättyjä tietoja käytetään MyHelsinki.fi-verkkopalvelussa. Lisäksi tietoja tarjotaan Helsinki Marketingin ja Helsingin kaupungin avoimessa rajapinnassa kolmansille osapuolille. Tietokantaa ylläpitää Helsinki kaupunki, jolla on oikeus valita julkaistava materiaali ja editoida tekstiä sopivaan muotoon.",
       "text2": "Lähettämällä tämän lomakkeen hyväksyt samalla käyttöehdot.",
       "link": "Lue käyttöehdot täältä"
+    },
+    "tip": {
+      "title": "Vinkkaa virheellisestä tiedosta",
+      "placeName": {
+        "label": "Hae kohdetta nimellä",
+        "helperText": "Kirjoita hakusana sitten valitse alla olevalta listalta"
+      },
+      "placeResults": {
+        "label": "Kohteen nimi"
+      },
+      "itemType": {
+        "label": "Vinkkityyppi",
+        "change": "Muutos kohteen tietoihin",
+        "delete": "Kohteen poistaminen"
+      },
+      "comments": {
+        "label": "Muutosvinkki",
+        "helperText": "Kuvaa muutostoive mahdollisimman tarkasti"
+      },
+      "details": {
+        "label": "Omat yhteystietosi",
+        "helperText": "Kerro halutessasi nimi, puhelinnumero ja sähköpostiosoite"
+      }
     }
   },
   "moderation": {

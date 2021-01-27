@@ -14,6 +14,7 @@ import {
   SET_NOTIFICATION_PHOTO_VALIDATION,
   SET_NOTIFICATION_PHOTO_ALT_TEXT_VALIDATION,
   REMOVE_NOTIFICATION_PHOTO_VALIDATION,
+  SET_NOTIFICATION_TIP_VALIDATION,
   INITIAL_NOTIFICATION_VALIDATION,
 } from "../../types/constants";
 import { PhotoValidation } from "../../types/notification_validation";
@@ -21,6 +22,12 @@ import { PhotoValidation } from "../../types/notification_validation";
 const initialState: NotificationValidationState = {
   pageValid: true,
   notificationValidation: INITIAL_NOTIFICATION_VALIDATION,
+  tipValidation: {
+    target: { valid: true },
+    item_type: { valid: true },
+    user_comments: { valid: true },
+    user_details: { valid: true },
+  },
 };
 
 const notificationValidation = (state = initialState, action: AnyAction): NotificationValidationState => {
@@ -174,6 +181,14 @@ const notificationValidation = (state = initialState, action: AnyAction): Notifi
       return {
         ...state,
         notificationValidation: { ...state.notificationValidation, photos },
+      };
+    }
+
+    case SET_NOTIFICATION_TIP_VALIDATION: {
+      console.log("SET_NOTIFICATION_TIP_VALIDATION", action.payload);
+      return {
+        ...state,
+        tipValidation: { ...state.tipValidation, ...action.payload },
       };
     }
 

@@ -76,6 +76,21 @@ export interface NotificationPlaceResult {
   data: NotificationSchema;
 }
 
+export interface ChangeRequestSchema {
+  target: number;
+  item_type: string;
+  user_comments: string;
+  user_details: string;
+  [key: string]: string | number;
+}
+
+export interface ChangeRequestValidationSchema {
+  target: Validation;
+  item_type: Validation;
+  user_comments: Validation;
+  user_details: Validation;
+}
+
 export interface ModerationPlaceSearch {
   placeName: string;
   language: string;
