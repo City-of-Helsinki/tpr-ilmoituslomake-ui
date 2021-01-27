@@ -505,7 +505,7 @@
     },
     "taskResults": {
       "found": "Löytyi",
-      "places": "kohdetta",
+      "tasks": "tehtävää",
       "nameId": "Nimi (tunnus)",
       "type": "Tyyppi",
       "notified": "Ilmoitettu",

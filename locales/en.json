@@ -505,7 +505,7 @@
     },
     "taskResults": {
       "found": "Found",
-      "places": "places",
+      "tasks": "tasks",
       "nameId": "Name (id)",
       "type": "Type",
       "notified": "Notified",

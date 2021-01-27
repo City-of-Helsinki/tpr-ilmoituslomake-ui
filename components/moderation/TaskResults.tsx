@@ -18,7 +18,7 @@ const TaskResults = (): ReactElement => {
 
   return (
     <div className={`formSection ${styles.taskResults}`}>
-      <h2 className="moderation">{`${i18n.t("moderation.taskResults.found")} ${taskResults.length} ${i18n.t("moderation.taskResults.places")}`}</h2>
+      <h2 className="moderation">{`${i18n.t("moderation.taskResults.found")} ${taskResults.length} ${i18n.t("moderation.taskResults.tasks")}`}</h2>
       <div className={`gridLayoutContainer ${styles.results}`}>
         <h3 className={`${styles.gridColumn1} gridHeader moderation`}>{i18n.t("moderation.taskResults.nameId")}</h3>
         <h3 className={`${styles.gridColumn2} gridHeader moderation`}>{i18n.t("moderation.taskResults.type")}</h3>
