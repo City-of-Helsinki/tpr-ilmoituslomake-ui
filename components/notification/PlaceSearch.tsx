@@ -1,7 +1,7 @@
 import React, { Dispatch, ChangeEvent, ReactElement } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useI18n } from "next-localization";
-import { Button, TextInput } from "hds-react";
+import { Button, RadioButton, SelectionGroup, TextInput } from "hds-react";
 import { NotificationAction } from "../../state/actions/types";
 import { setNotificationPlaceResults, setNotificationPlaceSearch } from "../../state/actions/notification";
 import { RootState } from "../../state/reducers";
@@ -13,10 +13,14 @@ const PlaceSearch = (): ReactElement => {
   const dispatch = useDispatch<Dispatch<NotificationAction>>();
 
   const placeSearch = useSelector((state: RootState) => state.notification.placeSearch);
-  const { placeName } = placeSearch;
+  const { placeName, ownPlacesOnly } = placeSearch;
 
   const updateSearchText = (evt: ChangeEvent<HTMLInputElement>) => {
     dispatch(setNotificationPlaceSearch({ ...placeSearch, [evt.target.name]: evt.target.value }));
+  };
+
+  const updateSearchOption = (evt: ChangeEvent<HTMLInputElement>) => {
+    dispatch(setNotificationPlaceSearch({ ...placeSearch, [evt.target.name]: Boolean(evt.target.value === "yes") }));
   };
 
   const searchPlaces = async () => {
@@ -27,7 +31,7 @@ const PlaceSearch = (): ReactElement => {
       console.log("PLACE RESPONSE", placeResult);
 
       if (placeResult && placeResult.results && placeResult.results.length > 0) {
-        dispatch(setNotificationPlaceResults(placeResult.results));
+        dispatch(setNotificationPlaceResults(placeResult.results.filter((result) => !ownPlacesOnly || result.is_notifier)));
       } else {
         dispatch(setNotificationPlaceResults([]));
       }
@@ -50,6 +54,27 @@ const PlaceSearch = (): ReactElement => {
         />
         <div className={styles.gridButton}>
           <Button onClick={searchPlaces}>{i18n.t("notification.button.search")}</Button>
+        </div>
+
+        <div className={styles.gridInput}>
+          <SelectionGroup id="ownPlacesOnly" direction="horizontal" label={i18n.t("notification.placeSearch.ownPlacesOnly.label")}>
+            <RadioButton
+              id="ownPlacesOnly_yes"
+              label={i18n.t("notification.placeSearch.ownPlacesOnly.yes")}
+              name="ownPlacesOnly"
+              value="yes"
+              checked={ownPlacesOnly}
+              onChange={updateSearchOption}
+            />
+            <RadioButton
+              id="ownPlacesOnly_no"
+              label={i18n.t("notification.placeSearch.ownPlacesOnly.no")}
+              name="ownPlacesOnly"
+              value="no"
+              checked={!ownPlacesOnly}
+              onChange={updateSearchOption}
+            />
+          </SelectionGroup>
         </div>
       </div>
     </div>

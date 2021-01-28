@@ -250,11 +250,17 @@
       "notice": "Hae nimellä kohdetta, jonka tietoja haluat tarkastella tai muuttaa. Voit tarkistaa tietojen paikkansapitävyyden ja ilmoittaa mahdollisista muutoksia.",
       "placeName": {
         "label": "Hae kohdetta nimellä"
+      },
+      "ownPlacesOnly": {
+        "label": "Näytä",
+        "yes": "vain omat kohteet",
+        "no": "kaikki kohteet"
       }
     },
     "placeResults": {
       "found": "Löytyi",
       "places": "kohdetta",
+      "ownPlace": "Oma kohde",
       "newPlace": {
         "title": "Haluatko lisätä uuden kohteen palveluun?",
         "notice": "Rekisteröidy ja ilmoita puuttuva kohde"

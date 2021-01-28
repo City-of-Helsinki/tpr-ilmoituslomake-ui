@@ -12,7 +12,7 @@
     margin-top: $spacing-layout-xs;
 
     .gridInput {
-      grid-column: span 3;
+      grid-column: 1 / span 3;
     }
   }
 }

@@ -69,11 +69,13 @@ export interface NotificationExtra {
 
 export interface NotificationPlaceSearch {
   placeName: string;
+  ownPlacesOnly: boolean;
 }
 
 export interface NotificationPlaceResult {
   id: number;
   data: NotificationSchema;
+  is_notifier: boolean;
 }
 
 export interface ChangeRequestSchema {

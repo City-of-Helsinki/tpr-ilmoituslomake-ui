@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useI18n } from "next-localization";
-import { Button, IconAngleRight, IconLocation } from "hds-react";
+import { Button, IconAngleRight, IconLocation, IconStarFill } from "hds-react";
 import { RootState } from "../../state/reducers";
 import { NotificationPlaceResult } from "../../types/general";
 import { defaultLocale } from "../../utils/i18n";
@@ -37,6 +37,7 @@ const PlaceResults = (): ReactElement => {
                   sv: { street: streetSv, postal_code: postalCodeSv, post_office: postOfficeSv },
                 },
               },
+              is_notifier: isNotifier,
             } = result;
             return (
               <Fragment key={`placeresult_${id}`}>
@@ -47,13 +48,25 @@ const PlaceResults = (): ReactElement => {
                     </Button>
                   </Link>
                 </div>
+                <div className={`${styles.gridContent} ${styles.middleColumn}`}>
+                  <div className={styles.addressContainer}>
+                    <IconLocation />
+                    <div className={styles.addressLabel}>
+                      {router.locale !== "sv"
+                        ? `${streetFi}${streetFi.length > 0 ? "," : ""} ${postalCodeFi} ${postOfficeFi}`
+                        : `${streetSv}${streetSv.length > 0 ? "," : ""} ${postalCodeSv} ${postOfficeSv}`}
+                    </div>
+                  </div>
+                </div>
                 <div className={`${styles.gridContent} ${styles.lastColumn}`}>
-                  <IconLocation />
-                  <span>
-                    {router.locale !== "sv"
-                      ? `${streetFi}${streetFi.length > 0 ? "," : ""} ${postalCodeFi} ${postOfficeFi}`
-                      : `${streetSv}${streetSv.length > 0 ? "," : ""} ${postalCodeSv} ${postOfficeSv}`}
-                  </span>
+                  {isNotifier && (
+                    <div className={styles.ownPlaceContainer}>
+                      <div className={styles.ownPlace}>
+                        <IconStarFill />
+                        <div className={styles.ownPlaceLabel}>{i18n.t("notification.placeResults.ownPlace")}</div>
+                      </div>
+                    </div>
+                  )}
                 </div>
               </Fragment>
             );

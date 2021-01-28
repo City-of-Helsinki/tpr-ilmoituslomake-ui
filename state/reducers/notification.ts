@@ -38,6 +38,7 @@ const initialState: NotificationState = {
   zoom: MAP_INITIAL_ZOOM,
   placeSearch: {
     placeName: "",
+    ownPlacesOnly: false,
   },
   placeResults: [],
   tip: {
