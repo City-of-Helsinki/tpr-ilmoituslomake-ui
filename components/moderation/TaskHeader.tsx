@@ -24,13 +24,16 @@ const TaskHeader = (): ReactElement => {
   const selectedTask = useSelector((state: RootState) => state.moderation.selectedTask);
   const {
     name: { fi, sv, en },
-    notifier: { notifier_type, full_name, email, phone },
     comments,
   } = selectedTask;
   const placeNameSelected = fi ?? sv ?? en;
 
   const modifiedTaskId = useSelector((state: RootState) => state.moderation.modifiedTaskId);
   const modifiedTask = useSelector((state: RootState) => state.moderation.modifiedTask);
+  const {
+    notifier: { notifier_type, full_name, email, phone },
+  } = modifiedTask;
+
   const moderationExtra = useSelector((state: RootState) => state.moderation.moderationExtra);
   const {
     photosSelected,
