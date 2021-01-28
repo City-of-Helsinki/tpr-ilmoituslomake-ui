@@ -1,4 +1,4 @@
-import React, { Dispatch, ChangeEvent, ReactElement } from "react";
+import React, { Dispatch, ChangeEvent, ReactElement, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useI18n } from "next-localization";
 import { Button, Select, TextInput } from "hds-react";
@@ -71,6 +71,11 @@ const TaskSearch = (): ReactElement => {
       }
     }
   };
+
+  // Search all tasks on first render only, using a workaround utilising useEffect with empty dependency array
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  const useMountEffect = (fun: () => void) => useEffect(fun, []);
+  useMountEffect(searchTasks);
 
   return (
     <div className="formSection">
