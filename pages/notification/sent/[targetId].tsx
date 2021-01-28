@@ -4,7 +4,7 @@ import { GetServerSideProps } from "next";
 import Head from "next/head";
 import Link from "next/link";
 import { useI18n } from "next-localization";
-import { Button, IconCheckCircleFill, IconClockPlus, IconInfoCircle, IconLinkExternal, IconPhotoPlus, Koros } from "hds-react";
+import { Button, IconCheckCircleFill, IconInfoCircle, IconLinkExternal, IconPhotoPlus, Koros } from "hds-react";
 import { Dialog } from "@material-ui/core";
 import i18nLoader from "../../../utils/i18n";
 import { RootState } from "../../../state/reducers";
@@ -25,7 +25,8 @@ const NotificationSent = (): ReactElement => {
   const notificationId = useSelector((state: RootState) => state.notification.notificationId);
   const notificationName = useSelector((state: RootState) => state.notification.notificationName);
 
-  const [modalOpen, setModalOpen] = useState(true);
+  // NOTE: temporarily set to false until external opening times application is ready
+  const [modalOpen, setModalOpen] = useState(false);
 
   const closeModal = () => {
     setModalOpen(false);
@@ -53,6 +54,7 @@ const NotificationSent = (): ReactElement => {
           titleKey="notification.message.saveSucceeded.title"
           messageKey="notification.message.saveSucceeded.message"
         />
+        {/* NOTE: temporarily removed until external opening times application is ready
         <Notice
           className={styles.opening}
           icon={<IconClockPlus size="xl" />}
@@ -64,6 +66,7 @@ const NotificationSent = (): ReactElement => {
             </Button>
           }
         />
+        */}
         <Notice
           className={styles.photos}
           icon={<IconPhotoPlus size="xl" />}

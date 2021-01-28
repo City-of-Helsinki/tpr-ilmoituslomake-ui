@@ -206,7 +206,8 @@
     },
     "opening": {
       "title": "Opening times",
-      "notice": "Opening times are notified after sending."
+      "notice": "Opening times are notified after sending.",
+      "temporaryNotice": "Opening times are temporarily notified in the long description below."
     },
     "photos": {
       "title": "Photos",

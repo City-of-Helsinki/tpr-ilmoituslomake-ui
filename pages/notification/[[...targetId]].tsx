@@ -53,6 +53,8 @@ const NotificationDetail = (): ReactElement => {
         <main id="content" className={styles.content} ref={ref}>
           <h2>{`${currentPage} ${i18n.t("notification.main.basic")}`}</h2>
           <NotificationNotice messageKey="notification.mandatory" />
+          {/* NOTE: temporarily added Opening here with temporary notice until external opening times application is ready */}
+          <Opening temporaryNotice />
           {!pageValid && <ValidationSummary />}
           <Description />
           <Tags />
@@ -82,7 +84,9 @@ const NotificationDetail = (): ReactElement => {
         <main id="content" className={styles.content} ref={ref}>
           <h2>{`${currentPage} ${i18n.t("notification.main.send")}`}</h2>
           <NotificationNotice messageKey="notification.comments.notice" />
+          {/* NOTE: temporarily removed until external opening times application is ready
           <Opening />
+          */}
           <Comments />
           <Terms />
           <NotificationFooter />

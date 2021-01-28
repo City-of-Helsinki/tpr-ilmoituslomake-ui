@@ -206,7 +206,8 @@
     },
     "opening": {
       "title": "Aukioloajat",
-      "notice": "Aukioloajat ilmoitetaan lähetyksen jälkeen."
+      "notice": "Aukioloajat ilmoitetaan lähetyksen jälkeen.",
+      "temporaryNotice": "Aukioloajat väliaikaisesti ilmoitetaan alla olevassa pitkässä kuvauksessa."
     },
     "photos": {
       "title": "Kuvat",

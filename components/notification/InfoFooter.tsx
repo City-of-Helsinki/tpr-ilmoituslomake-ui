@@ -18,11 +18,13 @@ const InfoFooter = (): ReactElement => {
           <Button variant="secondary">{i18n.t("notification.button.modifyInformation")}</Button>
         </Link>
       </div>
+      {/* NOTE: temporarily removed until external opening times application is ready
       <div className={styles.gridButton}>
         <Button variant="secondary" iconRight={<IconLinkExternal />}>
           {i18n.t("notification.button.modifyOpeningTimes")}
         </Button>
       </div>
+      */}
       <div className={`${styles.gridButton} ${styles.closingDownButton}`}>
         <Link href="/tip">
           <Button variant="secondary" iconRight={<IconLinkExternal />}>
