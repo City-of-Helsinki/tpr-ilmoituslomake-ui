@@ -24,9 +24,11 @@ const InfoFooter = (): ReactElement => {
         </Button>
       </div>
       <div className={`${styles.gridButton} ${styles.closingDownButton}`}>
-        <Button variant="secondary" iconRight={<IconLinkExternal />}>
-          {i18n.t("notification.button.notifyClosingDown")}
-        </Button>
+        <Link href="/tip">
+          <Button variant="secondary" iconRight={<IconLinkExternal />}>
+            {i18n.t("notification.button.notifyClosingDown")}
+          </Button>
+        </Link>
       </div>
       <div className={`${styles.gridButton} ${styles.returnButton}`}>
         <Link href="/search">
