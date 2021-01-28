@@ -6,10 +6,10 @@ $min-breakpoints: (
 );
 
 $max-breakpoints: (
-  xs: $breakpoint-s,
-  s: $breakpoint-m,
-  m: $breakpoint-l,
-  l: $breakpoint-xl,
+  xs: $breakpoint-s - 1,
+  s: $breakpoint-m - 1,
+  m: $breakpoint-l - 1,
+  l: $breakpoint-xl - 1,
 );
 
 @mixin media($keys...) {
