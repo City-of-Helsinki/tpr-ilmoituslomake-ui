@@ -6,7 +6,7 @@ import { useI18n } from "next-localization";
 import i18nLoader from "../../../utils/i18n";
 import { initStore } from "../../../state/store";
 import { RootState } from "../../../state/reducers";
-import { ModerationStatus, INITIAL_MODERATION_EXTRA, INITIAL_MODERATION_STATUS, INITIAL_NOTIFICATION } from "../../../types/constants";
+import { ModerationStatus, CLEAR_STATE } from "../../../types/constants";
 import { TagOption, ModerationTodoSchema } from "../../../types/general";
 import { PhotoStatus } from "../../../types/moderation_status";
 import { NotificationSchema } from "../../../types/notification_schema";
@@ -66,16 +66,10 @@ const ModerationTaskDetail = (): ReactElement => {
 export const getServerSideProps: GetServerSideProps = async ({ req, params, locales }) => {
   const lngDict = await i18nLoader(locales);
 
-  const reduxStore = initStore();
-  const initialReduxState = reduxStore.getState();
-
   // Reset the task details in the state
-  initialReduxState.moderation.selectedTaskId = 0;
-  initialReduxState.moderation.selectedTask = { ...INITIAL_NOTIFICATION, location: [0, 0] };
-  initialReduxState.moderation.modifiedTaskId = 0;
-  initialReduxState.moderation.modifiedTask = { ...INITIAL_NOTIFICATION, location: [0, 0] };
-  initialReduxState.moderation.moderationExtra = INITIAL_MODERATION_EXTRA;
-  initialReduxState.moderationStatus.moderationStatus = INITIAL_MODERATION_STATUS;
+  const reduxStore = initStore();
+  reduxStore.dispatch({ type: CLEAR_STATE });
+  const initialReduxState = reduxStore.getState();
 
   // Try to fetch the task details for the specified id
   if (params) {

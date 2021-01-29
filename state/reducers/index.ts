@@ -1,9 +1,18 @@
-import { combineReducers } from "redux";
+import { AnyAction, combineReducers } from "redux";
 import notification from "./notification";
 import notificationValidation from "./notificationValidation";
 import moderation from "./moderation";
 import moderationStatus from "./moderationStatus";
+import { CLEAR_STATE } from "../../types/constants";
 
-export const rootReducer = combineReducers({ notification, notificationValidation, moderation, moderationStatus });
+const appReducer = combineReducers({ notification, notificationValidation, moderation, moderationStatus });
 
-export type RootState = ReturnType<typeof rootReducer>;
+export type RootState = ReturnType<typeof appReducer>;
+
+export const rootReducer = (state: RootState | undefined, action: AnyAction): RootState => {
+  if (action.type === CLEAR_STATE) {
+    // Return to initial state
+    return appReducer(undefined, action);
+  }
+  return appReducer(state, action);
+};

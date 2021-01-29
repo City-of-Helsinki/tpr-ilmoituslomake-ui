@@ -8,6 +8,7 @@ import { Button, IconArrowLeft } from "hds-react";
 import i18nLoader from "../utils/i18n";
 import { initStore } from "../state/store";
 import { RootState } from "../state/reducers";
+import { CLEAR_STATE } from "../types/constants";
 import Layout from "../components/common/Layout";
 import Header from "../components/common/Header";
 import PlaceSearch from "../components/notification/PlaceSearch";
@@ -42,6 +43,7 @@ export const getServerSideProps: GetServerSideProps = async ({ locales }) => {
   const lngDict = await i18nLoader(locales);
 
   const reduxStore = initStore();
+  reduxStore.dispatch({ type: CLEAR_STATE });
   const initialReduxState = reduxStore.getState();
 
   return {

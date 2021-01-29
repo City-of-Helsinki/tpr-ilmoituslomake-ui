@@ -4,6 +4,7 @@ import Head from "next/head";
 import { useI18n } from "next-localization";
 import i18nLoader from "../../utils/i18n";
 import { initStore } from "../../state/store";
+import { CLEAR_STATE } from "../../types/constants";
 import Layout from "../../components/common/Layout";
 import ModerationHeader from "../../components/moderation/ModerationHeader";
 
@@ -36,6 +37,7 @@ export const getServerSideProps: GetServerSideProps = async ({ locales }) => {
   const lngDict = await i18nLoader(locales);
 
   const reduxStore = initStore();
+  reduxStore.dispatch({ type: CLEAR_STATE });
   const initialReduxState = reduxStore.getState();
 
   return {

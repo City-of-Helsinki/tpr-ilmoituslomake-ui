@@ -73,6 +73,7 @@ export const MAP_MIN_ZOOM = 10;
 export const MAP_MAX_ZOOM = 18;
 export const SEARCH_URL = "https://api.hel.fi/servicemap/v2/search/?format=json";
 
+export const CLEAR_STATE = "CLEAR_STATE";
 export const SET_PAGE = "SET_PAGE";
 export const SET_PAGE_VALID = "SET_PAGE_VALID";
 export const SET_PAGE_STATUS = "SET_PAGE_STATUS";

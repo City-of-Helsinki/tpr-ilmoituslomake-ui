@@ -23,7 +23,7 @@ import Preview from "../../components/notification/Preview";
 import Tags from "../../components/notification/Tags";
 import Terms from "../../components/notification/Terms";
 import ValidationSummary from "../../components/notification/ValidationSummary";
-import { INITIAL_NOTIFICATION, INITIAL_NOTIFICATION_EXTRA, INITIAL_NOTIFICATION_VALIDATION } from "../../types/constants";
+import { CLEAR_STATE, INITIAL_NOTIFICATION } from "../../types/constants";
 import { TagOption } from "../../types/general";
 import { NotificationSchema } from "../../types/notification_schema";
 import { PhotoValidation } from "../../types/notification_validation";
@@ -102,16 +102,12 @@ const NotificationDetail = (): ReactElement => {
 export const getServerSideProps: GetServerSideProps = async ({ req, params, locale, locales }) => {
   const lngDict = await i18nLoader(locales);
 
+  // Reset the notification details in the state
   const reduxStore = initStore();
+  reduxStore.dispatch({ type: CLEAR_STATE });
+
   const initialReduxState = reduxStore.getState();
   initialReduxState.notification.notificationExtra.inputLanguages = [locale || defaultLocale];
-
-  // Reset the notification details in the state
-  initialReduxState.notification.notificationId = 0;
-  initialReduxState.notification.notificationName = "";
-  initialReduxState.notification.notification = { ...INITIAL_NOTIFICATION, location: [0, 0] };
-  initialReduxState.notification.notificationExtra = INITIAL_NOTIFICATION_EXTRA;
-  initialReduxState.notificationValidation.notificationValidation = INITIAL_NOTIFICATION_VALIDATION;
 
   // Try to fetch the notification details for the specified id
   if (params) {

@@ -14,7 +14,7 @@ import Header from "../../../components/common/Header";
 import Notice from "../../../components/common/Notice";
 import Preview from "../../../components/notification/Preview";
 import InfoFooter from "../../../components/notification/InfoFooter";
-import { INITIAL_NOTIFICATION, INITIAL_NOTIFICATION_EXTRA } from "../../../types/constants";
+import { CLEAR_STATE } from "../../../types/constants";
 import { NotificationSchema } from "../../../types/notification_schema";
 import { getOrigin } from "../../../utils/request";
 import styles from "./[targetId].module.scss";
@@ -114,14 +114,10 @@ const NotificationSent = (): ReactElement => {
 export const getServerSideProps: GetServerSideProps = async ({ req, params, locales }) => {
   const lngDict = await i18nLoader(locales);
 
-  const reduxStore = initStore();
-  const initialReduxState = reduxStore.getState();
-
   // Reset the notification details in the state
-  initialReduxState.notification.notificationId = 0;
-  initialReduxState.notification.notificationName = "";
-  initialReduxState.notification.notification = { ...INITIAL_NOTIFICATION, location: [0, 0] };
-  initialReduxState.notification.notificationExtra = INITIAL_NOTIFICATION_EXTRA;
+  const reduxStore = initStore();
+  reduxStore.dispatch({ type: CLEAR_STATE });
+  const initialReduxState = reduxStore.getState();
 
   // Try to fetch the notification details for the specified id
   if (params) {

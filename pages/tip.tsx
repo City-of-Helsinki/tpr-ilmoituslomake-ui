@@ -6,6 +6,7 @@ import { useI18n } from "next-localization";
 import i18nLoader from "../utils/i18n";
 import { RootState } from "../state/reducers";
 import { initStore } from "../state/store";
+import { CLEAR_STATE } from "../types/constants";
 import Layout from "../components/common/Layout";
 import Header from "../components/common/Header";
 import NotificationNotice from "../components/notification/NotificationNotice";
@@ -50,6 +51,7 @@ export const getServerSideProps: GetServerSideProps = async ({ locales }) => {
   const lngDict = await i18nLoader(locales);
 
   const reduxStore = initStore();
+  reduxStore.dispatch({ type: CLEAR_STATE });
   const initialReduxState = reduxStore.getState();
 
   return {
