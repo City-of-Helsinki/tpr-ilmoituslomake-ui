@@ -23,6 +23,7 @@ export const saveNotification = async (
       const csrftoken = Cookies.get("csrftoken");
 
       // Include all the notification details and also the photos in the post data
+      // The photo metadata for all photos is in the data part, but only new images are included in the images part
       // The notification id is only included if it has a value, and is used for modifying existing notifications
       const { photos } = notificationExtra;
 
@@ -31,16 +32,16 @@ export const saveNotification = async (
         data: {
           ...notification,
           images: photos.map((photo, index) => {
-            const { sourceType: source_type, url, altText: alt_text, permission, source } = photo;
-            return { index, source_type, url, alt_text, permission, source };
+            const { uuid, sourceType: source_type, url, altText: alt_text, permission, source } = photo;
+            return { index, uuid, source_type, url, alt_text, permission, source };
           }),
         },
         images: photos
+          .filter((photo) => photo.new)
           .map((photo, index) => {
-            const { base64 } = photo;
-            return { index, base64 };
-          })
-          .filter((photo) => photo.base64 && photo.base64.length > 0),
+            const { uuid, url, base64 } = photo;
+            return { index, uuid, url, base64 };
+          }),
       };
 
       console.log("SENDING", postData);

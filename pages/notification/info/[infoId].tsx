@@ -72,6 +72,7 @@ export const getServerSideProps: GetServerSideProps = async ({ req, params, loca
             ...initialReduxState.notification.notificationExtra,
             photos: images.map((image) => {
               return {
+                uuid: image.uuid ?? "",
                 sourceType: image.source_type,
                 url: image.url,
                 altText: {

@@ -36,6 +36,7 @@ export type OptionType = {
 };
 
 export interface Photo {
+  uuid: string;
   sourceType: string;
   url: string;
   altText: {
@@ -46,6 +47,7 @@ export interface Photo {
   };
   permission?: string;
   source: string;
+  new?: boolean;
   base64?: string;
   preview?: string;
   [key: string]: unknown;

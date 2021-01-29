@@ -229,6 +229,9 @@
                     "index": {
                         "type": "number"
                     },
+                    "uuid": {
+                        "type": "string"
+                    },
                     "source_type": {
                         "type": "string"
                     },
@@ -260,7 +263,7 @@
                         "required": ["fi", "sv", "en"]
                     }
                 },
-                "required": ["index", "source_type", "url", "permission", "source", "alt_text"]
+                "required": ["index", "uuid", "source_type", "url", "permission", "source", "alt_text"]
             }
         },
         "opening_times": {

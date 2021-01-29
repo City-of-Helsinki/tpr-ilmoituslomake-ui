@@ -103,6 +103,7 @@ export const getServerSideProps: GetServerSideProps = async ({ req, params, loca
             },
             photosSelected: taskResult.target.data.images.map((image) => {
               return {
+                uuid: image.uuid ?? "",
                 sourceType: image.source_type,
                 url: image.url,
                 altText: {
@@ -118,6 +119,7 @@ export const getServerSideProps: GetServerSideProps = async ({ req, params, loca
             }),
             photosModified: modifiedTask.images.map((image) => {
               return {
+                uuid: image.uuid ?? "",
                 sourceType: image.source_type,
                 url: image.url,
                 altText: {

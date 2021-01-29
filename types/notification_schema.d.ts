@@ -59,6 +59,7 @@ export interface NotificationSchema {
   };
   images: {
     index: number;
+    uuid: string;
     source_type: string;
     url: string;
     permission: string;

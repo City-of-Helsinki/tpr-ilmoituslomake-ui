@@ -2,6 +2,7 @@ import React, { Dispatch, ChangeEvent, ReactElement, useRef } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useI18n } from "next-localization";
 import { TextInput, Button, IconUpload, IconLink, TextArea, SelectionGroup, RadioButton, IconLinkExternal } from "hds-react";
+import { v4 as uuidv4 } from "uuid";
 import { NotificationAction, NotificationValidationAction } from "../../state/actions/types";
 import { setNotificationPhoto, removeNotificationPhoto } from "../../state/actions/notification";
 import { setNotificationPhotoValidation, removeNotificationPhotoValidation } from "../../state/actions/notificationValidation";
@@ -36,6 +37,7 @@ const Photos = (): ReactElement => {
   const addPhoto = (sourceType: PhotoSourceType) => {
     dispatch(
       setNotificationPhoto(-1, {
+        uuid: uuidv4(),
         sourceType,
         url: "",
         altText: {
@@ -45,6 +47,7 @@ const Photos = (): ReactElement => {
         },
         permission: undefined,
         source: "",
+        new: true,
       })
     );
     dispatchValidation(
