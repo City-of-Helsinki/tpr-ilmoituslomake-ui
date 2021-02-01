@@ -1,7 +1,6 @@
 import { LatLngExpression } from "leaflet";
 import {
   SET_PAGE,
-  SET_USER,
   SET_MAP_VIEW,
   SET_NOTIFICATION_PLACE_SEARCH,
   SET_NOTIFICATION_PLACE_RESULTS,
@@ -22,7 +21,6 @@ import {
   SET_NOTIFICATION_TIP,
 } from "../../types/constants";
 import {
-  User,
   KeyValueString,
   KeyValueBoolean,
   Photo,
@@ -36,11 +34,6 @@ import { NotificationAction } from "./types";
 export const setPage = (pageNumber: number): NotificationAction => ({
   type: SET_PAGE,
   payload: pageNumber,
-});
-
-export const setUser = (user: User): NotificationAction => ({
-  type: SET_USER,
-  payload: user,
 });
 
 export const setMapView = (center: LatLngExpression, zoom: number): NotificationAction => ({

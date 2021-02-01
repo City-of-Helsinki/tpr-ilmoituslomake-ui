@@ -3,9 +3,15 @@ import { useSelector } from "react-redux";
 import { GetServerSideProps } from "next";
 import Head from "next/head";
 import { useI18n } from "next-localization";
-import i18nLoader, { defaultLocale } from "../../utils/i18n";
 import { RootState } from "../../state/reducers";
 import { initStore } from "../../state/store";
+import { CLEAR_STATE, INITIAL_NOTIFICATION } from "../../types/constants";
+import { TagOption } from "../../types/general";
+import { NotificationSchema } from "../../types/notification_schema";
+import { PhotoValidation } from "../../types/notification_validation";
+import i18nLoader, { defaultLocale } from "../../utils/i18n";
+import { getOrigin } from "../../utils/request";
+import checkUser from "../../utils/serverside";
 import Layout from "../../components/common/Layout";
 import NotificationHeader from "../../components/notification/NotificationHeader";
 import NotificationFooter from "../../components/notification/NotificationFooter";
@@ -23,11 +29,6 @@ import Preview from "../../components/notification/Preview";
 import Tags from "../../components/notification/Tags";
 import Terms from "../../components/notification/Terms";
 import ValidationSummary from "../../components/notification/ValidationSummary";
-import { CLEAR_STATE, INITIAL_NOTIFICATION } from "../../types/constants";
-import { TagOption } from "../../types/general";
-import { NotificationSchema } from "../../types/notification_schema";
-import { PhotoValidation } from "../../types/notification_validation";
-import { getOrigin } from "../../utils/request";
 import styles from "./[[...targetId]].module.scss";
 
 const NotificationDetail = (): ReactElement => {
@@ -99,14 +100,20 @@ const NotificationDetail = (): ReactElement => {
 };
 
 // Server-side rendering
-export const getServerSideProps: GetServerSideProps = async ({ req, params, locale, locales }) => {
+export const getServerSideProps: GetServerSideProps = async ({ req, res, resolvedUrl, params, locale, locales }) => {
   const lngDict = await i18nLoader(locales);
 
   // Reset the notification details in the state
   const reduxStore = initStore();
   reduxStore.dispatch({ type: CLEAR_STATE });
-
   const initialReduxState = reduxStore.getState();
+
+  const user = await checkUser(req, res, resolvedUrl, false);
+  if (user) {
+    initialReduxState.general.user = user;
+  }
+
+  // TODO - determine previously selected input languages if possible
   initialReduxState.notification.notificationExtra.inputLanguages = [locale || defaultLocale];
 
   // Try to fetch the notification details for the specified id
@@ -118,9 +125,8 @@ export const getServerSideProps: GetServerSideProps = async ({ req, params, loca
       const targetResult = await (targetResponse.json() as Promise<{ id: number; data: NotificationSchema }>);
 
       try {
-        // Merge the notification details from the backend, but remove the previous notifier details
+        // Merge the notification details from the backend, but remove the previous notifier details if present
         // TODO - handle image base64 when implemented in backend
-        // TODO - handle inputLanguages here?
         const { notifier, images, ...dataToUse } = targetResult.data;
 
         initialReduxState.notification = {
@@ -176,6 +182,16 @@ export const getServerSideProps: GetServerSideProps = async ({ req, params, loca
       }
     }
   }
+
+  // Replace the notifier details with the login user details if available
+  initialReduxState.notification.notification = {
+    ...initialReduxState.notification.notification,
+    notifier: {
+      ...INITIAL_NOTIFICATION.notifier,
+      full_name: user ? `${user.first_name} ${user.last_name}`.trim() : "",
+      email: user ? user.email : "",
+    },
+  };
 
   // Note: this currently fetches all tags which may cause performance issues
   const tagResponse = await fetch(`${getOrigin(req)}/api/ontologywords/?format=json&search=`);

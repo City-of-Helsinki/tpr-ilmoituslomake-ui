@@ -16,9 +16,12 @@ import { ModerationStatusSchema } from "../../types/moderation_status";
 import { NotificationSchema } from "../../types/notification_schema";
 import { NotificationValidationSchema } from "../../types/notification_validation";
 
+export interface GeneralState {
+  user?: User;
+}
+
 export interface NotificationState {
   page: number;
-  user?: User;
   center: LatLngExpression;
   zoom: number;
   placeSearch: NotificationPlaceSearch;

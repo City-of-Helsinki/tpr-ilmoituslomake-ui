@@ -12,6 +12,7 @@ import { PhotoStatus } from "../../../types/moderation_status";
 import { NotificationSchema } from "../../../types/notification_schema";
 import { getTaskStatus, getTaskType } from "../../../utils/conversion";
 import { getOrigin } from "../../../utils/request";
+import checkUser from "../../../utils/serverside";
 import Layout from "../../../components/common/Layout";
 import ModerationHeader from "../../../components/moderation/ModerationHeader";
 import Collapsible from "../../../components/moderation/Collapsible";
@@ -63,13 +64,18 @@ const ModerationTaskDetail = (): ReactElement => {
 };
 
 // Server-side rendering
-export const getServerSideProps: GetServerSideProps = async ({ req, params, locales }) => {
+export const getServerSideProps: GetServerSideProps = async ({ req, res, resolvedUrl, params, locales }) => {
   const lngDict = await i18nLoader(locales);
 
   // Reset the task details in the state
   const reduxStore = initStore();
   reduxStore.dispatch({ type: CLEAR_STATE });
   const initialReduxState = reduxStore.getState();
+
+  const user = await checkUser(req, res, resolvedUrl, true, true);
+  if (user) {
+    initialReduxState.general.user = user;
+  }
 
   // Try to fetch the task details for the specified id
   if (params) {

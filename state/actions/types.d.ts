@@ -4,7 +4,6 @@ import {
   SET_PAGE,
   SET_PAGE_VALID,
   SET_PAGE_STATUS,
-  SET_USER,
   SET_MAP_VIEW,
   SET_NOTIFICATION_PLACE_SEARCH,
   SET_NOTIFICATION_PLACE_RESULTS,
@@ -63,7 +62,6 @@ import {
   SET_MODERATION_PHOTO_ALT_TEXT_STATUS,
 } from "../../types/constants";
 import {
-  User,
   KeyValueString,
   KeyValueBoolean,
   Photo,
@@ -81,11 +79,6 @@ import { PhotoStatus } from "../../types/moderation_status";
 interface SetPageAction extends AnyAction {
   type: typeof SET_PAGE;
   payload: number;
-}
-
-interface SetUserAction extends AnyAction {
-  type: typeof SET_USER;
-  payload: User;
 }
 
 interface SetMapViewAction extends AnyAction {
@@ -180,7 +173,6 @@ interface SetNotificationTipAction extends AnyAction {
 
 export type NotificationAction =
   | SetPageAction
-  | SetUserAction
   | SetMapViewAction
   | SetNotificationPlaceSearchAction
   | SetNotificationPlaceResultsAction

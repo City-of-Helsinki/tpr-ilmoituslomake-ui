@@ -19,7 +19,7 @@ const TaskHeader = (): ReactElement => {
   const dispatchStatus = useDispatch<Dispatch<ModerationStatusAction>>();
   const router = useRouter();
 
-  const currentUser = useSelector((state: RootState) => state.notification.user);
+  const currentUser = useSelector((state: RootState) => state.general.user);
   const selectedTaskId = useSelector((state: RootState) => state.moderation.selectedTaskId);
   const selectedTask = useSelector((state: RootState) => state.moderation.selectedTask);
   const {

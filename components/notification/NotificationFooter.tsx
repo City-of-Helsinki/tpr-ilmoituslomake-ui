@@ -20,7 +20,7 @@ const NotificationFooter = (): ReactElement => {
   const router = useRouter();
 
   const currentPage = useSelector((state: RootState) => state.notification.page);
-  const currentUser = useSelector((state: RootState) => state.notification.user);
+  const currentUser = useSelector((state: RootState) => state.general.user);
   const notificationId = useSelector((state: RootState) => state.notification.notificationId);
   const notification = useSelector((state: RootState) => state.notification.notification);
   const notificationExtra = useSelector((state: RootState) => state.notification.notificationExtra);

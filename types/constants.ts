@@ -77,7 +77,6 @@ export const CLEAR_STATE = "CLEAR_STATE";
 export const SET_PAGE = "SET_PAGE";
 export const SET_PAGE_VALID = "SET_PAGE_VALID";
 export const SET_PAGE_STATUS = "SET_PAGE_STATUS";
-export const SET_USER = "SET_USER";
 export const SET_MAP_VIEW = "SET_MAP_VIEW";
 
 export const SET_NOTIFICATION_PLACE_SEARCH = "SET_NOTIFICATION_PLACE_SEARCH";

@@ -7,7 +7,6 @@ import {
   MAX_PHOTOS,
   MAP_INITIAL_ZOOM,
   SET_PAGE,
-  SET_USER,
   SET_MAP_VIEW,
   SET_NOTIFICATION_PLACE_SEARCH,
   SET_NOTIFICATION_PLACE_RESULTS,
@@ -60,23 +59,6 @@ const notification = (state = initialState, action: AnyAction): NotificationStat
       return {
         ...state,
         page: Math.min(Math.max(action.payload, 1), MAX_PAGE),
-      };
-    }
-
-    case SET_USER: {
-      console.log("SET_USER", action.payload);
-      return {
-        ...state,
-        user: action.payload,
-        // Also update the notifier values with the login user details if not already set
-        notification: {
-          ...state.notification,
-          notifier: {
-            ...state.notification.notifier,
-            full_name: state.notification.notifier.full_name || `${action.payload.first_name} ${action.payload.last_name}`.trim(),
-            email: state.notification.notifier.email || action.payload.email,
-          },
-        },
       };
     }
 
