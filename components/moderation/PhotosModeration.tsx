@@ -6,7 +6,7 @@ import { ModerationAction, ModerationStatusAction } from "../../state/actions/ty
 import { removeModerationPhoto, setModerationPhoto } from "../../state/actions/moderation";
 import { removeModerationPhotoStatus, setModerationPhotoAltTextStatus, setModerationPhotoStatus } from "../../state/actions/moderationStatus";
 import { RootState } from "../../state/reducers";
-import { LANGUAGE_OPTIONS, ModerationStatus, PhotoPermission, PhotoSourceType } from "../../types/constants";
+import { LANGUAGE_OPTIONS, ModerationStatus, PhotoPermission, PhotoSourceType, TaskType } from "../../types/constants";
 import ModerationSection from "./ModerationSection";
 import SelectionGroupWrapper from "./SelectionGroupWrapper";
 
@@ -20,6 +20,8 @@ const PhotosModeration = (): ReactElement => {
 
   const moderationStatus = useSelector((state: RootState) => state.moderationStatus.moderationStatus);
   const { photos: photosStatus } = moderationStatus;
+
+  const pageStatus = useSelector((state: RootState) => state.moderationStatus.pageStatus);
 
   const updatePhoto = (index: number, evt: ChangeEvent<HTMLInputElement>) => {
     const fieldName = evt.target.name.indexOf("permission") >= 0 ? "permission" : evt.target.name;
@@ -135,11 +137,13 @@ const PhotosModeration = (): ReactElement => {
                 ModerationComponent={<TextInput id={`source_${index}`} label={i18n.t("moderation.photos.source.label")} name="source" />}
               />
 
-              <div className="gridColumn1">
-                <Button variant="secondary" onClick={() => removePhoto(index)}>
-                  {i18n.t("moderation.photos.remove")}
-                </Button>
-              </div>
+              {(taskType === TaskType.NewPlace || taskType === TaskType.PlaceChange || pageStatus === ModerationStatus.Edited) && (
+                <div className="gridColumn1">
+                  <Button variant="secondary" onClick={() => removePhoto(index)}>
+                    {i18n.t("moderation.photos.remove")}
+                  </Button>
+                </div>
+              )}
             </div>
           </Fragment>
         );
