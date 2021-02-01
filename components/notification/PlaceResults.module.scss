@@ -18,7 +18,13 @@
       }
 
       &.middleColumn {
-        grid-column: 3 / span 4;
+        grid-column: 3 / span 5;
+        border-right: 2px solid $color-black-50;
+
+        &.ownPlaces {
+          grid-column: 3 / span 4;
+          border-right: 0;
+        }
       }
 
       &.lastColumn {

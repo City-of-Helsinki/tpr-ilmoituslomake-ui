@@ -10,7 +10,11 @@ import { defaultLocale } from "../../utils/i18n";
 import Notice from "../common/Notice";
 import styles from "./PlaceResults.module.scss";
 
-const PlaceResults = (): ReactElement => {
+interface PlaceResultsProps {
+  showOwnPlaces?: boolean;
+}
+
+const PlaceResults = ({ showOwnPlaces }: PlaceResultsProps): ReactElement => {
   const i18n = useI18n();
   const router = useRouter();
 
@@ -48,7 +52,7 @@ const PlaceResults = (): ReactElement => {
                     </Button>
                   </Link>
                 </div>
-                <div className={`${styles.gridContent} ${styles.middleColumn}`}>
+                <div className={`${styles.gridContent} ${styles.middleColumn} ${showOwnPlaces ? styles.ownPlaces : ""}`}>
                   <div className={styles.addressContainer}>
                     <IconLocation />
                     <div className={styles.addressLabel}>
@@ -58,16 +62,18 @@ const PlaceResults = (): ReactElement => {
                     </div>
                   </div>
                 </div>
-                <div className={`${styles.gridContent} ${styles.lastColumn}`}>
-                  {isNotifier && (
-                    <div className={styles.ownPlaceContainer}>
-                      <div className={styles.ownPlace}>
-                        <IconStarFill />
-                        <div className={styles.ownPlaceLabel}>{i18n.t("notification.placeResults.ownPlace")}</div>
+                {showOwnPlaces && (
+                  <div className={`${styles.gridContent} ${styles.lastColumn}`}>
+                    {isNotifier && (
+                      <div className={styles.ownPlaceContainer}>
+                        <div className={styles.ownPlace}>
+                          <IconStarFill />
+                          <div className={styles.ownPlaceLabel}>{i18n.t("notification.placeResults.ownPlace")}</div>
+                        </div>
                       </div>
-                    </div>
-                  )}
-                </div>
+                    )}
+                  </div>
+                )}
               </Fragment>
             );
           })}
@@ -86,6 +92,10 @@ const PlaceResults = (): ReactElement => {
       />
     </div>
   );
+};
+
+PlaceResults.defaultProps = {
+  showOwnPlaces: false,
 };
 
 export default PlaceResults;

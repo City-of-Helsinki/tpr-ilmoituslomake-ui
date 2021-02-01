@@ -8,7 +8,11 @@ import { RootState } from "../../state/reducers";
 import { NotificationPlaceResult } from "../../types/general";
 import styles from "./PlaceSearch.module.scss";
 
-const PlaceSearch = (): ReactElement => {
+interface PlaceSearchProps {
+  showOwnPlaces?: boolean;
+}
+
+const PlaceSearch = ({ showOwnPlaces }: PlaceSearchProps): ReactElement => {
   const i18n = useI18n();
   const dispatch = useDispatch<Dispatch<NotificationAction>>();
 
@@ -31,7 +35,7 @@ const PlaceSearch = (): ReactElement => {
       console.log("PLACE RESPONSE", placeResult);
 
       if (placeResult && placeResult.results && placeResult.results.length > 0) {
-        dispatch(setNotificationPlaceResults(placeResult.results.filter((result) => !ownPlacesOnly || result.is_notifier)));
+        dispatch(setNotificationPlaceResults(placeResult.results.filter((result) => !showOwnPlaces || !ownPlacesOnly || result.is_notifier)));
       } else {
         dispatch(setNotificationPlaceResults([]));
       }
@@ -56,29 +60,35 @@ const PlaceSearch = (): ReactElement => {
           <Button onClick={searchPlaces}>{i18n.t("notification.button.search")}</Button>
         </div>
 
-        <div className={styles.gridInput}>
-          <SelectionGroup id="ownPlacesOnly" direction="horizontal" label={i18n.t("notification.placeSearch.ownPlacesOnly.label")}>
-            <RadioButton
-              id="ownPlacesOnly_yes"
-              label={i18n.t("notification.placeSearch.ownPlacesOnly.yes")}
-              name="ownPlacesOnly"
-              value="yes"
-              checked={ownPlacesOnly}
-              onChange={updateSearchOption}
-            />
-            <RadioButton
-              id="ownPlacesOnly_no"
-              label={i18n.t("notification.placeSearch.ownPlacesOnly.no")}
-              name="ownPlacesOnly"
-              value="no"
-              checked={!ownPlacesOnly}
-              onChange={updateSearchOption}
-            />
-          </SelectionGroup>
-        </div>
+        {showOwnPlaces && (
+          <div className={styles.gridInput}>
+            <SelectionGroup id="ownPlacesOnly" direction="horizontal" label={i18n.t("notification.placeSearch.ownPlacesOnly.label")}>
+              <RadioButton
+                id="ownPlacesOnly_yes"
+                label={i18n.t("notification.placeSearch.ownPlacesOnly.yes")}
+                name="ownPlacesOnly"
+                value="yes"
+                checked={ownPlacesOnly}
+                onChange={updateSearchOption}
+              />
+              <RadioButton
+                id="ownPlacesOnly_no"
+                label={i18n.t("notification.placeSearch.ownPlacesOnly.no")}
+                name="ownPlacesOnly"
+                value="no"
+                checked={!ownPlacesOnly}
+                onChange={updateSearchOption}
+              />
+            </SelectionGroup>
+          </div>
+        )}
       </div>
     </div>
   );
+};
+
+PlaceSearch.defaultProps = {
+  showOwnPlaces: false,
 };
 
 export default PlaceSearch;
