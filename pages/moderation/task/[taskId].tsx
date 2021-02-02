@@ -7,12 +7,12 @@ import i18nLoader from "../../../utils/i18n";
 import { initStore } from "../../../state/store";
 import { RootState } from "../../../state/reducers";
 import { ModerationStatus, CLEAR_STATE } from "../../../types/constants";
-import { TagOption, ModerationTodoSchema } from "../../../types/general";
+import { ModerationTodoSchema } from "../../../types/general";
 import { PhotoStatus } from "../../../types/moderation_status";
 import { NotificationSchema } from "../../../types/notification_schema";
 import { getTaskStatus, getTaskType } from "../../../utils/conversion";
 import { getOrigin } from "../../../utils/request";
-import checkUser from "../../../utils/serverside";
+import { checkUser, getTags } from "../../../utils/serverside";
 import Layout from "../../../components/common/Layout";
 import ModerationHeader from "../../../components/moderation/ModerationHeader";
 import Collapsible from "../../../components/moderation/Collapsible";
@@ -76,6 +76,8 @@ export const getServerSideProps: GetServerSideProps = async ({ req, res, resolve
   if (user) {
     initialReduxState.general.user = user;
   }
+
+  initialReduxState.moderation.moderationExtra.tagOptions = await getTags(req);
 
   // Try to fetch the task details for the specified id
   if (params) {
@@ -163,16 +165,6 @@ export const getServerSideProps: GetServerSideProps = async ({ req, res, resolve
       } catch (err) {
         console.log("ERROR", err);
       }
-    }
-  }
-
-  // Note: this currently fetches all tags which may cause performance issues
-  const tagResponse = await fetch(`${getOrigin(req)}/api/ontologywords/?format=json&search=`);
-  if (tagResponse.ok) {
-    const tagResult = await tagResponse.json();
-    if (tagResult && tagResult.length > 0) {
-      const tagOptions = tagResult.map((tag: TagOption) => ({ id: tag.id, ontologyword: tag.ontologyword }));
-      initialReduxState.moderation.moderationExtra.tagOptions = tagOptions;
     }
   }
 

@@ -7,7 +7,7 @@ import { Button, IconArrowRight, IconGroup } from "hds-react";
 import { initStore } from "../../state/store";
 import { CLEAR_STATE } from "../../types/constants";
 import i18nLoader from "../../utils/i18n";
-import checkUser from "../../utils/serverside";
+import { checkUser } from "../../utils/serverside";
 import Layout from "../../components/common/Layout";
 import Notice from "../../components/common/Notice";
 import ModerationHeader from "../../components/moderation/ModerationHeader";

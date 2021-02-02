@@ -1,7 +1,7 @@
 // NOTE: These functions should only be used during server-side rendering
 
 import { IncomingMessage, ServerResponse } from "http";
-import { User } from "../types/general";
+import { TagOption, User } from "../types/general";
 import { getOrigin } from "./request";
 
 const redirectToLogin = (req: IncomingMessage, res: ServerResponse, resolvedUrl: string) => {
@@ -57,4 +57,12 @@ export const checkUser = async (
   return { authenticated: true, ...user };
 };
 
-export default checkUser;
+export const getTags = async (req: IncomingMessage): Promise<TagOption[]> => {
+  // Note: this currently fetches all tags which may cause performance issues
+  const tagResponse = await fetch(`${getOrigin(req)}/api/ontologywords/?format=json&search=`);
+  if (tagResponse.ok) {
+    const tagResult = await (tagResponse.json() as Promise<TagOption[]>);
+    return tagResult;
+  }
+  return [];
+};

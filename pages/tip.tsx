@@ -7,7 +7,7 @@ import { RootState } from "../state/reducers";
 import { initStore } from "../state/store";
 import { CLEAR_STATE } from "../types/constants";
 import i18nLoader from "../utils/i18n";
-import checkUser from "../utils/serverside";
+import { checkUser } from "../utils/serverside";
 import Layout from "../components/common/Layout";
 import Header from "../components/common/Header";
 import NotificationNotice from "../components/notification/NotificationNotice";

@@ -9,7 +9,7 @@ import { CLEAR_STATE, INITIAL_NOTIFICATION } from "../../../types/constants";
 import { NotificationSchema } from "../../../types/notification_schema";
 import i18nLoader from "../../../utils/i18n";
 import { getOrigin } from "../../../utils/request";
-import checkUser from "../../../utils/serverside";
+import { checkUser, getTags } from "../../../utils/serverside";
 import Layout from "../../../components/common/Layout";
 import Header from "../../../components/common/Header";
 import Preview from "../../../components/notification/Preview";
@@ -51,6 +51,8 @@ export const getServerSideProps: GetServerSideProps = async ({ req, res, resolve
   if (user) {
     initialReduxState.general.user = user;
   }
+
+  initialReduxState.notification.notificationExtra.tagOptions = await getTags(req);
 
   // Try to fetch the notification details for the specified id
   if (params) {

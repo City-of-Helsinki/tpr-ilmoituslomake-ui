@@ -7,7 +7,7 @@ import { Button, IconAngleRight, IconEye, IconLocation, IconPenLine, IconStar, K
 import { initStore } from "../state/store";
 import { ACCESSIBILITY_URL, CLEAR_STATE, TERMS_URL } from "../types/constants";
 import i18nLoader from "../utils/i18n";
-import checkUser from "../utils/serverside";
+import { checkUser } from "../utils/serverside";
 import Layout from "../components/common/Layout";
 import Header from "../components/common/Header";
 import Notice from "../components/common/Notice";

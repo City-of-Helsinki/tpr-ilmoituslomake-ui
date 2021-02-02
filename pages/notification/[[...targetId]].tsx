@@ -6,12 +6,11 @@ import { useI18n } from "next-localization";
 import { RootState } from "../../state/reducers";
 import { initStore } from "../../state/store";
 import { CLEAR_STATE, INITIAL_NOTIFICATION } from "../../types/constants";
-import { TagOption } from "../../types/general";
 import { NotificationSchema } from "../../types/notification_schema";
 import { PhotoValidation } from "../../types/notification_validation";
 import i18nLoader, { defaultLocale } from "../../utils/i18n";
 import { getOrigin } from "../../utils/request";
-import checkUser from "../../utils/serverside";
+import { checkUser, getTags } from "../../utils/serverside";
 import Layout from "../../components/common/Layout";
 import NotificationHeader from "../../components/notification/NotificationHeader";
 import NotificationFooter from "../../components/notification/NotificationFooter";
@@ -113,6 +112,8 @@ export const getServerSideProps: GetServerSideProps = async ({ req, res, resolve
     initialReduxState.general.user = user;
   }
 
+  initialReduxState.notification.notificationExtra.tagOptions = await getTags(req);
+
   // TODO - determine previously selected input languages if possible
   initialReduxState.notification.notificationExtra.inputLanguages = [locale || defaultLocale];
 
@@ -192,16 +193,6 @@ export const getServerSideProps: GetServerSideProps = async ({ req, res, resolve
       email: user ? user.email : "",
     },
   };
-
-  // Note: this currently fetches all tags which may cause performance issues
-  const tagResponse = await fetch(`${getOrigin(req)}/api/ontologywords/?format=json&search=`);
-  if (tagResponse.ok) {
-    const tagResult = await tagResponse.json();
-    if (tagResult && tagResult.length > 0) {
-      const tagOptions = tagResult.map((tag: TagOption) => ({ id: tag.id, ontologyword: tag.ontologyword }));
-      initialReduxState.notification.notificationExtra.tagOptions = tagOptions;
-    }
-  }
 
   return {
     props: {
