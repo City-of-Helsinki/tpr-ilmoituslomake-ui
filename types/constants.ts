@@ -75,6 +75,7 @@ export const MAP_INITIAL_ZOOM = 13;
 export const MAP_MIN_ZOOM = 10;
 export const MAP_MAX_ZOOM = 18;
 export const SEARCH_URL = "https://api.hel.fi/servicemap/v2/search/?format=json";
+export const NEIGHBOURHOOD_URL = "https://api.hel.fi/servicemap/v2/administrative_division/?type=neighborhood";
 
 export const CLEAR_STATE = "CLEAR_STATE";
 export const SET_PAGE = "SET_PAGE";
@@ -167,11 +168,13 @@ export const INITIAL_NOTIFICATION = {
       street: "",
       postal_code: "",
       post_office: "",
+      neighborhood: "",
     },
     sv: {
       street: "",
       postal_code: "",
       post_office: "",
+      neighborhood: "",
     },
   },
   phone: "",
@@ -286,11 +289,13 @@ export const INITIAL_MODERATION_STATUS = {
       street: ModerationStatus.Unknown,
       postal_code: ModerationStatus.Unknown,
       post_office: ModerationStatus.Unknown,
+      neighborhood: ModerationStatus.Unknown,
     },
     sv: {
       street: ModerationStatus.Unknown,
       postal_code: ModerationStatus.Unknown,
       post_office: ModerationStatus.Unknown,
+      neighborhood: ModerationStatus.Unknown,
     },
   },
   phone: ModerationStatus.Unknown,

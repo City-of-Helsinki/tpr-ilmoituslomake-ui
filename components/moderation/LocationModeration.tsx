@@ -17,16 +17,16 @@ const LocationModeration = (): ReactElement => {
   const selectedTask = useSelector((state: RootState) => state.moderation.selectedTask);
   const {
     address: {
-      fi: { street: streetFiSelected, postal_code: postalCodeFiSelected, post_office: postOfficeFiSelected },
-      sv: { street: streetSvSelected, postal_code: postalCodeSvSelected, post_office: postOfficeSvSelected },
+      fi: { street: streetFiSelected, postal_code: postalCodeFiSelected, post_office: postOfficeFiSelected, neighborhood: neighborhoodFiSelected },
+      sv: { street: streetSvSelected, postal_code: postalCodeSvSelected, post_office: postOfficeSvSelected, neighborhood: neighborhoodSvSelected },
     },
   } = selectedTask;
 
   const modifiedTask = useSelector((state: RootState) => state.moderation.modifiedTask);
   const {
     address: {
-      fi: { street: streetFiModified, postal_code: postalCodeFiModified, post_office: postOfficeFiModified },
-      sv: { street: streetSvModified, postal_code: postalCodeSvModified, post_office: postOfficeSvModified },
+      fi: { street: streetFiModified, postal_code: postalCodeFiModified, post_office: postOfficeFiModified, neighborhood: neighborhoodFiModified },
+      sv: { street: streetSvModified, postal_code: postalCodeSvModified, post_office: postOfficeSvModified, neighborhood: neighborhoodSvModified },
     },
   } = modifiedTask;
 
@@ -48,7 +48,7 @@ const LocationModeration = (): ReactElement => {
 
   const updateAddressStatus = (language: string, status: ModerationStatus) => {
     // Update all address fields to the same status
-    dispatchStatus(setModerationAddressStatus(language, { street: status, postal_code: status, post_office: status }));
+    dispatchStatus(setModerationAddressStatus(language, { street: status, postal_code: status, post_office: status, neighborhood: status }));
   };
 
   return (
@@ -116,6 +116,27 @@ const LocationModeration = (): ReactElement => {
             />
           }
         />
+
+        <ModerationSection
+          id="neighborhoodFi"
+          fieldName="fi"
+          selectedValue={neighborhoodFiSelected}
+          modifiedValue={neighborhoodFiModified}
+          status={addressFiStatus}
+          taskType={taskType}
+          modifyButtonLabel={`${i18n.t("moderation.location.address")} ${i18n.t("general.inLanguage.fi")}`}
+          modifyButtonHidden
+          actionButtonHidden
+          changeCallback={(evt: ChangeEvent<HTMLInputElement>) => updateAddress("fi", evt)}
+          statusCallback={updateAddressStatus}
+          ModerationComponent={
+            <TextInput
+              id="neighborhoodFi"
+              label={`${i18n.t("moderation.location.neighborhood.label")} ${i18n.t("general.inLanguage.fi")}`}
+              name="neighborhood"
+            />
+          }
+        />
       </div>
 
       <div className="gridLayoutContainer moderation">
@@ -139,7 +160,6 @@ const LocationModeration = (): ReactElement => {
             />
           }
         />
-
         <ModerationSection
           id="postalCodeSv"
           fieldName="sv"
@@ -160,7 +180,6 @@ const LocationModeration = (): ReactElement => {
             />
           }
         />
-
         <ModerationSection
           id="postalOfficeSv"
           fieldName="sv"
@@ -181,6 +200,26 @@ const LocationModeration = (): ReactElement => {
             />
           }
         />
+        <ModerationSection
+          id="neighborhoodSv"
+          fieldName="sv"
+          selectedValue={neighborhoodSvSelected}
+          modifiedValue={neighborhoodSvModified}
+          status={addressSvStatus}
+          taskType={taskType}
+          modifyButtonLabel={`${i18n.t("moderation.location.address")} ${i18n.t("general.inLanguage.sv")}`}
+          modifyButtonHidden
+          actionButtonHidden
+          changeCallback={(evt: ChangeEvent<HTMLInputElement>) => updateAddress("sv", evt)}
+          statusCallback={updateAddressStatus}
+          ModerationComponent={
+            <TextInput
+              id="neighborhoodSv"
+              label={`${i18n.t("moderation.location.neighborhood.label")} ${i18n.t("general.inLanguage.sv")}`}
+              name="neighborhood"
+            />
+          }
+        />{" "}
       </div>
     </div>
   );

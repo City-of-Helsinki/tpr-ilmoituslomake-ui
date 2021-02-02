@@ -6,6 +6,7 @@ import { LatLngExpression } from "leaflet";
 import { setMapView, setNotificationLocation } from "../../state/actions/notification";
 import { NotificationAction } from "../../state/actions/types";
 import { RootState } from "../../state/reducers";
+import { getNeighborhood } from "../../utils/address";
 import styles from "./Map.module.scss";
 
 const MapWrapper = dynamic(() => import("../common/MapWrapper"), { ssr: false });
@@ -20,6 +21,7 @@ const Map = (): ReactElement => {
 
   const updateLocation = (coordinates: [number, number]) => {
     dispatch(setNotificationLocation(coordinates));
+    getNeighborhood(coordinates[1], coordinates[0], dispatch);
   };
 
   const updateMapView = (center: LatLngExpression, zoom: number) => {

@@ -24,8 +24,8 @@ const Preview = ({ full }: PreviewProps): ReactElement => {
     description: { short: shortDesc, long: longDesc },
     ontology_ids,
     address: {
-      fi: { street: streetFi, postal_code: postalCodeFi, post_office: postOfficeFi },
-      sv: { street: streetSv, postal_code: postalCodeSv, post_office: postOfficeSv },
+      fi: { street: streetFi, postal_code: postalCodeFi, post_office: postOfficeFi, neighborhood: neighborhoodFi },
+      sv: { street: streetSv, postal_code: postalCodeSv, post_office: postOfficeSv, neighborhood: neighborhoodSv },
     },
     location,
     phone,
@@ -106,8 +106,8 @@ const Preview = ({ full }: PreviewProps): ReactElement => {
       <div className={`${styles.gridHeading} ${styles.gridContent}`}>{i18n.t("notification.location.title")}</div>
       <div className={`${styles.gridPlaceInfo} ${styles.gridContent}`}>
         {router.locale !== "sv"
-          ? `${streetFi}${streetFi.length > 0 ? "," : ""} ${postalCodeFi} ${postOfficeFi}`
-          : `${streetSv}${streetSv.length > 0 ? "," : ""} ${postalCodeSv} ${postOfficeSv}`}
+          ? `${streetFi}${streetFi.length > 0 ? "," : ""} ${postalCodeFi} ${postOfficeFi}${neighborhoodFi.length > 0 ? ` (${neighborhoodFi})` : ""}`
+          : `${streetSv}${streetSv.length > 0 ? "," : ""} ${postalCodeSv} ${postOfficeSv}${neighborhoodSv.length > 0 ? ` (${neighborhoodSv})` : ""}`}
       </div>
       <div className={`${styles.gridHeading} ${styles.gridContent}`}>{i18n.t("notification.map.title")}</div>
       <div className={`${styles.gridPlaceInfo} ${styles.gridContent}`}>

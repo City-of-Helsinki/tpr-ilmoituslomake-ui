@@ -39,12 +39,14 @@ export interface NotificationSchema {
       street: string;
       postal_code: string;
       post_office: string;
+      neighborhood: string;
       [k: string]: unknown;
     };
     sv: {
       street: string;
       postal_code: string;
       post_office: string;
+      neighborhood: string;
       [k: string]: unknown;
     };
     [k: string]: unknown;

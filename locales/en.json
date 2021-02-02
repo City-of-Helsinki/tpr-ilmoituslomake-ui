@@ -183,6 +183,9 @@
       },
       "postalOffice": {
         "label": "Postal office"
+      },
+      "neighborhood": {
+        "label": "District"
       }
     },
     "map": {
@@ -433,6 +436,9 @@
       },
       "postalOffice": {
         "label": "Postal office"
+      },
+      "neighborhood": {
+        "label": "District"
       }
     },
     "map": {

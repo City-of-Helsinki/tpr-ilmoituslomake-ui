@@ -4,9 +4,9 @@ import { useRouter } from "next/router";
 import { useI18n } from "next-localization";
 import { TextInput, Button } from "hds-react";
 import { NotificationAction, NotificationValidationAction } from "../../state/actions/types";
-import { setNotificationAddress, setNotificationLocation } from "../../state/actions/notification";
+import { setNotificationAddress } from "../../state/actions/notification";
 import { RootState } from "../../state/reducers";
-import { SEARCH_URL } from "../../types/constants";
+import { geocodeAddress } from "../../utils/address";
 import { isAddressFieldValid } from "../../utils/validation";
 
 const Location = (): ReactElement => {
@@ -18,8 +18,8 @@ const Location = (): ReactElement => {
   const notification = useSelector((state: RootState) => state.notification.notification);
   const {
     address: {
-      fi: { street: streetFi, postal_code: postalCodeFi, post_office: postOfficeFi },
-      sv: { street: streetSv, postal_code: postalCodeSv, post_office: postOfficeSv },
+      fi: { street: streetFi, postal_code: postalCodeFi, post_office: postOfficeFi, neighborhood: neighborhoodFi },
+      sv: { street: streetSv, postal_code: postalCodeSv, post_office: postOfficeSv, neighborhood: neighborhoodSv },
     },
   } = notification;
 
@@ -39,28 +39,11 @@ const Location = (): ReactElement => {
     isAddressFieldValid(language, evt.target.name, notification, dispatchValidation);
   };
 
-  const geocodeAddress = async () => {
+  const searchAddress = () => {
     // The Helsinki API does not use postal code
-    const input = router.locale === "sv" ? `${streetSv} ${postOfficeSv}` : `${streetFi} ${postOfficeFi}`;
-    const language = router.locale === "sv" ? "sv" : "fi";
-
-    const geocodeResponse = await fetch(`${SEARCH_URL}&type=address&input=${input}&language=${language}`);
-    if (geocodeResponse.ok) {
-      const geocodeResult = await geocodeResponse.json();
-
-      console.log("GEOCODE RESPONSE", geocodeResult);
-
-      if (geocodeResult.results && geocodeResult.results.length > 0) {
-        // Use the first result
-        const { location: resultLocation } = geocodeResult.results[0];
-        console.log(resultLocation.coordinates);
-
-        // Set the location in redux state using the geocoded position
-        // Note: this will cause the map to pan to centre on these coordinates
-        // The geocoder returns the coordinates as lon,lat but Leaflet needs them as lat,lon
-        dispatch(setNotificationLocation([resultLocation.coordinates[1], resultLocation.coordinates[0]]));
-      }
-    }
+    const street = router.locale === "sv" ? streetSv : streetFi;
+    const postOffice = router.locale === "sv" ? postOfficeSv : postOfficeFi;
+    geocodeAddress(router.locale, street, postOffice, dispatch);
   };
 
   return (
@@ -170,7 +153,14 @@ const Location = (): ReactElement => {
           />
         </>
       )}
-      <Button variant="secondary" onClick={geocodeAddress}>
+
+      {((router.locale === "sv" && neighborhoodSv) || neighborhoodFi) && (
+        <div className="formInput">{`${i18n.t("notification.location.neighborhood.label")}: ${
+          router.locale === "sv" ? neighborhoodSv : neighborhoodFi
+        }`}</div>
+      )}
+
+      <Button variant="secondary" onClick={searchAddress}>
         {i18n.t("notification.map.geocode")}
       </Button>
     </div>

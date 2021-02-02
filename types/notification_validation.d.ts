@@ -39,11 +39,13 @@ export interface NotificationValidationSchema {
       street: Validation;
       postal_code: Validation;
       post_office: Validation;
+      neighborhood?: Validation;
     };
     sv: {
       street: Validation;
       postal_code: Validation;
       post_office: Validation;
+      neighborhood?: Validation;
     };
   };
   phone: Validation;
