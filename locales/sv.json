@@ -63,8 +63,11 @@
     },
     "footer": {
       "backToTop": "Takaisin ylös",
+      "contact": "Ota yhteyttä",
       "copyright": "Copyright",
-      "rightsReserved": "Kaikki oikeudet pidätetään"
+      "rightsReserved": "Kaikki oikeudet pidätetään",
+      "terms": "Verkkopalvelun käyttöehdot",
+      "accessibility": "Saavutettavuusseloste"
     },
     "message": {
       "notAuthenticated": {

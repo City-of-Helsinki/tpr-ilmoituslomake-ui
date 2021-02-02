@@ -1,13 +1,14 @@
 import React, { ReactElement } from "react";
 import { useI18n } from "next-localization";
 import { Button, IconLinkExternal } from "hds-react";
+import { TERMS_URL } from "../../types/constants";
 import styles from "./Terms.module.scss";
 
 const Terms = (): ReactElement => {
   const i18n = useI18n();
 
   const openTermsOfUse = () => {
-    window.open("https://www.myhelsinki.fi/fi/myhelsinki-places-palvelun-käyttöehdot/", "_blank");
+    window.open(TERMS_URL, "_blank");
   };
 
   return (

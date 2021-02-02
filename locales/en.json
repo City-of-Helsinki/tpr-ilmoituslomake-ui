@@ -63,8 +63,11 @@
     },
     "footer": {
       "backToTop": "Back to top",
+      "contact": "Contact",
       "copyright": "Copyright",
-      "rightsReserved": "All rights reserved"
+      "rightsReserved": "All rights reserved",
+      "terms": "Terms of use",
+      "accessibility": "Accessibility statement"
     },
     "message": {
       "notAuthenticated": {

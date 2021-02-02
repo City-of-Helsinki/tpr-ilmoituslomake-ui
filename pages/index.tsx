@@ -5,7 +5,7 @@ import Link from "next/link";
 import { useI18n } from "next-localization";
 import { Button, IconAngleRight, IconEye, IconLocation, IconPenLine, IconStar, Koros } from "hds-react";
 import { initStore } from "../state/store";
-import { CLEAR_STATE } from "../types/constants";
+import { ACCESSIBILITY_URL, CLEAR_STATE, TERMS_URL } from "../types/constants";
 import i18nLoader from "../utils/i18n";
 import checkUser from "../utils/serverside";
 import Layout from "../components/common/Layout";
@@ -15,6 +15,14 @@ import styles from "./index.module.scss";
 
 const Main = (): ReactElement => {
   const i18n = useI18n();
+
+  const openTermsOfUse = () => {
+    window.open(TERMS_URL, "_blank");
+  };
+
+  const openAccessibilityInfo = () => {
+    window.open(ACCESSIBILITY_URL, "_blank");
+  };
 
   return (
     <Layout>
@@ -30,10 +38,10 @@ const Main = (): ReactElement => {
 
         <div className={styles.infoTextBox}>{i18n.t("notification.index.message")}</div>
         <div className={styles.infoLinkContainer}>
-          <Button variant="supplementary" size="small" iconRight={<IconAngleRight />}>
+          <Button variant="supplementary" size="small" iconRight={<IconAngleRight />} onClick={openTermsOfUse}>
             {i18n.t("notification.index.terms")}
           </Button>
-          <Button variant="supplementary" size="small" iconRight={<IconAngleRight />}>
+          <Button variant="supplementary" size="small" iconRight={<IconAngleRight />} onClick={openAccessibilityInfo}>
             {i18n.t("notification.index.accessibility")}
           </Button>
         </div>

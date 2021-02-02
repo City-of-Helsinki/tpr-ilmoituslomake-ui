@@ -65,6 +65,9 @@ export const MAX_LENGTH_LONG_DESC = 4000;
 export const MAX_LENGTH_PHOTO_DESC = 125;
 export const MAX_PHOTOS = 3;
 export const DATETIME_FORMAT = "D.M.YYYY H:mm";
+export const TERMS_URL = "https://www.myhelsinki.fi/fi/myhelsinki-places-palvelun-käyttöehdot/";
+export const ACCESSIBILITY_URL = "https://www.myhelsinki.fi/fi/saavutettavuusseloste/";
+export const CONTACT_URL = "https://hel.fi/helsinki/fi/kaupunki-ja-hallinto/osallistu-ja-vaikuta/ota-yhteytta/ota-yhteytta/";
 
 export const MAP_TILES_URL = "https://tiles.hel.ninja/styles/hel-osm-bright/{z}/{x}/{y}.png";
 export const MAP_INITIAL_CENTER = [60.166, 24.942];

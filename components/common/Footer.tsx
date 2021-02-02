@@ -1,6 +1,7 @@
 import React, { ReactElement } from "react";
 import { useI18n } from "next-localization";
-import { Footer as HdsFooter } from "hds-react";
+import { Footer as HdsFooter, IconArrowRight, IconArrowUp } from "hds-react";
+import { ACCESSIBILITY_URL, CONTACT_URL, TERMS_URL } from "../../types/constants";
 import styles from "./Footer.module.scss";
 
 const Footer = (): ReactElement => {
@@ -8,8 +9,14 @@ const Footer = (): ReactElement => {
 
   return (
     <HdsFooter korosType="basic" className={styles.footer} title={i18n.t("notification.title")}>
-      <HdsFooter.Utilities backToTopLabel={i18n.t("notification.footer.backToTop")} />
-      <HdsFooter.Base copyrightHolder={i18n.t("notification.footer.copyright")} copyrightText={i18n.t("notification.footer.rightsReserved")} />
+      <HdsFooter.Navigation variant="minimal">
+        <HdsFooter.Item as="a" href={CONTACT_URL} label={i18n.t("notification.footer.contact")} icon={<IconArrowRight />} />
+        <HdsFooter.Item as="a" href="#content" label={i18n.t("notification.footer.backToTop")} icon={<IconArrowUp />} />
+      </HdsFooter.Navigation>
+      <HdsFooter.Base copyrightHolder={i18n.t("notification.footer.copyright")} copyrightText={i18n.t("notification.footer.rightsReserved")}>
+        <HdsFooter.Item as="a" href={TERMS_URL} label={i18n.t("notification.footer.terms")} />
+        <HdsFooter.Item as="a" href={ACCESSIBILITY_URL} label={i18n.t("notification.footer.accessibility")} />
+      </HdsFooter.Base>
     </HdsFooter>
   );
 };
