@@ -43,6 +43,7 @@ const Preview = ({ full }: PreviewProps): ReactElement => {
   return (
     <div className={`gridLayoutContainer ${styles.preview}`}>
       {full && <h3>{i18n.t("notification.preview.title")}</h3>}
+      {!full && <h3>{i18n.t("notification.preview.placeInfo")}</h3>}
 
       <h4 className={`${styles.gridHeading} ${styles.gridHeader}`}>{i18n.t("notification.preview.heading")}</h4>
       <h4 className={`${styles.gridPlaceInfo} ${styles.gridHeader}`}>{i18n.t("notification.preview.placeInfo")}</h4>

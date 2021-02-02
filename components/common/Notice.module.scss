@@ -26,10 +26,11 @@
 
   .gridButton {
     grid-column: span 3;
-    justify-self: end;
+    justify-self: stretch;
 
     button {
       background-color: $color-white;
+      width: 100%;
     }
   }
 }
