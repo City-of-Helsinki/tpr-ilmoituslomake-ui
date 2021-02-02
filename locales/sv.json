@@ -17,6 +17,7 @@
     "title": "My Helsinki Places",
     "headerNew": "Ilmoita uusi kohde",
     "headerModify": "Muokkaa",
+    "navigationFooter": "Navigointi",
     "mandatory": "Pakolliset tiedot on merkitty tähdellä *",
     "button": {
       "search": "Hae",

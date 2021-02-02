@@ -49,7 +49,7 @@ const NotificationFooter = (): ReactElement => {
   };
 
   return (
-    <nav className={styles.notificationFooter}>
+    <nav className={styles.notificationFooter} aria-label={i18n.t("notification.navigationFooter")}>
       {currentPage === 1 && (
         <Button variant="secondary" iconLeft={<IconArrowLeft />} onClick={cancelNotification}>
           {i18n.t("notification.button.cancel")}
