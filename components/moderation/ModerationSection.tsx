@@ -17,6 +17,7 @@ interface ModerationSectionProps {
   modifyButtonHidden?: boolean;
   actionButtonHidden?: boolean;
   forceModifiedDisabled?: boolean;
+  bypassModifiedFieldCheck?: boolean;
   changeCallback:
     | ((evt: ChangeEvent<HTMLInputElement>) => void)
     | ((evt: ChangeEvent<HTMLTextAreaElement>) => void)
@@ -39,6 +40,7 @@ const ModerationSection = ({
   modifyButtonHidden,
   actionButtonHidden,
   forceModifiedDisabled,
+  bypassModifiedFieldCheck,
   changeCallback,
   statusCallback,
   ModerationComponent,
@@ -63,6 +65,11 @@ const ModerationSection = ({
   }
 
   if (taskType === TaskType.NewPlace || taskType === TaskType.PlaceChange) {
+    // Enable modified fields to be edited by default if they have a value
+    if (status === ModerationStatus.Unknown && modifiedValue && modifiedValue.length > 0 && !bypassModifiedFieldCheck) {
+      statusCallback(fieldName, ModerationStatus.Edited);
+    }
+
     return (
       <>
         {selectedHeaderText && <h4 className="gridColumn1 moderation">{selectedHeaderText}</h4>}
@@ -110,6 +117,7 @@ ModerationSection.defaultProps = {
   modifyButtonHidden: false,
   actionButtonHidden: false,
   forceModifiedDisabled: false,
+  bypassModifiedFieldCheck: false,
   isSelectionGroupWrapper: false,
 };
 
