@@ -43,6 +43,7 @@ const TaskHeader = (): ReactElement => {
     moderator: { fullName: moderatorName },
   } = moderationExtra;
   const pageStatus = useSelector((state: RootState) => state.moderationStatus.pageStatus);
+  const moderationStatus = useSelector((state: RootState) => state.moderationStatus.moderationStatus);
 
   const [toast, setToast] = useState<Toast>();
   const [confirmRejection, setConfirmRejection] = useState(false);
@@ -68,8 +69,87 @@ const TaskHeader = (): ReactElement => {
     setConfirmDeletion(false);
   };
 
+  const getApprovedValue = (statusToCheck: ModerationStatus, selectedValue: string, modifiedValue: string) => {
+    return statusToCheck === ModerationStatus.Approved ? modifiedValue : selectedValue;
+  };
+
   const saveTask = () => {
-    saveModeration(currentUser, modifiedTaskId, modifiedTask, moderationExtra, router, setToast);
+    // Save the moderated data for new or changed places using approved values only
+    // For tip change requests just use the modified values
+    // TODO - handle images
+    const approvedTask =
+      taskType === TaskType.NewPlace || taskType === TaskType.PlaceChange
+        ? {
+            ...modifiedTask,
+            name: {
+              fi: getApprovedValue(moderationStatus.name.fi, selectedTask.name.fi, modifiedTask.name.fi),
+              sv: getApprovedValue(moderationStatus.name.sv, selectedTask.name.sv, modifiedTask.name.sv),
+              en: getApprovedValue(moderationStatus.name.en, selectedTask.name.en, modifiedTask.name.en),
+            },
+            location: moderationStatus.location === ModerationStatus.Approved ? modifiedTask.location : selectedTask.location,
+            description: {
+              short: {
+                fi: getApprovedValue(moderationStatus.description.short.fi, selectedTask.description.short.fi, modifiedTask.description.short.fi),
+                sv: getApprovedValue(moderationStatus.description.short.sv, selectedTask.description.short.sv, modifiedTask.description.short.sv),
+                en: getApprovedValue(moderationStatus.description.short.en, selectedTask.description.short.en, modifiedTask.description.short.en),
+              },
+              long: {
+                fi: getApprovedValue(moderationStatus.description.long.fi, selectedTask.description.long.fi, modifiedTask.description.long.fi),
+                sv: getApprovedValue(moderationStatus.description.long.sv, selectedTask.description.long.sv, modifiedTask.description.long.sv),
+                en: getApprovedValue(moderationStatus.description.long.en, selectedTask.description.long.en, modifiedTask.description.long.en),
+              },
+            },
+            address: {
+              fi: {
+                street: getApprovedValue(moderationStatus.address.fi.street, selectedTask.address.fi.street, modifiedTask.address.fi.street),
+                postal_code: getApprovedValue(
+                  moderationStatus.address.fi.postal_code,
+                  selectedTask.address.fi.postal_code,
+                  modifiedTask.address.fi.postal_code
+                ),
+                post_office: getApprovedValue(
+                  moderationStatus.address.fi.post_office,
+                  selectedTask.address.fi.post_office,
+                  modifiedTask.address.fi.post_office
+                ),
+                neighborhood: getApprovedValue(
+                  moderationStatus.address.fi.neighborhood,
+                  selectedTask.address.fi.neighborhood,
+                  modifiedTask.address.fi.neighborhood
+                ),
+              },
+              sv: {
+                street: getApprovedValue(moderationStatus.address.sv.street, selectedTask.address.sv.street, modifiedTask.address.sv.street),
+                postal_code: getApprovedValue(
+                  moderationStatus.address.sv.postal_code,
+                  selectedTask.address.sv.postal_code,
+                  modifiedTask.address.sv.postal_code
+                ),
+                post_office: getApprovedValue(
+                  moderationStatus.address.sv.post_office,
+                  selectedTask.address.sv.post_office,
+                  modifiedTask.address.sv.post_office
+                ),
+                neighborhood: getApprovedValue(
+                  moderationStatus.address.sv.neighborhood,
+                  selectedTask.address.sv.neighborhood,
+                  modifiedTask.address.sv.neighborhood
+                ),
+              },
+            },
+            phone: getApprovedValue(moderationStatus.phone, selectedTask.phone, modifiedTask.phone),
+            email: getApprovedValue(moderationStatus.email, selectedTask.email, modifiedTask.email),
+            website: {
+              fi: getApprovedValue(moderationStatus.website.fi, selectedTask.website.fi, modifiedTask.website.fi),
+              sv: getApprovedValue(moderationStatus.website.sv, selectedTask.website.sv, modifiedTask.website.sv),
+              en: getApprovedValue(moderationStatus.website.en, selectedTask.website.en, modifiedTask.website.en),
+            },
+            images: modifiedTask.images,
+            ontology_ids: moderationStatus.ontology_ids === ModerationStatus.Approved ? modifiedTask.ontology_ids : selectedTask.ontology_ids,
+          }
+        : modifiedTask;
+
+    saveModeration(currentUser, modifiedTaskId, approvedTask, moderationExtra, router, setToast);
   };
 
   const rejectTask = () => {

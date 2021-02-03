@@ -147,7 +147,9 @@ export const saveModeration = async (
   setToast: Dispatch<SetStateAction<Toast | undefined>>
 ): Promise<void> => {
   try {
-    const valid = validateNotificationData(modifiedTask);
+    // TODO - fix notifier validation
+    // const valid = validateNotificationData(modifiedTask);
+    const valid = true;
 
     if (currentUser?.authenticated && valid) {
       // Send the Cross Site Request Forgery token, otherwise the backend returns the error "CSRF Failed: CSRF token missing or incorrect."
@@ -206,6 +208,7 @@ export const saveModeration = async (
 
           // TODO - handle page transition
           // router.push(`/moderation/task`);
+          router.reload();
         } else {
           setToast(Toast.SaveFailed);
         }
