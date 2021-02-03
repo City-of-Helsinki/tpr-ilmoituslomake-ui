@@ -19,6 +19,7 @@ import styles from "./[infoId].module.scss";
 const Info = (): ReactElement => {
   const i18n = useI18n();
 
+  const notificationId = useSelector((state: RootState) => state.notification.notificationId);
   const notificationName = useSelector((state: RootState) => state.notification.notificationName);
 
   return (
@@ -27,13 +28,15 @@ const Info = (): ReactElement => {
         <title>{i18n.t("notification.title")}</title>
       </Head>
       <Header />
-      <main id="content" className={styles.content}>
-        <h1>{notificationName}</h1>
+      {notificationId > 0 && (
+        <main id="content" className={styles.content}>
+          <h1>{notificationName}</h1>
 
-        <InfoFooter />
-        <Preview full={false} />
-        <InfoFooter />
-      </main>
+          <InfoFooter />
+          <Preview full={false} />
+          <InfoFooter />
+        </main>
+      )}
     </Layout>
   );
 };

@@ -39,74 +39,76 @@ const NotificationSent = (): ReactElement => {
         <title>{i18n.t("notification.title")}</title>
       </Head>
       <Header />
-      <main id="content" className={styles.content}>
-        <div className={`gridLayoutContainer ${styles.header}`}>
-          <h1>{notificationName}</h1>
-          <div className={styles.gridButton}>
-            <Link href="/notification">
-              <Button variant="secondary">{i18n.t("notification.button.notifyNewPlace")}</Button>
-            </Link>
-          </div>
-        </div>
-
-        <Notice
-          className={styles.sent}
-          icon={<IconCheckCircleFill size="xl" />}
-          titleKey="notification.message.saveSucceeded.title"
-          messageKey="notification.message.saveSucceeded.message"
-        />
-        {/* NOTE: temporarily removed until external opening times application is ready
-        <Notice
-          className={styles.opening}
-          icon={<IconClockPlus size="xl" />}
-          titleKey="notification.message.completeOpeningTimes.title"
-          messageKey="notification.message.completeOpeningTimes.message"
-          button={
-            <Button variant="secondary" iconRight={<IconLinkExternal />}>
-              {i18n.t("notification.button.notifyOpeningTimes")}
-            </Button>
-          }
-        />
-        */}
-        <Notice
-          className={styles.photos}
-          icon={<IconPhotoPlus size="xl" />}
-          titleKey="notification.message.completePhotos.title"
-          messageKey="notification.message.completePhotos.message"
-          button={
-            <Link href={`/notification/${notificationId}`}>
-              <Button variant="secondary">{i18n.t("notification.button.modifyInformation")}</Button>
-            </Link>
-          }
-        />
-
-        <InfoFooter />
-        <Preview />
-        <InfoFooter />
-
-        <Dialog open={modalOpen} onClose={closeModal} aria-labelledby="modal-dialog-title" aria-describedby="modal-dialog-description">
-          <div className={styles.dialog}>
-            <h1 id="modal-dialog-title">{i18n.t("notification.message.sentModal.title")}</h1>
-            <div id="modal-dialog-description" className={styles.message}>
-              {i18n.t("notification.message.sentModal.message")}
-            </div>
-            <div>
-              <Button iconRight={<IconLinkExternal />}>{i18n.t("notification.button.continueToOpeningTimes")}</Button>
-            </div>
-            <div>
-              <Button variant="supplementary" iconRight={<IconInfoCircle />} onClick={closeModal}>
-                {i18n.t("notification.button.noOpeningTimes")}
-              </Button>
-            </div>
-            <div>
-              <Button variant="supplementary" iconRight={<IconInfoCircle />} onClick={closeModal}>
-                {i18n.t("notification.button.continueLater")}
-              </Button>
+      {notificationId > 0 && (
+        <main id="content" className={styles.content}>
+          <div className={`gridLayoutContainer ${styles.header}`}>
+            <h1>{notificationName}</h1>
+            <div className={styles.gridButton}>
+              <Link href="/notification">
+                <Button variant="secondary">{i18n.t("notification.button.notifyNewPlace")}</Button>
+              </Link>
             </div>
           </div>
-          <Koros className={styles.wave} type="storm" />
-        </Dialog>
-      </main>
+
+          <Notice
+            className={styles.sent}
+            icon={<IconCheckCircleFill size="xl" />}
+            titleKey="notification.message.saveSucceeded.title"
+            messageKey="notification.message.saveSucceeded.message"
+          />
+          {/* NOTE: temporarily removed until external opening times application is ready
+          <Notice
+            className={styles.opening}
+            icon={<IconClockPlus size="xl" />}
+            titleKey="notification.message.completeOpeningTimes.title"
+            messageKey="notification.message.completeOpeningTimes.message"
+            button={
+              <Button variant="secondary" iconRight={<IconLinkExternal />}>
+                {i18n.t("notification.button.notifyOpeningTimes")}
+              </Button>
+            }
+          />
+          */}
+          <Notice
+            className={styles.photos}
+            icon={<IconPhotoPlus size="xl" />}
+            titleKey="notification.message.completePhotos.title"
+            messageKey="notification.message.completePhotos.message"
+            button={
+              <Link href={`/notification/${notificationId}`}>
+                <Button variant="secondary">{i18n.t("notification.button.modifyInformation")}</Button>
+              </Link>
+            }
+          />
+
+          <InfoFooter />
+          <Preview />
+          <InfoFooter />
+
+          <Dialog open={modalOpen} onClose={closeModal} aria-labelledby="modal-dialog-title" aria-describedby="modal-dialog-description">
+            <div className={styles.dialog}>
+              <h1 id="modal-dialog-title">{i18n.t("notification.message.sentModal.title")}</h1>
+              <div id="modal-dialog-description" className={styles.message}>
+                {i18n.t("notification.message.sentModal.message")}
+              </div>
+              <div>
+                <Button iconRight={<IconLinkExternal />}>{i18n.t("notification.button.continueToOpeningTimes")}</Button>
+              </div>
+              <div>
+                <Button variant="supplementary" iconRight={<IconInfoCircle />} onClick={closeModal}>
+                  {i18n.t("notification.button.noOpeningTimes")}
+                </Button>
+              </div>
+              <div>
+                <Button variant="supplementary" iconRight={<IconInfoCircle />} onClick={closeModal}>
+                  {i18n.t("notification.button.continueLater")}
+                </Button>
+              </div>
+            </div>
+            <Koros className={styles.wave} type="storm" />
+          </Dialog>
+        </main>
+      )}
     </Layout>
   );
 };
