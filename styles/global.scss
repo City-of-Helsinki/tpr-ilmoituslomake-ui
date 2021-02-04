@@ -1,6 +1,7 @@
-@import "~hds-core/lib/base.css";
-@import "~hds-core/lib/components/all.css";
-@import "~hds-core/lib/icons/all.css";
+// No need to include the core css, since hds-react already imports what it needs
+// @import "~hds-core/lib/base.css";
+// @import "~hds-core/lib/components/all.css";
+// @import "~hds-core/lib/icons/all.css";
 @import "~hds-design-tokens/lib/all.scss";
 @import "mixins";
 @import "leaflet/dist/leaflet.css";
