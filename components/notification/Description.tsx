@@ -9,6 +9,7 @@ import { setNotificationName, setNotificationShortDescription, setNotificationLo
 import { RootState } from "../../state/reducers";
 import { LANGUAGE_OPTIONS } from "../../types/constants";
 import { isNameValid, isShortDescriptionValid, isLongDescriptionValid } from "../../utils/validation";
+import Opening from "./Opening";
 
 const Description = (): ReactElement => {
   const i18n = useI18n();
@@ -145,6 +146,9 @@ const Description = (): ReactElement => {
           ) : null;
         })}
       </div>
+
+      {/* NOTE: temporarily added Opening here with temporary notice until external opening times application is ready */}
+      <Opening temporaryNotice />
     </div>
   );
 };

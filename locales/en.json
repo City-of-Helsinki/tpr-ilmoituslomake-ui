@@ -151,7 +151,7 @@
       },
       "longDescription": {
         "label": "Place's long description",
-        "helperText": "Note that the text cannot be in 'we' form. Length 120 - 4000 characters",
+        "helperText": "Also add information here about opening times. Note that the text cannot be in 'we' form. Length 120 - 4000 characters",
         "tooltipLabel": "More detailed kuvaus",
         "tooltipText": "You can if you want include the short description here and supplement the description according to your needs."
       }
@@ -214,7 +214,7 @@
     "opening": {
       "title": "Opening times",
       "notice": "Opening times are notified after sending.",
-      "temporaryNotice": "Opening times are temporarily notified in the long description below."
+      "temporaryNotice": "Opening times may change often due to the due to exceptional circumstances caused by the coronavirus pandemic. We recommend for the time being to update opening times on your own webpage or social media channels. You can tell customers in the long description field where the current opening times can be checked from."
     },
     "photos": {
       "title": "Photos",

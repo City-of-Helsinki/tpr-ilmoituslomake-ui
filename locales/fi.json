@@ -151,7 +151,7 @@
       },
       "longDescription": {
         "label": "Kohteen pitkä kuvaus",
-        "helperText": "Huomioi, että teksti ei saa olla me-muodossa. Pituus 120 - 4000 merkkiä",
+        "helperText": "Lisää tähän myös tietoa aukiolojoista. Huomioi, että teksti ei saa olla me-muodossa. Pituus 120 - 4000 merkkiä",
         "tooltipLabel": "Laajempi kuvaus",
         "tooltipText": "Voit halutessasi sisällyttää tähän lyhyen kuvauksen ja täydentää kuvausta tarpeesi mukaan."
       }
@@ -214,7 +214,7 @@
     "opening": {
       "title": "Aukioloajat",
       "notice": "Aukioloajat ilmoitetaan lähetyksen jälkeen.",
-      "temporaryNotice": "Aukioloajat väliaikaisesti ilmoitetaan alla olevassa pitkässä kuvauksessa."
+      "temporaryNotice": "Aukioloajat saattavat muuttua usein koronapandemian aiheuttamien poikkeusolojen vuoksi. Suosittelemme toistaiseksi aukioloaikojen päivittämistä omilla verkkosivullanne tai sosiaalisen median kanavissa. Kerrothan asiakkaille Pitkä kuvaus -kohdassa, mistä ajankohtaiset aukioloajat voi tarkistaa."
     },
     "photos": {
       "title": "Kuvat",

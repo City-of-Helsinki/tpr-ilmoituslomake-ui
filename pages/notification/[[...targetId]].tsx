@@ -22,7 +22,7 @@ import Location from "../../components/notification/Location";
 import Map from "../../components/notification/Map";
 import NotificationNotice from "../../components/notification/NotificationNotice";
 import Notifier from "../../components/notification/Notifier";
-import Opening from "../../components/notification/Opening";
+// import Opening from "../../components/notification/Opening";
 import Photos from "../../components/notification/Photos";
 import Preview from "../../components/notification/Preview";
 import Tags from "../../components/notification/Tags";
@@ -53,8 +53,6 @@ const NotificationDetail = (): ReactElement => {
         <main id="content" className={styles.content} ref={ref}>
           <h2>{`${currentPage} ${i18n.t("notification.main.basic")}`}</h2>
           <NotificationNotice messageKey="notification.mandatory" />
-          {/* NOTE: temporarily added Opening here with temporary notice until external opening times application is ready */}
-          <Opening temporaryNotice />
           {!pageValid && <ValidationSummary />}
           <Description />
           <Tags />
