@@ -1,5 +1,6 @@
 import React, { Dispatch, ReactElement } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import { useRouter } from "next/router";
 import { useI18n } from "next-localization";
 import { Koros, Navigation } from "hds-react";
 import { Stepper, Step, StepLabel, CircularProgress } from "@material-ui/core";
@@ -9,15 +10,19 @@ import { NotificationAction } from "../../state/actions/types";
 import { setPage } from "../../state/actions/notification";
 import { RootState } from "../../state/reducers";
 import { MAX_PAGE } from "../../types/constants";
+import { getDisplayName } from "../../utils/helper";
+import { defaultLocale } from "../../utils/i18n";
 import styles from "./NotificationHeader.module.scss";
 
 const NotificationHeader = (): ReactElement => {
   const i18n = useI18n();
   const dispatch = useDispatch<Dispatch<NotificationAction>>();
+  const router = useRouter();
 
   const currentPage = useSelector((state: RootState) => state.notification.page);
   const notificationId = useSelector((state: RootState) => state.notification.notificationId);
-  const notificationName = useSelector((state: RootState) => state.notification.notificationName);
+  const notification = useSelector((state: RootState) => state.notification.notification);
+  const { name: placeName } = notification;
 
   // The header should only be visible for developer usage
   const devHeader = false;
@@ -61,7 +66,11 @@ const NotificationHeader = (): ReactElement => {
       <aside className={styles.header}>
         <StylesProvider injectFirst>
           <div className={styles.tabletContainer}>
-            <h1>{notificationId > 0 ? `${i18n.t("notification.headerModify")}: ${notificationName}` : i18n.t("notification.headerNew")}</h1>
+            <h1>
+              {notificationId > 0
+                ? `${i18n.t("notification.headerModify")}: ${getDisplayName(router.locale || defaultLocale, placeName)}`
+                : i18n.t("notification.headerNew")}
+            </h1>
             <Stepper classes={{ root: styles.stepper }} activeStep={currentPage - 1} alternativeLabel>
               <Step>
                 <StepLabel>{i18n.t("notification.page.basic")}</StepLabel>
@@ -88,7 +97,9 @@ const NotificationHeader = (): ReactElement => {
                 </div>
               </div>
               <div className={styles.mobileHeaderText}>
-                {notificationId > 0 ? `${i18n.t("notification.headerModify")}: ${notificationName}` : i18n.t("notification.headerNew")}
+                {notificationId > 0
+                  ? `${i18n.t("notification.headerModify")}: ${getDisplayName(router.locale || defaultLocale, placeName)}`
+                  : i18n.t("notification.headerNew")}
               </div>
             </div>
             <Koros className={styles.wave} type="basic" flipHorizontal />

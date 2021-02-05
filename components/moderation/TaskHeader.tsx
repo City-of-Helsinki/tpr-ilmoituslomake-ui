@@ -7,6 +7,8 @@ import moment from "moment";
 import { ModerationStatusAction } from "../../state/actions/types";
 import { RootState } from "../../state/reducers";
 import { DATETIME_FORMAT, ModerationStatus, NotifierType, TaskType, Toast } from "../../types/constants";
+import { getDisplayName } from "../../utils/helper";
+import { defaultLocale } from "../../utils/i18n";
 import { rejectModeration, saveModeration } from "../../utils/save";
 import setModerationStatus from "../../utils/status";
 import ModalConfirmation from "../common/ModalConfirmation";
@@ -22,11 +24,7 @@ const TaskHeader = (): ReactElement => {
   const currentUser = useSelector((state: RootState) => state.general.user);
   const selectedTaskId = useSelector((state: RootState) => state.moderation.selectedTaskId);
   const selectedTask = useSelector((state: RootState) => state.moderation.selectedTask);
-  const {
-    name: { fi, sv, en },
-    comments,
-  } = selectedTask;
-  const placeNameSelected = fi ?? sv ?? en;
+  const { name: placeNameSelected, comments } = selectedTask;
 
   const modifiedTaskId = useSelector((state: RootState) => state.moderation.modifiedTaskId);
   const modifiedTask = useSelector((state: RootState) => state.moderation.modifiedTask);
@@ -166,7 +164,7 @@ const TaskHeader = (): ReactElement => {
   return (
     <div className={styles.taskHeader}>
       <h1 className="moderation">
-        {placeNameSelected} ({selectedTaskId})
+        {getDisplayName(router.locale || defaultLocale, placeNameSelected)} ({selectedTaskId})
       </h1>
 
       {(taskType === TaskType.NewPlace || taskType === TaskType.PlaceChange) && (

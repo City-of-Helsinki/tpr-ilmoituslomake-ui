@@ -28,7 +28,6 @@ export interface NotificationState {
   placeResults: NotificationPlaceResult[];
   tip: ChangeRequestSchema;
   notificationId: number;
-  notificationName: string;
   notification: NotificationSchema;
   notificationExtra: NotificationExtra;
 }

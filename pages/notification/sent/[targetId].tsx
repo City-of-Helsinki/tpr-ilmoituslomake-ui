@@ -3,6 +3,7 @@ import { useSelector } from "react-redux";
 import { GetServerSideProps } from "next";
 import Head from "next/head";
 import Link from "next/link";
+import { useRouter } from "next/router";
 import { useI18n } from "next-localization";
 import { Button, IconCheckCircleFill, IconInfoCircle, IconLinkExternal, IconPhotoPlus, Koros } from "hds-react";
 import { Dialog } from "@material-ui/core";
@@ -10,9 +11,10 @@ import { RootState } from "../../../state/reducers";
 import { initStore } from "../../../state/store";
 import { CLEAR_STATE, INITIAL_NOTIFICATION } from "../../../types/constants";
 import { NotificationSchema } from "../../../types/notification_schema";
-import i18nLoader from "../../../utils/i18n";
+import i18nLoader, { defaultLocale } from "../../../utils/i18n";
 import { getOrigin } from "../../../utils/request";
-import { checkUser, getTags } from "../../../utils/serverside";
+import { checkUser, getPreviousInputLanguages, getTags } from "../../../utils/serverside";
+import { getDisplayName } from "../../../utils/helper";
 import Layout from "../../../components/common/Layout";
 import Header from "../../../components/common/Header";
 import Notice from "../../../components/common/Notice";
@@ -22,9 +24,11 @@ import styles from "./[targetId].module.scss";
 
 const NotificationSent = (): ReactElement => {
   const i18n = useI18n();
+  const router = useRouter();
 
   const notificationId = useSelector((state: RootState) => state.notification.notificationId);
-  const notificationName = useSelector((state: RootState) => state.notification.notificationName);
+  const notification = useSelector((state: RootState) => state.notification.notification);
+  const { name: placeName } = notification;
 
   // NOTE: temporarily set to false until external opening times application is ready
   const [modalOpen, setModalOpen] = useState(false);
@@ -42,7 +46,7 @@ const NotificationSent = (): ReactElement => {
       {notificationId > 0 && (
         <main id="content" className={styles.content}>
           <div className={`gridLayoutContainer ${styles.header}`}>
-            <h1>{notificationName}</h1>
+            <h1>{getDisplayName(router.locale || defaultLocale, placeName)}</h1>
             <div className={styles.gridButton}>
               <Link href="/notification">
                 <Button variant="secondary">{i18n.t("notification.button.notifyNewPlace")}</Button>
@@ -145,7 +149,6 @@ export const getServerSideProps: GetServerSideProps = async ({ req, res, resolve
         initialReduxState.notification = {
           ...initialReduxState.notification,
           notificationId: targetResult.id,
-          notificationName: targetResult.data.name.fi || targetResult.data.name.sv || targetResult.data.name.en,
           notification: {
             ...initialReduxState.notification.notification,
             ...dataToUse,
@@ -153,6 +156,7 @@ export const getServerSideProps: GetServerSideProps = async ({ req, res, resolve
           },
           notificationExtra: {
             ...initialReduxState.notification.notificationExtra,
+            inputLanguages: getPreviousInputLanguages(defaultLocale, targetResult.data.name),
             photos: images.map((image) => {
               return {
                 uuid: image.uuid ?? "",

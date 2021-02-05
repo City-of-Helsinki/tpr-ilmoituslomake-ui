@@ -47,7 +47,6 @@ const initialState: NotificationState = {
     user_details: "",
   },
   notificationId: 0,
-  notificationName: "",
   notification: { ...INITIAL_NOTIFICATION, location: [0, 0] },
   notificationExtra: INITIAL_NOTIFICATION_EXTRA,
 };

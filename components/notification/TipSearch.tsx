@@ -7,9 +7,10 @@ import { NotificationAction, NotificationValidationAction } from "../../state/ac
 import { setNotificationTip } from "../../state/actions/notification";
 import { RootState } from "../../state/reducers";
 import { NotificationPlaceResult, OptionType } from "../../types/general";
+import { getDisplayName } from "../../utils/helper";
 import { defaultLocale } from "../../utils/i18n";
-import styles from "./TipSearch.module.scss";
 import { isTipFieldValid } from "../../utils/validation";
+import styles from "./TipSearch.module.scss";
 
 const TipSearch = (): ReactElement => {
   const i18n = useI18n();
@@ -55,11 +56,11 @@ const TipSearch = (): ReactElement => {
           setPlaceResults(
             placeResult.results
               .sort((a: NotificationPlaceResult, b: NotificationPlaceResult) => {
-                const nameA = (a.data.name[router.locale || defaultLocale] as string) ?? "";
-                const nameB = (b.data.name[router.locale || defaultLocale] as string) ?? "";
+                const nameA = getDisplayName(router.locale || defaultLocale, a.data.name);
+                const nameB = getDisplayName(router.locale || defaultLocale, b.data.name);
                 return nameA.localeCompare(nameB);
               })
-              .map((result) => ({ id: result.id, label: result.data.name[router.locale || defaultLocale] as string }))
+              .map((result) => ({ id: result.id, label: getDisplayName(router.locale || defaultLocale, result.data.name) }))
           );
         }
       }

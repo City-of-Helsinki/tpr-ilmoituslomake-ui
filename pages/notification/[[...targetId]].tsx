@@ -10,7 +10,7 @@ import { NotificationSchema } from "../../types/notification_schema";
 import { PhotoValidation } from "../../types/notification_validation";
 import i18nLoader, { defaultLocale } from "../../utils/i18n";
 import { getOrigin } from "../../utils/request";
-import { checkUser, getTags } from "../../utils/serverside";
+import { checkUser, getPreviousInputLanguages, getTags } from "../../utils/serverside";
 import Layout from "../../components/common/Layout";
 import NotificationHeader from "../../components/notification/NotificationHeader";
 import NotificationFooter from "../../components/notification/NotificationFooter";
@@ -110,10 +110,9 @@ export const getServerSideProps: GetServerSideProps = async ({ req, res, resolve
     initialReduxState.general.user = user;
   }
 
-  initialReduxState.notification.notificationExtra.tagOptions = await getTags(req);
-
-  // TODO - determine previously selected input languages if possible
+  // Note: the previously selected input languages are determined after fetching the data below
   initialReduxState.notification.notificationExtra.inputLanguages = [locale || defaultLocale];
+  initialReduxState.notification.notificationExtra.tagOptions = await getTags(req);
 
   // Try to fetch the notification details for the specified id
   if (params) {
@@ -131,7 +130,6 @@ export const getServerSideProps: GetServerSideProps = async ({ req, res, resolve
         initialReduxState.notification = {
           ...initialReduxState.notification,
           notificationId: targetResult.id,
-          notificationName: targetResult.data.name.fi || targetResult.data.name.sv || targetResult.data.name.en,
           notification: {
             ...initialReduxState.notification.notification,
             ...dataToUse,
@@ -139,6 +137,7 @@ export const getServerSideProps: GetServerSideProps = async ({ req, res, resolve
           },
           notificationExtra: {
             ...initialReduxState.notification.notificationExtra,
+            inputLanguages: getPreviousInputLanguages(locale || defaultLocale, targetResult.data.name),
             photos: images.map((image) => {
               return {
                 uuid: image.uuid ?? "",

@@ -6,6 +6,7 @@ import { useI18n } from "next-localization";
 import { Button, IconAngleRight, IconLocation, IconStarFill } from "hds-react";
 import { RootState } from "../../state/reducers";
 import { NotificationPlaceResult } from "../../types/general";
+import { getDisplayName } from "../../utils/helper";
 import { defaultLocale } from "../../utils/i18n";
 import Notice from "../common/Notice";
 import styles from "./PlaceResults.module.scss";
@@ -22,13 +23,13 @@ const PlaceResults = ({ showOwnPlaces }: PlaceResultsProps): ReactElement => {
 
   return (
     <div className={`formSection ${styles.placeResults}`}>
-      <h3>{`${i18n.t("notification.placeResults.found")} ${placeResults.length} ${i18n.t("notification.placeResults.places")}`}</h3>
+      <h2>{`${i18n.t("notification.placeResults.found")} ${placeResults.length} ${i18n.t("notification.placeResults.places")}`}</h2>
 
       <div className={`gridLayoutContainer ${styles.results}`}>
         {placeResults
           .sort((a: NotificationPlaceResult, b: NotificationPlaceResult) => {
-            const nameA = (a.data.name[router.locale || defaultLocale] as string) ?? "";
-            const nameB = (b.data.name[router.locale || defaultLocale] as string) ?? "";
+            const nameA = getDisplayName(router.locale || defaultLocale, a.data.name);
+            const nameB = getDisplayName(router.locale || defaultLocale, b.data.name);
             return nameA.localeCompare(nameB);
           })
           .map((result) => {
@@ -48,7 +49,7 @@ const PlaceResults = ({ showOwnPlaces }: PlaceResultsProps): ReactElement => {
                 <div className={`${styles.gridContent} ${styles.firstColumn} ${styles.gridButton}`}>
                   <Link href={`/notification/info/${id}`}>
                     <Button variant="supplementary" size="small" iconRight={<IconAngleRight />}>
-                      {name[router.locale || defaultLocale] as string}
+                      {getDisplayName(router.locale || defaultLocale, name)}
                     </Button>
                   </Link>
                 </div>

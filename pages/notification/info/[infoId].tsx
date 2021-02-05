@@ -2,14 +2,16 @@ import React, { ReactElement } from "react";
 import { useSelector } from "react-redux";
 import { GetServerSideProps } from "next";
 import Head from "next/head";
+import { useRouter } from "next/router";
 import { useI18n } from "next-localization";
 import { RootState } from "../../../state/reducers";
 import { initStore } from "../../../state/store";
 import { CLEAR_STATE, INITIAL_NOTIFICATION } from "../../../types/constants";
 import { NotificationSchema } from "../../../types/notification_schema";
-import i18nLoader from "../../../utils/i18n";
+import { getDisplayName } from "../../../utils/helper";
+import i18nLoader, { defaultLocale } from "../../../utils/i18n";
 import { getOrigin } from "../../../utils/request";
-import { checkUser, getTags } from "../../../utils/serverside";
+import { checkUser, getPreviousInputLanguages, getTags } from "../../../utils/serverside";
 import Layout from "../../../components/common/Layout";
 import Header from "../../../components/common/Header";
 import Preview from "../../../components/notification/Preview";
@@ -18,9 +20,11 @@ import styles from "./[infoId].module.scss";
 
 const Info = (): ReactElement => {
   const i18n = useI18n();
+  const router = useRouter();
 
   const notificationId = useSelector((state: RootState) => state.notification.notificationId);
-  const notificationName = useSelector((state: RootState) => state.notification.notificationName);
+  const notification = useSelector((state: RootState) => state.notification.notification);
+  const { name: placeName } = notification;
 
   return (
     <Layout>
@@ -30,7 +34,7 @@ const Info = (): ReactElement => {
       <Header />
       {notificationId > 0 && (
         <main id="content" className={styles.content}>
-          <h1>{notificationName}</h1>
+          <h1>{getDisplayName(router.locale || defaultLocale, placeName)}</h1>
 
           <InfoFooter />
           <Preview full={false} />
@@ -73,7 +77,6 @@ export const getServerSideProps: GetServerSideProps = async ({ req, res, resolve
         initialReduxState.notification = {
           ...initialReduxState.notification,
           notificationId: targetResult.id,
-          notificationName: targetResult.data.name.fi || targetResult.data.name.sv || targetResult.data.name.en,
           notification: {
             ...initialReduxState.notification.notification,
             ...dataToUse,
@@ -81,6 +84,7 @@ export const getServerSideProps: GetServerSideProps = async ({ req, res, resolve
           },
           notificationExtra: {
             ...initialReduxState.notification.notificationExtra,
+            inputLanguages: getPreviousInputLanguages(defaultLocale, targetResult.data.name),
             photos: images.map((image) => {
               return {
                 uuid: image.uuid ?? "",

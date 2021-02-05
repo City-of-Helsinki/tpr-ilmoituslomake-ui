@@ -1,6 +1,7 @@
 // NOTE: These functions should only be used during server-side rendering
 
 import { IncomingMessage, ServerResponse } from "http";
+import { LANGUAGE_OPTIONS } from "../types/constants";
 import { TagOption, User } from "../types/general";
 import { getOrigin } from "./request";
 
@@ -65,4 +66,15 @@ export const getTags = async (req: IncomingMessage): Promise<TagOption[]> => {
     return tagResult;
   }
   return [];
+};
+
+export const getPreviousInputLanguages = (locale: string, name: { [key: string]: unknown }): string[] => {
+  // Determine the previously selected input languages using the supplied place names, which are mandatory for selected input languages
+  // Also add the current locale in case it's different from the place names, and remove duplicates from the final array
+  return LANGUAGE_OPTIONS.reduce(
+    (acc, language) => {
+      return name[language] && (name[language] as string).length > 0 ? [...acc, language] : acc;
+    },
+    [locale]
+  ).filter((v, i, a) => a.indexOf(v) === i);
 };
