@@ -88,7 +88,7 @@ const NotificationDetail = (): ReactElement => {
           <Comments />
           <Terms />
           <NotificationFooter />
-          <Preview />
+          <Preview includeNotifier />
         </main>
       )}
       <NotificationFooter />

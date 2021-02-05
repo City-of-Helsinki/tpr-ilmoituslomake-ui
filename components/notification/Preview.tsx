@@ -12,9 +12,10 @@ const MapWrapper = dynamic(() => import("../common/MapWrapper"), { ssr: false })
 
 interface PreviewProps {
   full?: boolean;
+  includeNotifier?: boolean;
 }
 
-const Preview = ({ full }: PreviewProps): ReactElement => {
+const Preview = ({ full, includeNotifier }: PreviewProps): ReactElement => {
   const i18n = useI18n();
   const router = useRouter();
 
@@ -86,7 +87,7 @@ const Preview = ({ full }: PreviewProps): ReactElement => {
           ))}
       </div>
 
-      {full && (
+      {full && includeNotifier && (
         <>
           <div className={`${styles.gridHeading} ${styles.gridContent}`}>{i18n.t("notification.notifier.notifierType")}</div>
           <div className={`${styles.gridPlaceInfo} ${styles.gridContent}`}>
@@ -178,6 +179,7 @@ const Preview = ({ full }: PreviewProps): ReactElement => {
 
 Preview.defaultProps = {
   full: true,
+  includeNotifier: false,
 };
 
 export default Preview;
