@@ -48,21 +48,23 @@ const Description = (): ReactElement => {
 
   // Functions for validating values and storing the results in redux state
   const validateName = (evt: ChangeEvent<HTMLInputElement>) => {
+    dispatch(setNotificationName({ [evt.target.name]: (placeName[evt.target.name] as string).trim() }));
     isNameValid(evt.target.name, notification, dispatchValidation);
   };
 
   const validateShortDescription = (evt: ChangeEvent<HTMLTextAreaElement>) => {
+    dispatch(setNotificationShortDescription({ [evt.target.name]: (shortDesc[evt.target.name] as string).trim() }));
     isShortDescriptionValid(evt.target.name, notification, dispatchValidation);
 
     // Also update the long description if it's empty to help the user
     if ((longDesc[evt.target.name] as string).length === 0) {
-      dispatch(setNotificationLongDescription({ [evt.target.name]: evt.target.value }));
-
+      dispatch(setNotificationLongDescription({ [evt.target.name]: (shortDesc[evt.target.name] as string).trim() }));
       isLongDescriptionValid(evt.target.name, notification, dispatchValidation);
     }
   };
 
   const validateLongDescription = (evt: ChangeEvent<HTMLTextAreaElement>) => {
+    dispatch(setNotificationLongDescription({ [evt.target.name]: (longDesc[evt.target.name] as string).trim() }));
     isLongDescriptionValid(evt.target.name, notification, dispatchValidation);
   };
 

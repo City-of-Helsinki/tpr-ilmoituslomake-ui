@@ -27,6 +27,7 @@ const Links = (): ReactElement => {
   };
 
   const validateWebsite = (evt: ChangeEvent<HTMLInputElement>) => {
+    dispatch(setNotificationLink({ [evt.target.name]: (website[evt.target.name] as string).trim() }));
     isWebsiteValid(evt.target.name, notification, dispatchValidation);
   };
 

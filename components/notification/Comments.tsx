@@ -18,6 +18,10 @@ const Comments = (): ReactElement => {
     dispatch(setNotificationComments(evt.target.value));
   };
 
+  const validateComments = () => {
+    dispatch(setNotificationComments(comments.trim()));
+  };
+
   return (
     <div className={`formSection ${styles.comments}`}>
       <TextArea
@@ -28,6 +32,7 @@ const Comments = (): ReactElement => {
         name="comments"
         value={comments}
         onChange={updateComments}
+        onBlur={validateComments}
       />
     </div>
   );

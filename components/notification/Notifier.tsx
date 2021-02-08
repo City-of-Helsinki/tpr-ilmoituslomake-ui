@@ -28,6 +28,7 @@ const Notifier = (): ReactElement => {
   };
 
   const validateNotifier = (evt: ChangeEvent<HTMLInputElement>) => {
+    dispatch(setNotificationNotifier({ [evt.target.name]: (notification.notifier[evt.target.name] as string).trim() }));
     isNotifierFieldValid(evt.target.name, notification, dispatchValidation);
   };
 

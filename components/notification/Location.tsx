@@ -36,6 +36,11 @@ const Location = (): ReactElement => {
   };
 
   const validateAddress = (language: string, evt: ChangeEvent<HTMLInputElement>) => {
+    dispatch(
+      setNotificationAddress(language, {
+        [evt.target.name]: ((notification.address[language] as { [k: string]: unknown })[evt.target.name] as string).trim(),
+      })
+    );
     isAddressFieldValid(language, evt.target.name, notification, dispatchValidation);
   };
 

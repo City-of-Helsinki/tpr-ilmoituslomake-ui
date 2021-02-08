@@ -76,14 +76,22 @@ const Photos = (): ReactElement => {
   };
 
   const validateUrl = (index: number) => {
+    dispatch(setNotificationPhoto(index, { ...photos[index], url: photos[index].url.trim() }));
     isPhotoFieldValid(index, "url", notificationExtra, dispatchValidation);
   };
 
   const validatePhoto = (index: number, evt: ChangeEvent<HTMLInputElement>) => {
+    dispatch(setNotificationPhoto(index, { ...photos[index], [evt.target.name]: (photos[index][evt.target.name] as string).trim() }));
     isPhotoFieldValid(index, evt.target.name, notificationExtra, dispatchValidation);
   };
 
   const validatePhotoAltText = (index: number, evt: ChangeEvent<HTMLTextAreaElement>) => {
+    dispatch(
+      setNotificationPhoto(index, {
+        ...photos[index],
+        altText: { ...photos[index].altText, [evt.target.name]: (photos[index].altText[evt.target.name] as string).trim() },
+      })
+    );
     isPhotoAltTextValid(index, evt.target.name, notificationExtra, dispatchValidation);
   };
 

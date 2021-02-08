@@ -23,6 +23,7 @@ const Contact = (): ReactElement => {
   };
 
   const validateContact = (evt: ChangeEvent<HTMLInputElement>) => {
+    dispatch(setNotificationContact({ [evt.target.name]: evt.target.name === "email" ? email.trim() : phone.trim() }));
     isContactFieldValid(evt.target.name, notification, dispatchValidation);
   };
 
