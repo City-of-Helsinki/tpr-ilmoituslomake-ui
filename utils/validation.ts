@@ -27,8 +27,9 @@ const isValid = (schema: StringSchema<string | undefined> | NumberSchema<number 
   let valid = true;
   let message;
   try {
-    const validationResult = schema.validateSync(fieldValue);
-    valid = validationResult === fieldValue;
+    const fieldValueTrimmed = typeof fieldValue === "string" ? fieldValue.trim() : fieldValue;
+    const validationResult = schema.validateSync(fieldValueTrimmed);
+    valid = validationResult === fieldValueTrimmed;
     message = !valid ? "notification.message.fieldOther" : undefined;
   } catch (err) {
     valid = false;

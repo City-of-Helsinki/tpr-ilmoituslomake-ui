@@ -29,10 +29,10 @@ export const geocodeAddress = async (
   dispatch: Dispatch<NotificationAction>
 ): Promise<void> => {
   // The Helsinki API does not use postal code
-  const input = `${street} ${postOffice}`;
+  const input = `${street.trim()} ${postOffice.trim()}`;
   const language = locale === "sv" ? "sv" : "fi";
 
-  const geocodeResponse = await fetch(`${SEARCH_URL}&type=address&input=${input}&language=${language}`);
+  const geocodeResponse = await fetch(`${SEARCH_URL}&type=address&input=${input.trim()}&language=${language}`);
   if (geocodeResponse.ok) {
     const geocodeResult = await geocodeResponse.json();
 

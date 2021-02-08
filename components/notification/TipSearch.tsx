@@ -45,8 +45,8 @@ const TipSearch = (): ReactElement => {
     setPlaceResults([emptyOption]);
     selectPlace(emptyOption);
 
-    if (placeName.length > 0) {
-      const placeResponse = await fetch(`/api/notification/list/?search=${placeName}`);
+    if (placeName.trim().length > 0) {
+      const placeResponse = await fetch(`/api/notification/list/?search=${placeName.trim()}`);
       if (placeResponse.ok) {
         const placeResult = await (placeResponse.json() as Promise<{ results: NotificationPlaceResult[] }>);
 

@@ -28,7 +28,7 @@ const PlaceSearch = ({ showOwnPlaces }: PlaceSearchProps): ReactElement => {
   };
 
   const searchPlaces = async () => {
-    const placeResponse = await fetch(`/api/notification/list/?search=${placeName}`);
+    const placeResponse = await fetch(`/api/notification/list/?search=${placeName.trim()}`);
     if (placeResponse.ok) {
       const placeResult = await (placeResponse.json() as Promise<{ results: NotificationPlaceResult[] }>);
 

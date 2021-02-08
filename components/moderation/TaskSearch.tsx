@@ -43,7 +43,7 @@ const TaskSearch = (): ReactElement => {
 
   const searchTasks = async () => {
     const searchCategory = taskType !== TaskType.Unknown ? `&category=${getTaskCategoryFromType(taskType)}` : "";
-    const taskResponse = await fetch(`/api/moderation/todos/find/?search=${placeName}${searchCategory}`);
+    const taskResponse = await fetch(`/api/moderation/todos/find/?search=${placeName.trim()}${searchCategory}`);
     if (taskResponse.ok) {
       const taskResult = await (taskResponse.json() as Promise<{ results: ModerationTodoResult[] }>);
 
