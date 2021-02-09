@@ -114,7 +114,11 @@ export interface ModerationTodoResult {
   id: number;
   target: {
     id: number;
-    name: string;
+    name: {
+      fi: string;
+      sv: string;
+      en: string;
+    };
   };
   category: string;
   item_type: string;

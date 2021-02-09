@@ -1,16 +1,20 @@
 import React, { ReactElement, Fragment, useEffect, useState } from "react";
 import Link from "next/link";
+import { useRouter } from "next/router";
 import { useI18n } from "next-localization";
 import { Button, IconPen } from "hds-react";
 import moment from "moment";
 import { DATETIME_FORMAT, TaskType } from "../../types/constants";
 import { ModerationTodoResult } from "../../types/general";
 import { getTaskStatus, getTaskType } from "../../utils/conversion";
+import { getDisplayName } from "../../utils/helper";
+import { defaultLocale } from "../../utils/i18n";
 import TaskStatusLabel from "./TaskStatusLabel";
 import styles from "./NewTasks.module.scss";
 
 const NewTasks = (): ReactElement => {
   const i18n = useI18n();
+  const router = useRouter();
 
   const [init, setInit] = useState<boolean>(true);
   const [taskResults, setTaskResults] = useState<ModerationTodoResult[]>([]);
@@ -71,7 +75,7 @@ const NewTasks = (): ReactElement => {
                 <div className={`${styles.gridColumn1} ${styles.gridContent} ${styles.gridButton}`}>
                   <Link href={`/moderation/task/${id}`}>
                     <Button variant="supplementary" size="small" iconLeft={<IconPen />}>
-                      {`${name} (${targetId})`}
+                      {`${getDisplayName(router.locale || defaultLocale, name)} (${targetId})`}
                     </Button>
                   </Link>
                 </div>
