@@ -7,7 +7,7 @@ import { TagOption, User } from "../types/general";
 export const getOriginServerSide = (): string => {
   // The server-side calls should use the local backend directly
   // Note: the client-side calls use the full path, which is handled by getOrigin in request.ts
-  return "http://localhost";
+  return "http://localhost:8008";
 };
 
 const redirectToLogin = (req: IncomingMessage, res: ServerResponse, resolvedUrl: string) => {
