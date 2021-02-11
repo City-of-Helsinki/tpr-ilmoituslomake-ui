@@ -17,7 +17,6 @@ const NewTasks = (): ReactElement => {
   const i18n = useI18n();
   const router = useRouter();
 
-  const [init, setInit] = useState<boolean>(true);
   const [taskResults, setTaskResults] = useState<ModerationTodoResult[]>([]);
 
   const searchTasks = async () => {
@@ -45,12 +44,10 @@ const NewTasks = (): ReactElement => {
     }
   };
 
-  useEffect(() => {
-    if (init) {
-      searchTasks();
-    }
-    setInit(false);
-  }, [init, setInit]);
+  // Search all tasks on first render only, using a workaround utilising useEffect with empty dependency array
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  const useMountEffect = (fun: () => void) => useEffect(fun, []);
+  useMountEffect(searchTasks);
 
   return (
     <div className={`formSection ${styles.newTasks}`}>
