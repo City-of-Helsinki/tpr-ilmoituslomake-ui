@@ -31,12 +31,12 @@ const Header = ({ children }: HeaderProps): ReactElement => {
       location: { pathname },
     } = window;
 
-    window.open(`${getOrigin()}/helauth/login/?next=${pathname}`, "_self");
+    window.open(`${getOrigin(router)}/helauth/login/?next=${pathname}`, "_self");
   };
 
   const signOut = async () => {
     // TODO: Improve logout: remove cookies?
-    await fetch("/api/user/logout/");
+    await fetch(`${getOrigin(router)}/api/user/logout`);
     window.open("https://api.hel.fi/sso/openid/end-session/", "_self");
   };
 

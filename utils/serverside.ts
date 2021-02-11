@@ -3,10 +3,15 @@
 import { IncomingMessage, ServerResponse } from "http";
 import { LANGUAGE_OPTIONS } from "../types/constants";
 import { TagOption, User } from "../types/general";
-import { getOrigin } from "./request";
+
+export const getOriginServerSide = (): string => {
+  // The server-side calls should use the local backend directly
+  // Note: the client-side calls use the full path, which is handled by getOrigin in request.ts
+  return "http://localhost";
+};
 
 const redirectToLogin = (req: IncomingMessage, res: ServerResponse, resolvedUrl: string) => {
-  res.writeHead(302, { Location: `${getOrigin(req)}/helauth/login/?next=${resolvedUrl}` });
+  res.writeHead(302, { Location: `${getOriginServerSide()}/helauth/login/?next=${resolvedUrl}` });
   res.end();
 };
 
@@ -18,7 +23,7 @@ export const checkUser = async (
   isModeratorUserRequired?: boolean
 ): Promise<User | undefined> => {
   // Check the current user
-  const userResponse = await fetch(`${getOrigin(req)}/api/user/?format=json`, { headers: { cookie: req.headers.cookie as string } });
+  const userResponse = await fetch(`${getOriginServerSide()}/api/user/?format=json`, { headers: { cookie: req.headers.cookie as string } });
 
   if (!userResponse.ok) {
     if (isLoginRequired || isModeratorUserRequired) {
@@ -58,9 +63,9 @@ export const checkUser = async (
   return { authenticated: true, ...user };
 };
 
-export const getTags = async (req: IncomingMessage): Promise<TagOption[]> => {
+export const getTags = async (): Promise<TagOption[]> => {
   // Note: this currently fetches all tags which may cause performance issues
-  const tagResponse = await fetch(`${getOrigin(req)}/api/ontologywords/?format=json&search=`);
+  const tagResponse = await fetch(`${getOriginServerSide()}/api/ontologywords/?format=json&search=`);
   if (tagResponse.ok) {
     const tagResult = await (tagResponse.json() as Promise<TagOption[]>);
     return tagResult;

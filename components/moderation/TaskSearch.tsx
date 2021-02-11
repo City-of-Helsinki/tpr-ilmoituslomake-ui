@@ -1,5 +1,6 @@
 import React, { Dispatch, ChangeEvent, ReactElement, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import { useRouter } from "next/router";
 import { useI18n } from "next-localization";
 import { Button, Select, TextInput } from "hds-react";
 import moment from "moment";
@@ -9,6 +10,7 @@ import { RootState } from "../../state/reducers";
 import { TaskType } from "../../types/constants";
 import { ModerationTodoResult } from "../../types/general";
 import { getTaskCategoryFromType, getTaskItemTypeFromType, getTaskStatus, getTaskType } from "../../utils/conversion";
+import getOrigin from "../../utils/request";
 import styles from "./TaskSearch.module.scss";
 
 type OptionTypeWithEnumId = {
@@ -19,6 +21,7 @@ type OptionTypeWithEnumId = {
 const TaskSearch = (): ReactElement => {
   const i18n = useI18n();
   const dispatch = useDispatch<Dispatch<ModerationAction>>();
+  const router = useRouter();
 
   const taskSearch = useSelector((state: RootState) => state.moderation.taskSearch);
   const { placeName, taskType } = taskSearch;
@@ -43,7 +46,7 @@ const TaskSearch = (): ReactElement => {
 
   const searchTasks = async () => {
     const searchCategory = taskType !== TaskType.Unknown ? `&category=${getTaskCategoryFromType(taskType)}` : "";
-    const taskResponse = await fetch(`/api/moderation/todos/find/?search=${placeName.trim()}${searchCategory}`);
+    const taskResponse = await fetch(`${getOrigin(router)}/api/moderation/todos/find/?search=${placeName.trim()}${searchCategory}`);
     if (taskResponse.ok) {
       const taskResult = await (taskResponse.json() as Promise<{ results: ModerationTodoResult[] }>);
 

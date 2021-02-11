@@ -1,11 +1,13 @@
 import React, { Dispatch, ChangeEvent, ReactElement } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import { useRouter } from "next/router";
 import { useI18n } from "next-localization";
 import { Button, RadioButton, SelectionGroup, TextInput } from "hds-react";
 import { NotificationAction } from "../../state/actions/types";
 import { setNotificationPlaceResults, setNotificationPlaceSearch } from "../../state/actions/notification";
 import { RootState } from "../../state/reducers";
 import { NotificationPlaceResult } from "../../types/general";
+import getOrigin from "../../utils/request";
 import styles from "./PlaceSearch.module.scss";
 
 interface PlaceSearchProps {
@@ -15,6 +17,7 @@ interface PlaceSearchProps {
 const PlaceSearch = ({ showOwnPlaces }: PlaceSearchProps): ReactElement => {
   const i18n = useI18n();
   const dispatch = useDispatch<Dispatch<NotificationAction>>();
+  const router = useRouter();
 
   const placeSearch = useSelector((state: RootState) => state.notification.placeSearch);
   const { placeName, ownPlacesOnly } = placeSearch;
@@ -28,7 +31,7 @@ const PlaceSearch = ({ showOwnPlaces }: PlaceSearchProps): ReactElement => {
   };
 
   const searchPlaces = async () => {
-    const placeResponse = await fetch(`/api/notification/list/?search=${placeName.trim()}`);
+    const placeResponse = await fetch(`${getOrigin(router)}/api/notification/list/?search=${placeName.trim()}`);
     if (placeResponse.ok) {
       const placeResult = await (placeResponse.json() as Promise<{ results: NotificationPlaceResult[] }>);
 

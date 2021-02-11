@@ -5,6 +5,7 @@ import { NotificationValidationAction } from "../state/actions/types";
 import { Toast } from "../types/constants";
 import { ChangeRequestSchema, ModerationExtra, NotificationExtra, User } from "../types/general";
 import { NotificationSchema } from "../types/notification_schema";
+import getOrigin from "./request";
 import validateNotificationData, { isTipPageValid } from "./validation";
 
 export const saveNotification = async (
@@ -46,7 +47,7 @@ export const saveNotification = async (
 
       console.log("SENDING", postData);
 
-      const createResponse = await fetch("/api/notification/create/", {
+      const createResponse = await fetch(`${getOrigin(router)}/api/notification/create/`, {
         method: "POST",
         // method: notificationId > 0 ? "PUT" : "POST",
         headers: {
@@ -101,7 +102,7 @@ export const saveTip = async (
 
       console.log("SENDING", postData);
 
-      const changeRequestResponse = await fetch("/api/change_request/", {
+      const changeRequestResponse = await fetch(`${getOrigin(router)}/api/change_request/`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -162,7 +163,7 @@ export const saveModeration = async (
       // Check if this task has already been assigned to a moderator
       if (moderatorName.length === 0) {
         // Assign the moderation task to the current user
-        const assignResponse = await fetch(`/api/moderation/assign/${modifiedTaskId}/`, {
+        const assignResponse = await fetch(`${getOrigin(router)}/api/moderation/assign/${modifiedTaskId}/`, {
           method: "PUT",
           headers: {
             "X-CSRFToken": csrftoken as string,
@@ -189,7 +190,7 @@ export const saveModeration = async (
       console.log("SENDING", postData);
 
       // Save the moderation task with the possibly modified data
-      const createResponse = await fetch(`/api/moderation/todos/${modifiedTaskId}/`, {
+      const createResponse = await fetch(`${getOrigin(router)}/api/moderation/todos/${modifiedTaskId}/`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
@@ -249,7 +250,7 @@ export const rejectModeration = async (
       // Check if this task has already been assigned to a moderator
       if (moderatorName.length === 0) {
         // Assign the moderation task to the current user
-        const assignResponse = await fetch(`/api/moderation/assign/${modifiedTaskId}/`, {
+        const assignResponse = await fetch(`${getOrigin(router)}/api/moderation/assign/${modifiedTaskId}/`, {
           method: "PUT",
           headers: {
             "X-CSRFToken": csrftoken as string,
@@ -269,7 +270,7 @@ export const rejectModeration = async (
       }
 
       // Reject the moderation task
-      const rejectResponse = await fetch(`/api/moderation/reject/${modifiedTaskId}/`, {
+      const rejectResponse = await fetch(`${getOrigin(router)}/api/moderation/reject/${modifiedTaskId}/`, {
         method: "DELETE",
         headers: {
           "X-CSRFToken": csrftoken as string,

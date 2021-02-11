@@ -11,8 +11,7 @@ import { ModerationTodoSchema } from "../../../types/general";
 import { PhotoStatus } from "../../../types/moderation_status";
 import { NotificationSchema } from "../../../types/notification_schema";
 import { getTaskStatus, getTaskType } from "../../../utils/conversion";
-import { getOrigin } from "../../../utils/request";
-import { checkUser, getTags } from "../../../utils/serverside";
+import { checkUser, getOriginServerSide, getTags } from "../../../utils/serverside";
 import Layout from "../../../components/common/Layout";
 import ModerationHeader from "../../../components/moderation/ModerationHeader";
 import Collapsible from "../../../components/moderation/Collapsible";
@@ -77,12 +76,14 @@ export const getServerSideProps: GetServerSideProps = async ({ req, res, resolve
     initialReduxState.general.user = user;
   }
 
-  initialReduxState.moderation.moderationExtra.tagOptions = await getTags(req);
+  initialReduxState.moderation.moderationExtra.tagOptions = await getTags();
 
   // Try to fetch the task details for the specified id
   if (params) {
     const { taskId } = params;
-    const taskResponse = await fetch(`${getOrigin(req)}/api/moderation/todos/${taskId}/`, { headers: { cookie: req.headers.cookie as string } });
+    const taskResponse = await fetch(`${getOriginServerSide()}/api/moderation/todos/${taskId}/`, {
+      headers: { cookie: req.headers.cookie as string },
+    });
 
     if (taskResponse.ok) {
       const taskResult = await (taskResponse.json() as Promise<ModerationTodoSchema>);

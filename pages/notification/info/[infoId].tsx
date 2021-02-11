@@ -10,8 +10,7 @@ import { CLEAR_STATE, INITIAL_NOTIFICATION } from "../../../types/constants";
 import { NotificationSchema } from "../../../types/notification_schema";
 import { getDisplayName } from "../../../utils/helper";
 import i18nLoader, { defaultLocale } from "../../../utils/i18n";
-import { getOrigin } from "../../../utils/request";
-import { checkUser, getPreviousInputLanguages, getTags } from "../../../utils/serverside";
+import { checkUser, getOriginServerSide, getPreviousInputLanguages, getTags } from "../../../utils/serverside";
 import Layout from "../../../components/common/Layout";
 import Header from "../../../components/common/Header";
 import Preview from "../../../components/notification/Preview";
@@ -59,12 +58,14 @@ export const getServerSideProps: GetServerSideProps = async ({ req, res, resolve
     initialReduxState.general.user = user;
   }
 
-  initialReduxState.notification.notificationExtra.tagOptions = await getTags(req);
+  initialReduxState.notification.notificationExtra.tagOptions = await getTags();
 
   // Try to fetch the notification details for the specified id
   if (params) {
     const { infoId } = params;
-    const targetResponse = await fetch(`${getOrigin(req)}/api/notification/get/${infoId}/`, { headers: { cookie: req.headers.cookie as string } });
+    const targetResponse = await fetch(`${getOriginServerSide()}/api/notification/get/${infoId}/`, {
+      headers: { cookie: req.headers.cookie as string },
+    });
 
     if (targetResponse.ok) {
       const targetResult = await (targetResponse.json() as Promise<{ id: number; data: NotificationSchema }>);

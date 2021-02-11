@@ -9,8 +9,7 @@ import { CLEAR_STATE, INITIAL_NOTIFICATION } from "../../types/constants";
 import { NotificationSchema } from "../../types/notification_schema";
 import { PhotoValidation } from "../../types/notification_validation";
 import i18nLoader, { defaultLocale } from "../../utils/i18n";
-import { getOrigin } from "../../utils/request";
-import { checkUser, getPreviousInputLanguages, getTags } from "../../utils/serverside";
+import { checkUser, getOriginServerSide, getPreviousInputLanguages, getTags } from "../../utils/serverside";
 import Layout from "../../components/common/Layout";
 import NotificationHeader from "../../components/notification/NotificationHeader";
 import NotificationFooter from "../../components/notification/NotificationFooter";
@@ -112,12 +111,14 @@ export const getServerSideProps: GetServerSideProps = async ({ req, res, resolve
 
   // Note: the previously selected input languages are determined after fetching the data below
   initialReduxState.notification.notificationExtra.inputLanguages = [locale || defaultLocale];
-  initialReduxState.notification.notificationExtra.tagOptions = await getTags(req);
+  initialReduxState.notification.notificationExtra.tagOptions = await getTags();
 
   // Try to fetch the notification details for the specified id
   if (params) {
     const { targetId } = params;
-    const targetResponse = await fetch(`${getOrigin(req)}/api/notification/get/${targetId}/`, { headers: { cookie: req.headers.cookie as string } });
+    const targetResponse = await fetch(`${getOriginServerSide()}/api/notification/get/${targetId}/`, {
+      headers: { cookie: req.headers.cookie as string },
+    });
 
     if (targetResponse.ok) {
       const targetResult = await (targetResponse.json() as Promise<{ id: number; data: NotificationSchema }>);

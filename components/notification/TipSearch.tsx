@@ -9,6 +9,7 @@ import { RootState } from "../../state/reducers";
 import { NotificationPlaceResult, OptionType } from "../../types/general";
 import { getDisplayName } from "../../utils/helper";
 import { defaultLocale } from "../../utils/i18n";
+import getOrigin from "../../utils/request";
 import { isTipFieldValid } from "../../utils/validation";
 import styles from "./TipSearch.module.scss";
 
@@ -46,7 +47,7 @@ const TipSearch = (): ReactElement => {
     selectPlace(emptyOption);
 
     if (placeName.trim().length > 0) {
-      const placeResponse = await fetch(`/api/notification/list/?search=${placeName.trim()}`);
+      const placeResponse = await fetch(`${getOrigin(router)}/api/notification/list/?search=${placeName.trim()}`);
       if (placeResponse.ok) {
         const placeResult = await (placeResponse.json() as Promise<{ results: NotificationPlaceResult[] }>);
 

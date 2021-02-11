@@ -9,6 +9,7 @@ import { ModerationTodoResult } from "../../types/general";
 import { getTaskStatus, getTaskType } from "../../utils/conversion";
 import { getDisplayName } from "../../utils/helper";
 import { defaultLocale } from "../../utils/i18n";
+import getOrigin from "../../utils/request";
 import TaskStatusLabel from "./TaskStatusLabel";
 import styles from "./NewTasks.module.scss";
 
@@ -20,7 +21,7 @@ const NewTasks = (): ReactElement => {
   const [taskResults, setTaskResults] = useState<ModerationTodoResult[]>([]);
 
   const searchTasks = async () => {
-    const taskResponse = await fetch("/api/moderation/todos/recent/");
+    const taskResponse = await fetch(`${getOrigin(router)}/api/moderation/todos/recent/`);
     if (taskResponse.ok) {
       const taskResult = await (taskResponse.json() as Promise<{ results: ModerationTodoResult[] }>);
 
