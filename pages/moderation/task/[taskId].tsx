@@ -11,7 +11,7 @@ import { ModerationTodoSchema } from "../../../types/general";
 import { PhotoStatus } from "../../../types/moderation_status";
 import { NotificationSchema } from "../../../types/notification_schema";
 import { getTaskStatus, getTaskType } from "../../../utils/conversion";
-import { checkUser, getOriginServerSide, getTags } from "../../../utils/serverside";
+import { checkUser, getOriginServerSide, getTags, redirectToLogin } from "../../../utils/serverside";
 import Layout from "../../../components/common/Layout";
 import ModerationHeader from "../../../components/moderation/ModerationHeader";
 import Collapsible from "../../../components/moderation/Collapsible";
@@ -63,7 +63,7 @@ const ModerationTaskDetail = (): ReactElement => {
 };
 
 // Server-side rendering
-export const getServerSideProps: GetServerSideProps = async ({ req, res, resolvedUrl, params, locales }) => {
+export const getServerSideProps: GetServerSideProps = async ({ req, resolvedUrl, params, locales }) => {
   const lngDict = await i18nLoader(locales);
 
   // Reset the task details in the state
@@ -71,8 +71,12 @@ export const getServerSideProps: GetServerSideProps = async ({ req, res, resolve
   reduxStore.dispatch({ type: CLEAR_STATE });
   const initialReduxState = reduxStore.getState();
 
-  const user = await checkUser(req, res, resolvedUrl, true, true);
-  if (user) {
+  const user = await checkUser(req);
+  if (!user) {
+    // Invalid user but login is required, so redirect to login
+    return redirectToLogin(resolvedUrl);
+  }
+  if (user && user.authenticated) {
     initialReduxState.general.user = user;
   }
 

@@ -1,6 +1,7 @@
 // NOTE: These functions should only be used during server-side rendering
 
-import { IncomingMessage, ServerResponse } from "http";
+import { IncomingMessage } from "http";
+import { Redirect } from "next";
 import { LANGUAGE_OPTIONS } from "../types/constants";
 import { TagOption, User } from "../types/general";
 
@@ -10,29 +11,23 @@ export const getOriginServerSide = (): string => {
   return "http://localhost:8008";
 };
 
-const redirectToLogin = (req: IncomingMessage, res: ServerResponse, resolvedUrl: string) => {
-  res.writeHead(302, { Location: `${getOriginServerSide()}/helauth/login/?next=${resolvedUrl}` });
-  res.end();
+export const redirectToLogin = (resolvedUrl: string): { redirect: Redirect } => {
+  // Note: don't use a leading slash here to make sure next.js preserves the basepath when redirecting
+  return {
+    redirect: {
+      destination: `helauth/login/?next=${resolvedUrl}`,
+      permanent: false,
+    },
+  };
 };
 
-export const checkUser = async (
-  req: IncomingMessage,
-  res: ServerResponse,
-  resolvedUrl: string,
-  isLoginRequired: boolean,
-  isModeratorUserRequired?: boolean
-): Promise<User | undefined> => {
+export const checkUser = async (req: IncomingMessage): Promise<User | undefined> => {
   // Check the current user
+  // TODO: define how a moderator user is identified
   const userResponse = await fetch(`${getOriginServerSide()}/api/user/?format=json`, { headers: { cookie: req.headers.cookie as string } });
 
   if (!userResponse.ok) {
-    if (isLoginRequired || isModeratorUserRequired) {
-      // Invalid user but login is required, so redirect to login
-      redirectToLogin(req, res, resolvedUrl);
-      return undefined;
-    }
-
-    // Invalid user but login is not required
+    // Invalid user
     return undefined;
   }
 
@@ -40,24 +35,9 @@ export const checkUser = async (
   const user = await userResponse.json();
 
   if (!user.email || user.email.length === 0) {
-    if (isLoginRequired || isModeratorUserRequired) {
-      // Invalid user but login is required, so redirect to login
-      redirectToLogin(req, res, resolvedUrl);
-      return undefined;
-    }
-
-    // Invalid user but login is not required
+    // Invalid user
     return undefined;
   }
-
-  // TODO: define how a moderator user is identified
-  /*
-  if (isModeratorUserRequired && user.group !== "helsinki") {
-    // Valid normal user but moderator user is required, so redirect to login
-    redirectToLogin(req, res, resolvedUrl);
-    return undefined;
-  }
-  */
 
   // Valid user
   return { authenticated: true, ...user };

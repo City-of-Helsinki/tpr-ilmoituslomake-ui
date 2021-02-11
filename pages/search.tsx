@@ -40,15 +40,18 @@ const NotificationSearch = (): ReactElement => {
 };
 
 // Server-side rendering
-export const getServerSideProps: GetServerSideProps = async ({ req, res, resolvedUrl, locales }) => {
+export const getServerSideProps: GetServerSideProps = async ({ req, locales }) => {
   const lngDict = await i18nLoader(locales);
 
   const reduxStore = initStore();
   reduxStore.dispatch({ type: CLEAR_STATE });
   const initialReduxState = reduxStore.getState();
 
-  const user = await checkUser(req, res, resolvedUrl, false);
-  if (user) {
+  const user = await checkUser(req);
+  if (!user) {
+    // Invalid user but login is not required
+  }
+  if (user && user.authenticated) {
     initialReduxState.general.user = user;
   }
 
