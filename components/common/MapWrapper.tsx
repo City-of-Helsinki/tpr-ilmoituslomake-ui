@@ -1,8 +1,10 @@
 import React, { ReactElement, useRef, useEffect } from "react";
+import { useRouter } from "next/router";
 import { useI18n } from "next-localization";
 import { MapContainer, TileLayer, Marker, useMap, useMapEvents } from "react-leaflet";
 import { Marker as LeafletMarker, Icon, LatLngExpression } from "leaflet";
 import { MAP_TILES_URL, MAP_MIN_ZOOM, MAP_MAX_ZOOM } from "../../types/constants";
+import getOrigin from "../../utils/request";
 
 interface MapWrapperProps {
   className?: string;
@@ -26,11 +28,12 @@ const MapWrapper = ({
   draggableMarker,
 }: MapWrapperProps): ReactElement => {
   const i18n = useI18n();
+  const router = useRouter();
 
   const markerRef = useRef<LeafletMarker>(null);
 
   // Use the icon images from the public folder
-  const icon = new Icon.Default({ imagePath: "/" });
+  const icon = new Icon.Default({ imagePath: `${getOrigin(router)}/` });
 
   // Helper function
   const isLocationValid = () => location && location.length === 2 && location[0] > 0 && location[1] > 0;
