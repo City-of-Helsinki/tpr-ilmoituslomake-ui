@@ -12,10 +12,11 @@ export const getOriginServerSide = (): string => {
 };
 
 export const redirectToLogin = (resolvedUrl: string): { redirect: Redirect } => {
-  // Note: don't use a leading slash here to make sure next.js preserves the basepath when redirecting
+  // The server-side needs to redirect the client-side, so don't use getOriginServerSide here
+  // The base path is needed to make sure the login page redirects work correctly in the server environment
   return {
     redirect: {
-      destination: `helauth/login/?next=${resolvedUrl}`,
+      destination: `${process.env.BASE_PATH}/helauth/login/?next=${process.env.BASE_PATH}${resolvedUrl}`,
       permanent: false,
     },
   };

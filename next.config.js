@@ -1,9 +1,7 @@
 module.exports = {
-  // Use the basePath that matches the current server environment
+  // BASE_PATH is defined in .env.development for local development, and .env.production for test and production servers
   // assetPrefix is not currently needed
-  basePath: "",
-  // basePath: "/TPRalusta_testi",
-  // basePath: "/TPRalusta",
+  basePath: process.env.BASE_PATH || "",
   i18n: {
     locales: ["fi", "sv", "en"],
     defaultLocale: "fi",
