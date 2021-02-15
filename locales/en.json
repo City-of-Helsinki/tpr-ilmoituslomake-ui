@@ -1,11 +1,23 @@
 {
-  "header": {
-    "title": "My Helsinki Places",
-    "skipToContent": "Skip to content",
-    "login": "Sign in",
-    "logout": "Sign out"
-  },
-  "general": {
+  "common": {
+    "header": {
+      "title": "My Helsinki Places",
+      "skipToContent": "Skip to content",
+      "login": "Sign in",
+      "logout": "Sign out"
+    },
+    "footer": {
+      "title": "My Helsinki Places",
+      "backToTop": "Back to top",
+      "contact": "Contact",
+      "copyright": "Copyright",
+      "rightsReserved": "All rights reserved",
+      "terms": "Terms of use",
+      "accessibility": "Accessibility statement"
+    },
+    "map": {
+      "osm": "OpenStreetMap contributors"
+    },
     "inLanguage": {
       "fi": "in Finnish",
       "sv": "in Swedish",
@@ -61,14 +73,6 @@
       "notify": "Register places information",
       "terms": "Read terms of use",
       "accessibility": "Read accessibility statement"
-    },
-    "footer": {
-      "backToTop": "Back to top",
-      "contact": "Contact",
-      "copyright": "Copyright",
-      "rightsReserved": "All rights reserved",
-      "terms": "Terms of use",
-      "accessibility": "Accessibility statement"
     },
     "message": {
       "notAuthenticated": {
@@ -191,8 +195,7 @@
     "map": {
       "title": "Map of place",
       "notice": "The place is shown on the map based on the address given above. If the search result is imprecise or incorrect, you can correct it by moving the marker on the map to the right place. We recommend that the marker is located at the main entrance to the place.",
-      "geocode": "Show on the map",
-      "osm": "OpenStreetMap contributors"
+      "geocode": "Show on the map"
     },
     "notifier": {
       "title": "Notifier's information",

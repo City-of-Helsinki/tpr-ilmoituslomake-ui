@@ -76,7 +76,7 @@ const Description = (): ReactElement => {
       <div className={inputLanguages.length > 1 ? "languageSection" : ""}>
         {inputLanguages.length > 1 && <h3>{i18n.t("notification.description.placeName.label")}</h3>}
         {LANGUAGE_OPTIONS.map((option) => {
-          const label = `${i18n.t("notification.description.placeName.label")} ${i18n.t(`general.inLanguage.${option}`)}`;
+          const label = `${i18n.t("notification.description.placeName.label")} ${i18n.t(`common.inLanguage.${option}`)}`;
           return inputLanguages.includes(option) ? (
             <TextInput
               id={`placeName_${option}`}
@@ -98,7 +98,7 @@ const Description = (): ReactElement => {
       <div className={inputLanguages.length > 1 ? "languageSection" : ""}>
         {inputLanguages.length > 1 && <h3>{i18n.t("notification.description.shortDescription.label")}</h3>}
         {LANGUAGE_OPTIONS.map((option) => {
-          const label = `${i18n.t("notification.description.shortDescription.label")} ${i18n.t(`general.inLanguage.${option}`)}`;
+          const label = `${i18n.t("notification.description.shortDescription.label")} ${i18n.t(`common.inLanguage.${option}`)}`;
           return inputLanguages.includes(option) ? (
             <TextArea
               id={`shortDescription_${option}`}
@@ -125,7 +125,7 @@ const Description = (): ReactElement => {
       <div className={inputLanguages.length > 1 ? "languageSection" : ""}>
         {inputLanguages.length > 1 && <h3>{i18n.t("notification.description.longDescription.label")}</h3>}
         {LANGUAGE_OPTIONS.map((option) => {
-          const label = `${i18n.t("notification.description.longDescription.label")} ${i18n.t(`general.inLanguage.${option}`)}`;
+          const label = `${i18n.t("notification.description.longDescription.label")} ${i18n.t(`common.inLanguage.${option}`)}`;
           return inputLanguages.includes(option) ? (
             <TextArea
               id={`longDescription_${option}`}

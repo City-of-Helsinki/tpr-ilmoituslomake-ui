@@ -85,14 +85,14 @@ const PhotosModeration = (): ReactElement => {
                     modifiedValue={photosModified[index].altText[option] as string}
                     status={photosStatus[index].altText[option]}
                     taskType={taskType}
-                    modifyButtonLabel={`${i18n.t("moderation.photos.altText.label")} ${i18n.t(`general.inLanguage.${option}`)}`}
+                    modifyButtonLabel={`${i18n.t("moderation.photos.altText.label")} ${i18n.t(`common.inLanguage.${option}`)}`}
                     changeCallback={(evt: ChangeEvent<HTMLTextAreaElement>) => updatePhotoAltText(index, evt)}
                     statusCallback={(language, status) => updatePhotoAltTextStatus(index, language, status)}
                     ModerationComponent={
                       <TextArea
                         id={altTextKey}
                         rows={3}
-                        label={`${i18n.t("moderation.photos.altText.label")} ${i18n.t(`general.inLanguage.${option}`)}`}
+                        label={`${i18n.t("moderation.photos.altText.label")} ${i18n.t(`common.inLanguage.${option}`)}`}
                         name={option}
                       />
                     }

@@ -41,11 +41,16 @@ const Header = ({ children }: HeaderProps): ReactElement => {
   };
 
   return (
-    <Navigation title={i18n.t("header.title")} menuToggleAriaLabel="menu" skipTo="#content" skipToContentLabel={i18n.t("header.skipToContent")}>
+    <Navigation
+      title={i18n.t("common.header.title")}
+      menuToggleAriaLabel="menu"
+      skipTo="#content"
+      skipToContentLabel={i18n.t("common.header.skipToContent")}
+    >
       {children}
       <Navigation.Actions>
         <Navigation.User
-          label={i18n.t("header.login")}
+          label={i18n.t("common.header.login")}
           authenticated={currentUser?.authenticated}
           userName={currentUser?.first_name || currentUser?.email}
           onSignIn={signIn}
@@ -55,7 +60,7 @@ const Header = ({ children }: HeaderProps): ReactElement => {
             href="#"
             variant="supplementary"
             icon={<IconSignout aria-hidden />}
-            label={i18n.t("header.logout")}
+            label={i18n.t("common.header.logout")}
             onClick={signOut}
           />
         </Navigation.User>

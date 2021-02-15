@@ -101,7 +101,7 @@ const MapWrapper = ({
       <CustomMapHandler />
       <TileLayer
         url={MAP_TILES_URL}
-        attribution={`<a href="https://www.openstreetmap.org/copyright" target="_blank">© ${i18n.t("notification.map.osm")}</a>`}
+        attribution={`<a href="https://www.openstreetmap.org/copyright" target="_blank">© ${i18n.t("common.map.osm")}</a>`}
       />
       {isLocationValid() && (
         <Marker ref={markerRef} icon={icon} position={location} draggable={draggableMarker} eventHandlers={markerEventHandlers} />

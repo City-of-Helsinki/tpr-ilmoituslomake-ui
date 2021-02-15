@@ -61,15 +61,15 @@ const LocationModeration = (): ReactElement => {
           modifiedValue={streetFiModified}
           status={addressFiStatus}
           taskType={taskType}
-          selectedHeaderText={`${i18n.t("moderation.location.address")} ${i18n.t("general.inLanguage.fi")}${i18n.t("moderation.task.selected")}`}
-          modifiedHeaderText={`${i18n.t("moderation.location.address")} ${i18n.t("general.inLanguage.fi")}${i18n.t("moderation.task.modified")}`}
-          modifyButtonLabel={`${i18n.t("moderation.location.address")} ${i18n.t("general.inLanguage.fi")}`}
+          selectedHeaderText={`${i18n.t("moderation.location.address")} ${i18n.t("common.inLanguage.fi")}${i18n.t("moderation.task.selected")}`}
+          modifiedHeaderText={`${i18n.t("moderation.location.address")} ${i18n.t("common.inLanguage.fi")}${i18n.t("moderation.task.modified")}`}
+          modifyButtonLabel={`${i18n.t("moderation.location.address")} ${i18n.t("common.inLanguage.fi")}`}
           changeCallback={(evt: ChangeEvent<HTMLInputElement>) => updateAddress("fi", evt)}
           statusCallback={updateAddressStatus}
           ModerationComponent={
             <TextInput
               id="streetAddressFi"
-              label={`${i18n.t("moderation.location.streetAddress.label")} ${i18n.t("general.inLanguage.fi")}`}
+              label={`${i18n.t("moderation.location.streetAddress.label")} ${i18n.t("common.inLanguage.fi")}`}
               name="street"
             />
           }
@@ -82,7 +82,7 @@ const LocationModeration = (): ReactElement => {
           modifiedValue={postalCodeFiModified}
           status={addressFiStatus}
           taskType={taskType}
-          modifyButtonLabel={`${i18n.t("moderation.location.address")} ${i18n.t("general.inLanguage.fi")}`}
+          modifyButtonLabel={`${i18n.t("moderation.location.address")} ${i18n.t("common.inLanguage.fi")}`}
           modifyButtonHidden
           actionButtonHidden
           changeCallback={(evt: ChangeEvent<HTMLInputElement>) => updateAddress("fi", evt)}
@@ -90,7 +90,7 @@ const LocationModeration = (): ReactElement => {
           ModerationComponent={
             <TextInput
               id="postalCodeFi"
-              label={`${i18n.t("moderation.location.postalCode.label")} ${i18n.t("general.inLanguage.fi")}`}
+              label={`${i18n.t("moderation.location.postalCode.label")} ${i18n.t("common.inLanguage.fi")}`}
               name="postal_code"
             />
           }
@@ -103,7 +103,7 @@ const LocationModeration = (): ReactElement => {
           modifiedValue={postOfficeFiModified}
           status={addressFiStatus}
           taskType={taskType}
-          modifyButtonLabel={`${i18n.t("moderation.location.address")} ${i18n.t("general.inLanguage.fi")}`}
+          modifyButtonLabel={`${i18n.t("moderation.location.address")} ${i18n.t("common.inLanguage.fi")}`}
           modifyButtonHidden
           actionButtonHidden
           changeCallback={(evt: ChangeEvent<HTMLInputElement>) => updateAddress("fi", evt)}
@@ -111,7 +111,7 @@ const LocationModeration = (): ReactElement => {
           ModerationComponent={
             <TextInput
               id="postalOfficeFi"
-              label={`${i18n.t("moderation.location.postalOffice.label")} ${i18n.t("general.inLanguage.fi")}`}
+              label={`${i18n.t("moderation.location.postalOffice.label")} ${i18n.t("common.inLanguage.fi")}`}
               name="post_office"
             />
           }
@@ -124,7 +124,7 @@ const LocationModeration = (): ReactElement => {
           modifiedValue={neighborhoodFiModified}
           status={addressFiStatus}
           taskType={taskType}
-          modifyButtonLabel={`${i18n.t("moderation.location.address")} ${i18n.t("general.inLanguage.fi")}`}
+          modifyButtonLabel={`${i18n.t("moderation.location.address")} ${i18n.t("common.inLanguage.fi")}`}
           modifyButtonHidden
           actionButtonHidden
           bypassModifiedFieldCheck
@@ -133,7 +133,7 @@ const LocationModeration = (): ReactElement => {
           ModerationComponent={
             <TextInput
               id="neighborhoodFi"
-              label={`${i18n.t("moderation.location.neighborhood.label")} ${i18n.t("general.inLanguage.fi")}`}
+              label={`${i18n.t("moderation.location.neighborhood.label")} ${i18n.t("common.inLanguage.fi")}`}
               name="neighborhood"
             />
           }
@@ -148,15 +148,15 @@ const LocationModeration = (): ReactElement => {
           modifiedValue={streetSvModified}
           status={addressSvStatus}
           taskType={taskType}
-          selectedHeaderText={`${i18n.t("moderation.location.address")} ${i18n.t("general.inLanguage.sv")}${i18n.t("moderation.task.selected")}`}
-          modifiedHeaderText={`${i18n.t("moderation.location.address")} ${i18n.t("general.inLanguage.sv")}${i18n.t("moderation.task.modified")}`}
-          modifyButtonLabel={`${i18n.t("moderation.location.address")} ${i18n.t("general.inLanguage.sv")}`}
+          selectedHeaderText={`${i18n.t("moderation.location.address")} ${i18n.t("common.inLanguage.sv")}${i18n.t("moderation.task.selected")}`}
+          modifiedHeaderText={`${i18n.t("moderation.location.address")} ${i18n.t("common.inLanguage.sv")}${i18n.t("moderation.task.modified")}`}
+          modifyButtonLabel={`${i18n.t("moderation.location.address")} ${i18n.t("common.inLanguage.sv")}`}
           changeCallback={(evt: ChangeEvent<HTMLInputElement>) => updateAddress("sv", evt)}
           statusCallback={updateAddressStatus}
           ModerationComponent={
             <TextInput
               id="streetAddressSv"
-              label={`${i18n.t("moderation.location.streetAddress.label")} ${i18n.t("general.inLanguage.sv")}`}
+              label={`${i18n.t("moderation.location.streetAddress.label")} ${i18n.t("common.inLanguage.sv")}`}
               name="street"
             />
           }
@@ -168,7 +168,7 @@ const LocationModeration = (): ReactElement => {
           modifiedValue={postalCodeSvModified}
           status={addressSvStatus}
           taskType={taskType}
-          modifyButtonLabel={`${i18n.t("moderation.location.address")} ${i18n.t("general.inLanguage.sv")}`}
+          modifyButtonLabel={`${i18n.t("moderation.location.address")} ${i18n.t("common.inLanguage.sv")}`}
           modifyButtonHidden
           actionButtonHidden
           changeCallback={(evt: ChangeEvent<HTMLInputElement>) => updateAddress("sv", evt)}
@@ -176,7 +176,7 @@ const LocationModeration = (): ReactElement => {
           ModerationComponent={
             <TextInput
               id="postalCodeSv"
-              label={`${i18n.t("moderation.location.postalCode.label")} ${i18n.t("general.inLanguage.sv")}`}
+              label={`${i18n.t("moderation.location.postalCode.label")} ${i18n.t("common.inLanguage.sv")}`}
               name="postal_code"
             />
           }
@@ -188,7 +188,7 @@ const LocationModeration = (): ReactElement => {
           modifiedValue={postOfficeSvModified}
           status={addressSvStatus}
           taskType={taskType}
-          modifyButtonLabel={`${i18n.t("moderation.location.address")} ${i18n.t("general.inLanguage.sv")}`}
+          modifyButtonLabel={`${i18n.t("moderation.location.address")} ${i18n.t("common.inLanguage.sv")}`}
           modifyButtonHidden
           actionButtonHidden
           changeCallback={(evt: ChangeEvent<HTMLInputElement>) => updateAddress("sv", evt)}
@@ -196,7 +196,7 @@ const LocationModeration = (): ReactElement => {
           ModerationComponent={
             <TextInput
               id="postalOfficeSv"
-              label={`${i18n.t("moderation.location.postalOffice.label")} ${i18n.t("general.inLanguage.sv")}`}
+              label={`${i18n.t("moderation.location.postalOffice.label")} ${i18n.t("common.inLanguage.sv")}`}
               name="post_office"
             />
           }
@@ -208,7 +208,7 @@ const LocationModeration = (): ReactElement => {
           modifiedValue={neighborhoodSvModified}
           status={addressSvStatus}
           taskType={taskType}
-          modifyButtonLabel={`${i18n.t("moderation.location.address")} ${i18n.t("general.inLanguage.sv")}`}
+          modifyButtonLabel={`${i18n.t("moderation.location.address")} ${i18n.t("common.inLanguage.sv")}`}
           modifyButtonHidden
           actionButtonHidden
           bypassModifiedFieldCheck
@@ -217,7 +217,7 @@ const LocationModeration = (): ReactElement => {
           ModerationComponent={
             <TextInput
               id="neighborhoodSv"
-              label={`${i18n.t("moderation.location.neighborhood.label")} ${i18n.t("general.inLanguage.sv")}`}
+              label={`${i18n.t("moderation.location.neighborhood.label")} ${i18n.t("common.inLanguage.sv")}`}
               name="neighborhood"
             />
           }

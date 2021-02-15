@@ -207,7 +207,7 @@ const Photos = (): ReactElement => {
                   {inputLanguages.length > 1 && <h3>{i18n.t("notification.photos.altText.label")}</h3>}
                   {LANGUAGE_OPTIONS.map((option) => {
                     const key2 = `altText_${index}_${option}`;
-                    const label = `${i18n.t("notification.photos.altText.label")} ${i18n.t(`general.inLanguage.${option}`)}`;
+                    const label = `${i18n.t("notification.photos.altText.label")} ${i18n.t(`common.inLanguage.${option}`)}`;
                     return inputLanguages.includes(option) ? (
                       <TextArea
                         id={`altText_${index}_${option}`}

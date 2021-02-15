@@ -64,7 +64,7 @@ const ModerationTaskDetail = (): ReactElement => {
 
 // Server-side rendering
 export const getServerSideProps: GetServerSideProps = async ({ req, resolvedUrl, params, locales }) => {
-  const lngDict = await i18nLoader(locales);
+  const lngDict = await i18nLoader(locales, true);
 
   // Reset the task details in the state
   const reduxStore = initStore();

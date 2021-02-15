@@ -80,13 +80,13 @@ const DescriptionModeration = (): ReactElement => {
             taskType={taskType}
             selectedHeaderText={index === 0 ? `${i18n.t("moderation.description.placeName.title")}${i18n.t("moderation.task.selected")}` : undefined}
             modifiedHeaderText={index === 0 ? `${i18n.t("moderation.description.placeName.title")}${i18n.t("moderation.task.modified")}` : undefined}
-            modifyButtonLabel={`${i18n.t("moderation.description.placeName.label")} ${i18n.t(`general.inLanguage.${option}`)}`}
+            modifyButtonLabel={`${i18n.t("moderation.description.placeName.label")} ${i18n.t(`common.inLanguage.${option}`)}`}
             changeCallback={updateName}
             statusCallback={updateNameStatus}
             ModerationComponent={
               <TextInput
                 id={`placeName_${option}`}
-                label={`${i18n.t("moderation.description.placeName.label")} ${i18n.t(`general.inLanguage.${option}`)}`}
+                label={`${i18n.t("moderation.description.placeName.label")} ${i18n.t(`common.inLanguage.${option}`)}`}
                 name={option}
               />
             }
@@ -110,14 +110,14 @@ const DescriptionModeration = (): ReactElement => {
             modifiedHeaderText={
               index === 0 ? `${i18n.t("moderation.description.shortDescription.title")}${i18n.t("moderation.task.modified")}` : undefined
             }
-            modifyButtonLabel={`${i18n.t("moderation.description.shortDescription.label")} ${i18n.t(`general.inLanguage.${option}`)}`}
+            modifyButtonLabel={`${i18n.t("moderation.description.shortDescription.label")} ${i18n.t(`common.inLanguage.${option}`)}`}
             changeCallback={updateShortDescription}
             statusCallback={updateShortDescriptionStatus}
             ModerationComponent={
               <TextArea
                 id={`shortDescription_${option}`}
                 rows={3}
-                label={`${i18n.t("moderation.description.shortDescription.label")} ${i18n.t(`general.inLanguage.${option}`)}`}
+                label={`${i18n.t("moderation.description.shortDescription.label")} ${i18n.t(`common.inLanguage.${option}`)}`}
                 name={option}
               />
             }
@@ -141,14 +141,14 @@ const DescriptionModeration = (): ReactElement => {
             modifiedHeaderText={
               index === 0 ? `${i18n.t("moderation.description.longDescription.title")}${i18n.t("moderation.task.modified")}` : undefined
             }
-            modifyButtonLabel={`${i18n.t("moderation.description.longDescription.label")} ${i18n.t(`general.inLanguage.${option}`)}`}
+            modifyButtonLabel={`${i18n.t("moderation.description.longDescription.label")} ${i18n.t(`common.inLanguage.${option}`)}`}
             changeCallback={updateLongDescription}
             statusCallback={updateLongDescriptionStatus}
             ModerationComponent={
               <TextArea
                 id={`longDescription_${option}`}
                 rows={6}
-                label={`${i18n.t("moderation.description.longDescription.label")} ${i18n.t(`general.inLanguage.${option}`)}`}
+                label={`${i18n.t("moderation.description.longDescription.label")} ${i18n.t(`common.inLanguage.${option}`)}`}
                 name={option}
               />
             }

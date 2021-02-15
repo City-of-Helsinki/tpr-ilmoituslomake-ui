@@ -36,7 +36,7 @@ const Links = (): ReactElement => {
       <div className={inputLanguages.length > 1 ? "languageSection" : ""}>
         {inputLanguages.length > 1 && <h3>{i18n.t("notification.links.website.label")}</h3>}
         {LANGUAGE_OPTIONS.map((option) => {
-          const label = `${i18n.t("notification.links.website.label")} ${i18n.t(`general.inLanguage.${option}`)}`;
+          const label = `${i18n.t("notification.links.website.label")} ${i18n.t(`common.inLanguage.${option}`)}`;
           return inputLanguages.includes(option) ? (
             <TextInput
               id={`website_${option}`}

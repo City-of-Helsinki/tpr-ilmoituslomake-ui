@@ -35,7 +35,7 @@ const ModerationTranslation = (): ReactElement => {
 
 // Server-side rendering
 export const getServerSideProps: GetServerSideProps = async ({ req, resolvedUrl, locales }) => {
-  const lngDict = await i18nLoader(locales);
+  const lngDict = await i18nLoader(locales, true);
 
   const reduxStore = initStore();
   reduxStore.dispatch({ type: CLEAR_STATE });

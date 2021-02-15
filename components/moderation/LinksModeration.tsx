@@ -48,13 +48,13 @@ const LinksModeration = (): ReactElement => {
             taskType={taskType}
             selectedHeaderText={index === 0 ? `${i18n.t("moderation.links.website.label")}${i18n.t("moderation.task.selected")}` : undefined}
             modifiedHeaderText={index === 0 ? `${i18n.t("moderation.links.website.label")}${i18n.t("moderation.task.modified")}` : undefined}
-            modifyButtonLabel={`${i18n.t("moderation.links.website.label")} ${i18n.t(`general.inLanguage.${option}`)}`}
+            modifyButtonLabel={`${i18n.t("moderation.links.website.label")} ${i18n.t(`common.inLanguage.${option}`)}`}
             changeCallback={updateWebsite}
             statusCallback={updateWebsiteStatus}
             ModerationComponent={
               <TextInput
                 id={`website_${option}`}
-                label={`${i18n.t("moderation.links.website.label")} ${i18n.t(`general.inLanguage.${option}`)}`}
+                label={`${i18n.t("moderation.links.website.label")} ${i18n.t(`common.inLanguage.${option}`)}`}
                 name={option}
               />
             }

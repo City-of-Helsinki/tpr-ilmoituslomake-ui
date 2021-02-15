@@ -1,11 +1,23 @@
 {
-  "header": {
-    "title": "My Helsinki Places",
-    "skipToContent": "Siirry sivun pääsisältöön",
-    "login": "Kirjaudu sisään",
-    "logout": "Kirjaudu ulos"
-  },
-  "general": {
+  "common": {
+    "header": {
+      "title": "My Helsinki Places",
+      "skipToContent": "Siirry sivun pääsisältöön",
+      "login": "Kirjaudu sisään",
+      "logout": "Kirjaudu ulos"
+    },
+    "footer": {
+      "title": "My Helsinki Places",
+      "backToTop": "Takaisin ylös",
+      "contact": "Ota yhteyttä",
+      "copyright": "Copyright",
+      "rightsReserved": "Kaikki oikeudet pidätetään",
+      "terms": "Verkkopalvelun käyttöehdot",
+      "accessibility": "Saavutettavuusseloste"
+    },
+    "map": {
+      "osm": "OpenStreetMapin tekijät"
+    },
     "inLanguage": {
       "fi": "suomeksi",
       "sv": "ruotsiksi",
@@ -61,14 +73,6 @@
       "notify": "Ilmoita kohteiden tietoja",
       "terms": "Lue käyttöehdot",
       "accessibility": "Lue saavutettavuusseloste"
-    },
-    "footer": {
-      "backToTop": "Takaisin ylös",
-      "contact": "Ota yhteyttä",
-      "copyright": "Copyright",
-      "rightsReserved": "Kaikki oikeudet pidätetään",
-      "terms": "Verkkopalvelun käyttöehdot",
-      "accessibility": "Saavutettavuusseloste"
     },
     "message": {
       "notAuthenticated": {
@@ -191,8 +195,7 @@
     "map": {
       "title": "Kohde kartalla",
       "notice": "Kohde näkyy kartalla yllä annetun osoitteen perusteella. Jos hakutulos on epätarkka tai virheellinen, voit korjata sen siirtämällä kartalla olevaa kohdistinta oikeaan kohtaan. Suosittelemme, että kohdistin merkitään pääsisäänkäynnin kohdalle.",
-      "geocode": "Näytä kartalla",
-      "osm": "OpenStreetMapin tekijät"
+      "geocode": "Näytä kartalla"
     },
     "notifier": {
       "title": "Ilmoittajan tiedot",
