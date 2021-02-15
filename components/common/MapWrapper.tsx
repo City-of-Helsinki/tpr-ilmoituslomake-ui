@@ -66,6 +66,9 @@ const MapWrapper = ({
   const CustomMapHandler = () => {
     const map = useMap();
 
+    // Force a map update otherwise the map does not always render correctly after a page is first loaded
+    map.invalidateSize();
+
     // If the location in redux state has changed, by geocoding or dragging, pan the map to centre on the new position
     useEffect(() => {
       if (isLocationValid() && prevLocation !== location) {
