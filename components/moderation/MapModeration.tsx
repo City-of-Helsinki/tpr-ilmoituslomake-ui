@@ -1,4 +1,4 @@
-import React, { Dispatch, ReactElement, useEffect, useState } from "react";
+import React, { Dispatch, ReactElement, useCallback, useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import dynamic from "next/dynamic";
 import { useI18n } from "next-localization";
@@ -41,9 +41,13 @@ const MapModeration = ({ setMapsReady }: MapModerationProps): ReactElement => {
     dispatch(setModerationLocation(coordinates));
   };
 
-  const updateLocationStatus = (fieldName: string, status: ModerationStatus) => {
-    dispatchStatus(setModerationLocationStatus(status));
-  };
+  // useCallback is required here since updateLocationStatus is a dependency in useEffect below
+  const updateLocationStatus = useCallback(
+    (fieldName: string, status: ModerationStatus) => {
+      dispatchStatus(setModerationLocationStatus(status));
+    },
+    [dispatchStatus]
+  );
 
   // The maps only initialise properly when not hidden, so use flags to only hide the maps after they are ready
   const [map1Ready, setMap1Ready] = useState<boolean>(false);
@@ -57,13 +61,15 @@ const MapModeration = ({ setMapsReady }: MapModerationProps): ReactElement => {
         setMapsReady(map1Ready && map2Ready);
       }
       if (map2Ready) {
+        // Enable the location to be edited by default
         setInitialLocationStatus(undefined);
+        updateLocationStatus("", ModerationStatus.Edited);
       }
     } else if (setMapsReady) {
       // Only one map is needed
       setMapsReady(map1Ready);
     }
-  }, [taskType, map1Ready, map2Ready, setMapsReady, setInitialLocationStatus]);
+  }, [taskType, map1Ready, map2Ready, setMapsReady, setInitialLocationStatus, updateLocationStatus]);
 
   if (taskType === TaskType.ChangeTip || taskType === TaskType.RemoveTip) {
     return (
