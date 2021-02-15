@@ -96,9 +96,9 @@ const Photos = (): ReactElement => {
   };
 
   const fetchPhoto = async (index: number, evt: ChangeEvent<HTMLInputElement>) => {
-    const { sourceType, url } = photos[index];
+    const { new: isNewImage, sourceType, url } = photos[index];
 
-    if (sourceType === PhotoSourceType.Device && evt && evt.target && evt.target.files && evt.target.files.length > 0) {
+    if (isNewImage && sourceType === PhotoSourceType.Device && evt && evt.target && evt.target.files && evt.target.files.length > 0) {
       const file = evt.target.files[0];
       dispatchValidation(setNotificationPhotoValidation(index, { url: { valid: true } }));
 
@@ -119,7 +119,7 @@ const Photos = (): ReactElement => {
       reader.readAsDataURL(file);
     }
 
-    if (sourceType === PhotoSourceType.Link) {
+    if (!isNewImage || sourceType === PhotoSourceType.Link) {
       // The backend will fetch the image using the url, so just validate it here
       validateUrl(index);
       dispatch(setNotificationPhoto(index, { ...photos[index], base64: "", preview: url }));
@@ -132,7 +132,8 @@ const Photos = (): ReactElement => {
 
   return (
     <div className={`formSection ${styles.photos}`}>
-      {photos.map(({ sourceType, url, altText, permission, source, preview }, index) => {
+      {photos.map(({ new: isNewImage, sourceType, url, altText, permission, source, preview }, index) => {
+        // Note: before saving, new images can be uploaded from the device, but after saving, all images have a url link
         const key = `photo_${index}`;
         return (
           <div key={key}>
@@ -141,7 +142,7 @@ const Photos = (): ReactElement => {
               <NotificationNotice messageKey="notification.photos.photo.notice1" messageKey2="notification.photos.photo.notice2" />
             </div>
 
-            {sourceType === PhotoSourceType.Device && (
+            {isNewImage && sourceType === PhotoSourceType.Device && (
               <>
                 <TextInput
                   id={`url_${index}`}
@@ -156,7 +157,7 @@ const Photos = (): ReactElement => {
                       : ""
                   }
                   required
-                  disabled
+                  disabled={isNewImage}
                 />
 
                 <input className="hidden" type="file" ref={ref} onChange={(evt) => fetchPhoto(index, evt)} />
@@ -166,16 +167,10 @@ const Photos = (): ReactElement => {
                 <Button variant="secondary" className="formInput" onClick={() => removePhoto(index)}>
                   {i18n.t("notification.photos.remove")}
                 </Button>
-
-                {preview && preview.length > 0 && (
-                  <div className={styles.imagePreview}>
-                    <img src={preview} alt="" />
-                  </div>
-                )}
               </>
             )}
 
-            {sourceType === PhotoSourceType.Link && (
+            {(!isNewImage || sourceType === PhotoSourceType.Link) && (
               <>
                 <TextInput
                   id={`url_${index}`}
@@ -196,13 +191,13 @@ const Photos = (): ReactElement => {
                 <Button variant="secondary" className="formInput" onClick={() => removePhoto(index)}>
                   {i18n.t("notification.photos.remove")}
                 </Button>
-
-                {photosValid[index].url.valid && preview && preview.length > 0 && (
-                  <div className={styles.imagePreview}>
-                    <img src={preview} alt="" />
-                  </div>
-                )}
               </>
+            )}
+
+            {preview && preview.length > 0 && (
+              <div className={styles.imagePreview}>
+                <img src={preview} alt="" />
+              </div>
             )}
 
             {/* {photosValid[index].url.valid && preview && preview.length > 0 && ( */}

@@ -66,7 +66,6 @@ const PhotosModeration = (): ReactElement => {
                 selectedHeaderText={`${i18n.t("moderation.photos.photo.title")} ${index + 1}${i18n.t("moderation.task.selected")}`}
                 modifiedHeaderText={`${i18n.t("moderation.photos.photo.title")} ${index + 1}${i18n.t("moderation.task.modified")}`}
                 modifyButtonLabel={i18n.t(urlLabelKey)}
-                forceModifiedDisabled={sourceTypeSelected === PhotoSourceType.Device}
                 changeCallback={(evt: ChangeEvent<HTMLInputElement>) => updatePhoto(index, evt)}
                 statusCallback={(fieldName, status) => updatePhotoStatus(index, fieldName, status)}
                 ModerationComponent={<TextInput id={`url_${index}`} label={i18n.t(urlLabelKey)} name="url" />}

@@ -196,7 +196,7 @@ export const isPhotoFieldValid = (
   switch (photoField) {
     case "url": {
       schema =
-        photo.sourceType === PhotoSourceType.Link
+        !photo.new || photo.sourceType === PhotoSourceType.Link
           ? string().required("notification.message.fieldRequired").url("notification.message.fieldFormat")
           : string().required("notification.message.fieldRequired");
       break;

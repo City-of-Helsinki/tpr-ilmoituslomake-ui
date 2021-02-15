@@ -139,13 +139,12 @@ const Preview = ({ full, includeNotifier }: PreviewProps): ReactElement => {
         <>
           <h4 className={`${styles.gridHeading} ${styles.gridSubHeader}`}>{i18n.t("notification.main.photos")}</h4>
           <div className={`${styles.gridPlaceInfo} ${styles.gridSubHeader}`} />
-          {photos.map(({ url, altText, permission, source, preview }, index) => {
+          {photos.map(({ altText, permission, source, preview }, index) => {
             const key = `photo_${index}`;
             return (
               <Fragment key={key}>
                 <div className={`${styles.gridHeading} ${styles.gridContent}`}>{`${i18n.t("notification.photos.photo.title")} ${index + 1}`}</div>
                 <div className={`${styles.gridPlaceInfo} ${styles.gridContent}`}>
-                  <div>{url}</div>
                   {preview && preview.length > 0 && (
                     <div className={styles.imagePreview}>
                       <img src={preview} alt="" />

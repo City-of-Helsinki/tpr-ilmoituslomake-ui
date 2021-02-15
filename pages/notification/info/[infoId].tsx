@@ -75,7 +75,6 @@ export const getServerSideProps: GetServerSideProps = async ({ req, params, loca
 
       try {
         // Merge the notification details from the backend, but remove the previous notifier details if present
-        // TODO - handle image base64 when implemented in backend
         const { notifier, images, ...dataToUse } = targetResult.data;
 
         initialReduxState.notification = {

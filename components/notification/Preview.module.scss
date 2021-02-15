@@ -80,8 +80,6 @@
     }
 
     .imagePreview {
-      margin-top: $spacing-layout-xs;
-
       img {
         @include media(xs) {
           max-width: $container-width-xs / 2;
