@@ -1,4 +1,5 @@
 import React, { ReactNode, ReactElement, useEffect, useRef } from "react";
+import Head from "next/head";
 import Footer from "./Footer";
 import styles from "./Layout.module.scss";
 
@@ -19,6 +20,9 @@ const Layout = ({ children }: LayoutProps): ReactElement => {
 
   return (
     <div className="hidden" ref={ref}>
+      <Head>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+      </Head>
       <div className={styles.left} />
       <div className={styles.main}>
         {children}
