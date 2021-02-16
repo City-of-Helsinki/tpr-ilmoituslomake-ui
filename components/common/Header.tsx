@@ -1,5 +1,6 @@
 import React, { ReactElement } from "react";
 import { useSelector } from "react-redux";
+import dynamic from "next/dynamic";
 import { useRouter } from "next/router";
 import { useI18n } from "next-localization";
 import { Navigation, IconSignout } from "hds-react";
@@ -14,6 +15,11 @@ interface HeaderProps {
 const defaultProps: HeaderProps = {
   children: [],
 };
+
+// NOTE: The HDS Navigation component does not currently work for mobile views when server-side rendering
+// A workaround for this is to only use the Navigation component on the client-side
+// @ts-ignore: A dynamic import must be used to force client-side rendering regardless of the typescript errors
+const DynamicNavigation = dynamic(() => import("hds-react").then((hds) => hds.Navigation), { ssr: false });
 
 const Header = ({ children }: HeaderProps): ReactElement => {
   const i18n = useI18n();
@@ -41,7 +47,8 @@ const Header = ({ children }: HeaderProps): ReactElement => {
   };
 
   return (
-    <Navigation
+    <DynamicNavigation
+      // @ts-ignore: The HDS Navigation component comes from a dynamic import, see above for details
       title={i18n.t("common.header.title")}
       menuToggleAriaLabel="menu"
       skipTo="#content"
@@ -70,7 +77,7 @@ const Header = ({ children }: HeaderProps): ReactElement => {
           <Navigation.Item label="In English" onClick={() => changeLanguage("en")} />
         </Navigation.LanguageSelector>
       </Navigation.Actions>
-    </Navigation>
+    </DynamicNavigation>
   );
 };
 
