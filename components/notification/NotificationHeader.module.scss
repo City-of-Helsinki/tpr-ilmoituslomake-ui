@@ -20,6 +20,18 @@
 
   .stepper {
     padding: 0;
+
+    @include media(m) {
+      margin-left: -$spacing-layout-m;
+    }
+
+    @include media(l) {
+      margin-left: -$spacing-layout-l;
+    }
+
+    @include media(xl) {
+      margin-left: -$spacing-layout-xl;
+    }
   }
 }
 
