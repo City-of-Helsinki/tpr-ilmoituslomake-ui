@@ -9,7 +9,7 @@ import { CLEAR_STATE, INITIAL_NOTIFICATION } from "../../types/constants";
 import { NotificationSchema } from "../../types/notification_schema";
 import { PhotoValidation } from "../../types/notification_validation";
 import i18nLoader, { defaultLocale } from "../../utils/i18n";
-import { checkUser, getOriginServerSide, getPreviousInputLanguages, getTags } from "../../utils/serverside";
+import { checkUser, redirectToLogin, getOriginServerSide, getPreviousInputLanguages, getTags } from "../../utils/serverside";
 import Layout from "../../components/common/Layout";
 import NotificationHeader from "../../components/notification/NotificationHeader";
 import NotificationFooter from "../../components/notification/NotificationFooter";
@@ -96,7 +96,7 @@ const NotificationDetail = (): ReactElement => {
 };
 
 // Server-side rendering
-export const getServerSideProps: GetServerSideProps = async ({ req, params, locale, locales }) => {
+export const getServerSideProps: GetServerSideProps = async ({ req, resolvedUrl, params, locale, locales }) => {
   const lngDict = await i18nLoader(locales);
 
   // Reset the notification details in the state
@@ -106,7 +106,8 @@ export const getServerSideProps: GetServerSideProps = async ({ req, params, loca
 
   const user = await checkUser(req);
   if (!user) {
-    // Invalid user but login is not required
+    // Invalid user but login is required, so redirect to login
+    return redirectToLogin(resolvedUrl);
   }
   if (user && user.authenticated) {
     initialReduxState.general.user = user;
