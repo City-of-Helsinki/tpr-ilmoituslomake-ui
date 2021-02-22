@@ -6,12 +6,12 @@ import { Select, TextInput } from "hds-react";
 import { NotificationAction, NotificationValidationAction } from "../../state/actions/types";
 import { setNotificationTip } from "../../state/actions/notification";
 import { RootState } from "../../state/reducers";
+import { ItemType } from "../../types/constants";
 import { NotificationPlaceResult, OptionType } from "../../types/general";
 import { getDisplayName } from "../../utils/helper";
 import { defaultLocale } from "../../utils/i18n";
 import getOrigin from "../../utils/request";
 import { isTipFieldValid } from "../../utils/validation";
-import styles from "./TipSearch.module.scss";
 
 const TipSearch = (): ReactElement => {
   const i18n = useI18n();
@@ -25,9 +25,10 @@ const TipSearch = (): ReactElement => {
   const [selectedPlace, setSelectedPlace] = useState<OptionType>(emptyOption);
 
   const tip = useSelector((state: RootState) => state.notification.tip);
+  const { item_type, user_place_name } = tip;
 
   const tipValidation = useSelector((state: RootState) => state.notificationValidation.tipValidation);
-  const { target: targetValid } = tipValidation;
+  const { target: targetValid, user_place_name: userPlaceNameValid } = tipValidation;
 
   const selectPlace = (selected: OptionType) => {
     console.log("selectPlace", selected);
@@ -36,8 +37,16 @@ const TipSearch = (): ReactElement => {
     dispatch(setNotificationTip({ ...tip, target: selected.id as number }));
   };
 
+  const updateDetails = (evt: ChangeEvent<HTMLInputElement>) => {
+    dispatch(setNotificationTip({ ...tip, [evt.target.name]: evt.target.value }));
+  };
+
   const validatePlace = () => {
     isTipFieldValid("target", tip, dispatchValidation);
+  };
+
+  const validateDetails = (evt: ChangeEvent<HTMLInputElement>) => {
+    isTipFieldValid(evt.target.name, tip, dispatchValidation);
   };
 
   const searchPlaces = async (evt: ChangeEvent<HTMLInputElement>) => {
@@ -69,30 +78,55 @@ const TipSearch = (): ReactElement => {
   };
 
   return (
-    <div className={`formItem ${styles.tipSearch}`}>
-      <TextInput
-        id="placeName"
-        className="formInput"
-        name="placeName"
-        onChange={searchPlaces}
-        label={i18n.t("notification.tip.placeName.label")}
-        helperText={i18n.t("notification.tip.placeName.helperText")}
-      />
+    <div className="formItem">
+      {item_type === ItemType.ChangeRequestAdd && (
+        <TextInput
+          id="userPlaceName"
+          className="formInput"
+          name="user_place_name"
+          value={user_place_name}
+          onChange={updateDetails}
+          onBlur={validateDetails}
+          label={i18n.t("notification.tip.addPlaceName.label")}
+          invalid={!userPlaceNameValid.valid}
+          errorText={
+            !userPlaceNameValid.valid
+              ? i18n.t(userPlaceNameValid.message as string).replace("$fieldName", i18n.t("notification.tip.addPlaceName.label"))
+              : ""
+          }
+          required
+        />
+      )}
 
-      <Select
-        id="placeResults"
-        className="formInput"
-        options={placeResults}
-        value={selectedPlace}
-        onChange={selectPlace}
-        onBlur={validatePlace}
-        label={i18n.t("notification.tip.placeResults.label")}
-        selectedItemRemoveButtonAriaLabel={i18n.t("notification.button.remove")}
-        clearButtonAriaLabel={i18n.t("notification.button.clearAllSelections")}
-        invalid={!targetValid.valid}
-        error={!targetValid.valid ? i18n.t(targetValid.message as string).replace("$fieldName", i18n.t("notification.tip.placeResults.label")) : ""}
-        required
-      />
+      {(item_type === ItemType.ChangeRequestChange || item_type === ItemType.ChangeRequestDelete) && (
+        <>
+          <TextInput
+            id="placeName"
+            className="formInput"
+            name="placeName"
+            onChange={searchPlaces}
+            label={i18n.t("notification.tip.placeName.label")}
+            helperText={i18n.t("notification.tip.placeName.helperText")}
+          />
+
+          <Select
+            id="placeResults"
+            className="formInput"
+            options={placeResults}
+            value={selectedPlace}
+            onChange={selectPlace}
+            onBlur={validatePlace}
+            label={i18n.t("notification.tip.placeResults.label")}
+            selectedItemRemoveButtonAriaLabel={i18n.t("notification.button.remove")}
+            clearButtonAriaLabel={i18n.t("notification.button.clearAllSelections")}
+            invalid={!targetValid.valid}
+            error={
+              !targetValid.valid ? i18n.t(targetValid.message as string).replace("$fieldName", i18n.t("notification.tip.placeResults.label")) : ""
+            }
+            required
+          />
+        </>
+      )}
     </div>
   );
 };

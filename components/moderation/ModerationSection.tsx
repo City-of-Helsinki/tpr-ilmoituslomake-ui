@@ -44,7 +44,7 @@ const ModerationSection = ({
   ModerationComponent,
   isSelectionGroupWrapper,
 }: ModerationSectionProps): ReactElement => {
-  if (taskType === TaskType.ChangeTip || taskType === TaskType.RemoveTip) {
+  if (taskType === TaskType.ChangeTip || taskType === TaskType.AddTip || taskType === TaskType.RemoveTip) {
     return (
       <>
         {selectedHeaderText && status !== ModerationStatus.Edited && <h4 className="gridColumn1 moderation">{selectedHeaderText}</h4>}

@@ -36,6 +36,7 @@ const TaskHeader = (): ReactElement => {
     created_at,
     taskType,
     status,
+    userPlaceName,
     userComments,
     userDetails,
     moderator: { fullName: moderatorName },
@@ -164,7 +165,8 @@ const TaskHeader = (): ReactElement => {
   return (
     <div className={styles.taskHeader}>
       <h1 className="moderation">
-        {getDisplayName(router.locale || defaultLocale, placeNameSelected)} ({selectedTaskId})
+        {getDisplayName(router.locale || defaultLocale, placeNameSelected, userPlaceName)}
+        {selectedTaskId ? ` (${selectedTaskId})` : ""}
       </h1>
 
       {(taskType === TaskType.NewPlace || taskType === TaskType.PlaceChange) && (
@@ -182,7 +184,7 @@ const TaskHeader = (): ReactElement => {
         </div>
       )}
 
-      {(taskType === TaskType.ChangeTip || taskType === TaskType.RemoveTip) && (
+      {(taskType === TaskType.ChangeTip || taskType === TaskType.AddTip || taskType === TaskType.RemoveTip) && (
         <div className={styles.buttonRow}>
           <Button variant="secondary">{i18n.t("moderation.button.requestTranslation")}</Button>
           <Button variant="secondary" iconRight={<IconArrowUndo />} onClick={openRejectionConfirmation}>
@@ -239,7 +241,7 @@ const TaskHeader = (): ReactElement => {
               </>
             )}
           </div>
-          {(taskType === TaskType.ChangeTip || taskType === TaskType.RemoveTip) && <div>{userDetails}</div>}
+          {(taskType === TaskType.ChangeTip || taskType === TaskType.AddTip || taskType === TaskType.RemoveTip) && <div>{userDetails}</div>}
           {(taskType === TaskType.NewPlace || taskType === TaskType.PlaceChange) && (
             <>
               <div>{full_name}</div>
@@ -250,7 +252,15 @@ const TaskHeader = (): ReactElement => {
         </div>
         <div className={styles.comment}>
           <div className={styles.bold}>{i18n.t("moderation.taskHeader.messageFromNotifier")}</div>
-          <div>{taskType === TaskType.ChangeTip || taskType === TaskType.RemoveTip ? userComments : comments}</div>
+          {(taskType === TaskType.ChangeTip || taskType === TaskType.AddTip || taskType === TaskType.RemoveTip) && (
+            <>
+              <div>
+                {i18n.t("moderation.taskHeader.addPlaceName")}: {userPlaceName}
+              </div>
+              <div>{userComments}</div>
+            </>
+          )}
+          {(taskType === TaskType.NewPlace || taskType === TaskType.PlaceChange) && <div>{comments}</div>}
         </div>
       </div>
 

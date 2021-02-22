@@ -2,7 +2,7 @@ import { Dispatch, SetStateAction } from "react";
 import { NextRouter } from "next/router";
 import Cookies from "js-cookie";
 import { NotificationValidationAction } from "../state/actions/types";
-import { Toast } from "../types/constants";
+import { ItemType, Toast } from "../types/constants";
 import { ChangeRequestSchema, ModerationExtra, NotificationExtra, User } from "../types/general";
 import { NotificationSchema } from "../types/notification_schema";
 import getOrigin from "./request";
@@ -98,7 +98,9 @@ export const saveTip = async (
       // Send the Cross Site Request Forgery token, otherwise the backend returns the error "CSRF Failed: CSRF token missing or incorrect."
       const csrftoken = Cookies.get("csrftoken");
 
-      const postData = tip;
+      // If the tip is about a new place, use a null target id
+      const { item_type, target } = tip;
+      const postData = { ...tip, target: item_type === ItemType.ChangeRequestAdd ? null : target };
 
       console.log("SENDING", postData);
 

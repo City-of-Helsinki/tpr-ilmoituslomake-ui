@@ -83,6 +83,7 @@ export interface NotificationPlaceResult {
 export interface ChangeRequestSchema {
   target: number;
   item_type: string;
+  user_place_name: string;
   user_comments: string;
   user_details: string;
   [key: string]: string | number;
@@ -91,6 +92,7 @@ export interface ChangeRequestSchema {
 export interface ChangeRequestValidationSchema {
   target: Validation;
   item_type: Validation;
+  user_place_name: Validation;
   user_comments: Validation;
   user_details: Validation;
 }
@@ -128,6 +130,7 @@ export interface ModerationTodoResult {
     last_name?: string;
     email?: string;
   };
+  user_place_name: string;
   created_at: string;
   updated_at: string;
   created: Date;
@@ -146,6 +149,7 @@ export interface ModerationTodoSchema {
   item_type: string;
   status: string;
   data: NotificationSchema;
+  user_place_name: string;
   user_comments: string;
   user_details: string;
   moderator: {
@@ -169,6 +173,7 @@ export interface ModerationExtra {
   updated_at: string;
   taskType: TaskType;
   status: TaskStatus;
+  userPlaceName: string;
   userComments: string;
   userDetails: string;
   moderator: {

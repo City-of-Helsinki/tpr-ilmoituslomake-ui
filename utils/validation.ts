@@ -18,7 +18,14 @@ import {
   setNotificationPhotoAltTextValidation,
   setNotificationTipValidation,
 } from "../state/actions/notificationValidation";
-import { MAX_LENGTH_SHORT_DESC, MIN_LENGTH_LONG_DESC, MAX_LENGTH_LONG_DESC, MAX_LENGTH_PHOTO_DESC, PhotoSourceType } from "../types/constants";
+import {
+  MAX_LENGTH_SHORT_DESC,
+  MIN_LENGTH_LONG_DESC,
+  MAX_LENGTH_LONG_DESC,
+  MAX_LENGTH_PHOTO_DESC,
+  PhotoSourceType,
+  ItemType,
+} from "../types/constants";
 import { NotificationSchema } from "../types/notification_schema";
 import { ChangeRequestSchema, NotificationExtra } from "../types/general";
 import notificationSchema from "../schemas/notification_schema.json";
@@ -311,10 +318,12 @@ export const isTipPageValid = (tip: ChangeRequestSchema, dispatch: Dispatch<Noti
   // Check whether all data on the page is valid
   // Everything needs to be validated, so make sure lazy evaluation is not used
   const inputValid = [
-    isTipFieldValid("target", tip, dispatch),
+    tip.item_type === ItemType.ChangeRequestChange || tip.item_type === ItemType.ChangeRequestDelete
+      ? isTipFieldValid("target", tip, dispatch)
+      : true,
     isTipFieldValid("item_type", tip, dispatch),
+    tip.item_type === ItemType.ChangeRequestAdd ? isTipFieldValid("user_place_name", tip, dispatch) : true,
     isTipFieldValid("user_comments", tip, dispatch),
-    isTipFieldValid("user_details", tip, dispatch),
   ];
   return inputValid.every((valid) => valid);
 };

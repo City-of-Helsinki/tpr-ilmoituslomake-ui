@@ -43,6 +43,7 @@ const initialState: NotificationState = {
   tip: {
     target: 0,
     item_type: ItemType.ChangeRequestChange,
+    user_place_name: "",
     user_comments: "",
     user_details: "",
   },

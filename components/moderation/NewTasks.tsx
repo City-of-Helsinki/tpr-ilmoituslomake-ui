@@ -61,19 +61,15 @@ const NewTasks = (): ReactElement => {
         {taskResults
           .sort((a: ModerationTodoResult, b: ModerationTodoResult) => b.created.getTime() - a.created.getTime())
           .map((result) => {
-            const {
-              id,
-              target: { id: targetId, name },
-              taskType,
-              created,
-              status,
-            } = result;
+            const { id, target, taskType, created, status, user_place_name } = result;
+            const { id: targetId, name } = target || {};
+
             return (
               <Fragment key={`taskresult_${id}`}>
                 <div className={`${styles.gridColumn1} ${styles.gridContent} ${styles.gridButton}`}>
                   <Link href={`/moderation/task/${id}`}>
                     <Button variant="supplementary" size="small" iconLeft={<IconPen />}>
-                      {`${getDisplayName(router.locale || defaultLocale, name)} (${targetId})`}
+                      {`${getDisplayName(router.locale || defaultLocale, name, user_place_name)}${targetId ? ` (${targetId})` : ""}`}
                     </Button>
                   </Link>
                 </div>

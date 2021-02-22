@@ -11,6 +11,7 @@ import { checkUser } from "../utils/serverside";
 import Layout from "../components/common/Layout";
 import Header from "../components/common/Header";
 import NotificationNotice from "../components/notification/NotificationNotice";
+import TipType from "../components/notification/TipType";
 import TipSearch from "../components/notification/TipSearch";
 import TipDetails from "../components/notification/TipDetails";
 import TipFooter from "../components/notification/TipFooter";
@@ -39,6 +40,7 @@ const Tip = (): ReactElement => {
         <h1>{i18n.t("notification.tip.title")}</h1>
         <NotificationNotice messageKey="notification.mandatory" />
         {!pageValid && <ValidationSummary />}
+        <TipType />
         <TipSearch />
         <TipDetails />
         <TipFooter />

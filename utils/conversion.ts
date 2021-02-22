@@ -16,6 +16,9 @@ export const getTaskType = (category: string, itemType: string): TaskType => {
     if (taskItemType === ItemType.ChangeRequestChange) {
       return TaskType.ChangeTip;
     }
+    if (taskItemType === ItemType.ChangeRequestAdd) {
+      return TaskType.AddTip;
+    }
     if (taskItemType === ItemType.ChangeRequestDelete) {
       return TaskType.RemoveTip;
     }
@@ -29,6 +32,7 @@ export const getTaskCategoryFromType = (taskType: TaskType): TaskCategory => {
     case TaskType.PlaceChange:
       return TaskCategory.ModerationTask;
     case TaskType.ChangeTip:
+    case TaskType.AddTip:
     case TaskType.RemoveTip:
       return TaskCategory.ChangeRequest;
     default:
@@ -44,6 +48,8 @@ export const getTaskItemTypeFromType = (taskType: TaskType): ItemType => {
       return ItemType.ModerationTaskModified;
     case TaskType.ChangeTip:
       return ItemType.ChangeRequestChange;
+    case TaskType.AddTip:
+      return ItemType.ChangeRequestAdd;
     case TaskType.RemoveTip:
       return ItemType.ChangeRequestDelete;
     default:

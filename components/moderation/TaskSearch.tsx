@@ -31,6 +31,7 @@ const TaskSearch = (): ReactElement => {
     { id: TaskType.PlaceChange, label: i18n.t("moderation.taskType.placeChange") },
     { id: TaskType.NewPlace, label: i18n.t("moderation.taskType.newPlace") },
     { id: TaskType.ChangeTip, label: i18n.t("moderation.taskType.changeTip") },
+    { id: TaskType.AddTip, label: i18n.t("moderation.taskType.addTip") },
     { id: TaskType.RemoveTip, label: i18n.t("moderation.taskType.removeTip") },
   ];
 

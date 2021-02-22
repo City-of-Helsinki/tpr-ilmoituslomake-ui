@@ -6,7 +6,7 @@ import { useI18n } from "next-localization";
 import i18nLoader from "../../../utils/i18n";
 import { initStore } from "../../../state/store";
 import { RootState } from "../../../state/reducers";
-import { ModerationStatus, CLEAR_STATE } from "../../../types/constants";
+import { ModerationStatus, CLEAR_STATE, INITIAL_NOTIFICATION } from "../../../types/constants";
 import { ModerationTodoSchema } from "../../../types/general";
 import { PhotoStatus } from "../../../types/moderation_status";
 import { NotificationSchema } from "../../../types/notification_schema";
@@ -27,7 +27,6 @@ import TagsModeration from "../../../components/moderation/TagsModeration";
 const ModerationTaskDetail = (): ReactElement => {
   const i18n = useI18n();
 
-  const selectedTaskId = useSelector((state: RootState) => state.moderation.selectedTaskId);
   const modifiedTaskId = useSelector((state: RootState) => state.moderation.modifiedTaskId);
 
   // The maps only initialise properly when not hidden, so use a flag to only collapse the container after the maps are ready
@@ -39,7 +38,7 @@ const ModerationTaskDetail = (): ReactElement => {
         <title>{i18n.t("moderation.title")}</title>
       </Head>
       <ModerationHeader currentPage={3} />
-      {selectedTaskId > 0 && modifiedTaskId > 0 && (
+      {modifiedTaskId > 0 && (
         <main id="content">
           <TaskHeader />
           <h2 className="moderation">{i18n.t("moderation.task.title")}</h2>
@@ -94,12 +93,13 @@ export const getServerSideProps: GetServerSideProps = async ({ req, resolvedUrl,
 
       try {
         const taskType = getTaskType(taskResult.category, taskResult.item_type);
-        const modifiedTask = !taskResult.data || !taskResult.data.name ? taskResult.target.data : (taskResult.data as NotificationSchema);
+        const { id: targetId, data: targetData } = taskResult.target || { id: 0, data: INITIAL_NOTIFICATION };
+        const modifiedTask = !taskResult.data || !taskResult.data.name ? targetData : (taskResult.data as NotificationSchema);
 
         initialReduxState.moderation = {
           ...initialReduxState.moderation,
-          selectedTaskId: taskResult.target.id,
-          selectedTask: taskResult.target.data,
+          selectedTaskId: targetId,
+          selectedTask: targetData,
           modifiedTaskId: taskResult.id,
           modifiedTask,
           moderationExtra: {
@@ -108,13 +108,14 @@ export const getServerSideProps: GetServerSideProps = async ({ req, resolvedUrl,
             updated_at: taskResult.updated_at,
             taskType,
             status: getTaskStatus(taskResult.status),
+            userPlaceName: taskResult.user_place_name,
             userComments: taskResult.user_comments,
             userDetails: taskResult.user_details,
             moderator: {
               fullName: taskResult.moderator ? `${taskResult.moderator.first_name} ${taskResult.moderator.last_name}`.trim() : "",
               email: taskResult.moderator && taskResult.moderator.email ? taskResult.moderator.email : "",
             },
-            photosSelected: taskResult.target.data.images.map((image) => {
+            photosSelected: targetData.images.map((image) => {
               return {
                 uuid: image.uuid ?? "",
                 sourceType: image.source_type,

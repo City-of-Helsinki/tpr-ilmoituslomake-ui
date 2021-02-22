@@ -31,6 +31,7 @@ export enum TaskCategory {
 export enum ItemType {
   Unknown = "unknown",
   ChangeRequestChange = "change",
+  ChangeRequestAdd = "add",
   ChangeRequestDelete = "delete",
   ModerationTaskCreated = "created",
   ModerationTaskModified = "modified",
@@ -47,6 +48,7 @@ export enum TaskType {
   PlaceChange = "placeChange",
   NewPlace = "newPlace",
   ChangeTip = "changeTip",
+  AddTip = "addTip",
   RemoveTip = "removeTip",
 }
 
@@ -257,6 +259,7 @@ export const INITIAL_MODERATION_EXTRA = {
   updated_at: "",
   taskType: TaskType.Unknown,
   status: TaskStatus.Unknown,
+  userPlaceName: "",
   userComments: "",
   userDetails: "",
   moderator: {

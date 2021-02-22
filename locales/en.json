@@ -312,9 +312,13 @@
       "placeResults": {
         "label": "Place's name"
       },
+      "addPlaceName": {
+        "label": "New place's name"
+      },
       "itemType": {
         "label": "Tip type",
         "change": "Change to place's information",
+        "add": "New place",
         "delete": "Place closed down"
       },
       "comments": {
@@ -534,7 +538,8 @@
       "notifier": "Notifier",
       "representative": "Is the place's representative",
       "notRepresentative": "Is not the place's representative",
-      "messageFromNotifier": "Message from notifier"
+      "messageFromNotifier": "Message from notifier",
+      "addPlaceName": "New place's name"
     },
     "taskSearch": {
       "title": "Moderation tasks",
@@ -562,7 +567,8 @@
       "placeChange": "Place change",
       "newPlace": "New place",
       "changeTip": "Change tip",
-      "removeTip": "Remove tip"
+      "addTip": "Addition tip",
+      "removeTip": "Removal tip"
     },
     "translationNotice": {
       "title": "Translation management",

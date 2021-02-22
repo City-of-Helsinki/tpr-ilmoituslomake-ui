@@ -312,9 +312,13 @@
       "placeResults": {
         "label": "Kohteen nimi"
       },
+      "addPlaceName": {
+        "label": "Uuden kohteen nimi"
+      },
       "itemType": {
         "label": "Vinkkityyppi",
         "change": "Muutos kohteen tietoihin",
+        "add": "Uusi kohde",
         "delete": "Kohteen poistaminen"
       },
       "comments": {
@@ -534,7 +538,8 @@
       "notifier": "Ilmoittaja",
       "representative": "On kohteen edustaja",
       "notRepresentative": "Ei ole kohteen edustaja",
-      "messageFromNotifier": "Viesti ilmoittajalta"
+      "messageFromNotifier": "Viesti ilmoittajalta",
+      "addPlaceName": "Uuden kohteen nimi"
     },
     "taskSearch": {
       "title": "Moderointitehtävät",
@@ -562,6 +567,7 @@
       "placeChange": "Kohde muutos",
       "newPlace": "Uusi kohde",
       "changeTip": "Muutos vinkki",
+      "addTip": "Lisäys vinkki",
       "removeTip": "Poisto vinkki"
     },
     "translationNotice": {

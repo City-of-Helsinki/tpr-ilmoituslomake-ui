@@ -25,6 +25,7 @@ const initialState: NotificationValidationState = {
   tipValidation: {
     target: { valid: true },
     item_type: { valid: true },
+    user_place_name: { valid: true },
     user_comments: { valid: true },
     user_details: { valid: true },
   },
