@@ -32,7 +32,7 @@ const Contact = (): ReactElement => {
       <h3>{i18n.t("notification.contact.title")}</h3>
       <TextInput
         id="phone"
-        className="formInput"
+        className="formInput limitInputWidth"
         label={i18n.t("notification.contact.phone.label")}
         name="phone"
         value={phone}
@@ -43,7 +43,7 @@ const Contact = (): ReactElement => {
       />
       <TextInput
         id="email"
-        className="formInput"
+        className="formInput limitInputWidth"
         label={i18n.t("notification.contact.email.label")}
         name="email"
         value={email}

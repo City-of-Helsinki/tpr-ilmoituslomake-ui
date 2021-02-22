@@ -58,7 +58,7 @@ const Location = (): ReactElement => {
         <>
           <TextInput
             id="streetAddressFi"
-            className="formInput"
+            className="formInput limitInputWidth"
             label={i18n.t("notification.location.streetAddress.label")}
             name="street"
             value={streetFi}
@@ -75,7 +75,7 @@ const Location = (): ReactElement => {
           />
           <TextInput
             id="postalCodeFi"
-            className="formInput"
+            className="formInput limitInputWidth"
             label={i18n.t("notification.location.postalCode.label")}
             name="postal_code"
             value={postalCodeFi}
@@ -92,7 +92,7 @@ const Location = (): ReactElement => {
           />
           <TextInput
             id="postalOfficeFi"
-            className="formInput"
+            className="formInput limitInputWidth"
             label={i18n.t("notification.location.postalOffice.label")}
             name="post_office"
             value={postOfficeFi}
@@ -113,7 +113,7 @@ const Location = (): ReactElement => {
         <>
           <TextInput
             id="streetAddressSv"
-            className="formInput"
+            className="formInput limitInputWidth"
             label={i18n.t("notification.location.streetAddress.label")}
             name="street"
             value={streetSv}
@@ -130,7 +130,7 @@ const Location = (): ReactElement => {
           />
           <TextInput
             id="postalCodeSv"
-            className="formInput"
+            className="formInput limitInputWidth"
             label={i18n.t("notification.location.postalCode.label")}
             name="postal_code"
             value={postalCodeSv}
@@ -147,7 +147,7 @@ const Location = (): ReactElement => {
           />
           <TextInput
             id="postalOfficeSv"
-            className="formInput"
+            className="formInput limitInputWidth"
             label={i18n.t("notification.location.postalOffice.label")}
             name="post_office"
             value={postOfficeSv}

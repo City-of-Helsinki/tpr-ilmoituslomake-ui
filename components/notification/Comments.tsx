@@ -26,7 +26,7 @@ const Comments = (): ReactElement => {
     <div className={`formSection ${styles.comments}`}>
       <TextArea
         id="comments"
-        className="formInput"
+        className="formInput limitInputWidth"
         rows={6}
         label={i18n.t("notification.comments.comments.label")}
         name="comments"

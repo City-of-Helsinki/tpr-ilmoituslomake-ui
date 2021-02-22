@@ -41,7 +41,7 @@ const Links = (): ReactElement => {
             <TextInput
               id={`website_${option}`}
               key={`website_${option}`}
-              className="formInput"
+              className="formInput limitInputWidth"
               label={label}
               name={option}
               value={website[option] as string}

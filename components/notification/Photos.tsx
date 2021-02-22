@@ -146,7 +146,7 @@ const Photos = (): ReactElement => {
               <>
                 <TextInput
                   id={`url_${index}`}
-                  className="formInput disabledTextColor"
+                  className="formInput limitInputWidth disabledTextColor"
                   label={i18n.t("notification.photos.url.labelDevice")}
                   name="url"
                   value={url}
@@ -175,7 +175,7 @@ const Photos = (): ReactElement => {
               <>
                 <TextInput
                   id={`url_${index}`}
-                  className="formInput"
+                  className="formInput limitInputWidth"
                   label={i18n.t("notification.photos.url.labelLink")}
                   name="url"
                   value={url}
@@ -214,7 +214,7 @@ const Photos = (): ReactElement => {
                       <TextArea
                         id={`altText_${index}_${option}`}
                         key={key2}
-                        className="formInput"
+                        className="formInput limitInputWidth"
                         rows={3}
                         label={label}
                         name={option}
@@ -282,7 +282,7 @@ const Photos = (): ReactElement => {
 
                 <TextInput
                   id={`source_${index}`}
-                  className="formInput"
+                  className="formInput limitInputWidth"
                   label={i18n.t("notification.photos.source.label")}
                   name="source"
                   value={source}

@@ -43,7 +43,7 @@ const Tags = (): ReactElement => {
       <h3>{i18n.t("notification.tags.title")}</h3>
       <Combobox
         id="tag"
-        className="formInput"
+        className="formInput limitInputWidth"
         // @ts-ignore: Erroneous error that the type for options should be OptionType[][]
         options={convertOptions(tagOptions)}
         value={convertValues(ontology_ids)}
