@@ -71,6 +71,7 @@ const Location = (): ReactElement => {
                 : ""
             }
             required
+            aria-required
           />
           <TextInput
             id="postalCodeFi"
@@ -87,6 +88,7 @@ const Location = (): ReactElement => {
                 : ""
             }
             required
+            aria-required
           />
           <TextInput
             id="postalOfficeFi"
@@ -103,6 +105,7 @@ const Location = (): ReactElement => {
                 : ""
             }
             required
+            aria-required
           />
         </>
       )}
@@ -123,6 +126,7 @@ const Location = (): ReactElement => {
                 : ""
             }
             required
+            aria-required
           />
           <TextInput
             id="postalCodeSv"
@@ -139,6 +143,7 @@ const Location = (): ReactElement => {
                 : ""
             }
             required
+            aria-required
           />
           <TextInput
             id="postalOfficeSv"
@@ -155,6 +160,7 @@ const Location = (): ReactElement => {
                 : ""
             }
             required
+            aria-required
           />
         </>
       )}

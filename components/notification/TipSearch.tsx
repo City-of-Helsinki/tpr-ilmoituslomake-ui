@@ -95,6 +95,7 @@ const TipSearch = (): ReactElement => {
               : ""
           }
           required
+          aria-required
         />
       )}
 
@@ -124,6 +125,7 @@ const TipSearch = (): ReactElement => {
               !targetValid.valid ? i18n.t(targetValid.message as string).replace("$fieldName", i18n.t("notification.tip.placeResults.label")) : ""
             }
             required
+            aria-required
           />
         </>
       )}

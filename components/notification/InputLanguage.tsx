@@ -28,6 +28,7 @@ const InputLanguage = (): ReactElement => {
       className={styles.inputLanguage}
       label={i18n.t("notification.inputLanguage.title")}
       required
+      aria-required
     >
       {LANGUAGE_OPTIONS.map((option) => (
         <Checkbox
@@ -40,6 +41,7 @@ const InputLanguage = (): ReactElement => {
           checked={inputLanguages.includes(option)}
           onChange={updateInputLanguage}
           required={router.locale === option}
+          aria-required={router.locale === option}
           disabled={router.locale === option}
         />
       ))}

@@ -57,6 +57,7 @@ const Tags = (): ReactElement => {
         invalid={!tagsValid.valid}
         error={!tagsValid.valid ? i18n.t(tagsValid.message as string).replace("$fieldName", i18n.t("notification.tags.tagSelection")) : ""}
         required
+        aria-required
         multiselect
       />
     </div>

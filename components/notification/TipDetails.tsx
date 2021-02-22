@@ -43,6 +43,7 @@ const TipDetails = (): ReactElement => {
           !userCommentsValid.valid ? i18n.t(userCommentsValid.message as string).replace("$fieldName", i18n.t("notification.tip.comments.label")) : ""
         }
         required
+        aria-required
       />
 
       <TextArea

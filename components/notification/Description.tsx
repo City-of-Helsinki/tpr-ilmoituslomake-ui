@@ -90,6 +90,7 @@ const Description = (): ReactElement => {
               invalid={!nameValid[option].valid}
               errorText={!nameValid[option].valid ? i18n.t(nameValid[option].message as string).replace("$fieldName", label) : ""}
               required={router.locale === option}
+              aria-required={router.locale === option}
             />
           ) : null;
         })}
@@ -117,6 +118,7 @@ const Description = (): ReactElement => {
               invalid={!shortDescValid[option].valid}
               errorText={!shortDescValid[option].valid ? i18n.t(shortDescValid[option].message as string).replace("$fieldName", label) : ""}
               required={router.locale === option}
+              aria-required={router.locale === option}
             />
           ) : null;
         })}
@@ -144,6 +146,7 @@ const Description = (): ReactElement => {
               invalid={!longDescValid[option].valid}
               errorText={!longDescValid[option].valid ? i18n.t(longDescValid[option].message as string).replace("$fieldName", label) : ""}
               required={router.locale === option}
+              aria-required={router.locale === option}
             />
           ) : null;
         })}

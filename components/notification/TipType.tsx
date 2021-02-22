@@ -33,6 +33,7 @@ const TipType = (): ReactElement => {
           !itemTypeValid.valid ? i18n.t(itemTypeValid.message as string).replace("$fieldName", i18n.t("notification.tip.itemType.label")) : ""
         }
         required
+        aria-required
       >
         <RadioButton
           id="itemType_change"

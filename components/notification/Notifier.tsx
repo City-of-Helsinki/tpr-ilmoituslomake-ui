@@ -50,6 +50,7 @@ const Notifier = (): ReactElement => {
             : ""
         }
         required
+        aria-required
       >
         <RadioButton
           id="notifierType_owner"
@@ -82,6 +83,7 @@ const Notifier = (): ReactElement => {
           !fullNameValid.valid ? i18n.t(fullNameValid.message as string).replace("$fieldName", i18n.t("notification.notifier.fullName.label")) : ""
         }
         required
+        aria-required
       />
       <TextInput
         id="email"
@@ -94,6 +96,7 @@ const Notifier = (): ReactElement => {
         invalid={!emailValid.valid}
         errorText={!emailValid.valid ? i18n.t(emailValid.message as string).replace("$fieldName", i18n.t("notification.notifier.email.label")) : ""}
         required
+        aria-required
       />
       <TextInput
         id="phone"
@@ -106,6 +109,7 @@ const Notifier = (): ReactElement => {
         invalid={!phoneValid.valid}
         errorText={!phoneValid.valid ? i18n.t(phoneValid.message as string).replace("$fieldName", i18n.t("notification.notifier.phone.label")) : ""}
         required
+        aria-required
       />
     </div>
   );

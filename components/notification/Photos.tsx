@@ -157,6 +157,7 @@ const Photos = (): ReactElement => {
                       : ""
                   }
                   required
+                  aria-required
                   disabled={isNewImage}
                 />
 
@@ -187,6 +188,7 @@ const Photos = (): ReactElement => {
                       : ""
                   }
                   required
+                  aria-required
                 />
                 <Button variant="secondary" className="formInput" onClick={() => removePhoto(index)}>
                   {i18n.t("notification.photos.remove")}
@@ -249,6 +251,7 @@ const Photos = (): ReactElement => {
                       : ""
                   }
                   required
+                  aria-required
                 >
                   <RadioButton
                     id={`permission_myHelsinki_${index}`}
@@ -295,6 +298,7 @@ const Photos = (): ReactElement => {
                   tooltipLabel={i18n.t("notification.photos.source.tooltipLabel")}
                   tooltipText={i18n.t("notification.photos.source.tooltipText")}
                   required
+                  aria-required
                 />
               </>
             )}
