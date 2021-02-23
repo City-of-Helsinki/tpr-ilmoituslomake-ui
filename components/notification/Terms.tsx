@@ -18,6 +18,7 @@ const Terms = (): ReactElement => {
         <div>{i18n.t("notification.terms.text1")}</div>
         <Button variant="supplementary" size="small" className={styles.creativeCommonsLink} iconRight={<IconLinkExternal />} onClick={openTermsOfUse}>
           {i18n.t("notification.terms.link")}
+          <span className="screenReaderOnly"> {i18n.t("common.opensInANewTab")}</span>
         </Button>
         <div>{i18n.t("notification.terms.text2")}</div>
       </div>

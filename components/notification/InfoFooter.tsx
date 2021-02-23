@@ -22,6 +22,7 @@ const InfoFooter = (): ReactElement => {
       <div className={styles.gridButton}>
         <Button variant="secondary" iconRight={<IconLinkExternal />}>
           {i18n.t("notification.button.modifyOpeningTimes")}
+          <span className="screenReaderOnly"> {i18n.t("common.opensInANewTab")}</span>
         </Button>
       </div>
       */}

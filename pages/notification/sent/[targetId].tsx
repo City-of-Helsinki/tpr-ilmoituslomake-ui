@@ -68,6 +68,7 @@ const NotificationSent = (): ReactElement => {
             button={
               <Button variant="secondary" iconRight={<IconLinkExternal />}>
                 {i18n.t("notification.button.notifyOpeningTimes")}
+                <span className="screenReaderOnly"> {i18n.t("common.opensInANewTab")}</span>
               </Button>
             }
           />
@@ -95,7 +96,10 @@ const NotificationSent = (): ReactElement => {
                 {i18n.t("notification.message.sentModal.message")}
               </div>
               <div>
-                <Button iconRight={<IconLinkExternal />}>{i18n.t("notification.button.continueToOpeningTimes")}</Button>
+                <Button iconRight={<IconLinkExternal />}>
+                  {i18n.t("notification.button.continueToOpeningTimes")}
+                  <span className="screenReaderOnly"> {i18n.t("common.opensInANewTab")}</span>
+                </Button>
               </div>
               <div>
                 <Button variant="supplementary" iconRight={<IconInfoCircle />} onClick={closeModal}>

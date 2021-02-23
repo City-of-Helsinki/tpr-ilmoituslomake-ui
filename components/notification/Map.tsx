@@ -36,7 +36,7 @@ const Map = (): ReactElement => {
   return (
     <div className="formSection">
       <h3>{i18n.t("notification.map.title")}</h3>
-      <Button variant="supplementary" size="small" className={styles.skipButton} iconRight={<IconPlaybackNext />} onClick={skipMap}>
+      <Button variant="supplementary" size="small" className="visibleOnFocusOnly" iconRight={<IconPlaybackNext />} onClick={skipMap}>
         {i18n.t("notification.map.skipMap")}
       </Button>
 

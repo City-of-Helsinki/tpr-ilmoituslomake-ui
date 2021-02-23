@@ -278,6 +278,7 @@ const Photos = (): ReactElement => {
                   onClick={openCreativeCommons}
                 >
                   {i18n.t("notification.photos.permission.creativeCommons2")}
+                  <span className="screenReaderOnly"> {i18n.t("common.opensInANewTab")}</span>
                 </Button>
 
                 <TextInput
