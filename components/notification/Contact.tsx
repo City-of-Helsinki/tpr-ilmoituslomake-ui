@@ -28,7 +28,7 @@ const Contact = (): ReactElement => {
   };
 
   return (
-    <div>
+    <div id="contact">
       <h3>{i18n.t("notification.contact.title")}</h3>
       <TextInput
         id="phone"

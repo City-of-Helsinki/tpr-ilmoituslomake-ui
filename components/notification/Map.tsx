@@ -2,6 +2,7 @@ import React, { Dispatch, ReactElement } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import dynamic from "next/dynamic";
 import { useI18n } from "next-localization";
+import { Button, IconPlaybackNext } from "hds-react";
 import { LatLngExpression } from "leaflet";
 import { setMapView, setNotificationLocation } from "../../state/actions/notification";
 import { NotificationAction } from "../../state/actions/types";
@@ -28,9 +29,17 @@ const Map = (): ReactElement => {
     dispatch(setMapView(center, zoom));
   };
 
+  const skipMap = () => {
+    window.location.href = "#contact";
+  };
+
   return (
     <div className="formSection">
       <h3>{i18n.t("notification.map.title")}</h3>
+      <Button variant="supplementary" size="small" className={styles.skipButton} iconRight={<IconPlaybackNext />} onClick={skipMap}>
+        {i18n.t("notification.map.skipMap")}
+      </Button>
+
       <div className={styles.geocode}>
         <div>{i18n.t("notification.map.notice")}</div>
       </div>

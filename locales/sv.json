@@ -195,7 +195,8 @@
     "map": {
       "title": "Kohde kartalla",
       "notice": "Kohde näkyy kartalla yllä annetun osoitteen perusteella. Jos hakutulos on epätarkka tai virheellinen, voit korjata sen siirtämällä kartalla olevaa kohdistinta oikeaan kohtaan. Suosittelemme, että kohdistin merkitään pääsisäänkäynnin kohdalle.",
-      "geocode": "Näytä kartalla"
+      "geocode": "Näytä kartalla",
+      "skipMap": "Ohita kartta"
     },
     "notifier": {
       "title": "Ilmoittajan tiedot",
