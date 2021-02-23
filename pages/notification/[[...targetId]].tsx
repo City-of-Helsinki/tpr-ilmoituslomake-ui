@@ -34,11 +34,12 @@ const NotificationDetail = (): ReactElement => {
 
   const currentPage = useSelector((state: RootState) => state.notification.page);
   const pageValid = useSelector((state: RootState) => state.notificationValidation.pageValid);
-  const ref = useRef<HTMLDivElement>(null);
+  const ref = useRef<HTMLHeadingElement>(null);
 
   useEffect(() => {
     if (ref.current) {
       ref.current.scrollIntoView();
+      ref.current.focus();
     }
   });
 
@@ -49,8 +50,8 @@ const NotificationDetail = (): ReactElement => {
       </Head>
       <NotificationHeader />
       {currentPage === 1 && (
-        <main id="content" className={styles.content} ref={ref}>
-          <h2>{`${currentPage} ${i18n.t("notification.main.basic")}`}</h2>
+        <main id="content" className={styles.content}>
+          <h2 ref={ref} tabIndex={-1}>{`${currentPage} ${i18n.t("notification.main.basic")}`}</h2>
           <NotificationNotice messageKey="notification.mandatory" />
           {!pageValid && <ValidationSummary />}
           <Description />
@@ -59,8 +60,8 @@ const NotificationDetail = (): ReactElement => {
         </main>
       )}
       {currentPage === 2 && (
-        <main id="content" className={styles.content} ref={ref}>
-          <h2>{`${currentPage} ${i18n.t("notification.main.contact")}`}</h2>
+        <main id="content" className={styles.content}>
+          <h2 ref={ref} tabIndex={-1}>{`${currentPage} ${i18n.t("notification.main.contact")}`}</h2>
           <NotificationNotice messageKey="notification.mandatory" />
           {!pageValid && <ValidationSummary />}
           <Location />
@@ -70,16 +71,16 @@ const NotificationDetail = (): ReactElement => {
         </main>
       )}
       {currentPage === 3 && (
-        <main id="content" className={styles.content} ref={ref}>
-          <h2>{`${currentPage} ${i18n.t("notification.main.photos")}`}</h2>
+        <main id="content" className={styles.content}>
+          <h2 ref={ref} tabIndex={-1}>{`${currentPage} ${i18n.t("notification.main.photos")}`}</h2>
           <NotificationNotice messageKey="notification.photos.notice" />
           {!pageValid && <ValidationSummary />}
           <Photos />
         </main>
       )}
       {currentPage === 4 && (
-        <main id="content" className={styles.content} ref={ref}>
-          <h2>{`${currentPage} ${i18n.t("notification.main.send")}`}</h2>
+        <main id="content" className={styles.content}>
+          <h2 ref={ref} tabIndex={-1}>{`${currentPage} ${i18n.t("notification.main.send")}`}</h2>
           <NotificationNotice messageKey="notification.comments.notice" />
           {/* NOTE: temporarily removed until external opening times application is ready
           <Opening />
