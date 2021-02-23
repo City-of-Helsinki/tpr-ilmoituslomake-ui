@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { useRouter } from "next/router";
 import { useI18n } from "next-localization";
 import { Checkbox, SelectionGroup } from "hds-react";
+import { useMediaQuery } from "react-responsive";
 import { NotificationAction } from "../../state/actions/types";
 import { setNotificationInputLanguage } from "../../state/actions/notification";
 import { RootState } from "../../state/reducers";
@@ -14,6 +15,9 @@ const InputLanguage = (): ReactElement => {
   const dispatch = useDispatch<Dispatch<NotificationAction>>();
   const router = useRouter();
 
+  // Note: this only works for client-side rendering
+  const isScreenSizeXS = useMediaQuery({ query: `only screen and (max-width: ${styles.max_breakpoint_xs})` });
+
   const notificationExtra = useSelector((state: RootState) => state.notification.notificationExtra);
   const { inputLanguages } = notificationExtra;
 
@@ -24,7 +28,7 @@ const InputLanguage = (): ReactElement => {
   return (
     <SelectionGroup
       id="inputLanguage"
-      direction="vertical"
+      direction={isScreenSizeXS ? "vertical" : "horizontal"}
       className={styles.inputLanguage}
       label={i18n.t("notification.inputLanguage.title")}
       required

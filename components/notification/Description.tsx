@@ -1,15 +1,18 @@
 import React, { Dispatch, ChangeEvent, ReactElement } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import dynamic from "next/dynamic";
 import { useRouter } from "next/router";
 import { useI18n } from "next-localization";
 import { TextInput, TextArea } from "hds-react";
-import InputLanguage from "./InputLanguage";
 import { NotificationAction, NotificationValidationAction } from "../../state/actions/types";
 import { setNotificationName, setNotificationShortDescription, setNotificationLongDescription } from "../../state/actions/notification";
 import { RootState } from "../../state/reducers";
 import { LANGUAGE_OPTIONS } from "../../types/constants";
 import { isNameValid, isShortDescriptionValid, isLongDescriptionValid } from "../../utils/validation";
 import Opening from "./Opening";
+
+// Note: The input language selector has an attribute that uses a media query which does not work when server-side rendering
+const DynamicInputLanguage = dynamic(() => import("./InputLanguage"), { ssr: false });
 
 const Description = (): ReactElement => {
   const i18n = useI18n();
@@ -71,7 +74,7 @@ const Description = (): ReactElement => {
   return (
     <div className="formSection">
       <h3>{i18n.t("notification.description.title")}</h3>
-      <InputLanguage />
+      <DynamicInputLanguage />
 
       <div className={inputLanguages.length > 1 ? "languageSection" : ""}>
         {inputLanguages.length > 1 && <h3>{i18n.t("notification.description.placeName.label")}</h3>}
