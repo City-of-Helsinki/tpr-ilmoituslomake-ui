@@ -5,6 +5,12 @@
   padding: $spacing-m;
   margin-top: $spacing-layout-s;
 
+  .header {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+  }
+
   .icon {
     margin-right: $spacing-2-xs;
   }
