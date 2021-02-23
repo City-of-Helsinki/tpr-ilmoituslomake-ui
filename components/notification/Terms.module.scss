@@ -5,6 +5,14 @@
   padding: $spacing-m;
   margin-bottom: $spacing-layout-m;
 
+  .heading {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-end;
+    font-weight: 700;
+    font-size: $fontsize-body-l;
+  }
+
   .notice {
     margin-top: $spacing-s;
   }

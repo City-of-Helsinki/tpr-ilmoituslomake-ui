@@ -5,10 +5,12 @@
   padding: $spacing-m;
   margin-top: $spacing-layout-s;
 
-  .header {
+  .heading {
     display: flex;
     flex-direction: row;
-    align-items: center;
+    align-items: flex-end;
+    font-weight: 700;
+    font-size: $fontsize-body-l;
   }
 
   .icon {

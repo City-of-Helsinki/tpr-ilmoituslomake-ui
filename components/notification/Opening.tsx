@@ -12,7 +12,7 @@ const Opening = ({ temporaryNotice }: OpeningProps): ReactElement => {
 
   return (
     <div className={styles.opening}>
-      <div className={`hds-notification__label ${styles.header}`}>
+      <div className={styles.heading}>
         <IconClock className={styles.icon} />
         {i18n.t("notification.opening.title")}
       </div>
