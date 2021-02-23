@@ -219,7 +219,7 @@
     "opening": {
       "title": "Opening times",
       "notice": "Opening times are notified after sending.",
-      "temporaryNotice": "Opening times may change often due to the due to exceptional circumstances caused by the coronavirus pandemic. We recommend for the time being to update opening times on your own webpage or social media channels. You can tell customers in the long description field where the current opening times can be checked from."
+      "temporaryNotice": "Opening times may change often due to the due to exceptional circumstances caused by the coronavirus pandemic. We recommend for the time being to update opening times on your own webpage or social media channels. You can tell customers in the long description field where the current opening times can be checked from. Please don't put links in the long description, links to webpages and social media are added in the next phase."
     },
     "photos": {
       "title": "Photos",
