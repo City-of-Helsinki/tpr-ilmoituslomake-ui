@@ -1,13 +1,13 @@
 {
   "common": {
     "header": {
-      "title": "My Helsinki Places",
+      "title": "Kaupunkialusta",
       "skipToContent": "Skip to content",
       "login": "Sign in",
       "logout": "Sign out"
     },
     "footer": {
-      "title": "My Helsinki Places",
+      "title": "Kaupunkialusta",
       "backToTop": "Back to top",
       "contact": "Contact",
       "copyright": "Copyright",
@@ -26,7 +26,7 @@
     "todo": "TODO - TEXT HERE"
   },
   "notification": {
-    "title": "My Helsinki Places",
+    "title": "Kaupunkialusta",
     "headerNew": "Register a new place",
     "headerModify": "Modify",
     "navigationFooter": "Navigation",
@@ -69,7 +69,7 @@
     },
     "index": {
       "title": "Together we'll keep the information of Helsinki's best places up-to-date!",
-      "message": "My Helsinki Places collects and maintains information about Helsinki's places for the benefit of locals and tourists. In this service you can register information for new places or make changes to the information of existing places.",
+      "message": "Kaupunkialusta collects and maintains information about Helsinki's places for the benefit of locals and tourists. In this service you can register information for new places or make changes to the information of existing places.",
       "notify": "Register places information",
       "terms": "Read terms of use",
       "accessibility": "Read accessibility statement"

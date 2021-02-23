@@ -1,13 +1,13 @@
 {
   "common": {
     "header": {
-      "title": "My Helsinki Places",
+      "title": "Kaupunkialusta",
       "skipToContent": "Siirry sivun pääsisältöön",
       "login": "Kirjaudu sisään",
       "logout": "Kirjaudu ulos"
     },
     "footer": {
-      "title": "My Helsinki Places",
+      "title": "Kaupunkialusta",
       "backToTop": "Takaisin ylös",
       "contact": "Ota yhteyttä",
       "copyright": "Copyright",
@@ -26,7 +26,7 @@
     "todo": "TODO - TEXT HERE"
   },
   "notification": {
-    "title": "My Helsinki Places",
+    "title": "Kaupunkialusta",
     "headerNew": "Ilmoita uusi kohde",
     "headerModify": "Muokkaa",
     "navigationFooter": "Navigointi",
@@ -69,7 +69,7 @@
     },
     "index": {
       "title": "Pidetään yhdessä Helsingin parhaiden paikkojen tiedot ajantasalla!",
-      "message": "My Helsinki Places kerää ja ylläpitää tietoa Helsingin kohteista paikallisten ja matkailijoiden hyödyksi. Tässä palvelussa voit ilmoittaa kohteet tiedot tai tehdä muutoksia jo olemassa oleviin kohdetietoihin.",
+      "message": "Kaupunkialusta kerää ja ylläpitää tietoa Helsingin kohteista paikallisten ja matkailijoiden hyödyksi. Tässä palvelussa voit ilmoittaa kohteet tiedot tai tehdä muutoksia jo olemassa oleviin kohdetietoihin.",
       "notify": "Ilmoita kohteiden tietoja",
       "terms": "Lue käyttöehdot",
       "accessibility": "Lue saavutettavuusseloste"
