@@ -91,6 +91,7 @@ const Notifier = (): ReactElement => {
         label={i18n.t("notification.notifier.email.label")}
         name="email"
         value={email}
+        inputMode="email"
         onChange={updateNotifier}
         onBlur={validateNotifier}
         invalid={!emailValid.valid}
@@ -104,6 +105,7 @@ const Notifier = (): ReactElement => {
         label={i18n.t("notification.notifier.phone.label")}
         name="phone"
         value={phone}
+        inputMode="tel"
         onChange={updateNotifier}
         onBlur={validateNotifier}
         invalid={!phoneValid.valid}

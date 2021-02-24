@@ -179,6 +179,7 @@ const Photos = (): ReactElement => {
                   label={i18n.t("notification.photos.url.labelLink")}
                   name="url"
                   value={url}
+                  inputMode="url"
                   onChange={(evt) => updatePhoto(index, evt)}
                   onBlur={(evt) => fetchPhoto(index, evt)}
                   invalid={!photosValid[index].url.valid}

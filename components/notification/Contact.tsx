@@ -36,6 +36,7 @@ const Contact = (): ReactElement => {
         label={i18n.t("notification.contact.phone.label")}
         name="phone"
         value={phone}
+        inputMode="tel"
         onChange={updateContact}
         onBlur={validateContact}
         invalid={!phoneValid.valid}
@@ -47,6 +48,7 @@ const Contact = (): ReactElement => {
         label={i18n.t("notification.contact.email.label")}
         name="email"
         value={email}
+        inputMode="email"
         onChange={updateContact}
         onBlur={validateContact}
         invalid={!emailValid.valid}
