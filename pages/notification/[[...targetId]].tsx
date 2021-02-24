@@ -57,6 +57,7 @@ const NotificationDetail = (): ReactElement => {
           <Description />
           <Tags />
           <Notifier />
+          <NotificationFooter />
         </main>
       )}
       {currentPage === 2 && (
@@ -68,6 +69,7 @@ const NotificationDetail = (): ReactElement => {
           <Map />
           <Contact />
           <Links />
+          <NotificationFooter />
         </main>
       )}
       {currentPage === 3 && (
@@ -76,6 +78,7 @@ const NotificationDetail = (): ReactElement => {
           <NotificationNotice messageKey="notification.photos.notice" />
           {!pageValid && <ValidationSummary />}
           <Photos />
+          <NotificationFooter />
         </main>
       )}
       {currentPage === 4 && (
@@ -89,9 +92,9 @@ const NotificationDetail = (): ReactElement => {
           <Terms />
           <NotificationFooter />
           <Preview includeNotifier />
+          <NotificationFooter />
         </main>
       )}
-      <NotificationFooter />
     </Layout>
   );
 };

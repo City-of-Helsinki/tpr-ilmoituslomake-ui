@@ -30,7 +30,7 @@
     "title": "Kaupunkialusta",
     "headerNew": "Register a new place",
     "headerModify": "Modify",
-    "navigationFooter": "Navigation",
+    "navigationFooter": "Buttons",
     "mandatory": "Mandatory information is marked with an asterisk *",
     "button": {
       "search": "Search",
