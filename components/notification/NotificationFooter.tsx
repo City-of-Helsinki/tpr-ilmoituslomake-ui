@@ -49,16 +49,16 @@ const NotificationFooter = (): ReactElement => {
   };
 
   return (
-    <nav className={`gridLayoutContainer ${styles.notificationFooter}`} aria-label={i18n.t("notification.navigationFooter")}>
+    <nav className={`${styles.notificationFooter}`} aria-label={i18n.t("notification.navigationFooter")}>
       {currentPage === 1 && (
-        <div className={styles.gridButtonLeft}>
+        <div className={styles.flexButton}>
           <Button variant="secondary" iconLeft={<IconArrowLeft />} onClick={cancelNotification}>
             {i18n.t("notification.button.cancel")}
           </Button>
         </div>
       )}
       {currentPage > 1 && (
-        <div className={styles.gridButtonLeft}>
+        <div className={styles.flexButton}>
           <Button variant="secondary" iconLeft={<IconArrowLeft />} onClick={previousPage}>
             {i18n.t("notification.button.previous")}
           </Button>
@@ -66,14 +66,14 @@ const NotificationFooter = (): ReactElement => {
       )}
 
       {currentPage < MAX_PAGE && (
-        <div className={styles.gridButtonRight}>
+        <div className={`${styles.flexButton} ${styles.flexButtonRight}`}>
           <Button iconRight={<IconArrowRight />} onClick={nextPage}>
             {i18n.t("notification.button.next")}
           </Button>
         </div>
       )}
       {currentPage === MAX_PAGE && (
-        <div className={styles.gridButtonRight}>
+        <div className={`${styles.flexButton} ${styles.flexButtonRight}`}>
           <Button iconRight={<IconArrowRight />} onClick={sendNotification}>
             {i18n.t("notification.button.send")}
           </Button>
