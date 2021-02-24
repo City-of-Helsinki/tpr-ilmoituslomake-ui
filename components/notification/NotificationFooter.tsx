@@ -49,29 +49,35 @@ const NotificationFooter = (): ReactElement => {
   };
 
   return (
-    <nav className={styles.notificationFooter} aria-label={i18n.t("notification.navigationFooter")}>
+    <nav className={`gridLayoutContainer ${styles.notificationFooter}`} aria-label={i18n.t("notification.navigationFooter")}>
       {currentPage === 1 && (
-        <Button variant="secondary" iconLeft={<IconArrowLeft />} onClick={cancelNotification}>
-          {i18n.t("notification.button.cancel")}
-        </Button>
+        <div className={styles.gridButtonLeft}>
+          <Button variant="secondary" iconLeft={<IconArrowLeft />} onClick={cancelNotification}>
+            {i18n.t("notification.button.cancel")}
+          </Button>
+        </div>
       )}
       {currentPage > 1 && (
-        <Button variant="secondary" iconLeft={<IconArrowLeft />} onClick={previousPage}>
-          {i18n.t("notification.button.previous")}
-        </Button>
+        <div className={styles.gridButtonLeft}>
+          <Button variant="secondary" iconLeft={<IconArrowLeft />} onClick={previousPage}>
+            {i18n.t("notification.button.previous")}
+          </Button>
+        </div>
       )}
-
-      <div className="flexSpace" />
 
       {currentPage < MAX_PAGE && (
-        <Button iconRight={<IconArrowRight />} onClick={nextPage}>
-          {i18n.t("notification.button.next")}
-        </Button>
+        <div className={styles.gridButtonRight}>
+          <Button iconRight={<IconArrowRight />} onClick={nextPage}>
+            {i18n.t("notification.button.next")}
+          </Button>
+        </div>
       )}
       {currentPage === MAX_PAGE && (
-        <Button iconRight={<IconArrowRight />} onClick={sendNotification}>
-          {i18n.t("notification.button.send")}
-        </Button>
+        <div className={styles.gridButtonRight}>
+          <Button iconRight={<IconArrowRight />} onClick={sendNotification}>
+            {i18n.t("notification.button.send")}
+          </Button>
+        </div>
       )}
 
       {toast && <ToastNotification prefix="notification" toast={toast} setToast={setToast} />}

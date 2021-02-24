@@ -32,18 +32,20 @@ const TipFooter = (): ReactElement => {
   };
 
   return (
-    <div className={styles.tipFooter}>
-      <Link href="/">
-        <Button variant="secondary" iconLeft={<IconArrowLeft />}>
-          {i18n.t("notification.button.cancel")}
+    <div className={`gridLayoutContainer ${styles.tipFooter}`}>
+      <div className={styles.gridButtonLeft}>
+        <Link href="/">
+          <Button variant="secondary" iconLeft={<IconArrowLeft />}>
+            {i18n.t("notification.button.cancel")}
+          </Button>
+        </Link>
+      </div>
+
+      <div className={styles.gridButtonRight}>
+        <Button iconRight={<IconArrowRight />} onClick={sendTip}>
+          {i18n.t("notification.button.send")}
         </Button>
-      </Link>
-
-      <div className="flexSpace" />
-
-      <Button iconRight={<IconArrowRight />} onClick={sendTip}>
-        {i18n.t("notification.button.send")}
-      </Button>
+      </div>
 
       {toast && <ToastNotification prefix="notification" toast={toast} setToast={setToast} />}
     </div>

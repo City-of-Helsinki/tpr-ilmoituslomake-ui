@@ -1,6 +1,14 @@
 @import "~hds-design-tokens/lib/all.scss";
 
 .tipFooter {
-  display: flex;
-  flex-direction: row;
+  // $spacing-4-xl = 4rem = 64px
+  grid-template-columns: repeat(auto-fit, minmax(4 * $spacing-4-xl, 1fr));
+
+  .gridButtonLeft {
+    justify-self: start;
+  }
+
+  .gridButtonRight {
+    justify-self: end;
+  }
 }

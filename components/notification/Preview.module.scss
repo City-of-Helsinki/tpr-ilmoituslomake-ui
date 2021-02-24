@@ -5,22 +5,46 @@
   margin-top: $spacing-layout-l;
   margin-bottom: $spacing-layout-l;
 
+  // $spacing-4-xl = 4rem = 64px
+  grid-template-columns: minmax(2 * $spacing-4-xl, 1fr) minmax(4 * $spacing-4-xl, 2fr);
+
+  @include media(xs, s) {
+    grid-template-columns: minmax(4 * $spacing-4-xl, 1fr);
+  }
+
+  column-gap: 0;
   row-gap: 0;
 
   .gridHeading {
     grid-column: 1 / 1;
+
+    @include media(xs, s) {
+      grid-column: 1 / 1;
+    }
   }
 
   .gridPlaceInfo {
     grid-column: 2 / 2;
+
+    @include media(xs, s) {
+      grid-column: 1 / 1;
+    }
   }
 
   .gridHeader {
     padding: $spacing-xs;
+
+    @include media(xs, s) {
+      display: none;
+    }
   }
 
   .headerLine {
     grid-column: 1 / span 2;
+
+    @include media(xs, s) {
+      display: none;
+    }
   }
 
   .gridSubHeader {
@@ -32,38 +56,30 @@
     overflow-wrap: break-word;
     word-wrap: break-word;
 
-    @include media(xs) {
-      max-width: $container-width-xs / 2;
-    }
-
-    @include media(s) {
-      max-width: $container-width-s / 2;
-    }
-
-    @include media(m) {
-      max-width: $container-width-m / 2;
-    }
-
-    @include media(l) {
-      max-width: $container-width-l / 2;
-    }
-
-    @include media(xl) {
-      max-width: $container-width-xl / 2;
-    }
-
     &:nth-child(4n + 1),
     &:nth-child(4n + 2) {
       background-color: $color-silver-light;
     }
 
+    @include media(xs) {
+      &:nth-child(2n) {
+        margin-bottom: $spacing-xs;
+      }
+    }
+
+    @include media(s) {
+      &:nth-child(2n) {
+        margin-bottom: $spacing-s;
+      }
+    }
+
     .map {
       @include media(xs) {
-        height: $container-width-xs / 4;
+        height: $container-width-xs / 2;
       }
 
       @include media(s) {
-        height: $container-width-s / 4;
+        height: $container-width-s / 2;
       }
 
       @include media(m) {

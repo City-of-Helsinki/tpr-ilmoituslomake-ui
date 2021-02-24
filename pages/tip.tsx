@@ -1,6 +1,7 @@
 import React, { ReactElement, useEffect, useRef } from "react";
 import { useSelector } from "react-redux";
 import { GetServerSideProps } from "next";
+import dynamic from "next/dynamic";
 import Head from "next/head";
 import { useI18n } from "next-localization";
 import { RootState } from "../state/reducers";
@@ -11,12 +12,14 @@ import { checkUser } from "../utils/serverside";
 import Layout from "../components/common/Layout";
 import Header from "../components/common/Header";
 import NotificationNotice from "../components/notification/NotificationNotice";
-import TipType from "../components/notification/TipType";
 import TipSearch from "../components/notification/TipSearch";
 import TipDetails from "../components/notification/TipDetails";
 import TipFooter from "../components/notification/TipFooter";
 import ValidationSummary from "../components/notification/ValidationSummary";
 import styles from "./tip.module.scss";
+
+// Note: The tip type selector has an attribute that uses a media query which does not work when server-side rendering
+const DynamicTipType = dynamic(() => import("../components/notification/TipType"), { ssr: false });
 
 const Tip = (): ReactElement => {
   const i18n = useI18n();
@@ -40,7 +43,7 @@ const Tip = (): ReactElement => {
         <h1>{i18n.t("notification.tip.title")}</h1>
         <NotificationNotice messageKey="notification.mandatory" />
         {!pageValid && <ValidationSummary />}
-        <TipType />
+        <DynamicTipType />
         <TipSearch />
         <TipDetails />
         <TipFooter />

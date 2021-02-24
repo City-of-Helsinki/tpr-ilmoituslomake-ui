@@ -2,17 +2,21 @@
 
 .content {
   .header {
+    margin-bottom: $spacing-layout-s;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+
     h1 {
-      grid-column: span 6;
       color: $color-bus;
     }
 
-    .gridButton {
-      grid-column: span 2;
-      justify-self: end;
+    .flexButton {
+      flex-grow: 1;
       display: flex;
       flex-direction: row;
-      align-items: center;
+      justify-content: flex-end;
     }
   }
 

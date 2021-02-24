@@ -12,28 +12,29 @@ const InfoFooter = (): ReactElement => {
   const notificationId = useSelector((state: RootState) => state.notification.notificationId);
 
   return (
-    <div className={`gridLayoutContainer ${styles.footer}`}>
-      <div className={styles.gridButton}>
+    <div className={styles.footer}>
+      <div className={styles.flexButton}>
         <Link href={`/notification/${notificationId}`}>
           <Button variant="secondary">{i18n.t("notification.button.modifyInformation")}</Button>
         </Link>
       </div>
       {/* NOTE: temporarily removed until external opening times application is ready
-      <div className={styles.gridButton}>
+      <div className={styles.flexButton}>
         <Button variant="secondary" iconRight={<IconLinkExternal />}>
           {i18n.t("notification.button.modifyOpeningTimes")}
           <span className="screenReaderOnly"> {i18n.t("common.opensInANewTab")}</span>
         </Button>
       </div>
       */}
-      <div className={`${styles.gridButton} ${styles.closingDownButton}`}>
+      <div className={styles.flexButton}>
         <Link href="/tip">
           <Button variant="secondary" iconRight={<IconLinkExternal />}>
             {i18n.t("notification.button.notifyClosingDown")}
           </Button>
         </Link>
       </div>
-      <div className={`${styles.gridButton} ${styles.returnButton}`}>
+      <div className="flexSpace" />
+      <div className={`${styles.flexButton} ${styles.returnButton}`}>
         <Link href="/search">
           <Button variant="secondary">{i18n.t("notification.button.return")}</Button>
         </Link>

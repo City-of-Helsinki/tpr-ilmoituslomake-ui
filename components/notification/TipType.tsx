@@ -2,6 +2,7 @@ import React, { Dispatch, ChangeEvent, ReactElement } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useI18n } from "next-localization";
 import { RadioButton, SelectionGroup } from "hds-react";
+import { useMediaQuery } from "react-responsive";
 import { NotificationAction } from "../../state/actions/types";
 import { setNotificationTip } from "../../state/actions/notification";
 import { RootState } from "../../state/reducers";
@@ -11,6 +12,9 @@ import styles from "./TipType.module.scss";
 const TipType = (): ReactElement => {
   const i18n = useI18n();
   const dispatch = useDispatch<Dispatch<NotificationAction>>();
+
+  // Note: this only works for client-side rendering
+  const isScreenSizeXS = useMediaQuery({ query: `only screen and (max-width: ${styles.max_breakpoint_xs})` });
 
   const tip = useSelector((state: RootState) => state.notification.tip);
   const { item_type } = tip;
@@ -26,7 +30,7 @@ const TipType = (): ReactElement => {
     <div className={`formItem ${styles.tipType}`}>
       <SelectionGroup
         id="itemType"
-        direction="horizontal"
+        direction={isScreenSizeXS ? "vertical" : "horizontal"}
         className="formInput"
         label={i18n.t("notification.tip.itemType.label")}
         errorText={

@@ -44,9 +44,9 @@ const NotificationSent = (): ReactElement => {
       <Header />
       {notificationId > 0 && (
         <main id="content" className={styles.content}>
-          <div className={`gridLayoutContainer ${styles.header}`}>
+          <div className={styles.header}>
             <h1>{getDisplayName(router.locale || defaultLocale, placeName)}</h1>
-            <div className={styles.gridButton}>
+            <div className={styles.flexButton}>
               <Link href="/notification">
                 <Button variant="secondary">{i18n.t("notification.button.notifyNewPlace")}</Button>
               </Link>

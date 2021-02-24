@@ -1,15 +1,16 @@
 @import "~hds-design-tokens/lib/all.scss";
 
 .footer {
-  .gridButton {
-    grid-column: span 3;
-  }
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
 
-  .closingDownButton {
-    grid-column: span 4;
+  .flexButton {
+    margin-right: $spacing-s;
+    margin-bottom: $spacing-s;
   }
 
   .returnButton {
-    justify-self: end;
+    margin-right: 0;
   }
 }
