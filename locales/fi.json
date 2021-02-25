@@ -30,6 +30,7 @@
     "title": "Kaupunkialusta",
     "headerNew": "Ilmoita uusi kohde",
     "headerModify": "Muokkaa",
+    "navigationHeader": "Prosessi",
     "navigationFooter": "Painikkeet",
     "mandatory": "Pakolliset tiedot on merkitty tähdellä *",
     "button": {

@@ -64,7 +64,7 @@ const NotificationHeader = (): ReactElement => {
           </Navigation.Row>
         )}
       </Header>
-      <aside className={styles.header}>
+      <nav className={styles.header} aria-label={i18n.t("notification.navigationHeader")}>
         <StylesProvider injectFirst>
           <div className={styles.tabletContainer}>
             <h1>
@@ -110,7 +110,7 @@ const NotificationHeader = (): ReactElement => {
             <Koros className={styles.wave} type="basic" flipHorizontal />
           </div>
         </StylesProvider>
-      </aside>
+      </nav>
     </>
   );
 };
