@@ -30,7 +30,7 @@ const NotificationSearchOwn = (): ReactElement => {
         <PlaceSearch showOwnPlaces />
         {placeResults.length > 0 && <PlaceResults showOwnPlaces />}
         <Link href="/">
-          <Button variant="secondary" iconLeft={<IconArrowLeft />}>
+          <Button variant="secondary" iconLeft={<IconArrowLeft aria-hidden />}>
             {i18n.t("notification.button.returnToStart")}
           </Button>
         </Link>

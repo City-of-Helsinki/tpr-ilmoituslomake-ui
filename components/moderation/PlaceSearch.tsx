@@ -74,7 +74,7 @@ const PlaceSearch = (): ReactElement => {
         <div className="flexSpace" />
         <div>
           <Link href="/notification">
-            <Button className={styles.primary} iconLeft={<IconPlus />}>
+            <Button className={styles.primary} iconLeft={<IconPlus aria-hidden />}>
               {i18n.t("moderation.button.addNewPlace")}
             </Button>
           </Link>

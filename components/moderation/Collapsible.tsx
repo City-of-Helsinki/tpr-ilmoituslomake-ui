@@ -36,12 +36,12 @@ const Collapsible = ({ section, title, forceExpanded, children }: CollapsiblePro
         <div className={styles.button}>
           {expanded && (
             <Button variant="secondary" size="small" aria-label={i18n.t("moderation.button.collapse")} onClick={toggle}>
-              <IconMinus />
+              <IconMinus aria-hidden />
             </Button>
           )}
           {!expanded && (
             <Button variant="secondary" size="small" aria-label={i18n.t("moderation.button.expand")} onClick={toggle}>
-              <IconPlus />
+              <IconPlus aria-hidden />
             </Button>
           )}
         </div>

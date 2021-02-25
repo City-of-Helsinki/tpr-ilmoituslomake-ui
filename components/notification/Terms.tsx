@@ -21,7 +21,7 @@ const Terms = (): ReactElement => {
             variant="supplementary"
             size="small"
             className={styles.creativeCommonsLink}
-            iconRight={<IconLinkExternal />}
+            iconRight={<IconLinkExternal aria-hidden />}
             onClick={openTermsOfUse}
           >
             {i18n.t("notification.terms.link")}

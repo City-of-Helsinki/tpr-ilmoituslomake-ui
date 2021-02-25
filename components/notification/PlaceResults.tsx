@@ -48,14 +48,14 @@ const PlaceResults = ({ showOwnPlaces }: PlaceResultsProps): ReactElement => {
               <Fragment key={`placeresult_${id}`}>
                 <div className={`${styles.gridContent} ${styles.firstColumn} ${styles.gridButton}`}>
                   <Link href={`/notification/info/${id}`}>
-                    <Button variant="supplementary" size="small" iconRight={<IconAngleRight />}>
+                    <Button variant="supplementary" size="small" iconRight={<IconAngleRight aria-hidden />}>
                       {getDisplayName(router.locale || defaultLocale, name)}
                     </Button>
                   </Link>
                 </div>
                 <div className={`${styles.gridContent} ${styles.middleColumn} ${showOwnPlaces ? styles.ownPlaces : ""}`}>
                   <div className={styles.addressContainer}>
-                    <IconLocation />
+                    <IconLocation aria-hidden />
                     <div className={styles.addressLabel}>
                       {router.locale !== "sv"
                         ? `${streetFi}${streetFi.length > 0 ? "," : ""} ${postalCodeFi} ${postOfficeFi}`
@@ -68,7 +68,7 @@ const PlaceResults = ({ showOwnPlaces }: PlaceResultsProps): ReactElement => {
                     {isNotifier && (
                       <div className={styles.ownPlaceContainer}>
                         <div className={styles.ownPlace}>
-                          <IconStarFill />
+                          <IconStarFill aria-hidden />
                           <div className={styles.ownPlaceLabel}>{i18n.t("notification.placeResults.ownPlace")}</div>
                         </div>
                       </div>
@@ -82,7 +82,7 @@ const PlaceResults = ({ showOwnPlaces }: PlaceResultsProps): ReactElement => {
 
       <Notice
         className={styles.newPlace}
-        icon={<IconLocation size="xl" />}
+        icon={<IconLocation size="xl" aria-hidden />}
         titleKey="notification.placeResults.newPlace.title"
         messageKey="notification.placeResults.newPlace.notice"
         button={

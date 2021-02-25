@@ -16,7 +16,7 @@ const Intro = (): ReactElement => {
           <Button className={styles.primary}>{i18n.t("moderation.button.allPlaces")}</Button>
         </Link>
         <Link href="/notification">
-          <Button className={styles.primary} iconLeft={<IconPlus />}>
+          <Button className={styles.primary} iconLeft={<IconPlus aria-hidden />}>
             {i18n.t("moderation.button.addNewPlace")}
           </Button>
         </Link>

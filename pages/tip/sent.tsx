@@ -25,7 +25,7 @@ const TipSent = (): ReactElement => {
       <main id="content" className={styles.content}>
         <Notice
           className={styles.sent}
-          icon={<IconCheckCircleFill size="xl" />}
+          icon={<IconCheckCircleFill size="xl" aria-hidden />}
           titleKey="notification.message.saveSucceeded.title"
           messageKey="notification.message.saveSucceeded.message"
         />

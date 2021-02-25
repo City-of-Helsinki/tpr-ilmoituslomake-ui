@@ -28,7 +28,12 @@ const ModifyButton = ({ className, label, fieldName, status, modifyCallback, hid
       {(status === ModerationStatus.Approved || status === ModerationStatus.Rejected) && (
         <>
           {children}
-          <Button variant="supplementary" size="small" iconLeft={<IconPen />} onClick={() => modifyCallback(fieldName, ModerationStatus.Edited)}>
+          <Button
+            variant="supplementary"
+            size="small"
+            iconLeft={<IconPen aria-hidden />}
+            onClick={() => modifyCallback(fieldName, ModerationStatus.Edited)}
+          >
             {i18n.t("moderation.button.modify")}
           </Button>
         </>

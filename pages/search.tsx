@@ -30,7 +30,7 @@ const NotificationSearch = (): ReactElement => {
         <PlaceSearch />
         {placeResults.length > 0 && <PlaceResults />}
         <Link href="/">
-          <Button variant="secondary" iconLeft={<IconArrowLeft />}>
+          <Button variant="secondary" iconLeft={<IconArrowLeft aria-hidden />}>
             {i18n.t("notification.button.returnToStart")}
           </Button>
         </Link>

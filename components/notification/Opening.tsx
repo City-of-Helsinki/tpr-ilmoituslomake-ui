@@ -13,7 +13,7 @@ const Opening = ({ temporaryNotice }: OpeningProps): ReactElement => {
   return (
     <div className={styles.opening}>
       <div className={styles.heading}>
-        <IconClock className={styles.icon} />
+        <IconClock className={styles.icon} aria-hidden />
         {i18n.t("notification.opening.title")}
       </div>
       <div className={styles.notice}>{temporaryNotice ? i18n.t("notification.opening.temporaryNotice") : i18n.t("notification.opening.notice")}</div>

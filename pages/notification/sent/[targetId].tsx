@@ -55,18 +55,18 @@ const NotificationSent = (): ReactElement => {
 
           <Notice
             className={styles.sent}
-            icon={<IconCheckCircleFill size="xl" />}
+            icon={<IconCheckCircleFill size="xl" aria-hidden />}
             titleKey="notification.message.saveSucceeded.title"
             messageKey="notification.message.saveSucceeded.message"
           />
           {/* NOTE: temporarily removed until external opening times application is ready
           <Notice
             className={styles.opening}
-            icon={<IconClockPlus size="xl" />}
+            icon={<IconClockPlus size="xl" aria-hidden />}
             titleKey="notification.message.completeOpeningTimes.title"
             messageKey="notification.message.completeOpeningTimes.message"
             button={
-              <Button variant="secondary" iconRight={<IconLinkExternal />}>
+              <Button variant="secondary" iconRight={<IconLinkExternal aria-hidden />}>
                 {i18n.t("notification.button.notifyOpeningTimes")}
                 <span className="screenReaderOnly"> {i18n.t("common.opensInANewTab")}</span>
               </Button>
@@ -75,7 +75,7 @@ const NotificationSent = (): ReactElement => {
           */}
           <Notice
             className={styles.photos}
-            icon={<IconPhotoPlus size="xl" />}
+            icon={<IconPhotoPlus size="xl" aria-hidden />}
             titleKey="notification.message.completePhotos.title"
             messageKey="notification.message.completePhotos.message"
             button={
@@ -96,18 +96,18 @@ const NotificationSent = (): ReactElement => {
                 {i18n.t("notification.message.sentModal.message")}
               </div>
               <div>
-                <Button iconRight={<IconLinkExternal />}>
+                <Button iconRight={<IconLinkExternal aria-hidden />}>
                   {i18n.t("notification.button.continueToOpeningTimes")}
                   <span className="screenReaderOnly"> {i18n.t("common.opensInANewTab")}</span>
                 </Button>
               </div>
               <div>
-                <Button variant="supplementary" iconRight={<IconInfoCircle />} onClick={closeModal}>
+                <Button variant="supplementary" iconRight={<IconInfoCircle aria-hidden />} onClick={closeModal}>
                   {i18n.t("notification.button.noOpeningTimes")}
                 </Button>
               </div>
               <div>
-                <Button variant="supplementary" iconRight={<IconInfoCircle />} onClick={closeModal}>
+                <Button variant="supplementary" iconRight={<IconInfoCircle aria-hidden />} onClick={closeModal}>
                   {i18n.t("notification.button.continueLater")}
                 </Button>
               </div>

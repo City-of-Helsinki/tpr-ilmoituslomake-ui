@@ -25,7 +25,7 @@ const ActionButton = ({ className, fieldName, status, actionCallback }: ActionBu
             aria-label={i18n.t("moderation.button.approve")}
             onClick={() => actionCallback(fieldName, ModerationStatus.Approved)}
           >
-            <IconCheck />
+            <IconCheck aria-hidden />
           </Button>
           <Button
             className={styles.rejectSecondary}
@@ -34,14 +34,14 @@ const ActionButton = ({ className, fieldName, status, actionCallback }: ActionBu
             aria-label={i18n.t("moderation.button.reject")}
             onClick={() => actionCallback(fieldName, ModerationStatus.Rejected)}
           >
-            <IconCross />
+            <IconCross aria-hidden />
           </Button>
         </div>
       )}
       {status === ModerationStatus.Approved && (
         <Button
           className={styles.approve}
-          iconLeft={<IconCheck />}
+          iconLeft={<IconCheck aria-hidden />}
           variant="success"
           onClick={() => actionCallback(fieldName, ModerationStatus.Edited)}
         >
@@ -51,7 +51,7 @@ const ActionButton = ({ className, fieldName, status, actionCallback }: ActionBu
       {status === ModerationStatus.Rejected && (
         <Button
           className={styles.reject}
-          iconLeft={<IconCross />}
+          iconLeft={<IconCross aria-hidden />}
           variant="danger"
           onClick={() => actionCallback(fieldName, ModerationStatus.Edited)}
         >

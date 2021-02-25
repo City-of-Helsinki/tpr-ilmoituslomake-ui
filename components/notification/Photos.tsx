@@ -275,7 +275,7 @@ const Photos = (): ReactElement => {
                   variant="supplementary"
                   size="small"
                   className={styles.creativeCommonsLink}
-                  iconRight={<IconLinkExternal />}
+                  iconRight={<IconLinkExternal aria-hidden />}
                   onClick={openCreativeCommons}
                 >
                   {i18n.t("notification.photos.permission.creativeCommons2")}
@@ -311,10 +311,15 @@ const Photos = (): ReactElement => {
 
       {photos.length < MAX_PHOTOS && (
         <div>
-          <Button variant="secondary" className={styles.addNew} iconRight={<IconUpload />} onClick={() => addPhoto(PhotoSourceType.Device)}>
+          <Button
+            variant="secondary"
+            className={styles.addNew}
+            iconRight={<IconUpload aria-hidden />}
+            onClick={() => addPhoto(PhotoSourceType.Device)}
+          >
             {i18n.t("notification.photos.addNewFromDevice")}
           </Button>
-          <Button variant="secondary" className={styles.addNew} iconRight={<IconLink />} onClick={() => addPhoto(PhotoSourceType.Link)}>
+          <Button variant="secondary" className={styles.addNew} iconRight={<IconLink aria-hidden />} onClick={() => addPhoto(PhotoSourceType.Link)}>
             {i18n.t("notification.photos.addNewFromLink")}
           </Button>
         </div>

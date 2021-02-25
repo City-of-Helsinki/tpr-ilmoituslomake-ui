@@ -20,7 +20,7 @@ const InfoFooter = (): ReactElement => {
       </div>
       {/* NOTE: temporarily removed until external opening times application is ready
       <div className={styles.flexButton}>
-        <Button variant="secondary" iconRight={<IconLinkExternal />}>
+        <Button variant="secondary" iconRight={<IconLinkExternal aria-hidden />}>
           {i18n.t("notification.button.modifyOpeningTimes")}
           <span className="screenReaderOnly"> {i18n.t("common.opensInANewTab")}</span>
         </Button>
@@ -28,7 +28,7 @@ const InfoFooter = (): ReactElement => {
       */}
       <div className={styles.flexButton}>
         <Link href="/tip">
-          <Button variant="secondary" iconRight={<IconLinkExternal />}>
+          <Button variant="secondary" iconRight={<IconLinkExternal aria-hidden />}>
             {i18n.t("notification.button.notifyClosingDown")}
           </Button>
         </Link>

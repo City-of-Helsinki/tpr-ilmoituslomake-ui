@@ -10,8 +10,8 @@ const Footer = (): ReactElement => {
   return (
     <HdsFooter korosType="basic" className={styles.footer} title={i18n.t("common.footer.title")}>
       <HdsFooter.Navigation variant="minimal">
-        <HdsFooter.Item as="a" href={CONTACT_URL} label={i18n.t("common.footer.contact")} icon={<IconArrowRight />} />
-        <HdsFooter.Item as="a" href="#content" label={i18n.t("common.footer.backToTop")} icon={<IconArrowUp />} />
+        <HdsFooter.Item as="a" href={CONTACT_URL} label={i18n.t("common.footer.contact")} icon={<IconArrowRight aria-hidden />} />
+        <HdsFooter.Item as="a" href="#content" label={i18n.t("common.footer.backToTop")} icon={<IconArrowUp aria-hidden />} />
       </HdsFooter.Navigation>
       <HdsFooter.Base copyrightHolder={i18n.t("common.footer.copyright")} copyrightText={i18n.t("common.footer.rightsReserved")}>
         <HdsFooter.Item as="a" href={TERMS_URL} label={i18n.t("common.footer.terms")} />

@@ -38,10 +38,10 @@ const Main = (): ReactElement => {
 
         <div className={styles.infoTextBox}>{i18n.t("notification.index.message")}</div>
         <div className={styles.infoLinkContainer}>
-          <Button variant="supplementary" size="small" iconRight={<IconAngleRight />} onClick={openTermsOfUse}>
+          <Button variant="supplementary" size="small" iconRight={<IconAngleRight aria-hidden />} onClick={openTermsOfUse}>
             {i18n.t("notification.index.terms")}
           </Button>
-          <Button variant="supplementary" size="small" iconRight={<IconAngleRight />} onClick={openAccessibilityInfo}>
+          <Button variant="supplementary" size="small" iconRight={<IconAngleRight aria-hidden />} onClick={openAccessibilityInfo}>
             {i18n.t("notification.index.accessibility")}
           </Button>
         </div>
@@ -50,7 +50,7 @@ const Main = (): ReactElement => {
 
         <Notice
           className={styles.newPlace}
-          icon={<IconLocation size="xl" />}
+          icon={<IconLocation size="xl" aria-hidden />}
           titleKey="notification.message.notifyNewPlace.title"
           messageKey="notification.message.notifyNewPlace.message"
           button={
@@ -60,7 +60,7 @@ const Main = (): ReactElement => {
           }
         />
         <Notice
-          icon={<IconPenLine size="xl" />}
+          icon={<IconPenLine size="xl" aria-hidden />}
           titleKey="notification.message.giveTip.title"
           messageKey="notification.message.giveTip.message"
           button={
@@ -71,7 +71,7 @@ const Main = (): ReactElement => {
         />
         <Notice
           className={styles.checkPlace}
-          icon={<IconEye size="xl" />}
+          icon={<IconEye size="xl" aria-hidden />}
           titleKey="notification.message.checkPlace.title"
           messageKey="notification.message.checkPlace.message"
           button={
@@ -81,7 +81,7 @@ const Main = (): ReactElement => {
           }
         />
         <Notice
-          icon={<IconStar size="xl" />}
+          icon={<IconStar size="xl" aria-hidden />}
           titleKey="notification.message.modifyOwnPlace.title"
           messageKey="notification.message.modifyOwnPlace.message"
           button={

@@ -68,7 +68,7 @@ const NewTasks = (): ReactElement => {
               <Fragment key={`taskresult_${id}`}>
                 <div className={`${styles.gridColumn1} ${styles.gridContent} ${styles.gridButton}`}>
                   <Link href={`/moderation/task/${id}`}>
-                    <Button variant="supplementary" size="small" iconLeft={<IconPen />}>
+                    <Button variant="supplementary" size="small" iconLeft={<IconPen aria-hidden />}>
                       {`${getDisplayName(router.locale || defaultLocale, name, user_place_name)}${targetId ? ` (${targetId})` : ""}`}
                     </Button>
                   </Link>

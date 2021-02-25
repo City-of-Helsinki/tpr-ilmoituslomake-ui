@@ -29,11 +29,11 @@ const ModerationFront = (): ReactElement => {
 
         <h2 className="moderation">{i18n.t("moderation.organisationNotice.title")}</h2>
         <Notice
-          icon={<IconGroup size="xl" />}
+          icon={<IconGroup size="xl" aria-hidden />}
           messageKey="common.todo"
           button={
             <Link href="/moderation/organisation">
-              <Button variant="secondary" iconLeft={<IconArrowRight />}>
+              <Button variant="secondary" iconLeft={<IconArrowRight aria-hidden />}>
                 {i18n.t("moderation.organisationNotice.manageOrganisation")}
               </Button>
             </Link>
@@ -42,11 +42,11 @@ const ModerationFront = (): ReactElement => {
 
         <h2 className="moderation">{i18n.t("moderation.translationNotice.title")}</h2>
         <Notice
-          icon={<IconGroup size="xl" />}
+          icon={<IconGroup size="xl" aria-hidden />}
           messageKey="common.todo"
           button={
             <Link href="/moderation/translation">
-              <Button variant="secondary" iconLeft={<IconArrowRight />}>
+              <Button variant="secondary" iconLeft={<IconArrowRight aria-hidden />}>
                 {i18n.t("moderation.translationNotice.manageTranslation")}
               </Button>
             </Link>

@@ -172,13 +172,13 @@ const TaskHeader = (): ReactElement => {
       {(taskType === TaskType.NewPlace || taskType === TaskType.PlaceChange) && (
         <div className={styles.buttonRow}>
           <Button variant="secondary">{i18n.t("moderation.button.requestTranslation")}</Button>
-          <Button variant="secondary" iconRight={<IconArrowUndo />} onClick={openRejectionConfirmation}>
+          <Button variant="secondary" iconRight={<IconArrowUndo aria-hidden />} onClick={openRejectionConfirmation}>
             {i18n.t("moderation.button.rejectChangeRequest")}
           </Button>
-          <Button variant="secondary" iconRight={<IconTrash />} onClick={openDeletionConfirmation}>
+          <Button variant="secondary" iconRight={<IconTrash aria-hidden />} onClick={openDeletionConfirmation}>
             {i18n.t("moderation.button.removePlace")}
           </Button>
-          <Button iconRight={<IconArrowRight />} onClick={saveTask}>
+          <Button iconRight={<IconArrowRight aria-hidden />} onClick={saveTask}>
             {i18n.t("moderation.button.saveInformation")}
           </Button>
         </div>
@@ -187,7 +187,7 @@ const TaskHeader = (): ReactElement => {
       {(taskType === TaskType.ChangeTip || taskType === TaskType.AddTip || taskType === TaskType.RemoveTip) && (
         <div className={styles.buttonRow}>
           <Button variant="secondary">{i18n.t("moderation.button.requestTranslation")}</Button>
-          <Button variant="secondary" iconRight={<IconArrowUndo />} onClick={openRejectionConfirmation}>
+          <Button variant="secondary" iconRight={<IconArrowUndo aria-hidden />} onClick={openRejectionConfirmation}>
             {i18n.t("moderation.button.rejectChangeRequest")}
           </Button>
           {pageStatus !== ModerationStatus.Edited && (
@@ -196,7 +196,7 @@ const TaskHeader = (): ReactElement => {
             </Button>
           )}
           {pageStatus === ModerationStatus.Edited && (
-            <Button iconRight={<IconArrowRight />} onClick={saveTask}>
+            <Button iconRight={<IconArrowRight aria-hidden />} onClick={saveTask}>
               {i18n.t("moderation.button.saveInformation")}
             </Button>
           )}
@@ -231,12 +231,12 @@ const TaskHeader = (): ReactElement => {
             <div className={styles.bold}>{i18n.t("moderation.taskHeader.notifier")}</div>
             {notifier_type === NotifierType.Representative ? (
               <>
-                <IconCheck size="s" aria-hidden="true" />
+                <IconCheck size="s" aria-hidden />
                 <div>{i18n.t("moderation.taskHeader.representative")}</div>
               </>
             ) : (
               <>
-                <IconCross size="s" aria-hidden="true" />
+                <IconCross size="s" aria-hidden />
                 <div>{i18n.t("moderation.taskHeader.notRepresentative")}</div>
               </>
             )}
