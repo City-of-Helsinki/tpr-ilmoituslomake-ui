@@ -12,7 +12,7 @@ import i18nLoader, { defaultLocale } from "../../utils/i18n";
 import { checkUser, redirectToLogin, getOriginServerSide, getPreviousInputLanguages, getTags } from "../../utils/serverside";
 import Layout from "../../components/common/Layout";
 import NotificationHeader from "../../components/notification/NotificationHeader";
-import NotificationFooter from "../../components/notification/NotificationFooter";
+import NotificationFooterNav from "../../components/notification/NotificationFooterNav";
 import Comments from "../../components/notification/Comments";
 import Contact from "../../components/notification/Contact";
 import Description from "../../components/notification/Description";
@@ -57,7 +57,7 @@ const NotificationDetail = (): ReactElement => {
           <Description />
           <Tags />
           <Notifier />
-          <NotificationFooter />
+          <NotificationFooterNav />
         </main>
       )}
       {currentPage === 2 && (
@@ -69,7 +69,7 @@ const NotificationDetail = (): ReactElement => {
           <Map />
           <Contact />
           <Links />
-          <NotificationFooter />
+          <NotificationFooterNav />
         </main>
       )}
       {currentPage === 3 && (
@@ -78,7 +78,7 @@ const NotificationDetail = (): ReactElement => {
           <NotificationNotice messageKey="notification.photos.notice" />
           {!pageValid && <ValidationSummary />}
           <Photos />
-          <NotificationFooter />
+          <NotificationFooterNav />
         </main>
       )}
       {currentPage === 4 && (
@@ -90,9 +90,9 @@ const NotificationDetail = (): ReactElement => {
           */}
           <Comments />
           <Terms />
-          <NotificationFooter />
+          <NotificationFooterNav />
           <Preview includeNotifier />
-          <NotificationFooter />
+          <NotificationFooterNav />
         </main>
       )}
     </Layout>

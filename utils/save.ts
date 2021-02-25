@@ -14,7 +14,7 @@ export const saveNotification = async (
   notification: NotificationSchema,
   notificationExtra: NotificationExtra,
   router: NextRouter,
-  setToast: Dispatch<SetStateAction<Toast | undefined>>
+  setToast?: Dispatch<SetStateAction<Toast | undefined>>
 ): Promise<void> => {
   try {
     const valid = validateNotificationData(notification);
@@ -62,26 +62,34 @@ export const saveNotification = async (
         console.log("RESPONSE", notificationResult);
 
         if (notificationResult.id) {
-          // setToast(Toast.SaveSucceeded);
+          /*
+          if (setToast) {
+            setToast(Toast.SaveSucceeded);
+          }
+          */
           router.push(`/notification/sent/${notificationResult.id}`);
-        } else {
+        } else if (setToast) {
           setToast(Toast.SaveFailed);
         }
       } else {
-        setToast(Toast.SaveFailed);
+        if (setToast) {
+          setToast(Toast.SaveFailed);
+        }
 
         // TODO - handle error
         const notificationResult = await createResponse.text();
         console.log("FAILED", notificationResult);
       }
-    } else if (!valid) {
+    } else if (!valid && setToast) {
       setToast(Toast.ValidationFailed);
-    } else {
+    } else if (setToast) {
       setToast(Toast.NotAuthenticated);
     }
   } catch (err) {
     console.log("ERROR", err);
-    setToast(Toast.SaveFailed);
+    if (setToast) {
+      setToast(Toast.SaveFailed);
+    }
   }
 };
 

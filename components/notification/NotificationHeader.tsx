@@ -13,6 +13,7 @@ import { MAX_PAGE } from "../../types/constants";
 import { getDisplayName } from "../../utils/helper";
 import { defaultLocale } from "../../utils/i18n";
 import styles from "./NotificationHeader.module.scss";
+import NotificationFooter from "./NotificationFooter";
 
 const NotificationHeader = (): ReactElement => {
   const i18n = useI18n();
@@ -86,6 +87,7 @@ const NotificationHeader = (): ReactElement => {
               </Step>
             </Stepper>
           </div>
+
           <div className={styles.mobileContainer}>
             <div className={styles.mobileHeader}>
               <div className={styles.progressContainer}>
@@ -93,13 +95,16 @@ const NotificationHeader = (): ReactElement => {
                   <CircularProgress classes={{ root: styles.progress }} variant="determinate" value={(100 * currentPage) / MAX_PAGE} />
                 </div>
                 <div className={styles.progressItem}>
-                  <h3 className={styles.progressText}>{`${currentPage} / ${MAX_PAGE}`}</h3>
+                  <div className={styles.progressText}>{`${currentPage} / ${MAX_PAGE}`}</div>
                 </div>
               </div>
-              <div className={styles.mobileHeaderText}>
-                {notificationId > 0
-                  ? `${i18n.t("notification.headerModify")}: ${getDisplayName(router.locale || defaultLocale, placeName)}`
-                  : i18n.t("notification.headerNew")}
+              <div>
+                <div className={styles.mobileHeaderText}>
+                  {notificationId > 0
+                    ? `${i18n.t("notification.headerModify")}: ${getDisplayName(router.locale || defaultLocale, placeName)}`
+                    : i18n.t("notification.headerNew")}
+                </div>
+                <NotificationFooter smallButtons />
               </div>
             </div>
             <Koros className={styles.wave} type="basic" flipHorizontal />

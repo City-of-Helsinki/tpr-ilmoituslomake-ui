@@ -13,10 +13,15 @@
     margin-right: $spacing-s;
     margin-bottom: $spacing-s;
     justify-content: flex-start;
+    z-index: 1;
 
     @include media(xs) {
       margin-right: 0;
       justify-content: center;
+    }
+
+    &.smallButton {
+      margin-bottom: 0;
     }
   }
 
