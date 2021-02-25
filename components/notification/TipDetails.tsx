@@ -30,7 +30,7 @@ const TipDetails = (): ReactElement => {
     <div className="formSection">
       <TextArea
         id="userComments"
-        className="formInput limitInputWidth"
+        className="formInput"
         rows={3}
         name="user_comments"
         value={user_comments}
@@ -48,7 +48,7 @@ const TipDetails = (): ReactElement => {
 
       <TextArea
         id="userDetails"
-        className="formInput limitInputWidth"
+        className="formInput"
         rows={3}
         name="user_details"
         value={user_details}

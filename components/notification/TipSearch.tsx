@@ -78,11 +78,11 @@ const TipSearch = (): ReactElement => {
   };
 
   return (
-    <div className="formItem">
+    <div className="formSection">
       {item_type === ItemType.ChangeRequestAdd && (
         <TextInput
           id="userPlaceName"
-          className="formInput limitInputWidth"
+          className="formInput"
           name="user_place_name"
           value={user_place_name}
           onChange={updateDetails}
@@ -103,7 +103,7 @@ const TipSearch = (): ReactElement => {
         <>
           <TextInput
             id="placeName"
-            className="formInput limitInputWidth"
+            className="formInput"
             name="placeName"
             onChange={searchPlaces}
             label={i18n.t("notification.tip.placeName.label")}
@@ -112,7 +112,7 @@ const TipSearch = (): ReactElement => {
 
           <Select
             id="placeResults"
-            className="formInput limitInputWidth"
+            className="formInput"
             options={placeResults}
             value={selectedPlace}
             onChange={selectPlace}

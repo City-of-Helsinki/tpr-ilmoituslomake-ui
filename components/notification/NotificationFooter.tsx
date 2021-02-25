@@ -84,14 +84,14 @@ const NotificationFooter = ({ smallButtons, setToast }: NotificationFooterProps)
 
       {currentPage < MAX_PAGE && smallButtons && (
         <div className={`${styles.flexButton} ${styles.smallButton} ${styles.flexButtonRight}`}>
-          <Button variant="supplementary" size="small" iconLeft={<IconArrowRight />} onClick={nextPage}>
+          <Button variant="supplementary" size="small" iconRight={<IconArrowRight />} onClick={nextPage}>
             {i18n.t("notification.button.next")}
           </Button>
         </div>
       )}
       {currentPage < MAX_PAGE && !smallButtons && (
         <div className={`${styles.flexButton} ${styles.flexButtonRight}`}>
-          <Button variant="primary" size="default" iconLeft={<IconArrowRight />} onClick={nextPage}>
+          <Button variant="primary" size="default" iconRight={<IconArrowRight />} onClick={nextPage}>
             {i18n.t("notification.button.next")}
           </Button>
         </div>
@@ -99,14 +99,14 @@ const NotificationFooter = ({ smallButtons, setToast }: NotificationFooterProps)
 
       {currentPage === MAX_PAGE && smallButtons && setToast && (
         <div className={`${styles.flexButton} ${styles.smallButton} ${styles.flexButtonRight}`}>
-          <Button variant="supplementary" size="small" iconLeft={<IconArrowRight />} onClick={sendNotification}>
+          <Button variant="supplementary" size="small" iconRight={<IconArrowRight />} onClick={sendNotification}>
             {i18n.t("notification.button.send")}
           </Button>
         </div>
       )}
       {currentPage === MAX_PAGE && !smallButtons && setToast && (
         <div className={`${styles.flexButton} ${styles.flexButtonRight}`}>
-          <Button variant="primary" size="default" iconLeft={<IconArrowRight />} onClick={sendNotification}>
+          <Button variant="primary" size="default" iconRight={<IconArrowRight />} onClick={sendNotification}>
             {i18n.t("notification.button.send")}
           </Button>
         </div>

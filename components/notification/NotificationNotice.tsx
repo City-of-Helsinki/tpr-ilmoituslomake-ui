@@ -3,15 +3,16 @@ import { useI18n } from "next-localization";
 import styles from "./NotificationNotice.module.scss";
 
 interface NoticeProps {
+  className?: string;
   messageKey: string;
   messageKey2?: string;
 }
 
-const NotificationNotice = ({ messageKey, messageKey2 }: NoticeProps): ReactElement => {
+const NotificationNotice = ({ className, messageKey, messageKey2 }: NoticeProps): ReactElement => {
   const i18n = useI18n();
 
   return (
-    <div className={styles.notice}>
+    <div className={`${styles.notice} ${className}`}>
       {i18n.t(messageKey)}
       {messageKey2 && (
         <>
@@ -25,6 +26,7 @@ const NotificationNotice = ({ messageKey, messageKey2 }: NoticeProps): ReactElem
 };
 
 NotificationNotice.defaultProps = {
+  className: undefined,
   messageKey2: undefined,
 };
 

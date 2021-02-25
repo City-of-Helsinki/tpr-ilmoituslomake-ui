@@ -6,6 +6,7 @@ import { NotificationAction, NotificationValidationAction } from "../../state/ac
 import { setNotificationContact } from "../../state/actions/notification";
 import { RootState } from "../../state/reducers";
 import { isContactFieldValid } from "../../utils/validation";
+import styles from "./Contact.module.scss";
 
 const Contact = (): ReactElement => {
   const i18n = useI18n();
@@ -28,11 +29,11 @@ const Contact = (): ReactElement => {
   };
 
   return (
-    <div id="contact">
+    <div id="contact" className={`formSection ${styles.contact}`}>
       <h3>{i18n.t("notification.contact.title")}</h3>
       <TextInput
         id="phone"
-        className="formInput limitInputWidth"
+        className="formInput"
         label={i18n.t("notification.contact.phone.label")}
         name="phone"
         value={phone}
@@ -44,7 +45,7 @@ const Contact = (): ReactElement => {
       />
       <TextInput
         id="email"
-        className="formInput limitInputWidth"
+        className="formInput"
         label={i18n.t("notification.contact.email.label")}
         name="email"
         value={email}

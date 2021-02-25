@@ -72,7 +72,7 @@ const Notifier = (): ReactElement => {
 
       <TextInput
         id="fullName"
-        className="formInput limitInputWidth"
+        className="formInput"
         label={i18n.t("notification.notifier.fullName.label")}
         name="full_name"
         value={full_name}
@@ -87,7 +87,7 @@ const Notifier = (): ReactElement => {
       />
       <TextInput
         id="email"
-        className="formInput limitInputWidth"
+        className="formInput"
         label={i18n.t("notification.notifier.email.label")}
         name="email"
         value={email}
@@ -101,7 +101,7 @@ const Notifier = (): ReactElement => {
       />
       <TextInput
         id="phone"
-        className="formInput limitInputWidth"
+        className="formInput"
         label={i18n.t("notification.notifier.phone.label")}
         name="phone"
         value={phone}

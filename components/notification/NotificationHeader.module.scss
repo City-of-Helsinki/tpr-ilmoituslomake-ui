@@ -30,7 +30,8 @@
     }
 
     @include media(xl) {
-      margin-left: -$spacing-layout-xl;
+      max-width: $container-width-l;
+      margin-left: 0;
     }
   }
 }

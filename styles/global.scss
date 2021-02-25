@@ -107,10 +107,6 @@ textarea {
   height: auto !important;
 }
 
-.limitInputWidth {
-  max-width: $container-width-l;
-}
-
 .disabledTextColor input[disabled],
 .disabledTextColor textarea[disabled],
 .disabledTextColor input[type="checkbox"][disabled] + label {
@@ -119,6 +115,13 @@ textarea {
 
 .formSection {
   margin-bottom: $spacing-layout-l;
+}
+
+.narrowSection {
+  @include media(xl) {
+    max-width: $container-width-l;
+    margin-left: $spacing-layout-l;
+  }
 }
 
 .formInput {

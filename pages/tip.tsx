@@ -39,8 +39,10 @@ const Tip = (): ReactElement => {
         <title>{i18n.t("notification.title")}</title>
       </Head>
       <Header />
-      <main id="content" className={styles.content} ref={ref}>
+      <div className={styles.header}>
         <h1>{i18n.t("notification.tip.title")}</h1>
+      </div>
+      <main id="content" className={`narrowSection ${styles.content}`} ref={ref}>
         <NotificationNotice messageKey="notification.mandatory" />
         {!pageValid && <ValidationSummary />}
         <DynamicTipType />

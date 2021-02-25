@@ -11,11 +11,12 @@ import styles from "./Preview.module.scss";
 const MapWrapper = dynamic(() => import("../common/MapWrapper"), { ssr: false });
 
 interface PreviewProps {
+  className?: string;
   full?: boolean;
   includeNotifier?: boolean;
 }
 
-const Preview = ({ full, includeNotifier }: PreviewProps): ReactElement => {
+const Preview = ({ className, full, includeNotifier }: PreviewProps): ReactElement => {
   const i18n = useI18n();
   const router = useRouter();
 
@@ -42,7 +43,7 @@ const Preview = ({ full, includeNotifier }: PreviewProps): ReactElement => {
   const initialZoom = MAP_INITIAL_ZOOM;
 
   return (
-    <div className={`gridLayoutContainer ${styles.preview}`}>
+    <div className={`gridLayoutContainer ${styles.preview} ${className}`}>
       {full && <h3>{i18n.t("notification.preview.title")}</h3>}
       {!full && <h3>{i18n.t("notification.preview.placeInfo")}</h3>}
 
@@ -177,6 +178,7 @@ const Preview = ({ full, includeNotifier }: PreviewProps): ReactElement => {
 };
 
 Preview.defaultProps = {
+  className: undefined,
   full: true,
   includeNotifier: false,
 };
