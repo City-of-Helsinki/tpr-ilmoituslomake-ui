@@ -7,7 +7,15 @@ import { NotificationAction, NotificationValidationAction } from "../../state/ac
 import { setNotificationPhoto, removeNotificationPhoto } from "../../state/actions/notification";
 import { setNotificationPhotoValidation, removeNotificationPhotoValidation } from "../../state/actions/notificationValidation";
 import { RootState } from "../../state/reducers";
-import { LANGUAGE_OPTIONS, MAX_PHOTOS, PhotoPermission, PhotoSourceType } from "../../types/constants";
+import {
+  LANGUAGE_OPTIONS,
+  MAX_LENGTH,
+  MAX_LENGTH_PHOTO_DESC,
+  MAX_LENGTH_URL,
+  MAX_PHOTOS,
+  PhotoPermission,
+  PhotoSourceType,
+} from "../../types/constants";
 import { PhotoValidation } from "../../types/notification_validation";
 import { isPhotoFieldValid, isPhotoAltTextValid } from "../../utils/validation";
 import NotificationNotice from "./NotificationNotice";
@@ -180,6 +188,7 @@ const Photos = (): ReactElement => {
                   name="url"
                   value={url}
                   inputMode="url"
+                  maxLength={MAX_LENGTH_URL}
                   onChange={(evt) => updatePhoto(index, evt)}
                   onBlur={(evt) => fetchPhoto(index, evt)}
                   invalid={!photosValid[index].url.valid}
@@ -220,6 +229,7 @@ const Photos = (): ReactElement => {
                         label={label}
                         name={option}
                         value={altText[option] as string}
+                        maxLength={MAX_LENGTH_PHOTO_DESC}
                         onChange={(evt) => updatePhotoAltText(index, evt)}
                         onBlur={(evt) => validatePhotoAltText(index, evt)}
                         helperText={i18n.t("notification.photos.altText.helperText")}
@@ -288,6 +298,7 @@ const Photos = (): ReactElement => {
                   label={i18n.t("notification.photos.source.label")}
                   name="source"
                   value={source}
+                  maxLength={MAX_LENGTH}
                   onChange={(evt) => updatePhoto(index, evt)}
                   onBlur={(evt) => validatePhoto(index, evt)}
                   invalid={!photosValid[index].source.valid}

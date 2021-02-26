@@ -5,6 +5,7 @@ import { TextInput } from "hds-react";
 import { NotificationAction, NotificationValidationAction } from "../../state/actions/types";
 import { setNotificationContact } from "../../state/actions/notification";
 import { RootState } from "../../state/reducers";
+import { MAX_LENGTH_EMAIL, MAX_LENGTH_PHONE } from "../../types/constants";
 import { isContactFieldValid } from "../../utils/validation";
 import styles from "./Contact.module.scss";
 
@@ -38,6 +39,7 @@ const Contact = (): ReactElement => {
         name="phone"
         value={phone}
         inputMode="tel"
+        maxLength={MAX_LENGTH_PHONE}
         onChange={updateContact}
         onBlur={validateContact}
         invalid={!phoneValid.valid}
@@ -50,6 +52,7 @@ const Contact = (): ReactElement => {
         name="email"
         value={email}
         inputMode="email"
+        maxLength={MAX_LENGTH_EMAIL}
         onChange={updateContact}
         onBlur={validateContact}
         invalid={!emailValid.valid}

@@ -6,6 +6,7 @@ import { TextInput, Button } from "hds-react";
 import { NotificationAction, NotificationValidationAction } from "../../state/actions/types";
 import { setNotificationAddress } from "../../state/actions/notification";
 import { RootState } from "../../state/reducers";
+import { MAX_LENGTH, MAX_LENGTH_POSTAL_CODE } from "../../types/constants";
 import { geocodeAddress } from "../../utils/address";
 import { isAddressFieldValid } from "../../utils/validation";
 
@@ -62,6 +63,7 @@ const Location = (): ReactElement => {
             label={i18n.t("notification.location.streetAddress.label")}
             name="street"
             value={streetFi}
+            maxLength={MAX_LENGTH}
             onChange={(evt) => updateAddress("fi", evt)}
             onBlur={(evt) => validateAddress("fi", evt)}
             invalid={!streetFiValid.valid}
@@ -79,6 +81,7 @@ const Location = (): ReactElement => {
             label={i18n.t("notification.location.postalCode.label")}
             name="postal_code"
             value={postalCodeFi}
+            maxLength={MAX_LENGTH_POSTAL_CODE}
             onChange={(evt) => updateAddress("fi", evt)}
             onBlur={(evt) => validateAddress("fi", evt)}
             invalid={!postalCodeFiValid.valid}
@@ -96,6 +99,7 @@ const Location = (): ReactElement => {
             label={i18n.t("notification.location.postalOffice.label")}
             name="post_office"
             value={postOfficeFi}
+            maxLength={MAX_LENGTH}
             onChange={(evt) => updateAddress("fi", evt)}
             onBlur={(evt) => validateAddress("fi", evt)}
             invalid={!postOfficeFiValid.valid}
@@ -117,6 +121,7 @@ const Location = (): ReactElement => {
             label={i18n.t("notification.location.streetAddress.label")}
             name="street"
             value={streetSv}
+            maxLength={MAX_LENGTH}
             onChange={(evt) => updateAddress("sv", evt)}
             onBlur={(evt) => validateAddress("sv", evt)}
             invalid={!streetSvValid.valid}
@@ -134,6 +139,7 @@ const Location = (): ReactElement => {
             label={i18n.t("notification.location.postalCode.label")}
             name="postal_code"
             value={postalCodeSv}
+            maxLength={MAX_LENGTH_POSTAL_CODE}
             onChange={(evt) => updateAddress("sv", evt)}
             onBlur={(evt) => validateAddress("sv", evt)}
             invalid={!postalCodeSvValid.valid}
@@ -151,6 +157,7 @@ const Location = (): ReactElement => {
             label={i18n.t("notification.location.postalOffice.label")}
             name="post_office"
             value={postOfficeSv}
+            maxLength={MAX_LENGTH}
             onChange={(evt) => updateAddress("sv", evt)}
             onBlur={(evt) => validateAddress("sv", evt)}
             invalid={!postOfficeSvValid.valid}

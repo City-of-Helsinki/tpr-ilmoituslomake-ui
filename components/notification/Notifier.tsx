@@ -5,7 +5,7 @@ import { TextInput, RadioButton, SelectionGroup } from "hds-react";
 import { NotificationAction, NotificationValidationAction } from "../../state/actions/types";
 import { setNotificationNotifier } from "../../state/actions/notification";
 import { RootState } from "../../state/reducers";
-import { NotifierType } from "../../types/constants";
+import { MAX_LENGTH, MAX_LENGTH_EMAIL, MAX_LENGTH_PHONE, NotifierType } from "../../types/constants";
 import { isNotifierFieldValid } from "../../utils/validation";
 
 const Notifier = (): ReactElement => {
@@ -76,6 +76,7 @@ const Notifier = (): ReactElement => {
         label={i18n.t("notification.notifier.fullName.label")}
         name="full_name"
         value={full_name}
+        maxLength={MAX_LENGTH}
         onChange={updateNotifier}
         onBlur={validateNotifier}
         invalid={!fullNameValid.valid}
@@ -92,6 +93,7 @@ const Notifier = (): ReactElement => {
         name="email"
         value={email}
         inputMode="email"
+        maxLength={MAX_LENGTH_EMAIL}
         onChange={updateNotifier}
         onBlur={validateNotifier}
         invalid={!emailValid.valid}
@@ -106,6 +108,7 @@ const Notifier = (): ReactElement => {
         name="phone"
         value={phone}
         inputMode="tel"
+        maxLength={MAX_LENGTH_PHONE}
         onChange={updateNotifier}
         onBlur={validateNotifier}
         invalid={!phoneValid.valid}

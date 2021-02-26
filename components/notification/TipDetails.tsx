@@ -5,6 +5,7 @@ import { TextArea } from "hds-react";
 import { NotificationAction, NotificationValidationAction } from "../../state/actions/types";
 import { setNotificationTip } from "../../state/actions/notification";
 import { RootState } from "../../state/reducers";
+import { MAX_LENGTH_LONG_DESC } from "../../types/constants";
 import { isTipFieldValid } from "../../utils/validation";
 
 const TipDetails = (): ReactElement => {
@@ -34,6 +35,7 @@ const TipDetails = (): ReactElement => {
         rows={3}
         name="user_comments"
         value={user_comments}
+        maxLength={MAX_LENGTH_LONG_DESC}
         onChange={updateDetails}
         onBlur={validateDetails}
         label={i18n.t("notification.tip.comments.label")}
@@ -52,6 +54,7 @@ const TipDetails = (): ReactElement => {
         rows={3}
         name="user_details"
         value={user_details}
+        maxLength={MAX_LENGTH_LONG_DESC}
         onChange={updateDetails}
         label={i18n.t("notification.tip.details.label")}
         helperText={i18n.t("notification.tip.details.helperText")}

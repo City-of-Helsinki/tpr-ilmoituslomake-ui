@@ -5,6 +5,7 @@ import { TextArea } from "hds-react";
 import { NotificationAction } from "../../state/actions/types";
 import { setNotificationComments } from "../../state/actions/notification";
 import { RootState } from "../../state/reducers";
+import { MAX_LENGTH_LONG_DESC } from "../../types/constants";
 import styles from "./Comments.module.scss";
 
 const Comments = (): ReactElement => {
@@ -31,6 +32,7 @@ const Comments = (): ReactElement => {
         label={i18n.t("notification.comments.comments.label")}
         name="comments"
         value={comments}
+        maxLength={MAX_LENGTH_LONG_DESC}
         onChange={updateComments}
         onBlur={validateComments}
       />

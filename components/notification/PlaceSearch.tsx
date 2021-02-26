@@ -6,6 +6,7 @@ import { Button, RadioButton, SelectionGroup, TextInput } from "hds-react";
 import { NotificationAction } from "../../state/actions/types";
 import { setNotificationPlaceResults, setNotificationPlaceSearch } from "../../state/actions/notification";
 import { RootState } from "../../state/reducers";
+import { MAX_LENGTH } from "../../types/constants";
 import { NotificationPlaceResult } from "../../types/general";
 import getOrigin from "../../utils/request";
 import styles from "./PlaceSearch.module.scss";
@@ -66,6 +67,7 @@ const PlaceSearch = ({ showOwnPlaces }: PlaceSearchProps): ReactElement => {
           label={i18n.t("notification.placeSearch.placeName.label")}
           name="placeName"
           value={placeName}
+          maxLength={MAX_LENGTH}
           onChange={updateSearchText}
         />
         <div className={styles.gridButton}>

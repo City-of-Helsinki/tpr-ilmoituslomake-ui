@@ -5,7 +5,7 @@ import { TextInput } from "hds-react";
 import { NotificationAction, NotificationValidationAction } from "../../state/actions/types";
 import { setNotificationLink } from "../../state/actions/notification";
 import { RootState } from "../../state/reducers";
-import { LANGUAGE_OPTIONS } from "../../types/constants";
+import { LANGUAGE_OPTIONS, MAX_LENGTH_URL } from "../../types/constants";
 import { isWebsiteValid } from "../../utils/validation";
 
 const Links = (): ReactElement => {
@@ -46,6 +46,7 @@ const Links = (): ReactElement => {
               name={option}
               value={website[option] as string}
               inputMode="url"
+              maxLength={MAX_LENGTH_URL}
               onChange={updateWebsite}
               onBlur={validateWebsite}
               tooltipButtonLabel={i18n.t("notification.button.openHelp")}

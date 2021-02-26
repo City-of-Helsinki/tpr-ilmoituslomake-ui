@@ -61,10 +61,15 @@ export enum Toast {
 
 export const LANGUAGE_OPTIONS = ["fi", "sv", "en"];
 export const MAX_PAGE = 4;
+export const MAX_LENGTH = 100;
 export const MAX_LENGTH_SHORT_DESC = 150;
 export const MIN_LENGTH_LONG_DESC = 120;
 export const MAX_LENGTH_LONG_DESC = 4000;
 export const MAX_LENGTH_PHOTO_DESC = 125;
+export const MAX_LENGTH_EMAIL = 254;
+export const MAX_LENGTH_PHONE = 20;
+export const MAX_LENGTH_URL = 2000;
+export const MAX_LENGTH_POSTAL_CODE = 5;
 export const MAX_PHOTOS = 3;
 export const DATETIME_FORMAT = "D.M.YYYY H:mm";
 export const TERMS_URL = "https://www.myhelsinki.fi/fi/myhelsinki-places-palvelun-käyttöehdot/";

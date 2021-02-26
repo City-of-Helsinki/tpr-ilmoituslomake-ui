@@ -7,7 +7,7 @@ import { TextInput, TextArea } from "hds-react";
 import { NotificationAction, NotificationValidationAction } from "../../state/actions/types";
 import { setNotificationName, setNotificationShortDescription, setNotificationLongDescription } from "../../state/actions/notification";
 import { RootState } from "../../state/reducers";
-import { LANGUAGE_OPTIONS } from "../../types/constants";
+import { LANGUAGE_OPTIONS, MAX_LENGTH, MAX_LENGTH_LONG_DESC, MAX_LENGTH_SHORT_DESC } from "../../types/constants";
 import { isNameValid, isShortDescriptionValid, isLongDescriptionValid } from "../../utils/validation";
 import Opening from "./Opening";
 
@@ -88,6 +88,7 @@ const Description = (): ReactElement => {
               label={label}
               name={option}
               value={placeName[option] as string}
+              maxLength={MAX_LENGTH}
               onChange={updateName}
               onBlur={validateName}
               invalid={!nameValid[option].valid}
@@ -112,6 +113,7 @@ const Description = (): ReactElement => {
               label={label}
               name={option}
               value={shortDesc[option] as string}
+              maxLength={MAX_LENGTH_SHORT_DESC}
               onChange={updateShortDescription}
               onBlur={validateShortDescription}
               helperText={i18n.t("notification.description.shortDescription.helperText")}
@@ -140,6 +142,7 @@ const Description = (): ReactElement => {
               label={label}
               name={option}
               value={longDesc[option] as string}
+              maxLength={MAX_LENGTH_LONG_DESC}
               onChange={updateLongDescription}
               onBlur={validateLongDescription}
               helperText={i18n.t("notification.description.longDescription.helperText")}

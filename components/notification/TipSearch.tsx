@@ -6,7 +6,7 @@ import { Select, TextInput } from "hds-react";
 import { NotificationAction, NotificationValidationAction } from "../../state/actions/types";
 import { setNotificationTip } from "../../state/actions/notification";
 import { RootState } from "../../state/reducers";
-import { ItemType } from "../../types/constants";
+import { ItemType, MAX_LENGTH } from "../../types/constants";
 import { NotificationPlaceResult, OptionType } from "../../types/general";
 import { getDisplayName } from "../../utils/helper";
 import { defaultLocale } from "../../utils/i18n";
@@ -85,6 +85,7 @@ const TipSearch = (): ReactElement => {
           className="formInput"
           name="user_place_name"
           value={user_place_name}
+          maxLength={MAX_LENGTH}
           onChange={updateDetails}
           onBlur={validateDetails}
           label={i18n.t("notification.tip.addPlaceName.label")}
@@ -105,6 +106,7 @@ const TipSearch = (): ReactElement => {
             id="placeName"
             className="formInput"
             name="placeName"
+            maxLength={MAX_LENGTH}
             onChange={searchPlaces}
             label={i18n.t("notification.tip.placeName.label")}
             helperText={i18n.t("notification.tip.placeName.helperText")}
