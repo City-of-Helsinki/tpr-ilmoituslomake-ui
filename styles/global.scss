@@ -211,7 +211,15 @@ textarea {
   white-space: nowrap;
 }
 
+.MuiStepIcon-root {
+  color: $color-black-70;
+}
+
 .MuiStepIcon-root.MuiStepIcon-active,
 .MuiStepIcon-root.MuiStepIcon-completed {
   color: $color-bus;
+}
+
+.MuiStepConnector-line {
+  border-color: $color-black-70;
 }
