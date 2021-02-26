@@ -19,7 +19,11 @@ const PlaceResults = ({ showOwnPlaces }: PlaceResultsProps): ReactElement => {
   const i18n = useI18n();
   const router = useRouter();
 
+  const currentUser = useSelector((state: RootState) => state.general.user);
   const placeResults = useSelector((state: RootState) => state.notification.placeResults);
+
+  // Show the user's own places if they are logged in
+  const ownPlaces = showOwnPlaces || currentUser?.authenticated;
 
   return (
     <div className={`formSection ${styles.placeResults}`}>
@@ -53,7 +57,7 @@ const PlaceResults = ({ showOwnPlaces }: PlaceResultsProps): ReactElement => {
                     </Button>
                   </Link>
                 </div>
-                <div className={`${styles.gridContent} ${styles.middleColumn} ${showOwnPlaces ? styles.ownPlaces : ""}`}>
+                <div className={`${styles.gridContent} ${styles.middleColumn} ${ownPlaces ? styles.ownPlaces : ""}`}>
                   <div className={styles.addressContainer}>
                     <IconLocation aria-hidden />
                     <div className={styles.addressLabel}>
@@ -63,7 +67,7 @@ const PlaceResults = ({ showOwnPlaces }: PlaceResultsProps): ReactElement => {
                     </div>
                   </div>
                 </div>
-                {showOwnPlaces && (
+                {ownPlaces && (
                   <div className={`${styles.gridContent} ${styles.lastColumn}`}>
                     {isNotifier && (
                       <div className={styles.ownPlaceContainer}>

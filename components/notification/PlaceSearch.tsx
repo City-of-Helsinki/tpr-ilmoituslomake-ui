@@ -1,4 +1,4 @@
-import React, { Dispatch, ChangeEvent, ReactElement } from "react";
+import React, { Dispatch, ChangeEvent, ReactElement, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useRouter } from "next/router";
 import { useI18n } from "next-localization";
@@ -19,8 +19,12 @@ const PlaceSearch = ({ showOwnPlaces }: PlaceSearchProps): ReactElement => {
   const dispatch = useDispatch<Dispatch<NotificationAction>>();
   const router = useRouter();
 
+  const currentUser = useSelector((state: RootState) => state.general.user);
   const placeSearch = useSelector((state: RootState) => state.notification.placeSearch);
   const { placeName, ownPlacesOnly } = placeSearch;
+
+  // Show the user's own places if they are logged in
+  const ownPlaces = showOwnPlaces || currentUser?.authenticated;
 
   const updateSearchText = (evt: ChangeEvent<HTMLInputElement>) => {
     dispatch(setNotificationPlaceSearch({ ...placeSearch, [evt.target.name]: evt.target.value }));
@@ -45,6 +49,11 @@ const PlaceSearch = ({ showOwnPlaces }: PlaceSearchProps): ReactElement => {
     }
   };
 
+  // If specified, search all places on first render only, using a workaround utilising useEffect with empty dependency array
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  const useMountEffect = (fun: () => void) => useEffect(fun, []);
+  useMountEffect(showOwnPlaces ? searchPlaces : () => {});
+
   return (
     <div className={`formSection ${styles.placeSearch}`}>
       <h1>{i18n.t("notification.placeSearch.title")}</h1>
@@ -63,7 +72,7 @@ const PlaceSearch = ({ showOwnPlaces }: PlaceSearchProps): ReactElement => {
           <Button onClick={searchPlaces}>{i18n.t("notification.button.search")}</Button>
         </div>
 
-        {showOwnPlaces && (
+        {ownPlaces && (
           <div className={styles.gridInput}>
             <SelectionGroup id="ownPlacesOnly" direction="horizontal" label={i18n.t("notification.placeSearch.ownPlacesOnly.label")}>
               <RadioButton
