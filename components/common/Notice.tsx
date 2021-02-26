@@ -23,15 +23,19 @@ const Notice = ({ className, icon, titleKey, messageKey, button, focusOnTitle }:
   });
 
   return (
-    <div className={`gridLayoutContainer ${styles.notice} ${className}`}>
-      <div className={styles.icon}>{icon}</div>
-      <div className={styles.text}>
-        <div className={styles.title} ref={focusOnTitle ? ref : undefined} tabIndex={focusOnTitle ? -1 : undefined}>
-          {i18n.t(titleKey as string)}
+    <div className={`${styles.notice} ${className}`}>
+      <div className={styles.flexText}>
+        <div className={styles.icon}>{icon}</div>
+        <div className={styles.text}>
+          <div className={styles.title} ref={focusOnTitle ? ref : undefined} tabIndex={focusOnTitle ? -1 : undefined}>
+            {i18n.t(titleKey as string)}
+          </div>
+          <div className={styles.message}>{i18n.t(messageKey)}</div>
         </div>
-        <div className={styles.message}>{i18n.t(messageKey)}</div>
       </div>
-      <div className={styles.gridButton}>{button}</div>
+      <div className={styles.flexButtonContainer}>
+        <div className={styles.flexButton}>{button}</div>
+      </div>
     </div>
   );
 };
