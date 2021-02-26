@@ -145,7 +145,7 @@ const Description = (): ReactElement => {
               maxLength={MAX_LENGTH_LONG_DESC}
               onChange={updateLongDescription}
               onBlur={validateLongDescription}
-              helperText={i18n.t("notification.description.longDescription.helperText")}
+              helperText={`${i18n.t("notification.description.longDescription.helperText")} (${(longDesc[option] as string).length})`}
               tooltipButtonLabel={i18n.t("notification.button.openHelp")}
               tooltipLabel={i18n.t("notification.description.longDescription.tooltipLabel")}
               tooltipText={i18n.t("notification.description.longDescription.tooltipText")}
