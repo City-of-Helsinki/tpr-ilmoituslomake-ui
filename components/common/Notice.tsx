@@ -1,4 +1,4 @@
-import React, { ReactElement, ReactNode } from "react";
+import React, { ReactElement, ReactNode, useEffect, useRef } from "react";
 import { useI18n } from "next-localization";
 import styles from "./Notice.module.scss";
 
@@ -8,16 +8,27 @@ interface NoticeProps {
   titleKey?: string;
   messageKey: string;
   button?: ReactNode;
+  focusOnTitle?: boolean;
 }
 
-const Notice = ({ className, icon, titleKey, messageKey, button }: NoticeProps): ReactElement => {
+const Notice = ({ className, icon, titleKey, messageKey, button, focusOnTitle }: NoticeProps): ReactElement => {
   const i18n = useI18n();
+  const ref = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (focusOnTitle && ref.current) {
+      ref.current.scrollIntoView();
+      ref.current.focus();
+    }
+  });
 
   return (
     <div className={`gridLayoutContainer ${styles.notice} ${className}`}>
       <div className={styles.icon}>{icon}</div>
       <div className={styles.text}>
-        <div className={styles.title}>{i18n.t(titleKey as string)}</div>
+        <div className={styles.title} ref={focusOnTitle ? ref : undefined} tabIndex={focusOnTitle ? -1 : undefined}>
+          {i18n.t(titleKey as string)}
+        </div>
         <div className={styles.message}>{i18n.t(messageKey)}</div>
       </div>
       <div className={styles.gridButton}>{button}</div>
@@ -29,6 +40,7 @@ Notice.defaultProps = {
   className: undefined,
   titleKey: "",
   button: undefined,
+  focusOnTitle: false,
 };
 
 export default Notice;

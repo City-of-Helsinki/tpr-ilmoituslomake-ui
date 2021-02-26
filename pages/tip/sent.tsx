@@ -28,6 +28,7 @@ const TipSent = (): ReactElement => {
           icon={<IconCheckCircleFill size="xl" aria-hidden />}
           titleKey="notification.message.saveSucceeded.title"
           messageKey="notification.message.saveSucceeded.message"
+          focusOnTitle
         />
 
         <div className={styles.footer}>

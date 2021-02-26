@@ -58,6 +58,7 @@ const NotificationSent = (): ReactElement => {
             icon={<IconCheckCircleFill size="xl" aria-hidden />}
             titleKey="notification.message.saveSucceeded.title"
             messageKey="notification.message.saveSucceeded.message"
+            focusOnTitle
           />
           {/* NOTE: temporarily removed until external opening times application is ready
           <Notice
