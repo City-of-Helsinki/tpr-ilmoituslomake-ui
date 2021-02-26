@@ -115,7 +115,7 @@ const Description = (): ReactElement => {
               onChange={updateShortDescription}
               onBlur={validateShortDescription}
               helperText={i18n.t("notification.description.shortDescription.helperText")}
-              tooltipButtonLabel={i18n.t("notification.description.shortDescription.tooltipLabel")}
+              tooltipButtonLabel={i18n.t("notification.button.openHelp")}
               tooltipLabel={i18n.t("notification.description.shortDescription.tooltipLabel")}
               tooltipText={i18n.t("notification.description.shortDescription.tooltipText")}
               invalid={!shortDescValid[option].valid}
@@ -143,7 +143,7 @@ const Description = (): ReactElement => {
               onChange={updateLongDescription}
               onBlur={validateLongDescription}
               helperText={i18n.t("notification.description.longDescription.helperText")}
-              tooltipButtonLabel={i18n.t("notification.description.longDescription.tooltipLabel")}
+              tooltipButtonLabel={i18n.t("notification.button.openHelp")}
               tooltipLabel={i18n.t("notification.description.longDescription.tooltipLabel")}
               tooltipText={i18n.t("notification.description.longDescription.tooltipText")}
               invalid={!longDescValid[option].valid}

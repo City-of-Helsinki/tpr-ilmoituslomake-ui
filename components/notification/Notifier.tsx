@@ -41,7 +41,7 @@ const Notifier = (): ReactElement => {
         direction="horizontal"
         className="formInput"
         label={i18n.t("notification.notifier.notifierType")}
-        tooltipButtonLabel={i18n.t("notification.notifier.tooltipLabel")}
+        tooltipButtonLabel={i18n.t("notification.button.openHelp")}
         tooltipLabel={i18n.t("notification.notifier.tooltipLabel")}
         tooltipText={i18n.t("notification.notifier.tooltipText")}
         errorText={

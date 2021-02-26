@@ -223,7 +223,7 @@ const Photos = (): ReactElement => {
                         onChange={(evt) => updatePhotoAltText(index, evt)}
                         onBlur={(evt) => validatePhotoAltText(index, evt)}
                         helperText={i18n.t("notification.photos.altText.helperText")}
-                        tooltipButtonLabel={i18n.t("notification.photos.altText.tooltipLabel")}
+                        tooltipButtonLabel={i18n.t("notification.button.openHelp")}
                         tooltipLabel={i18n.t("notification.photos.altText.tooltipLabel")}
                         tooltipText={i18n.t("notification.photos.altText.tooltipText")}
                         invalid={!photosValid[index].altText[option].valid}
@@ -296,7 +296,7 @@ const Photos = (): ReactElement => {
                       ? i18n.t(photosValid[index].source.message as string).replace("$fieldName", i18n.t("notification.photos.source.label"))
                       : ""
                   }
-                  tooltipButtonLabel={i18n.t("notification.photos.source.tooltipLabel")}
+                  tooltipButtonLabel={i18n.t("notification.button.openHelp")}
                   tooltipLabel={i18n.t("notification.photos.source.tooltipLabel")}
                   tooltipText={i18n.t("notification.photos.source.tooltipText")}
                   required
