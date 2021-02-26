@@ -197,6 +197,10 @@ textarea {
   display: none;
 }
 
+button:hover {
+  text-decoration: underline;
+}
+
 .screenReaderOnly,
 .visibleOnFocusOnly:not(:focus) {
   border: 0;
