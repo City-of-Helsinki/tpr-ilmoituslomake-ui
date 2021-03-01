@@ -126,6 +126,7 @@
       "close": "Sulje viesti",
       "fieldRequired": "$fieldName on pakollinen tieto",
       "fieldFormat": "$fieldName on annettava oikeassa muodossa",
+      "fieldFormatUrl": "$fieldName on annettava oikeassa muodossa (esim. https://myhelsinki.fi)",
       "fieldTooLong": "$fieldName on liian pitkä",
       "fieldTooShort": "$fieldName on liian lyhyt",
       "fieldOther": "Tarkista tieto"
@@ -396,6 +397,7 @@
       "close": "Sulje viesti",
       "fieldRequired": "$fieldName on pakollinen tieto",
       "fieldFormat": "$fieldName on annettava oikeassa muodossa",
+      "fieldFormatUrl": "$fieldName on annettava oikeassa muodossa (esim. https://myhelsinki.fi)",
       "fieldTooLong": "$fieldName on liian pitkä",
       "fieldTooShort": "$fieldName on liian lyhyt",
       "fieldOther": "Tarkista tieto"

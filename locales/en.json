@@ -126,6 +126,7 @@
       "close": "Close message",
       "fieldRequired": "$fieldName is mandatory information",
       "fieldFormat": "$fieldName must be entered in the right format",
+      "fieldFormatUrl": "$fieldName must be entered in the right format (e.g. https://myhelsinki.fi)",
       "fieldTooLong": "$fieldName is too long",
       "fieldTooShort": "$fieldName is too short",
       "fieldOther": "Please check the information"
@@ -396,6 +397,7 @@
       "close": "Close message",
       "fieldRequired": "$fieldName is mandatory information",
       "fieldFormat": "$fieldName must be entered in the right format",
+      "fieldFormatUrl": "$fieldName must be entered in the right format (e.g. https://myhelsinki.fi)",
       "fieldTooLong": "$fieldName is too long",
       "fieldTooShort": "$fieldName is too short",
       "fieldOther": "Please check the information"

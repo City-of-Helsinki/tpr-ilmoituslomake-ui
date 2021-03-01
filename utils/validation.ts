@@ -185,7 +185,7 @@ export const isContactFieldValid = (
 
 export const isWebsiteValid = (language: string, notification: NotificationSchema, dispatch: Dispatch<NotificationValidationAction>): boolean => {
   const { website } = notification;
-  const schema = string().url("notification.message.fieldFormat");
+  const schema = string().url("notification.message.fieldFormatUrl");
   const result = isValid(schema, website[language] as string);
   dispatch(setNotificationLinkValidation({ [language]: result }));
   return result.valid;
@@ -204,7 +204,7 @@ export const isPhotoFieldValid = (
     case "url": {
       schema =
         !photo.new || photo.sourceType === PhotoSourceType.Link
-          ? string().required("notification.message.fieldRequired").url("notification.message.fieldFormat")
+          ? string().required("notification.message.fieldRequired").url("notification.message.fieldFormatUrl")
           : string().required("notification.message.fieldRequired");
       break;
     }
