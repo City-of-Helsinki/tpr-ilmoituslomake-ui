@@ -9,15 +9,27 @@ import styles from "./InfoFooter.module.scss";
 const InfoFooter = (): ReactElement => {
   const i18n = useI18n();
 
+  const currentUser = useSelector((state: RootState) => state.general.user);
   const notificationId = useSelector((state: RootState) => state.notification.notificationId);
 
   return (
     <div className={styles.footer}>
-      <div className={styles.flexButton}>
-        <Link href={`/notification/${notificationId}`}>
-          <Button variant="secondary">{i18n.t("notification.button.modifyInformation")}</Button>
-        </Link>
-      </div>
+      {currentUser?.authenticated && (
+        <div className={styles.flexButton}>
+          <Link href={`/notification/${notificationId}`}>
+            <Button variant="secondary">{i18n.t("notification.button.modifyInformation")}</Button>
+          </Link>
+        </div>
+      )}
+      {!currentUser?.authenticated && (
+        <div className={styles.flexButton}>
+          <Link href="/tip">
+            <Button variant="secondary" iconRight={<IconLinkExternal aria-hidden />}>
+              {i18n.t("notification.button.modifyPlace")}
+            </Button>
+          </Link>
+        </div>
+      )}
       {/* NOTE: temporarily removed until external opening times application is ready
       <div className={styles.flexButton}>
         <Button variant="secondary" iconRight={<IconLinkExternal aria-hidden />}>

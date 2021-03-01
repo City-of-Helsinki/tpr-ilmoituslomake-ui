@@ -47,6 +47,7 @@
       "openHelp": "Open help",
       "selectFromDevice": "Select from device",
       "modifyInformation": "Modify place's information",
+      "modifyPlace": "Modify place",
       "modifyOpeningTimes": "Modify opening times",
       "notifyOpeningTimes": "Register opening times",
       "notifyClosingDown": "Notify place closing down",
