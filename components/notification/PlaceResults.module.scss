@@ -6,31 +6,80 @@
     column-gap: 0;
     margin-bottom: $spacing-layout-l;
 
+    // $spacing-4-xl = 4rem = 64px
+    grid-template-columns: minmax(2 * $spacing-4-xl, 2fr) minmax(4 * $spacing-4-xl, 4fr) minmax(1 * $spacing-4-xl, 1fr);
+
+    @include media(xs, s) {
+      grid-template-columns: minmax(3 * $spacing-4-xl, 3fr) minmax(1 * $spacing-4-xl, 1fr);
+      row-gap: 0;
+    }
+
     .gridContent {
       display: flex;
       flex-direction: row;
-      border-top: 2px solid $color-black-50;
-      border-bottom: 2px solid $color-black-50;
+      border: 2px solid $color-black-50;
 
       &.firstColumn {
-        grid-column: 1 / span 2;
-        border-left: 2px solid $color-black-50;
+        grid-column: 1 / 1;
+
+        @include media(m, l, xl) {
+          border-right: 0;
+        }
+
+        @include media(xs, s) {
+          grid-column: 1 / span 2;
+          border-bottom: 0;
+        }
       }
 
       &.middleColumn {
-        grid-column: 3 / span 5;
-        border-right: 2px solid $color-black-50;
+        grid-column: 2 / span 2;
+        padding: $spacing-xs 0px;
 
         &.ownPlaces {
-          grid-column: 3 / span 4;
+          grid-column: 2 / 2;
           border-right: 0;
+        }
+
+        @include media(m, l, xl) {
+          border-left: 0;
+        }
+
+        @include media(xs, s) {
+          grid-column: 1 / span 2;
+          border-top: 0;
+
+          &.ownPlaces {
+            grid-column: 1 / 1;
+          }
+        }
+
+        @include media(xs) {
+          margin-bottom: $spacing-xs;
+        }
+
+        @include media(s) {
+          margin-bottom: $spacing-s;
         }
       }
 
       &.lastColumn {
-        grid-column: 7 / 7;
-        border-right: 2px solid $color-black-50;
+        grid-column: 3 / 3;
         justify-content: flex-end;
+        border-left: 0;
+
+        @include media(xs, s) {
+          grid-column: 2 / 2;
+          border-top: 0;
+        }
+
+        @include media(xs) {
+          margin-bottom: $spacing-xs;
+        }
+
+        @include media(s) {
+          margin-bottom: $spacing-s;
+        }
       }
 
       &.gridButton {
@@ -64,11 +113,11 @@
           .ownPlaceLabel {
             margin-right: $spacing-2-xs;
 
-            @include media(m, l, xl) {
+            @include media(s, m, l, xl) {
               display: block;
             }
 
-            @include media(xs, s) {
+            @include media(xs) {
               display: none;
             }
           }
