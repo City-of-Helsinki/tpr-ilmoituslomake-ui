@@ -25,7 +25,7 @@ const InfoFooter = (): ReactElement => {
         <div className={styles.flexButton}>
           <Link href="/tip">
             <Button variant="secondary" iconRight={<IconLinkExternal aria-hidden />}>
-              {i18n.t("notification.button.modifyPlace")}
+              {i18n.t("notification.button.suggestChange")}
             </Button>
           </Link>
         </div>
