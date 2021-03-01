@@ -125,7 +125,7 @@ export const saveTip = async (
         const changeRequestResult = await changeRequestResponse.json();
         console.log("RESPONSE", changeRequestResult);
 
-        if (changeRequestResult.target) {
+        if (changeRequestResult.item_type === ItemType.ChangeRequestAdd || changeRequestResult.target) {
           // setToast(Toast.SaveSucceeded);
           router.push("/tip/sent");
         } else {
