@@ -3,7 +3,7 @@ import { GetServerSideProps } from "next";
 import Head from "next/head";
 import Link from "next/link";
 import { useI18n } from "next-localization";
-import { Button, IconAngleRight, IconEye, IconLocation, IconPenLine, IconStar, Koros } from "hds-react";
+import { Button, IconAngleRight, IconLocation, IconPenLine, IconSearch, IconStar, Koros } from "hds-react";
 import { initStore } from "../state/store";
 import { ACCESSIBILITY_URL, CLEAR_STATE, TERMS_URL } from "../types/constants";
 import i18nLoader from "../utils/i18n";
@@ -60,6 +60,7 @@ const Main = (): ReactElement => {
           }
         />
         <Notice
+          className={styles.giveTip}
           icon={<IconPenLine size="xl" aria-hidden />}
           titleKey="notification.message.giveTip.title"
           messageKey="notification.message.giveTip.message"
@@ -71,7 +72,7 @@ const Main = (): ReactElement => {
         />
         <Notice
           className={styles.checkPlace}
-          icon={<IconEye size="xl" aria-hidden />}
+          icon={<IconSearch size="xl" aria-hidden />}
           titleKey="notification.message.checkPlace.title"
           messageKey="notification.message.checkPlace.message"
           button={
