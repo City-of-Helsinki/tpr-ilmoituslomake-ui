@@ -129,6 +129,7 @@
       "fieldFormatUrl": "$fieldName on annettava oikeassa muodossa (esim. https://myhelsinki.fi)",
       "fieldTooLong": "$fieldName on liian pitkä",
       "fieldTooShort": "$fieldName on liian lyhyt",
+      "fieldNotJpeg": "Valitun kuvan formaatti on virheellinen, kuvien tulee olla JPEG-muotoinen",
       "fieldOther": "Tarkista tieto"
     },
     "comments": {

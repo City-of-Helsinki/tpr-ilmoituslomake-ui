@@ -208,6 +208,15 @@ export const isPhotoFieldValid = (
           : string().required("notification.message.fieldRequired");
       break;
     }
+    case "base64": {
+      schema =
+        photo.new && photo.sourceType === PhotoSourceType.Device
+          ? string()
+              .required("notification.message.fieldRequired")
+              .matches(/image\/jpeg/, "notification.message.fieldNotJpeg")
+          : string();
+      break;
+    }
     default: {
       schema = string().required("notification.message.fieldRequired");
     }
@@ -285,6 +294,7 @@ export const isPageValid = (
           isPhotoFieldValid(index, "url", notificationExtra, dispatch),
           isPhotoFieldValid(index, "permission", notificationExtra, dispatch),
           isPhotoFieldValid(index, "source", notificationExtra, dispatch),
+          isPhotoFieldValid(index, "base64", notificationExtra, dispatch),
         ];
         const photoValid2 = inputLanguages.flatMap((option) => [isPhotoAltTextValid(index, option, notificationExtra, dispatch)]);
         return photoValid1.every((valid) => valid) && photoValid2.every((valid) => valid);

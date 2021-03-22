@@ -10,6 +10,7 @@ export interface PhotoValidation {
   };
   permission: Validation;
   source: Validation;
+  base64: Validation;
   [key: string]: Validation | unknown;
 }
 

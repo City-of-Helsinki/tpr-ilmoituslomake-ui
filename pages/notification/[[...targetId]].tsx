@@ -179,6 +179,7 @@ export const getServerSideProps: GetServerSideProps = async ({ req, resolvedUrl,
                 },
                 permission: { valid: true },
                 source: { valid: true },
+                base64: { valid: true },
               } as PhotoValidation;
             }),
           },

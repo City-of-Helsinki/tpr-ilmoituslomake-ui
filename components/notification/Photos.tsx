@@ -68,6 +68,7 @@ const Photos = (): ReactElement => {
         },
         permission: { valid: true },
         source: { valid: true },
+        base64: { valid: true },
       } as PhotoValidation)
     );
   };
@@ -103,12 +104,23 @@ const Photos = (): ReactElement => {
     isPhotoAltTextValid(index, evt.target.name, notificationExtra, dispatchValidation);
   };
 
+  const validatePhotoBase64 = (index: number, base64: string) => {
+    // The base64 string should start with "data:image/jpeg;base64," to be valid
+    const regex = new RegExp(/image\/jpeg/);
+    const base64Valid = base64 ? regex.test(base64) : false;
+    dispatchValidation(
+      setNotificationPhotoValidation(index, {
+        base64: { valid: base64Valid, message: !base64Valid ? "notification.message.fieldNotJpeg" : undefined },
+      })
+    );
+  };
+
   const fetchPhoto = async (index: number, evt: ChangeEvent<HTMLInputElement>) => {
     const { new: isNewImage, sourceType, url } = photos[index];
 
     if (isNewImage && sourceType === PhotoSourceType.Device && evt && evt.target && evt.target.files && evt.target.files.length > 0) {
       const file = evt.target.files[0];
-      dispatchValidation(setNotificationPhotoValidation(index, { url: { valid: true } }));
+      dispatchValidation(setNotificationPhotoValidation(index, { url: { valid: true }, base64: { valid: true } }));
 
       // Read the image file and store it as a base64 string
       const reader = new FileReader();
@@ -116,6 +128,7 @@ const Photos = (): ReactElement => {
         if (fileEvt && fileEvt.target && fileEvt.target.result) {
           const base64 = fileEvt.target.result as string;
           dispatch(setNotificationPhoto(index, { ...photos[index], url: file.name, base64, preview: base64 }));
+          validatePhotoBase64(index, base64);
         } else {
           dispatch(setNotificationPhoto(index, { ...photos[index], url: "", base64: "", preview: "" }));
         }
@@ -158,10 +171,10 @@ const Photos = (): ReactElement => {
                   label={i18n.t("notification.photos.url.labelDevice")}
                   name="url"
                   value={url}
-                  invalid={!photosValid[index].url.valid}
+                  invalid={!photosValid[index].base64.valid}
                   errorText={
-                    !photosValid[index].url.valid
-                      ? i18n.t(photosValid[index].url.message as string).replace("$fieldName", i18n.t("notification.photos.photo.title"))
+                    !photosValid[index].base64.valid
+                      ? i18n.t(photosValid[index].base64.message as string).replace("$fieldName", i18n.t("notification.photos.photo.title"))
                       : ""
                   }
                   required
