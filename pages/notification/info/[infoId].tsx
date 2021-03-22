@@ -101,7 +101,7 @@ export const getServerSideProps: GetServerSideProps = async ({ req, params, loca
                 permission: image.permission,
                 source: image.source,
                 base64: "",
-                preview: "",
+                preview: image.url,
               };
             }),
           },

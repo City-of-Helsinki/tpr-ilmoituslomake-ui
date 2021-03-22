@@ -136,7 +136,7 @@ const Preview = ({ className, full, includeNotifier }: PreviewProps): ReactEleme
         )}
       </div>
 
-      {full && photos.length > 0 && (
+      {photos.length > 0 && (
         <>
           <h4 className={`${styles.gridHeading} ${styles.gridSubHeader}`}>{i18n.t("notification.main.photos")}</h4>
           <div className={`${styles.gridPlaceInfo} ${styles.gridSubHeader}`} />
