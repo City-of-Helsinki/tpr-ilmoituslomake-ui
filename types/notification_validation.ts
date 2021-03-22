@@ -10,7 +10,7 @@ export interface PhotoValidation {
   };
   permission: Validation;
   source: Validation;
-  [key: string]: Validation;
+  [key: string]: Validation | unknown;
 }
 
 export interface NotificationValidationSchema {

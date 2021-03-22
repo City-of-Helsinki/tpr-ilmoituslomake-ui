@@ -1,6 +1,7 @@
 import { AnyAction } from "redux";
 import { LatLngExpression } from "leaflet";
 import {
+  ModerationStatus,
   SET_PAGE,
   SET_PAGE_VALID,
   SET_PAGE_STATUS,
@@ -60,21 +61,24 @@ import {
   SET_MODERATION_LINK_STATUS,
   SET_MODERATION_PHOTO_STATUS,
   SET_MODERATION_PHOTO_ALT_TEXT_STATUS,
+  REMOVE_MODERATION_PHOTO_STATUS,
 } from "../../types/constants";
 import {
-  KeyValueString,
+  ChangeRequestSchema,
   KeyValueBoolean,
+  KeyValueStatus,
+  KeyValueString,
+  KeyValueValidation,
+  ModerationPlaceSearch,
+  ModerationTodoResult,
+  NotificationPlaceResult,
+  NotificationPlaceSearch,
   Photo,
   TagOption,
-  NotificationPlaceSearch,
-  NotificationPlaceResult,
-  ChangeRequestSchema,
-  ModerationPlaceSearch,
   TaskSearch,
-  ModerationTodoResult,
+  Validation,
 } from "../../types/general";
 import { PhotoValidation } from "../../types/notification_validation";
-import { PhotoStatus } from "../../types/moderation_status";
 
 interface SetPageAction extends AnyAction {
   type: typeof SET_PAGE;
@@ -199,52 +203,52 @@ interface SetPageValidAction extends AnyAction {
 
 interface SetNotificationNameValidationAction extends AnyAction {
   type: typeof SET_NOTIFICATION_NAME_VALIDATION;
-  payload: Validation;
+  payload: KeyValueValidation;
 }
 
 interface SetNotificationShortDescriptionValidationAction extends AnyAction {
   type: typeof SET_NOTIFICATION_SHORT_DESCRIPTION_VALIDATION;
-  payload: Validation;
+  payload: KeyValueValidation;
 }
 
 interface SetNotificationLongDescriptionValidationAction extends AnyAction {
   type: typeof SET_NOTIFICATION_LONG_DESCRIPTION_VALIDATION;
-  payload: Validation;
+  payload: KeyValueValidation;
 }
 
 interface SetNotificationTagValidationAction extends AnyAction {
   type: typeof SET_NOTIFICATION_TAG_VALIDATION;
-  payload: boolean;
+  payload: Validation;
 }
 
 interface SetNotificationNotifierValidationAction extends AnyAction {
   type: typeof SET_NOTIFICATION_NOTIFIER_VALIDATION;
-  payload: Validation;
+  payload: KeyValueValidation;
 }
 
 interface SetNotificationAddressValidationAction extends AnyAction {
   type: typeof SET_NOTIFICATION_ADDRESS_VALIDATION;
-  payload: { language: string; validation: Validation };
+  payload: { language: string; validation: KeyValueValidation };
 }
 
 interface SetNotificationContactValidationAction extends AnyAction {
   type: typeof SET_NOTIFICATION_CONTACT_VALIDATION;
-  payload: Validation;
+  payload: KeyValueValidation;
 }
 
 interface SetNotificationLinkValidationAction extends AnyAction {
   type: typeof SET_NOTIFICATION_LINK_VALIDATION;
-  payload: Validation;
+  payload: KeyValueValidation;
 }
 
 interface SetNotificationPhotoValidationAction extends AnyAction {
   type: typeof SET_NOTIFICATION_PHOTO_VALIDATION;
-  payload: { index: number; validation: PhotoValidation | Validation };
+  payload: { index: number; validation: PhotoValidation | KeyValueValidation };
 }
 
 interface SetNotificationPhotoAltTextValidationAction extends AnyAction {
   type: typeof SET_NOTIFICATION_PHOTO_ALT_TEXT_VALIDATION;
-  payload: { index: number; validation: Validation };
+  payload: { index: number; validation: KeyValueValidation };
 }
 
 interface RemoveNotificationPhotoValidationAction extends AnyAction {
@@ -254,7 +258,7 @@ interface RemoveNotificationPhotoValidationAction extends AnyAction {
 
 interface SetNotificationTipValidationAction extends AnyAction {
   type: typeof SET_NOTIFICATION_TIP_VALIDATION;
-  payload: Validation;
+  payload: KeyValueValidation;
 }
 
 export type NotificationValidationAction =
@@ -267,7 +271,7 @@ export type NotificationValidationAction =
   | SetNotificationAddressValidationAction
   | SetNotificationContactValidationAction
   | SetNotificationLinkValidationAction
-  | SetNotificationPhotoUrlValidationAction
+  | SetNotificationPhotoValidationAction
   | SetNotificationPhotoAltTextValidationAction
   | RemoveNotificationPhotoValidationAction
   | SetNotificationTipValidationAction;
@@ -378,17 +382,17 @@ interface SetPageStatusAction extends AnyAction {
 
 interface SetModerationNameStatusAction extends AnyAction {
   type: typeof SET_MODERATION_NAME_STATUS;
-  payload: ModerationStatus;
+  payload: KeyValueStatus;
 }
 
 interface SetModerationShortDescriptionStatusAction extends AnyAction {
   type: typeof SET_MODERATION_SHORT_DESCRIPTION_STATUS;
-  payload: ModerationStatus;
+  payload: KeyValueStatus;
 }
 
 interface SetModerationLongDescriptionStatusAction extends AnyAction {
   type: typeof SET_MODERATION_LONG_DESCRIPTION_STATUS;
-  payload: ModerationStatus;
+  payload: KeyValueStatus;
 }
 
 interface SetModerationTagStatusAction extends AnyAction {
@@ -398,7 +402,7 @@ interface SetModerationTagStatusAction extends AnyAction {
 
 interface SetModerationAddressStatusAction extends AnyAction {
   type: typeof SET_MODERATION_ADDRESS_STATUS;
-  payload: { language: string; status: ModerationStatus };
+  payload: { language: string; status: KeyValueStatus };
 }
 
 interface SetModerationLocationStatusAction extends AnyAction {
@@ -408,22 +412,22 @@ interface SetModerationLocationStatusAction extends AnyAction {
 
 interface SetModerationContactStatusAction extends AnyAction {
   type: typeof SET_MODERATION_CONTACT_STATUS;
-  payload: ModerationStatus;
+  payload: KeyValueStatus;
 }
 
 interface SetModerationLinkStatusAction extends AnyAction {
   type: typeof SET_MODERATION_LINK_STATUS;
-  payload: ModerationStatus;
+  payload: KeyValueStatus;
 }
 
 interface SetModerationPhotoStatusAction extends AnyAction {
   type: typeof SET_MODERATION_PHOTO_STATUS;
-  payload: PhotoStatus[];
+  payload: { index: number; status: KeyValueStatus };
 }
 
 interface SetModerationPhotoAltTextStatusAction extends AnyAction {
   type: typeof SET_MODERATION_PHOTO_ALT_TEXT_STATUS;
-  payload: PhotoStatus[];
+  payload: { index: number; status: KeyValueStatus };
 }
 
 interface RemoveModerationPhotoStatusAction extends AnyAction {
@@ -441,6 +445,6 @@ export type ModerationStatusAction =
   | SetModerationLocationStatusAction
   | SetModerationContactStatusAction
   | SetModerationLinkStatusAction
-  | SetModerationPhotoUrlStatusAction
+  | SetModerationPhotoStatusAction
   | SetModerationPhotoAltTextStatusAction
   | RemoveModerationPhotoStatusAction;

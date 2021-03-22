@@ -10,7 +10,7 @@ export interface PhotoStatus {
   };
   permission: ModerationStatus;
   source: ModerationStatus;
-  [key: string]: ModerationStatus;
+  [key: string]: ModerationStatus | unknown;
 }
 
 export interface ModerationStatusSchema {
