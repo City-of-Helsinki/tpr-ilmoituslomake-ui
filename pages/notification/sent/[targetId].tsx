@@ -28,6 +28,8 @@ const NotificationSent = (): ReactElement => {
   const notificationId = useSelector((state: RootState) => state.notification.notificationId);
   const notification = useSelector((state: RootState) => state.notification.notification);
   const { name: placeName } = notification;
+  const notificationExtra = useSelector((state: RootState) => state.notification.notificationExtra);
+  const { photos } = notificationExtra;
 
   // NOTE: temporarily set to false until external opening times application is ready
   const [modalOpen, setModalOpen] = useState(false);
@@ -74,17 +76,19 @@ const NotificationSent = (): ReactElement => {
             }
           />
           */}
-          <Notice
-            className={styles.photos}
-            icon={<IconPhotoPlus size="xl" aria-hidden />}
-            titleKey="notification.message.completePhotos.title"
-            messageKey="notification.message.completePhotos.message"
-            button={
-              <Link href={`/notification/${notificationId}`}>
-                <Button variant="secondary">{i18n.t("notification.button.modifyInformation")}</Button>
-              </Link>
-            }
-          />
+          {photos.length === 0 && (
+            <Notice
+              className={styles.photos}
+              icon={<IconPhotoPlus size="xl" aria-hidden />}
+              titleKey="notification.message.completePhotos.title"
+              messageKey="notification.message.completePhotos.message"
+              button={
+                <Link href={`/notification/${notificationId}`}>
+                  <Button variant="secondary">{i18n.t("notification.button.modifyInformation")}</Button>
+                </Link>
+              }
+            />
+          )}
 
           <InfoFooter />
           <Preview />
