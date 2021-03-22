@@ -34,17 +34,13 @@ const TipFooter = (): ReactElement => {
   return (
     <div className={styles.tipFooter}>
       <div className={styles.flexButton}>
-        <Link href="/">
-          <Button variant="secondary" iconLeft={<IconArrowLeft aria-hidden />}>
-            {i18n.t("notification.button.cancel")}
-          </Button>
-        </Link>
+        <Button onClick={sendTip}>{i18n.t("notification.button.send")}</Button>
       </div>
 
       <div className={`${styles.flexButton} ${styles.flexButtonRight}`}>
-        <Button iconRight={<IconArrowRight aria-hidden />} onClick={sendTip}>
-          {i18n.t("notification.button.send")}
-        </Button>
+        <Link href="/">
+          <Button variant="secondary">{i18n.t("notification.button.close")}</Button>
+        </Link>
       </div>
 
       {toast && <ToastNotification prefix="notification" toast={toast} setToast={setToast} />}
