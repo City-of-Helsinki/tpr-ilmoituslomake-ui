@@ -1,4 +1,4 @@
-import React, { Dispatch, ChangeEvent, ReactElement, useState } from "react";
+import React, { Dispatch, ChangeEvent, ReactElement, useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useRouter } from "next/router";
 import { useI18n } from "next-localization";
@@ -8,6 +8,7 @@ import { setNotificationTip } from "../../state/actions/notification";
 import { RootState } from "../../state/reducers";
 import { ItemType, MAX_LENGTH } from "../../types/constants";
 import { NotificationPlaceResult, OptionType } from "../../types/general";
+import { NotificationSchema } from "../../types/notification_schema";
 import { getDisplayName } from "../../utils/helper";
 import { defaultLocale } from "../../utils/i18n";
 import getOrigin from "../../utils/request";
@@ -25,7 +26,7 @@ const TipSearch = (): ReactElement => {
   const [selectedPlace, setSelectedPlace] = useState<OptionType>(emptyOption);
 
   const tip = useSelector((state: RootState) => state.notification.tip);
-  const { item_type, user_place_name } = tip;
+  const { target, item_type, user_place_name } = tip;
 
   const tipValidation = useSelector((state: RootState) => state.notificationValidation.tipValidation);
   const { target: targetValid, user_place_name: userPlaceNameValid } = tipValidation;
@@ -76,6 +77,28 @@ const TipSearch = (): ReactElement => {
       }
     }
   };
+
+  const preselectPlaceOnMount = async () => {
+    if (target > 0) {
+      const placeResponse = await fetch(`${getOrigin(router)}/api/notification/get/${target}`);
+      if (placeResponse.ok) {
+        const placeResult = await (placeResponse.json() as Promise<{ id: number; data: NotificationSchema }>);
+
+        console.log("PLACE RESPONSE", placeResult);
+
+        if (placeResult && placeResult.data) {
+          const selected = { id: placeResult.id, label: getDisplayName(router.locale || defaultLocale, placeResult.data.name) };
+          setPlaceResults([selected]);
+          setSelectedPlace(selected);
+        }
+      }
+    }
+  };
+
+  // If specified, search for the specified place on first render only, using a workaround utilising useEffect with empty dependency array
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  const useMountEffect = (fun: () => void) => useEffect(fun, []);
+  useMountEffect(preselectPlaceOnMount);
 
   return (
     <div className="formSection">
