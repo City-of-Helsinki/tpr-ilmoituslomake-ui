@@ -1,12 +1,10 @@
 import React, { ReactElement } from "react";
-import { useSelector } from "react-redux";
 import { GetServerSideProps } from "next";
 import Head from "next/head";
 import Link from "next/link";
 import { useI18n } from "next-localization";
 import { Button, IconArrowLeft } from "hds-react";
 import { initStore } from "../state/store";
-import { RootState } from "../state/reducers";
 import { CLEAR_STATE } from "../types/constants";
 import i18nLoader from "../utils/i18n";
 import { checkUser } from "../utils/serverside";
@@ -18,10 +16,6 @@ import PlaceResults from "../components/notification/PlaceResults";
 const NotificationSearch = (): ReactElement => {
   const i18n = useI18n();
 
-  const placeResults = useSelector((state: RootState) => state.notification.placeResults);
-  const placeSearch = useSelector((state: RootState) => state.notification.placeSearch);
-  const { searchDone } = placeSearch;
-
   return (
     <Layout>
       <Head>
@@ -30,8 +24,7 @@ const NotificationSearch = (): ReactElement => {
       <Header />
       <main id="content">
         <PlaceSearch />
-        {placeResults.length > 0 && <PlaceResults />}
-        {searchDone && placeResults.length === 0 && <h2>{i18n.t("notification.placeResults.notFound")}</h2>}
+        <PlaceResults />
         <Link href="/">
           <Button variant="secondary" iconLeft={<IconArrowLeft aria-hidden />}>
             {i18n.t("notification.button.returnToStart")}

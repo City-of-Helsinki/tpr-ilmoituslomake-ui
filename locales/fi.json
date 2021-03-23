@@ -280,6 +280,7 @@
       "found": "Löytyi",
       "places": "kohdetta",
       "notFound": "Kohteita ei löytynyt",
+      "notFoundTip": "Vinkki: Tarkista hakusanan kirjoitusasu tai koita hakea sanan alkukirjaimilla tai toisella hakusanalla",
       "ownPlace": "Oma kohde",
       "newPlace": {
         "title": "Haluatko lisätä uuden kohteen palveluun?",
