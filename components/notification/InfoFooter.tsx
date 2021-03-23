@@ -23,7 +23,7 @@ const InfoFooter = (): ReactElement => {
       )}
       {!currentUser?.authenticated && (
         <div className={styles.flexButton}>
-          <Link href="/tip">
+          <Link href={`/tip/${notificationId}`}>
             <Button variant="secondary" iconRight={<IconLinkExternal aria-hidden />}>
               {i18n.t("notification.button.suggestChange")}
             </Button>
@@ -39,7 +39,7 @@ const InfoFooter = (): ReactElement => {
       </div>
       */}
       <div className={styles.flexButton}>
-        <Link href="/tip">
+        <Link href={`/tip/${notificationId}`}>
           <Button variant="secondary" iconRight={<IconLinkExternal aria-hidden />}>
             {i18n.t("notification.button.notifyClosingDown")}
           </Button>

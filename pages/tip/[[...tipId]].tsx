@@ -26,7 +26,7 @@ const Tip = (): ReactElement => {
   const i18n = useI18n();
 
   const pageValid = useSelector((state: RootState) => state.notificationValidation.pageValid);
-  const ref = useRef<HTMLDivElement>(null);
+  const ref = useRef<HTMLHeadingElement>(null);
 
   useEffect(() => {
     if (ref.current) {
@@ -41,9 +41,9 @@ const Tip = (): ReactElement => {
       </Head>
       <Header />
       <div className={styles.header}>
-        <h1>{i18n.t("notification.tip.title")}</h1>
+        <h1 ref={ref}>{i18n.t("notification.tip.title")}</h1>
       </div>
-      <main id="content" className={`narrowSection ${styles.content}`} ref={ref}>
+      <main id="content" className={`narrowSection ${styles.content}`}>
         <NotificationNotice messageKey="notification.mandatory" />
         {!pageValid && <ValidationSummary />}
         <DynamicTipType />
@@ -56,7 +56,7 @@ const Tip = (): ReactElement => {
 };
 
 // Server-side rendering
-export const getServerSideProps: GetServerSideProps = async ({ req, params, locale, locales }) => {
+export const getServerSideProps: GetServerSideProps = async ({ req, params, locales }) => {
   const lngDict = await i18nLoader(locales);
 
   const reduxStore = initStore();

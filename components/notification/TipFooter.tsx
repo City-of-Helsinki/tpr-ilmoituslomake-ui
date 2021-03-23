@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useI18n } from "next-localization";
-import { Button, IconArrowLeft, IconArrowRight } from "hds-react";
+import { Button } from "hds-react";
 import { NotificationValidationAction } from "../../state/actions/types";
 import { setPageValid } from "../../state/actions/notificationValidation";
 import { RootState } from "../../state/reducers";
