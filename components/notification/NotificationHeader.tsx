@@ -1,4 +1,4 @@
-import React, { Dispatch, ReactElement } from "react";
+import React, { Dispatch, ReactElement, RefObject } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useRouter } from "next/router";
 import { useI18n } from "next-localization";
@@ -15,7 +15,11 @@ import { defaultLocale } from "../../utils/i18n";
 import styles from "./NotificationHeader.module.scss";
 import NotificationFooter from "./NotificationFooter";
 
-const NotificationHeader = (): ReactElement => {
+interface NotificationHeaderProps {
+  headerRef: RefObject<HTMLHeadingElement>;
+}
+
+const NotificationHeader = ({ headerRef }: NotificationHeaderProps): ReactElement => {
   const i18n = useI18n();
   const dispatch = useDispatch<Dispatch<NotificationAction>>();
   const router = useRouter();
@@ -67,7 +71,7 @@ const NotificationHeader = (): ReactElement => {
       <nav className={styles.header} aria-label={i18n.t("notification.navigationHeader")}>
         <StylesProvider injectFirst>
           <div className={styles.tabletContainer}>
-            <h1>
+            <h1 ref={headerRef}>
               {notificationId > 0
                 ? `${i18n.t("notification.headerModify")}: ${getDisplayName(router.locale || defaultLocale, placeName)}`
                 : i18n.t("notification.headerNew")}

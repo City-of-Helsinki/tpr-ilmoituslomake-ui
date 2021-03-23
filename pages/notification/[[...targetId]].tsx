@@ -48,10 +48,10 @@ const NotificationDetail = (): ReactElement => {
       <Head>
         <title>{i18n.t("notification.title")}</title>
       </Head>
-      <NotificationHeader />
+      <NotificationHeader headerRef={ref} />
       {currentPage === 1 && (
         <main id="content" className={`narrowSection ${styles.content}`}>
-          <h2 ref={ref} tabIndex={-1}>{`${currentPage} ${i18n.t("notification.main.basic")}`}</h2>
+          <h2 tabIndex={-1}>{`${currentPage} ${i18n.t("notification.main.basic")}`}</h2>
           <NotificationNotice messageKey="notification.mandatory" />
           {!pageValid && <ValidationSummary />}
           <Description />
@@ -62,7 +62,7 @@ const NotificationDetail = (): ReactElement => {
       )}
       {currentPage === 2 && (
         <main id="content" className={`narrowSection ${styles.content}`}>
-          <h2 ref={ref} tabIndex={-1}>{`${currentPage} ${i18n.t("notification.main.contact")}`}</h2>
+          <h2 tabIndex={-1}>{`${currentPage} ${i18n.t("notification.main.contact")}`}</h2>
           <NotificationNotice messageKey="notification.mandatory" />
           {!pageValid && <ValidationSummary />}
           <Location />
@@ -74,7 +74,7 @@ const NotificationDetail = (): ReactElement => {
       )}
       {currentPage === 3 && (
         <main id="content" className={`narrowSection ${styles.content}`}>
-          <h2 ref={ref} tabIndex={-1}>{`${currentPage} ${i18n.t("notification.main.photos")}`}</h2>
+          <h2 tabIndex={-1}>{`${currentPage} ${i18n.t("notification.main.photos")}`}</h2>
           <NotificationNotice messageKey="notification.photos.notice" />
           {!pageValid && <ValidationSummary />}
           <Photos />
@@ -83,7 +83,7 @@ const NotificationDetail = (): ReactElement => {
       )}
       {currentPage === 4 && (
         <main id="content" className={`narrowSection ${styles.content}`}>
-          <h2 ref={ref} tabIndex={-1}>{`${currentPage} ${i18n.t("notification.main.send")}`}</h2>
+          <h2 tabIndex={-1}>{`${currentPage} ${i18n.t("notification.main.send")}`}</h2>
           <NotificationNotice messageKey="notification.comments.notice" />
           {/* NOTE: temporarily removed until external opening times application is ready
           <Opening />
