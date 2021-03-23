@@ -42,11 +42,12 @@ const PlaceSearch = ({ showOwnPlaces }: PlaceSearchProps): ReactElement => {
 
       console.log("PLACE RESPONSE", placeResult);
 
-      if (placeResult && placeResult.results && placeResult.results.length > 0) {
+      if ((placeName.length > 0 || (ownPlaces && ownPlacesOnly)) && placeResult && placeResult.results && placeResult.results.length > 0) {
         dispatch(setNotificationPlaceResults(placeResult.results.filter((result) => !ownPlaces || !ownPlacesOnly || result.is_notifier)));
       } else {
         dispatch(setNotificationPlaceResults([]));
       }
+      dispatch(setNotificationPlaceSearch({ ...placeSearch, searchDone: true }));
     }
   };
 

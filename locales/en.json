@@ -279,6 +279,7 @@
     "placeResults": {
       "found": "Found",
       "places": "places",
+      "notFound": "No places found",
       "ownPlace": "Own place",
       "newPlace": {
         "title": "Do you want to add a new place to the service?",

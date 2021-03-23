@@ -19,6 +19,8 @@ const NotificationSearch = (): ReactElement => {
   const i18n = useI18n();
 
   const placeResults = useSelector((state: RootState) => state.notification.placeResults);
+  const placeSearch = useSelector((state: RootState) => state.notification.placeSearch);
+  const { searchDone } = placeSearch;
 
   return (
     <Layout>
@@ -29,6 +31,7 @@ const NotificationSearch = (): ReactElement => {
       <main id="content">
         <PlaceSearch />
         {placeResults.length > 0 && <PlaceResults />}
+        {searchDone && placeResults.length === 0 && <h2>{i18n.t("notification.placeResults.notFound")}</h2>}
         <Link href="/">
           <Button variant="secondary" iconLeft={<IconArrowLeft aria-hidden />}>
             {i18n.t("notification.button.returnToStart")}

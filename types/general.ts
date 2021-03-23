@@ -72,6 +72,7 @@ export interface NotificationExtra {
 export interface NotificationPlaceSearch {
   placeName: string;
   ownPlacesOnly: boolean;
+  searchDone: boolean;
 }
 
 export interface NotificationPlaceResult {

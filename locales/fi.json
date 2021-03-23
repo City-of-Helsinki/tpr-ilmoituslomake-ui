@@ -279,6 +279,7 @@
     "placeResults": {
       "found": "Löytyi",
       "places": "kohdetta",
+      "notFound": "Kohteita ei löytynyt",
       "ownPlace": "Oma kohde",
       "newPlace": {
         "title": "Haluatko lisätä uuden kohteen palveluun?",

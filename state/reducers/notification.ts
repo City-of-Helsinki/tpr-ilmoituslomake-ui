@@ -38,6 +38,7 @@ const initialState: NotificationState = {
   placeSearch: {
     placeName: "",
     ownPlacesOnly: true,
+    searchDone: false,
   },
   placeResults: [],
   tip: {
