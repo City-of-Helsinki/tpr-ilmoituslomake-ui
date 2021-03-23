@@ -43,6 +43,7 @@ const Links = (): ReactElement => {
               key={`website_${option}`}
               className="formInput"
               label={label}
+              helperText={i18n.t("notification.links.website.helperText")}
               name={option}
               value={website[option] as string}
               inputMode="url"

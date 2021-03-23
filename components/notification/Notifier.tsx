@@ -105,6 +105,7 @@ const Notifier = (): ReactElement => {
         id="phone"
         className="formInput"
         label={i18n.t("notification.notifier.phone.label")}
+        helperText={i18n.t("notification.notifier.phone.helperText")}
         name="phone"
         value={phone}
         inputMode="tel"

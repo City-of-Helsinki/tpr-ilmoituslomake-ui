@@ -143,7 +143,8 @@
     "contact": {
       "title": "Muut yhteystiedot",
       "phone": {
-        "label": "Kohteen puhelinnumero"
+        "label": "Kohteen puhelinnumero",
+        "helperText": "Puhelinnumeron muoto on esim. 0501234567 tai +358501234567"
       },
       "email": {
         "label": "Kohteen sähköpostiosoite"
@@ -177,6 +178,7 @@
       "title": "Kohteen linkit",
       "website": {
         "label": "Verkkosivusto",
+        "helperText": "Linkin muoto on esim. https://myhelsinki.fi",
         "tooltipLabel": "Linkki lisätietoihin",
         "tooltipText": "Voit lisätä tähän kohteen verkkosivun tai sosiaallisen median tilin osoitteen."
       },
@@ -219,7 +221,8 @@
         "label": "Ilmoittajan sähköpostiosoite"
       },
       "phone": {
-        "label": "Ilmoittajan puhelinnumero"
+        "label": "Ilmoittajan puhelinnumero",
+        "helperText": "Puhelinnumeron muoto on esim. 0501234567 tai +358501234567"
       }
     },
     "opening": {

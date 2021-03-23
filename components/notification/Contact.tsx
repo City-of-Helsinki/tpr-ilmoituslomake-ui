@@ -36,6 +36,7 @@ const Contact = (): ReactElement => {
         id="phone"
         className="formInput"
         label={i18n.t("notification.contact.phone.label")}
+        helperText={i18n.t("notification.contact.phone.helperText")}
         name="phone"
         value={phone}
         inputMode="tel"
