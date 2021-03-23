@@ -50,8 +50,8 @@ const PlaceResults = ({ showOwnPlaces }: PlaceResultsProps): ReactElement => {
                 data: {
                   name,
                   address: {
-                    fi: { street: streetFi, postal_code: postalCodeFi, post_office: postOfficeFi },
-                    sv: { street: streetSv, postal_code: postalCodeSv, post_office: postOfficeSv },
+                    fi: { street: streetFi, postal_code: postalCodeFi, post_office: postOfficeFi, neighborhood: neighborhoodFi },
+                    sv: { street: streetSv, postal_code: postalCodeSv, post_office: postOfficeSv, neighborhood: neighborhoodSv },
                   },
                 },
                 is_notifier: isNotifier,
@@ -70,8 +70,12 @@ const PlaceResults = ({ showOwnPlaces }: PlaceResultsProps): ReactElement => {
                       <IconLocation aria-hidden />
                       <div className={styles.addressLabel}>
                         {router.locale !== "sv"
-                          ? `${streetFi}${streetFi.length > 0 ? "," : ""} ${postalCodeFi} ${postOfficeFi}`
-                          : `${streetSv}${streetSv.length > 0 ? "," : ""} ${postalCodeSv} ${postOfficeSv}`}
+                          ? `${streetFi}${streetFi.length > 0 ? "," : ""} ${postalCodeFi} ${postOfficeFi} ${
+                              neighborhoodFi.length > 0 ? `(${neighborhoodFi})` : ""
+                            }`
+                          : `${streetSv}${streetSv.length > 0 ? "," : ""} ${postalCodeSv} ${postOfficeSv} ${
+                              neighborhoodFi.length > 0 ? `(${neighborhoodSv})` : ""
+                            }`}
                       </div>
                     </div>
                   </div>
