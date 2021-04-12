@@ -3,6 +3,7 @@ import { NotificationValidationState } from "./types";
 import {
   MAX_PHOTOS,
   SET_PAGE_VALID,
+  SET_NOTIFICATION_INPUT_LANGUAGE_VALIDATION,
   SET_NOTIFICATION_NAME_VALIDATION,
   SET_NOTIFICATION_SHORT_DESCRIPTION_VALIDATION,
   SET_NOTIFICATION_LONG_DESCRIPTION_VALIDATION,
@@ -38,6 +39,14 @@ const notificationValidation = (state = initialState, action: AnyAction): Notifi
       return {
         ...state,
         pageValid: action.payload,
+      };
+    }
+
+    case SET_NOTIFICATION_INPUT_LANGUAGE_VALIDATION: {
+      console.log("SET_NOTIFICATION_INPUT_LANGUAGE_VALIDATION", action.payload);
+      return {
+        ...state,
+        notificationValidation: { ...state.notificationValidation, inputLanguage: action.payload },
       };
     }
 

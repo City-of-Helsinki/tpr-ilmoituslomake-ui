@@ -4,15 +4,17 @@ import { useRouter } from "next/router";
 import { useI18n } from "next-localization";
 import { Checkbox, SelectionGroup } from "hds-react";
 import { useMediaQuery } from "react-responsive";
-import { NotificationAction } from "../../state/actions/types";
+import { NotificationAction, NotificationValidationAction } from "../../state/actions/types";
 import { setNotificationInputLanguage } from "../../state/actions/notification";
 import { RootState } from "../../state/reducers";
 import { LANGUAGE_OPTIONS } from "../../types/constants";
+import { isInputLanguageFieldValid } from "../../utils/validation";
 import styles from "./InputLanguage.module.scss";
 
 const InputLanguage = (): ReactElement => {
   const i18n = useI18n();
   const dispatch = useDispatch<Dispatch<NotificationAction>>();
+  const dispatchValidation = useDispatch<Dispatch<NotificationValidationAction>>();
   const router = useRouter();
 
   // Note: this only works for client-side rendering
@@ -21,8 +23,15 @@ const InputLanguage = (): ReactElement => {
   const notificationExtra = useSelector((state: RootState) => state.notification.notificationExtra);
   const { inputLanguages } = notificationExtra;
 
+  const notificationValidation = useSelector((state: RootState) => state.notificationValidation.notificationValidation);
+  const { inputLanguage: inputLanguageValid } = notificationValidation;
+
   const updateInputLanguage = (evt: ChangeEvent<HTMLInputElement>) => {
     dispatch(setNotificationInputLanguage({ [evt.target.value]: evt.target.checked }));
+  };
+
+  const validateInputLanguage = () => {
+    isInputLanguageFieldValid(notificationExtra, dispatchValidation);
   };
 
   return (
@@ -31,6 +40,7 @@ const InputLanguage = (): ReactElement => {
       direction={isScreenSizeXS ? "vertical" : "horizontal"}
       className={styles.inputLanguage}
       label={i18n.t("notification.inputLanguage.title")}
+      errorText={!inputLanguageValid.valid ? i18n.t(inputLanguageValid.message as string) : ""}
       required
       aria-required
     >
@@ -44,9 +54,9 @@ const InputLanguage = (): ReactElement => {
           value={option}
           checked={inputLanguages.includes(option)}
           onChange={updateInputLanguage}
+          onBlur={validateInputLanguage}
           required={router.locale === option}
           aria-required={router.locale === option}
-          disabled={router.locale === option}
         />
       ))}
     </SelectionGroup>

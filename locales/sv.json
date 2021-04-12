@@ -132,6 +132,7 @@
       "fieldTooLong": "$fieldName on liian pitkä",
       "fieldTooShort": "$fieldName on liian lyhyt",
       "fieldNotJpeg": "Valitun kuvan formaatti on virheellinen, kuvien tulee olla JPEG-muotoinen",
+      "fieldLanguage": "Yksi kieli on pakollinen",
       "fieldOther": "Tarkista tieto"
     },
     "comments": {

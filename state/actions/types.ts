@@ -23,6 +23,7 @@ import {
   REMOVE_NOTIFICATION_PHOTO,
   SET_NOTIFICATION_COMMENTS,
   SET_NOTIFICATION_TIP,
+  SET_NOTIFICATION_INPUT_LANGUAGE_VALIDATION,
   SET_NOTIFICATION_NAME_VALIDATION,
   SET_NOTIFICATION_SHORT_DESCRIPTION_VALIDATION,
   SET_NOTIFICATION_LONG_DESCRIPTION_VALIDATION,
@@ -201,6 +202,11 @@ interface SetPageValidAction extends AnyAction {
   payload: boolean;
 }
 
+interface SetNotificationInputLanguageValidationAction extends AnyAction {
+  type: typeof SET_NOTIFICATION_INPUT_LANGUAGE_VALIDATION;
+  payload: Validation;
+}
+
 interface SetNotificationNameValidationAction extends AnyAction {
   type: typeof SET_NOTIFICATION_NAME_VALIDATION;
   payload: KeyValueValidation;
@@ -263,6 +269,7 @@ interface SetNotificationTipValidationAction extends AnyAction {
 
 export type NotificationValidationAction =
   | SetPageValidAction
+  | SetNotificationInputLanguageValidationAction
   | SetNotificationNameValidationAction
   | SetNotificationShortDescriptionValidationAction
   | SetNotificationLongDescriptionValidationAction

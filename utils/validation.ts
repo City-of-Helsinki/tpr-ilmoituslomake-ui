@@ -6,6 +6,7 @@ import StringSchema from "yup/lib/string";
 import NumberSchema from "yup/lib/number";
 import { NotificationValidationAction } from "../state/actions/types";
 import {
+  setNotificationInputLanguageValidation,
   setNotificationNameValidation,
   setNotificationShortDescriptionValidation,
   setNotificationLongDescriptionValidation,
@@ -47,6 +48,17 @@ const isValid = (schema: StringSchema<string | undefined> | NumberSchema<number 
     }
   }
   return { valid, message };
+};
+
+export const isInputLanguageFieldValid = (notificationExtra: NotificationExtra, dispatch: Dispatch<NotificationValidationAction>): boolean => {
+  const { inputLanguages } = notificationExtra;
+  const valid = inputLanguages.length > 0;
+  if (!valid) {
+    dispatch(setNotificationInputLanguageValidation({ valid, message: "notification.message.fieldLanguage" }));
+  } else {
+    dispatch(setNotificationInputLanguageValidation({ valid, message: undefined }));
+  }
+  return valid;
 };
 
 export const isNameValid = (language: string, notification: NotificationSchema, dispatch: Dispatch<NotificationValidationAction>): boolean => {
@@ -261,6 +273,7 @@ export const isPageValid = (
         isLongDescriptionValid(option, notification, dispatch),
       ]);
       const inputValid2 = [
+        isInputLanguageFieldValid(notificationExtra, dispatch),
         isTagValid(notification, dispatch),
         isNotifierFieldValid("notifier_type", notification, dispatch),
         isNotifierFieldValid("full_name", notification, dispatch),

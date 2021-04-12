@@ -1,5 +1,6 @@
 import {
   SET_PAGE_VALID,
+  SET_NOTIFICATION_INPUT_LANGUAGE_VALIDATION,
   SET_NOTIFICATION_NAME_VALIDATION,
   SET_NOTIFICATION_SHORT_DESCRIPTION_VALIDATION,
   SET_NOTIFICATION_LONG_DESCRIPTION_VALIDATION,
@@ -20,6 +21,11 @@ import { NotificationValidationAction } from "./types";
 export const setPageValid = (valid: boolean): NotificationValidationAction => ({
   type: SET_PAGE_VALID,
   payload: valid,
+});
+
+export const setNotificationInputLanguageValidation = (validation: Validation): NotificationValidationAction => ({
+  type: SET_NOTIFICATION_INPUT_LANGUAGE_VALIDATION,
+  payload: validation,
 });
 
 export const setNotificationNameValidation = (validation: KeyValueValidation): NotificationValidationAction => ({

@@ -15,6 +15,7 @@ export interface PhotoValidation {
 }
 
 export interface NotificationValidationSchema {
+  inputLanguage: Validation;
   name: {
     fi: Validation;
     sv: Validation;
