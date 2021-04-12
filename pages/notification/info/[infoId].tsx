@@ -21,6 +21,7 @@ const Info = (): ReactElement => {
   const i18n = useI18n();
   const router = useRouter();
 
+  const currentUser = useSelector((state: RootState) => state.general.user);
   const notificationId = useSelector((state: RootState) => state.notification.notificationId);
   const notification = useSelector((state: RootState) => state.notification.notification);
   const { name: placeName } = notification;
@@ -34,6 +35,8 @@ const Info = (): ReactElement => {
       {notificationId > 0 && (
         <main id="content" className={styles.content}>
           <h1>{getDisplayName(router.locale || defaultLocale, placeName)}</h1>
+
+          {!currentUser?.authenticated && <div className={styles.noticeLoggedOut}>{i18n.t("notification.placeSearch.noticeLoggedOut")}</div>}
 
           <InfoFooter />
           <Preview full={false} />

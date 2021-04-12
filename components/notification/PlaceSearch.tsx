@@ -61,6 +61,8 @@ const PlaceSearch = ({ showOwnPlaces }: PlaceSearchProps): ReactElement => {
       <h1>{i18n.t("notification.placeSearch.title")}</h1>
       <div>{i18n.t("notification.placeSearch.notice")}</div>
 
+      {!currentUser?.authenticated && <div className={styles.noticeLoggedOut}>{i18n.t("notification.placeSearch.noticeLoggedOut")}</div>}
+
       <div className={`gridLayoutContainer ${styles.search}`}>
         <TextInput
           id="placeName"
