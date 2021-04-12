@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { useI18n } from "next-localization";
 import { Button, IconAngleRight, IconLocation, IconStarFill } from "hds-react";
+import moment from "moment";
 import { RootState } from "../../state/reducers";
 import { NotificationPlaceResult } from "../../types/general";
 import { getDisplayName } from "../../utils/helper";
@@ -39,10 +40,19 @@ const PlaceResults = ({ showOwnPlaces }: PlaceResultsProps): ReactElement => {
       {placeResults.length > 0 && (
         <div className={`gridLayoutContainer ${styles.results}`}>
           {placeResults
+            /*
             .sort((a: NotificationPlaceResult, b: NotificationPlaceResult) => {
+              // Sort by name asc
               const nameA = getDisplayName(router.locale || defaultLocale, a.data.name);
               const nameB = getDisplayName(router.locale || defaultLocale, b.data.name);
               return nameA.localeCompare(nameB);
+            })
+            */
+            .sort((a: NotificationPlaceResult, b: NotificationPlaceResult) => {
+              // Sort by date desc
+              const updatedA = moment(a.updated_at);
+              const updatedB = moment(b.updated_at);
+              return updatedB.isBefore(updatedA) ? -1 : 1;
             })
             .map((result) => {
               const {

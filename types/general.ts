@@ -79,6 +79,7 @@ export interface NotificationPlaceResult {
   id: number;
   data: NotificationSchema;
   is_notifier: boolean;
+  updated_at: string;
 }
 
 export interface ChangeRequestSchema {

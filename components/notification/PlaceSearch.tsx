@@ -42,7 +42,7 @@ const PlaceSearch = ({ showOwnPlaces }: PlaceSearchProps): ReactElement => {
 
       console.log("PLACE RESPONSE", placeResult);
 
-      if ((placeName.length > 0 || (ownPlaces && ownPlacesOnly)) && placeResult && placeResult.results && placeResult.results.length > 0) {
+      if (placeResult && placeResult.results && placeResult.results.length > 0) {
         dispatch(setNotificationPlaceResults(placeResult.results.filter((result) => !ownPlaces || !ownPlacesOnly || result.is_notifier)));
       } else {
         dispatch(setNotificationPlaceResults([]));
@@ -66,6 +66,7 @@ const PlaceSearch = ({ showOwnPlaces }: PlaceSearchProps): ReactElement => {
           id="placeName"
           className={styles.gridInput}
           label={i18n.t("notification.placeSearch.placeName.label")}
+          helperText={i18n.t("notification.placeSearch.placeName.helperText")}
           name="placeName"
           value={placeName}
           maxLength={MAX_LENGTH}

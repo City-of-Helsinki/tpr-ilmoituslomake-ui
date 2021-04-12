@@ -272,7 +272,8 @@
       "title": "Kaikki kohteet",
       "notice": "Hae nimellä kohdetta, jonka tietoja haluat tarkastella tai muuttaa. Voit tarkistaa tietojen paikkansapitävyyden ja ilmoittaa mahdollisista muutoksia.",
       "placeName": {
-        "label": "Hae kohdetta nimellä"
+        "label": "Hae kohdetta nimellä",
+        "helperText": "Kun kenttä on tyhjä ja valitset Hae, saat näkyviin kaikki kohteet"
       },
       "ownPlacesOnly": {
         "label": "Näytä",

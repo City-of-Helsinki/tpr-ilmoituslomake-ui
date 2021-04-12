@@ -272,7 +272,8 @@
       "title": "All places",
       "notice": "With the name, search places whose information you want to view or change. You can check the information's correctness and notify about possible changes.",
       "placeName": {
-        "label": "Search places with the name"
+        "label": "Search places with the name",
+        "helperText": "When the field is empty and you select Search, you will see all places"
       },
       "ownPlacesOnly": {
         "label": "Show",
