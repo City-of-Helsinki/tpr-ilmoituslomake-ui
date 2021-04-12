@@ -32,14 +32,18 @@
   }
 
   .newPlace {
-    background-color: $color-copper-light;
+    background-color: $color-suomenlinna-light;
   }
 
   .giveTip {
-    background-color: $color-engel-light;
+    background-color: $color-bus-light;
   }
 
   .checkPlace {
-    background-color: $color-suomenlinna-light;
+    background-color: $color-copper-light;
+  }
+
+  .modifyOwnPlace {
+    background-color: $color-engel-light;
   }
 }

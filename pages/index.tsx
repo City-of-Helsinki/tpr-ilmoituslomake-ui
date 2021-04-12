@@ -3,7 +3,7 @@ import { GetServerSideProps } from "next";
 import Head from "next/head";
 import Link from "next/link";
 import { useI18n } from "next-localization";
-import { Button, IconAngleRight, IconLocation, IconPenLine, IconSearch, IconStar, Koros } from "hds-react";
+import { Button, IconAngleRight, IconPenLine, IconPlusCircle, IconSearch, IconStar, Koros } from "hds-react";
 import { initStore } from "../state/store";
 import { ACCESSIBILITY_URL, CLEAR_STATE, TERMS_URL } from "../types/constants";
 import i18nLoader from "../utils/i18n";
@@ -49,8 +49,30 @@ const Main = (): ReactElement => {
         <h2>{i18n.t("notification.index.notify")}</h2>
 
         <Notice
+          className={styles.checkPlace}
+          icon={<IconSearch size="xl" aria-hidden />}
+          titleKey="notification.message.checkPlace.title"
+          messageKey="notification.message.checkPlace.message"
+          button={
+            <Link href="/search">
+              <Button variant="secondary">{i18n.t("notification.button.checkPlace")}</Button>
+            </Link>
+          }
+        />
+        <Notice
+          className={styles.modifyOwnPlace}
+          icon={<IconStar size="xl" aria-hidden />}
+          titleKey="notification.message.modifyOwnPlace.title"
+          messageKey="notification.message.modifyOwnPlace.message"
+          button={
+            <Link href="/searchown">
+              <Button variant="secondary">{i18n.t("notification.button.modifyOwnPlace")}</Button>
+            </Link>
+          }
+        />
+        <Notice
           className={styles.newPlace}
-          icon={<IconLocation size="xl" aria-hidden />}
+          icon={<IconPlusCircle size="xl" aria-hidden />}
           titleKey="notification.message.notifyNewPlace.title"
           messageKey="notification.message.notifyNewPlace.message"
           button={
@@ -67,27 +89,6 @@ const Main = (): ReactElement => {
           button={
             <Link href="/tip">
               <Button variant="secondary">{i18n.t("notification.button.giveTip")}</Button>
-            </Link>
-          }
-        />
-        <Notice
-          className={styles.checkPlace}
-          icon={<IconSearch size="xl" aria-hidden />}
-          titleKey="notification.message.checkPlace.title"
-          messageKey="notification.message.checkPlace.message"
-          button={
-            <Link href="/search">
-              <Button variant="secondary">{i18n.t("notification.button.checkPlace")}</Button>
-            </Link>
-          }
-        />
-        <Notice
-          icon={<IconStar size="xl" aria-hidden />}
-          titleKey="notification.message.modifyOwnPlace.title"
-          messageKey="notification.message.modifyOwnPlace.message"
-          button={
-            <Link href="/searchown">
-              <Button variant="secondary">{i18n.t("notification.button.modifyOwnPlace")}</Button>
             </Link>
           }
         />
