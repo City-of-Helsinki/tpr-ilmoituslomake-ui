@@ -54,7 +54,7 @@
       "notifyOpeningTimes": "Register opening times",
       "notifyClosingDown": "Notify place closing down",
       "notifyNewPlace": "Add a new place",
-      "giveTip": "Give a tip to us",
+      "giveTip": "Give a tip",
       "checkPlace": "Search places",
       "modifyOwnPlace": "Modify own place",
       "continueToOpeningTimes": "Continue to opening times registration",
@@ -102,7 +102,7 @@
         "message": "Register new places to the service. Login first and register the missing place today!"
       },
       "giveTip": {
-        "title": "Give us a tip!",
+        "title": "Give a tip!",
         "message": "In case you notice missing, incorrect or old information, do us a favour and notify us about it. You can make the notification with ease without registering."
       },
       "checkPlace": {

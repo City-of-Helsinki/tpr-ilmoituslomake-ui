@@ -54,7 +54,7 @@
       "notifyOpeningTimes": "Ilmoita aukioloajat",
       "notifyClosingDown": "Ilmoita kohde lopettaneeksi",
       "notifyNewPlace": "Lisää uusi kohde",
-      "giveTip": "Vinkkaa meille",
+      "giveTip": "Anna vinkki",
       "checkPlace": "Hae kohteita",
       "modifyOwnPlace": "Muokkaa omaa kohdetta",
       "continueToOpeningTimes": "Jatka aukioloaikojen ilmoittamiseen",
@@ -102,7 +102,7 @@
         "message": "Ilmoita palveluun uusia toimipisteitä ja kohteita. Kirjaudu ensin ja ilmoita puuttuva kohde jo tänään!"
       },
       "giveTip": {
-        "title": "Anna meille vinkki!",
+        "title": "Anna vinkki!",
         "message": "Mikäli huomasit puuttuvan, virheellisen tai vanhentuneen tiedon, tee palvelus ja ilmoita siitä meille. Voit tehdä ilmoituksen vaivattomasti rekisteröitymättä."
       },
       "checkPlace": {
