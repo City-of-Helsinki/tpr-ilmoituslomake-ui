@@ -1,13 +1,13 @@
-import React, { Dispatch, ChangeEvent, ReactElement } from "react";
+import React, { Dispatch, ChangeEvent, ReactElement, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useRouter } from "next/router";
 import { useI18n } from "next-localization";
-import { TextInput, Button } from "hds-react";
+import { TextInput } from "hds-react";
 import { NotificationAction, NotificationValidationAction } from "../../state/actions/types";
 import { setNotificationAddress } from "../../state/actions/notification";
 import { RootState } from "../../state/reducers";
 import { MAX_LENGTH, MAX_LENGTH_POSTAL_CODE } from "../../types/constants";
-import { geocodeAddress } from "../../utils/address";
+import { searchAddress } from "../../utils/address";
 import { isAddressFieldValid } from "../../utils/validation";
 
 const Location = (): ReactElement => {
@@ -45,12 +45,42 @@ const Location = (): ReactElement => {
     isAddressFieldValid(language, evt.target.name, notification, dispatchValidation);
   };
 
-  const searchAddress = () => {
-    // The Helsinki API does not use postal code
-    const street = router.locale === "sv" ? streetSv : streetFi;
-    const postOffice = router.locale === "sv" ? postOfficeSv : postOfficeFi;
-    geocodeAddress(router.locale, street, postOffice, dispatch);
-  };
+  useEffect(() => {
+    const isAddressComplete =
+      router.locale === "sv"
+        ? streetSv.length > 0 &&
+          streetSvValid.valid &&
+          postalCodeSv.length > 0 &&
+          postalCodeSvValid.valid &&
+          postOfficeSv.length > 0 &&
+          postOfficeSvValid.valid
+        : streetFi.length > 0 &&
+          streetFiValid.valid &&
+          postalCodeFi.length > 0 &&
+          postalCodeFiValid.valid &&
+          postOfficeFi.length > 0 &&
+          postOfficeFiValid.valid;
+
+    // Search the address automatically when complete
+    if (isAddressComplete) {
+      searchAddress(router.locale, streetFi, postOfficeFi, streetSv, postOfficeSv, dispatch);
+    }
+  }, [
+    router.locale,
+    streetFi,
+    postalCodeFi,
+    postOfficeFi,
+    streetSv,
+    postalCodeSv,
+    postOfficeSv,
+    streetFiValid,
+    postalCodeFiValid,
+    postOfficeFiValid,
+    streetSvValid,
+    postalCodeSvValid,
+    postOfficeSvValid,
+    dispatch,
+  ]);
 
   return (
     <div className="formSection">
@@ -177,10 +207,6 @@ const Location = (): ReactElement => {
           router.locale === "sv" ? neighborhoodSv : neighborhoodFi
         }`}</div>
       )}
-
-      <Button variant="secondary" onClick={searchAddress}>
-        {i18n.t("notification.map.geocode")}
-      </Button>
     </div>
   );
 };

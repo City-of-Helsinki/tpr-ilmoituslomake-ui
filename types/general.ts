@@ -67,6 +67,7 @@ export interface NotificationExtra {
   inputLanguages: string[];
   photos: Photo[];
   tagOptions: TagOption[];
+  locationOriginal: [number, number];
 }
 
 export interface NotificationPlaceSearch {

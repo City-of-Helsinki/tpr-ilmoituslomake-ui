@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 import { useI18n } from "next-localization";
 import { MapContainer, TileLayer, Marker, useMap, useMapEvents } from "react-leaflet";
 import { Marker as LeafletMarker, Icon, LatLngExpression } from "leaflet";
-import { MAP_TILES_URL, MAP_MIN_ZOOM, MAP_MAX_ZOOM } from "../../types/constants";
+import { MAP_TILES_URL, MAP_INITIAL_MARKER_ZOOM, MAP_MIN_ZOOM, MAP_MAX_ZOOM } from "../../types/constants";
 import getOrigin from "../../utils/request";
 
 interface MapWrapperProps {
@@ -72,7 +72,7 @@ const MapWrapper = ({
     // If the location in redux state has changed, by geocoding or dragging, pan the map to centre on the new position
     useEffect(() => {
       if (isLocationValid() && prevLocation !== location) {
-        map.panTo(location);
+        map.flyTo(location, MAP_INITIAL_MARKER_ZOOM);
       }
     }, [map]);
 

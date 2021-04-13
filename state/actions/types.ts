@@ -16,6 +16,7 @@ import {
   SET_NOTIFICATION_TAG_OPTIONS,
   SET_NOTIFICATION_NOTIFIER,
   SET_NOTIFICATION_ADDRESS,
+  SET_NOTIFICATION_ORIGINAL_LOCATION,
   SET_NOTIFICATION_LOCATION,
   SET_NOTIFICATION_CONTACT,
   SET_NOTIFICATION_LINK,
@@ -141,6 +142,11 @@ interface SetNotificationAddressAction extends AnyAction {
   payload: { language: string; value: KeyValueString };
 }
 
+interface SetNotificationOriginalLocationAction extends AnyAction {
+  type: typeof SET_NOTIFICATION_ORIGINAL_LOCATION;
+  payload: [number, number];
+}
+
 interface SetNotificationLocationAction extends AnyAction {
   type: typeof SET_NOTIFICATION_LOCATION;
   payload: [number, number];
@@ -189,6 +195,7 @@ export type NotificationAction =
   | SetNotificationTagOptionsAction
   | SetNotificationNotifierAction
   | SetNotificationAddressAction
+  | SetNotificationOriginalLocationAction
   | SetNotificationLocationAction
   | SetNotificationContactAction
   | SetNotificationLinkAction

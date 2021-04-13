@@ -207,6 +207,7 @@
       "title": "Kohde kartalla",
       "notice": "Kohde näkyy kartalla yllä annetun osoitteen perusteella. Jos hakutulos on epätarkka tai virheellinen, voit korjata sen siirtämällä kartalla olevaa kohdistinta oikeaan kohtaan. Suosittelemme, että kohdistin merkitään pääsisäänkäynnin kohdalle.",
       "geocode": "Näytä kartalla",
+      "resetLocation": "Palauta osoitteenmukainen sijainti",
       "skipMap": "Ohita kartta"
     },
     "notifier": {

@@ -19,6 +19,7 @@ import {
   SET_NOTIFICATION_TAG_OPTIONS,
   SET_NOTIFICATION_NOTIFIER,
   SET_NOTIFICATION_ADDRESS,
+  SET_NOTIFICATION_ORIGINAL_LOCATION,
   SET_NOTIFICATION_LOCATION,
   SET_NOTIFICATION_CONTACT,
   SET_NOTIFICATION_LINK,
@@ -50,7 +51,7 @@ const initialState: NotificationState = {
   },
   notificationId: 0,
   notification: { ...INITIAL_NOTIFICATION, location: [0, 0] },
-  notificationExtra: INITIAL_NOTIFICATION_EXTRA,
+  notificationExtra: { ...INITIAL_NOTIFICATION_EXTRA, locationOriginal: [0, 0] },
 };
 
 const notification = (state = initialState, action: AnyAction): NotificationState => {
@@ -180,6 +181,14 @@ const notification = (state = initialState, action: AnyAction): NotificationStat
             [action.payload.language]: { ...(action.payload.language === "sv" ? sv : fi), ...action.payload.value },
           },
         },
+      };
+    }
+
+    case SET_NOTIFICATION_ORIGINAL_LOCATION: {
+      console.log("SET_NOTIFICATION_ORIGINAL_LOCATION", action.payload);
+      return {
+        ...state,
+        notificationExtra: { ...state.notificationExtra, locationOriginal: action.payload },
       };
     }
 

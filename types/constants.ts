@@ -79,6 +79,7 @@ export const CONTACT_URL = "https://hel.fi/helsinki/fi/kaupunki-ja-hallinto/osal
 export const MAP_TILES_URL = "https://tiles.hel.ninja/styles/hel-osm-bright/{z}/{x}/{y}.png";
 export const MAP_INITIAL_CENTER = [60.166, 24.942];
 export const MAP_INITIAL_ZOOM = 13;
+export const MAP_INITIAL_MARKER_ZOOM = 18;
 export const MAP_MIN_ZOOM = 10;
 export const MAP_MAX_ZOOM = 18;
 export const SEARCH_URL = "https://api.hel.fi/servicemap/v2/search/?format=json";
@@ -100,6 +101,7 @@ export const SET_NOTIFICATION_TAG = "SET_NOTIFICATION_TAG";
 export const SET_NOTIFICATION_TAG_OPTIONS = "SET_NOTIFICATION_TAG_OPTIONS";
 export const SET_NOTIFICATION_NOTIFIER = "SET_NOTIFICATION_NOTIFIER";
 export const SET_NOTIFICATION_ADDRESS = "SET_NOTIFICATION_ADDRESS";
+export const SET_NOTIFICATION_ORIGINAL_LOCATION = "SET_NOTIFICATION_ORIGINAL_LOCATION";
 export const SET_NOTIFICATION_LOCATION = "SET_NOTIFICATION_LOCATION";
 export const SET_NOTIFICATION_CONTACT = "SET_NOTIFICATION_CONTACT";
 export const SET_NOTIFICATION_LINK = "SET_NOTIFICATION_LINK";
@@ -208,6 +210,7 @@ export const INITIAL_NOTIFICATION_EXTRA = {
   inputLanguages: [defaultLocale],
   photos: [],
   tagOptions: [],
+  locationOriginal: [0, 0],
 };
 
 export const INITIAL_NOTIFICATION_VALIDATION = {

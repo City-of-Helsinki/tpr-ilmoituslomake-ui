@@ -1,7 +1,8 @@
 import { Dispatch } from "react";
 import { NotificationAction } from "../state/actions/types";
-import { setNotificationAddress, setNotificationLocation } from "../state/actions/notification";
+import { setNotificationAddress, setNotificationLocation, setNotificationOriginalLocation } from "../state/actions/notification";
 import { NEIGHBOURHOOD_URL, SEARCH_URL } from "../types/constants";
+import { Validation } from "../types/general";
 
 export const getNeighborhood = async (lon: number, lat: number, dispatch: Dispatch<NotificationAction>): Promise<void> => {
   // Fetch the neighbourhood for these coordinates
@@ -48,8 +49,25 @@ export const geocodeAddress = async (
       // The geocoder returns the coordinates as lon,lat but Leaflet needs them as lat,lon
       dispatch(setNotificationLocation([resultLocation.coordinates[1], resultLocation.coordinates[0]]));
 
+      // Also set the location in another variable for comparison if the map marker is later moved
+      dispatch(setNotificationOriginalLocation([resultLocation.coordinates[1], resultLocation.coordinates[0]]));
+
       // Also fetch the neighbourhood for these coordinates
       getNeighborhood(resultLocation.coordinates[0], resultLocation.coordinates[1], dispatch);
     }
   }
+};
+
+export const searchAddress = (
+  locale: string | undefined,
+  streetFi: string,
+  postOfficeFi: string,
+  streetSv: string,
+  postOfficeSv: string,
+  dispatch: Dispatch<NotificationAction>
+): void => {
+  // The Helsinki API does not use postal code
+  const street = locale === "sv" ? streetSv : streetFi;
+  const postOffice = locale === "sv" ? postOfficeSv : postOfficeFi;
+  geocodeAddress(locale, street, postOffice, dispatch);
 };

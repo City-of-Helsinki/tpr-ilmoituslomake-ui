@@ -12,6 +12,7 @@ import {
   SET_NOTIFICATION_TAG_OPTIONS,
   SET_NOTIFICATION_NOTIFIER,
   SET_NOTIFICATION_ADDRESS,
+  SET_NOTIFICATION_ORIGINAL_LOCATION,
   SET_NOTIFICATION_LOCATION,
   SET_NOTIFICATION_CONTACT,
   SET_NOTIFICATION_LINK,
@@ -89,6 +90,11 @@ export const setNotificationNotifier = (keyValue: KeyValueString): NotificationA
 export const setNotificationAddress = (language: string, value: KeyValueString): NotificationAction => ({
   type: SET_NOTIFICATION_ADDRESS,
   payload: { language, value },
+});
+
+export const setNotificationOriginalLocation = (coordinates: [number, number]): NotificationAction => ({
+  type: SET_NOTIFICATION_ORIGINAL_LOCATION,
+  payload: coordinates,
 });
 
 export const setNotificationLocation = (coordinates: [number, number]): NotificationAction => ({
