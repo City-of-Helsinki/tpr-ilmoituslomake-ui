@@ -50,6 +50,7 @@ export interface NotificationValidationSchema {
       neighborhood?: Validation;
     };
   };
+  wholeAddress: Validation;
   phone: Validation;
   email: Validation;
   website: {

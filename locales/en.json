@@ -201,7 +201,9 @@
       },
       "neighborhood": {
         "label": "District"
-      }
+      },
+      "addressNotFound": "Address not found",
+      "addressIncorrect": "Address incorrect, the closest suggestion is"
     },
     "map": {
       "title": "Map of place",

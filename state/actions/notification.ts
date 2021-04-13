@@ -12,6 +12,7 @@ import {
   SET_NOTIFICATION_TAG_OPTIONS,
   SET_NOTIFICATION_NOTIFIER,
   SET_NOTIFICATION_ADDRESS,
+  SET_NOTIFICATION_ADDRESS_FOUND,
   SET_NOTIFICATION_ORIGINAL_LOCATION,
   SET_NOTIFICATION_LOCATION,
   SET_NOTIFICATION_CONTACT,
@@ -26,6 +27,7 @@ import {
   KeyValueBoolean,
   Photo,
   TagOption,
+  AddressSearchResult,
   NotificationPlaceSearch,
   NotificationPlaceResult,
   ChangeRequestSchema,
@@ -90,6 +92,11 @@ export const setNotificationNotifier = (keyValue: KeyValueString): NotificationA
 export const setNotificationAddress = (language: string, value: KeyValueString): NotificationAction => ({
   type: SET_NOTIFICATION_ADDRESS,
   payload: { language, value },
+});
+
+export const setNotificationAddressFound = (addressFound: AddressSearchResult | undefined): NotificationAction => ({
+  type: SET_NOTIFICATION_ADDRESS_FOUND,
+  payload: addressFound,
 });
 
 export const setNotificationOriginalLocation = (coordinates: [number, number]): NotificationAction => ({

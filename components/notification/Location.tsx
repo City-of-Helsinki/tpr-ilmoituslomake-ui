@@ -1,14 +1,15 @@
-import React, { Dispatch, ChangeEvent, ReactElement, useEffect } from "react";
+import React, { Dispatch, ChangeEvent, ReactElement, useCallback, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useRouter } from "next/router";
 import { useI18n } from "next-localization";
-import { TextInput } from "hds-react";
+import { IconAlertCircle, TextInput } from "hds-react";
 import { NotificationAction, NotificationValidationAction } from "../../state/actions/types";
 import { setNotificationAddress } from "../../state/actions/notification";
 import { RootState } from "../../state/reducers";
 import { MAX_LENGTH, MAX_LENGTH_POSTAL_CODE } from "../../types/constants";
 import { searchAddress } from "../../utils/address";
-import { isAddressFieldValid } from "../../utils/validation";
+import { isAddressFieldValid, isWholeAddressValid } from "../../utils/validation";
+import styles from "./Location.module.scss";
 
 const Location = (): ReactElement => {
   const i18n = useI18n();
@@ -24,12 +25,16 @@ const Location = (): ReactElement => {
     },
   } = notification;
 
+  const notificationExtra = useSelector((state: RootState) => state.notification.notificationExtra);
+  const { addressFound } = notificationExtra;
+
   const notificationValidation = useSelector((state: RootState) => state.notificationValidation.notificationValidation);
   const {
     address: {
       fi: { street: streetFiValid, postal_code: postalCodeFiValid, post_office: postOfficeFiValid },
       sv: { street: streetSvValid, postal_code: postalCodeSvValid, post_office: postOfficeSvValid },
     },
+    wholeAddress: wholeAddressValid,
   } = notificationValidation;
 
   const updateAddress = (language: string, evt: ChangeEvent<HTMLInputElement>) => {
@@ -43,28 +48,23 @@ const Location = (): ReactElement => {
       })
     );
     isAddressFieldValid(language, evt.target.name, notification, dispatchValidation);
+    isWholeAddressValid(language, notification, notificationExtra, dispatchValidation);
   };
 
-  useEffect(() => {
-    const isAddressComplete =
-      router.locale === "sv"
-        ? streetSv.length > 0 &&
+  const isAddressComplete = useCallback(() => {
+    return router.locale === "sv"
+      ? streetSv.length > 0 &&
           streetSvValid.valid &&
           postalCodeSv.length > 0 &&
           postalCodeSvValid.valid &&
           postOfficeSv.length > 0 &&
           postOfficeSvValid.valid
-        : streetFi.length > 0 &&
+      : streetFi.length > 0 &&
           streetFiValid.valid &&
           postalCodeFi.length > 0 &&
           postalCodeFiValid.valid &&
           postOfficeFi.length > 0 &&
           postOfficeFiValid.valid;
-
-    // Search the address automatically when complete
-    if (isAddressComplete) {
-      searchAddress(router.locale, streetFi, postOfficeFi, streetSv, postOfficeSv, dispatch);
-    }
   }, [
     router.locale,
     streetFi,
@@ -79,8 +79,14 @@ const Location = (): ReactElement => {
     streetSvValid,
     postalCodeSvValid,
     postOfficeSvValid,
-    dispatch,
   ]);
+
+  useEffect(() => {
+    // Search the address automatically when complete
+    if (isAddressComplete()) {
+      searchAddress(router.locale, streetFi, postOfficeFi, streetSv, postOfficeSv, dispatch);
+    }
+  }, [isAddressComplete, router.locale, streetFi, postOfficeFi, streetSv, postOfficeSv, dispatch]);
 
   return (
     <div className="formSection">
@@ -200,6 +206,20 @@ const Location = (): ReactElement => {
             aria-required
           />
         </>
+      )}
+
+      {isAddressComplete() && !wholeAddressValid.valid && !addressFound && (
+        <div className={styles.invalidAddress}>
+          <IconAlertCircle />
+          <span>{`${i18n.t("notification.location.addressNotFound")}`}</span>
+        </div>
+      )}
+      {isAddressComplete() && !wholeAddressValid.valid && addressFound && (
+        <div className={styles.invalidAddress}>
+          <IconAlertCircle />
+          <span>{`${i18n.t("notification.location.addressIncorrect")}:`}</span>
+          <span>{`${addressFound.street}, ${addressFound.postalCode} ${addressFound.postOffice}`}</span>
+        </div>
       )}
 
       {((router.locale === "sv" && neighborhoodSv) || neighborhoodFi) && (

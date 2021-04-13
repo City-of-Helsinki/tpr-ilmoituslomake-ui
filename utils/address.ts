@@ -1,8 +1,12 @@
 import { Dispatch } from "react";
 import { NotificationAction } from "../state/actions/types";
-import { setNotificationAddress, setNotificationLocation, setNotificationOriginalLocation } from "../state/actions/notification";
+import {
+  setNotificationAddress,
+  setNotificationAddressFound,
+  setNotificationLocation,
+  setNotificationOriginalLocation,
+} from "../state/actions/notification";
 import { NEIGHBOURHOOD_URL, SEARCH_URL } from "../types/constants";
-import { Validation } from "../types/general";
 
 export const getNeighborhood = async (lon: number, lat: number, dispatch: Dispatch<NotificationAction>): Promise<void> => {
   // Fetch the neighbourhood for these coordinates
@@ -15,10 +19,13 @@ export const getNeighborhood = async (lon: number, lat: number, dispatch: Dispat
     if (neighbourhoodResult.results && neighbourhoodResult.results.length > 0) {
       // Use the first result
       const { name: { fi: resultNameFi = "", sv: resultNameSv = "" } = {} } = neighbourhoodResult.results[0];
-      console.log(resultNameFi, resultNameSv);
+      console.log("USING NEIGHBOURHOOD RESULT", neighbourhoodResult.results[0]);
 
       dispatch(setNotificationAddress("fi", { neighborhood: resultNameFi }));
       dispatch(setNotificationAddress("sv", { neighborhood: resultNameSv }));
+    } else {
+      dispatch(setNotificationAddress("fi", { neighborhood: "" }));
+      dispatch(setNotificationAddress("sv", { neighborhood: "" }));
     }
   }
 };
@@ -41,8 +48,14 @@ export const geocodeAddress = async (
 
     if (geocodeResult.results && geocodeResult.results.length > 0) {
       // Use the first result
-      const { location: resultLocation } = geocodeResult.results[0];
-      console.log(resultLocation.coordinates);
+      const {
+        location: resultLocation,
+        street: resultStreet,
+        number: resultNumber,
+        letter: resultLetter,
+        postal_code: resultPostalCode,
+      } = geocodeResult.results[0];
+      console.log("USING GEOCODE RESULT", geocodeResult.results[0]);
 
       // Set the location in redux state using the geocoded position
       // Note: this will cause the map to pan to centre on these coordinates
@@ -54,6 +67,21 @@ export const geocodeAddress = async (
 
       // Also fetch the neighbourhood for these coordinates
       getNeighborhood(resultLocation.coordinates[0], resultLocation.coordinates[1], dispatch);
+
+      // Store the address found for display later if needed
+      dispatch(
+        setNotificationAddressFound({
+          street: `${resultStreet.name[language] ?? ""} ${resultNumber ?? ""}${resultLetter ?? ""}`,
+          postalCode: resultPostalCode ?? "",
+          postOffice: resultStreet.municipality ?? "",
+        })
+      );
+    } else {
+      dispatch(setNotificationLocation([0, 0]));
+      dispatch(setNotificationOriginalLocation([0, 0]));
+      dispatch(setNotificationAddress("fi", { neighborhood: "" }));
+      dispatch(setNotificationAddress("sv", { neighborhood: "" }));
+      dispatch(setNotificationAddressFound(undefined));
     }
   }
 };

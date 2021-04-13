@@ -63,11 +63,18 @@ export interface TagOption {
   };
 }
 
+export interface AddressSearchResult {
+  street: string;
+  postalCode: string;
+  postOffice: string;
+}
+
 export interface NotificationExtra {
   inputLanguages: string[];
   photos: Photo[];
   tagOptions: TagOption[];
   locationOriginal: [number, number];
+  addressFound?: AddressSearchResult;
 }
 
 export interface NotificationPlaceSearch {

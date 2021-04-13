@@ -7,6 +7,7 @@ import {
   SET_NOTIFICATION_TAG_VALIDATION,
   SET_NOTIFICATION_NOTIFIER_VALIDATION,
   SET_NOTIFICATION_ADDRESS_VALIDATION,
+  SET_NOTIFICATION_WHOLE_ADDRESS_VALIDATION,
   SET_NOTIFICATION_CONTACT_VALIDATION,
   SET_NOTIFICATION_LINK_VALIDATION,
   SET_NOTIFICATION_PHOTO_VALIDATION,
@@ -56,6 +57,11 @@ export const setNotificationNotifierValidation = (validation: KeyValueValidation
 export const setNotificationAddressValidation = (language: string, validation: KeyValueValidation): NotificationValidationAction => ({
   type: SET_NOTIFICATION_ADDRESS_VALIDATION,
   payload: { language, validation },
+});
+
+export const setNotificationWholeAddressValidation = (validation: Validation): NotificationValidationAction => ({
+  type: SET_NOTIFICATION_WHOLE_ADDRESS_VALIDATION,
+  payload: validation,
 });
 
 export const setNotificationContactValidation = (validation: KeyValueValidation): NotificationValidationAction => ({

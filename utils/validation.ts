@@ -13,6 +13,7 @@ import {
   setNotificationTagValidation,
   setNotificationNotifierValidation,
   setNotificationAddressValidation,
+  setNotificationWholeAddressValidation,
   setNotificationContactValidation,
   setNotificationLinkValidation,
   setNotificationPhotoValidation,
@@ -169,6 +170,28 @@ export const isAddressFieldValid = (
   return result.valid;
 };
 
+export const isWholeAddressValid = (
+  language: string,
+  notification: NotificationSchema,
+  notificationExtra: NotificationExtra,
+  dispatch: Dispatch<NotificationValidationAction>
+): boolean => {
+  const { address } = notification;
+  const { fi, sv } = address;
+  const { addressFound } = notificationExtra;
+
+  // Check that the street and postal code match, but not the municipality since it is not language-specific
+  const valid =
+    !!addressFound &&
+    (language === "sv"
+      ? sv.street.toLowerCase().startsWith(addressFound.street.toLowerCase())
+      : fi.street.toLowerCase().startsWith(addressFound.street.toLowerCase())) &&
+    (language === "sv" ? sv.postal_code === addressFound.postalCode : fi.postal_code === addressFound.postalCode);
+
+  dispatch(setNotificationWholeAddressValidation({ valid, message: undefined }));
+  return valid;
+};
+
 export const isContactFieldValid = (
   contactField: string,
   notification: NotificationSchema,
@@ -290,11 +313,13 @@ export const isPageValid = (
               isAddressFieldValid("sv", "street", notification, dispatch),
               isAddressFieldValid("sv", "postal_code", notification, dispatch),
               isAddressFieldValid("sv", "post_office", notification, dispatch),
+              isWholeAddressValid("sv", notification, notificationExtra, dispatch),
             ]
           : [
               isAddressFieldValid("fi", "street", notification, dispatch),
               isAddressFieldValid("fi", "postal_code", notification, dispatch),
               isAddressFieldValid("fi", "post_office", notification, dispatch),
+              isWholeAddressValid("fi", notification, notificationExtra, dispatch),
             ];
       const inputValid2 = [isContactFieldValid("phone", notification, dispatch), isContactFieldValid("email", notification, dispatch)];
       const inputValid3 = inputLanguages.map((option) => isWebsiteValid(option, notification, dispatch));

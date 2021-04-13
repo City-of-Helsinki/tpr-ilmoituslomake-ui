@@ -19,6 +19,7 @@ import {
   SET_NOTIFICATION_TAG_OPTIONS,
   SET_NOTIFICATION_NOTIFIER,
   SET_NOTIFICATION_ADDRESS,
+  SET_NOTIFICATION_ADDRESS_FOUND,
   SET_NOTIFICATION_ORIGINAL_LOCATION,
   SET_NOTIFICATION_LOCATION,
   SET_NOTIFICATION_CONTACT,
@@ -181,6 +182,14 @@ const notification = (state = initialState, action: AnyAction): NotificationStat
             [action.payload.language]: { ...(action.payload.language === "sv" ? sv : fi), ...action.payload.value },
           },
         },
+      };
+    }
+
+    case SET_NOTIFICATION_ADDRESS_FOUND: {
+      console.log("SET_NOTIFICATION_ADDRESS_FOUND", action.payload);
+      return {
+        ...state,
+        notificationExtra: { ...state.notificationExtra, addressFound: action.payload },
       };
     }
 

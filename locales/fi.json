@@ -201,7 +201,9 @@
       },
       "neighborhood": {
         "label": "Kaupunginosa"
-      }
+      },
+      "addressNotFound": "Osoite ei löydy",
+      "addressIncorrect": "Osoite väärin, lähin ehdotus on"
     },
     "map": {
       "title": "Kohde kartalla",

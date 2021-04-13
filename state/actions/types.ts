@@ -16,6 +16,7 @@ import {
   SET_NOTIFICATION_TAG_OPTIONS,
   SET_NOTIFICATION_NOTIFIER,
   SET_NOTIFICATION_ADDRESS,
+  SET_NOTIFICATION_ADDRESS_FOUND,
   SET_NOTIFICATION_ORIGINAL_LOCATION,
   SET_NOTIFICATION_LOCATION,
   SET_NOTIFICATION_CONTACT,
@@ -31,6 +32,7 @@ import {
   SET_NOTIFICATION_TAG_VALIDATION,
   SET_NOTIFICATION_NOTIFIER_VALIDATION,
   SET_NOTIFICATION_ADDRESS_VALIDATION,
+  SET_NOTIFICATION_WHOLE_ADDRESS_VALIDATION,
   SET_NOTIFICATION_CONTACT_VALIDATION,
   SET_NOTIFICATION_LINK_VALIDATION,
   SET_NOTIFICATION_PHOTO_VALIDATION,
@@ -66,6 +68,7 @@ import {
   REMOVE_MODERATION_PHOTO_STATUS,
 } from "../../types/constants";
 import {
+  AddressSearchResult,
   ChangeRequestSchema,
   KeyValueBoolean,
   KeyValueStatus,
@@ -142,6 +145,11 @@ interface SetNotificationAddressAction extends AnyAction {
   payload: { language: string; value: KeyValueString };
 }
 
+interface SetNotificationAddressFoundAction extends AnyAction {
+  type: typeof SET_NOTIFICATION_ADDRESS_FOUND;
+  payload: AddressSearchResult | undefined;
+}
+
 interface SetNotificationOriginalLocationAction extends AnyAction {
   type: typeof SET_NOTIFICATION_ORIGINAL_LOCATION;
   payload: [number, number];
@@ -195,6 +203,7 @@ export type NotificationAction =
   | SetNotificationTagOptionsAction
   | SetNotificationNotifierAction
   | SetNotificationAddressAction
+  | SetNotificationAddressFoundAction
   | SetNotificationOriginalLocationAction
   | SetNotificationLocationAction
   | SetNotificationContactAction
@@ -244,6 +253,11 @@ interface SetNotificationAddressValidationAction extends AnyAction {
   payload: { language: string; validation: KeyValueValidation };
 }
 
+interface SetNotificationWholeAddressValidationAction extends AnyAction {
+  type: typeof SET_NOTIFICATION_WHOLE_ADDRESS_VALIDATION;
+  payload: Validation;
+}
+
 interface SetNotificationContactValidationAction extends AnyAction {
   type: typeof SET_NOTIFICATION_CONTACT_VALIDATION;
   payload: KeyValueValidation;
@@ -283,6 +297,7 @@ export type NotificationValidationAction =
   | SetNotificationTagValidationAction
   | SetNotificationNotifierValidationAction
   | SetNotificationAddressValidationAction
+  | SetNotificationWholeAddressValidationAction
   | SetNotificationContactValidationAction
   | SetNotificationLinkValidationAction
   | SetNotificationPhotoValidationAction

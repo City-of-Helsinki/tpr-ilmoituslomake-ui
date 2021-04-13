@@ -1,0 +1,13 @@
+@import "~hds-design-tokens/lib/all.scss";
+
+.invalidAddress {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  color: $color-error;
+  margin-bottom: $spacing-layout-s;
+
+  span {
+    margin-left: $spacing-2-xs;
+  }
+}
