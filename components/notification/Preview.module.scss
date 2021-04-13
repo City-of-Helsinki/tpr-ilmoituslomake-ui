@@ -2,7 +2,10 @@
 @import "../../styles/mixins";
 
 .preview {
-  margin-top: $spacing-layout-l;
+  .title {
+    margin-top: $spacing-layout-m;
+  }
+
   margin-bottom: $spacing-layout-l;
 
   // $spacing-4-xl = 4rem = 64px

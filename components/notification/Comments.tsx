@@ -24,11 +24,11 @@ const Comments = (): ReactElement => {
   };
 
   return (
-    <div className={`formSection ${styles.comments}`}>
+    <div className={`formInput ${styles.comments}`}>
       <TextArea
         id="comments"
         className="formInput"
-        rows={6}
+        rows={3}
         label={i18n.t("notification.comments.comments.label")}
         name="comments"
         value={comments}

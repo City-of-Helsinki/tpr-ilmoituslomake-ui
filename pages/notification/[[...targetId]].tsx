@@ -90,6 +90,7 @@ const NotificationDetail = (): ReactElement => {
           */}
           <Comments />
           <Terms />
+          <h3>{i18n.t("notification.preview.title")}</h3>
           <NotificationFooterNav />
           <Preview includeNotifier />
           <NotificationFooterNav />

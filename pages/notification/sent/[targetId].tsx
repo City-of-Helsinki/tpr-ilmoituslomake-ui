@@ -91,7 +91,7 @@ const NotificationSent = (): ReactElement => {
           )}
 
           <InfoFooter />
-          <Preview />
+          <Preview titleKey="notification.preview.title" />
           <InfoFooter />
 
           <Dialog open={modalOpen} onClose={closeModal} aria-labelledby="modal-dialog-title" aria-describedby="modal-dialog-description">

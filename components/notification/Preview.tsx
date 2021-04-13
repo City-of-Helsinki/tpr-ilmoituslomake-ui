@@ -12,11 +12,11 @@ const MapWrapper = dynamic(() => import("../common/MapWrapper"), { ssr: false })
 
 interface PreviewProps {
   className?: string;
-  full?: boolean;
+  titleKey?: string;
   includeNotifier?: boolean;
 }
 
-const Preview = ({ className, full, includeNotifier }: PreviewProps): ReactElement => {
+const Preview = ({ className, titleKey, includeNotifier }: PreviewProps): ReactElement => {
   const i18n = useI18n();
   const router = useRouter();
 
@@ -44,8 +44,7 @@ const Preview = ({ className, full, includeNotifier }: PreviewProps): ReactEleme
 
   return (
     <div className={`gridLayoutContainer ${styles.preview} ${className}`}>
-      {full && <h3>{i18n.t("notification.preview.title")}</h3>}
-      {!full && <h3>{i18n.t("notification.preview.placeInfo")}</h3>}
+      {titleKey && <h3 className={styles.title}>{i18n.t(titleKey)}</h3>}
 
       <h4 className={`${styles.gridHeading} ${styles.gridHeader}`}>{i18n.t("notification.preview.heading")}</h4>
       <h4 className={`${styles.gridPlaceInfo} ${styles.gridHeader}`}>{i18n.t("notification.preview.placeInfo")}</h4>
@@ -88,7 +87,7 @@ const Preview = ({ className, full, includeNotifier }: PreviewProps): ReactEleme
           ))}
       </div>
 
-      {full && includeNotifier && (
+      {includeNotifier && (
         <>
           <div className={`${styles.gridHeading} ${styles.gridContent}`}>{i18n.t("notification.notifier.notifierType")}</div>
           <div className={`${styles.gridPlaceInfo} ${styles.gridContent}`}>
@@ -179,7 +178,7 @@ const Preview = ({ className, full, includeNotifier }: PreviewProps): ReactEleme
 
 Preview.defaultProps = {
   className: undefined,
-  full: true,
+  titleKey: undefined,
   includeNotifier: false,
 };
 
