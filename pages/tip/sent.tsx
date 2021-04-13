@@ -34,7 +34,7 @@ const TipSent = (): ReactElement => {
         <div className={styles.footer}>
           <div className="flexSpace" />
           <Link href="/">
-            <Button variant="secondary">{i18n.t("notification.button.return")}</Button>
+            <Button variant="secondary">{i18n.t("notification.button.close")}</Button>
           </Link>
         </div>
       </main>

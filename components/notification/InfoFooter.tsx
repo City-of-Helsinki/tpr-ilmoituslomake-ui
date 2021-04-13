@@ -48,7 +48,7 @@ const InfoFooter = (): ReactElement => {
       <div className="flexSpace" />
       <div className={`${styles.flexButton} ${styles.returnButton}`}>
         <Link href="/search">
-          <Button variant="secondary">{i18n.t("notification.button.return")}</Button>
+          <Button variant="secondary">{i18n.t("notification.button.close")}</Button>
         </Link>
       </div>
     </div>
