@@ -24,9 +24,12 @@ const TipFooter = (): ReactElement => {
 
   const sendTip = () => {
     if (isTipPageValid(tip, dispatchValidation)) {
+      // The page is valid, so save the tip
       saveTip(tip, router, dispatchValidation, setToast);
       dispatchValidation(setPageValid(true));
     } else {
+      // The page is not valid, but set the page to valid then invalid to force the page to show the general validation message
+      dispatchValidation(setPageValid(true));
       dispatchValidation(setPageValid(false));
     }
   };

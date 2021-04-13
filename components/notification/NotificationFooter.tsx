@@ -35,9 +35,12 @@ const NotificationFooter = ({ smallButtons, setToast }: NotificationFooterProps)
 
   const nextPage = () => {
     if (isPageValid(currentPage, router.locale, notification, notificationExtra, dispatchValidation)) {
+      // The page is valid, so go to the next page
       dispatch(setPage(currentPage + 1));
       dispatchValidation(setPageValid(true));
     } else {
+      // The page is not valid, but set the page to valid then invalid to force the page to show the general validation message
+      dispatchValidation(setPageValid(true));
       dispatchValidation(setPageValid(false));
     }
   };
