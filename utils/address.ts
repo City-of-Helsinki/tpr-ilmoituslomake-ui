@@ -1,4 +1,5 @@
 import { Dispatch } from "react";
+import { NextRouter } from "next/router";
 import { NotificationAction } from "../state/actions/types";
 import {
   setNotificationAddress,
@@ -6,11 +7,12 @@ import {
   setNotificationLocation,
   setNotificationOriginalLocation,
 } from "../state/actions/notification";
+import getOrigin from "./request";
 import { NEIGHBOURHOOD_URL, SEARCH_URL } from "../types/constants";
 
-export const getNeighborhood = async (lon: number, lat: number, dispatch: Dispatch<NotificationAction>): Promise<void> => {
+export const getNeighborhood = async (router: NextRouter, lon: number, lat: number, dispatch: Dispatch<NotificationAction>): Promise<void> => {
   // Fetch the neighbourhood for these coordinates
-  const neighbourhoodResponse = await fetch(`${NEIGHBOURHOOD_URL}&lon=${lon}&lat=${lat}`);
+  const neighbourhoodResponse = await fetch(`${getOrigin(router)}${NEIGHBOURHOOD_URL}&lon=${lon}&lat=${lat}`);
   if (neighbourhoodResponse.ok) {
     const neighbourhoodResult = await neighbourhoodResponse.json();
 
@@ -31,16 +33,16 @@ export const getNeighborhood = async (lon: number, lat: number, dispatch: Dispat
 };
 
 export const geocodeAddress = async (
-  locale: string | undefined,
+  router: NextRouter,
   street: string,
   postOffice: string,
   dispatch: Dispatch<NotificationAction>
 ): Promise<void> => {
   // The Helsinki API does not use postal code
   const input = `${street.trim()} ${postOffice.trim()}`;
-  const language = locale === "sv" ? "sv" : "fi";
+  const language = router.locale === "sv" ? "sv" : "fi";
 
-  const geocodeResponse = await fetch(`${SEARCH_URL}&type=address&input=${input.trim()}&language=${language}`);
+  const geocodeResponse = await fetch(`${getOrigin(router)}${SEARCH_URL}&type=address&input=${input.trim()}&language=${language}`);
   if (geocodeResponse.ok) {
     const geocodeResult = await geocodeResponse.json();
 
@@ -66,7 +68,7 @@ export const geocodeAddress = async (
       dispatch(setNotificationOriginalLocation([resultLocation.coordinates[1], resultLocation.coordinates[0]]));
 
       // Also fetch the neighbourhood for these coordinates
-      getNeighborhood(resultLocation.coordinates[0], resultLocation.coordinates[1], dispatch);
+      getNeighborhood(router, resultLocation.coordinates[0], resultLocation.coordinates[1], dispatch);
 
       // Store the address found for display later if needed
       dispatch(
@@ -87,7 +89,7 @@ export const geocodeAddress = async (
 };
 
 export const searchAddress = (
-  locale: string | undefined,
+  router: NextRouter,
   streetFi: string,
   postOfficeFi: string,
   streetSv: string,
@@ -95,7 +97,7 @@ export const searchAddress = (
   dispatch: Dispatch<NotificationAction>
 ): void => {
   // The Helsinki API does not use postal code
-  const street = locale === "sv" ? streetSv : streetFi;
-  const postOffice = locale === "sv" ? postOfficeSv : postOfficeFi;
-  geocodeAddress(locale, street, postOffice, dispatch);
+  const street = router.locale === "sv" ? streetSv : streetFi;
+  const postOffice = router.locale === "sv" ? postOfficeSv : postOfficeFi;
+  geocodeAddress(router, street, postOffice, dispatch);
 };

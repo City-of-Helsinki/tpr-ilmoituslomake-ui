@@ -84,9 +84,9 @@ const Location = (): ReactElement => {
   useEffect(() => {
     // Search the address automatically when complete
     if (isAddressComplete()) {
-      searchAddress(router.locale, streetFi, postOfficeFi, streetSv, postOfficeSv, dispatch);
+      searchAddress(router, streetFi, postOfficeFi, streetSv, postOfficeSv, dispatch);
     }
-  }, [isAddressComplete, router.locale, streetFi, postOfficeFi, streetSv, postOfficeSv, dispatch]);
+  }, [isAddressComplete, router, streetFi, postOfficeFi, streetSv, postOfficeSv, dispatch]);
 
   return (
     <div className="formSection">

@@ -82,8 +82,10 @@ export const MAP_INITIAL_ZOOM = 13;
 export const MAP_INITIAL_MARKER_ZOOM = 18;
 export const MAP_MIN_ZOOM = 10;
 export const MAP_MAX_ZOOM = 18;
-export const SEARCH_URL = "https://api.hel.fi/servicemap/v2/search/?format=json";
-export const NEIGHBOURHOOD_URL = "https://api.hel.fi/servicemap/v2/administrative_division/?type=neighborhood";
+// export const SEARCH_URL = "https://api.hel.fi/servicemap/v2/search/?format=json";
+// export const NEIGHBOURHOOD_URL = "https://api.hel.fi/servicemap/v2/administrative_division/?type=neighborhood";
+export const SEARCH_URL = "/helapi/servicemap/v2/search/?format=json";
+export const NEIGHBOURHOOD_URL = "/helapi/servicemap/v2/administrative_division/?type=neighborhood";
 
 export const CLEAR_STATE = "CLEAR_STATE";
 export const SET_PAGE = "SET_PAGE";

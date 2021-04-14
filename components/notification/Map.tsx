@@ -48,7 +48,7 @@ const Map = (): ReactElement => {
 
   const updateLocation = (coordinates: [number, number]) => {
     dispatch(setNotificationLocation(coordinates));
-    getNeighborhood(coordinates[1], coordinates[0], dispatch);
+    getNeighborhood(router, coordinates[1], coordinates[0], dispatch);
   };
 
   const updateMapView = (center: LatLngExpression, zoom: number) => {
@@ -82,7 +82,7 @@ const Map = (): ReactElement => {
       <Button
         className={styles.resetLocation}
         variant="secondary"
-        onClick={() => searchAddress(router.locale, streetFi, postOfficeFi, streetSv, postOfficeSv, dispatch)}
+        onClick={() => searchAddress(router, streetFi, postOfficeFi, streetSv, postOfficeSv, dispatch)}
         disabled={!isLocationChanged()}
       >
         {i18n.t("notification.map.resetLocation")}
