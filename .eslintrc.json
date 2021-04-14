@@ -27,9 +27,7 @@
     "plugin:jsx-a11y/recommended",
     "plugin:jest/recommended",
     "plugin:prettier/recommended",
-    "prettier",
-    "prettier/react",
-    "prettier/@typescript-eslint"
+    "prettier"
   ],
   "settings": {
     "react": {
