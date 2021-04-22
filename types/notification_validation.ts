@@ -22,6 +22,7 @@ export interface NotificationValidationSchema {
     en: Validation;
     [key: string]: Validation;
   };
+  location: Validation;
   description: {
     short: {
       fi: Validation;

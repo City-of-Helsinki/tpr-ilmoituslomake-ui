@@ -203,7 +203,8 @@
         "label": "Kaupunginosa"
       },
       "addressNotFound": "Osoite ei löydy",
-      "addressIncorrect": "Osoite väärin, lähin ehdotus on"
+      "addressIncorrect": "Osoite väärin, lähin ehdotus on",
+      "locationNotSpecified": "Sijainti ei määritelty"
     },
     "map": {
       "title": "Kohde kartalla",

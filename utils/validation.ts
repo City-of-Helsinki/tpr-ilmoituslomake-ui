@@ -14,6 +14,7 @@ import {
   setNotificationNotifierValidation,
   setNotificationAddressValidation,
   setNotificationWholeAddressValidation,
+  setNotificationLocationValidation,
   setNotificationContactValidation,
   setNotificationLinkValidation,
   setNotificationPhotoValidation,
@@ -192,6 +193,13 @@ export const isWholeAddressValid = (
   return valid;
 };
 
+export const isLocationValid = (notification: NotificationSchema, dispatch: Dispatch<NotificationValidationAction>): boolean => {
+  const { location } = notification;
+  const valid = location && location.length === 2 && location[0] > 0 && location[1] > 0;
+  dispatch(setNotificationLocationValidation({ valid, message: undefined }));
+  return valid;
+};
+
 export const isContactFieldValid = (
   contactField: string,
   notification: NotificationSchema,
@@ -313,15 +321,19 @@ export const isPageValid = (
               isAddressFieldValid("sv", "street", notification, dispatch),
               isAddressFieldValid("sv", "postal_code", notification, dispatch),
               isAddressFieldValid("sv", "post_office", notification, dispatch),
-              isWholeAddressValid("sv", notification, notificationExtra, dispatch),
+              // isWholeAddressValid("sv", notification, notificationExtra, dispatch),
             ]
           : [
               isAddressFieldValid("fi", "street", notification, dispatch),
               isAddressFieldValid("fi", "postal_code", notification, dispatch),
               isAddressFieldValid("fi", "post_office", notification, dispatch),
-              isWholeAddressValid("fi", notification, notificationExtra, dispatch),
+              // isWholeAddressValid("fi", notification, notificationExtra, dispatch),
             ];
-      const inputValid2 = [isContactFieldValid("phone", notification, dispatch), isContactFieldValid("email", notification, dispatch)];
+      const inputValid2 = [
+        isContactFieldValid("phone", notification, dispatch),
+        isContactFieldValid("email", notification, dispatch),
+        isLocationValid(notification, dispatch),
+      ];
       const inputValid3 = inputLanguages.map((option) => isWebsiteValid(option, notification, dispatch));
       return inputValid1.every((valid) => valid) && inputValid2.every((valid) => valid) && inputValid3.every((valid) => valid);
     }

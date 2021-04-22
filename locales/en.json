@@ -203,7 +203,8 @@
         "label": "District"
       },
       "addressNotFound": "Address not found",
-      "addressIncorrect": "Address incorrect, the closest suggestion is"
+      "addressIncorrect": "Address incorrect, the closest suggestion is",
+      "locationNotSpecified": "Location not specified"
     },
     "map": {
       "title": "Map of place",

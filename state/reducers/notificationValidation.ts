@@ -11,6 +11,7 @@ import {
   SET_NOTIFICATION_NOTIFIER_VALIDATION,
   SET_NOTIFICATION_ADDRESS_VALIDATION,
   SET_NOTIFICATION_WHOLE_ADDRESS_VALIDATION,
+  SET_NOTIFICATION_LOCATION_VALIDATION,
   SET_NOTIFICATION_CONTACT_VALIDATION,
   SET_NOTIFICATION_LINK_VALIDATION,
   SET_NOTIFICATION_PHOTO_VALIDATION,
@@ -123,6 +124,14 @@ const notificationValidation = (state = initialState, action: AnyAction): Notifi
       return {
         ...state,
         notificationValidation: { ...state.notificationValidation, wholeAddress: action.payload },
+      };
+    }
+
+    case SET_NOTIFICATION_LOCATION_VALIDATION: {
+      console.log("SET_NOTIFICATION_LOCATION_VALIDATION", action.payload);
+      return {
+        ...state,
+        notificationValidation: { ...state.notificationValidation, location: action.payload },
       };
     }
 

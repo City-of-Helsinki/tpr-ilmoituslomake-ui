@@ -3,12 +3,13 @@ import { useSelector, useDispatch } from "react-redux";
 import { useRouter } from "next/router";
 import dynamic from "next/dynamic";
 import { useI18n } from "next-localization";
-import { Button, IconPlaybackNext } from "hds-react";
+import { Button, IconAlertCircle, IconPlaybackNext } from "hds-react";
 import { LatLngExpression } from "leaflet";
 import { setMapView, setNotificationLocation } from "../../state/actions/notification";
-import { NotificationAction } from "../../state/actions/types";
+import { NotificationAction, NotificationValidationAction } from "../../state/actions/types";
 import { RootState } from "../../state/reducers";
 import { getNeighborhood, searchAddress } from "../../utils/address";
+import { isLocationValid } from "../../utils/validation";
 import styles from "./Map.module.scss";
 
 const MapWrapper = dynamic(() => import("../common/MapWrapper"), { ssr: false });
@@ -16,6 +17,7 @@ const MapWrapper = dynamic(() => import("../common/MapWrapper"), { ssr: false })
 const Map = (): ReactElement => {
   const i18n = useI18n();
   const dispatch = useDispatch<Dispatch<NotificationAction>>();
+  const dispatchValidation = useDispatch<Dispatch<NotificationValidationAction>>();
   const router = useRouter();
 
   const mapCenter = useSelector((state: RootState) => state.notification.center);
@@ -32,6 +34,9 @@ const Map = (): ReactElement => {
 
   const notificationExtra = useSelector((state: RootState) => state.notification.notificationExtra);
   const { locationOriginal } = notificationExtra;
+
+  const notificationValidation = useSelector((state: RootState) => state.notificationValidation.notificationValidation);
+  const { location: locationValid } = notificationValidation;
 
   const isLocationChanged = () => {
     return (
@@ -55,6 +60,9 @@ const Map = (): ReactElement => {
 
   const updateMapView = (center: LatLngExpression, zoom: number) => {
     dispatch(setMapView(center, zoom));
+
+    // Check if the location is valid
+    isLocationValid(notification, dispatchValidation);
   };
 
   const skipMap = () => {
@@ -80,6 +88,13 @@ const Map = (): ReactElement => {
         setMapView={updateMapView}
         draggableMarker
       />
+
+      {!locationValid.valid && (
+        <div className={styles.invalidLocation}>
+          <IconAlertCircle aria-hidden />
+          <span>{`${i18n.t("notification.location.locationNotSpecified")}`}</span>
+        </div>
+      )}
 
       <Button
         className={styles.resetLocation}
