@@ -78,10 +78,16 @@ const MapWrapper = ({
 
     // Store the map view in redux state, so that the same zoom can be used when changing pages
     // The map centre is stored if needed, but currently the map is always centred on the marker position
+    // If there is no location, allow a map click (or tap) to store the click location in redux, which then causes the marker to be shown
     useMapEvents({
       moveend: () => {
         if (setMapView) {
           setMapView(map.getCenter(), map.getZoom());
+        }
+      },
+      click: (evt) => {
+        if (!isLocationValid() && setLocation) {
+          setLocation([evt.latlng.lat, evt.latlng.lng]);
         }
       },
     });

@@ -41,6 +41,8 @@ const Map = (): ReactElement => {
       locationOriginal.length === 2 &&
       location[0] > 0 &&
       location[1] > 0 &&
+      locationOriginal[0] > 0 &&
+      locationOriginal[1] > 0 &&
       location[0] !== locationOriginal[0] &&
       location[1] !== locationOriginal[1]
     );
