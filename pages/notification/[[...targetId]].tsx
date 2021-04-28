@@ -133,7 +133,7 @@ export const getServerSideProps: GetServerSideProps = async ({ req, resolvedUrl,
       const targetResult = await (targetResponse.json() as Promise<{ id: number; data: NotificationSchema }>);
 
       try {
-        // Merge the notification details from the backend, but remove the previous notifier details if present
+        // Merge the notification details from the backend, but remove the previous notifier details if present, except notifier type
         const { notifier, images, ...dataToUse } = targetResult.data;
 
         initialReduxState.notification = {
@@ -142,7 +142,7 @@ export const getServerSideProps: GetServerSideProps = async ({ req, resolvedUrl,
           notification: {
             ...initialReduxState.notification.notification,
             ...dataToUse,
-            notifier: INITIAL_NOTIFICATION.notifier,
+            notifier: { ...INITIAL_NOTIFICATION.notifier, notifier_type: notifier.notifier_type },
           },
           notificationExtra: {
             ...initialReduxState.notification.notificationExtra,
@@ -196,6 +196,7 @@ export const getServerSideProps: GetServerSideProps = async ({ req, resolvedUrl,
     ...initialReduxState.notification.notification,
     notifier: {
       ...INITIAL_NOTIFICATION.notifier,
+      notifier_type: initialReduxState.notification.notification.notifier.notifier_type || INITIAL_NOTIFICATION.notifier.notifier_type,
       full_name: user ? `${user.first_name} ${user.last_name}`.trim() : "",
       email: user ? user.email : "",
     },
