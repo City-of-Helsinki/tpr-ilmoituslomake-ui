@@ -9,19 +9,16 @@ import { RootState } from "../../state/reducers";
 import getOrigin from "../../utils/request";
 
 interface HeaderProps {
+  includeLanguageSelector?: boolean;
   children?: React.ReactNode;
 }
-
-const defaultProps: HeaderProps = {
-  children: [],
-};
 
 // NOTE: The HDS Navigation component does not currently work for mobile views when server-side rendering
 // A workaround for this is to only use the Navigation component on the client-side
 // @ts-ignore: A dynamic import must be used to force client-side rendering regardless of the typescript errors
 const DynamicNavigation = dynamic(() => import("hds-react").then((hds) => hds.Navigation), { ssr: false });
 
-const Header = ({ children }: HeaderProps): ReactElement => {
+const Header = ({ includeLanguageSelector, children }: HeaderProps): ReactElement => {
   const i18n = useI18n();
   const router = useRouter();
 
@@ -73,15 +70,22 @@ const Header = ({ children }: HeaderProps): ReactElement => {
             onClick={signOut}
           />
         </Navigation.User>
-        <Navigation.LanguageSelector label={(router.locale || defaultLocale).toUpperCase()}>
-          <Navigation.Item label="Suomeksi" onClick={() => changeLanguage("fi")} />
-          <Navigation.Item label="På svenska" onClick={() => changeLanguage("sv")} />
-          <Navigation.Item label="In English" onClick={() => changeLanguage("en")} />
-        </Navigation.LanguageSelector>
+
+        {includeLanguageSelector && (
+          <Navigation.LanguageSelector label={(router.locale || defaultLocale).toUpperCase()}>
+            <Navigation.Item label="Suomeksi" onClick={() => changeLanguage("fi")} />
+            <Navigation.Item label="På svenska" onClick={() => changeLanguage("sv")} />
+            <Navigation.Item label="In English" onClick={() => changeLanguage("en")} />
+          </Navigation.LanguageSelector>
+        )}
       </Navigation.Actions>
     </DynamicNavigation>
   );
 };
 
-Header.defaultProps = defaultProps;
+Header.defaultProps = {
+  includeLanguageSelector: true,
+  children: [],
+};
+
 export default Header;

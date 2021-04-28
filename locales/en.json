@@ -353,248 +353,248 @@
     }
   },
   "moderation": {
-    "title": "Moderation",
+    "title": "Moderointi",
     "page": {
-      "front": "Front page",
-      "place": "Places",
-      "task": "Tasks",
-      "organisation": "Organisations",
-      "translation": "Translations"
+      "front": "Etusivu",
+      "place": "Kohteet",
+      "task": "Tehtävät",
+      "organisation": "Organisaatiot",
+      "translation": "Käännökset"
     },
     "main": {
-      "front": "Front page",
-      "place": "Places",
-      "task": "Tasks",
-      "organisation": "Organisations",
-      "translation": "Translations"
+      "front": "Etusivu",
+      "place": "Kohteet",
+      "task": "Tehtävät",
+      "organisation": "Organisaatiot",
+      "translation": "Käännökset"
     },
     "button": {
-      "search": "Search",
-      "clear": "Clear",
-      "expand": "Expand",
-      "collapse": "Collapse",
-      "approve": "Approve",
-      "approved": "Approved",
-      "reject": "Reject",
-      "rejected": "Rejected",
-      "modify": "Modify",
-      "cancel": "Cancel",
-      "addNewPlace": "Add new place",
-      "allPlaces": "All places",
-      "showAllRequests": "Show all requests",
-      "requestTranslation": "Request translation",
-      "rejectChangeRequest": "Reject change request",
-      "openForModifying": "Open for modifying",
-      "removePlace": "Remove place",
-      "saveIncomplete": "Save as incomplete",
-      "saveInformation": "Save information",
-      "clearAllSelections": "Clear all selections",
-      "remove": "Remove",
-      "toggleMenu": "Toggle menu"
+      "search": "Hae",
+      "clear": "Tyhjennä",
+      "expand": "Laajenna",
+      "collapse": "Tiivistä",
+      "approve": "Hyväksy",
+      "approved": "Hyväksytty",
+      "reject": "Hylkää",
+      "rejected": "Hylätty",
+      "modify": "Muokkaa",
+      "cancel": "Keskeytä",
+      "addNewPlace": "Lisää uusi kohde",
+      "allPlaces": "Kaikki kohteet",
+      "showAllRequests": "Näytä kaikki tehtävät",
+      "requestTranslation": "Pyydä käännös",
+      "rejectChangeRequest": "Hylkää muutospyyntö",
+      "openForModifying": "Avaa muokattavaksi",
+      "removePlace": "Poista kohde",
+      "saveIncomplete": "Tallenna keskeneräisenä",
+      "saveInformation": "Tallenna tiedot",
+      "clearAllSelections": "Poista kaikki valinnat",
+      "remove": "Poista",
+      "toggleMenu": "Vaihdele valikko"
     },
     "message": {
       "notAuthenticated": {
-        "title": "Please login before saving",
+        "title": "Kirjaudu sisään ennen tallentamista",
         "message": ""
       },
       "validationFailed": {
-        "title": "The form has errors",
-        "message": "Please check the information, the incorrect entries are highlighted below"
+        "title": "Lomakkeella on virheitä",
+        "message": "Tarkista tiedot, virheellisiä kohtia on korostettu alla"
       },
       "saveFailed": {
-        "title": "The information failed to be saved",
-        "message": "Unfortunately a technical error prevented the information from being saved. Please try again later."
+        "title": "Tietojen tallennus epäonnistui",
+        "message": "Valitettavasti tekninen virhe esti tietojen tallentamisen. Ole hyvä ja yritä uudelleen myöhemmin."
       },
       "saveSucceeded": {
-        "title": "Save succeeded!",
+        "title": "Tallennus onnistui!",
         "message": ""
       },
-      "close": "Close message",
-      "fieldRequired": "$fieldName is mandatory information",
-      "fieldFormat": "$fieldName must be entered in the right format",
-      "fieldFormatUrl": "$fieldName must be entered in the right format (e.g. https://myhelsinki.fi)",
-      "fieldTooLong": "$fieldName is too long",
-      "fieldTooShort": "$fieldName is too short",
-      "fieldOther": "Please check the information"
+      "close": "Sulje viesti",
+      "fieldRequired": "$fieldName on pakollinen tieto",
+      "fieldFormat": "$fieldName on annettava oikeassa muodossa",
+      "fieldFormatUrl": "$fieldName on annettava oikeassa muodossa (esim. https://myhelsinki.fi)",
+      "fieldTooLong": "$fieldName on liian pitkä",
+      "fieldTooShort": "$fieldName on liian lyhyt",
+      "fieldOther": "Tarkista tieto"
     },
     "confirmation": {
-      "rejectChangeRequest": "Are you sure you want to reject the change request?",
-      "removePlace": "Are you sure you want to remove the place?"
+      "rejectChangeRequest": "Haluatko varmasti hylätä muutospyynnön?",
+      "removePlace": "Haluatko varmasti poistaa kohteen?"
     },
     "contact": {
-      "title": "Other contact information",
+      "title": "Muut yhteystiedot",
       "phone": {
-        "label": "Place's phone number"
+        "label": "Kohteen puhelinnumero"
       },
       "email": {
-        "label": "Place's email address"
+        "label": "Kohteen sähköpostiosoite"
       }
     },
     "description": {
       "placeName": {
-        "title": "Name",
-        "label": "Place's name"
+        "title": "Nimi",
+        "label": "Kohteen nimi"
       },
       "shortDescription": {
-        "title": "Short description",
-        "label": "Place's short description"
+        "title": "Lyhyt kuvaus",
+        "label": "Kohteen lyhyt kuvaus"
       },
       "longDescription": {
-        "title": "Long description",
-        "label": "Place's long description"
+        "title": "Pitkä kuvaus",
+        "label": "Kohteen pitkä kuvaus"
       }
     },
     "intro": {
-      "title": "Welcome to moderation!"
+      "title": "Tervetuloa moderoimaan!"
     },
     "links": {
       "website": {
-        "label": "Website"
+        "label": "Verkkosivusto"
       },
       "socialMedia": {
-        "label": "Social media"
+        "label": "Sosiaalinen media"
       }
     },
     "location": {
-      "address": "Address",
+      "address": "Osoite",
       "streetAddress": {
-        "label": "Street address"
+        "label": "Katuosoite"
       },
       "postalCode": {
-        "label": "Postal code"
+        "label": "Postinumero"
       },
       "postalOffice": {
-        "label": "Postal office"
+        "label": "Postitoimipaikka"
       },
       "neighborhood": {
-        "label": "District"
+        "label": "Kaupunginosa"
       }
     },
     "map": {
-      "title": "Map of place"
+      "title": "Kohde kartalla"
     },
     "newTasks": {
-      "title": "New moderation requests"
+      "title": "Uudet moderointitehtävät"
     },
     "organisationNotice": {
-      "title": "Organisation management",
-      "manageOrganisation": "Manage organisation"
+      "title": "Organisaatiohallinta",
+      "manageOrganisation": "Hallinoi organisaatiota"
     },
     "photos": {
-      "title": "Photos",
+      "title": "Kuvat",
       "photo": {
-        "title": "Photo"
+        "title": "Kuva"
       },
       "url": {
-        "labelDevice": "Photo's source from the device",
-        "labelLink": "Photo's internet address (url)"
+        "labelDevice": "Valokuvan lähde laitteelta",
+        "labelLink": "Valokuvan verkko-osoite (url)"
       },
       "altText": {
-        "label": "Photo's short description (alt-text)"
+        "label": "Kuvan lyhyt kuvailu (alt-teksti)"
       },
       "permission": {
-        "title": "Usage rights",
-        "label": "Photo's usage rights",
+        "title": "Käyttöoikeudet",
+        "label": "Kuvan käyttöoikeudet",
         "myHelsinki": "MyHelsinki",
         "creativeCommons": "Creative Commons"
       },
       "source": {
-        "label": "Photo's source"
+        "label": "Kuvalähde"
       },
-      "addNewFromDevice": "Add photo from device",
-      "addNewFromLink": "Add photo link",
-      "remove": "Remove photo"
+      "addNewFromDevice": "Lisää kuva laitteelta",
+      "addNewFromLink": "Lisää kuvalinkki",
+      "remove": "Poista kuva"
     },
     "placeSearch": {
-      "title": "Search places",
+      "title": "Hae kohteita",
       "placeName": {
-        "label": "Place's name"
+        "label": "Kohteen nimi"
       },
       "language": {
-        "label": "Language",
-        "fi": "Finnish",
-        "sv": "Swedish",
-        "en": "English"
+        "label": "Kieli",
+        "fi": "Suomi",
+        "sv": "Ruotsi",
+        "en": "Englanti"
       },
       "address": {
-        "label": "Place's address"
+        "label": "Kohteen osoite"
       },
       "district": {
-        "label": "District"
+        "label": "Kaupunginosa"
       },
       "tag": {
-        "label": "Keyword"
+        "label": "Asiasana"
       },
       "comment": {
-        "label": "Moderator's comment"
+        "label": "Moderoijan kommentti"
       },
       "publishPermission": {
-        "label": "Permission to publish",
-        "yes": "Yes",
-        "no": "No"
+        "label": "Julkaisulupa",
+        "yes": "Kyllä",
+        "no": "Ei"
       }
     },
     "placeResults": {
-      "found": "Found",
-      "places": "places"
+      "found": "Löytyi",
+      "places": "kohdetta"
     },
     "tags": {
-      "title": "Keywords",
+      "title": "Asiasanat",
       "add": {
-        "label": "Add keyword"
+        "label": "Lisää asiasana"
       }
     },
     "task": {
-      "title": "Place's information",
-      "basic": "Basic info",
-      "contact": "Contact info",
-      "photos": "Photos",
-      "selected": " - in the database",
-      "modified": " - change"
+      "title": "Kohteen tiedot",
+      "basic": "Perustiedot",
+      "contact": "Yhteystiedot",
+      "photos": "Kuvat",
+      "selected": " - tietokannassa",
+      "modified": " - muutos"
     },
     "taskHeader": {
-      "taskType": "Task type",
-      "publishPermission": "Publish permission",
-      "status": "Status",
-      "moderator": "Moderator",
-      "notifier": "Notifier",
-      "representative": "Is the place's representative",
-      "notRepresentative": "Is not the place's representative",
-      "messageFromNotifier": "Message from notifier",
-      "addPlaceName": "New place's name"
+      "taskType": "Tehtävätyyppi",
+      "publishPermission": "Julkaisulupa",
+      "status": "Tila",
+      "moderator": "Moderoija",
+      "notifier": "Ilmoittaja",
+      "representative": "On kohteen edustaja",
+      "notRepresentative": "Ei ole kohteen edustaja",
+      "messageFromNotifier": "Viesti ilmoittajalta",
+      "addPlaceName": "Uuden kohteen nimi"
     },
     "taskSearch": {
-      "title": "Moderation tasks",
+      "title": "Moderointitehtävät",
       "placeName": {
-        "label": "Place's name"
+        "label": "Kohteen nimi"
       },
       "taskType": {
-        "label": "Type",
-        "all": "All"
+        "label": "Tyyppi",
+        "all": "Kaikki"
       }
     },
     "taskResults": {
-      "found": "Found",
-      "tasks": "tasks",
-      "nameId": "Name (id)",
-      "type": "Type",
-      "notified": "Notified",
+      "found": "Löytyi",
+      "tasks": "tehtävää",
+      "nameId": "Nimi (tunnus)",
+      "type": "Tyyppi",
+      "notified": "Ilmoitettu",
       "status": "Status"
     },
     "taskStatus": {
-      "open": "New",
-      "inProgress": "Incomplete"
+      "open": "Uusi",
+      "inProgress": "Keskeneräinen"
     },
     "taskType": {
-      "placeChange": "Place change",
-      "newPlace": "New place",
-      "changeTip": "Change tip",
-      "addTip": "Addition tip",
-      "removeTip": "Removal tip"
+      "placeChange": "Kohde muutos",
+      "newPlace": "Uusi kohde",
+      "changeTip": "Muutos vinkki",
+      "addTip": "Lisäys vinkki",
+      "removeTip": "Poisto vinkki"
     },
     "translationNotice": {
-      "title": "Translation management",
-      "manageTranslation": "Manage translation requests"
+      "title": "Käännösten hallinta",
+      "manageTranslation": "Hallinoi käännöspyyntöjä"
     }
   }
 }

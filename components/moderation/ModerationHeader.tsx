@@ -44,7 +44,7 @@ const ModerationHeader = (props: ModerationHeaderProps): ReactElement => {
   };
 
   return (
-    <Header>
+    <Header includeLanguageSelector={false}>
       <Navigation.Row variant="inline">
         <Navigation.Item
           className={styles.navigationItem}
