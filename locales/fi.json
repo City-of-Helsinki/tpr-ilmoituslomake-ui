@@ -74,8 +74,8 @@
       "send": "Tarkista tiedot ja lähetä"
     },
     "index": {
-      "title": "Pidetään yhdessä Helsingin parhaiden paikkojen tiedot ajantasalla!",
-      "message": "Kaupunkialusta kerää ja ylläpitää tietoa Helsingin kohteista paikallisten ja matkailijoiden hyödyksi. Tässä palvelussa voit ilmoittaa kohteet tiedot tai tehdä muutoksia jo olemassa oleviin kohdetietoihin.",
+      "title": "Pidetään yhdessä palveluiden tiedot ajan tasalla!",
+      "message": "Ilmoita täällä kohteen tiedot ja tee muutoksia olemassa oleviin kohdetietoihin.",
       "notify": "Ilmoita kohteiden tietoja",
       "terms": "Lue käyttöehdot",
       "accessibility": "Lue saavutettavuusseloste"

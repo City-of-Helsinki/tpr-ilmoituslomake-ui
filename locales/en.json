@@ -74,8 +74,8 @@
       "send": "Check information and send"
     },
     "index": {
-      "title": "Together we can keep the information about the best places in Helsinki up to date!",
-      "message": "The City Platform collects and maintains information about Helsinki's locations for the benefit of locals and tourists. With this service, you can enter location information or make changes to existing location information.",
+      "title": "Together we can keep information about the services up to date!",
+      "message": "Enter location information and make changes to existing location information.",
       "notify": "Provide location information",
       "terms": "Read terms of use",
       "accessibility": "Read accessibility statement"
