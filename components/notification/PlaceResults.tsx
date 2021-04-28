@@ -6,6 +6,7 @@ import { useI18n } from "next-localization";
 import { Button, IconAngleRight, IconLocation, IconStarFill } from "hds-react";
 import moment from "moment";
 import { RootState } from "../../state/reducers";
+import { NotifierType } from "../../types/constants";
 import { NotificationPlaceResult } from "../../types/general";
 import { getDisplayName } from "../../utils/helper";
 import { defaultLocale } from "../../utils/i18n";
@@ -63,9 +64,14 @@ const PlaceResults = ({ showOwnPlaces }: PlaceResultsProps): ReactElement => {
                     fi: { street: streetFi, postal_code: postalCodeFi, post_office: postOfficeFi, neighborhood: neighborhoodFi },
                     sv: { street: streetSv, postal_code: postalCodeSv, post_office: postOfficeSv, neighborhood: neighborhoodSv },
                   },
+                  notifier: { notifier_type: notifierType } = {},
                 },
                 is_notifier: isNotifier,
               } = result;
+
+              // This is the user's own place if they made the notification and they marked themselves as the place's representative
+              const isOwnPlace = isNotifier && notifierType === NotifierType.Representative;
+
               return (
                 <Fragment key={`placeresult_${id}`}>
                   <div className={`${styles.gridContent} ${styles.firstColumn} ${styles.gridButton}`}>
@@ -91,7 +97,7 @@ const PlaceResults = ({ showOwnPlaces }: PlaceResultsProps): ReactElement => {
                   </div>
                   {ownPlaces && (
                     <div className={`${styles.gridContent} ${styles.lastColumn}`}>
-                      {isNotifier && (
+                      {isOwnPlace && (
                         <div className={styles.ownPlaceContainer}>
                           <div className={styles.ownPlace}>
                             <IconStarFill aria-hidden />

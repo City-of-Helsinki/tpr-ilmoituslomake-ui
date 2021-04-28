@@ -6,7 +6,7 @@ import { Button, RadioButton, SelectionGroup, TextInput } from "hds-react";
 import { NotificationAction } from "../../state/actions/types";
 import { setNotificationPlaceResults, setNotificationPlaceSearch } from "../../state/actions/notification";
 import { RootState } from "../../state/reducers";
-import { MAX_LENGTH } from "../../types/constants";
+import { NotifierType, MAX_LENGTH } from "../../types/constants";
 import { NotificationPlaceResult } from "../../types/general";
 import getOrigin from "../../utils/request";
 import styles from "./PlaceSearch.module.scss";
@@ -43,7 +43,21 @@ const PlaceSearch = ({ showOwnPlaces }: PlaceSearchProps): ReactElement => {
       console.log("PLACE RESPONSE", placeResult);
 
       if (placeResult && placeResult.results && placeResult.results.length > 0) {
-        dispatch(setNotificationPlaceResults(placeResult.results.filter((result) => !ownPlaces || !ownPlacesOnly || result.is_notifier)));
+        dispatch(
+          setNotificationPlaceResults(
+            placeResult.results.filter((result) => {
+              const {
+                data: { notifier: { notifier_type: notifierType } = {} },
+                is_notifier: isNotifier,
+              } = result;
+
+              // This is the user's own place if they made the notification and they marked themselves as the place's representative
+              const isOwnPlace = isNotifier && notifierType === NotifierType.Representative;
+
+              return !ownPlaces || !ownPlacesOnly || isOwnPlace;
+            })
+          )
+        );
       } else {
         dispatch(setNotificationPlaceResults([]));
       }
