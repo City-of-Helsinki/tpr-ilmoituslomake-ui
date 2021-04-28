@@ -202,7 +202,7 @@
       "neighborhood": {
         "label": "District"
       },
-      "addressNotFound": "Address not found",
+      "addressNotFound": "Based on the address, a location could not be found for the place on the map. Add the place to the map by clicking the map at the point where the place is located.",
       "addressIncorrect": "Address incorrect, the closest suggestion is",
       "locationNotSpecified": "Location not specified"
     },

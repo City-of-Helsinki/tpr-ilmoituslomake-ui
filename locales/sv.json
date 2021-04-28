@@ -202,7 +202,7 @@
       "neighborhood": {
         "label": "Kaupunginosa"
       },
-      "addressNotFound": "Osoite ei löydy",
+      "addressNotFound": "Osoitteen perusteella kohteelle ei löydy sijaintia kartalle. Lisää kohde kartalle napauttamalla karttaa siinä kohdassa, missä kohde sijaitsee.",
       "addressIncorrect": "Osoite väärin, lähin ehdotus on",
       "locationNotSpecified": "Sijainti ei määritelty"
     },
