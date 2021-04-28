@@ -1,354 +1,354 @@
 {
   "common": {
     "header": {
-      "title": "Kaupunkialusta",
-      "titleAlt": "Helsingin kaupunki: Kaupunkialusta",
-      "skipToContent": "Siirry sivun pääsisältöön",
-      "login": "Kirjaudu sisään",
-      "logout": "Kirjaudu ulos"
+      "title": "Stadsplattform",
+      "titleAlt": "Helsingfors stad: Stadsplattform",
+      "skipToContent": "Till huvudinnehållet",
+      "login": "Logga in",
+      "logout": "Logga ut"
     },
     "footer": {
-      "title": "Kaupunkialusta",
-      "backToTop": "Takaisin ylös",
-      "contact": "Ota yhteyttä",
+      "title": "Stadsplattform",
+      "backToTop": "Tillbaka upp",
+      "contact": "Ta kontakt",
       "copyright": "Copyright",
-      "rightsReserved": "Kaikki oikeudet pidätetään",
-      "terms": "Verkkopalvelun käyttöehdot",
-      "accessibility": "Saavutettavuusseloste"
+      "rightsReserved": "Alla rättigheter förbehålles",
+      "terms": "Webbtjänstens bruksvillkor",
+      "accessibility": "Tillgänglighetsutlåtande"
     },
     "map": {
-      "osm": "OpenStreetMapin tekijät"
+      "osm": "OpenStreetMaps bidragsgivare"
     },
     "inLanguage": {
-      "fi": "suomeksi",
-      "sv": "ruotsiksi",
-      "en": "englanniksi"
+      "fi": "på finska",
+      "sv": "på svenska",
+      "en": "på engelska"
     },
-    "opensInANewTab": "(aukeaa uuteen välilehteen)",
+    "opensInANewTab": "(öppnar i ny flik)",
     "todo": "TODO - TEXT HERE"
   },
   "notification": {
-    "title": "Kaupunkialusta",
-    "headerNew": "Ilmoita uusi kohde",
-    "headerModify": "Muokkaa",
-    "navigationHeader": "Prosessi",
-    "navigationFooter": "Painikkeet",
-    "mandatory": "Pakolliset tiedot on merkitty tähdellä *",
+    "title": "Stadsplattform",
+    "headerNew": "Lägg till ett nytt ställe",
+    "headerModify": "Redigera",
+    "navigationHeader": "Process",
+    "navigationFooter": "Knappar",
+    "mandatory": "Fält markerade med * är obligatoriska",
     "button": {
-      "search": "Hae",
-      "next": "Seuraava",
-      "previous": "Edellinen",
-      "cancel": "Keskeytä",
-      "close": "Sulje",
-      "send": "Lähetä",
-      "return": "Palaa",
-      "returnToStart": "Palaa aloitussivulle",
-      "clearAllSelections": "Poista kaikki valinnat",
-      "remove": "Poista",
-      "toggleMenu": "Vaihdele valikko",
-      "openHelp": "Avaa ohje",
-      "selectFromDevice": "Valitse laitteelta",
-      "modifyInformation": "Muokkaa kohteen tietoja",
-      "suggestChange": "Vinkkaa muutoksesta",
-      "modifyOpeningTimes": "Muokkaa aukioloaikoja",
-      "notifyOpeningTimes": "Ilmoita aukioloajat",
-      "notifyClosingDown": "Ilmoita kohde lopettaneeksi",
-      "notifyNewPlace": "Lisää uusi kohde",
-      "giveTip": "Anna vinkki",
-      "checkPlace": "Hae kohteita",
-      "modifyOwnPlace": "Muokkaa omaa kohdetta",
-      "continueToOpeningTimes": "Jatka aukioloaikojen ilmoittamiseen",
-      "noOpeningTimes": "Kohteella ei ole aukioloaikoja",
-      "continueLater": "Jatkan myöhemmin"
+      "search": "Sök",
+      "next": "Följande",
+      "previous": "Föregående",
+      "cancel": "Avbryt",
+      "close": "Stäng",
+      "send": "Sänd",
+      "return": "Gå tillbaka",
+      "returnToStart": "Gå tillbaka till startsidan",
+      "clearAllSelections": "Ta bort alla val",
+      "remove": "Ta bort",
+      "toggleMenu": "Toggle menu",
+      "openHelp": "Öppna instruktionerna",
+      "selectFromDevice": "Välj från din enhet",
+      "modifyInformation": "Redigera information om stället",
+      "suggestChange": "Föreslå förändring",
+      "modifyOpeningTimes": "Ändra öppettider",
+      "notifyOpeningTimes": "Meddela öppettider",
+      "notifyClosingDown": "Meddela att stället har lagt ner",
+      "notifyNewPlace": "Lägg till ett nytt ställe",
+      "giveTip": "Ge ett tips",
+      "checkPlace": "Sök ställen",
+      "modifyOwnPlace": "Redigera information om stället du representerar",
+      "continueToOpeningTimes": "Fortsätt till anmälan om öppettider",
+      "noOpeningTimes": "Stället har ej öppettider",
+      "continueLater": "Fortsätt senare"
     },
     "page": {
-      "basic": "Perustiedot",
-      "contact": "Yhteystiedot",
-      "photos": "Kuvat",
-      "send": "Lähetä"
+      "basic": "Basuppgifter",
+      "contact": "Kontaktuppgifter",
+      "photos": "Foton",
+      "send": "Sänd"
     },
     "main": {
-      "basic": "Kohteen perustiedot",
-      "contact": "Kohteen yhteystiedot",
-      "photos": "Kohteen kuvat",
-      "send": "Tarkista tiedot ja lähetä"
+      "basic": "Basuppgifter om stället",
+      "contact": "Ställets kontaktuppgifter",
+      "photos": "Ställets foton",
+      "send": "Kontrollera och sänd informationen"
     },
     "index": {
-      "title": "Pidetään yhdessä Helsingin parhaiden paikkojen tiedot ajantasalla!",
-      "message": "Kaupunkialusta kerää ja ylläpitää tietoa Helsingin kohteista paikallisten ja matkailijoiden hyödyksi. Tässä palvelussa voit ilmoittaa kohteet tiedot tai tehdä muutoksia jo olemassa oleviin kohdetietoihin.",
-      "notify": "Ilmoita kohteiden tietoja",
-      "terms": "Lue käyttöehdot",
-      "accessibility": "Lue saavutettavuusseloste"
+      "title": "Låt oss tillsammans upprätthålla information om Helsingfors bästa ställen!",
+      "message": "Stadsplattformen samlar och upprätthåller information om ställen i Helsingfors, till nytta för både stadsbor och turister. I den här tjänsten kan du anmäla nya ställen eller upprätthålla information om ställen som redan är befintliga i tjänsten.",
+      "notify": "Anmäl information om ställen",
+      "terms": "Läs bruksvillkoren",
+      "accessibility": "Läs tillgänglighetsutlåtandet"
     },
     "message": {
       "notAuthenticated": {
-        "title": "Kirjaudu sisään ennen lähettämistä",
+        "title": "Logga in före du sänder",
         "message": ""
       },
       "validationFailed": {
-        "title": "Lomakkeella on virheitä",
-        "message": "Tarkista tiedot, virheellisiä kohtia on korostettu alla"
+        "title": "Det finns fel i blanketten",
+        "message": "Kontrollera uppgifterna, de felaktiga punkterna är markerade här under"
       },
       "saveFailed": {
-        "title": "Lomakkeen lähetys epäonnistui",
-        "message": "Valitettavasti tekninen virhe esti lomakkeen lähettämisen. Ole hyvä ja yritä uudelleen myöhemmin."
+        "title": "Sändning av blanketten misslyckades",
+        "message": "Tyvärr, ett tekniskt fel orsakade att sändningen av blanketten misslyckades. Var god och försök på nytt senare."
       },
       "saveSucceeded": {
-        "title": "Lähetys onnistui!",
-        "message": "Kiitos ilmoituksesta! Tiedot tarkistetaan vielä ennen julkaisemista."
+        "title": "Sändningen lyckades!",
+        "message": "Tack för anmälan! Informationen kontrolleras ännu före publicering."
       },
       "notifyNewPlace": {
-        "title": "Haluatko lisätä uuden kohteen palveluun?",
-        "message": "Ilmoita palveluun uusia toimipisteitä ja kohteita. Kirjaudu ensin ja ilmoita puuttuva kohde jo tänään!"
+        "title": "Vill du lägga till ett nytt ställe i tjänsten?",
+        "message": "Lägg till nya verksamhetsställen och andra mål. Logga in i tjänsten och lägg till stället redan idag!"
       },
       "giveTip": {
-        "title": "Anna vinkki!",
-        "message": "Mikäli huomasit puuttuvan, virheellisen tai vanhentuneen tiedon, tee palvelus ja ilmoita siitä meille. Voit tehdä ilmoituksen vaivattomasti rekisteröitymättä."
+        "title": "Ge ett tips!",
+        "message": "Om du saknade något ställe, eller om du upptäckte felaktig eller föråldrad information om ett ställe, gör oss en tjänst och meddela oss om det. Ett sådant meddelande kan du lätt göra utan att registrera dig i tjänsten."
       },
       "checkPlace": {
-        "title": "Mitä tietoja kohteesta löytyy?",
-        "message": "Tarkista, onko kohde jo ilmoitettu meille ja mitä tietoa siitä on olemassa."
+        "title": "Vilken information finns om stället?",
+        "message": "Kontrollera om stället redan finns i tjänsten och vilken information det finns om den."
       },
       "modifyOwnPlace": {
-        "title": "Muokkaa oman kohteesi tietoja",
-        "message": "Voit milloin tahansa ilmoittaa uusia tai muuttuneita tietoja omasta kohteestasi. Kirjaudu ensin ja muokkaa."
+        "title": "Redigera informationen om ditt ställe",
+        "message": "Du kan när som helst anmäla ny eller förändrar information om ditt ställe. Logga in först för att redigera."
       },
       "completeOpeningTimes": {
-        "title": "Täydennä kohteen tietoja aukioloajoilla",
-        "message": "Kerro kävijöille, milloin kohteesi on avoinna."
+        "title": "Lägg till information om öppettiderna",
+        "message": "Berätta åt besökarna när ditt ställe har öppet."
       },
       "completePhotos": {
-        "title": "Täydennä kohteen tietoja kuvilla",
-        "message": "Kerro kävijöille, miltä kohteesi näyttää."
+        "title": "Komplettera ställets information med foton",
+        "message": "Visa åt besökarna hur ditt ställe ser ut."
       },
       "sentModal": {
-        "title": "Melkein valmista...",
-        "message": "Kiitos, kohteen tiedot on nyt lähetetty tarkistettavaksi. Jatka kertomalla, milloin kohteesi on avoinna yleisölle."
+        "title": "Nästan färdigt...",
+        "message": "Tack, informationen om stället har nu skickats vidare för kontroll. Fortsätt med att anmäla när ditt ställe har öppet för allmänheten."
       },
-      "close": "Sulje viesti",
-      "fieldRequired": "$fieldName on pakollinen tieto",
-      "fieldFormat": "$fieldName on annettava oikeassa muodossa",
-      "fieldFormatUrl": "$fieldName on annettava oikeassa muodossa (esim. https://myhelsinki.fi)",
-      "fieldTooLong": "$fieldName on liian pitkä",
-      "fieldTooShort": "$fieldName on liian lyhyt",
-      "fieldNotJpeg": "Valitun kuvan formaatti on virheellinen, kuvien tulee olla JPEG-muotoinen",
-      "fieldLanguage": "Yksi kieli on pakollinen",
-      "fieldOther": "Tarkista tieto"
+      "close": "Stäng meddelandet",
+      "fieldRequired": "$fieldName är obligatorisk",
+      "fieldFormat": "$fieldName bör anges i rätt format",
+      "fieldFormatUrl": "$fieldName bör anges i rätt format (t.ex. https://myhelsinki.fi)",
+      "fieldTooLong": "$fieldName är för lång",
+      "fieldTooShort": "$fieldName är för kort",
+      "fieldNotJpeg": "Formatet för den valda bilden är felaktig, bildformatet bör vara JPEG.",
+      "fieldLanguage": "Ett språk är obligatoriskt",
+      "fieldOther": "Kontrollera informationen"
     },
     "comments": {
-      "title": "Kommentteja",
-      "notice": "Tarkista vielä tiedot ja lähetä lomake. Jos haluat, voit myös jättää viestin tietojen käsittelijälle.",
+      "title": "Kommentarer",
+      "notice": "Kontrollera ännu informationen och sänd blanketten. Om du vill, kan du lägga till ett meddelande till den som behandlar informationen.",
       "comments": {
-        "label": "Viesti tietojen käsittelijälle"
+        "label": "Meddelande till den som behandlar informationen"
       }
     },
     "contact": {
-      "title": "Muut yhteystiedot",
+      "title": "Andra kontaktuppgifter",
       "phone": {
-        "label": "Kohteen puhelinnumero",
-        "helperText": "Puhelinnumeron muoto on esim. 0501234567 tai +358501234567"
+        "label": "Telefonnummer",
+        "helperText": "Telefonnummer skall t.ex. ha formen 0501234567 eller +358501234567"
       },
       "email": {
-        "label": "Kohteen sähköpostiosoite"
+        "label": "E-postadress"
       }
     },
     "description": {
-      "title": "Kohteen nimi ja kuvaus",
+      "title": "Namn och beskrivning",
       "placeName": {
-        "label": "Kohteen nimi"
+        "label": "Namn"
       },
       "shortDescription": {
-        "label": "Kohteen lyhyt kuvaus",
-        "helperText": "Huomioi, että teksti ei saa olla me-muodossa. Pituus max. 150 merkkiä",
-        "tooltipLabel": "Paranna löydettävyyttä",
-        "tooltipText": "Lyhyen kuvauksen avulla toimipaikka löytyy paremmin hakukoneella."
+        "label": "Kort platsbeskrivning",
+        "helperText": "Observera vänligen att texten inte får vara i vi-form. Längd max. 150 tecken",
+        "tooltipLabel": "Förbättra sökbarheten",
+        "tooltipText": "Med hjälp av den korta platsbeskrivningen hittar sökmotorer stället bättre."
       },
       "longDescription": {
-        "label": "Kohteen pitkä kuvaus",
-        "helperText": "Lisää tähän myös tietoa aukiolojoista. Huomioi, että teksti ei saa olla me-muodossa. Pituus 120 - 4000 merkkiä",
-        "tooltipLabel": "Laajempi kuvaus",
-        "tooltipText": "Voit halutessasi sisällyttää tähän lyhyen kuvauksen ja täydentää kuvausta tarpeesi mukaan."
+        "label": "Lång platsbeskrivning",
+        "helperText": "Lägg även till information om öppettiderna här. Observera vänligen att texten inte får vara i vi-form. Längd 120 - 4000 tecken.",
+        "tooltipLabel": "En mer omfattande platsbeskrivning",
+        "tooltipText": "Om du vill, kan du inkludera den korta platsbeskrivningen här och fylla på den vid behov."
       }
     },
     "inputLanguage": {
-      "title": "Valitse ensin millä kielillä annat tiedot (yksi kieli on pakollinen)",
-      "fi": "suomeksi",
-      "sv": "ruotsiksi",
-      "en": "englanniksi"
+      "title": "Välj först på vilket språk du anger informationen (ett språk är obligatoriskt)",
+      "fi": "på finska",
+      "sv": "på svenska",
+      "en": "på engelska"
     },
     "links": {
-      "title": "Kohteen linkit",
+      "title": "Länkar",
       "website": {
-        "label": "Verkkosivusto",
-        "helperText": "Linkin muoto on esim. https://myhelsinki.fi",
-        "tooltipLabel": "Linkki lisätietoihin",
-        "tooltipText": "Voit lisätä tähän kohteen verkkosivun tai sosiaallisen median tilin osoitteen."
+        "label": "Webbsida",
+        "helperText": "Formen för länken t.ex. https://myhelsinki.fi",
+        "tooltipLabel": "Länk till tilläggsuppgifter",
+        "tooltipText": "Här kan du lägga till ställets webbsida eller länk till sociala medier."
       },
       "socialMedia": {
-        "label": "Sosiaalinen media"
+        "label": "Sociala medier"
       }
     },
     "location": {
-      "title": "Kohteen sijainti",
+      "title": "Adress",
       "streetAddress": {
-        "label": "Katuosoite"
+        "label": "Gatuadress"
       },
       "postalCode": {
-        "label": "Postinumero"
+        "label": "Postnummer"
       },
       "postalOffice": {
-        "label": "Postitoimipaikka"
+        "label": "Postanstalt"
       },
       "neighborhood": {
-        "label": "Kaupunginosa"
+        "label": "Stadsdel"
       },
       "addressNotFound": "Osoitteen perusteella kohteelle ei löydy sijaintia kartalle. Lisää kohde kartalle napauttamalla karttaa siinä kohdassa, missä kohde sijaitsee.",
-      "addressIncorrect": "Osoite väärin, lähin ehdotus on",
+      "addressIncorrect": "Felaktig adress, närmaste förslag är",
       "locationNotSpecified": "Sijainti ei määritelty"
     },
     "map": {
-      "title": "Kohde kartalla",
-      "notice": "Kohde näkyy kartalla yllä annetun osoitteen perusteella. Jos hakutulos on epätarkka tai virheellinen, voit korjata sen siirtämällä kartalla olevaa kohdistinta oikeaan kohtaan. Suosittelemme, että kohdistin merkitään pääsisäänkäynnin kohdalle.",
-      "geocode": "Näytä kartalla",
-      "resetLocation": "Palauta osoitteenmukainen sijainti",
-      "skipMap": "Ohita kartta"
+      "title": "Stället på kartan",
+      "notice": "Stället syns på kartan enligt ovannämnda adress. Om sökresultatet är inexakt eller fel, kan du korrigera det genom att flytta på stiftet på kartan till den rätta platsen. Vi rekommenderar att stiftet sätts vid huvudingången.",
+      "geocode": "Visa på kartan",
+      "resetLocation": "Gå tillbaka till läget enligt adress",
+      "skipMap": "Hoppa över kartan"
     },
     "notifier": {
-      "title": "Ilmoittajan tiedot",
-      "notifierType": "Ilmoittajan tyyppi",
-      "representative": "Edustan kohdetta",
-      "notRepresentative": "En edusta kohdetta",
-      "tooltipLabel": "Kohteen edustaja",
-      "tooltipText": "Kohteen edustaja on omistaja ja joku muu, joka ilmoittaa edustamansa kohteen tiedot. Esimerkiksi matkailija tai paikallinen asukas eivät edusta kohdetta.",
+      "title": "Anmälarens information",
+      "notifierType": "Typ av anmälare",
+      "representative": "Jag representerar stället",
+      "notRepresentative": "Jag representerar inte stället",
+      "tooltipLabel": "Ställets representant",
+      "tooltipText": "Ställets representant är ägare eller en annan person som anmäler information om det ställe hen representerar. Som besökare, t.ex. turist eller stadsbo, representerar man inte stället.",
       "fullName": {
-        "label": "Ilmoittajan etunimi ja sukunimi"
+        "label": "Anmälarens för- och efternamn"
       },
       "email": {
-        "label": "Ilmoittajan sähköpostiosoite"
+        "label": "Anmälarens e-postadress"
       },
       "phone": {
-        "label": "Ilmoittajan puhelinnumero",
-        "helperText": "Puhelinnumeron muoto on esim. 0501234567 tai +358501234567"
+        "label": "Anmälarens telefonnummer",
+        "helperText": "Telefonnummer skall t.ex. ha formen 0501234567 eller +358501234567"
       }
     },
     "opening": {
-      "title": "Aukioloajat",
-      "notice": "Aukioloajat ilmoitetaan lähetyksen jälkeen.",
-      "temporaryNotice": "Aukioloajat saattavat muuttua usein koronapandemian aiheuttamien poikkeusolojen vuoksi. Suosittelemme toistaiseksi aukioloaikojen päivittämistä omilla verkkosivullanne tai sosiaalisen median kanavissa. Kerrothan asiakkaille Pitkä kuvaus -kohdassa, mistä ajankohtaiset aukioloajat voi tarkistaa. Ethän laita pitkään kuvaukseen linkkejä, linkit verkkosivuille ja someen lisätään seuraavassa vaiheessa."
+      "title": "Öppettider",
+      "notice": "Öppettiderna meddelas skilt efter sändning av annan information.",
+      "temporaryNotice": "Öppettiderna kan ändra ofta på grund av de undantagsförhållanden som coronapandemin orsakar. Tills vidare rekommenderar vi att öppettiderna uppdateras på ställets egna hemsidor och sociala kanaler. Berätta gärna i Långa platsbeskrivningen var man kan kolla upp de aktuella öppettiderna. Lägg dock inte till länkar i beskrivningen. Länkar för webbsidor och sociala medier anges i följande fas."
     },
     "photos": {
-      "title": "Kuvat",
-      "notice": "Tässä voit halutessasi lisätä 1-3 kuvaa kohteesta. Mikäli kuva on lisätty, siihen liittyvät pakolliset tiedot on merkitty tähdellä *",
+      "title": "Foton",
+      "notice": "Om du önskar, kan du lägga till foton här. Om du lägger till foton, bör du fylla i fälten markerade med en asterisk *",
       "photo": {
-        "title": "Kuva",
-        "notice1": "Valitse kohdetta parhaiten kuvaavat houkuttelevat ja korkealaatuiset kuvat. Kuvien päälle ei tule lisätä tekstiä, päivämääriä, vesileimoja tai muuta vastaavaa.",
-        "notice2": "Kuvien koko tulee olla vähintään 1920 x 1080 pikseliä, tiedoston JPEG-muodossa, eikä sen koko saa ylittää 4 MB:a. Kuvat tulee olla mielellään vaakatasossa."
+        "title": "Foto",
+        "notice1": "Välj sådana foton som bäst avbildar ditt ställe och som är lockande och av hög kvalitet. Det får inte finnas extra text, datum, vattenstämpel eller dylikt på fotot.",
+        "notice2": "Fotot skall vara minst 1920 x 1080 pixel, i JPEG-format, och den får inte överskrida 4MB. Fotot skall helst vara en vågrät bild."
       },
       "url": {
-        "labelDevice": "Valitse kuva laitteeltasi",
-        "labelLink": "Valokuvan verkko-osoite (url)"
+        "labelDevice": "Välj ett foto från din enhet",
+        "labelLink": "Fotots webbadress (url)"
       },
       "altText": {
-        "label": "Kuvan lyhyt kuvailu (alt-teksti)",
-        "helperText": "Kirjoita tiivis ja mahdollisimman lyhyt kuvailu kuvasta. Pituus max. 125 merkkiä",
-        "tooltipLabel": "Kuvailutekstin käyttö",
-        "tooltipText": "Kuvailun (alt-teksti) avulla kerrotaan kuvan sisältämä tieto hakukoneelle tai niille henkilöille, jotka eivät jostain syystä näe itse kuvaa. Syynä voi olla näkövamma tai se, että kuvat eivät ole latautuneet, tai henkilö ei ole halunnut ladata niitä."
+        "label": "Kort beskrivning av fotot (alt-text)",
+        "helperText": "Skriv en så kort beskrivning som möjligt om vad fotot föreställer. Max. 125 tecken.",
+        "tooltipLabel": "Användning av beskrivande text",
+        "tooltipText": "Med hjälp av den beskrivande texten (alt-text) förklarar man vad fotot föreställer för sökmotorer och för personer som av någon anledning inte kan se själva bilden. Orsaken kan vara synnedsättning eller att fotot av någon anledning inte laddas ner, eller att personen inte vill ladda ner den."
       },
       "permission": {
-        "title": "Käyttöoikeudet",
-        "notice": "HUOM! Sinulla pitää olla oikeudet lataamaasi kuvaan. Lataamalla kuvan myönnät Helsinki Marketingille oikeuden jakaa sitä eteenpäin avoimessa rajapinnassa. Sinun on valittava toinen alla olevista kuvan käyttöoikeuksista. Kts. tarkemmat tiedot käyttöehdoista.",
-        "label": "Kuvan käyttöoikeudet",
-        "myHelsinki": "Kuvaa saa käyttää ainoastaan ko. kohteen yhteydessä esim. MyHelsinki.fi-sivustolla. Kuvaa voidaan jakaa myös avoimena datana kolmansille osapuolille MyHelsinki-avoimen rajapinnan kautta. Kuvan käyttö tai siirto muihin tarkoituksiin on kielletty. Kuvaa käytettäessä on ehdottomasti mainittava kuvan lähde ja kuvaaja.",
+        "title": "Nyttjanderätt",
+        "notice": "OBS! Du bör ha rättigheter till det foto du laddar upp till tjänsten. Genom att ladda upp fotot ger du lov till Helsinki Marketing att dela vidare fotot via det öppna gränssnittet MyHelsinki. Du bör välja en av nedanstående bildrättigheter för fotot. Se mer information i bruksvillkoren.",
+        "label": "Nyttjanderätt till fotot",
+        "myHelsinki": "Fotot får endast användas i samband med stället i fråga, t.ex. på MyHelsinki.fi-webbsidan. Fotot kan även delas som öppen data till tredje parter via det öppna gränssnittet MyHelsinki. Att använda eller flytta fotot för annan avsikt är förbjudet. Vid användning av foto bör bildkälla och fotografens namn anges.",
         "myHelsinki2": "MyHelsinki",
-        "creativeCommons1": "Kuvaa saa jakaa Creative Commons BY 4.0.-lisenssillä. Kuvaa käytettäessä on ehdottomasti mainittava kuvan lähde ja kuvaaja.",
-        "creativeCommons2": "Creative Commons BY 4.0.-lisenssi",
+        "creativeCommons1": "Bilden får delas med licensen Creative Commons BY 4.0. Vid användning av foto bör bildkälla och fotografens namn anges ",
+        "creativeCommons2": "Creative Commons BY 4.0.-licensen",
         "creativeCommons3": "Creative Commons"
       },
       "source": {
-        "label": "Kuvalähde",
-        "tooltipLabel": "Kuvalähde",
-        "tooltipText": "Valokuvaaja tai muu kuvan omistaja, esim. organisaatio."
+        "label": "Bildkälla",
+        "tooltipLabel": "Bildkälla",
+        "tooltipText": "Fotograf eller annan ägare till fotot, t.ex. en organisation."
       },
-      "addNewFromDevice": "Lisää kuva laitteelta",
-      "addNewFromLink": "Lisää kuvalinkki",
-      "remove": "Poista kuva"
+      "addNewFromDevice": "Lägg till en bild från din enhet",
+      "addNewFromLink": "Lägg till en bildlänk",
+      "remove": "Ta bort foto"
     },
     "placeSearch": {
-      "title": "Kaikki kohteet",
-      "notice": "Hae nimellä kohdetta, jonka tietoja haluat tarkastella tai muuttaa. Voit tarkistaa tietojen paikkansapitävyyden ja ilmoittaa mahdollisista muutoksia.",
-      "noticeLoggedOut": "Kirjaudu sisään muokkaa oman kohteen tietoja.",
+      "title": "Alla ställen",
+      "notice": "Sök med namn det ställe du vill se på eller redigera. Kolla om informationen stämmer och meddela om eventuella förändringar.",
+      "noticeLoggedOut": "Logga in och redigera information om ditt ställe.",
       "placeName": {
-        "label": "Hae kohdetta nimellä",
-        "helperText": "Kun kenttä on tyhjä ja valitset Hae, saat näkyviin kaikki kohteet"
+        "label": "Sök stället med namn",
+        "helperText": "Du får fram alla ställen genom att lämna fältet tomt och trycka på Sök"
       },
       "ownPlacesOnly": {
-        "label": "Näytä",
-        "yes": "vain omat kohteet",
-        "no": "kaikki kohteet"
+        "label": "Visa",
+        "yes": "endast egna ställen",
+        "no": "alla ställen"
       }
     },
     "placeResults": {
-      "found": "Löytyi",
-      "places": "kohdetta",
-      "notFound": "Kohteita ei löytynyt",
-      "notFoundTip": "Vinkki: Tarkista hakusanan kirjoitusasu tai koita hakea sanan alkukirjaimilla tai toisella hakusanalla",
-      "ownPlace": "Oma kohde",
+      "found": "Hittades",
+      "places": "ställen",
+      "notFound": "Inga ställen hittades",
+      "notFoundTip": "Tips! Kolla sökordets stavning, eller prova på nytt med att söka endast med första bokstäverna i ordet eller med ett helt annat sökord.",
+      "ownPlace": "Eget ställe",
       "newPlace": {
-        "title": "Haluatko lisätä uuden kohteen palveluun?",
-        "notice": "Rekisteröidy ja ilmoita puuttuva kohde"
+        "title": "Vill du lägga till ett nytt ställe i tjänsten?",
+        "notice": "Registrera dig och lägg till stället som saknas"
       }
     },
     "placeType": {
-      "title": "Kohteen tyyppi",
-      "myPlace": "Ilmoittamani toimipiste on",
-      "private": "Yksityinen kohde",
-      "municipal": "Kunnallinen kohde",
-      "institution": "Säätiö- tai yhdistyskohde"
+      "title": "Typ av ställe",
+      "myPlace": "Stället som jag lägger till är",
+      "private": "Privat",
+      "municipal": "Kommunalt",
+      "institution": "Stiftelse eller förening"
     },
     "preview": {
-      "title": "Yhteenveto kohteen tiedoista",
-      "heading": "Otsikko",
-      "placeInfo": "Kohteen tiedot"
+      "title": "Sammandrag av informationen",
+      "heading": "Rubrik",
+      "placeInfo": "Information om stället"
     },
     "tags": {
-      "title": "Asiasanat",
-      "tagSelection": "Asiasanojen valinta",
+      "title": "Ämnesord",
+      "tagSelection": "Val av ämnesord",
       "add": {
-        "label": "Lisää asiasana",
-        "helperText": "Hae tai valitse listalta. Valitse max. 5 sanaa."
+        "label": "Lägg till ämnesord",
+        "helperText": "Sök eller välj från listan. Välj max. 5 ord."
       }
     },
     "terms": {
-      "heading": "Käyttöehdot",
-      "text1": "Palveluun ilmoitettuja ja kerättyjä tietoja käytetään MyHelsinki.fi-verkkopalvelussa. Lisäksi tietoja tarjotaan Helsinki Marketingin ja Helsingin kaupungin avoimessa rajapinnassa kolmansille osapuolille. Tietokantaa ylläpitää Helsinki kaupunki, jolla on oikeus valita julkaistava materiaali ja editoida tekstiä sopivaan muotoon.",
-      "text2": "Lähettämällä tämän lomakkeen hyväksyt samalla käyttöehdot.",
-      "link": "Lue käyttöehdot täältä"
+      "heading": "Bruksvillkor",
+      "text1": "Information som anmäls eller samlas i tjänsten används i nättjänsten MyHelsinki.fi. Dessutom erbjuds informationen till tredje parter via Helsinki Marketings och Helsingfors stads öppna gränssnitt. Helsingfors stad upprätthåller databasen, och behåller rätten att välja materialet som publiceras och bearbeta texter till lämplig form.",
+      "text2": "Genom att sända blanketten godkänner du samtidigt bruksvillkoren.",
+      "link": "Läs bruksvillkoren här"
     },
     "tip": {
-      "title": "Vinkkaa virheellisestä tiedosta",
+      "title": "Tipsa om inkorrekt information",
       "placeName": {
-        "label": "Hae kohdetta nimellä",
-        "helperText": "Kirjoita hakusana sitten valitse alla olevalta listalta"
+        "label": "Sök stället med namn",
+        "helperText": "Skriv ett sökord och välj därefter från listan här under"
       },
       "placeResults": {
-        "label": "Kohteen nimi"
+        "label": "Ställets namn"
       },
       "addPlaceName": {
-        "label": "Uuden kohteen nimi"
+        "label": "Det nya ställets namn"
       },
       "itemType": {
-        "label": "Vinkkityyppi",
-        "change": "Muutos kohteen tietoihin",
-        "add": "Uusi kohde",
-        "delete": "Kohteen poistaminen"
+        "label": "Typ av tips",
+        "change": "Ändring i ställets information",
+        "add": "Nytt ställe",
+        "delete": "Avlägsna stället"
       },
       "comments": {
-        "label": "Muutosvinkki",
-        "helperText": "Kuvaa muutostoive mahdollisimman tarkasti"
+        "label": "Ändringsförslag",
+        "helperText": "Beskriv ändringsförslaget så noga som möjligt"
       },
       "details": {
-        "label": "Omat yhteystietosi",
-        "helperText": "Kerro halutessasi nimi, puhelinnumero ja sähköpostiosoite"
+        "label": "Egna kontaktuppgifter",
+        "helperText": "Om du vill, kan du lämna namn, telefonnummer och e-postadress"
       }
     }
   },

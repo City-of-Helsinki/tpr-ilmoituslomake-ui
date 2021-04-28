@@ -1,20 +1,20 @@
 {
   "common": {
     "header": {
-      "title": "Kaupunkialusta",
-      "titleAlt": "City of Helsinki: Kaupunkialusta",
-      "skipToContent": "Skip to content",
-      "login": "Sign in",
-      "logout": "Sign out"
+      "title": "City Platform",
+      "titleAlt": "Helsinki City: City Platform",
+      "skipToContent": "Skip to main content",
+      "login": "Login",
+      "logout": "Logout"
     },
     "footer": {
-      "title": "Kaupunkialusta",
+      "title": "City Platform",
       "backToTop": "Back to top",
       "contact": "Contact",
       "copyright": "Copyright",
       "rightsReserved": "All rights reserved",
-      "terms": "Terms of use",
-      "accessibility": "Accessibility statement"
+      "terms": "Terms & Conditions",
+      "accessibility": "Accessibility"
     },
     "map": {
       "osm": "OpenStreetMap contributors"
@@ -24,16 +24,16 @@
       "sv": "in Swedish",
       "en": "in English"
     },
-    "opensInANewTab": "(opens in a new tab)",
+    "opensInANewTab": "(Open in a new tab)",
     "todo": "TODO - TEXT HERE"
   },
   "notification": {
-    "title": "Kaupunkialusta",
-    "headerNew": "Register a new place",
-    "headerModify": "Modify",
+    "title": "City Platform",
+    "headerNew": "New",
+    "headerModify": "Edit",
     "navigationHeader": "Process",
     "navigationFooter": "Buttons",
-    "mandatory": "Mandatory information is marked with an asterisk *",
+    "mandatory": "Mandatory information *",
     "button": {
       "search": "Search",
       "next": "Next",
@@ -42,88 +42,88 @@
       "close": "Close",
       "send": "Send",
       "return": "Return",
-      "returnToStart": "Return to the start page",
+      "returnToStart": "Return to start",
       "clearAllSelections": "Clear all selections",
-      "remove": "Remove",
+      "remove": "remove",
       "toggleMenu": "Toggle menu",
       "openHelp": "Open help",
       "selectFromDevice": "Select from device",
-      "modifyInformation": "Modify place's information",
-      "suggestChange": "Suggest a change",
-      "modifyOpeningTimes": "Modify opening times",
-      "notifyOpeningTimes": "Register opening times",
-      "notifyClosingDown": "Notify place closing down",
-      "notifyNewPlace": "Add a new place",
-      "giveTip": "Give a tip",
-      "checkPlace": "Search places",
-      "modifyOwnPlace": "Modify own place",
-      "continueToOpeningTimes": "Continue to opening times registration",
-      "noOpeningTimes": "The place does not have opening times",
+      "modifyInformation": "Edit information",
+      "suggestChange": "Suggest change",
+      "modifyOpeningTimes": "Edit opening times",
+      "notifyOpeningTimes": "Notify about opening times",
+      "notifyClosingDown": "Notify about a location closing down",
+      "notifyNewPlace": "Add new location",
+      "giveTip": "Give tips",
+      "checkPlace": "Search for location",
+      "modifyOwnPlace": "Edit own location",
+      "continueToOpeningTimes": "Continue to opening times",
+      "noOpeningTimes": "Location has no opening times",
       "continueLater": "Continue later"
     },
     "page": {
-      "basic": "Basic info",
-      "contact": "Contact info",
+      "basic": "Basic information",
+      "contact": "Contact",
       "photos": "Photos",
       "send": "Send"
     },
     "main": {
-      "basic": "Place's basic information",
-      "contact": "Place's contact information",
-      "photos": "Place's photos",
+      "basic": "Basic information",
+      "contact": "Contact information",
+      "photos": "Photos",
       "send": "Check information and send"
     },
     "index": {
-      "title": "Together we'll keep the information of Helsinki's best places up-to-date!",
-      "message": "Kaupunkialusta collects and maintains information about Helsinki's places for the benefit of locals and tourists. In this service you can register information for new places or make changes to the information of existing places.",
-      "notify": "Register places information",
+      "title": "Together we can keep the information about the best places in Helsinki up to date!",
+      "message": "The City Platform collects and maintains information about Helsinki's locations for the benefit of locals and tourists. With this service, you can enter location information or make changes to existing location information.",
+      "notify": "Provide location information",
       "terms": "Read terms of use",
       "accessibility": "Read accessibility statement"
     },
     "message": {
       "notAuthenticated": {
-        "title": "Please login before sending",
+        "title": "Login before sending",
         "message": ""
       },
       "validationFailed": {
-        "title": "The form has errors",
-        "message": "Please check the information, the incorrect entries are highlighted below"
+        "title": "Errors in the form",
+        "message": "Please check the information, incorrect fields are highlighted below"
       },
       "saveFailed": {
-        "title": "The form failed to be sent",
-        "message": "Unfortunately a technical error prevented the form from being sent. Please try again later."
+        "title": "Form submission failed",
+        "message": "Sorry, a technical error prevented the form from submitting. Please try again later."
       },
       "saveSucceeded": {
-        "title": "Sending succeeded!",
-        "message": "Thank you for the notification! The information will be checked before publishing."
+        "title": "Submitted successfully!",
+        "message": "Thanks for your submission! The information will be reviewed before publication."
       },
       "notifyNewPlace": {
-        "title": "Do you want to add a new place to the service?",
-        "message": "Register new places to the service. Login first and register the missing place today!"
+        "title": "Do you want to add a new location?",
+        "message": "Notify of new locations. Please log in first and report a missing location today!!"
       },
       "giveTip": {
         "title": "Give a tip!",
-        "message": "In case you notice missing, incorrect or old information, do us a favour and notify us about it. You can make the notification with ease without registering."
+        "message": "If you notice missing, incorrect or outdated information, please report it. You will need to register to submit a report."
       },
       "checkPlace": {
-        "title": "What information can be found about a place?",
-        "message": "Check if the place has already been registered with us and what information exists about it."
+        "title": "What location information is available?",
+        "message": "Check if the location has already been submitted and its currently available information."
       },
       "modifyOwnPlace": {
-        "title": "Modify your own place's information",
-        "message": "You can at any time notify new or changed information about your own place. Login first and modify."
+        "title": "Edit own location information",
+        "message": "You can inform us of new or changed information about your location at any time. Please log in first to edit."
       },
       "completeOpeningTimes": {
-        "title": "Complete the place's information with opening times",
-        "message": "Let the visitors know when your place is open."
+        "title": "Provide information about the location’s opening times",
+        "message": "Let visitors know when your location is open."
       },
       "completePhotos": {
-        "title": "Complete the place's information with photos",
-        "message": "Let the visitors know what your place looks like."
+        "title": "Add images for better visibility",
+        "message": "Tell visitors what your location looks like."
       },
       "sentModal": {
-        "title": "Melkein valmista...",
-        "message": "Thank you, the place's information has now been sent for review. Please continue by telling when the place is open to the public."
+        "title": "Almost ready...",
+        "message": "Thank you, the location information has now been submitted for review. Continue by telling when your location is open to the public."
       },
       "close": "Close message",
       "fieldRequired": "$fieldName is mandatory information",
@@ -131,224 +131,224 @@
       "fieldFormatUrl": "$fieldName must be entered in the right format (e.g. https://myhelsinki.fi)",
       "fieldTooLong": "$fieldName is too long",
       "fieldTooShort": "$fieldName is too short",
-      "fieldNotJpeg": "The selected photo's format is incorrect, the image must be in JPEG format",
-      "fieldLanguage": "One language is mandatory",
-      "fieldOther": "Please check the information"
+      "fieldNotJpeg": "The format of the selected image is incorrect, images must be in JPEG format",
+      "fieldLanguage": "At least one language is mandatory",
+      "fieldOther": "Check information"
     },
     "comments": {
       "title": "Comments",
-      "notice": "Check the information and send the form. If you want, you can also leave a message for the handler of the information.",
+      "notice": "Please check the information again and resubmit the form. If you want, you can also leave a message to the moderator.",
       "comments": {
-        "label": "Message for the handler of the information"
+        "label": "Message the moderator"
       }
     },
     "contact": {
       "title": "Other contact information",
       "phone": {
-        "label": "Place's phone number",
-        "helperText": "The phone number's format is e.g. 0501234567 or +358501234567"
+        "label": "Phone number",
+        "helperText": "Correct phone number formats: 0501234567 or +358501234567"
       },
       "email": {
-        "label": "Place's email address"
+        "label": "Email"
       }
     },
     "description": {
-      "title": "Place's name and description",
+      "title": "Name and description",
       "placeName": {
-        "label": "Place's name"
+        "label": "Name"
       },
       "shortDescription": {
-        "label": "Place's short description",
-        "helperText": "Note that the text cannot be in 'we' form. Length max. 150 characters",
+        "label": "Short description",
+        "helperText": "Note that the text must not be written in ‘we’ format. Length max. 150 characters",
         "tooltipLabel": "Improve findability",
-        "tooltipText": "A short description helps the place to be found more easily with a search engine."
+        "tooltipText": "A shorter description makes the location easier to find by a search engine."
       },
       "longDescription": {
-        "label": "Place's long description",
-        "helperText": "Also add information here about opening times. Note that the text cannot be in 'we' form. Length 120 - 4000 characters",
-        "tooltipLabel": "More detailed kuvaus",
-        "tooltipText": "You can if you want include the short description here and supplement the description according to your needs."
+        "label": "Detailed description",
+        "helperText": "You can also add information about opening hours here. Note that the text must not be written in ‘we’ format. Length 120 - 4000 characters",
+        "tooltipLabel": "More detailed description",
+        "tooltipText": "If you prefer, you can include a short description here and complete it later as needed."
       }
     },
     "inputLanguage": {
-      "title": "First select the languages in which you will give the information (one language is mandatory)",
+      "title": "Choose in which languages you will provide information (at least one language is mandatory)",
       "fi": "Finnish",
       "sv": "Swedish",
       "en": "English"
     },
     "links": {
-      "title": "Place's links",
+      "title": "Location links",
       "website": {
         "label": "Website",
-        "helperText": "The link's format is e.g. https://myhelsinki.fi",
-        "tooltipLabel": "Link for more information",
-        "tooltipText": "You can add an address here to the place's webpage or social media account."
+        "helperText": "Correct web address format e.g. https://myhelsinki.fi",
+        "tooltipLabel": "Link to further information",
+        "tooltipText": "You can add the location's website or social media account links here."
       },
       "socialMedia": {
-        "label": "Social media"
+        "label": "Social Media"
       }
     },
     "location": {
-      "title": "Place's location",
+      "title": "Location",
       "streetAddress": {
         "label": "Street address"
       },
       "postalCode": {
-        "label": "Postal code"
+        "label": "Postcode"
       },
       "postalOffice": {
-        "label": "Postal office"
+        "label": "Post office"
       },
       "neighborhood": {
-        "label": "District"
+        "label": "Neighborhood"
       },
       "addressNotFound": "Based on the address, a location could not be found for the place on the map. Add the place to the map by clicking the map at the point where the place is located.",
       "addressIncorrect": "Address incorrect, the closest suggestion is",
       "locationNotSpecified": "Location not specified"
     },
     "map": {
-      "title": "Map of place",
-      "notice": "The place is shown on the map based on the address given above. If the search result is imprecise or incorrect, you can correct it by moving the marker on the map to the right place. We recommend that the marker is located at the main entrance to the place.",
-      "geocode": "Show on the map",
       "resetLocation": "Return to address location",
+      "title": "View on map",
+      "notice": "The location is shown on the map based on the address above. If the search result is inaccurate or incorrect, you can move the cursor on the map to the correct location. We recommend that the cursor should mark the main entrance.",
+      "geocode": "Show map",
       "skipMap": "Skip map"
     },
     "notifier": {
-      "title": "Notifier's information",
-      "notifierType": "Notifier's type",
-      "representative": "I represent the place",
-      "notRepresentative": "I don't represent the place",
-      "tooltipLabel": "Place's representative",
-      "tooltipText": "The place's representative is the owner or someone else who indicates they represent the place's information. For example, a tourist or local resident do not represent the place.",
+      "title": "Notifier information",
+      "notifierType": "Choose the option that best represents you",
+      "representative": "I represent the location",
+      "notRepresentative": "I don’t represent the location",
+      "tooltipLabel": "Location representative",
+      "tooltipText": "A location representative is the owner or someone else who provides information about the location they represent. For example, a tourist or a local resident does not count as representing the location.",
       "fullName": {
-        "label": "Notifier's first and last name"
+        "label": "Name and surname"
       },
       "email": {
-        "label": "Notifier's email address"
+        "label": "Email"
       },
       "phone": {
-        "label": "Notifier's phone number",
-        "helperText": "The phone number's format is e.g. 0501234567 or +358501234567"
+        "label": "Phone number",
+        "helperText": "Correct phone number formats: 0501234567 or +358501234567"
       }
     },
     "opening": {
-      "title": "Opening times",
-      "notice": "Opening times are notified after sending.",
-      "temporaryNotice": "Opening times may change often due to the due to exceptional circumstances caused by the coronavirus pandemic. We recommend for the time being to update opening times on your own webpage or social media channels. You can tell customers in the long description field where the current opening times can be checked from. Please don't put links in the long description, links to webpages and social media are added in the next phase."
+      "title": "Opening hours",
+      "notice": "Opening hours will be submitted after sending the form.",
+      "temporaryNotice": "Opening hours may change frequently due to the exceptional circumstances caused by the Corona pandemic. For now, we recommend updating your opening hours on your own website or social media channels. Please tell customers in the detailed description section where they can check the location’s current opening hours. Please do not put links in the detailed description, links to websites and social media can be added in the next step."
     },
     "photos": {
       "title": "Photos",
-      "notice": "If you want, you can add 1-3 photos of the place here. In case a photo is added, its mandatory information is marked with an asterisk *",
+      "notice": "Here you can add 1-3 photos of the location. If an image has been added, any futher required information is marked with an asterisk *",
       "photo": {
         "title": "Photo",
-        "notice1": "Select the most attractive and high-quality photos of the place. The photos should not have text, dates, watermarks or anything similar on them.",
-        "notice2": "The size of the photos should be at least 1920 x 1080 pixels, in JPEG format, and their size must not exceed 4 MB. The photos should preferably be in landscape."
+        "notice1": "Choose high-quality images that best describes your subject. Images should not be overlaid with text, dates, watermarks, or similar.",
+        "notice2": "Images must be at least 1920 x 1080 pixels in size, in JPEG file format, and must not exceed 4 MB in size. Images should preferably be horizontal in orientation."
       },
       "url": {
-        "labelDevice": "Select a photo from your device",
-        "labelLink": "Photo's internet address (url)"
+        "labelDevice": "Select an image from your device",
+        "labelLink": "Photo web address (url)"
       },
       "altText": {
-        "label": "Photo's short description (alt-text)",
-        "helperText": "Write a concise and as short as possible description of the photo. Length max. 125 characters.",
-        "tooltipLabel": "Description text usage",
-        "tooltipText": "A description (alt-text) helps to inform the contents of the photo to a search engine or to people who for some reason cannot see the photo themselves. A reason for this could be a visual impairment, or that the photo was not downloaded, or the person does not want to download them."
+        "label": "Short description of photo (alt-text)",
+        "helperText": "Write a short description of the photo. Max length 125 characters",
+        "tooltipLabel": "Use of descriptive text",
+        "tooltipText": "A description (alt text) is used to describe the information contained in an image to a search engine or to people who, for whatever reason, cannot see the image itself. This could be due to visual impairment, the images having not been uploaded, or the viewer has chosen not to load them.."
       },
       "permission": {
-        "title": "Usage rights",
-        "notice": "NOTE! You must have the rights to the photo you are uploading. By uploading the photo you grant Helsinki Marketing the right to distribute it forward in an open interface. You must choose one of the following usage rights for the photo. Check the terms of use for precise information.",
-        "label": "Photo's usage rights",
-        "myHelsinki": "The photo can only be used in connection with the place in question, for example the MyHelsinki.fi website. The photo can also be distributed as open data to third parties via the MyHelsinki open interface. The photo's usage or transfer for other purposes is forbidden. When using the photo, the photo's source and photographer must be mentioned.",
+        "title": "User rights",
+        "notice": "NOTE! You must hold the rights to the images you upload. By uploading the image, you grant Helsinki Marketing the right to distribute it further in an MyHelsinki Open API. You must select one of the image permissions below. See the terms of use for more details.",
+        "label": "Photo user rights",
+        "myHelsinki": "The image may only be used in connection with the location, e.g. on the MyHelsinki.fi website. The image can also be shared as open data to third parties via the MyHelsinki Open API. Use or transfer of the image for other purposes is prohibited. When using an image, it is essential to mention the source and producer of the image.",
         "myHelsinki2": "MyHelsinki",
-        "creativeCommons1": "The photo can be distributed with the Creative Commons BY 4.0. license. When using the photo, the photo's source and photographer must be mentioned.",
-        "creativeCommons2": "Creative Commons BY 4.0. license",
+        "creativeCommons1": "Image courtesy of Creative Commons BY 4.0. license. When using an image, it is essential to mention the source and producer of the image.",
+        "creativeCommons2": "Creative Commons BY 4.0.-license",
         "creativeCommons3": "Creative Commons"
       },
       "source": {
-        "label": "Photo's source",
-        "tooltipLabel": "Photo's source",
-        "tooltipText": "Photographer or other owner of the photo, for example an organisation."
+        "label": "Image source",
+        "tooltipLabel": "Image source",
+        "tooltipText": "Photographer or other photo owner e.g. organisation"
       },
-      "addNewFromDevice": "Add photo from device",
+      "addNewFromDevice": "Add image from device",
       "addNewFromLink": "Add photo link",
       "remove": "Remove photo"
     },
     "placeSearch": {
-      "title": "All places",
-      "notice": "With the name, search places whose information you want to view or change. You can check the information's correctness and notify about possible changes.",
-      "noticeLoggedOut": "Log in to modify your own place's information.",
+      "title": "All locations",
+      "notice": "Search for the location that you want to view or change. You can check the accuracy of the information and report any changes made.",
+      "noticeLoggedOut": "Login to change your own location’s information.",
       "placeName": {
-        "label": "Search places with the name",
-        "helperText": "When the field is empty and you select Search, you will see all places"
+        "label": "Search for location by name",
+        "helperText": "When the field is empty and you select Search, you will see all locations"
       },
       "ownPlacesOnly": {
         "label": "Show",
-        "yes": "own places only",
-        "no": "all places"
+        "yes": "Only your own locations",
+        "no": "All locations"
       }
     },
     "placeResults": {
       "found": "Found",
-      "places": "places",
-      "notFound": "No places found",
-      "notFoundTip": "Tip: Check the spelling of the search term, or try to search with the first letters of the word or another search term.",
-      "ownPlace": "Own place",
+      "places": "locations",
+      "notFound": "Locations not found",
+      "notFoundTip": "Tip: Check the keyword spelling, or try searching using the first letter or another keyword",
+      "ownPlace": "Own location",
       "newPlace": {
-        "title": "Do you want to add a new place to the service?",
-        "notice": "Register and notify the missing place"
+        "title": "Would you like to add a new location?",
+        "notice": "Register or inform of a missing location"
       }
     },
     "placeType": {
-      "title": "Place's type",
-      "myPlace": "The place I'm registering is a",
-      "private": "Private place",
-      "municipal": "Municipal place",
-      "institution": "Institution place"
+      "title": "Location type",
+      "myPlace": "The location I want to fill in details for is",
+      "private": "Private location",
+      "municipal": "Municipal location",
+      "institution": "Foundation or private location"
     },
     "preview": {
-      "title": "Summary of the place's information",
+      "title": "Summary of location information",
       "heading": "Heading",
-      "placeInfo": "Place's information"
+      "placeInfo": "Location information"
     },
     "tags": {
-      "title": "Keywords",
-      "tagSelection": "Keywords selection",
+      "title": "Tags",
+      "tagSelection": "Tag selection",
       "add": {
-        "label": "Add keyword",
-        "helperText": "Search or select from the list. Select max. 5 words"
+        "label": "Add tag",
+        "helperText": "Search or choose from the list. Choose max. 5 words."
       }
     },
     "terms": {
       "heading": "Terms of use",
-      "text1": "The information notified and collected by the service is used in the MyHelsinki.fi web service. In addition, the information is offered by Helsinki Marketing's and Helsinki City's open interface to third parties. The database is maintained by Helsinki City, who has the right to select the material to be published and edit the text into a suitable form.",
-      "text2": "By sending this form, you accept the terms of use.",
-      "link": "Read the terms of use here"
+      "text1": "The information reported and collected is used in the MyHelsinki.fi online service. In addition, information is provided to third parties in an open interface between Helsinki Marketing and the City of Helsinki. The database is maintained by the City of Helsinki, which has the right to select the material to be published and to edit the text in an appropriate format.",
+      "text2": "By submitting this form, you agree to the terms of use.",
+      "link": "Read terms of use here"
     },
     "tip": {
-      "title": "Give a tip about incorrect information",
+      "title": "Tip about incorrect information",
       "placeName": {
-        "label": "Search places with the name",
-        "helperText": "Write a keyword then select from the list below"
+        "label": "Search for location by name",
+        "helperText": "Enter a keyword then select from the list below"
       },
       "placeResults": {
-        "label": "Place's name"
+        "label": "Location’s name"
       },
       "addPlaceName": {
-        "label": "New place's name"
+        "label": "New location name"
       },
       "itemType": {
         "label": "Tip type",
-        "change": "Change to place's information",
-        "add": "New place",
-        "delete": "Place closed down"
+        "change": "Edit information",
+        "add": "Add",
+        "delete": "Delete"
       },
       "comments": {
-        "label": "Change tip",
-        "helperText": "Describe your desired change as precisely as possible"
+        "label": "Editing tip",
+        "helperText": "Describe the change request as accurately as possible"
       },
       "details": {
-        "label": "Your own contact information",
-        "helperText": "If you want tell your name, phone number and email address"
+        "label": "Your contact information",
+        "helperText": "If you wish to, please provide your name, phone number and email address"
       }
     }
   },
