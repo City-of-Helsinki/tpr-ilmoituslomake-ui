@@ -5,7 +5,7 @@ import Head from "next/head";
 import { useI18n } from "next-localization";
 import { RootState } from "../../state/reducers";
 import { initStore } from "../../state/store";
-import { CLEAR_STATE, INITIAL_NOTIFICATION } from "../../types/constants";
+import { NotifierType, CLEAR_STATE, INITIAL_NOTIFICATION } from "../../types/constants";
 import { NotificationSchema } from "../../types/notification_schema";
 import { PhotoValidation } from "../../types/notification_validation";
 import i18nLoader, { defaultLocale } from "../../utils/i18n";
@@ -130,10 +130,12 @@ export const getServerSideProps: GetServerSideProps = async ({ req, resolvedUrl,
     });
 
     if (targetResponse.ok) {
-      const targetResult = await (targetResponse.json() as Promise<{ id: number; data: NotificationSchema }>);
+      const targetResult = await (targetResponse.json() as Promise<{ id: number; is_notifier: boolean; data: NotificationSchema }>);
 
       try {
-        // Merge the notification details from the backend, but remove the previous notifier details if present, except notifier type
+        // Merge the notification details from the backend
+        // If the current user matches the notifier and they are the representative of the place, also merge the notifier details
+        // In all other cases, remove the previous notifier details
         const { notifier, images, ...dataToUse } = targetResult.data;
 
         initialReduxState.notification = {
@@ -142,8 +144,10 @@ export const getServerSideProps: GetServerSideProps = async ({ req, resolvedUrl,
           notification: {
             ...initialReduxState.notification.notification,
             ...dataToUse,
-            notifier: INITIAL_NOTIFICATION.notifier,
-            // notifier: { ...INITIAL_NOTIFICATION.notifier, notifier_type: notifier.notifier_type },
+            notifier:
+              targetResult.is_notifier && notifier && notifier.notifier_type === NotifierType.Representative
+                ? { ...INITIAL_NOTIFICATION.notifier, ...notifier }
+                : INITIAL_NOTIFICATION.notifier,
           },
           notificationExtra: {
             ...initialReduxState.notification.notificationExtra,
@@ -192,16 +196,19 @@ export const getServerSideProps: GetServerSideProps = async ({ req, resolvedUrl,
     }
   }
 
-  // Replace the notifier details with the login user details if available
-  initialReduxState.notification.notification = {
-    ...initialReduxState.notification.notification,
-    notifier: {
-      ...INITIAL_NOTIFICATION.notifier,
-      // notifier_type: initialReduxState.notification.notification.notifier.notifier_type || INITIAL_NOTIFICATION.notifier.notifier_type,
-      full_name: user ? `${user.first_name} ${user.last_name}`.trim() : "",
-      email: user ? user.email : "",
-    },
-  };
+  // For an existing place, if the current user matches the notifier and they are the representative of the place,
+  // the notifier_type value is set above to 'representative', and in this case only, leave the notifier details as defined above
+  // In all other cases, replace the notifier details with the login user details if available
+  if (initialReduxState.notification.notification.notifier.notifier_type !== NotifierType.Representative) {
+    initialReduxState.notification.notification = {
+      ...initialReduxState.notification.notification,
+      notifier: {
+        ...INITIAL_NOTIFICATION.notifier,
+        full_name: user ? `${user.first_name} ${user.last_name}`.trim() : "",
+        email: user ? user.email : "",
+      },
+    };
+  }
 
   return {
     props: {
