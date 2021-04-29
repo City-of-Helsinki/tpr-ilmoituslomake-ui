@@ -54,7 +54,7 @@
       "notifyOpeningTimes": "Notify about opening times",
       "notifyClosingDown": "Notify about a location closing down",
       "notifyNewPlace": "Add new location",
-      "giveTip": "Give tips",
+      "giveTip": "Give a tip",
       "checkPlace": "Search for location",
       "modifyOwnPlace": "Edit own location",
       "continueToOpeningTimes": "Continue to opening times",
@@ -74,8 +74,8 @@
       "send": "Check information and send"
     },
     "index": {
-      "title": "Together we can keep information about the services up to date!",
-      "message": "Enter location information and make changes to existing location information.",
+      "title": "Together we can keep the service’s information up to date!",
+      "message": "Enter location information here and make changes to an existing location.",
       "notify": "Provide location information",
       "terms": "Read terms of use",
       "accessibility": "Read accessibility statement"
@@ -99,11 +99,11 @@
       },
       "notifyNewPlace": {
         "title": "Do you want to add a new location?",
-        "message": "Notify of new locations. Please log in first and report a missing location today!!"
+        "message": "Notify of new locations. Please log in first and report a missing location today!"
       },
       "giveTip": {
         "title": "Give a tip!",
-        "message": "If you notice missing, incorrect or outdated information, please report it. You will need to register to submit a report."
+        "message": "If you notice missing information, please report it. You can submit a report without registering."
       },
       "checkPlace": {
         "title": "What location information is available?",
@@ -202,7 +202,7 @@
       "neighborhood": {
         "label": "Neighborhood"
       },
-      "addressNotFound": "Based on the address, a location could not be found for the place on the map. Add the place to the map by clicking the map at the point where the place is located.",
+      "addressNotFound": "Based on the given address, no location can be found on the map. To add a location, click on the map at the point where it is located.",
       "addressIncorrect": "Address incorrect, the closest suggestion is",
       "locationNotSpecified": "Location not specified"
     },
@@ -326,6 +326,7 @@
     },
     "tip": {
       "title": "Tip about incorrect information",
+      "titleNew": "Give a tip",
       "placeName": {
         "label": "Search for location by name",
         "helperText": "Enter a keyword then select from the list below"

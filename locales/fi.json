@@ -103,7 +103,7 @@
       },
       "giveTip": {
         "title": "Anna vinkki!",
-        "message": "Mikäli huomasit puuttuvan, virheellisen tai vanhentuneen tiedon, tee palvelus ja ilmoita siitä meille. Voit tehdä ilmoituksen vaivattomasti rekisteröitymättä."
+        "message": "Mikäli huomasit puuttuvan tiedon, tee palvelus ja ilmoita siitä meille. Voit tehdä ilmoituksen vaivattomasti rekisteröitymättä."
       },
       "checkPlace": {
         "title": "Mitä tietoja kohteesta löytyy?",
@@ -326,6 +326,7 @@
     },
     "tip": {
       "title": "Vinkkaa virheellisestä tiedosta",
+      "titleNew": "Anna vinkki",
       "placeName": {
         "label": "Hae kohdetta nimellä",
         "helperText": "Kirjoita hakusana sitten valitse alla olevalta listalta"

@@ -74,8 +74,8 @@
       "send": "Kontrollera och sänd informationen"
     },
     "index": {
-      "title": "Låt oss tillsammans upprätthålla information om Helsingfors bästa ställen!",
-      "message": "I den här tjänsten kan du anmäla nya ställen eller upprätthålla information om ställen som redan är befintliga i tjänsten.",
+      "title": "Låt oss tillsammans hålla tjänsternas information ajour!",
+      "message": "Anmäl information om stället här, samt gör förändringar i redan befintlig information om ställen.",
       "notify": "Anmäl information om ställen",
       "terms": "Läs bruksvillkoren",
       "accessibility": "Läs tillgänglighetsutlåtandet"
@@ -103,7 +103,7 @@
       },
       "giveTip": {
         "title": "Ge ett tips!",
-        "message": "Om du saknade något ställe, eller om du upptäckte felaktig eller föråldrad information om ett ställe, gör oss en tjänst och meddela oss om det. Ett sådant meddelande kan du lätt göra utan att registrera dig i tjänsten."
+        "message": "Om du saknade något ställe, gör oss en tjänst och meddela oss om det. Ett sådant meddelande kan du lätt göra utan att registrera dig i tjänsten."
       },
       "checkPlace": {
         "title": "Vilken information finns om stället?",
@@ -202,9 +202,9 @@
       "neighborhood": {
         "label": "Stadsdel"
       },
-      "addressNotFound": "Osoitteen perusteella kohteelle ei löydy sijaintia kartalle. Lisää kohde kartalle napauttamalla karttaa siinä kohdassa, missä kohde sijaitsee.",
+      "addressNotFound": "På basen av adressen hittas läget inte på kartan. Lägg till stället på kartan genom att klicka i kartan på den plats där stället finns.",
       "addressIncorrect": "Felaktig adress, närmaste förslag är",
-      "locationNotSpecified": "Sijainti ei määritelty"
+      "locationNotSpecified": "Platsen har ej angivits"
     },
     "map": {
       "title": "Stället på kartan",
@@ -326,6 +326,7 @@
     },
     "tip": {
       "title": "Tipsa om inkorrekt information",
+      "titleNew": "Ge ett tips",
       "placeName": {
         "label": "Sök stället med namn",
         "helperText": "Skriv ett sökord och välj därefter från listan här under"

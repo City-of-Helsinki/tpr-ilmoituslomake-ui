@@ -44,7 +44,7 @@ const Tip = (): ReactElement => {
       </Head>
       <Header />
       <div className={styles.header}>
-        <h1 ref={ref}>{i18n.t("notification.tip.title")}</h1>
+        <h1 ref={ref}>{target > 0 ? i18n.t("notification.tip.title") : i18n.t("notification.tip.titleNew")}</h1>
       </div>
       <main id="content" className={`narrowSection ${styles.content}`}>
         <NotificationNotice messageKey="notification.mandatory" />
