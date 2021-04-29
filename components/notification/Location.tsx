@@ -2,7 +2,7 @@ import React, { Dispatch, ChangeEvent, ReactElement, useCallback, useEffect } fr
 import { useSelector, useDispatch } from "react-redux";
 import { useRouter } from "next/router";
 import { useI18n } from "next-localization";
-import { IconInfoCircle, TextInput } from "hds-react";
+import { Notification as HdsNotification, TextInput } from "hds-react";
 import { NotificationAction, NotificationValidationAction } from "../../state/actions/types";
 import { setNotificationAddress } from "../../state/actions/notification";
 import { RootState } from "../../state/reducers";
@@ -209,17 +209,14 @@ const Location = (): ReactElement => {
       )}
 
       {isAddressComplete() && !wholeAddressValid.valid && !addressFound && (
-        <div className={styles.invalidAddress}>
-          <IconInfoCircle aria-hidden />
-          <span>{`${i18n.t("notification.location.addressNotFound")}`}</span>
-        </div>
+        <HdsNotification size="small" className={styles.invalidAddress} type="alert">
+          {i18n.t(`notification.location.addressNotFound`)}
+        </HdsNotification>
       )}
       {isAddressComplete() && !wholeAddressValid.valid && addressFound && (
-        <div className={styles.invalidAddress}>
-          <IconInfoCircle aria-hidden />
-          <span>{`${i18n.t("notification.location.addressIncorrect")}:`}</span>
-          <span>{`${addressFound.street}, ${addressFound.postalCode} ${addressFound.postOffice}`}</span>
-        </div>
+        <HdsNotification size="small" className={styles.invalidAddress} type="alert">
+          {`${i18n.t("notification.location.addressIncorrect")}: ${addressFound.street}, ${addressFound.postalCode} ${addressFound.postOffice}`}
+        </HdsNotification>
       )}
 
       {((router.locale === "sv" && neighborhoodSv) || neighborhoodFi) && (
