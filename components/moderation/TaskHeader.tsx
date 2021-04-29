@@ -254,9 +254,11 @@ const TaskHeader = (): ReactElement => {
           <div className={styles.bold}>{i18n.t("moderation.taskHeader.messageFromNotifier")}</div>
           {(taskType === TaskType.ChangeTip || taskType === TaskType.AddTip || taskType === TaskType.RemoveTip) && (
             <>
-              <div>
-                {i18n.t("moderation.taskHeader.addPlaceName")}: {userPlaceName}
-              </div>
+              {taskType === TaskType.AddTip && (
+                <div>
+                  {i18n.t("moderation.taskHeader.addPlaceName")}: {userPlaceName}
+                </div>
+              )}
               <div>{userComments}</div>
             </>
           )}

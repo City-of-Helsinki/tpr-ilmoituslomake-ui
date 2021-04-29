@@ -28,7 +28,7 @@ const TipDetails = (): ReactElement => {
   };
 
   return (
-    <div className="formSection">
+    <div className="formItem">
       <TextArea
         id="userComments"
         className="formInput"

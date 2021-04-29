@@ -6,14 +6,14 @@ import Head from "next/head";
 import { useI18n } from "next-localization";
 import { RootState } from "../../state/reducers";
 import { initStore } from "../../state/store";
-import { CLEAR_STATE } from "../../types/constants";
+import { ItemType, CLEAR_STATE } from "../../types/constants";
 import { NotificationSchema } from "../../types/notification_schema";
 import i18nLoader from "../../utils/i18n";
 import { checkUser, getOriginServerSide } from "../../utils/serverside";
 import Layout from "../../components/common/Layout";
 import Header from "../../components/common/Header";
 import NotificationNotice from "../../components/notification/NotificationNotice";
-import TipSearch from "../../components/notification/TipSearch";
+import TipPlace from "../../components/notification/TipPlace";
 import TipDetails from "../../components/notification/TipDetails";
 import TipFooter from "../../components/notification/TipFooter";
 import ValidationSummary from "../../components/notification/ValidationSummary";
@@ -27,6 +27,9 @@ const Tip = (): ReactElement => {
 
   const pageValid = useSelector((state: RootState) => state.notificationValidation.pageValid);
   const ref = useRef<HTMLHeadingElement>(null);
+
+  const tip = useSelector((state: RootState) => state.notification.tip);
+  const { target } = tip;
 
   useEffect(() => {
     if (ref.current) {
@@ -46,9 +49,11 @@ const Tip = (): ReactElement => {
       <main id="content" className={`narrowSection ${styles.content}`}>
         <NotificationNotice messageKey="notification.mandatory" />
         {!pageValid && <ValidationSummary />}
-        <DynamicTipType />
-        <TipSearch />
-        <TipDetails />
+        <div className={`formSection ${styles.tipInfo}`}>
+          {target > 0 && <DynamicTipType />}
+          <TipPlace />
+          <TipDetails />
+        </div>
         <TipFooter />
       </main>
     </Layout>
@@ -85,12 +90,13 @@ export const getServerSideProps: GetServerSideProps = async ({ req, params, loca
 
         try {
           // The notification exists in the backend, so set the tip target id in the state
-          // This will be used to pre-select the place in TipSearch via the preselectPlaceOnMount method
+          // This will be used to pre-select the place in TipPlace via the preselectPlaceOnMount method
           initialReduxState.notification = {
             ...initialReduxState.notification,
             tip: {
               ...initialReduxState.notification.tip,
               target: targetResult.id,
+              item_type: ItemType.ChangeRequestChange,
             },
           };
         } catch (err) {

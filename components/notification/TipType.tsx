@@ -27,7 +27,7 @@ const TipType = (): ReactElement => {
   };
 
   return (
-    <div className={`formItem ${styles.tipType}`}>
+    <div className="formItem">
       <SelectionGroup
         id="itemType"
         direction={isScreenSizeXS ? "vertical" : "horizontal"}
@@ -47,6 +47,7 @@ const TipType = (): ReactElement => {
           checked={item_type === ItemType.ChangeRequestChange}
           onChange={updateItemType}
         />
+        {/*
         <RadioButton
           id="itemType_add"
           label={i18n.t("notification.tip.itemType.add")}
@@ -55,6 +56,7 @@ const TipType = (): ReactElement => {
           checked={item_type === ItemType.ChangeRequestAdd}
           onChange={updateItemType}
         />
+        */}
         <RadioButton
           id="itemType_delete"
           label={i18n.t("notification.tip.itemType.delete")}
