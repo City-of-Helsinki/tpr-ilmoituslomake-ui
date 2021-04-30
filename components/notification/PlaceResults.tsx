@@ -15,11 +15,7 @@ import { defaultLocale } from "../../utils/i18n";
 import Notice from "../common/Notice";
 import styles from "./PlaceResults.module.scss";
 
-interface PlaceResultsProps {
-  showOwnPlaces?: boolean;
-}
-
-const PlaceResults = ({ showOwnPlaces }: PlaceResultsProps): ReactElement => {
+const PlaceResults = (): ReactElement => {
   const i18n = useI18n();
   const dispatch = useDispatch<Dispatch<NotificationAction>>();
   const router = useRouter();
@@ -31,7 +27,7 @@ const PlaceResults = ({ showOwnPlaces }: PlaceResultsProps): ReactElement => {
   const { searchDone, ownPlacesOnly } = placeSearch;
 
   // Show the user's own places if they are logged in
-  const ownPlaces = showOwnPlaces || currentUser?.authenticated;
+  const showOwnPlaces = currentUser?.authenticated;
 
   const fetchMoreResults = async () => {
     if (next) {
@@ -57,7 +53,7 @@ const PlaceResults = ({ showOwnPlaces }: PlaceResultsProps): ReactElement => {
                   // This is the user's own place if they made the notification and they marked themselves as the place's representative
                   const isOwnPlace = isNotifier && notifierType === NotifierType.Representative;
 
-                  return !ownPlaces || !ownPlacesOnly || isOwnPlace;
+                  return !showOwnPlaces || !ownPlacesOnly || isOwnPlace;
                 }),
               ],
               count,
@@ -121,7 +117,7 @@ const PlaceResults = ({ showOwnPlaces }: PlaceResultsProps): ReactElement => {
                       </Button>
                     </Link>
                   </div>
-                  <div className={`${styles.gridContent} ${styles.middleColumn} ${ownPlaces ? styles.ownPlaces : ""}`}>
+                  <div className={`${styles.gridContent} ${styles.middleColumn} ${showOwnPlaces ? styles.ownPlaces : ""}`}>
                     <div className={styles.addressContainer}>
                       <IconLocation aria-hidden />
                       <div className={styles.addressLabel}>
@@ -135,7 +131,7 @@ const PlaceResults = ({ showOwnPlaces }: PlaceResultsProps): ReactElement => {
                       </div>
                     </div>
                   </div>
-                  {ownPlaces && (
+                  {showOwnPlaces && (
                     <div className={`${styles.gridContent} ${styles.lastColumn}`}>
                       {isOwnPlace && (
                         <div className={styles.ownPlaceContainer}>
@@ -176,10 +172,6 @@ const PlaceResults = ({ showOwnPlaces }: PlaceResultsProps): ReactElement => {
       )}
     </div>
   );
-};
-
-PlaceResults.defaultProps = {
-  showOwnPlaces: false,
 };
 
 export default PlaceResults;

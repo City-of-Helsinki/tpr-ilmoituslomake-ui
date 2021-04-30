@@ -65,7 +65,7 @@ const Main = (): ReactElement => {
           titleKey="notification.message.modifyOwnPlace.title"
           messageKey="notification.message.modifyOwnPlace.message"
           button={
-            <Link href="/searchown">
+            <Link href="/search?own=1">
               <Button variant="secondary">{i18n.t("notification.button.modifyOwnPlace")}</Button>
             </Link>
           }

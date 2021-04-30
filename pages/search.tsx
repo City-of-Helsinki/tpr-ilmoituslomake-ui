@@ -7,7 +7,7 @@ import { Button, IconArrowLeft } from "hds-react";
 import { initStore } from "../state/store";
 import { CLEAR_STATE } from "../types/constants";
 import i18nLoader from "../utils/i18n";
-import { checkUser } from "../utils/serverside";
+import { checkUser, redirectToLogin } from "../utils/serverside";
 import Layout from "../components/common/Layout";
 import Header from "../components/common/Header";
 import PlaceSearch from "../components/notification/PlaceSearch";
@@ -36,7 +36,7 @@ const NotificationSearch = (): ReactElement => {
 };
 
 // Server-side rendering
-export const getServerSideProps: GetServerSideProps = async ({ req, locales }) => {
+export const getServerSideProps: GetServerSideProps = async ({ req, resolvedUrl, query, locales }) => {
   const lngDict = await i18nLoader(locales);
 
   const reduxStore = initStore();
@@ -44,8 +44,14 @@ export const getServerSideProps: GetServerSideProps = async ({ req, locales }) =
   const initialReduxState = reduxStore.getState();
 
   const user = await checkUser(req);
+  const { own } = query;
   if (!user) {
-    // Invalid user but login is not required
+    if (!own) {
+      // Invalid user but login is not required
+    } else {
+      // Invalid user but login is required, so redirect to login
+      return redirectToLogin(resolvedUrl);
+    }
   }
   if (user && user.authenticated) {
     initialReduxState.general.user = user;

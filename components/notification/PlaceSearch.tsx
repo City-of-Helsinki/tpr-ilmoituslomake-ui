@@ -11,11 +11,7 @@ import { NotificationPlaceResult } from "../../types/general";
 import getOrigin from "../../utils/request";
 import styles from "./PlaceSearch.module.scss";
 
-interface PlaceSearchProps {
-  showOwnPlaces?: boolean;
-}
-
-const PlaceSearch = ({ showOwnPlaces }: PlaceSearchProps): ReactElement => {
+const PlaceSearch = (): ReactElement => {
   const i18n = useI18n();
   const dispatch = useDispatch<Dispatch<NotificationAction>>();
   const router = useRouter();
@@ -25,7 +21,7 @@ const PlaceSearch = ({ showOwnPlaces }: PlaceSearchProps): ReactElement => {
   const { placeName, ownPlacesOnly } = placeSearch;
 
   // Show the user's own places if they are logged in
-  const ownPlaces = showOwnPlaces || currentUser?.authenticated;
+  const showOwnPlaces = currentUser?.authenticated;
 
   const updateSearchText = (evt: ChangeEvent<HTMLInputElement>) => {
     dispatch(setNotificationPlaceSearch({ ...placeSearch, [evt.target.name]: evt.target.value }));
@@ -56,7 +52,7 @@ const PlaceSearch = ({ showOwnPlaces }: PlaceSearchProps): ReactElement => {
               // This is the user's own place if they made the notification and they marked themselves as the place's representative
               const isOwnPlace = isNotifier && notifierType === NotifierType.Representative;
 
-              return !ownPlaces || !ownPlacesOnly || isOwnPlace;
+              return !showOwnPlaces || !ownPlacesOnly || isOwnPlace;
             }),
             count,
             next,
@@ -96,7 +92,7 @@ const PlaceSearch = ({ showOwnPlaces }: PlaceSearchProps): ReactElement => {
           <Button onClick={searchPlaces}>{i18n.t("notification.button.search")}</Button>
         </div>
 
-        {ownPlaces && (
+        {showOwnPlaces && (
           <div className={styles.gridInput}>
             <SelectionGroup id="ownPlacesOnly" direction="horizontal" label={i18n.t("notification.placeSearch.ownPlacesOnly.label")}>
               <RadioButton
@@ -121,10 +117,6 @@ const PlaceSearch = ({ showOwnPlaces }: PlaceSearchProps): ReactElement => {
       </div>
     </div>
   );
-};
-
-PlaceSearch.defaultProps = {
-  showOwnPlaces: false,
 };
 
 export default PlaceSearch;
