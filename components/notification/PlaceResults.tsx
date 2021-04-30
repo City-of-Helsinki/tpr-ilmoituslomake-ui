@@ -1,10 +1,12 @@
-import React, { ReactElement, Fragment } from "react";
-import { useSelector } from "react-redux";
+import React, { Dispatch, ReactElement, Fragment } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useI18n } from "next-localization";
 import { Button, IconAngleRight, IconLocation, IconStarFill } from "hds-react";
 import moment from "moment";
+import { NotificationAction } from "../../state/actions/types";
+import { setNotificationPlaceResults } from "../../state/actions/notification";
 import { RootState } from "../../state/reducers";
 import { NotifierType } from "../../types/constants";
 import { NotificationPlaceResult } from "../../types/general";
@@ -19,28 +21,66 @@ interface PlaceResultsProps {
 
 const PlaceResults = ({ showOwnPlaces }: PlaceResultsProps): ReactElement => {
   const i18n = useI18n();
+  const dispatch = useDispatch<Dispatch<NotificationAction>>();
   const router = useRouter();
 
   const currentUser = useSelector((state: RootState) => state.general.user);
   const placeResults = useSelector((state: RootState) => state.notification.placeResults);
+  const { results, count, next } = placeResults;
   const placeSearch = useSelector((state: RootState) => state.notification.placeSearch);
-  const { searchDone } = placeSearch;
+  const { searchDone, ownPlacesOnly } = placeSearch;
 
   // Show the user's own places if they are logged in
   const ownPlaces = showOwnPlaces || currentUser?.authenticated;
 
+  const fetchMoreResults = async () => {
+    if (next) {
+      const placeResponse = await fetch(next);
+      if (placeResponse.ok) {
+        const placeResult = await (placeResponse.json() as Promise<{ count: number; next: string; results: NotificationPlaceResult[] }>);
+
+        console.log("PLACE RESPONSE", placeResult);
+
+        if (placeResult && placeResult.results && placeResult.results.length > 0) {
+          const { results: moreResults, next: nextBatch } = placeResult;
+
+          dispatch(
+            setNotificationPlaceResults({
+              results: [
+                ...results,
+                ...moreResults.filter((result) => {
+                  const {
+                    data: { notifier: { notifier_type: notifierType } = {} },
+                    is_notifier: isNotifier,
+                  } = result;
+
+                  // This is the user's own place if they made the notification and they marked themselves as the place's representative
+                  const isOwnPlace = isNotifier && notifierType === NotifierType.Representative;
+
+                  return !ownPlaces || !ownPlacesOnly || isOwnPlace;
+                }),
+              ],
+              count,
+              next: nextBatch,
+            })
+          );
+        }
+      }
+    }
+  };
+
   return (
     <div className={`formSection ${styles.placeResults}`}>
-      {placeResults.length > 0 && (
-        <h2>{`${i18n.t("notification.placeResults.found")} ${placeResults.length} ${i18n.t("notification.placeResults.places")}`}</h2>
+      {results.length > 0 && (
+        <h2>{`${i18n.t("notification.placeResults.found")} ${results.length} / ${count} ${i18n.t("notification.placeResults.places")}`}</h2>
       )}
 
-      {searchDone && placeResults.length === 0 && <h2>{i18n.t("notification.placeResults.notFound")}</h2>}
-      {searchDone && placeResults.length === 0 && <div className={styles.notFoundTip}>{i18n.t("notification.placeResults.notFoundTip")}</div>}
+      {searchDone && results.length === 0 && <h2>{i18n.t("notification.placeResults.notFound")}</h2>}
+      {searchDone && results.length === 0 && <div className={styles.notFoundTip}>{i18n.t("notification.placeResults.notFoundTip")}</div>}
 
-      {placeResults.length > 0 && (
+      {results.length > 0 && (
         <div className={`gridLayoutContainer ${styles.results}`}>
-          {placeResults
+          {results
             /*
             .sort((a: NotificationPlaceResult, b: NotificationPlaceResult) => {
               // Sort by name asc
@@ -112,6 +152,14 @@ const PlaceResults = ({ showOwnPlaces }: PlaceResultsProps): ReactElement => {
             })}
         </div>
       )}
+
+      <div className={styles.nextResults}>
+        {next && (
+          <Button variant="secondary" onClick={fetchMoreResults}>
+            {i18n.t("notification.button.showMore")}
+          </Button>
+        )}
+      </div>
 
       {searchDone && (
         <Notice

@@ -4,7 +4,7 @@ import {
   User,
   NotificationExtra,
   NotificationPlaceSearch,
-  NotificationPlaceResult,
+  NotificationPlaceResults,
   ChangeRequestSchema,
   ChangeRequestValidationSchema,
   ModerationPlaceSearch,
@@ -25,7 +25,7 @@ export interface NotificationState {
   center: LatLngExpression;
   zoom: number;
   placeSearch: NotificationPlaceSearch;
-  placeResults: NotificationPlaceResult[];
+  placeResults: NotificationPlaceResults;
   tip: ChangeRequestSchema;
   notificationId: number;
   notification: NotificationSchema;

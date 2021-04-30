@@ -29,7 +29,7 @@ import {
   TagOption,
   AddressSearchResult,
   NotificationPlaceSearch,
-  NotificationPlaceResult,
+  NotificationPlaceResults,
   ChangeRequestSchema,
 } from "../../types/general";
 import { NotificationAction } from "./types";
@@ -49,7 +49,7 @@ export const setNotificationPlaceSearch = (placeSearch: NotificationPlaceSearch)
   payload: placeSearch,
 });
 
-export const setNotificationPlaceResults = (placeResults: NotificationPlaceResult[]): NotificationAction => ({
+export const setNotificationPlaceResults = (placeResults: NotificationPlaceResults): NotificationAction => ({
   type: SET_NOTIFICATION_PLACE_RESULTS,
   payload: placeResults,
 });

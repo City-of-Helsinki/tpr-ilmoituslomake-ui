@@ -90,6 +90,12 @@ export interface NotificationPlaceResult {
   updated_at: string;
 }
 
+export interface NotificationPlaceResults {
+  results: NotificationPlaceResult[];
+  count: number;
+  next?: string;
+}
+
 export interface ChangeRequestSchema {
   target: number;
   item_type: string;

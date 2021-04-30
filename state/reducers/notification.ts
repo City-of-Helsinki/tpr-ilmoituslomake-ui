@@ -42,7 +42,10 @@ const initialState: NotificationState = {
     ownPlacesOnly: true,
     searchDone: false,
   },
-  placeResults: [],
+  placeResults: {
+    results: [],
+    count: 0,
+  },
   tip: {
     target: 0,
     item_type: ItemType.ChangeRequestAdd,
@@ -86,7 +89,7 @@ const notification = (state = initialState, action: AnyAction): NotificationStat
       console.log("SET_NOTIFICATION_PLACE_RESULTS", action.payload);
       return {
         ...state,
-        placeResults: action.payload || [],
+        placeResults: action.payload,
       };
     }
 

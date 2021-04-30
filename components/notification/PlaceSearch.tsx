@@ -38,14 +38,16 @@ const PlaceSearch = ({ showOwnPlaces }: PlaceSearchProps): ReactElement => {
   const searchPlaces = async () => {
     const placeResponse = await fetch(`${getOrigin(router)}/api/notification/list/?search=${placeName.trim()}`);
     if (placeResponse.ok) {
-      const placeResult = await (placeResponse.json() as Promise<{ results: NotificationPlaceResult[] }>);
+      const placeResult = await (placeResponse.json() as Promise<{ count: number; next: string; results: NotificationPlaceResult[] }>);
 
       console.log("PLACE RESPONSE", placeResult);
 
       if (placeResult && placeResult.results && placeResult.results.length > 0) {
+        const { results, count, next } = placeResult;
+
         dispatch(
-          setNotificationPlaceResults(
-            placeResult.results.filter((result) => {
+          setNotificationPlaceResults({
+            results: results.filter((result) => {
               const {
                 data: { notifier: { notifier_type: notifierType } = {} },
                 is_notifier: isNotifier,
@@ -55,11 +57,13 @@ const PlaceSearch = ({ showOwnPlaces }: PlaceSearchProps): ReactElement => {
               const isOwnPlace = isNotifier && notifierType === NotifierType.Representative;
 
               return !ownPlaces || !ownPlacesOnly || isOwnPlace;
-            })
-          )
+            }),
+            count,
+            next,
+          })
         );
       } else {
-        dispatch(setNotificationPlaceResults([]));
+        dispatch(setNotificationPlaceResults({ results: [], count: 0 }));
       }
       dispatch(setNotificationPlaceSearch({ ...placeSearch, searchDone: true }));
     }

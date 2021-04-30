@@ -77,7 +77,7 @@ import {
   KeyValueValidation,
   ModerationPlaceSearch,
   ModerationTodoResult,
-  NotificationPlaceResult,
+  NotificationPlaceResults,
   NotificationPlaceSearch,
   Photo,
   TagOption,
@@ -103,7 +103,7 @@ interface SetNotificationPlaceSearchAction extends AnyAction {
 
 interface SetNotificationPlaceResultsAction extends AnyAction {
   type: typeof SET_NOTIFICATION_PLACE_RESULTS;
-  payload: NotificationPlaceResult[];
+  payload: NotificationPlaceResults;
 }
 
 interface SetNotificationInputLanguage extends AnyAction {

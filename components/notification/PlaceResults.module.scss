@@ -4,7 +4,6 @@
 .placeResults {
   .results {
     column-gap: 0;
-    margin-bottom: $spacing-layout-l;
 
     // $spacing-4-xl = 4rem = 64px
     grid-template-columns: minmax(2 * $spacing-4-xl, 2fr) minmax(4 * $spacing-4-xl, 4fr) minmax(1 * $spacing-4-xl, 1fr);
@@ -124,6 +123,10 @@
         }
       }
     }
+  }
+
+  .nextResults {
+    margin-bottom: $spacing-layout-l;
   }
 
   .newPlace {
