@@ -26,7 +26,7 @@ const ModerationPlace = (): ReactElement => {
       <ModerationHeader currentPage={2} />
       <main id="content">
         <PlaceSearch />
-        {placeResults.length > 0 && <PlaceResults />}
+        {placeResults.results.length > 0 && <PlaceResults />}
       </main>
     </Layout>
   );

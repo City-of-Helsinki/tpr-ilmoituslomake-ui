@@ -585,7 +585,8 @@
     },
     "taskStatus": {
       "open": "Uusi",
-      "inProgress": "Keskeneräinen"
+      "inProgress": "Kesken",
+      "closed": "Valmis"
     },
     "taskType": {
       "placeChange": "Kohde muutos",

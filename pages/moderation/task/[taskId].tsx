@@ -6,7 +6,7 @@ import { useI18n } from "next-localization";
 import i18nLoader from "../../../utils/i18n";
 import { initStore } from "../../../state/store";
 import { RootState } from "../../../state/reducers";
-import { ModerationStatus, CLEAR_STATE, INITIAL_NOTIFICATION } from "../../../types/constants";
+import { ModerationStatus, CLEAR_STATE, INITIAL_NOTIFICATION, LANGUAGE_OPTIONS } from "../../../types/constants";
 import { ModerationTodoSchema } from "../../../types/general";
 import { PhotoStatus } from "../../../types/moderation_status";
 import { NotificationSchema } from "../../../types/notification_schema";
@@ -28,9 +28,69 @@ const ModerationTaskDetail = (): ReactElement => {
   const i18n = useI18n();
 
   const modifiedTaskId = useSelector((state: RootState) => state.moderation.modifiedTaskId);
+  const moderationStatus = useSelector((state: RootState) => state.moderationStatus.moderationStatus);
+  const moderationExtra = useSelector((state: RootState) => state.moderation.moderationExtra);
+  const { photosSelected, taskType } = moderationExtra;
 
   // The maps only initialise properly when not hidden, so use a flag to only collapse the container after the maps are ready
   const [mapsReady, setMapsReady] = useState<boolean>(false);
+
+  const isModerated = (statusToCheck: ModerationStatus) => {
+    return statusToCheck !== ModerationStatus.Edited;
+  };
+
+  const isSectionModerated = (section: number) => {
+    switch (section) {
+      case 1: {
+        // Basic
+        const moderated1 = LANGUAGE_OPTIONS.flatMap((option) => [
+          isModerated(moderationStatus.name[option]),
+          isModerated(moderationStatus.description.short[option]),
+          isModerated(moderationStatus.description.long[option]),
+        ]);
+        const moderated2 = [isModerated(moderationStatus.ontology_ids)];
+
+        return moderated1.every((mod) => mod) && moderated2.every((mod) => mod);
+      }
+      case 2: {
+        // Contact
+        const moderated1 = LANGUAGE_OPTIONS.flatMap((option) => [isModerated(moderationStatus.website[option])]);
+        const moderated2 = [
+          isModerated(moderationStatus.location),
+          isModerated(moderationStatus.address.fi.street),
+          isModerated(moderationStatus.address.fi.postal_code),
+          isModerated(moderationStatus.address.fi.post_office),
+          isModerated(moderationStatus.address.fi.neighborhood),
+          isModerated(moderationStatus.address.sv.street),
+          isModerated(moderationStatus.address.sv.postal_code),
+          isModerated(moderationStatus.address.sv.post_office),
+          isModerated(moderationStatus.address.sv.neighborhood),
+          isModerated(moderationStatus.phone),
+          isModerated(moderationStatus.email),
+        ];
+
+        return moderated1.every((mod) => mod) && moderated2.every((mod) => mod);
+      }
+      case 3: {
+        // Photos
+        const moderated = photosSelected.map((photo, index) => {
+          const photoModerated1 = [
+            isModerated(moderationStatus.photos[index].url),
+            isModerated(moderationStatus.photos[index].permission),
+            isModerated(moderationStatus.photos[index].source),
+          ];
+          const photoModerated2 = LANGUAGE_OPTIONS.flatMap((option) => [isModerated(moderationStatus.photos[index].altText[option])]);
+
+          return photoModerated1.every((mod) => mod) && photoModerated2.every((mod) => mod);
+        });
+
+        return moderated.every((mod) => mod);
+      }
+      default: {
+        return true;
+      }
+    }
+  };
 
   return (
     <Layout>
@@ -40,19 +100,25 @@ const ModerationTaskDetail = (): ReactElement => {
       <ModerationHeader currentPage={3} />
       {modifiedTaskId > 0 && (
         <main id="content">
-          <TaskHeader />
+          <TaskHeader isModerated={isSectionModerated(1) && isSectionModerated(2) && isSectionModerated(3)} />
           <h2 className="moderation">{i18n.t("moderation.task.title")}</h2>
-          <Collapsible section={1} title={i18n.t("moderation.task.basic")}>
+          <Collapsible section={1} title={i18n.t("moderation.task.basic")} taskType={taskType} isModerated={isSectionModerated(1)}>
             <DescriptionModeration />
             <TagsModeration />
           </Collapsible>
-          <Collapsible section={2} title={i18n.t("moderation.task.contact")} forceExpanded={!mapsReady}>
+          <Collapsible
+            section={2}
+            title={i18n.t("moderation.task.contact")}
+            taskType={taskType}
+            isModerated={isSectionModerated(2)}
+            forceExpanded={!mapsReady}
+          >
             <LocationModeration />
             <MapModeration setMapsReady={setMapsReady} />
             <ContactModeration />
             <LinksModeration />
           </Collapsible>
-          <Collapsible section={3} title={i18n.t("moderation.task.photos")}>
+          <Collapsible section={3} title={i18n.t("moderation.task.photos")} taskType={taskType} isModerated={isSectionModerated(3)}>
             <PhotosModeration />
           </Collapsible>
         </main>

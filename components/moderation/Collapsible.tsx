@@ -1,16 +1,20 @@
 import React, { ReactElement, ReactNode, useState, useEffect } from "react";
 import { useI18n } from "next-localization";
 import { Button, IconMinus, IconPlus } from "hds-react";
+import { TaskStatus, TaskType } from "../../types/constants";
+import TaskStatusLabel from "./TaskStatusLabel";
 import styles from "./Collapsible.module.scss";
 
 interface CollapsibleProps {
   section: number;
   title: string;
+  taskType: TaskType;
+  isModerated: boolean;
   forceExpanded?: boolean;
   children: ReactNode;
 }
 
-const Collapsible = ({ section, title, forceExpanded, children }: CollapsibleProps): ReactElement => {
+const Collapsible = ({ section, title, taskType, isModerated, forceExpanded, children }: CollapsibleProps): ReactElement => {
   const i18n = useI18n();
   const [expanded, setExpanded] = useState<boolean>(false);
 
@@ -32,6 +36,11 @@ const Collapsible = ({ section, title, forceExpanded, children }: CollapsiblePro
         </div>
         <div className={styles.title}>
           <h3 className="moderation">{title}</h3>
+        </div>
+        <div className={styles.status}>
+          {(taskType === TaskType.NewPlace || taskType === TaskType.PlaceChange) && (
+            <TaskStatusLabel status={isModerated ? TaskStatus.Closed : TaskStatus.InProgress} />
+          )}
         </div>
         <div className={styles.button}>
           {expanded && (

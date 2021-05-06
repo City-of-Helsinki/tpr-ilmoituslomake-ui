@@ -16,7 +16,11 @@ import ToastNotification from "../common/ToastNotification";
 import TaskStatusLabel from "./TaskStatusLabel";
 import styles from "./TaskHeader.module.scss";
 
-const TaskHeader = (): ReactElement => {
+interface TaskHeaderProps {
+  isModerated: boolean;
+}
+
+const TaskHeader = ({ isModerated }: TaskHeaderProps): ReactElement => {
   const i18n = useI18n();
   const dispatchStatus = useDispatch<Dispatch<ModerationStatusAction>>();
   const router = useRouter();
@@ -171,14 +175,19 @@ const TaskHeader = (): ReactElement => {
 
       {(taskType === TaskType.NewPlace || taskType === TaskType.PlaceChange) && (
         <div className={styles.buttonRow}>
-          <Button variant="secondary">{i18n.t("moderation.button.requestTranslation")}</Button>
+          {/* <Button variant="secondary">{i18n.t("moderation.button.requestTranslation")}</Button> */}
           <Button variant="secondary" iconRight={<IconArrowUndo aria-hidden />} onClick={openRejectionConfirmation}>
             {i18n.t("moderation.button.rejectChangeRequest")}
           </Button>
-          <Button variant="secondary" iconRight={<IconTrash aria-hidden />} onClick={openDeletionConfirmation}>
+          <Button
+            variant="secondary"
+            iconRight={<IconTrash aria-hidden />}
+            onClick={openDeletionConfirmation}
+            disabled={taskType === TaskType.NewPlace}
+          >
             {i18n.t("moderation.button.removePlace")}
           </Button>
-          <Button iconRight={<IconArrowRight aria-hidden />} onClick={saveTask}>
+          <Button iconRight={<IconArrowRight aria-hidden />} onClick={saveTask} disabled={!isModerated}>
             {i18n.t("moderation.button.saveInformation")}
           </Button>
         </div>
@@ -186,7 +195,7 @@ const TaskHeader = (): ReactElement => {
 
       {(taskType === TaskType.ChangeTip || taskType === TaskType.AddTip || taskType === TaskType.RemoveTip) && (
         <div className={styles.buttonRow}>
-          <Button variant="secondary">{i18n.t("moderation.button.requestTranslation")}</Button>
+          {/* <Button variant="secondary">{i18n.t("moderation.button.requestTranslation")}</Button> */}
           <Button variant="secondary" iconRight={<IconArrowUndo aria-hidden />} onClick={openRejectionConfirmation}>
             {i18n.t("moderation.button.rejectChangeRequest")}
           </Button>

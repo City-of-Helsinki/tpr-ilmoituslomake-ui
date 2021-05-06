@@ -15,7 +15,10 @@ const TaskStatusLabel = ({ status }: TaskStatusLabelProps): ReactElement | null 
       return <StatusLabel type="alert">{i18n.t("moderation.taskStatus.open")}</StatusLabel>;
     }
     case TaskStatus.InProgress: {
-      return <StatusLabel type="success">{i18n.t("moderation.taskStatus.inProgress")}</StatusLabel>;
+      return <StatusLabel type="error">{i18n.t("moderation.taskStatus.inProgress")}</StatusLabel>;
+    }
+    case TaskStatus.Closed: {
+      return <StatusLabel type="success">{i18n.t("moderation.taskStatus.closed")}</StatusLabel>;
     }
     default: {
       return null;
