@@ -199,8 +199,9 @@ export const saveModeration = async (
 
       console.log("SENDING", postData);
 
-      // Save the moderation task with the possibly modified data
-      const createResponse = await fetch(`${getOrigin(router)}/api/moderation/todos/${modifiedTaskId}/`, {
+      // Save and approve the moderation task with the possibly modified data
+      // Note: this will also make the notificaton data available to normal users
+      const approveResponse = await fetch(`${getOrigin(router)}/api/moderation/approve/${modifiedTaskId}/`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
@@ -209,12 +210,12 @@ export const saveModeration = async (
         mode: "same-origin",
         body: JSON.stringify(postData),
       });
-      if (createResponse.ok) {
+      if (approveResponse.ok) {
         // TODO - handle response
-        const moderationResult = await createResponse.json();
-        console.log("SAVE RESPONSE", moderationResult);
+        const approveResult = await approveResponse.json();
+        console.log("APPROVE RESPONSE", approveResult);
 
-        if (moderationResult.id) {
+        if (approveResult.id) {
           setToast(Toast.SaveSucceeded);
 
           // TODO - handle page transition
@@ -227,8 +228,8 @@ export const saveModeration = async (
         setToast(Toast.SaveFailed);
 
         // TODO - handle error
-        const moderationResult = await createResponse.text();
-        console.log("SAVE FAILED", moderationResult);
+        const approveResult = await approveResponse.text();
+        console.log("APPROVE FAILED", approveResult);
       }
     } else if (!valid) {
       setToast(Toast.ValidationFailed);
