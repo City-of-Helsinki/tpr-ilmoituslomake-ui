@@ -31,8 +31,8 @@ const TaskResults = (): ReactElement => {
         {taskResults
           .sort((a: ModerationTodoResult, b: ModerationTodoResult) => b.created.getTime() - a.created.getTime())
           .map((result) => {
-            const { id, target, taskType, created, status, user_place_name } = result;
-            const { id: targetId, name } = target || {};
+            const { id, target, notification_target, taskType, created, status, user_place_name } = result;
+            const { id: targetId, name } = target || notification_target || {};
 
             return (
               <Fragment key={`taskresult_${id}`}>

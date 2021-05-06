@@ -138,6 +138,14 @@ export interface ModerationTodoResult {
       en: string;
     };
   };
+  notification_target: {
+    id: number;
+    name: {
+      fi: string;
+      sv: string;
+      en: string;
+    };
+  };
   category: string;
   item_type: string;
   status: string;

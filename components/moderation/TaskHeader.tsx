@@ -32,7 +32,7 @@ const TaskHeader = ({ isModerated }: TaskHeaderProps): ReactElement => {
 
   const modifiedTaskId = useSelector((state: RootState) => state.moderation.modifiedTaskId);
   const modifiedTask = useSelector((state: RootState) => state.moderation.modifiedTask);
-  const { notifier: { notifier_type, full_name, email, phone } = {} } = modifiedTask;
+  const { name: placeNameModified, notifier: { notifier_type, full_name, email, phone } = {} } = modifiedTask;
 
   const moderationExtra = useSelector((state: RootState) => state.moderation.moderationExtra);
   const {
@@ -169,7 +169,7 @@ const TaskHeader = ({ isModerated }: TaskHeaderProps): ReactElement => {
   return (
     <div className={styles.taskHeader}>
       <h1 className="moderation">
-        {getDisplayName(router.locale || defaultLocale, placeNameSelected, userPlaceName)}
+        {getDisplayName(router.locale || defaultLocale, selectedTaskId > 0 ? placeNameSelected : placeNameModified, userPlaceName)}
         {selectedTaskId ? ` (${selectedTaskId})` : ""}
       </h1>
 
