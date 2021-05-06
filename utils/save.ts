@@ -308,3 +308,70 @@ export const rejectModeration = async (
     setToast(Toast.SaveFailed);
   }
 };
+
+export const deleteModeration = async (
+  currentUser: User | undefined,
+  modifiedTaskId: number,
+  moderationExtra: ModerationExtra,
+  router: NextRouter,
+  setToast: Dispatch<SetStateAction<Toast | undefined>>
+): Promise<void> => {
+  try {
+    if (currentUser?.authenticated) {
+      // Send the Cross Site Request Forgery token, otherwise the backend returns the error "CSRF Failed: CSRF token missing or incorrect."
+      const csrftoken = Cookies.get("csrftoken");
+
+      const {
+        moderator: { fullName: moderatorName },
+      } = moderationExtra;
+
+      // Check if this task has already been assigned to a moderator
+      if (moderatorName.length === 0) {
+        // Assign the moderation task to the current user
+        const assignResponse = await fetch(`${getOrigin(router)}/api/moderation/assign/${modifiedTaskId}/`, {
+          method: "PUT",
+          headers: {
+            "X-CSRFToken": csrftoken as string,
+          },
+        });
+        if (assignResponse.ok) {
+          // TODO - handle response
+          const assignResult = await assignResponse.json();
+          console.log("ASSIGN RESPONSE", assignResult);
+        } else {
+          setToast(Toast.SaveFailed);
+
+          // TODO - handle error
+          const assignResult = await assignResponse.text();
+          console.log("ASSIGN FAILED", assignResult);
+        }
+      }
+
+      // Delete the moderation task
+      const deleteResponse = await fetch(`${getOrigin(router)}/api/moderation/delete/${modifiedTaskId}/`, {
+        method: "DELETE",
+        headers: {
+          "X-CSRFToken": csrftoken as string,
+        },
+      });
+      if (deleteResponse.ok) {
+        setToast(Toast.SaveSucceeded);
+
+        // TODO - handle response
+        const deleteResult = await deleteResponse.text();
+        console.log("DELETE RESPONSE", deleteResult);
+      } else {
+        setToast(Toast.SaveFailed);
+
+        // TODO - handle error
+        const deleteResult = await deleteResponse.text();
+        console.log("DELETE FAILED", deleteResult);
+      }
+    } else {
+      setToast(Toast.NotAuthenticated);
+    }
+  } catch (err) {
+    console.log("ERROR", err);
+    setToast(Toast.SaveFailed);
+  }
+};
