@@ -1,5 +1,5 @@
 import React, { ChangeEvent, ReactElement, cloneElement } from "react";
-import { ModerationStatus, TaskType } from "../../types/constants";
+import { ModerationStatus, TaskStatus, TaskType } from "../../types/constants";
 import { OptionType } from "../../types/general";
 import ActionButton from "./ActionButton";
 import ModifyButton from "./ModifyButton";
@@ -9,8 +9,9 @@ interface ModerationSectionProps {
   fieldName: string;
   selectedValue?: string | OptionType[];
   modifiedValue?: string | OptionType[];
-  status: ModerationStatus;
+  moderationStatus: ModerationStatus;
   taskType: TaskType;
+  taskStatus: TaskStatus;
   selectedHeaderText?: string;
   modifiedHeaderText?: string;
   modifyButtonLabel: string;
@@ -31,8 +32,9 @@ const ModerationSection = ({
   fieldName,
   selectedValue,
   modifiedValue,
-  status,
+  moderationStatus,
   taskType,
+  taskStatus,
   selectedHeaderText,
   modifiedHeaderText,
   modifyButtonLabel,
@@ -47,15 +49,15 @@ const ModerationSection = ({
   if (taskType === TaskType.ChangeTip || taskType === TaskType.AddTip || taskType === TaskType.RemoveTip) {
     return (
       <>
-        {selectedHeaderText && status !== ModerationStatus.Edited && <h4 className="gridColumn1 moderation">{selectedHeaderText}</h4>}
-        {modifiedHeaderText && status === ModerationStatus.Edited && <h4 className="gridColumn1 moderation">{modifiedHeaderText}</h4>}
+        {selectedHeaderText && moderationStatus !== ModerationStatus.Edited && <h4 className="gridColumn1 moderation">{selectedHeaderText}</h4>}
+        {modifiedHeaderText && moderationStatus === ModerationStatus.Edited && <h4 className="gridColumn1 moderation">{modifiedHeaderText}</h4>}
 
         {cloneElement(ModerationComponent, {
-          id: status !== ModerationStatus.Edited ? `${id}_Selected` : `${id}_Modified`,
+          id: moderationStatus !== ModerationStatus.Edited ? `${id}_Selected` : `${id}_Modified`,
           className: "gridColumn1 disabledTextColor",
-          value: status !== ModerationStatus.Edited ? selectedValue : modifiedValue,
-          onChange: status === ModerationStatus.Edited ? changeCallback : undefined,
-          disabled: status !== ModerationStatus.Edited,
+          value: moderationStatus !== ModerationStatus.Edited ? selectedValue : modifiedValue,
+          onChange: moderationStatus === ModerationStatus.Edited ? changeCallback : undefined,
+          disabled: moderationStatus !== ModerationStatus.Edited || taskStatus === TaskStatus.Closed,
           radiobuttonname: isSelectionGroupWrapper ? id : undefined,
         })}
       </>
@@ -64,7 +66,7 @@ const ModerationSection = ({
 
   if (taskType === TaskType.NewPlace || taskType === TaskType.PlaceChange) {
     // Enable modified fields to be edited by default if they have a value
-    if (status === ModerationStatus.Unknown && modifiedValue && modifiedValue.length > 0 && !bypassModifiedFieldCheck) {
+    if (moderationStatus === ModerationStatus.Unknown && modifiedValue && modifiedValue.length > 0 && !bypassModifiedFieldCheck) {
       statusCallback(fieldName, ModerationStatus.Edited);
     }
 
@@ -85,7 +87,8 @@ const ModerationSection = ({
           className="gridColumn2"
           label={modifyButtonLabel}
           fieldName={fieldName}
-          status={status}
+          moderationStatus={moderationStatus}
+          taskStatus={taskStatus}
           modifyCallback={statusCallback}
           hidden={modifyButtonHidden}
         >
@@ -94,12 +97,21 @@ const ModerationSection = ({
             className: "gridColumn2 disabledTextColor",
             value: modifiedValue,
             onChange: changeCallback,
-            disabled: status === ModerationStatus.Approved || status === ModerationStatus.Rejected,
+            disabled:
+              moderationStatus === ModerationStatus.Approved || moderationStatus === ModerationStatus.Rejected || taskStatus === TaskStatus.Closed,
             radiobuttonname: isSelectionGroupWrapper ? `${id}_Modified` : undefined,
           })}
         </ModifyButton>
 
-        {!actionButtonHidden && <ActionButton className="gridColumn3" fieldName={fieldName} status={status} actionCallback={statusCallback} />}
+        {!actionButtonHidden && (
+          <ActionButton
+            className="gridColumn3"
+            fieldName={fieldName}
+            moderationStatus={moderationStatus}
+            taskStatus={taskStatus}
+            actionCallback={statusCallback}
+          />
+        )}
       </>
     );
   }

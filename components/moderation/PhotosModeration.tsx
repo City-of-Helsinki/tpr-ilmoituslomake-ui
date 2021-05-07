@@ -16,7 +16,7 @@ const PhotosModeration = (): ReactElement => {
   const dispatchStatus = useDispatch<Dispatch<ModerationStatusAction>>();
 
   const moderationExtra = useSelector((state: RootState) => state.moderation.moderationExtra);
-  const { photosSelected, photosModified, taskType } = moderationExtra;
+  const { photosSelected, photosModified, taskType, taskStatus } = moderationExtra;
 
   const moderationStatus = useSelector((state: RootState) => state.moderationStatus.moderationStatus);
   const { photos: photosStatus } = moderationStatus;
@@ -61,8 +61,9 @@ const PhotosModeration = (): ReactElement => {
                 fieldName="url"
                 selectedValue={photosSelected[index].url}
                 modifiedValue={photosModified[index].url}
-                status={photosStatus[index].url}
+                moderationStatus={photosStatus[index].url}
                 taskType={taskType}
+                taskStatus={taskStatus}
                 selectedHeaderText={`${i18n.t("moderation.photos.photo.title")} ${index + 1}${i18n.t("moderation.task.selected")}`}
                 modifiedHeaderText={`${i18n.t("moderation.photos.photo.title")} ${index + 1}${i18n.t("moderation.task.modified")}`}
                 modifyButtonLabel={i18n.t(urlLabelKey)}
@@ -83,8 +84,9 @@ const PhotosModeration = (): ReactElement => {
                     fieldName={option}
                     selectedValue={photosSelected[index].altText[option] as string}
                     modifiedValue={photosModified[index].altText[option] as string}
-                    status={photosStatus[index].altText[option]}
+                    moderationStatus={photosStatus[index].altText[option]}
                     taskType={taskType}
+                    taskStatus={taskStatus}
                     modifyButtonLabel={`${i18n.t("moderation.photos.altText.label")} ${i18n.t(`common.inLanguage.${option}`)}`}
                     changeCallback={(evt: ChangeEvent<HTMLTextAreaElement>) => updatePhotoAltText(index, evt)}
                     statusCallback={(language, status) => updatePhotoAltTextStatus(index, language, status)}
@@ -107,8 +109,9 @@ const PhotosModeration = (): ReactElement => {
                 fieldName="permission"
                 selectedValue={photosSelected[index].permission}
                 modifiedValue={photosModified[index].permission}
-                status={photosStatus[index].permission}
+                moderationStatus={photosStatus[index].permission}
                 taskType={taskType}
+                taskStatus={taskStatus}
                 modifyButtonLabel={i18n.t("moderation.photos.permission.label")}
                 changeCallback={(evt: ChangeEvent<HTMLInputElement>) => updatePhoto(index, evt)}
                 statusCallback={(fieldName, status) => updatePhotoStatus(index, fieldName, status)}
@@ -128,8 +131,9 @@ const PhotosModeration = (): ReactElement => {
                 fieldName="source"
                 selectedValue={photosSelected[index].source}
                 modifiedValue={photosModified[index].source}
-                status={photosStatus[index].source}
+                moderationStatus={photosStatus[index].source}
                 taskType={taskType}
+                taskStatus={taskStatus}
                 modifyButtonLabel={i18n.t("moderation.photos.source.label")}
                 changeCallback={(evt: ChangeEvent<HTMLInputElement>) => updatePhoto(index, evt)}
                 statusCallback={(fieldName, status) => updatePhotoStatus(index, fieldName, status)}

@@ -6,7 +6,7 @@ import { ModerationAction, ModerationStatusAction } from "../../state/actions/ty
 import { setModerationLocation } from "../../state/actions/moderation";
 import { setModerationLocationStatus } from "../../state/actions/moderationStatus";
 import { RootState } from "../../state/reducers";
-import { ModerationStatus, TaskType, MAP_INITIAL_CENTER, MAP_INITIAL_ZOOM } from "../../types/constants";
+import { ModerationStatus, TaskStatus, TaskType, MAP_INITIAL_CENTER, MAP_INITIAL_ZOOM } from "../../types/constants";
 import ActionButton from "./ActionButton";
 import ModifyButton from "./ModifyButton";
 import styles from "./MapModeration.module.scss";
@@ -29,7 +29,7 @@ const MapModeration = ({ setMapsReady }: MapModerationProps): ReactElement => {
   const { location: locationModified } = modifiedTask;
 
   const moderationExtra = useSelector((state: RootState) => state.moderation.moderationExtra);
-  const { taskType } = moderationExtra;
+  const { taskType, taskStatus } = moderationExtra;
 
   const moderationStatus = useSelector((state: RootState) => state.moderationStatus.moderationStatus);
   const { location: locationStatus } = moderationStatus;
@@ -89,7 +89,7 @@ const MapModeration = ({ setMapsReady }: MapModerationProps): ReactElement => {
             location={locationStatus !== ModerationStatus.Edited ? locationSelected : locationModified}
             setLocation={locationStatus === ModerationStatus.Edited ? updateLocation : undefined}
             setMapReady={setMap1Ready}
-            draggableMarker={locationStatus === ModerationStatus.Edited}
+            draggableMarker={locationStatus === ModerationStatus.Edited && taskStatus !== TaskStatus.Closed}
           />
         </div>
       </div>
@@ -116,7 +116,8 @@ const MapModeration = ({ setMapsReady }: MapModerationProps): ReactElement => {
             className="gridColumn2"
             label={i18n.t("moderation.map.title")}
             fieldName="location"
-            status={initialLocationStatus || locationStatus}
+            moderationStatus={initialLocationStatus || locationStatus}
+            taskStatus={taskStatus}
             modifyCallback={updateLocationStatus}
           >
             <MapWrapper
@@ -126,10 +127,18 @@ const MapModeration = ({ setMapsReady }: MapModerationProps): ReactElement => {
               location={locationModified}
               setLocation={updateLocation}
               setMapReady={setMap2Ready}
-              draggableMarker={locationStatus !== ModerationStatus.Approved && locationStatus !== ModerationStatus.Rejected}
+              draggableMarker={
+                locationStatus !== ModerationStatus.Approved && locationStatus !== ModerationStatus.Rejected && taskStatus !== TaskStatus.Closed
+              }
             />
           </ModifyButton>
-          <ActionButton className="gridColumn3" fieldName="location" status={locationStatus} actionCallback={updateLocationStatus} />
+          <ActionButton
+            className="gridColumn3"
+            fieldName="location"
+            moderationStatus={locationStatus}
+            taskStatus={taskStatus}
+            actionCallback={updateLocationStatus}
+          />
         </div>
       </div>
     );

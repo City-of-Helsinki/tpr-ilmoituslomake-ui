@@ -196,7 +196,7 @@ export interface ModerationExtra {
   created_at: string;
   updated_at: string;
   taskType: TaskType;
-  status: TaskStatus;
+  taskStatus: TaskStatus;
   userPlaceName: string;
   userComments: string;
   userDetails: string;

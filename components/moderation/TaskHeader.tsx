@@ -6,7 +6,7 @@ import { Button, IconArrowRight, IconArrowUndo, IconCheck, IconCross, IconTrash 
 import moment from "moment";
 import { ModerationStatusAction } from "../../state/actions/types";
 import { RootState } from "../../state/reducers";
-import { DATETIME_FORMAT, ModerationStatus, NotifierType, TaskType, Toast } from "../../types/constants";
+import { DATETIME_FORMAT, ModerationStatus, NotifierType, TaskStatus, TaskType, Toast } from "../../types/constants";
 import { getDisplayName } from "../../utils/helper";
 import { defaultLocale } from "../../utils/i18n";
 import { approveModeration, deleteModeration, rejectModeration } from "../../utils/save";
@@ -39,7 +39,7 @@ const TaskHeader = ({ isModerated }: TaskHeaderProps): ReactElement => {
     photosSelected,
     created_at,
     taskType,
-    status,
+    taskStatus,
     userPlaceName,
     userComments,
     userDetails,
@@ -186,10 +186,19 @@ const TaskHeader = ({ isModerated }: TaskHeaderProps): ReactElement => {
       {(taskType === TaskType.NewPlace || taskType === TaskType.PlaceChange) && (
         <div className={styles.buttonRow}>
           {/* <Button variant="secondary">{i18n.t("moderation.button.requestTranslation")}</Button> */}
-          <Button variant="secondary" iconRight={<IconArrowUndo aria-hidden />} onClick={openRejectionConfirmation}>
+          <Button
+            variant="secondary"
+            iconRight={<IconArrowUndo aria-hidden />}
+            onClick={openRejectionConfirmation}
+            disabled={taskStatus === TaskStatus.Closed}
+          >
             {i18n.t("moderation.button.rejectChangeRequest")}
           </Button>
-          <Button iconRight={<IconArrowRight aria-hidden />} onClick={openApprovalConfirmation} disabled={!isModerated}>
+          <Button
+            iconRight={<IconArrowRight aria-hidden />}
+            onClick={openApprovalConfirmation}
+            disabled={!isModerated || taskStatus === TaskStatus.Closed}
+          >
             {i18n.t("moderation.button.saveInformation")}
           </Button>
         </div>
@@ -198,16 +207,21 @@ const TaskHeader = ({ isModerated }: TaskHeaderProps): ReactElement => {
       {(taskType === TaskType.ChangeTip || taskType === TaskType.AddTip) && (
         <div className={styles.buttonRow}>
           {/* <Button variant="secondary">{i18n.t("moderation.button.requestTranslation")}</Button> */}
-          <Button variant="secondary" iconRight={<IconArrowUndo aria-hidden />} onClick={openRejectionConfirmation}>
+          <Button
+            variant="secondary"
+            iconRight={<IconArrowUndo aria-hidden />}
+            onClick={openRejectionConfirmation}
+            disabled={taskStatus === TaskStatus.Closed}
+          >
             {i18n.t("moderation.button.rejectChangeRequest")}
           </Button>
           {pageStatus !== ModerationStatus.Edited && (
-            <Button variant="secondary" onClick={modifyTask}>
+            <Button variant="secondary" onClick={modifyTask} disabled={taskStatus === TaskStatus.Closed}>
               {i18n.t("moderation.button.openForModifying")}
             </Button>
           )}
           {pageStatus === ModerationStatus.Edited && (
-            <Button iconRight={<IconArrowRight aria-hidden />} onClick={openApprovalConfirmation}>
+            <Button iconRight={<IconArrowRight aria-hidden />} onClick={openApprovalConfirmation} disabled={taskStatus === TaskStatus.Closed}>
               {i18n.t("moderation.button.saveInformation")}
             </Button>
           )}
@@ -216,10 +230,15 @@ const TaskHeader = ({ isModerated }: TaskHeaderProps): ReactElement => {
 
       {taskType === TaskType.RemoveTip && (
         <div className={styles.buttonRow}>
-          <Button variant="secondary" iconRight={<IconArrowUndo aria-hidden />} onClick={openRejectionConfirmation}>
+          <Button
+            variant="secondary"
+            iconRight={<IconArrowUndo aria-hidden />}
+            onClick={openRejectionConfirmation}
+            disabled={taskStatus === TaskStatus.Closed}
+          >
             {i18n.t("moderation.button.rejectChangeRequest")}
           </Button>
-          <Button iconRight={<IconTrash aria-hidden />} onClick={openDeletionConfirmation}>
+          <Button iconRight={<IconTrash aria-hidden />} onClick={openDeletionConfirmation} disabled={taskStatus === TaskStatus.Closed}>
             {i18n.t("moderation.button.removePlace")}
           </Button>
         </div>
@@ -238,7 +257,7 @@ const TaskHeader = ({ isModerated }: TaskHeaderProps): ReactElement => {
         <div>
           <div className={styles.bold}>{i18n.t("moderation.taskHeader.status")}</div>
           <div>
-            <TaskStatusLabel status={status} />
+            <TaskStatusLabel status={taskStatus} />
           </div>
         </div>
         <div>

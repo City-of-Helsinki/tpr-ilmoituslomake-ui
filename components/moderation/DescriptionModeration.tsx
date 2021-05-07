@@ -32,7 +32,7 @@ const DescriptionModeration = (): ReactElement => {
   } = modifiedTask;
 
   const moderationExtra = useSelector((state: RootState) => state.moderation.moderationExtra);
-  const { taskType } = moderationExtra;
+  const { taskType, taskStatus } = moderationExtra;
 
   const moderationStatus = useSelector((state: RootState) => state.moderationStatus.moderationStatus);
   const {
@@ -76,8 +76,9 @@ const DescriptionModeration = (): ReactElement => {
             fieldName={option}
             selectedValue={placeNameSelected[option] as string}
             modifiedValue={placeNameModified[option] as string}
-            status={placeNameStatus[option]}
+            moderationStatus={placeNameStatus[option]}
             taskType={taskType}
+            taskStatus={taskStatus}
             selectedHeaderText={index === 0 ? `${i18n.t("moderation.description.placeName.title")}${i18n.t("moderation.task.selected")}` : undefined}
             modifiedHeaderText={index === 0 ? `${i18n.t("moderation.description.placeName.title")}${i18n.t("moderation.task.modified")}` : undefined}
             modifyButtonLabel={`${i18n.t("moderation.description.placeName.label")} ${i18n.t(`common.inLanguage.${option}`)}`}
@@ -102,8 +103,9 @@ const DescriptionModeration = (): ReactElement => {
             fieldName={option}
             selectedValue={shortDescSelected[option] as string}
             modifiedValue={shortDescModified[option] as string}
-            status={shortDescStatus[option]}
+            moderationStatus={shortDescStatus[option]}
             taskType={taskType}
+            taskStatus={taskStatus}
             selectedHeaderText={
               index === 0 ? `${i18n.t("moderation.description.shortDescription.title")}${i18n.t("moderation.task.selected")}` : undefined
             }
@@ -133,8 +135,9 @@ const DescriptionModeration = (): ReactElement => {
             fieldName={option}
             selectedValue={longDescSelected[option] as string}
             modifiedValue={longDescModified[option] as string}
-            status={longDescStatus[option]}
+            moderationStatus={longDescStatus[option]}
             taskType={taskType}
+            taskStatus={taskStatus}
             selectedHeaderText={
               index === 0 ? `${i18n.t("moderation.description.longDescription.title")}${i18n.t("moderation.task.selected")}` : undefined
             }

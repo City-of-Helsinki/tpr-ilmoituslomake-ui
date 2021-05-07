@@ -31,7 +31,7 @@ const LocationModeration = (): ReactElement => {
   } = modifiedTask;
 
   const moderationExtra = useSelector((state: RootState) => state.moderation.moderationExtra);
-  const { taskType } = moderationExtra;
+  const { taskType, taskStatus } = moderationExtra;
 
   // Use the street status for all the fields
   const moderationStatus = useSelector((state: RootState) => state.moderationStatus.moderationStatus);
@@ -59,8 +59,9 @@ const LocationModeration = (): ReactElement => {
           fieldName="fi"
           selectedValue={streetFiSelected}
           modifiedValue={streetFiModified}
-          status={addressFiStatus}
+          moderationStatus={addressFiStatus}
           taskType={taskType}
+          taskStatus={taskStatus}
           selectedHeaderText={`${i18n.t("moderation.location.address")} ${i18n.t("common.inLanguage.fi")}${i18n.t("moderation.task.selected")}`}
           modifiedHeaderText={`${i18n.t("moderation.location.address")} ${i18n.t("common.inLanguage.fi")}${i18n.t("moderation.task.modified")}`}
           modifyButtonLabel={`${i18n.t("moderation.location.address")} ${i18n.t("common.inLanguage.fi")}`}
@@ -80,8 +81,9 @@ const LocationModeration = (): ReactElement => {
           fieldName="fi"
           selectedValue={postalCodeFiSelected}
           modifiedValue={postalCodeFiModified}
-          status={addressFiStatus}
+          moderationStatus={addressFiStatus}
           taskType={taskType}
+          taskStatus={taskStatus}
           modifyButtonLabel={`${i18n.t("moderation.location.address")} ${i18n.t("common.inLanguage.fi")}`}
           modifyButtonHidden
           actionButtonHidden
@@ -101,8 +103,9 @@ const LocationModeration = (): ReactElement => {
           fieldName="fi"
           selectedValue={postOfficeFiSelected}
           modifiedValue={postOfficeFiModified}
-          status={addressFiStatus}
+          moderationStatus={addressFiStatus}
           taskType={taskType}
+          taskStatus={taskStatus}
           modifyButtonLabel={`${i18n.t("moderation.location.address")} ${i18n.t("common.inLanguage.fi")}`}
           modifyButtonHidden
           actionButtonHidden
@@ -122,8 +125,9 @@ const LocationModeration = (): ReactElement => {
           fieldName="fi"
           selectedValue={neighborhoodFiSelected}
           modifiedValue={neighborhoodFiModified}
-          status={addressFiStatus}
+          moderationStatus={addressFiStatus}
           taskType={taskType}
+          taskStatus={taskStatus}
           modifyButtonLabel={`${i18n.t("moderation.location.address")} ${i18n.t("common.inLanguage.fi")}`}
           modifyButtonHidden
           actionButtonHidden
@@ -146,8 +150,9 @@ const LocationModeration = (): ReactElement => {
           fieldName="sv"
           selectedValue={streetSvSelected}
           modifiedValue={streetSvModified}
-          status={addressSvStatus}
+          moderationStatus={addressSvStatus}
           taskType={taskType}
+          taskStatus={taskStatus}
           selectedHeaderText={`${i18n.t("moderation.location.address")} ${i18n.t("common.inLanguage.sv")}${i18n.t("moderation.task.selected")}`}
           modifiedHeaderText={`${i18n.t("moderation.location.address")} ${i18n.t("common.inLanguage.sv")}${i18n.t("moderation.task.modified")}`}
           modifyButtonLabel={`${i18n.t("moderation.location.address")} ${i18n.t("common.inLanguage.sv")}`}
@@ -166,8 +171,9 @@ const LocationModeration = (): ReactElement => {
           fieldName="sv"
           selectedValue={postalCodeSvSelected}
           modifiedValue={postalCodeSvModified}
-          status={addressSvStatus}
+          moderationStatus={addressSvStatus}
           taskType={taskType}
+          taskStatus={taskStatus}
           modifyButtonLabel={`${i18n.t("moderation.location.address")} ${i18n.t("common.inLanguage.sv")}`}
           modifyButtonHidden
           actionButtonHidden
@@ -186,8 +192,9 @@ const LocationModeration = (): ReactElement => {
           fieldName="sv"
           selectedValue={postOfficeSvSelected}
           modifiedValue={postOfficeSvModified}
-          status={addressSvStatus}
+          moderationStatus={addressSvStatus}
           taskType={taskType}
+          taskStatus={taskStatus}
           modifyButtonLabel={`${i18n.t("moderation.location.address")} ${i18n.t("common.inLanguage.sv")}`}
           modifyButtonHidden
           actionButtonHidden
@@ -206,8 +213,9 @@ const LocationModeration = (): ReactElement => {
           fieldName="sv"
           selectedValue={neighborhoodSvSelected}
           modifiedValue={neighborhoodSvModified}
-          status={addressSvStatus}
+          moderationStatus={addressSvStatus}
           taskType={taskType}
+          taskStatus={taskStatus}
           modifyButtonLabel={`${i18n.t("moderation.location.address")} ${i18n.t("common.inLanguage.sv")}`}
           modifyButtonHidden
           actionButtonHidden

@@ -276,7 +276,7 @@ export const INITIAL_MODERATION_EXTRA = {
   created_at: "",
   updated_at: "",
   taskType: TaskType.Unknown,
-  status: TaskStatus.Unknown,
+  taskStatus: TaskStatus.Unknown,
   userPlaceName: "",
   userComments: "",
   userDetails: "",

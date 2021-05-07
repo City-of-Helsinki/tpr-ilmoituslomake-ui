@@ -21,7 +21,7 @@ const LinksModeration = (): ReactElement => {
   const { website: websiteModified } = modifiedTask;
 
   const moderationExtra = useSelector((state: RootState) => state.moderation.moderationExtra);
-  const { taskType } = moderationExtra;
+  const { taskType, taskStatus } = moderationExtra;
 
   const moderationStatus = useSelector((state: RootState) => state.moderationStatus.moderationStatus);
   const { website: websiteStatus } = moderationStatus;
@@ -44,8 +44,9 @@ const LinksModeration = (): ReactElement => {
             fieldName={option}
             selectedValue={websiteSelected[option] as string}
             modifiedValue={websiteModified[option] as string}
-            status={websiteStatus[option]}
+            moderationStatus={websiteStatus[option]}
             taskType={taskType}
+            taskStatus={taskStatus}
             selectedHeaderText={index === 0 ? `${i18n.t("moderation.links.website.label")}${i18n.t("moderation.task.selected")}` : undefined}
             modifiedHeaderText={index === 0 ? `${i18n.t("moderation.links.website.label")}${i18n.t("moderation.task.modified")}` : undefined}
             modifyButtonLabel={`${i18n.t("moderation.links.website.label")} ${i18n.t(`common.inLanguage.${option}`)}`}

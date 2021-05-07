@@ -9,12 +9,13 @@ interface CollapsibleProps {
   section: number;
   title: string;
   taskType: TaskType;
+  taskStatus: TaskStatus;
   isModerated: boolean;
   forceExpanded?: boolean;
   children: ReactNode;
 }
 
-const Collapsible = ({ section, title, taskType, isModerated, forceExpanded, children }: CollapsibleProps): ReactElement => {
+const Collapsible = ({ section, title, taskType, taskStatus, isModerated, forceExpanded, children }: CollapsibleProps): ReactElement => {
   const i18n = useI18n();
   const [expanded, setExpanded] = useState<boolean>(false);
 
@@ -39,7 +40,7 @@ const Collapsible = ({ section, title, taskType, isModerated, forceExpanded, chi
         </div>
         <div className={styles.status}>
           {(taskType === TaskType.NewPlace || taskType === TaskType.PlaceChange) && (
-            <TaskStatusLabel status={isModerated ? TaskStatus.Closed : TaskStatus.InProgress} />
+            <TaskStatusLabel status={isModerated || taskStatus === TaskStatus.Closed ? TaskStatus.Closed : TaskStatus.InProgress} />
           )}
         </div>
         <div className={styles.button}>

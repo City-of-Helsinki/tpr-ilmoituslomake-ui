@@ -30,7 +30,7 @@ const ModerationTaskDetail = (): ReactElement => {
   const modifiedTaskId = useSelector((state: RootState) => state.moderation.modifiedTaskId);
   const moderationStatus = useSelector((state: RootState) => state.moderationStatus.moderationStatus);
   const moderationExtra = useSelector((state: RootState) => state.moderation.moderationExtra);
-  const { photosSelected, taskType } = moderationExtra;
+  const { photosSelected, taskType, taskStatus } = moderationExtra;
 
   // The maps only initialise properly when not hidden, so use a flag to only collapse the container after the maps are ready
   const [mapsReady, setMapsReady] = useState<boolean>(false);
@@ -102,7 +102,13 @@ const ModerationTaskDetail = (): ReactElement => {
         <main id="content">
           <TaskHeader isModerated={isSectionModerated(1) && isSectionModerated(2) && isSectionModerated(3)} />
           <h2 className="moderation">{i18n.t("moderation.task.title")}</h2>
-          <Collapsible section={1} title={i18n.t("moderation.task.basic")} taskType={taskType} isModerated={isSectionModerated(1)}>
+          <Collapsible
+            section={1}
+            title={i18n.t("moderation.task.basic")}
+            taskType={taskType}
+            taskStatus={taskStatus}
+            isModerated={isSectionModerated(1)}
+          >
             <DescriptionModeration />
             <TagsModeration />
           </Collapsible>
@@ -110,6 +116,7 @@ const ModerationTaskDetail = (): ReactElement => {
             section={2}
             title={i18n.t("moderation.task.contact")}
             taskType={taskType}
+            taskStatus={taskStatus}
             isModerated={isSectionModerated(2)}
             forceExpanded={!mapsReady}
           >
@@ -118,7 +125,13 @@ const ModerationTaskDetail = (): ReactElement => {
             <ContactModeration />
             <LinksModeration />
           </Collapsible>
-          <Collapsible section={3} title={i18n.t("moderation.task.photos")} taskType={taskType} isModerated={isSectionModerated(3)}>
+          <Collapsible
+            section={3}
+            title={i18n.t("moderation.task.photos")}
+            taskType={taskType}
+            taskStatus={taskStatus}
+            isModerated={isSectionModerated(3)}
+          >
             <PhotosModeration />
           </Collapsible>
         </main>
@@ -173,7 +186,7 @@ export const getServerSideProps: GetServerSideProps = async ({ req, resolvedUrl,
             created_at: taskResult.created_at,
             updated_at: taskResult.updated_at,
             taskType,
-            status: getTaskStatus(taskResult.status),
+            taskStatus: getTaskStatus(taskResult.status),
             userPlaceName: taskResult.user_place_name,
             userComments: taskResult.user_comments,
             userDetails: taskResult.user_details,

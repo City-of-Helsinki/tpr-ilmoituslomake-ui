@@ -1,31 +1,44 @@
 import React, { ReactElement, ReactNode } from "react";
 import { useI18n } from "next-localization";
 import { Button, IconPen } from "hds-react";
-import { ModerationStatus } from "../../types/constants";
+import { ModerationStatus, TaskStatus } from "../../types/constants";
 import styles from "./ModifyButton.module.scss";
 
 interface ModifyButtonProps {
   className?: string;
   label: string;
   fieldName: string;
-  status: ModerationStatus;
+  moderationStatus: ModerationStatus;
+  taskStatus: TaskStatus;
   modifyCallback: (fieldName: string, status: ModerationStatus) => void;
   hidden?: boolean;
   children: ReactNode;
 }
 
-const ModifyButton = ({ className, label, fieldName, status, modifyCallback, hidden, children }: ModifyButtonProps): ReactElement => {
+const ModifyButton = ({
+  className,
+  label,
+  fieldName,
+  moderationStatus,
+  taskStatus,
+  modifyCallback,
+  hidden,
+  children,
+}: ModifyButtonProps): ReactElement => {
   const i18n = useI18n();
 
   return (
     <div className={className}>
-      {status === ModerationStatus.Unknown && !hidden && (
-        <Button className={styles.gridButton} variant="secondary" onClick={() => modifyCallback(fieldName, ModerationStatus.Edited)}>{`${i18n.t(
-          "moderation.button.modify"
-        )} ${label.toLowerCase()}`}</Button>
+      {moderationStatus === ModerationStatus.Unknown && !hidden && (
+        <Button
+          className={styles.gridButton}
+          variant="secondary"
+          onClick={() => modifyCallback(fieldName, ModerationStatus.Edited)}
+          disabled={taskStatus === TaskStatus.Closed}
+        >{`${i18n.t("moderation.button.modify")} ${label.toLowerCase()}`}</Button>
       )}
-      {status === ModerationStatus.Edited && children}
-      {(status === ModerationStatus.Approved || status === ModerationStatus.Rejected) && (
+      {moderationStatus === ModerationStatus.Edited && children}
+      {(moderationStatus === ModerationStatus.Approved || moderationStatus === ModerationStatus.Rejected) && (
         <>
           {children}
           <Button
@@ -33,6 +46,7 @@ const ModifyButton = ({ className, label, fieldName, status, modifyCallback, hid
             size="small"
             iconLeft={<IconPen aria-hidden />}
             onClick={() => modifyCallback(fieldName, ModerationStatus.Edited)}
+            disabled={taskStatus === TaskStatus.Closed}
           >
             {i18n.t("moderation.button.modify")}
           </Button>
