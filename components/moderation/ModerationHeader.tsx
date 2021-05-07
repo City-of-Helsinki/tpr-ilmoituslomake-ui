@@ -29,6 +29,7 @@ const ModerationHeader = (props: ModerationHeaderProps): ReactElement => {
         router.push("/moderation/task");
         break;
       }
+      /*
       case 4: {
         router.push("/moderation/organisation");
         break;
@@ -37,6 +38,7 @@ const ModerationHeader = (props: ModerationHeaderProps): ReactElement => {
         router.push("/moderation/translation");
         break;
       }
+      */
       default: {
         // Nothing to do
       }
@@ -64,6 +66,7 @@ const ModerationHeader = (props: ModerationHeaderProps): ReactElement => {
           active={currentPage === 3}
           onClick={() => changePage(3)}
         />
+        {/*
         <Navigation.Item
           className={styles.navigationItem}
           label={`${i18n.t("moderation.page.organisation")}`}
@@ -76,6 +79,7 @@ const ModerationHeader = (props: ModerationHeaderProps): ReactElement => {
           active={currentPage === 5}
           onClick={() => changePage(5)}
         />
+        */}
       </Navigation.Row>
     </Header>
   );

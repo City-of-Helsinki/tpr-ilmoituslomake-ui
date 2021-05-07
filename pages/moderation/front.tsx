@@ -27,6 +27,7 @@ const ModerationFront = (): ReactElement => {
         <Intro />
         <NewTasks />
 
+        {/*
         <h2 className="moderation">{i18n.t("moderation.organisationNotice.title")}</h2>
         <Notice
           icon={<IconGroup size="xl" aria-hidden />}
@@ -52,6 +53,7 @@ const ModerationFront = (): ReactElement => {
             </Link>
           }
         />
+        */}
       </main>
     </Layout>
   );
