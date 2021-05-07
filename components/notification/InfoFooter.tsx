@@ -2,7 +2,7 @@ import React, { ReactElement } from "react";
 import { useSelector } from "react-redux";
 import Link from "next/link";
 import { useI18n } from "next-localization";
-import { Button, IconLinkExternal } from "hds-react";
+import { Button } from "hds-react";
 import { RootState } from "../../state/reducers";
 import styles from "./InfoFooter.module.scss";
 
@@ -24,9 +24,7 @@ const InfoFooter = (): ReactElement => {
       {!currentUser?.authenticated && (
         <div className={styles.flexButton}>
           <Link href={`/tip/${notificationId}`}>
-            <Button variant="secondary" iconRight={<IconLinkExternal aria-hidden />}>
-              {i18n.t("notification.button.suggestChange")}
-            </Button>
+            <Button variant="secondary">{i18n.t("notification.button.suggestChange")}</Button>
           </Link>
         </div>
       )}
@@ -40,9 +38,7 @@ const InfoFooter = (): ReactElement => {
       */}
       <div className={styles.flexButton}>
         <Link href={`/tip/${notificationId}`}>
-          <Button variant="secondary" iconRight={<IconLinkExternal aria-hidden />}>
-            {i18n.t("notification.button.notifyClosingDown")}
-          </Button>
+          <Button variant="secondary">{i18n.t("notification.button.notifyClosingDown")}</Button>
         </Link>
       </div>
       <div className="flexSpace" />
