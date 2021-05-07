@@ -9,7 +9,7 @@ import { RootState } from "../../state/reducers";
 import { DATETIME_FORMAT, ModerationStatus, NotifierType, TaskStatus, TaskType, Toast } from "../../types/constants";
 import { getDisplayName } from "../../utils/helper";
 import { defaultLocale } from "../../utils/i18n";
-import { approveModeration, deleteModeration, rejectModeration } from "../../utils/save";
+import { approveModeration, deleteModeration, rejectModeration } from "../../utils/moderation";
 import setModerationStatus from "../../utils/status";
 import ModalConfirmation from "../common/ModalConfirmation";
 import ToastNotification from "../common/ToastNotification";
