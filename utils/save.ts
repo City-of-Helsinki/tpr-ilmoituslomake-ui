@@ -149,7 +149,7 @@ export const saveTip = async (
   }
 };
 
-export const saveModeration = async (
+export const approveModeration = async (
   currentUser: User | undefined,
   modifiedTaskId: number,
   modifiedTask: NotificationSchema,

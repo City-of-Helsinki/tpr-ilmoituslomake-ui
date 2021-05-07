@@ -385,6 +385,7 @@
       "allPlaces": "Kaikki kohteet",
       "showAllRequests": "Näytä kaikki tehtävät",
       "requestTranslation": "Pyydä käännös",
+      "approveChangeRequest": "Hyväksy muutospyyntö",
       "rejectChangeRequest": "Hylkää muutospyyntö",
       "openForModifying": "Avaa muokattavaksi",
       "removePlace": "Poista kohde",
@@ -420,6 +421,7 @@
       "fieldOther": "Tarkista tieto"
     },
     "confirmation": {
+      "approveChangeRequest": "Haluatko varmasti tallentaa ja hyväksyä muutospyynnön?",
       "rejectChangeRequest": "Haluatko varmasti hylätä muutospyynnön?",
       "removePlace": "Haluatko varmasti poistaa kohteen?"
     },

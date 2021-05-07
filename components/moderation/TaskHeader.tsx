@@ -9,7 +9,7 @@ import { RootState } from "../../state/reducers";
 import { DATETIME_FORMAT, ModerationStatus, NotifierType, TaskType, Toast } from "../../types/constants";
 import { getDisplayName } from "../../utils/helper";
 import { defaultLocale } from "../../utils/i18n";
-import { deleteModeration, rejectModeration, saveModeration } from "../../utils/save";
+import { approveModeration, deleteModeration, rejectModeration } from "../../utils/save";
 import setModerationStatus from "../../utils/status";
 import ModalConfirmation from "../common/ModalConfirmation";
 import ToastNotification from "../common/ToastNotification";
@@ -49,11 +49,20 @@ const TaskHeader = ({ isModerated }: TaskHeaderProps): ReactElement => {
   const moderationStatus = useSelector((state: RootState) => state.moderationStatus.moderationStatus);
 
   const [toast, setToast] = useState<Toast>();
+  const [confirmApproval, setConfirmApproval] = useState(false);
   const [confirmRejection, setConfirmRejection] = useState(false);
   const [confirmDeletion, setConfirmDeletion] = useState(false);
 
   const modifyTask = () => {
     setModerationStatus(photosSelected, dispatchStatus);
+  };
+
+  const openApprovalConfirmation = () => {
+    setConfirmApproval(true);
+  };
+
+  const closeApprovalConfirmation = () => {
+    setConfirmApproval(false);
   };
 
   const openRejectionConfirmation = () => {
@@ -76,7 +85,9 @@ const TaskHeader = ({ isModerated }: TaskHeaderProps): ReactElement => {
     return statusToCheck === ModerationStatus.Approved ? modifiedValue : selectedValue;
   };
 
-  const saveTask = () => {
+  const approveTask = () => {
+    closeApprovalConfirmation();
+
     // Save the moderated data for new or changed places using approved values only
     // For tip change requests just use the modified values
     // TODO - handle images
@@ -152,7 +163,7 @@ const TaskHeader = ({ isModerated }: TaskHeaderProps): ReactElement => {
           }
         : modifiedTask;
 
-    saveModeration(currentUser, modifiedTaskId, approvedTask, moderationExtra, router, setToast);
+    approveModeration(currentUser, modifiedTaskId, approvedTask, moderationExtra, router, setToast);
   };
 
   const rejectTask = () => {
@@ -178,7 +189,7 @@ const TaskHeader = ({ isModerated }: TaskHeaderProps): ReactElement => {
           <Button variant="secondary" iconRight={<IconArrowUndo aria-hidden />} onClick={openRejectionConfirmation}>
             {i18n.t("moderation.button.rejectChangeRequest")}
           </Button>
-          <Button iconRight={<IconArrowRight aria-hidden />} onClick={saveTask} disabled={!isModerated}>
+          <Button iconRight={<IconArrowRight aria-hidden />} onClick={openApprovalConfirmation} disabled={!isModerated}>
             {i18n.t("moderation.button.saveInformation")}
           </Button>
         </div>
@@ -196,7 +207,7 @@ const TaskHeader = ({ isModerated }: TaskHeaderProps): ReactElement => {
             </Button>
           )}
           {pageStatus === ModerationStatus.Edited && (
-            <Button iconRight={<IconArrowRight aria-hidden />} onClick={saveTask}>
+            <Button iconRight={<IconArrowRight aria-hidden />} onClick={openApprovalConfirmation}>
               {i18n.t("moderation.button.saveInformation")}
             </Button>
           )}
@@ -276,6 +287,18 @@ const TaskHeader = ({ isModerated }: TaskHeaderProps): ReactElement => {
           {(taskType === TaskType.NewPlace || taskType === TaskType.PlaceChange) && <div>{comments}</div>}
         </div>
       </div>
+
+      {confirmApproval && (
+        <ModalConfirmation
+          open={confirmApproval}
+          titleKey="moderation.button.approveChangeRequest"
+          messageKey="moderation.confirmation.approveChangeRequest"
+          cancelKey="moderation.button.cancel"
+          confirmKey="moderation.button.approve"
+          closeCallback={closeApprovalConfirmation}
+          confirmCallback={approveTask}
+        />
+      )}
 
       {confirmRejection && (
         <ModalConfirmation
