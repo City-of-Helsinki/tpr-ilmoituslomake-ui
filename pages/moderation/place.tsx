@@ -7,7 +7,7 @@ import { initStore } from "../../state/store";
 import { RootState } from "../../state/reducers";
 import { CLEAR_STATE } from "../../types/constants";
 import i18nLoader from "../../utils/i18n";
-import { checkUser, redirectToLogin } from "../../utils/serverside";
+import { checkUser, getTags, redirectToLogin } from "../../utils/serverside";
 import Layout from "../../components/common/Layout";
 import ModerationHeader from "../../components/moderation/ModerationHeader";
 import PlaceSearch from "../../components/moderation/PlaceSearch";
@@ -16,7 +16,7 @@ import PlaceResults from "../../components/moderation/PlaceResults";
 const ModerationPlace = (): ReactElement => {
   const i18n = useI18n();
 
-  const placeResults = useSelector((state: RootState) => state.notification.placeResults);
+  const placeResults = useSelector((state: RootState) => state.moderation.placeResults);
 
   return (
     <Layout>
@@ -48,6 +48,8 @@ export const getServerSideProps: GetServerSideProps = async ({ req, resolvedUrl,
   if (user && user.authenticated) {
     initialReduxState.general.user = user;
   }
+
+  initialReduxState.moderation.moderationExtra.tagOptions = await getTags();
 
   return {
     props: {

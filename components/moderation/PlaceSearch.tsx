@@ -1,36 +1,43 @@
 import React, { Dispatch, ChangeEvent, ReactElement } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import Link from "next/link";
+import { useRouter } from "next/router";
 import { useI18n } from "next-localization";
 import { Button, Checkbox, Combobox, IconPlus, Select, SelectionGroup, TextInput } from "hds-react";
+import moment from "moment";
 import { ModerationAction } from "../../state/actions/types";
-import { setModerationPlaceSearch, clearModerationPlaceSearch } from "../../state/actions/moderation";
+import { setModerationPlaceSearch, clearModerationPlaceSearch, setModerationPlaceResults } from "../../state/actions/moderation";
 import { RootState } from "../../state/reducers";
-import { OptionType } from "../../types/general";
+import { ModerationPlaceResult, OptionType, TagOption } from "../../types/general";
+import { defaultLocale } from "../../utils/i18n";
+import getOrigin from "../../utils/request";
 import styles from "./PlaceSearch.module.scss";
-
-type OptionTypeWithoutId = {
-  label: string;
-};
 
 const PlaceSearch = (): ReactElement => {
   const i18n = useI18n();
   const dispatch = useDispatch<Dispatch<ModerationAction>>();
+  const router = useRouter();
 
   const placeSearch = useSelector((state: RootState) => state.moderation.placeSearch);
-  const { placeName, language, address, district, tag, comment, publishPermission } = placeSearch;
+  const { placeName, language, address, district, ontologyIds, comment, publishPermission } = placeSearch;
+
+  const moderationExtra = useSelector((state: RootState) => state.moderation.moderationExtra);
+  const { tagOptions = [] } = moderationExtra;
 
   const languageOptions = [
+    { id: "", label: "" },
     { id: "fi", label: i18n.t("moderation.placeSearch.language.fi") },
     { id: "sv", label: i18n.t("moderation.placeSearch.language.sv") },
     { id: "en", label: i18n.t("moderation.placeSearch.language.en") },
   ];
-  const districtOptions = [{ label: "Test" }];
-  const tagOptions = [{ label: "Test" }];
   const publishPermissionOptions = ["yes", "no"];
 
-  const convertValue = (value: string | undefined): OptionTypeWithoutId | undefined => ({ label: value ?? "" });
   const convertValueWithId = (value: string | undefined): OptionType | undefined => languageOptions.find((l) => l.id === value);
+
+  const convertOptions = (options: TagOption[]): OptionType[] =>
+    options.map((tag) => ({ id: tag.id, label: tag.ontologyword[router.locale || defaultLocale] as string }));
+
+  const convertValues = (values: number[]): OptionType[] => convertOptions(tagOptions.filter((tag) => values.includes(tag.id)));
 
   const updateSearchText = (evt: ChangeEvent<HTMLInputElement>) => {
     dispatch(setModerationPlaceSearch({ ...placeSearch, [evt.target.name]: evt.target.value }));
@@ -40,27 +47,58 @@ const PlaceSearch = (): ReactElement => {
     dispatch(setModerationPlaceSearch({ ...placeSearch, language: selected ? (selected.id as string) : "" }));
   };
 
-  const updateSearchDistrict = (selected: OptionTypeWithoutId) => {
-    dispatch(setModerationPlaceSearch({ ...placeSearch, district: selected ? selected.label : "" }));
-  };
-
-  const updateSearchTag = (selected: OptionTypeWithoutId) => {
-    dispatch(setModerationPlaceSearch({ ...placeSearch, tag: selected ? selected.label : "" }));
+  const updateSearchTags = (selected: OptionType[]) => {
+    dispatch(setModerationPlaceSearch({ ...placeSearch, ontologyIds: selected.map((s) => s.id as number) }));
   };
 
   const updatePublishPermission = (evt: ChangeEvent<HTMLInputElement>) => {
     dispatch(
       setModerationPlaceSearch({
         ...placeSearch,
-        publishPermission: [...publishPermission.filter((o) => o !== evt.target.value), ...(evt.target.checked ? [evt.target.value] : [])],
+        publishPermission: evt.target.checked ? evt.target.value : undefined,
       })
     );
   };
 
-  const isChecked = (option: string) => publishPermission.some((o) => o === option);
+  const isChecked = (option: string) => !!publishPermission && publishPermission === option;
 
-  const searchPlaces = () => {
-    console.log("TODO");
+  const searchPlaces = async () => {
+    const searchObject = {
+      ...(placeName.length > 0 && { search_name__contains: placeName }),
+      ...(address.length > 0 && { search_address__contains: address }),
+      ...(ontologyIds.length > 0 && { data__ontology_ids__contains: ontologyIds }),
+      ...(comment.length > 0 && { search_comments__contains: comment }),
+      ...(publishPermission && { published: publishPermission === "yes" }),
+      ...(district.length > 0 && { search_neighborhood: district }),
+      ...(language.length > 0 && { lang: language }),
+    };
+
+    const placeResponse = await fetch(`${getOrigin(router)}/api/moderation/search/?q=${encodeURIComponent(JSON.stringify(searchObject))}`);
+    if (placeResponse.ok) {
+      const placeResult = await (placeResponse.json() as Promise<{ count: number; next: string; results: ModerationPlaceResult[] }>);
+
+      console.log("PLACE RESPONSE", placeResult);
+
+      if (placeResult && placeResult.results && placeResult.results.length > 0) {
+        const { results, count, next } = placeResult;
+
+        // Parse the date strings to date objects
+        dispatch(
+          setModerationPlaceResults({
+            results: results.map((result) => {
+              return {
+                ...result,
+                updated: moment(result.updated_at).toDate(),
+              };
+            }),
+            count,
+            next,
+          })
+        );
+      } else {
+        dispatch(setModerationPlaceResults({ results: [], count: 0 }));
+      }
+    }
   };
 
   const clearPlaceSearch = () => {
@@ -94,7 +132,7 @@ const PlaceSearch = (): ReactElement => {
           id="language"
           className={styles.gridColumn2}
           options={languageOptions}
-          defaultValue={convertValueWithId(language)}
+          value={convertValueWithId(language)}
           onChange={updateSearchLanguage}
           label={i18n.t("moderation.placeSearch.language.label")}
           selectedItemRemoveButtonAriaLabel={i18n.t("moderation.button.remove")}
@@ -117,6 +155,7 @@ const PlaceSearch = (): ReactElement => {
             />
           ))}
         </SelectionGroup>
+
         <TextInput
           id="address"
           className={styles.gridColumn1}
@@ -125,37 +164,38 @@ const PlaceSearch = (): ReactElement => {
           value={address}
           onChange={updateSearchText}
         />
-        <Combobox
+        <TextInput
           id="district"
           className={styles.gridColumn2}
-          options={districtOptions}
-          defaultValue={convertValue(district)}
-          onChange={updateSearchDistrict}
           label={i18n.t("moderation.placeSearch.district.label")}
-          toggleButtonAriaLabel={i18n.t("moderation.button.toggleMenu")}
-          selectedItemRemoveButtonAriaLabel={i18n.t("moderation.button.remove")}
-          clearButtonAriaLabel={i18n.t("moderation.button.clearAllSelections")}
+          name="district"
+          value={district}
+          onChange={updateSearchText}
         />
+
         <Combobox
           id="tag"
           className={styles.gridColumn1}
-          options={tagOptions}
-          defaultValue={convertValue(tag)}
-          onChange={updateSearchTag}
+          // @ts-ignore: Erroneous error that the type for options should be OptionType[][]
+          options={convertOptions(tagOptions)}
+          value={convertValues(ontologyIds)}
+          onChange={updateSearchTags}
           label={i18n.t("moderation.placeSearch.tag.label")}
-          toggleButtonAriaLabel={i18n.t("moderation.button.toggleMenu")}
-          selectedItemRemoveButtonAriaLabel={i18n.t("moderation.button.remove")}
-          clearButtonAriaLabel={i18n.t("moderation.button.clearAllSelections")}
+          toggleButtonAriaLabel={i18n.t("notification.button.toggleMenu")}
+          selectedItemRemoveButtonAriaLabel={i18n.t("notification.button.remove")}
+          clearButtonAriaLabel={i18n.t("notification.button.clearAllSelections")}
+          multiselect
         />
         <TextInput
           id="comment"
-          className={styles.gridColumn1}
+          className={styles.gridColumn2}
           label={i18n.t("moderation.placeSearch.comment.label")}
           name="comment"
           value={comment}
           onChange={updateSearchText}
         />
-        <div className={styles.gridColumn1}>
+
+        <div className={`${styles.gridColumn1} ${styles.searchButtons}`}>
           <Button onClick={searchPlaces}>{i18n.t("moderation.button.search")}</Button>
           <Button variant="secondary" onClick={clearPlaceSearch}>
             {i18n.t("moderation.button.clear")}

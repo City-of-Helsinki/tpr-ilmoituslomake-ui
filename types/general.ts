@@ -118,9 +118,23 @@ export interface ModerationPlaceSearch {
   language: string;
   address: string;
   district: string;
-  tag: string;
+  ontologyIds: number[];
   comment: string;
-  publishPermission: string[];
+  publishPermission?: string;
+}
+
+export interface ModerationPlaceResult {
+  id: number;
+  data: NotificationSchema;
+  published: boolean;
+  updated_at: string;
+  updated: Date;
+}
+
+export interface ModerationPlaceResults {
+  results: ModerationPlaceResult[];
+  count: number;
+  next?: string;
 }
 
 export interface TaskSearch {

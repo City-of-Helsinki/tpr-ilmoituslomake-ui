@@ -8,6 +8,7 @@ import {
   ChangeRequestSchema,
   ChangeRequestValidationSchema,
   ModerationPlaceSearch,
+  ModerationPlaceResults,
   TaskSearch,
   ModerationTodoResult,
   ModerationExtra,
@@ -38,10 +39,9 @@ export interface NotificationValidationState {
   tipValidation: ChangeRequestValidationSchema;
 }
 
-// TODO - add place result type
 export interface ModerationState {
   placeSearch: ModerationPlaceSearch;
-  placeResults: string[];
+  placeResults: ModerationPlaceResults;
   taskSearch: TaskSearch;
   taskResults: ModerationTodoResult[];
   selectedTaskId: number;

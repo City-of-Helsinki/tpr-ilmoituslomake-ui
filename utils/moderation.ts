@@ -73,7 +73,7 @@ export const approveModeration = async (
         console.log("APPROVE RESPONSE", approveResult);
 
         if (approveResult.id) {
-          setToast(Toast.SaveSucceeded);
+          // setToast(Toast.SaveSucceeded);
 
           // TODO - handle page transition
           // router.push(`/moderation/task`);
@@ -145,7 +145,7 @@ export const rejectModeration = async (
         },
       });
       if (rejectResponse.ok) {
-        setToast(Toast.SaveSucceeded);
+        // setToast(Toast.SaveSucceeded);
 
         // TODO - handle response
         const rejectResult = await rejectResponse.text();
@@ -216,7 +216,7 @@ export const deleteModeration = async (
         },
       });
       if (deleteResponse.ok) {
-        setToast(Toast.SaveSucceeded);
+        // setToast(Toast.SaveSucceeded);
 
         // TODO - handle response
         const deleteResult = await deleteResponse.text();

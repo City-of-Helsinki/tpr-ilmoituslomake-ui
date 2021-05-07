@@ -75,6 +75,7 @@ import {
   KeyValueStatus,
   KeyValueString,
   KeyValueValidation,
+  ModerationPlaceResults,
   ModerationPlaceSearch,
   ModerationTodoResult,
   NotificationPlaceResults,
@@ -322,10 +323,9 @@ interface ClearModerationPlaceSearchAction extends AnyAction {
   payload: undefined;
 }
 
-// TODO - add place result type
 interface SetModerationPlaceResultsAction extends AnyAction {
   type: typeof SET_MODERATION_PLACE_RESULTS;
-  payload: string[];
+  payload: ModerationPlaceResults;
 }
 
 interface SetModerationTaskSearchAction extends AnyAction {

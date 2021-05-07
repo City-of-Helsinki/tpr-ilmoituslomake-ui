@@ -97,7 +97,7 @@ const TaskSearch = (): ReactElement => {
           id="taskType"
           className={styles.gridInput}
           options={taskTypeOptions}
-          defaultValue={convertValue(taskType)}
+          value={convertValue(taskType)}
           onChange={updateSearchTaskType}
           label={i18n.t("moderation.taskSearch.taskType.label")}
           selectedItemRemoveButtonAriaLabel={i18n.t("moderation.button.remove")}

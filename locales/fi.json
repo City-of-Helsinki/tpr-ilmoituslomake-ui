@@ -540,7 +540,11 @@
     },
     "placeResults": {
       "found": "Löytyi",
-      "places": "kohdetta"
+      "places": "kohdetta",
+      "nameId": "Nimi (tunnus)",
+      "address": "Osoite",
+      "modifiedLast": "Muokattu viimeksi",
+      "publishPermission": "Julkaisulupa"
     },
     "tags": {
       "title": "Asiasanat",

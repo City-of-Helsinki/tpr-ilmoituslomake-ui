@@ -29,11 +29,13 @@ const initialState: ModerationState = {
     language: "",
     address: "",
     district: "",
-    tag: "",
+    ontologyIds: [],
     comment: "",
-    publishPermission: [],
   },
-  placeResults: [],
+  placeResults: {
+    results: [],
+    count: 0,
+  },
   taskSearch: {
     placeName: "",
     taskType: TaskType.Unknown,

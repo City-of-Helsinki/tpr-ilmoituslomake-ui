@@ -17,7 +17,15 @@ import {
   REMOVE_MODERATION_PHOTO,
 } from "../../types/constants";
 import { ModerationAction } from "./types";
-import { KeyValueString, Photo, ModerationPlaceSearch, TagOption, TaskSearch, ModerationTodoResult } from "../../types/general";
+import {
+  KeyValueString,
+  ModerationPlaceResults,
+  ModerationPlaceSearch,
+  ModerationTodoResult,
+  Photo,
+  TagOption,
+  TaskSearch,
+} from "../../types/general";
 
 export const setModerationPlaceSearch = (placeSearch: ModerationPlaceSearch): ModerationAction => ({
   type: SET_MODERATION_PLACE_SEARCH,
@@ -29,8 +37,7 @@ export const clearModerationPlaceSearch = (): ModerationAction => ({
   payload: undefined,
 });
 
-// TODO - add place result type
-export const setModerationPlaceResults = (placeResults: string[]): ModerationAction => ({
+export const setModerationPlaceResults = (placeResults: ModerationPlaceResults): ModerationAction => ({
   type: SET_MODERATION_PLACE_RESULTS,
   payload: placeResults,
 });
