@@ -1,0 +1,12 @@
+@import "~hds-design-tokens/lib/all.scss";
+
+.taskHeaderButtons {
+  button {
+    margin-left: $spacing-s;
+  }
+
+  .buttonRow {
+    text-align: right;
+    margin-bottom: $spacing-xs;
+  }
+}
