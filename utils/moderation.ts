@@ -37,13 +37,11 @@ export const approveModeration = async (
           },
         });
         if (assignResponse.ok) {
-          // TODO - handle response
           const assignResult = await assignResponse.json();
           console.log("ASSIGN RESPONSE", assignResult);
         } else {
           setToast(Toast.SaveFailed);
 
-          // TODO - handle error
           const assignResult = await assignResponse.text();
           console.log("ASSIGN FAILED", assignResult);
         }
@@ -68,14 +66,11 @@ export const approveModeration = async (
         body: JSON.stringify(postData),
       });
       if (approveResponse.ok) {
-        // TODO - handle response
         const approveResult = await approveResponse.json();
         console.log("APPROVE RESPONSE", approveResult);
 
         if (approveResult.id) {
-          // setToast(Toast.SaveSucceeded);
-
-          // TODO - handle page transition
+          // Reload the current page instead of redirecting to the task list page
           // router.push(`/moderation/task`);
           router.reload();
         } else {
@@ -84,7 +79,6 @@ export const approveModeration = async (
       } else {
         setToast(Toast.SaveFailed);
 
-        // TODO - handle error
         const approveResult = await approveResponse.text();
         console.log("APPROVE FAILED", approveResult);
       }
@@ -125,13 +119,11 @@ export const rejectModeration = async (
           },
         });
         if (assignResponse.ok) {
-          // TODO - handle response
           const assignResult = await assignResponse.json();
           console.log("ASSIGN RESPONSE", assignResult);
         } else {
           setToast(Toast.SaveFailed);
 
-          // TODO - handle error
           const assignResult = await assignResponse.text();
           console.log("ASSIGN FAILED", assignResult);
         }
@@ -145,19 +137,15 @@ export const rejectModeration = async (
         },
       });
       if (rejectResponse.ok) {
-        // setToast(Toast.SaveSucceeded);
-
-        // TODO - handle response
         const rejectResult = await rejectResponse.text();
         console.log("REJECT RESPONSE", rejectResult);
 
-        // TODO - handle page transition
+        // Reload the current page instead of redirecting to the task list page
         // router.push(`/moderation/task`);
         router.reload();
       } else {
         setToast(Toast.SaveFailed);
 
-        // TODO - handle error
         const rejectResult = await rejectResponse.text();
         console.log("REJECT FAILED", rejectResult);
       }
@@ -196,13 +184,11 @@ export const deleteModeration = async (
           },
         });
         if (assignResponse.ok) {
-          // TODO - handle response
           const assignResult = await assignResponse.json();
           console.log("ASSIGN RESPONSE", assignResult);
         } else {
           setToast(Toast.SaveFailed);
 
-          // TODO - handle error
           const assignResult = await assignResponse.text();
           console.log("ASSIGN FAILED", assignResult);
         }
@@ -218,17 +204,15 @@ export const deleteModeration = async (
       if (deleteResponse.ok) {
         // setToast(Toast.SaveSucceeded);
 
-        // TODO - handle response
         const deleteResult = await deleteResponse.text();
         console.log("DELETE RESPONSE", deleteResult);
 
-        // TODO - handle page transition
+        // Reload the current page instead of redirecting to the task list page
         // router.push(`/moderation/task`);
         router.reload();
       } else {
         setToast(Toast.SaveFailed);
 
-        // TODO - handle error
         const deleteResult = await deleteResponse.text();
         console.log("DELETE FAILED", deleteResult);
       }
@@ -270,12 +254,11 @@ export const saveModerationChangeRequest = async (
         body: JSON.stringify(postData),
       });
       if (changeRequestResponse.ok) {
-        // TODO - handle response
         const changeRequestResult = await changeRequestResponse.json();
         console.log("RESPONSE", changeRequestResult);
 
         if (changeRequestResult.id) {
-          // setToast(Toast.SaveSucceeded);
+          // Redirect to the task page showing the new change request already in edit mode
           router.push(`/moderation/task/${changeRequestResult.id}/?edit=1`);
         } else {
           setToast(Toast.SaveFailed);
@@ -283,7 +266,6 @@ export const saveModerationChangeRequest = async (
       } else {
         setToast(Toast.SaveFailed);
 
-        // TODO - handle error
         const changeRequestResult = await changeRequestResponse.text();
         console.log("FAILED", changeRequestResult);
       }

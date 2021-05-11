@@ -46,7 +46,7 @@ const NotificationFooter = ({ smallButtons, setToast }: NotificationFooterProps)
   };
 
   const sendNotification = () => {
-    saveNotification(currentUser, notificationId, notification, notificationExtra, router, setToast);
+    saveNotification(currentUser, notificationId, notification, notificationExtra, router, dispatch, setToast);
   };
 
   const cancelNotification = () => {

@@ -66,7 +66,8 @@
       "basic": "Basuppgifter",
       "contact": "Kontaktuppgifter",
       "photos": "Foton",
-      "send": "Sänd"
+      "send": "Sänd",
+      "info": "Information"
     },
     "main": {
       "basic": "Basuppgifter om stället",

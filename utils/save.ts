@@ -1,8 +1,9 @@
 import { Dispatch, SetStateAction } from "react";
 import { NextRouter } from "next/router";
 import Cookies from "js-cookie";
-import { NotificationValidationAction } from "../state/actions/types";
-import { ItemType, Toast } from "../types/constants";
+import { NotificationAction, NotificationValidationAction } from "../state/actions/types";
+import { setPage, setSentNotification } from "../state/actions/notification";
+import { ItemType, Toast, SENT_INFO_PAGE } from "../types/constants";
 import { ChangeRequestSchema, NotificationExtra, User } from "../types/general";
 import { NotificationSchema } from "../types/notification_schema";
 import getOrigin from "./request";
@@ -14,6 +15,7 @@ export const saveNotification = async (
   notification: NotificationSchema,
   notificationExtra: NotificationExtra,
   router: NextRouter,
+  dispatch: Dispatch<NotificationAction>,
   setToast?: Dispatch<SetStateAction<Toast | undefined>>
 ): Promise<void> => {
   try {
@@ -57,17 +59,40 @@ export const saveNotification = async (
         body: JSON.stringify(postData),
       });
       if (createResponse.ok) {
-        // TODO - handle response
-        const notificationResult = await createResponse.json();
+        const notificationResult = await (createResponse.json() as Promise<{ id: number; data: NotificationSchema }>);
         console.log("RESPONSE", notificationResult);
 
         if (notificationResult.id) {
-          /*
-          if (setToast) {
-            setToast(Toast.SaveSucceeded);
-          }
-          */
-          router.push(`/notification/sent/${notificationResult.id}`);
+          // NOTE: since the notification has been sent to moderation, the data is not available yet for normal users
+          // So show the info from the response in the same page instead of redirecting to the 'sent' page
+          // router.push(`/notification/sent/${notificationResult.id}`);
+          const { images, ...dataToUse } = notificationResult.data;
+          const sentNotification = {
+            ...notification,
+            ...dataToUse,
+          } as NotificationSchema;
+          const sentNotificationExtra = {
+            ...notificationExtra,
+            photos: images.map((image) => {
+              return {
+                uuid: image.uuid ?? "",
+                sourceType: image.source_type,
+                url: image.url,
+                altText: {
+                  fi: image.alt_text.fi,
+                  sv: image.alt_text.sv,
+                  en: image.alt_text.en,
+                },
+                permission: image.permission,
+                source: image.source,
+                base64: "",
+                preview: image.url,
+              };
+            }),
+          } as NotificationExtra;
+
+          dispatch(setSentNotification(notificationResult.id, sentNotification, sentNotificationExtra));
+          dispatch(setPage(SENT_INFO_PAGE));
         } else if (setToast) {
           setToast(Toast.SaveFailed);
         }
@@ -76,7 +101,6 @@ export const saveNotification = async (
           setToast(Toast.SaveFailed);
         }
 
-        // TODO - handle error
         const notificationResult = await createResponse.text();
         console.log("FAILED", notificationResult);
       }
@@ -121,12 +145,11 @@ export const saveTip = async (
         body: JSON.stringify(postData),
       });
       if (changeRequestResponse.ok) {
-        // TODO - handle response
         const changeRequestResult = await changeRequestResponse.json();
         console.log("RESPONSE", changeRequestResult);
 
         if (changeRequestResult.item_type === ItemType.ChangeRequestAdd || changeRequestResult.target) {
-          // setToast(Toast.SaveSucceeded);
+          // Redirect to the 'sent' page
           router.push("/tip/sent");
         } else {
           setToast(Toast.SaveFailed);
@@ -134,7 +157,6 @@ export const saveTip = async (
       } else {
         setToast(Toast.SaveFailed);
 
-        // TODO - handle error
         const changeRequestResult = await changeRequestResponse.text();
         console.log("FAILED", changeRequestResult);
       }

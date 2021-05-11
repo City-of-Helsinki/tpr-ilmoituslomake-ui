@@ -1,6 +1,30 @@
 @import "~hds-design-tokens/lib/all.scss";
 
-.content h2 {
-  color: $color-bus;
-  outline: none;
+.content {
+  h2 {
+    color: $color-bus;
+    outline: none;
+  }
+
+  .sentHeader {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+
+    h1 {
+      color: $color-bus;
+    }
+
+    .flexButton {
+      flex-grow: 1;
+      display: flex;
+      flex-direction: row;
+      justify-content: flex-end;
+    }
+  }
+
+  .sent {
+    background-color: $color-copper-light;
+  }
 }

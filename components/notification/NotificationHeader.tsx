@@ -65,6 +65,12 @@ const NotificationHeader = ({ headerRef }: NotificationHeaderProps): ReactElemen
               active={currentPage === 4}
               onClick={() => changePage(4)}
             />
+            <Navigation.Item
+              className={styles.navigationItem}
+              label={i18n.t("notification.page.info")}
+              active={currentPage === 5}
+              onClick={() => changePage(5)}
+            />
           </Navigation.Row>
         )}
       </Header>

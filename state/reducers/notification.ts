@@ -3,8 +3,11 @@ import { LatLngExpression } from "leaflet";
 import { NotificationState } from "./types";
 import {
   ItemType,
-  MAX_PAGE,
+  INITIAL_NOTIFICATION,
+  INITIAL_NOTIFICATION_EXTRA,
+  // MAX_PAGE,
   MAX_PHOTOS,
+  MAP_INITIAL_CENTER,
   MAP_INITIAL_ZOOM,
   SET_PAGE,
   SET_MAP_VIEW,
@@ -27,9 +30,7 @@ import {
   SET_NOTIFICATION_PHOTO,
   REMOVE_NOTIFICATION_PHOTO,
   SET_NOTIFICATION_COMMENTS,
-  MAP_INITIAL_CENTER,
-  INITIAL_NOTIFICATION,
-  INITIAL_NOTIFICATION_EXTRA,
+  SET_SENT_NOTIFICATION,
 } from "../../types/constants";
 import { Photo } from "../../types/general";
 
@@ -64,7 +65,8 @@ const notification = (state = initialState, action: AnyAction): NotificationStat
       console.log("SET_PAGE", action.payload);
       return {
         ...state,
-        page: Math.min(Math.max(action.payload, 1), MAX_PAGE),
+        // page: Math.min(Math.max(action.payload, 1), MAX_PAGE),
+        page: action.payload,
       };
     }
 
@@ -268,6 +270,16 @@ const notification = (state = initialState, action: AnyAction): NotificationStat
       return {
         ...state,
         notification: { ...state.notification, comments: action.payload },
+      };
+    }
+
+    case SET_SENT_NOTIFICATION: {
+      console.log("SET_SENT_NOTIFICATION", action.payload);
+      return {
+        ...state,
+        notificationId: action.payload.notificationId,
+        notification: action.payload.notification,
+        notificationExtra: action.payload.notificationExtra,
       };
     }
 

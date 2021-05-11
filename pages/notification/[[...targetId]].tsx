@@ -2,15 +2,22 @@ import React, { ReactElement, useEffect, useRef } from "react";
 import { useSelector } from "react-redux";
 import { GetServerSideProps } from "next";
 import Head from "next/head";
+import Link from "next/link";
+import { useRouter } from "next/router";
 import { useI18n } from "next-localization";
+import { Button, IconCheckCircleFill } from "hds-react";
 import { RootState } from "../../state/reducers";
 import { initStore } from "../../state/store";
-import { NotifierType, CLEAR_STATE, INITIAL_NOTIFICATION } from "../../types/constants";
+import { NotifierType, CLEAR_STATE, INITIAL_NOTIFICATION, SENT_INFO_PAGE } from "../../types/constants";
 import { NotificationSchema } from "../../types/notification_schema";
 import { PhotoValidation } from "../../types/notification_validation";
+import { getDisplayName } from "../../utils/helper";
 import i18nLoader, { defaultLocale } from "../../utils/i18n";
 import { checkUser, redirectToLogin, getOriginServerSide, getPreviousInputLanguages, getTags } from "../../utils/serverside";
 import Layout from "../../components/common/Layout";
+import Header from "../../components/common/Header";
+import Notice from "../../components/common/Notice";
+import InfoFooter from "../../components/notification/InfoFooter";
 import NotificationHeader from "../../components/notification/NotificationHeader";
 import NotificationFooterNav from "../../components/notification/NotificationFooterNav";
 import Comments from "../../components/notification/Comments";
@@ -31,8 +38,11 @@ import styles from "./[[...targetId]].module.scss";
 
 const NotificationDetail = (): ReactElement => {
   const i18n = useI18n();
+  const router = useRouter();
 
   const currentPage = useSelector((state: RootState) => state.notification.page);
+  const notification = useSelector((state: RootState) => state.notification.notification);
+  const { name: placeName } = notification;
   const pageValid = useSelector((state: RootState) => state.notificationValidation.pageValid);
   const ref = useRef<HTMLHeadingElement>(null);
 
@@ -48,7 +58,9 @@ const NotificationDetail = (): ReactElement => {
       <Head>
         <title>{i18n.t("notification.title")}</title>
       </Head>
-      <NotificationHeader headerRef={ref} />
+      {currentPage < SENT_INFO_PAGE && <NotificationHeader headerRef={ref} />}
+      {currentPage === SENT_INFO_PAGE && <Header />}
+
       {currentPage === 1 && (
         <main id="content" className={`narrowSection ${styles.content}`}>
           <h2 tabIndex={-1}>{`${currentPage} ${i18n.t("notification.main.basic")}`}</h2>
@@ -94,6 +106,31 @@ const NotificationDetail = (): ReactElement => {
           <NotificationFooterNav />
           <Preview includeNotifier />
           <NotificationFooterNav />
+        </main>
+      )}
+
+      {currentPage === SENT_INFO_PAGE && (
+        <main id="content" className={styles.content}>
+          <div className={styles.sentHeader}>
+            <h1 tabIndex={-1}>{getDisplayName(router.locale || defaultLocale, placeName)}</h1>
+            <div className={styles.flexButton}>
+              <Link href="/notification">
+                <Button variant="secondary">{i18n.t("notification.button.notifyNewPlace")}</Button>
+              </Link>
+            </div>
+          </div>
+
+          <Notice
+            className={styles.sent}
+            icon={<IconCheckCircleFill size="xl" aria-hidden />}
+            titleKey="notification.message.saveSucceeded.title"
+            messageKey="notification.message.saveSucceeded.message"
+            focusOnTitle
+          />
+
+          <InfoFooter isEditingAllowed={false} />
+          <Preview titleKey="notification.preview.title" />
+          <InfoFooter isEditingAllowed={false} />
         </main>
       )}
     </Layout>

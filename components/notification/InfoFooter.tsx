@@ -6,7 +6,11 @@ import { Button } from "hds-react";
 import { RootState } from "../../state/reducers";
 import styles from "./InfoFooter.module.scss";
 
-const InfoFooter = (): ReactElement => {
+interface InfoFooterProps {
+  isEditingAllowed?: boolean;
+}
+
+const InfoFooter = ({ isEditingAllowed }: InfoFooterProps): ReactElement => {
   const i18n = useI18n();
 
   const currentUser = useSelector((state: RootState) => state.general.user);
@@ -14,14 +18,14 @@ const InfoFooter = (): ReactElement => {
 
   return (
     <div className={styles.footer}>
-      {currentUser?.authenticated && (
+      {currentUser?.authenticated && isEditingAllowed && (
         <div className={styles.flexButton}>
           <Link href={`/notification/${notificationId}`}>
             <Button variant="secondary">{i18n.t("notification.button.modifyInformation")}</Button>
           </Link>
         </div>
       )}
-      {!currentUser?.authenticated && (
+      {!currentUser?.authenticated && isEditingAllowed && (
         <div className={styles.flexButton}>
           <Link href={`/tip/${notificationId}`}>
             <Button variant="secondary">{i18n.t("notification.button.suggestChange")}</Button>
@@ -29,18 +33,22 @@ const InfoFooter = (): ReactElement => {
         </div>
       )}
       {/* NOTE: temporarily removed until external opening times application is ready
-      <div className={styles.flexButton}>
-        <Button variant="secondary" iconRight={<IconLinkExternal aria-hidden />}>
-          {i18n.t("notification.button.modifyOpeningTimes")}
-          <span className="screenReaderOnly"> {i18n.t("common.opensInANewTab")}</span>
-        </Button>
-      </div>
+      {isEditingAllowed && (
+        <div className={styles.flexButton}>
+          <Button variant="secondary" iconRight={<IconLinkExternal aria-hidden />}>
+            {i18n.t("notification.button.modifyOpeningTimes")}
+            <span className="screenReaderOnly"> {i18n.t("common.opensInANewTab")}</span>
+          </Button>
+        </div>
+      )}
       */}
-      <div className={styles.flexButton}>
-        <Link href={`/tip/${notificationId}`}>
-          <Button variant="secondary">{i18n.t("notification.button.notifyClosingDown")}</Button>
-        </Link>
-      </div>
+      {isEditingAllowed && (
+        <div className={styles.flexButton}>
+          <Link href={`/tip/${notificationId}`}>
+            <Button variant="secondary">{i18n.t("notification.button.notifyClosingDown")}</Button>
+          </Link>
+        </div>
+      )}
       <div className="flexSpace" />
       <div className={`${styles.flexButton} ${styles.returnButton}`}>
         <Link href="/search">
@@ -49,6 +57,10 @@ const InfoFooter = (): ReactElement => {
       </div>
     </div>
   );
+};
+
+InfoFooter.defaultProps = {
+  isEditingAllowed: true,
 };
 
 export default InfoFooter;

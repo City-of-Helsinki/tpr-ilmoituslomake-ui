@@ -25,6 +25,7 @@ import {
   REMOVE_NOTIFICATION_PHOTO,
   SET_NOTIFICATION_COMMENTS,
   SET_NOTIFICATION_TIP,
+  SET_SENT_NOTIFICATION,
   SET_NOTIFICATION_INPUT_LANGUAGE_VALIDATION,
   SET_NOTIFICATION_NAME_VALIDATION,
   SET_NOTIFICATION_SHORT_DESCRIPTION_VALIDATION,
@@ -78,6 +79,7 @@ import {
   ModerationPlaceResults,
   ModerationPlaceSearch,
   ModerationTodoResult,
+  NotificationExtra,
   NotificationPlaceResults,
   NotificationPlaceSearch,
   Photo,
@@ -85,6 +87,7 @@ import {
   TaskSearch,
   Validation,
 } from "../../types/general";
+import { NotificationSchema } from "../../types/notification_schema";
 import { PhotoValidation } from "../../types/notification_validation";
 
 interface SetPageAction extends AnyAction {
@@ -192,6 +195,11 @@ interface SetNotificationTipAction extends AnyAction {
   payload: ChangeRequestSchema;
 }
 
+interface SetSentNotificationAction extends AnyAction {
+  type: typeof SET_SENT_NOTIFICATION;
+  payload: { notificationId: number; notification: NotificationSchema; notificationExtra: NotificationExtra };
+}
+
 export type NotificationAction =
   | SetPageAction
   | SetMapViewAction
@@ -213,7 +221,8 @@ export type NotificationAction =
   | SetNotificationPhotoAction
   | RemoveNotificationPhotoAction
   | SetNotificationCommentsAction
-  | SetNotificationTipAction;
+  | SetNotificationTipAction
+  | SetSentNotificationAction;
 
 interface SetPageValidAction extends AnyAction {
   type: typeof SET_PAGE_VALID;

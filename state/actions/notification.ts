@@ -21,17 +21,20 @@ import {
   REMOVE_NOTIFICATION_PHOTO,
   SET_NOTIFICATION_COMMENTS,
   SET_NOTIFICATION_TIP,
+  SET_SENT_NOTIFICATION,
 } from "../../types/constants";
 import {
-  KeyValueString,
+  AddressSearchResult,
+  ChangeRequestSchema,
   KeyValueBoolean,
+  KeyValueString,
+  NotificationExtra,
+  NotificationPlaceResults,
+  NotificationPlaceSearch,
   Photo,
   TagOption,
-  AddressSearchResult,
-  NotificationPlaceSearch,
-  NotificationPlaceResults,
-  ChangeRequestSchema,
 } from "../../types/general";
+import { NotificationSchema } from "../../types/notification_schema";
 import { NotificationAction } from "./types";
 
 export const setPage = (pageNumber: number): NotificationAction => ({
@@ -137,4 +140,13 @@ export const setNotificationComments = (value: string): NotificationAction => ({
 export const setNotificationTip = (tip: ChangeRequestSchema): NotificationAction => ({
   type: SET_NOTIFICATION_TIP,
   payload: tip,
+});
+
+export const setSentNotification = (
+  notificationId: number,
+  notification: NotificationSchema,
+  notificationExtra: NotificationExtra
+): NotificationAction => ({
+  type: SET_SENT_NOTIFICATION,
+  payload: { notificationId, notification, notificationExtra },
 });
