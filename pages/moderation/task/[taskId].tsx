@@ -6,7 +6,7 @@ import { useI18n } from "next-localization";
 import i18nLoader from "../../../utils/i18n";
 import { initStore } from "../../../state/store";
 import { RootState } from "../../../state/reducers";
-import { ModerationStatus, CLEAR_STATE, INITIAL_NOTIFICATION, LANGUAGE_OPTIONS } from "../../../types/constants";
+import { ModerationStatus, CLEAR_STATE, INITIAL_NOTIFICATION, INITIAL_MODERATION_STATUS_EDITED, LANGUAGE_OPTIONS } from "../../../types/constants";
 import { ModerationTodoSchema } from "../../../types/general";
 import { PhotoStatus } from "../../../types/moderation_status";
 import { NotificationSchema } from "../../../types/notification_schema";
@@ -141,7 +141,7 @@ const ModerationTaskDetail = (): ReactElement => {
 };
 
 // Server-side rendering
-export const getServerSideProps: GetServerSideProps = async ({ req, resolvedUrl, params, locales }) => {
+export const getServerSideProps: GetServerSideProps = async ({ req, resolvedUrl, params, query, locales }) => {
   const lngDict = await i18nLoader(locales, true);
 
   // Reset the task details in the state
@@ -171,7 +171,6 @@ export const getServerSideProps: GetServerSideProps = async ({ req, resolvedUrl,
       const taskResult = await (taskResponse.json() as Promise<ModerationTodoSchema>);
 
       try {
-        const taskType = getTaskType(taskResult.category, taskResult.item_type);
         const { id: targetId, data: targetData } = taskResult.target || { id: 0, data: INITIAL_NOTIFICATION };
         const modifiedTask = !taskResult.data || !taskResult.data.name ? targetData : (taskResult.data as NotificationSchema);
 
@@ -185,7 +184,7 @@ export const getServerSideProps: GetServerSideProps = async ({ req, resolvedUrl,
             ...initialReduxState.moderation.moderationExtra,
             created_at: taskResult.created_at,
             updated_at: taskResult.updated_at,
-            taskType,
+            taskType: getTaskType(taskResult.category, taskResult.item_type),
             taskStatus: getTaskStatus(taskResult.status),
             userPlaceName: taskResult.user_place_name,
             userComments: taskResult.user_comments,
@@ -229,24 +228,49 @@ export const getServerSideProps: GetServerSideProps = async ({ req, resolvedUrl,
           },
         };
 
-        initialReduxState.moderationStatus = {
-          ...initialReduxState.moderationStatus,
-          moderationStatus: {
-            ...initialReduxState.moderationStatus.moderationStatus,
-            photos: modifiedTask.images.map(() => {
-              return {
-                url: ModerationStatus.Unknown,
-                altText: {
-                  fi: ModerationStatus.Unknown,
-                  sv: ModerationStatus.Unknown,
-                  en: ModerationStatus.Unknown,
-                },
-                permission: ModerationStatus.Unknown,
-                source: ModerationStatus.Unknown,
-              } as PhotoStatus;
-            }),
-          },
-        };
+        const { edit } = query;
+        if (!edit) {
+          // This is the usual case where the moderation status is initialised to 'unknown'
+          initialReduxState.moderationStatus = {
+            ...initialReduxState.moderationStatus,
+            moderationStatus: {
+              ...initialReduxState.moderationStatus.moderationStatus,
+              photos: modifiedTask.images.map(() => {
+                return {
+                  url: ModerationStatus.Unknown,
+                  altText: {
+                    fi: ModerationStatus.Unknown,
+                    sv: ModerationStatus.Unknown,
+                    en: ModerationStatus.Unknown,
+                  },
+                  permission: ModerationStatus.Unknown,
+                  source: ModerationStatus.Unknown,
+                } as PhotoStatus;
+              }),
+            },
+          };
+        } else {
+          // In cases where the moderator has opened a change request themselves, make the moderation status 'edited'
+          // to save the moderator the step of clicking the button to open the change request for editing
+          initialReduxState.moderationStatus = {
+            pageStatus: ModerationStatus.Edited,
+            moderationStatus: {
+              ...INITIAL_MODERATION_STATUS_EDITED,
+              photos: modifiedTask.images.map(() => {
+                return {
+                  url: ModerationStatus.Edited,
+                  altText: {
+                    fi: ModerationStatus.Edited,
+                    sv: ModerationStatus.Edited,
+                    en: ModerationStatus.Edited,
+                  },
+                  permission: ModerationStatus.Edited,
+                  source: ModerationStatus.Edited,
+                } as PhotoStatus;
+              }),
+            },
+          };
+        }
       } catch (err) {
         console.log("ERROR", err);
       }

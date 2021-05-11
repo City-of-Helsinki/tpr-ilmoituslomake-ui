@@ -71,7 +71,7 @@ const MapModeration = ({ setMapsReady }: MapModerationProps): ReactElement => {
     }
   }, [taskType, map1Ready, map2Ready, setMapsReady, setInitialLocationStatus, updateLocationStatus]);
 
-  if (taskType === TaskType.ChangeTip || taskType === TaskType.AddTip || taskType === TaskType.RemoveTip) {
+  if (taskType === TaskType.ChangeTip || taskType === TaskType.AddTip || taskType === TaskType.RemoveTip || taskType === TaskType.PlaceInfo) {
     return (
       <div className="formSection">
         <div className="gridLayoutContainer moderation">

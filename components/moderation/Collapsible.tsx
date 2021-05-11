@@ -10,7 +10,7 @@ interface CollapsibleProps {
   title: string;
   taskType: TaskType;
   taskStatus: TaskStatus;
-  isModerated: boolean;
+  isModerated?: boolean;
   forceExpanded?: boolean;
   children: ReactNode;
 }
@@ -62,6 +62,7 @@ const Collapsible = ({ section, title, taskType, taskStatus, isModerated, forceE
 };
 
 Collapsible.defaultProps = {
+  isModerated: false,
   forceExpanded: undefined,
 };
 

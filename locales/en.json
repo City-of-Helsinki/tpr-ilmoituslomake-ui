@@ -381,6 +381,7 @@
       "rejected": "Hylätty",
       "modify": "Muokkaa",
       "cancel": "Keskeytä",
+      "showMore": "Näytä lisää",
       "addNewPlace": "Lisää uusi kohde",
       "allPlaces": "Kaikki kohteet",
       "showAllRequests": "Näytä kaikki tehtävät",
@@ -569,6 +570,7 @@
       "representative": "On kohteen edustaja",
       "notRepresentative": "Ei ole kohteen edustaja",
       "messageFromNotifier": "Viesti ilmoittajalta",
+      "moderatorChangeRequest": "Moderoijan muutospyyntö",
       "addPlaceName": "Uuden kohteen nimi"
     },
     "taskSearch": {
@@ -599,7 +601,8 @@
       "newPlace": "Uusi kohde",
       "changeTip": "Muutos vinkki",
       "addTip": "Lisäys vinkki",
-      "removeTip": "Poisto vinkki"
+      "removeTip": "Poisto vinkki",
+      "placeInfo": "Kohdetiedot"
     },
     "translationNotice": {
       "title": "Käännösten hallinta",

@@ -1,8 +1,8 @@
 import { Dispatch, SetStateAction } from "react";
 import { NextRouter } from "next/router";
 import Cookies from "js-cookie";
-import { Toast } from "../types/constants";
-import { ModerationExtra, User } from "../types/general";
+import { ItemType, Toast } from "../types/constants";
+import { ChangeRequestSchema, ModerationExtra, User } from "../types/general";
 import { NotificationSchema } from "../types/notification_schema";
 import getOrigin from "./request";
 
@@ -232,6 +232,63 @@ export const deleteModeration = async (
         const deleteResult = await deleteResponse.text();
         console.log("DELETE FAILED", deleteResult);
       }
+    } else {
+      setToast(Toast.NotAuthenticated);
+    }
+  } catch (err) {
+    console.log("ERROR", err);
+    setToast(Toast.SaveFailed);
+  }
+};
+
+export const saveModerationChangeRequest = async (
+  tip: ChangeRequestSchema,
+  router: NextRouter,
+  setToast: Dispatch<SetStateAction<Toast | undefined>>
+): Promise<void> => {
+  try {
+    // TODO - fix notifier validation
+    // const valid = validateNotificationData(modifiedTask);
+    const valid = true;
+
+    if (valid) {
+      // Send the Cross Site Request Forgery token, otherwise the backend returns the error "CSRF Failed: CSRF token missing or incorrect."
+      const csrftoken = Cookies.get("csrftoken");
+
+      // If the tip is about a new place, use a null target id
+      const { item_type, target } = tip;
+      const postData = { ...tip, target: item_type === ItemType.ChangeRequestAdd ? null : target };
+
+      console.log("SENDING", postData);
+
+      const changeRequestResponse = await fetch(`${getOrigin(router)}/api/change_request/`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "X-CSRFToken": csrftoken as string,
+        },
+        body: JSON.stringify(postData),
+      });
+      if (changeRequestResponse.ok) {
+        // TODO - handle response
+        const changeRequestResult = await changeRequestResponse.json();
+        console.log("RESPONSE", changeRequestResult);
+
+        if (changeRequestResult.id) {
+          // setToast(Toast.SaveSucceeded);
+          router.push(`/moderation/task/${changeRequestResult.id}/?edit=1`);
+        } else {
+          setToast(Toast.SaveFailed);
+        }
+      } else {
+        setToast(Toast.SaveFailed);
+
+        // TODO - handle error
+        const changeRequestResult = await changeRequestResponse.text();
+        console.log("FAILED", changeRequestResult);
+      }
+    } else if (!valid) {
+      setToast(Toast.ValidationFailed);
     } else {
       setToast(Toast.NotAuthenticated);
     }

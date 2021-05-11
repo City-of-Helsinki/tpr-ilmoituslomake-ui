@@ -127,6 +127,7 @@ export interface ModerationPlaceResult {
   id: number;
   data: NotificationSchema;
   published: boolean;
+  created_at: string;
   updated_at: string;
   updated: Date;
 }

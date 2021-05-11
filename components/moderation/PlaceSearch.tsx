@@ -1,6 +1,5 @@
-import React, { Dispatch, ChangeEvent, ReactElement } from "react";
+import React, { Dispatch, ChangeEvent, ReactElement, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import Link from "next/link";
 import { useRouter } from "next/router";
 import { useI18n } from "next-localization";
 import { Button, Checkbox, Combobox, IconPlus, Select, SelectionGroup, TextInput } from "hds-react";
@@ -8,9 +7,12 @@ import moment from "moment";
 import { ModerationAction } from "../../state/actions/types";
 import { setModerationPlaceSearch, clearModerationPlaceSearch, setModerationPlaceResults } from "../../state/actions/moderation";
 import { RootState } from "../../state/reducers";
+import { ItemType, Toast } from "../../types/constants";
 import { ModerationPlaceResult, OptionType, TagOption } from "../../types/general";
 import { defaultLocale } from "../../utils/i18n";
+import { saveModerationChangeRequest } from "../../utils/moderation";
 import getOrigin from "../../utils/request";
+import ToastNotification from "../common/ToastNotification";
 import styles from "./PlaceSearch.module.scss";
 
 const PlaceSearch = (): ReactElement => {
@@ -18,11 +20,14 @@ const PlaceSearch = (): ReactElement => {
   const dispatch = useDispatch<Dispatch<ModerationAction>>();
   const router = useRouter();
 
+  const currentUser = useSelector((state: RootState) => state.general.user);
   const placeSearch = useSelector((state: RootState) => state.moderation.placeSearch);
   const { placeName, language, address, district, ontologyIds, comment, publishPermission } = placeSearch;
 
   const moderationExtra = useSelector((state: RootState) => state.moderation.moderationExtra);
   const { tagOptions = [] } = moderationExtra;
+
+  const [toast, setToast] = useState<Toast>();
 
   const languageOptions = [
     { id: "", label: "" },
@@ -105,17 +110,27 @@ const PlaceSearch = (): ReactElement => {
     dispatch(clearModerationPlaceSearch());
   };
 
+  const makeNewPlaceChangeRequest = () => {
+    // Make a new moderation task for the new place by making a change request
+    const newPlaceChangeRequest = {
+      target: 0,
+      item_type: ItemType.ChangeRequestAdd,
+      user_place_name: "",
+      user_comments: i18n.t("moderation.taskHeader.moderatorChangeRequest"),
+      user_details: currentUser ? `${currentUser.first_name} ${currentUser.last_name}`.trim() : "",
+    };
+    saveModerationChangeRequest(newPlaceChangeRequest, router, setToast);
+  };
+
   return (
     <div className={`formSection ${styles.placeSearch}`}>
       <div className={styles.header}>
         <h1 className="moderation">{i18n.t("moderation.placeSearch.title")}</h1>
         <div className="flexSpace" />
         <div>
-          <Link href="/notification">
-            <Button className={styles.primary} iconLeft={<IconPlus aria-hidden />}>
-              {i18n.t("moderation.button.addNewPlace")}
-            </Button>
-          </Link>
+          <Button className={styles.primary} iconLeft={<IconPlus aria-hidden />} onClick={makeNewPlaceChangeRequest}>
+            {i18n.t("moderation.button.addNewPlace")}
+          </Button>
         </div>
       </div>
 
@@ -202,6 +217,8 @@ const PlaceSearch = (): ReactElement => {
           </Button>
         </div>
       </div>
+
+      {toast && <ToastNotification prefix="moderation" toast={toast} setToast={setToast} />}
     </div>
   );
 };

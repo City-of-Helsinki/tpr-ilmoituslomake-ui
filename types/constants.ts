@@ -51,6 +51,7 @@ export enum TaskType {
   ChangeTip = "changeTip",
   AddTip = "addTip",
   RemoveTip = "removeTip",
+  PlaceInfo = "placeInfo",
 }
 
 export enum Toast {
@@ -286,46 +287,51 @@ export const INITIAL_MODERATION_EXTRA = {
   },
 };
 
-export const INITIAL_MODERATION_STATUS = {
-  name: {
-    fi: ModerationStatus.Unknown,
-    sv: ModerationStatus.Unknown,
-    en: ModerationStatus.Unknown,
-  },
-  location: ModerationStatus.Unknown,
-  description: {
-    short: {
-      fi: ModerationStatus.Unknown,
-      sv: ModerationStatus.Unknown,
-      en: ModerationStatus.Unknown,
+const getInitialModerationStatus = (moderationStatus: ModerationStatus) => {
+  return {
+    name: {
+      fi: moderationStatus,
+      sv: moderationStatus,
+      en: moderationStatus,
     },
-    long: {
-      fi: ModerationStatus.Unknown,
-      sv: ModerationStatus.Unknown,
-      en: ModerationStatus.Unknown,
+    location: moderationStatus,
+    description: {
+      short: {
+        fi: moderationStatus,
+        sv: moderationStatus,
+        en: moderationStatus,
+      },
+      long: {
+        fi: moderationStatus,
+        sv: moderationStatus,
+        en: moderationStatus,
+      },
     },
-  },
-  address: {
-    fi: {
-      street: ModerationStatus.Unknown,
-      postal_code: ModerationStatus.Unknown,
-      post_office: ModerationStatus.Unknown,
-      neighborhood: ModerationStatus.Unknown,
+    address: {
+      fi: {
+        street: moderationStatus,
+        postal_code: moderationStatus,
+        post_office: moderationStatus,
+        neighborhood: moderationStatus,
+      },
+      sv: {
+        street: moderationStatus,
+        postal_code: moderationStatus,
+        post_office: moderationStatus,
+        neighborhood: moderationStatus,
+      },
     },
-    sv: {
-      street: ModerationStatus.Unknown,
-      postal_code: ModerationStatus.Unknown,
-      post_office: ModerationStatus.Unknown,
-      neighborhood: ModerationStatus.Unknown,
+    phone: moderationStatus,
+    email: moderationStatus,
+    website: {
+      fi: moderationStatus,
+      sv: moderationStatus,
+      en: moderationStatus,
     },
-  },
-  phone: ModerationStatus.Unknown,
-  email: ModerationStatus.Unknown,
-  website: {
-    fi: ModerationStatus.Unknown,
-    sv: ModerationStatus.Unknown,
-    en: ModerationStatus.Unknown,
-  },
-  ontology_ids: ModerationStatus.Unknown,
-  photos: [],
+    ontology_ids: moderationStatus,
+    photos: [],
+  };
 };
+
+export const INITIAL_MODERATION_STATUS = getInitialModerationStatus(ModerationStatus.Unknown);
+export const INITIAL_MODERATION_STATUS_EDITED = getInitialModerationStatus(ModerationStatus.Edited);

@@ -6,10 +6,10 @@ import { Button, IconArrowRight, IconArrowUndo, IconCheck, IconCross, IconTrash 
 import moment from "moment";
 import { ModerationStatusAction } from "../../state/actions/types";
 import { RootState } from "../../state/reducers";
-import { DATETIME_FORMAT, ModerationStatus, NotifierType, TaskStatus, TaskType, Toast } from "../../types/constants";
+import { DATETIME_FORMAT, ItemType, ModerationStatus, NotifierType, TaskStatus, TaskType, Toast } from "../../types/constants";
 import { getDisplayName } from "../../utils/helper";
 import { defaultLocale } from "../../utils/i18n";
-import { approveModeration, deleteModeration, rejectModeration } from "../../utils/moderation";
+import { approveModeration, deleteModeration, saveModerationChangeRequest, rejectModeration } from "../../utils/moderation";
 import setModerationStatus from "../../utils/status";
 import ModalConfirmation from "../common/ModalConfirmation";
 import ToastNotification from "../common/ToastNotification";
@@ -17,7 +17,7 @@ import TaskStatusLabel from "./TaskStatusLabel";
 import styles from "./TaskHeader.module.scss";
 
 interface TaskHeaderProps {
-  isModerated: boolean;
+  isModerated?: boolean;
 }
 
 const TaskHeader = ({ isModerated }: TaskHeaderProps): ReactElement => {
@@ -54,7 +54,20 @@ const TaskHeader = ({ isModerated }: TaskHeaderProps): ReactElement => {
   const [confirmDeletion, setConfirmDeletion] = useState(false);
 
   const modifyTask = () => {
+    // Make the components editable for using tip info
     setModerationStatus(photosSelected, dispatchStatus);
+  };
+
+  const makePlaceInfoChangeRequest = (itemType: ItemType) => {
+    // Make a new moderation task for the notification place by making a change request
+    const placeInfoChangeRequest = {
+      target: selectedTaskId,
+      item_type: itemType,
+      user_place_name: "",
+      user_comments: i18n.t("moderation.taskHeader.moderatorChangeRequest"),
+      user_details: currentUser ? `${currentUser.first_name} ${currentUser.last_name}`.trim() : "",
+    };
+    saveModerationChangeRequest(placeInfoChangeRequest, router, setToast);
   };
 
   const openApprovalConfirmation = () => {
@@ -244,6 +257,26 @@ const TaskHeader = ({ isModerated }: TaskHeaderProps): ReactElement => {
         </div>
       )}
 
+      {taskType === TaskType.PlaceInfo && (
+        <div className={styles.buttonRow}>
+          <Button
+            variant="secondary"
+            onClick={() => makePlaceInfoChangeRequest(ItemType.ChangeRequestChange)}
+            disabled={taskStatus === TaskStatus.Closed}
+          >
+            {i18n.t("moderation.button.openForModifying")}
+          </Button>
+          <Button
+            variant="secondary"
+            iconRight={<IconTrash aria-hidden />}
+            onClick={() => makePlaceInfoChangeRequest(ItemType.ChangeRequestDelete)}
+            disabled={taskStatus === TaskStatus.Closed}
+          >
+            {i18n.t("moderation.button.removePlace")}
+          </Button>
+        </div>
+      )}
+
       <div className={styles.upperRow}>
         <div>
           <div className={styles.bold}>{i18n.t("moderation.taskHeader.taskType")}</div>
@@ -270,20 +303,21 @@ const TaskHeader = ({ isModerated }: TaskHeaderProps): ReactElement => {
         <div className={styles.notifier}>
           <div className={styles.notifierType}>
             <div className={styles.bold}>{i18n.t("moderation.taskHeader.notifier")}</div>
-            {notifier_type === NotifierType.Representative ? (
-              <>
-                <IconCheck size="s" aria-hidden />
-                <div>{i18n.t("moderation.taskHeader.representative")}</div>
-              </>
-            ) : (
-              <>
-                <IconCross size="s" aria-hidden />
-                <div>{i18n.t("moderation.taskHeader.notRepresentative")}</div>
-              </>
-            )}
+            {(taskType === TaskType.NewPlace || taskType === TaskType.PlaceChange || taskType === TaskType.PlaceInfo) &&
+              (notifier_type === NotifierType.Representative ? (
+                <>
+                  <IconCheck size="s" aria-hidden />
+                  <div>{i18n.t("moderation.taskHeader.representative")}</div>
+                </>
+              ) : (
+                <>
+                  <IconCross size="s" aria-hidden />
+                  <div>{i18n.t("moderation.taskHeader.notRepresentative")}</div>
+                </>
+              ))}
           </div>
           {(taskType === TaskType.ChangeTip || taskType === TaskType.AddTip || taskType === TaskType.RemoveTip) && <div>{userDetails}</div>}
-          {(taskType === TaskType.NewPlace || taskType === TaskType.PlaceChange) && (
+          {(taskType === TaskType.NewPlace || taskType === TaskType.PlaceChange || taskType === TaskType.PlaceInfo) && (
             <>
               <div>{full_name}</div>
               <div>{email}</div>
@@ -295,7 +329,7 @@ const TaskHeader = ({ isModerated }: TaskHeaderProps): ReactElement => {
           <div className={styles.bold}>{i18n.t("moderation.taskHeader.messageFromNotifier")}</div>
           {(taskType === TaskType.ChangeTip || taskType === TaskType.AddTip || taskType === TaskType.RemoveTip) && (
             <>
-              {taskType === TaskType.AddTip && (
+              {taskType === TaskType.AddTip && userPlaceName.length > 0 && (
                 <div>
                   {i18n.t("moderation.taskHeader.addPlaceName")}: {userPlaceName}
                 </div>
@@ -346,6 +380,10 @@ const TaskHeader = ({ isModerated }: TaskHeaderProps): ReactElement => {
       {toast && <ToastNotification prefix="moderation" toast={toast} setToast={setToast} />}
     </div>
   );
+};
+
+TaskHeader.defaultProps = {
+  isModerated: false,
 };
 
 export default TaskHeader;

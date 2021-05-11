@@ -1,22 +1,58 @@
-import React, { ReactElement, Fragment } from "react";
-import { useSelector } from "react-redux";
+import React, { Dispatch, ReactElement, Fragment } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useI18n } from "next-localization";
 import { Button, IconPen } from "hds-react";
 import moment from "moment";
+import { ModerationAction } from "../../state/actions/types";
+import { setModerationPlaceResults } from "../../state/actions/moderation";
 import { RootState } from "../../state/reducers";
 import { DATETIME_FORMAT } from "../../types/constants";
+import { ModerationPlaceResult } from "../../types/general";
 import { getDisplayName } from "../../utils/helper";
 import { defaultLocale } from "../../utils/i18n";
 import styles from "./PlaceResults.module.scss";
 
 const PlaceResults = (): ReactElement => {
   const i18n = useI18n();
+  const dispatch = useDispatch<Dispatch<ModerationAction>>();
   const router = useRouter();
 
   const placeResults = useSelector((state: RootState) => state.moderation.placeResults);
   const { results, count, next } = placeResults;
+
+  const fetchMoreResults = async () => {
+    if (next) {
+      const placeResponse = await fetch(next);
+      if (placeResponse.ok) {
+        const placeResult = await (placeResponse.json() as Promise<{ count: number; next: string; results: ModerationPlaceResult[] }>);
+
+        console.log("PLACE RESPONSE", placeResult);
+
+        if (placeResult && placeResult.results && placeResult.results.length > 0) {
+          const { results: moreResults, next: nextBatch } = placeResult;
+
+          // Parse the date strings to date objects
+          dispatch(
+            setModerationPlaceResults({
+              results: [
+                ...results,
+                ...moreResults.map((result) => {
+                  return {
+                    ...result,
+                    updated: moment(result.updated_at).toDate(),
+                  };
+                }),
+              ],
+              count,
+              next: nextBatch,
+            })
+          );
+        }
+      }
+    }
+  };
 
   return (
     <div className={`formSection ${styles.placeResults}`}>
@@ -27,7 +63,7 @@ const PlaceResults = (): ReactElement => {
         <h3 className={`${styles.gridColumn3} gridHeader moderation`}>{i18n.t("moderation.placeResults.modifiedLast")}</h3>
         <h3 className={`${styles.gridColumn4} gridHeader moderation`}>{i18n.t("moderation.placeResults.publishPermission")}</h3>
         {results
-          // .sort((a: ModerationPlaceResult, b: ModerationPlaceResult) => b.created.getTime() - a.created.getTime())
+          .sort((a: ModerationPlaceResult, b: ModerationPlaceResult) => b.updated.getTime() - a.updated.getTime())
           .map((result) => {
             const { id: targetId, data, published, updated } = result;
             const {
@@ -41,7 +77,7 @@ const PlaceResults = (): ReactElement => {
             return (
               <Fragment key={`taskresult_${targetId}`}>
                 <div className={`${styles.gridColumn1} ${styles.gridContent} ${styles.gridButton}`}>
-                  <Link href={`/notification/info/${targetId}`}>
+                  <Link href={`/moderation/place/${targetId}`}>
                     <Button variant="supplementary" size="small" iconLeft={<IconPen aria-hidden />}>
                       {`${getDisplayName(router.locale || defaultLocale, name)}${targetId ? ` (${targetId})` : ""}`}
                     </Button>
@@ -63,6 +99,14 @@ const PlaceResults = (): ReactElement => {
               </Fragment>
             );
           })}
+      </div>
+
+      <div className={styles.nextResults}>
+        {next && (
+          <Button variant="secondary" onClick={fetchMoreResults}>
+            {i18n.t("moderation.button.showMore")}
+          </Button>
+        )}
       </div>
     </div>
   );
