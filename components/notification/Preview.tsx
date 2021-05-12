@@ -45,6 +45,7 @@ const Preview = ({ className, titleKey, includeNotifier }: PreviewProps): ReactE
   return (
     <div className={`gridLayoutContainer ${styles.preview} ${className}`}>
       {titleKey && <h3 className={styles.title}>{i18n.t(titleKey)}</h3>}
+      {!titleKey && <div />}
 
       <h4 className={`${styles.gridHeading} ${styles.gridHeader}`}>{i18n.t("notification.preview.heading")}</h4>
       <h4 className={`${styles.gridPlaceInfo} ${styles.gridHeader}`}>{i18n.t("notification.preview.placeInfo")}</h4>
