@@ -6,7 +6,7 @@ import { ModerationAction, ModerationStatusAction } from "../../state/actions/ty
 import { setModerationLocation } from "../../state/actions/moderation";
 import { setModerationLocationStatus } from "../../state/actions/moderationStatus";
 import { RootState } from "../../state/reducers";
-import { ModerationStatus, TaskStatus, TaskType, MAP_INITIAL_CENTER, MAP_INITIAL_ZOOM } from "../../types/constants";
+import { ModerationStatus, TaskStatus, TaskType, MAP_INITIAL_CENTER, MAP_INITIAL_MARKER_ZOOM, MAP_INITIAL_ZOOM } from "../../types/constants";
 import ActionButton from "./ActionButton";
 import ModifyButton from "./ModifyButton";
 import styles from "./MapModeration.module.scss";
@@ -35,7 +35,14 @@ const MapModeration = ({ setMapsReady }: MapModerationProps): ReactElement => {
   const { location: locationStatus } = moderationStatus;
 
   const initialCenter = MAP_INITIAL_CENTER;
-  const initialZoom = MAP_INITIAL_ZOOM;
+  const initialSelectedZoom =
+    locationSelected && locationSelected.length === 2 && locationSelected[0] > 0 && locationSelected[1] > 0
+      ? MAP_INITIAL_MARKER_ZOOM
+      : MAP_INITIAL_ZOOM;
+  const initialModifiedZoom =
+    locationModified && locationModified.length === 2 && locationModified[0] > 0 && locationModified[1] > 0
+      ? MAP_INITIAL_MARKER_ZOOM
+      : MAP_INITIAL_ZOOM;
 
   const updateLocation = (coordinates: [number, number]) => {
     dispatch(setModerationLocation(coordinates));
@@ -85,7 +92,7 @@ const MapModeration = ({ setMapsReady }: MapModerationProps): ReactElement => {
           <MapWrapper
             className={`gridColumn1 ${styles.map}`}
             initialCenter={initialCenter as [number, number]}
-            initialZoom={initialZoom}
+            initialZoom={locationStatus !== ModerationStatus.Edited ? initialSelectedZoom : initialModifiedZoom}
             location={locationStatus !== ModerationStatus.Edited ? locationSelected : locationModified}
             setLocation={locationStatus === ModerationStatus.Edited ? updateLocation : undefined}
             setMapReady={setMap1Ready}
@@ -106,7 +113,7 @@ const MapModeration = ({ setMapsReady }: MapModerationProps): ReactElement => {
           <MapWrapper
             className={`gridColumn1 ${styles.map}`}
             initialCenter={initialCenter as [number, number]}
-            initialZoom={initialZoom}
+            initialZoom={initialSelectedZoom}
             location={locationSelected}
             setMapReady={setMap1Ready}
             draggableMarker={false}
@@ -123,7 +130,7 @@ const MapModeration = ({ setMapsReady }: MapModerationProps): ReactElement => {
             <MapWrapper
               className={`gridColumn2 ${styles.map}`}
               initialCenter={initialCenter as [number, number]}
-              initialZoom={initialZoom}
+              initialZoom={initialModifiedZoom}
               location={locationModified}
               setLocation={updateLocation}
               setMapReady={setMap2Ready}
