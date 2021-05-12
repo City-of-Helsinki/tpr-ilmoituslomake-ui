@@ -99,6 +99,10 @@
         "title": "Sändningen lyckades!",
         "message": "Tack för anmälan! Informationen kontrolleras ännu före publicering."
       },
+      "tipSaveSucceeded": {
+        "title": "Sändning av tipsblanketten lyckades!",
+        "message": "Tack för anmälan! Informationen kontrolleras ännu före publicering."
+      },
       "notifyNewPlace": {
         "title": "Vill du lägga till ett nytt ställe i tjänsten?",
         "message": "Lägg till nya verksamhetsställen och andra mål. Logga in i tjänsten och lägg till stället redan idag!"

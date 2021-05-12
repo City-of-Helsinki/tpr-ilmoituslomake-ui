@@ -99,6 +99,10 @@
         "title": "Lähetys onnistui!",
         "message": "Kiitos ilmoituksesta! Tiedot tarkistetaan vielä ennen julkaisemista."
       },
+      "tipSaveSucceeded": {
+        "title": "Vinkkilomakkeen lähetys onnistui!",
+        "message": "Kiitos ilmoituksesta! Tiedot tarkistetaan vielä ennen muutoksien lisäämistä ja kohteen julkaisemista."
+      },
       "notifyNewPlace": {
         "title": "Haluatko lisätä uuden kohteen palveluun?",
         "message": "Ilmoita palveluun uusia toimipisteitä ja kohteita. Kirjaudu ensin ja ilmoita puuttuva kohde jo tänään!"

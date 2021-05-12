@@ -99,6 +99,10 @@
         "title": "Submitted successfully!",
         "message": "Thanks for your submission! The information will be reviewed before publication."
       },
+      "tipSaveSucceeded": {
+        "title": "Tips form sent successfully!",
+        "message": "Thank you for your notification! The information will be reviewed before adding any changes and publishing."
+      },
       "notifyNewPlace": {
         "title": "Do you want to add a new location?",
         "message": "Notify of new locations. Please log in first and report a missing location today!"
