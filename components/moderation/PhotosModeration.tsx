@@ -8,6 +8,7 @@ import { removeModerationPhotoStatus, setModerationPhotoAltTextStatus, setModera
 import { RootState } from "../../state/reducers";
 import { LANGUAGE_OPTIONS, ModerationStatus, PhotoPermission, PhotoSourceType, TaskType } from "../../types/constants";
 import ModerationSection from "./ModerationSection";
+import PhotoPreviewModeration from "./PhotoPreviewModeration";
 import SelectionGroupWrapper from "./SelectionGroupWrapper";
 
 const PhotosModeration = (): ReactElement => {
@@ -49,9 +50,9 @@ const PhotosModeration = (): ReactElement => {
 
   return (
     <div className="formSection">
-      {photosSelected.map(({ sourceType: sourceTypeSelected }, index) => {
+      {photosModified.map(({ sourceType: sourceTypeModified }, index) => {
         const key = `photo_${index}`;
-        const urlLabelKey = sourceTypeSelected === PhotoSourceType.Device ? "moderation.photos.url.labelDevice" : "moderation.photos.url.labelLink";
+        const urlLabelKey = sourceTypeModified === PhotoSourceType.Device ? "moderation.photos.url.labelDevice" : "moderation.photos.url.labelLink";
 
         return (
           <Fragment key={key}>
@@ -59,8 +60,8 @@ const PhotosModeration = (): ReactElement => {
               <ModerationSection
                 id={`url_${index}`}
                 fieldName="url"
-                selectedValue={photosSelected[index].url}
-                modifiedValue={photosModified[index].url}
+                selectedValue={photosSelected[index] && photosSelected[index].url}
+                modifiedValue={photosModified[index] && photosModified[index].url}
                 moderationStatus={photosStatus[index].url}
                 taskType={taskType}
                 taskStatus={taskStatus}
@@ -73,6 +74,8 @@ const PhotosModeration = (): ReactElement => {
               />
             </div>
 
+            <PhotoPreviewModeration index={index} />
+
             <div className="languageSection gridLayoutContainer moderation">
               {LANGUAGE_OPTIONS.map((option) => {
                 const altTextKey = `altText_${option}_${index}`;
@@ -82,8 +85,8 @@ const PhotosModeration = (): ReactElement => {
                     id={altTextKey}
                     key={altTextKey}
                     fieldName={option}
-                    selectedValue={photosSelected[index].altText[option] as string}
-                    modifiedValue={photosModified[index].altText[option] as string}
+                    selectedValue={photosSelected[index] && (photosSelected[index].altText[option] as string)}
+                    modifiedValue={photosModified[index] && (photosModified[index].altText[option] as string)}
                     moderationStatus={photosStatus[index].altText[option]}
                     taskType={taskType}
                     taskStatus={taskStatus}
@@ -107,8 +110,8 @@ const PhotosModeration = (): ReactElement => {
               <ModerationSection
                 id={`permission_${index}`}
                 fieldName="permission"
-                selectedValue={photosSelected[index].permission}
-                modifiedValue={photosModified[index].permission}
+                selectedValue={photosSelected[index] && photosSelected[index].permission}
+                modifiedValue={photosModified[index] && photosModified[index].permission}
                 moderationStatus={photosStatus[index].permission}
                 taskType={taskType}
                 taskStatus={taskStatus}
@@ -129,8 +132,8 @@ const PhotosModeration = (): ReactElement => {
               <ModerationSection
                 id={`source_${index}`}
                 fieldName="source"
-                selectedValue={photosSelected[index].source}
-                modifiedValue={photosModified[index].source}
+                selectedValue={photosSelected[index] && photosSelected[index].source}
+                modifiedValue={photosModified[index] && photosModified[index].source}
                 moderationStatus={photosStatus[index].source}
                 taskType={taskType}
                 taskStatus={taskStatus}

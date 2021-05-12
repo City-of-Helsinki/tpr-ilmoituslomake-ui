@@ -1,0 +1,28 @@
+@import "~hds-design-tokens/lib/all.scss";
+@import "../../styles/mixins";
+
+.imagePreview {
+  img {
+    max-width: 100%;
+
+    @include media(xs) {
+      max-height: $container-width-xs / 2;
+    }
+
+    @include media(s) {
+      max-height: $container-width-s / 2;
+    }
+
+    @include media(m) {
+      max-height: $container-width-m / 4;
+    }
+
+    @include media(l) {
+      max-height: $container-width-l / 4;
+    }
+
+    @include media(xl) {
+      max-height: $container-width-xl / 4;
+    }
+  }
+}

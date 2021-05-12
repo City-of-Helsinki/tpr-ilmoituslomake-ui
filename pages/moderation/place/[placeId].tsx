@@ -126,7 +126,7 @@ export const getServerSideProps: GetServerSideProps = async ({ req, resolvedUrl,
                 permission: image.permission,
                 source: image.source,
                 base64: "",
-                preview: "",
+                preview: image.url,
               };
             }),
             photosModified: placeResult.data.images.map((image) => {
@@ -142,7 +142,7 @@ export const getServerSideProps: GetServerSideProps = async ({ req, resolvedUrl,
                 permission: image.permission,
                 source: image.source,
                 base64: "",
-                preview: "",
+                preview: image.url,
               };
             }),
           },

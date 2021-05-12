@@ -30,7 +30,7 @@ const ModerationTaskDetail = (): ReactElement => {
   const modifiedTaskId = useSelector((state: RootState) => state.moderation.modifiedTaskId);
   const moderationStatus = useSelector((state: RootState) => state.moderationStatus.moderationStatus);
   const moderationExtra = useSelector((state: RootState) => state.moderation.moderationExtra);
-  const { photosSelected, taskType, taskStatus } = moderationExtra;
+  const { photosModified, taskType, taskStatus } = moderationExtra;
 
   // The maps only initialise properly when not hidden, so use a flag to only collapse the container after the maps are ready
   const [mapsReady, setMapsReady] = useState<boolean>(false);
@@ -73,7 +73,7 @@ const ModerationTaskDetail = (): ReactElement => {
       }
       case 3: {
         // Photos
-        const moderated = photosSelected.map((photo, index) => {
+        const moderated = photosModified.map((photo, index) => {
           const photoModerated1 = [
             isModerated(moderationStatus.photos[index].url),
             isModerated(moderationStatus.photos[index].permission),
@@ -206,7 +206,7 @@ export const getServerSideProps: GetServerSideProps = async ({ req, resolvedUrl,
                 permission: image.permission,
                 source: image.source,
                 base64: "",
-                preview: "",
+                preview: image.url,
               };
             }),
             photosModified: modifiedTask.images.map((image) => {
@@ -222,7 +222,7 @@ export const getServerSideProps: GetServerSideProps = async ({ req, resolvedUrl,
                 permission: image.permission,
                 source: image.source,
                 base64: "",
-                preview: "",
+                preview: image.url,
               };
             }),
           },

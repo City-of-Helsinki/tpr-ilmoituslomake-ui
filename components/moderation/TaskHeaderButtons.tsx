@@ -29,7 +29,7 @@ const TaskHeaderButtons = ({ isModerated }: TaskHeaderButtonsProps): ReactElemen
   const modifiedTask = useSelector((state: RootState) => state.moderation.modifiedTask);
 
   const moderationExtra = useSelector((state: RootState) => state.moderation.moderationExtra);
-  const { photosSelected, taskType, taskStatus } = moderationExtra;
+  const { photosModified, taskType, taskStatus } = moderationExtra;
   const pageStatus = useSelector((state: RootState) => state.moderationStatus.pageStatus);
   const moderationStatus = useSelector((state: RootState) => state.moderationStatus.moderationStatus);
 
@@ -40,7 +40,7 @@ const TaskHeaderButtons = ({ isModerated }: TaskHeaderButtonsProps): ReactElemen
 
   const modifyTask = () => {
     // Make the components editable for using tip info
-    setModerationStatus(photosSelected, dispatchStatus);
+    setModerationStatus(photosModified, dispatchStatus);
   };
 
   const makePlaceInfoChangeRequest = (itemType: ItemType) => {
