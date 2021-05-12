@@ -1,0 +1,19 @@
+@import "~hds-design-tokens/lib/all.scss";
+
+.sentHeader {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+
+  h1 {
+    color: $color-bus;
+  }
+
+  .flexButton {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+  }
+}
