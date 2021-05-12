@@ -356,6 +356,10 @@
       "details": {
         "label": "Omat yhteystietosi",
         "helperText": "Kerro halutessasi nimi, puhelinnumero ja sähköpostiosoite"
+      },
+      "loginNotice": {
+        "title": "Tiesitkö?",
+        "notice": "Huomaathan, kun kirjaudut palveluun sisälle voit muokata oman kohteesi tietoja laajemmin täällä:"
       }
     }
   },

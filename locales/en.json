@@ -356,6 +356,10 @@
       "details": {
         "label": "Your contact information",
         "helperText": "If you wish to, please provide your name, phone number and email address"
+      },
+      "loginNotice": {
+        "title": "Did you know?",
+        "notice": "Please note, that when you log in, you can further edit your location information here:"
       }
     }
   },

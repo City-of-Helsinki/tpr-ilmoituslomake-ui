@@ -12,6 +12,8 @@ import { getDisplayName } from "../../utils/helper";
 import { defaultLocale } from "../../utils/i18n";
 import getOrigin from "../../utils/request";
 import { isTipFieldValid } from "../../utils/validation";
+import TipNotice from "./TipNotice";
+import styles from "./TipPlace.module.scss";
 
 const TipPlace = (): ReactElement => {
   const i18n = useI18n();
@@ -80,15 +82,20 @@ const TipPlace = (): ReactElement => {
       )}
 
       {(item_type === ItemType.ChangeRequestChange || item_type === ItemType.ChangeRequestDelete) && (
-        <TextInput
-          id="placeName"
-          className="formInput"
-          name="placeName"
-          value={selectedPlace}
-          maxLength={MAX_LENGTH}
-          label={i18n.t("notification.tip.placeResults.label")}
-          disabled
-        />
+        <div className={styles.placeNameNotice}>
+          <div className={styles.placeName}>
+            <TextInput
+              id="placeName"
+              className="formInput"
+              name="placeName"
+              value={selectedPlace}
+              maxLength={MAX_LENGTH}
+              label={i18n.t("notification.tip.placeResults.label")}
+              disabled
+            />
+          </div>
+          <div className={styles.notice}>{target > 0 && <TipNotice selectedPlaceName={selectedPlace} />}</div>
+        </div>
       )}
     </div>
   );

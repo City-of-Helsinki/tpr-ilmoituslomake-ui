@@ -356,6 +356,10 @@
       "details": {
         "label": "Egna kontaktuppgifter",
         "helperText": "Om du vill, kan du lämna namn, telefonnummer och e-postadress"
+      },
+      "loginNotice": {
+        "title": "Visste du?",
+        "notice": "Vänligen observera att om du loggar in i tjänsten kan du redigera informationen om det egna stället mer omfattande här:"
       }
     }
   },
