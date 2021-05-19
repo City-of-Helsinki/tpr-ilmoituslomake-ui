@@ -29,6 +29,7 @@ const TaskHeader = ({ isModerated }: TaskHeaderProps): ReactElement => {
 
   const moderationExtra = useSelector((state: RootState) => state.moderation.moderationExtra);
   const {
+    published,
     created_at,
     taskType,
     taskStatus,
@@ -54,8 +55,8 @@ const TaskHeader = ({ isModerated }: TaskHeaderProps): ReactElement => {
           <div>{moment(created_at).format(DATETIME_FORMAT)}</div>
         </div>
         <div>
-          <div className={styles.bold}>{i18n.t("moderation.taskHeader.publishPermission")}</div>
-          <div>TODO</div>
+          <div className={styles.bold}>{i18n.t("moderation.taskHeader.publishPermission.label")}</div>
+          <div>{published ? i18n.t("moderation.taskHeader.publishPermission.yes") : i18n.t("moderation.taskHeader.publishPermission.no")}</div>
         </div>
         <div>
           <div className={styles.bold}>{i18n.t("moderation.taskHeader.status")}</div>

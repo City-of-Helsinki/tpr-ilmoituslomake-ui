@@ -572,7 +572,11 @@
     },
     "taskHeader": {
       "taskType": "Tehtävätyyppi",
-      "publishPermission": "Julkaisulupa",
+      "publishPermission": {
+        "label": "Julkaisulupa",
+        "yes": "Kyllä",
+        "no": "Ei"
+      },
       "status": "Tila",
       "moderator": "Moderoija",
       "notifier": "Ilmoittaja",

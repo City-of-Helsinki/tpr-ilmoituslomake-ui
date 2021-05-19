@@ -208,6 +208,7 @@ export interface ModerationExtra {
   photosSelected: Photo[];
   photosModified: Photo[];
   tagOptions: TagOption[];
+  published: boolean;
   created_at: string;
   updated_at: string;
   taskType: TaskType;

@@ -102,6 +102,7 @@ export const getServerSideProps: GetServerSideProps = async ({ req, resolvedUrl,
           modifiedTask: placeData,
           moderationExtra: {
             ...initialReduxState.moderation.moderationExtra,
+            published: placeResult.published,
             created_at: placeResult.created_at,
             updated_at: placeResult.updated_at,
             taskType: TaskType.PlaceInfo,
