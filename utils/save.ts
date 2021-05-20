@@ -39,13 +39,10 @@ export const saveNotification = async (
             return { index, uuid, source_type, url, alt_text, permission, source };
           }),
         },
-        images: photos
-          // .filter((photo) => photo.new)
-          .map((photo, index) => {
-            const { uuid, url, base64 } = photo;
-            // return { index, uuid, url, base64 };
-            return { index, uuid, url, ...(photo.new && { base64 }) };
-          }),
+        images: photos.map((photo, index) => {
+          const { uuid, url, base64 } = photo;
+          return { index, uuid, url, ...(photo.new && { base64 }) };
+        }),
       };
 
       console.log("SENDING", postData);

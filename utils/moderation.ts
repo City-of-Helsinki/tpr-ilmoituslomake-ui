@@ -2,14 +2,15 @@ import { Dispatch, SetStateAction } from "react";
 import { NextRouter } from "next/router";
 import Cookies from "js-cookie";
 import { ItemType, Toast } from "../types/constants";
-import { ChangeRequestSchema, ModerationExtra, User } from "../types/general";
+import { ChangeRequestSchema, ModerationExtra, Photo, User } from "../types/general";
 import { NotificationSchema } from "../types/notification_schema";
 import getOrigin from "./request";
 
 export const approveModeration = async (
   currentUser: User | undefined,
   modifiedTaskId: number,
-  modifiedTask: NotificationSchema,
+  approvedTask: NotificationSchema,
+  approvedPhotos: Photo[],
   moderationExtra: ModerationExtra,
   router: NextRouter,
   setToast: Dispatch<SetStateAction<Toast | undefined>>
@@ -49,10 +50,16 @@ export const approveModeration = async (
 
       // TODO - handle new images including the base64 value
       const postData = {
-        data: { ...modifiedTask },
-        images: modifiedTask.images.map((photo, index) => {
-          const { uuid, url } = photo;
-          return { index, uuid, url };
+        data: {
+          ...approvedTask,
+          images: approvedPhotos.map((photo, index) => {
+            const { uuid, sourceType: source_type, url, altText: alt_text, permission, source } = photo;
+            return { index, uuid, source_type, url, alt_text, permission, source };
+          }),
+        },
+        images: approvedPhotos.map((photo, index) => {
+          const { uuid, preview, base64 } = photo;
+          return { index, uuid, url: preview, ...(photo.new && { base64 }) };
         }),
       };
 

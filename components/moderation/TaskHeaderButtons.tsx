@@ -6,6 +6,7 @@ import { Button, IconArrowRight, IconArrowUndo, IconTrash } from "hds-react";
 import { ModerationStatusAction } from "../../state/actions/types";
 import { RootState } from "../../state/reducers";
 import { ItemType, ModerationStatus, TaskStatus, TaskType, Toast } from "../../types/constants";
+import { Photo } from "../../types/general";
 import { approveModeration, deleteModeration, saveModerationChangeRequest, rejectModeration } from "../../utils/moderation";
 import setModerationStatus from "../../utils/status";
 import ModalConfirmation from "../common/ModalConfirmation";
@@ -89,7 +90,6 @@ const TaskHeaderButtons = ({ isModerated }: TaskHeaderButtonsProps): ReactElemen
 
     // Save the moderated data for new or changed places using approved values only
     // For tip change requests just use the modified values
-    // TODO - handle images
     const approvedTask =
       taskType === TaskType.NewPlace || taskType === TaskType.PlaceChange
         ? {
@@ -158,7 +158,6 @@ const TaskHeaderButtons = ({ isModerated }: TaskHeaderButtonsProps): ReactElemen
               en: getApprovedValue(moderationStatus.website.en, selectedTask.website.en, modifiedTask.website.en),
             },
             images: photosModified.map((photo, index) => {
-              // Note: the proxied preview url is used as the modified url
               const photoSelected = photosSelected[index] || { altText: {} };
               const photoModified = photo || { altText: {} };
               const photoStatus = photosStatus[index] || { altText: {} };
@@ -168,7 +167,7 @@ const TaskHeaderButtons = ({ isModerated }: TaskHeaderButtonsProps): ReactElemen
                 index,
                 uuid,
                 source_type,
-                url: getApprovedValue(photoStatus.url, photoSelected.url, photoModified.preview || ""),
+                url: getApprovedValue(photoStatus.url, photoSelected.url, photoModified.url),
                 alt_text: {
                   fi: getApprovedValue(photoStatus.altText.fi, photoSelected.altText.fi, photoModified.altText.fi),
                   sv: getApprovedValue(photoStatus.altText.sv, photoSelected.altText.sv, photoModified.altText.sv),
@@ -182,7 +181,36 @@ const TaskHeaderButtons = ({ isModerated }: TaskHeaderButtonsProps): ReactElemen
           }
         : modifiedTask;
 
-    approveModeration(currentUser, modifiedTaskId, approvedTask, moderationExtra, router, setToast);
+    // The moderation approval for images needs both the original url and the proxied preview url
+    const approvedPhotos =
+      taskType === TaskType.NewPlace || taskType === TaskType.PlaceChange
+        ? photosModified.map((photo, index) => {
+            const photoSelected = photosSelected[index] || { altText: {} };
+            const photoModified = photo || { altText: {} };
+            const photoStatus = photosStatus[index] || { altText: {} };
+            const { uuid, sourceType } = photoModified;
+
+            return {
+              index,
+              uuid,
+              sourceType,
+              url: getApprovedValue(photoStatus.url, photoSelected.url, photoModified.url),
+              altText: {
+                fi: getApprovedValue(photoStatus.altText.fi, photoSelected.altText.fi, photoModified.altText.fi),
+                sv: getApprovedValue(photoStatus.altText.sv, photoSelected.altText.sv, photoModified.altText.sv),
+                en: getApprovedValue(photoStatus.altText.en, photoSelected.altText.en, photoModified.altText.en),
+              },
+              permission: getApprovedValue(photoStatus.permission, photoSelected.permission as string, photoModified.permission as string),
+              source: getApprovedValue(photoStatus.source, photoSelected.source, photoModified.source),
+              preview: getApprovedValue(photoStatus.url, photoSelected.preview as string, photoModified.preview as string),
+            };
+          })
+        : modifiedTask.images.map((photo, index) => {
+            const { uuid, source_type: sourceType, url, alt_text: altText, permission, source } = photo;
+            return { index, uuid, sourceType, url, altText, permission, source };
+          });
+
+    approveModeration(currentUser, modifiedTaskId, approvedTask, approvedPhotos, moderationExtra, router, setToast);
   };
 
   const rejectTask = () => {
