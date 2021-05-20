@@ -6,7 +6,6 @@ import { Button, IconArrowRight, IconArrowUndo, IconTrash } from "hds-react";
 import { ModerationStatusAction } from "../../state/actions/types";
 import { RootState } from "../../state/reducers";
 import { ItemType, ModerationStatus, TaskStatus, TaskType, Toast } from "../../types/constants";
-import { Photo } from "../../types/general";
 import { approveModeration, deleteModeration, saveModerationChangeRequest, rejectModeration } from "../../utils/moderation";
 import setModerationStatus from "../../utils/status";
 import ModalConfirmation from "../common/ModalConfirmation";
@@ -157,26 +156,7 @@ const TaskHeaderButtons = ({ isModerated }: TaskHeaderButtonsProps): ReactElemen
               sv: getApprovedValue(moderationStatus.website.sv, selectedTask.website.sv, modifiedTask.website.sv),
               en: getApprovedValue(moderationStatus.website.en, selectedTask.website.en, modifiedTask.website.en),
             },
-            images: photosModified.map((photo, index) => {
-              const photoSelected = photosSelected[index] || { altText: {} };
-              const photoModified = photo || { altText: {} };
-              const photoStatus = photosStatus[index] || { altText: {} };
-              const { uuid, sourceType: source_type } = photoModified;
-
-              return {
-                index,
-                uuid,
-                source_type,
-                url: getApprovedValue(photoStatus.url, photoSelected.url, photoModified.url),
-                alt_text: {
-                  fi: getApprovedValue(photoStatus.altText.fi, photoSelected.altText.fi, photoModified.altText.fi),
-                  sv: getApprovedValue(photoStatus.altText.sv, photoSelected.altText.sv, photoModified.altText.sv),
-                  en: getApprovedValue(photoStatus.altText.en, photoSelected.altText.en, photoModified.altText.en),
-                },
-                permission: getApprovedValue(photoStatus.permission, photoSelected.permission as string, photoModified.permission as string),
-                source: getApprovedValue(photoStatus.source, photoSelected.source, photoModified.source),
-              };
-            }),
+            images: [],
             ontology_ids: moderationStatus.ontology_ids === ModerationStatus.Approved ? modifiedTask.ontology_ids : selectedTask.ontology_ids,
           }
         : modifiedTask;
@@ -196,9 +176,9 @@ const TaskHeaderButtons = ({ isModerated }: TaskHeaderButtonsProps): ReactElemen
               sourceType,
               url: getApprovedValue(photoStatus.url, photoSelected.url, photoModified.url),
               altText: {
-                fi: getApprovedValue(photoStatus.altText.fi, photoSelected.altText.fi, photoModified.altText.fi),
-                sv: getApprovedValue(photoStatus.altText.sv, photoSelected.altText.sv, photoModified.altText.sv),
-                en: getApprovedValue(photoStatus.altText.en, photoSelected.altText.en, photoModified.altText.en),
+                fi: getApprovedValue(photoStatus.altText.fi, photoSelected.altText.fi ?? "", photoModified.altText.fi ?? ""),
+                sv: getApprovedValue(photoStatus.altText.sv, photoSelected.altText.sv ?? "", photoModified.altText.sv ?? ""),
+                en: getApprovedValue(photoStatus.altText.en, photoSelected.altText.en ?? "", photoModified.altText.en ?? ""),
               },
               permission: getApprovedValue(photoStatus.permission, photoSelected.permission as string, photoModified.permission as string),
               source: getApprovedValue(photoStatus.source, photoSelected.source, photoModified.source),
