@@ -77,9 +77,9 @@ export const saveNotification = async (
                 sourceType: image.source_type,
                 url: image.url,
                 altText: {
-                  fi: image.alt_text.fi,
-                  sv: image.alt_text.sv,
-                  en: image.alt_text.en,
+                  fi: image.alt_text.fi ?? "",
+                  sv: image.alt_text.sv ?? "",
+                  en: image.alt_text.en ?? "",
                 },
                 permission: image.permission,
                 source: image.source,
