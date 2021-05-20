@@ -158,6 +158,7 @@ const TaskHeaderButtons = ({ isModerated }: TaskHeaderButtonsProps): ReactElemen
               en: getApprovedValue(moderationStatus.website.en, selectedTask.website.en, modifiedTask.website.en),
             },
             images: photosModified.map((photo, index) => {
+              // Note: the proxied preview url is used as the modified url
               const photoSelected = photosSelected[index] || { altText: {} };
               const photoModified = photo || { altText: {} };
               const photoStatus = photosStatus[index] || { altText: {} };
@@ -167,7 +168,7 @@ const TaskHeaderButtons = ({ isModerated }: TaskHeaderButtonsProps): ReactElemen
                 index,
                 uuid,
                 source_type,
-                url: getApprovedValue(photoStatus.url, photoSelected.url, photoModified.url),
+                url: getApprovedValue(photoStatus.url, photoSelected.url, photoModified.preview || ""),
                 alt_text: {
                   fi: getApprovedValue(photoStatus.altText.fi, photoSelected.altText.fi, photoModified.altText.fi),
                   sv: getApprovedValue(photoStatus.altText.sv, photoSelected.altText.sv, photoModified.altText.sv),

@@ -184,6 +184,10 @@ export interface ModerationTodoSchema {
     id: number;
     data: NotificationSchema;
   };
+  notification_target: {
+    id: number;
+    data: NotificationSchema;
+  };
   category: string;
   item_type: string;
   status: string;

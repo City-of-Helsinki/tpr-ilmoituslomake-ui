@@ -18,6 +18,7 @@ interface ModerationSectionProps {
   modifyButtonHidden?: boolean;
   actionButtonHidden?: boolean;
   bypassModifiedFieldCheck?: boolean;
+  forceDisabled?: boolean;
   changeCallback:
     | ((evt: ChangeEvent<HTMLInputElement>) => void)
     | ((evt: ChangeEvent<HTMLTextAreaElement>) => void)
@@ -41,6 +42,7 @@ const ModerationSection = ({
   modifyButtonHidden,
   actionButtonHidden,
   bypassModifiedFieldCheck,
+  forceDisabled,
   changeCallback,
   statusCallback,
   ModerationComponent,
@@ -57,7 +59,7 @@ const ModerationSection = ({
           className: "gridColumn1 disabledTextColor",
           value: moderationStatus !== ModerationStatus.Edited ? selectedValue : modifiedValue,
           onChange: moderationStatus === ModerationStatus.Edited ? changeCallback : undefined,
-          disabled: moderationStatus !== ModerationStatus.Edited || taskStatus === TaskStatus.Closed,
+          disabled: moderationStatus !== ModerationStatus.Edited || taskStatus === TaskStatus.Closed || forceDisabled,
           radiobuttonname: isSelectionGroupWrapper ? id : undefined,
         })}
       </>
@@ -98,7 +100,10 @@ const ModerationSection = ({
             value: modifiedValue,
             onChange: changeCallback,
             disabled:
-              moderationStatus === ModerationStatus.Approved || moderationStatus === ModerationStatus.Rejected || taskStatus === TaskStatus.Closed,
+              moderationStatus === ModerationStatus.Approved ||
+              moderationStatus === ModerationStatus.Rejected ||
+              taskStatus === TaskStatus.Closed ||
+              forceDisabled,
             radiobuttonname: isSelectionGroupWrapper ? `${id}_Modified` : undefined,
           })}
         </ModifyButton>
@@ -127,6 +132,7 @@ ModerationSection.defaultProps = {
   modifyButtonHidden: false,
   actionButtonHidden: false,
   bypassModifiedFieldCheck: false,
+  forceDisabled: false,
   isSelectionGroupWrapper: false,
 };
 

@@ -40,10 +40,11 @@ export const saveNotification = async (
           }),
         },
         images: photos
-          .filter((photo) => photo.new)
+          // .filter((photo) => photo.new)
           .map((photo, index) => {
             const { uuid, url, base64 } = photo;
-            return { index, uuid, url, base64 };
+            // return { index, uuid, url, base64 };
+            return { index, uuid, url, ...(photo.new && { base64 }) };
           }),
       };
 

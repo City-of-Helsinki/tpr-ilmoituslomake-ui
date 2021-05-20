@@ -47,10 +47,13 @@ export const approveModeration = async (
         }
       }
 
-      // TODO - handle photos
+      // TODO - handle new images including the base64 value
       const postData = {
         data: { ...modifiedTask },
-        images: [],
+        images: modifiedTask.images.map((photo, index) => {
+          const { uuid, url } = photo;
+          return { index, uuid, url };
+        }),
       };
 
       console.log("SENDING", postData);

@@ -173,8 +173,11 @@ export const getServerSideProps: GetServerSideProps = async ({ req, resolvedUrl,
       try {
         // taskResult.target.data is the original existing notification, and is available for modified places and change requests
         // taskResult.data is the new or modified notification, and is available for new and modified places
+        // taskResult.notification_target.data is the new or modified notification with proxied image urls
         const { id: targetId, data: targetData } = taskResult.target || { id: 0, data: INITIAL_NOTIFICATION };
+        const { data: imageData } = taskResult.notification_target || { id: 0, data: INITIAL_NOTIFICATION };
         const modifiedTask = !taskResult.data || !taskResult.data.name ? targetData : (taskResult.data as NotificationSchema);
+        const modifiedImages = imageData.images || [];
 
         initialReduxState.moderation = {
           ...initialReduxState.moderation,
@@ -212,7 +215,7 @@ export const getServerSideProps: GetServerSideProps = async ({ req, resolvedUrl,
                 preview: image.url,
               };
             }),
-            photosModified: modifiedTask.images.map((image) => {
+            photosModified: modifiedTask.images.map((image, index) => {
               return {
                 uuid: image.uuid ?? "",
                 sourceType: image.source_type,
@@ -225,7 +228,8 @@ export const getServerSideProps: GetServerSideProps = async ({ req, resolvedUrl,
                 permission: image.permission,
                 source: image.source,
                 base64: "",
-                preview: image.url,
+                // preview: image.url,
+                preview: modifiedImages[index] ? modifiedImages[index].url : "",
               };
             }),
           },
