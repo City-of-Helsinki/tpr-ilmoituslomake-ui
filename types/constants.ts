@@ -276,6 +276,7 @@ export const INITIAL_MODERATION_EXTRA = {
   photosSelected: [],
   photosModified: [],
   tagOptions: [],
+  published: false,
   created_at: "",
   updated_at: "",
   taskType: TaskType.Unknown,

@@ -50,6 +50,7 @@ export const approveModeration = async (
       // TODO - handle photos
       const postData = {
         data: { ...modifiedTask },
+        images: [],
       };
 
       console.log("SENDING", postData);

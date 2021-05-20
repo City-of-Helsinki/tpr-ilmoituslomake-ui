@@ -171,6 +171,8 @@ export const getServerSideProps: GetServerSideProps = async ({ req, resolvedUrl,
       const taskResult = await (taskResponse.json() as Promise<ModerationTodoSchema>);
 
       try {
+        // taskResult.target.data is the original existing notification, and is available for modified places and change requests
+        // taskResult.data is the new or modified notification, and is available for new and modified places
         const { id: targetId, data: targetData } = taskResult.target || { id: 0, data: INITIAL_NOTIFICATION };
         const modifiedTask = !taskResult.data || !taskResult.data.name ? targetData : (taskResult.data as NotificationSchema);
 
