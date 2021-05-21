@@ -7,7 +7,7 @@ import i18nLoader from "../../../utils/i18n";
 import { initStore } from "../../../state/store";
 import { RootState } from "../../../state/reducers";
 import { ModerationStatus, CLEAR_STATE, INITIAL_NOTIFICATION, INITIAL_MODERATION_STATUS_EDITED, LANGUAGE_OPTIONS } from "../../../types/constants";
-import { ModerationTodoSchema } from "../../../types/general";
+import { ModerationTodoSchema, PhotoSchema } from "../../../types/general";
 import { PhotoStatus } from "../../../types/moderation_status";
 import { NotificationSchema } from "../../../types/notification_schema";
 import { getTaskStatus, getTaskType } from "../../../utils/conversion";
@@ -173,12 +173,23 @@ export const getServerSideProps: GetServerSideProps = async ({ req, resolvedUrl,
       try {
         // taskResult.target.data is the original existing notification, and is available for modified places and change requests
         // taskResult.data is the new or modified notification, and is available for new and modified places
-        // taskResult.notification_target.data is the new or modified notification with proxied image urls
+        // taskResult.notification_target.data is the new or modified notification with proxied image urls (for new images only)
         const { id: targetId, data: targetData } = taskResult.target || { id: 0, data: INITIAL_NOTIFICATION };
         const { data: imageData } = taskResult.notification_target || { id: 0, data: INITIAL_NOTIFICATION };
         const modifiedTask = !taskResult.data || !taskResult.data.name ? targetData : (taskResult.data as NotificationSchema);
-        const modifiedImages = imageData.images || [];
 
+        // Make a list of all unique image uuids
+        const originalImages = targetData.images || [];
+        const modifiedImages = modifiedTask.images || [];
+        const newImages = imageData.images || [];
+        const uuids = [
+          ...originalImages.map((image) => image.uuid),
+          ...modifiedImages.map((image) => image.uuid),
+          ...newImages.map((image) => image.uuid),
+        ].filter((v, i, a) => a.indexOf(v) === i);
+
+        // For photosSelected, only include a photo if it also exists in the modified images
+        // So if a user has removed a photo, it will not be moderated, just removed
         initialReduxState.moderation = {
           ...initialReduxState.moderation,
           selectedTaskId: targetId,
@@ -199,37 +210,44 @@ export const getServerSideProps: GetServerSideProps = async ({ req, resolvedUrl,
               fullName: taskResult.moderator ? `${taskResult.moderator.first_name} ${taskResult.moderator.last_name}`.trim() : "",
               email: taskResult.moderator && taskResult.moderator.email ? taskResult.moderator.email : "",
             },
-            photosSelected: targetData.images.map((image) => {
+            photosUuids: uuids,
+            photosSelected: uuids.map((uuid) => {
+              const originalImage = originalImages.find((i) => i.uuid === uuid);
+              const image = originalImage || ({ alt_text: {} } as PhotoSchema);
+
               return {
                 uuid: image.uuid ?? "",
-                sourceType: image.source_type,
-                url: image.url,
+                sourceType: image.source_type ?? "",
+                url: image.url ?? "",
                 altText: {
                   fi: image.alt_text.fi ?? "",
                   sv: image.alt_text.sv ?? "",
                   en: image.alt_text.en ?? "",
                 },
-                permission: image.permission,
-                source: image.source,
+                permission: image.permission ?? "",
+                source: image.source ?? "",
                 base64: "",
-                preview: image.url,
+                preview: image.url ?? "",
               };
             }),
-            photosModified: modifiedTask.images.map((image, index) => {
+            photosModified: uuids.map((uuid) => {
+              const modifiedImage = modifiedImages.find((i) => i.uuid === uuid);
+              const newImage = newImages.find((i) => i.uuid === uuid);
+              const image = modifiedImage || ({ alt_text: {} } as PhotoSchema);
+
               return {
                 uuid: image.uuid ?? "",
-                sourceType: image.source_type,
-                url: image.url,
+                sourceType: image.source_type ?? "",
+                url: image.url ?? "",
                 altText: {
                   fi: image.alt_text.fi ?? "",
                   sv: image.alt_text.sv ?? "",
                   en: image.alt_text.en ?? "",
                 },
-                permission: image.permission,
-                source: image.source,
+                permission: image.permission ?? "",
+                source: image.source ?? "",
                 base64: "",
-                // preview: image.url,
-                preview: modifiedImages[index] ? modifiedImages[index].url : "",
+                preview: newImage ? newImage.url : image.url ?? "",
               };
             }),
           },
@@ -242,7 +260,7 @@ export const getServerSideProps: GetServerSideProps = async ({ req, resolvedUrl,
             ...initialReduxState.moderationStatus,
             moderationStatus: {
               ...initialReduxState.moderationStatus.moderationStatus,
-              photos: modifiedTask.images.map(() => {
+              photos: uuids.map(() => {
                 return {
                   url: ModerationStatus.Unknown,
                   altText: {
@@ -263,7 +281,7 @@ export const getServerSideProps: GetServerSideProps = async ({ req, resolvedUrl,
             pageStatus: ModerationStatus.Edited,
             moderationStatus: {
               ...INITIAL_MODERATION_STATUS_EDITED,
-              photos: modifiedTask.images.map(() => {
+              photos: uuids.map(() => {
                 return {
                   url: ModerationStatus.Edited,
                   altText: {

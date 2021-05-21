@@ -190,12 +190,8 @@ const moderation = (state = initialState, action: AnyAction): ModerationState =>
 
       // If index -1 is specified, add the photo to both arrays
       // Otherwise combine the field value with the existing photo in the modified array
-      const photosSelected = [
-        ...state.moderationExtra.photosSelected.reduce((acc: Photo[], photo) => {
-          return [...acc, photo];
-        }, []),
-        ...(action.payload.index === -1 ? [action.payload.value] : []),
-      ];
+      const photosUuids = [...state.moderationExtra.photosUuids, ...(action.payload.index === -1 ? [action.payload.value.uuid] : [])];
+      const photosSelected = [...state.moderationExtra.photosSelected, ...(action.payload.index === -1 ? [action.payload.value] : [])];
       const photosModified = [
         ...state.moderationExtra.photosModified.reduce((acc: Photo[], photo, index) => {
           return [...acc, action.payload.index === index ? { ...photo, ...action.payload.value } : photo];
@@ -205,7 +201,7 @@ const moderation = (state = initialState, action: AnyAction): ModerationState =>
 
       return {
         ...state,
-        moderationExtra: { ...state.moderationExtra, photosSelected, photosModified },
+        moderationExtra: { ...state.moderationExtra, photosUuids, photosSelected, photosModified },
       };
     }
 
@@ -213,6 +209,9 @@ const moderation = (state = initialState, action: AnyAction): ModerationState =>
       console.log("REMOVE_MODERATION_PHOTO", action.payload);
 
       // Remove the photo at the specified index
+      const photosUuids = state.moderationExtra.photosUuids.reduce((acc: string[], uuid, index) => {
+        return action.payload === index ? acc : [...acc, uuid];
+      }, []);
       const photosSelected = state.moderationExtra.photosSelected.reduce((acc: Photo[], photo, index) => {
         return action.payload === index ? acc : [...acc, photo];
       }, []);
@@ -222,7 +221,7 @@ const moderation = (state = initialState, action: AnyAction): ModerationState =>
 
       return {
         ...state,
-        moderationExtra: { ...state.moderationExtra, photosSelected, photosModified },
+        moderationExtra: { ...state.moderationExtra, photosUuids, photosSelected, photosModified },
       };
     }
 

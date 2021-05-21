@@ -1,12 +1,12 @@
-import React, { Dispatch, ChangeEvent, ReactElement, Fragment } from "react";
+import React, { Dispatch, ChangeEvent, ReactElement, useRef } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useI18n } from "next-localization";
-import { TextInput, Button, TextArea } from "hds-react";
+import { Button, IconLink, IconUpload, Notification as HdsNotification, TextArea, TextInput } from "hds-react";
 import { ModerationAction, ModerationStatusAction } from "../../state/actions/types";
 import { removeModerationPhoto, setModerationPhoto } from "../../state/actions/moderation";
 import { removeModerationPhotoStatus, setModerationPhotoAltTextStatus, setModerationPhotoStatus } from "../../state/actions/moderationStatus";
 import { RootState } from "../../state/reducers";
-import { LANGUAGE_OPTIONS, ModerationStatus, PhotoPermission, PhotoSourceType, TaskType } from "../../types/constants";
+import { LANGUAGE_OPTIONS, ModerationStatus, PhotoPermission, PhotoSourceType, TaskStatus, TaskType } from "../../types/constants";
 import ModerationSection from "./ModerationSection";
 import PhotoPreviewModeration from "./PhotoPreviewModeration";
 import SelectionGroupWrapper from "./SelectionGroupWrapper";
@@ -17,7 +17,7 @@ const PhotosModeration = (): ReactElement => {
   const dispatchStatus = useDispatch<Dispatch<ModerationStatusAction>>();
 
   const moderationExtra = useSelector((state: RootState) => state.moderation.moderationExtra);
-  const { photosSelected, photosModified, taskType, taskStatus } = moderationExtra;
+  const { photosUuids, photosSelected, photosModified, taskType, taskStatus } = moderationExtra;
 
   const moderationStatus = useSelector((state: RootState) => state.moderationStatus.moderationStatus);
   const { photos: photosStatus } = moderationStatus;
@@ -49,13 +49,15 @@ const PhotosModeration = (): ReactElement => {
   };
 
   return (
-    <div className="formSection">
-      {photosModified.map(({ sourceType: sourceTypeModified }, index) => {
+    <div>
+      {photosUuids.map((uuid, index) => {
         const key = `photo_${index}`;
+        const modifiedImage = photosModified.find((i) => i.uuid === uuid);
+        const { new: isNewImage, sourceType: sourceTypeModified } = modifiedImage || {};
         const urlLabelKey = sourceTypeModified === PhotoSourceType.Device ? "moderation.photos.url.labelDevice" : "moderation.photos.url.labelLink";
 
         return (
-          <Fragment key={key}>
+          <div key={key} className="formSection">
             <div className="gridLayoutContainer moderation">
               <ModerationSection
                 id={`url_${index}`}
@@ -68,6 +70,7 @@ const PhotosModeration = (): ReactElement => {
                 selectedHeaderText={`${i18n.t("moderation.photos.photo.title")} ${index + 1}${i18n.t("moderation.task.selected")}`}
                 modifiedHeaderText={`${i18n.t("moderation.photos.photo.title")} ${index + 1}${i18n.t("moderation.task.modified")}`}
                 modifyButtonLabel={i18n.t(urlLabelKey)}
+                modifyButtonHidden
                 forceDisabled
                 changeCallback={(evt: ChangeEvent<HTMLInputElement>) => updatePhoto(index, evt)}
                 statusCallback={(fieldName, status) => updatePhotoStatus(index, fieldName, status)}
@@ -76,6 +79,26 @@ const PhotosModeration = (): ReactElement => {
             </div>
 
             <PhotoPreviewModeration index={index} />
+
+            {(taskType === TaskType.NewPlace || taskType === TaskType.PlaceChange || pageStatus === ModerationStatus.Edited) && (
+              <div className="gridLayoutContainer moderation">
+                <div className="gridColumn1">
+                  {!modifiedImage && (
+                    <HdsNotification size="small" type="alert">
+                      {i18n.t(`moderation.photos.removed`)}
+                    </HdsNotification>
+                  )}
+                </div>
+                <div className="gridColumn2">
+                  {modifiedImage && (
+                    <Button variant="secondary" onClick={() => removePhoto(index)} disabled={taskStatus === TaskStatus.Closed}>
+                      {i18n.t("moderation.photos.remove")}
+                    </Button>
+                  )}
+                </div>
+                <div className="gridColumn3" />
+              </div>
+            )}
 
             <div className="languageSection gridLayoutContainer moderation">
               {LANGUAGE_OPTIONS.map((option) => {
@@ -92,6 +115,7 @@ const PhotosModeration = (): ReactElement => {
                     taskType={taskType}
                     taskStatus={taskStatus}
                     modifyButtonLabel={`${i18n.t("moderation.photos.altText.label")} ${i18n.t(`common.inLanguage.${option}`)}`}
+                    modifyButtonHidden={!modifiedImage}
                     changeCallback={(evt: ChangeEvent<HTMLTextAreaElement>) => updatePhotoAltText(index, evt)}
                     statusCallback={(language, status) => updatePhotoAltTextStatus(index, language, status)}
                     ModerationComponent={
@@ -117,6 +141,7 @@ const PhotosModeration = (): ReactElement => {
                 taskType={taskType}
                 taskStatus={taskStatus}
                 modifyButtonLabel={i18n.t("moderation.photos.permission.label")}
+                modifyButtonHidden={!modifiedImage}
                 changeCallback={(evt: ChangeEvent<HTMLInputElement>) => updatePhoto(index, evt)}
                 statusCallback={(fieldName, status) => updatePhotoStatus(index, fieldName, status)}
                 ModerationComponent={
@@ -139,20 +164,14 @@ const PhotosModeration = (): ReactElement => {
                 taskType={taskType}
                 taskStatus={taskStatus}
                 modifyButtonLabel={i18n.t("moderation.photos.source.label")}
+                modifyButtonHidden={!modifiedImage}
                 changeCallback={(evt: ChangeEvent<HTMLInputElement>) => updatePhoto(index, evt)}
                 statusCallback={(fieldName, status) => updatePhotoStatus(index, fieldName, status)}
                 ModerationComponent={<TextInput id={`source_${index}`} label={i18n.t("moderation.photos.source.label")} name="source" />}
               />
-
-              {(taskType === TaskType.NewPlace || taskType === TaskType.PlaceChange || pageStatus === ModerationStatus.Edited) && (
-                <div className="gridColumn1">
-                  <Button variant="secondary" onClick={() => removePhoto(index)}>
-                    {i18n.t("moderation.photos.remove")}
-                  </Button>
-                </div>
-              )}
             </div>
-          </Fragment>
+            <hr />
+          </div>
         );
       })}
     </div>

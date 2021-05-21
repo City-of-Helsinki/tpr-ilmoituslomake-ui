@@ -29,7 +29,7 @@ const TaskHeaderButtons = ({ isModerated }: TaskHeaderButtonsProps): ReactElemen
   const modifiedTask = useSelector((state: RootState) => state.moderation.modifiedTask);
 
   const moderationExtra = useSelector((state: RootState) => state.moderation.moderationExtra);
-  const { photosSelected, photosModified, taskType, taskStatus } = moderationExtra;
+  const { photosUuids, photosSelected, photosModified, taskType, taskStatus } = moderationExtra;
   const pageStatus = useSelector((state: RootState) => state.moderationStatus.pageStatus);
   const moderationStatus = useSelector((state: RootState) => state.moderationStatus.moderationStatus);
   const { photos: photosStatus } = moderationStatus;
@@ -161,30 +161,33 @@ const TaskHeaderButtons = ({ isModerated }: TaskHeaderButtonsProps): ReactElemen
           }
         : modifiedTask;
 
-    // The moderation approval for images needs both the original url and the proxied preview url
+    // The moderation approval for new images needs both the original url and the proxied preview url
+    // Filter out photos that the user has removed
     const approvedPhotos =
       taskType === TaskType.NewPlace || taskType === TaskType.PlaceChange
-        ? photosModified.map((photo, index) => {
-            const photoSelected = photosSelected[index] || { altText: {} };
-            const photoModified = photo || { altText: {} };
-            const photoStatus = photosStatus[index] || { altText: {} };
-            const { uuid, sourceType } = photoModified;
+        ? photosUuids
+            .filter((uuid) => photosModified.some((photo) => photo.uuid === uuid))
+            .map((uuid, index) => {
+              const photoSelected = photosSelected[index] || { altText: {} };
+              const photoModified = photosModified[index] || { altText: {} };
+              const photoStatus = photosStatus[index] || { altText: {} };
+              const { sourceType } = photoModified;
 
-            return {
-              index,
-              uuid,
-              sourceType,
-              url: getApprovedValue(photoStatus.url, photoSelected.url, photoModified.url),
-              altText: {
-                fi: getApprovedValue(photoStatus.altText.fi, photoSelected.altText.fi ?? "", photoModified.altText.fi ?? ""),
-                sv: getApprovedValue(photoStatus.altText.sv, photoSelected.altText.sv ?? "", photoModified.altText.sv ?? ""),
-                en: getApprovedValue(photoStatus.altText.en, photoSelected.altText.en ?? "", photoModified.altText.en ?? ""),
-              },
-              permission: getApprovedValue(photoStatus.permission, photoSelected.permission as string, photoModified.permission as string),
-              source: getApprovedValue(photoStatus.source, photoSelected.source, photoModified.source),
-              preview: getApprovedValue(photoStatus.url, photoSelected.preview as string, photoModified.preview as string),
-            };
-          })
+              return {
+                index,
+                uuid,
+                sourceType,
+                url: getApprovedValue(photoStatus.url, photoSelected.url, photoModified.url),
+                altText: {
+                  fi: getApprovedValue(photoStatus.altText.fi, photoSelected.altText.fi ?? "", photoModified.altText.fi ?? ""),
+                  sv: getApprovedValue(photoStatus.altText.sv, photoSelected.altText.sv ?? "", photoModified.altText.sv ?? ""),
+                  en: getApprovedValue(photoStatus.altText.en, photoSelected.altText.en ?? "", photoModified.altText.en ?? ""),
+                },
+                permission: getApprovedValue(photoStatus.permission, photoSelected.permission as string, photoModified.permission as string),
+                source: getApprovedValue(photoStatus.source, photoSelected.source, photoModified.source),
+                preview: getApprovedValue(photoStatus.url, photoSelected.preview as string, photoModified.preview as string),
+              };
+            })
         : modifiedTask.images.map((photo, index) => {
             const { uuid, source_type: sourceType, url, alt_text: altText, permission, source } = photo;
             return { index, uuid, sourceType, url, altText, permission, source };

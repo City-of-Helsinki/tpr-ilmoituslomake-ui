@@ -273,6 +273,7 @@ export const INITIAL_NOTIFICATION_VALIDATION = {
 };
 
 export const INITIAL_MODERATION_EXTRA = {
+  photosUuids: [],
   photosSelected: [],
   photosModified: [],
   tagOptions: [],

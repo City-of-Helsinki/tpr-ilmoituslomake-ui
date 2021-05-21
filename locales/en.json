@@ -517,7 +517,8 @@
       },
       "addNewFromDevice": "Lisää kuva laitteelta",
       "addNewFromLink": "Lisää kuvalinkki",
-      "remove": "Poista kuva"
+      "remove": "Poista kuva",
+      "removed": "Poistettu"
     },
     "placeSearch": {
       "title": "Hae kohteita",

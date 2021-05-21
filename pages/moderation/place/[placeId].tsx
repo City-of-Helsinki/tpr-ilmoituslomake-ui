@@ -114,6 +114,7 @@ export const getServerSideProps: GetServerSideProps = async ({ req, resolvedUrl,
               fullName: "",
               email: "",
             },
+            photosUuids: placeResult.data.images.map((image) => image.uuid ?? ""),
             photosSelected: placeResult.data.images.map((image) => {
               return {
                 uuid: image.uuid ?? "",

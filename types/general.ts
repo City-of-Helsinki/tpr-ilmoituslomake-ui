@@ -35,6 +35,21 @@ export type OptionType = {
   label: string;
 };
 
+export interface PhotoSchema {
+  uuid: string;
+  source_type: string;
+  url: string;
+  alt_text: {
+    fi: string;
+    sv: string;
+    en: string;
+    [key: string]: unknown;
+  };
+  permission: string;
+  source: string;
+  [key: string]: unknown;
+}
+
 export interface Photo {
   uuid: string;
   sourceType: string;
@@ -209,6 +224,7 @@ export interface ModerationTodoSchema {
 }
 
 export interface ModerationExtra {
+  photosUuids: string[];
   photosSelected: Photo[];
   photosModified: Photo[];
   tagOptions: TagOption[];
