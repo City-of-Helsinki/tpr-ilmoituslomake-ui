@@ -163,6 +163,7 @@ const TaskHeaderButtons = ({ isModerated }: TaskHeaderButtonsProps): ReactElemen
 
     // The moderation approval for new images needs both the original url and the proxied preview url
     // Filter out photos that the user has removed
+    // After checking, filter out any invalid images, so those with an empty url
     const approvedPhotos =
       taskType === TaskType.NewPlace || taskType === TaskType.PlaceChange
         ? photosUuids
@@ -171,7 +172,7 @@ const TaskHeaderButtons = ({ isModerated }: TaskHeaderButtonsProps): ReactElemen
               const photoSelected = photosSelected[index] || { altText: {} };
               const photoModified = photosModified[index] || { altText: {} };
               const photoStatus = photosStatus[index] || { altText: {} };
-              const { sourceType } = photoModified;
+              const { sourceType, new: isNewImage } = photoModified;
 
               return {
                 index,
@@ -185,9 +186,12 @@ const TaskHeaderButtons = ({ isModerated }: TaskHeaderButtonsProps): ReactElemen
                 },
                 permission: getApprovedValue(photoStatus.permission, photoSelected.permission as string, photoModified.permission as string),
                 source: getApprovedValue(photoStatus.source, photoSelected.source, photoModified.source),
+                new: isNewImage,
+                base64: getApprovedValue(photoStatus.url, photoSelected.base64 as string, photoModified.base64 as string),
                 preview: getApprovedValue(photoStatus.url, photoSelected.preview as string, photoModified.preview as string),
               };
             })
+            .filter((photo) => !!photo.url && photo.url.length > 0)
         : modifiedTask.images.map((photo, index) => {
             const { uuid, source_type: sourceType, url, alt_text: altText, permission, source } = photo;
             return { index, uuid, sourceType, url, altText, permission, source };

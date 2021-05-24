@@ -14,6 +14,7 @@ import {
   REMOVE_MODERATION_PHOTO_STATUS,
 } from "../../types/constants";
 import { KeyValueStatus } from "../../types/general";
+import { PhotoStatus } from "../../types/moderation_status";
 import { ModerationStatusAction } from "./types";
 
 export const setPageStatus = (status: ModerationStatus): ModerationStatusAction => ({
@@ -61,7 +62,7 @@ export const setModerationLinkStatus = (status: KeyValueStatus): ModerationStatu
   payload: status,
 });
 
-export const setModerationPhotoStatus = (index: number, status: KeyValueStatus): ModerationStatusAction => ({
+export const setModerationPhotoStatus = (index: number, status: PhotoStatus | KeyValueStatus): ModerationStatusAction => ({
   type: SET_MODERATION_PHOTO_STATUS,
   payload: { index, status },
 });

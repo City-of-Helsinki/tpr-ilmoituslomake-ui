@@ -89,6 +89,7 @@ import {
 } from "../../types/general";
 import { NotificationSchema } from "../../types/notification_schema";
 import { PhotoValidation } from "../../types/notification_validation";
+import { PhotoStatus } from "../../types/moderation_status";
 
 interface SetPageAction extends AnyAction {
   type: typeof SET_PAGE;
@@ -467,7 +468,7 @@ interface SetModerationLinkStatusAction extends AnyAction {
 
 interface SetModerationPhotoStatusAction extends AnyAction {
   type: typeof SET_MODERATION_PHOTO_STATUS;
-  payload: { index: number; status: KeyValueStatus };
+  payload: { index: number; status: PhotoStatus | KeyValueStatus };
 }
 
 interface SetModerationPhotoAltTextStatusAction extends AnyAction {

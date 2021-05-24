@@ -231,6 +231,7 @@ export const getServerSideProps: GetServerSideProps = async ({ req, resolvedUrl,
               };
             }),
             photosModified: uuids.map((uuid) => {
+              const originalImage = originalImages.find((i) => i.uuid === uuid);
               const modifiedImage = modifiedImages.find((i) => i.uuid === uuid);
               const newImage = newImages.find((i) => i.uuid === uuid);
               const image = modifiedImage || ({ alt_text: {} } as PhotoSchema);
@@ -247,7 +248,7 @@ export const getServerSideProps: GetServerSideProps = async ({ req, resolvedUrl,
                 permission: image.permission ?? "",
                 source: image.source ?? "",
                 base64: "",
-                preview: newImage ? newImage.url : image.url ?? "",
+                preview: !originalImage && newImage ? newImage.url : image.url ?? "",
               };
             }),
           },

@@ -58,8 +58,8 @@ export const approveModeration = async (
           }),
         },
         images: approvedPhotos.map((photo, index) => {
-          const { uuid, preview, base64 } = photo;
-          return { index, uuid, url: preview, ...(photo.new && { base64 }) };
+          const { uuid, url, preview, base64 } = photo;
+          return { index, uuid, url: photo.new ? url : preview, ...(photo.new && { base64 }) };
         }),
       };
 

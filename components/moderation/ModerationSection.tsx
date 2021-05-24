@@ -1,4 +1,4 @@
-import React, { ChangeEvent, ReactElement, cloneElement } from "react";
+import React, { ChangeEvent, FocusEvent, ReactElement, cloneElement } from "react";
 import { ModerationStatus, TaskStatus, TaskType } from "../../types/constants";
 import { OptionType } from "../../types/general";
 import ActionButton from "./ActionButton";
@@ -23,6 +23,7 @@ interface ModerationSectionProps {
     | ((evt: ChangeEvent<HTMLInputElement>) => void)
     | ((evt: ChangeEvent<HTMLTextAreaElement>) => void)
     | ((selected: OptionType[]) => void);
+  blurCallback?: (evt: FocusEvent<HTMLInputElement>) => void;
   statusCallback: (fieldName: string, status: ModerationStatus) => void;
   ModerationComponent: ReactElement;
   isSelectionGroupWrapper?: boolean;
@@ -44,6 +45,7 @@ const ModerationSection = ({
   bypassModifiedFieldCheck,
   forceDisabled,
   changeCallback,
+  blurCallback,
   statusCallback,
   ModerationComponent,
   isSelectionGroupWrapper,
@@ -59,6 +61,7 @@ const ModerationSection = ({
           className: "gridColumn1 disabledTextColor",
           value: moderationStatus !== ModerationStatus.Edited ? selectedValue : modifiedValue,
           onChange: moderationStatus === ModerationStatus.Edited ? changeCallback : undefined,
+          onBlur: moderationStatus === ModerationStatus.Edited ? blurCallback : undefined,
           disabled: moderationStatus !== ModerationStatus.Edited || taskStatus === TaskStatus.Closed || forceDisabled,
           radiobuttonname: isSelectionGroupWrapper ? id : undefined,
         })}
@@ -99,6 +102,7 @@ const ModerationSection = ({
             className: "gridColumn2 disabledTextColor",
             value: modifiedValue,
             onChange: changeCallback,
+            onBlur: blurCallback,
             disabled:
               moderationStatus === ModerationStatus.Approved ||
               moderationStatus === ModerationStatus.Rejected ||
@@ -133,6 +137,7 @@ ModerationSection.defaultProps = {
   actionButtonHidden: false,
   bypassModifiedFieldCheck: false,
   forceDisabled: false,
+  blurCallback: undefined,
   isSelectionGroupWrapper: false,
 };
 

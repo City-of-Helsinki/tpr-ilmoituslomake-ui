@@ -179,7 +179,7 @@ const Photos = (): ReactElement => {
                   }
                   required
                   aria-required
-                  disabled={isNewImage}
+                  disabled
                 />
 
                 <input className="hidden" type="file" ref={ref} onChange={(evt) => fetchPhoto(index, evt)} />
@@ -212,6 +212,7 @@ const Photos = (): ReactElement => {
                   }
                   required
                   aria-required
+                  disabled={!isNewImage}
                 />
                 <Button variant="secondary" className="formInput" onClick={() => removePhoto(index)}>
                   {i18n.t("notification.photos.remove")}
