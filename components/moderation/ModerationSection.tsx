@@ -71,7 +71,11 @@ const ModerationSection = ({
 
   if (taskType === TaskType.NewPlace || taskType === TaskType.PlaceChange) {
     // Enable modified fields to be edited by default if they have a value
-    if (moderationStatus === ModerationStatus.Unknown && modifiedValue && modifiedValue.length > 0 && !bypassModifiedFieldCheck) {
+    if (
+      moderationStatus === ModerationStatus.Unknown &&
+      ((selectedValue && selectedValue.length > 0) || (modifiedValue && modifiedValue.length > 0)) &&
+      !bypassModifiedFieldCheck
+    ) {
       statusCallback(fieldName, ModerationStatus.Edited);
     }
 
