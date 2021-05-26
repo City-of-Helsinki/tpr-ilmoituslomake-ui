@@ -8,7 +8,9 @@ import {
   SET_MODERATION_SHORT_DESCRIPTION,
   SET_MODERATION_LONG_DESCRIPTION,
   SET_MODERATION_TAG,
+  SET_MODERATION_MATKO_TAG,
   SET_MODERATION_TAG_OPTIONS,
+  SET_MODERATION_MATKO_TAG_OPTIONS,
   SET_MODERATION_EXTRA_KEYWORDS,
   SET_MODERATION_ADDRESS,
   SET_MODERATION_LOCATION,
@@ -20,6 +22,7 @@ import {
 import { ModerationAction } from "./types";
 import {
   KeyValueString,
+  MatkoTagOption,
   ModerationPlaceResults,
   ModerationPlaceSearch,
   ModerationTodoResult,
@@ -73,8 +76,18 @@ export const setModerationTag = (values: number[]): ModerationAction => ({
   payload: values,
 });
 
+export const setModerationMatkoTag = (values: number[]): ModerationAction => ({
+  type: SET_MODERATION_MATKO_TAG,
+  payload: values,
+});
+
 export const setModerationTagOptions = (options: TagOption[]): ModerationAction => ({
   type: SET_MODERATION_TAG_OPTIONS,
+  payload: options,
+});
+
+export const setModerationMatkoTagOptions = (options: MatkoTagOption[]): ModerationAction => ({
+  type: SET_MODERATION_MATKO_TAG_OPTIONS,
   payload: options,
 });
 

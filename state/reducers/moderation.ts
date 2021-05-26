@@ -11,7 +11,9 @@ import {
   SET_MODERATION_SHORT_DESCRIPTION,
   SET_MODERATION_LONG_DESCRIPTION,
   SET_MODERATION_TAG,
+  SET_MODERATION_MATKO_TAG,
   SET_MODERATION_TAG_OPTIONS,
+  SET_MODERATION_MATKO_TAG_OPTIONS,
   SET_MODERATION_EXTRA_KEYWORDS,
   SET_MODERATION_ADDRESS,
   SET_MODERATION_LOCATION,
@@ -135,11 +137,27 @@ const moderation = (state = initialState, action: AnyAction): ModerationState =>
       };
     }
 
+    case SET_MODERATION_MATKO_TAG: {
+      console.log("SET_MODERATION_MATKO_TAG", action.payload);
+      return {
+        ...state,
+        modifiedTask: { ...state.modifiedTask, matko_ids: action.payload },
+      };
+    }
+
     case SET_MODERATION_TAG_OPTIONS: {
       console.log("SET_MODERATION_TAG_OPTIONS", action.payload);
       return {
         ...state,
         moderationExtra: { ...state.moderationExtra, tagOptions: action.payload },
+      };
+    }
+
+    case SET_MODERATION_MATKO_TAG_OPTIONS: {
+      console.log("SET_MODERATION_MATKO_TAG_OPTIONS", action.payload);
+      return {
+        ...state,
+        moderationExtra: { ...state.moderationExtra, matkoTagOptions: action.payload },
       };
     }
 

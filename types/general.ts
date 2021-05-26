@@ -78,6 +78,16 @@ export interface TagOption {
   };
 }
 
+export interface MatkoTagOption {
+  id: number;
+  matkoword: {
+    fi: string;
+    sv: string;
+    en: string;
+    [key: string]: unknown;
+  };
+}
+
 export interface AddressSearchResult {
   street: string;
   postalCode: string;
@@ -229,6 +239,7 @@ export interface ModerationExtra {
   photosSelected: Photo[];
   photosModified: Photo[];
   tagOptions: TagOption[];
+  matkoTagOptions: MatkoTagOption[];
   extraKeywordsTextSelected: string;
   extraKeywordsTextModified: string;
   published: boolean;

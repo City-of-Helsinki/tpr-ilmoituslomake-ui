@@ -11,7 +11,7 @@ import { ModerationTodoSchema, PhotoSchema } from "../../../types/general";
 import { PhotoStatus } from "../../../types/moderation_status";
 import { NotificationSchema } from "../../../types/notification_schema";
 import { getTaskStatus, getTaskType } from "../../../utils/conversion";
-import { checkUser, getOriginServerSide, getTags, redirectToLogin } from "../../../utils/serverside";
+import { checkUser, getMatkoTags, getOriginServerSide, getTags, redirectToLogin } from "../../../utils/serverside";
 import Layout from "../../../components/common/Layout";
 import ModerationHeader from "../../../components/moderation/ModerationHeader";
 import Collapsible from "../../../components/moderation/Collapsible";
@@ -159,6 +159,7 @@ export const getServerSideProps: GetServerSideProps = async ({ req, resolvedUrl,
   }
 
   initialReduxState.moderation.moderationExtra.tagOptions = await getTags();
+  initialReduxState.moderation.moderationExtra.matkoTagOptions = await getMatkoTags();
 
   // Try to fetch the task details for the specified id
   if (params) {

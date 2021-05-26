@@ -51,7 +51,9 @@ import {
   SET_MODERATION_SHORT_DESCRIPTION,
   SET_MODERATION_LONG_DESCRIPTION,
   SET_MODERATION_TAG,
+  SET_MODERATION_MATKO_TAG,
   SET_MODERATION_TAG_OPTIONS,
+  SET_MODERATION_MATKO_TAG_OPTIONS,
   SET_MODERATION_EXTRA_KEYWORDS,
   SET_MODERATION_ADDRESS,
   SET_MODERATION_LOCATION,
@@ -63,6 +65,7 @@ import {
   SET_MODERATION_SHORT_DESCRIPTION_STATUS,
   SET_MODERATION_LONG_DESCRIPTION_STATUS,
   SET_MODERATION_TAG_STATUS,
+  SET_MODERATION_MATKO_TAG_STATUS,
   SET_MODERATION_EXTRA_KEYWORDS_STATUS,
   SET_MODERATION_ADDRESS_STATUS,
   SET_MODERATION_LOCATION_STATUS,
@@ -79,6 +82,7 @@ import {
   KeyValueStatus,
   KeyValueString,
   KeyValueValidation,
+  MatkoTagOption,
   ModerationPlaceResults,
   ModerationPlaceSearch,
   ModerationTodoResult,
@@ -377,6 +381,11 @@ interface SetModerationTagAction extends AnyAction {
   payload: number[];
 }
 
+interface SetModerationMatkoTagAction extends AnyAction {
+  type: typeof SET_MODERATION_MATKO_TAG;
+  payload: number[];
+}
+
 interface SetModerationExtraKeywordsAction extends AnyAction {
   type: typeof SET_MODERATION_EXTRA_KEYWORDS;
   payload: string;
@@ -385,6 +394,11 @@ interface SetModerationExtraKeywordsAction extends AnyAction {
 interface SetModerationTagOptionsAction extends AnyAction {
   type: typeof SET_MODERATION_TAG_OPTIONS;
   payload: TagOption[];
+}
+
+interface SetModerationMatkoTagOptionsAction extends AnyAction {
+  type: typeof SET_MODERATION_MATKO_TAG_OPTIONS;
+  payload: MatkoTagOption[];
 }
 
 interface SetModerationAddressAction extends AnyAction {
@@ -427,7 +441,9 @@ export type ModerationAction =
   | SetModerationShortDescriptionAction
   | SetModerationLongDescriptionAction
   | SetModerationTagAction
+  | SetModerationMatkoTagAction
   | SetModerationTagOptionsAction
+  | SetModerationMatkoTagOptionsAction
   | SetModerationExtraKeywordsAction
   | SetModerationAddressAction
   | SetModerationLocationAction
@@ -458,6 +474,11 @@ interface SetModerationLongDescriptionStatusAction extends AnyAction {
 
 interface SetModerationTagStatusAction extends AnyAction {
   type: typeof SET_MODERATION_TAG_STATUS;
+  payload: ModerationStatus;
+}
+
+interface SetModerationMatkoTagStatusAction extends AnyAction {
+  type: typeof SET_MODERATION_MATKO_TAG_STATUS;
   payload: ModerationStatus;
 }
 
@@ -507,6 +528,7 @@ export type ModerationStatusAction =
   | SetModerationShortDescriptionStatusAction
   | SetModerationLongDescriptionStatusAction
   | SetModerationTagStatusAction
+  | SetModerationMatkoTagStatusAction
   | SetModerationExtraKeywordsStatusAction
   | SetModerationAddressStatusAction
   | SetModerationLocationStatusAction

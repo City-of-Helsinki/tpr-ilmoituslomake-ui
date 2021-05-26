@@ -3,7 +3,7 @@
 import { IncomingMessage } from "http";
 import { Redirect } from "next";
 import { LANGUAGE_OPTIONS } from "../types/constants";
-import { TagOption, User } from "../types/general";
+import { MatkoTagOption, TagOption, User } from "../types/general";
 
 export const getOriginServerSide = (): string => {
   // The server-side calls should use the local backend directly
@@ -49,6 +49,15 @@ export const getTags = async (): Promise<TagOption[]> => {
   const tagResponse = await fetch(`${getOriginServerSide()}/api/ontologywords/?format=json&search=`);
   if (tagResponse.ok) {
     const tagResult = await (tagResponse.json() as Promise<TagOption[]>);
+    return tagResult;
+  }
+  return [];
+};
+
+export const getMatkoTags = async (): Promise<MatkoTagOption[]> => {
+  const tagResponse = await fetch(`${getOriginServerSide()}/api/matkowords/?format=json&search=`);
+  if (tagResponse.ok) {
+    const tagResult = await (tagResponse.json() as Promise<MatkoTagOption[]>);
     return tagResult;
   }
   return [];

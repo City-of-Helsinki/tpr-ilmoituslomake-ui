@@ -565,6 +565,7 @@
     },
     "tags": {
       "title": "Asiasanat",
+      "matko": "Matko asiasanat",
       "extra": "Käyttäjän toivomat lisähakusanat",
       "add": {
         "label": "Lisää asiasana"
