@@ -206,6 +206,8 @@ export const INITIAL_NOTIFICATION = {
   images: [],
   opening_times: {},
   ontology_ids: [],
+  matko_ids: [],
+  extra_keywords: [],
   comments: "",
   notifier: {
     notifier_type: "",
@@ -263,6 +265,8 @@ export const INITIAL_NOTIFICATION_VALIDATION = {
     en: { valid: true },
   },
   ontology_ids: { valid: true },
+  matko_ids: { valid: true },
+  extra_keywords: { valid: true },
   notifier: {
     notifier_type: { valid: true },
     full_name: { valid: true },
@@ -333,6 +337,8 @@ const getInitialModerationStatus = (moderationStatus: ModerationStatus) => {
       en: moderationStatus,
     },
     ontology_ids: moderationStatus,
+    matko_ids: moderationStatus,
+    extra_keywords: moderationStatus,
     photos: [],
   };
 };
