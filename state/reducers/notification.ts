@@ -20,6 +20,7 @@ import {
   SET_NOTIFICATION_LONG_DESCRIPTION,
   SET_NOTIFICATION_TAG,
   SET_NOTIFICATION_TAG_OPTIONS,
+  SET_NOTIFICATION_EXTRA_KEYWORDS,
   SET_NOTIFICATION_NOTIFIER,
   SET_NOTIFICATION_ADDRESS,
   SET_NOTIFICATION_ADDRESS_FOUND,
@@ -164,6 +165,21 @@ const notification = (state = initialState, action: AnyAction): NotificationStat
       return {
         ...state,
         notificationExtra: { ...state.notificationExtra, tagOptions: action.payload },
+      };
+    }
+
+    case SET_NOTIFICATION_EXTRA_KEYWORDS: {
+      console.log("SET_NOTIFICATION_EXTRA_KEYWORDS", action.payload);
+      return {
+        ...state,
+        notification: {
+          ...state.notification,
+          extra_keywords: action.payload
+            .split(",")
+            .map((extra: string) => extra.trim())
+            .filter((extra: string) => extra.length > 0),
+        },
+        notificationExtra: { ...state.notificationExtra, extraKeywordsText: action.payload },
       };
     }
 

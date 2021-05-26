@@ -1,11 +1,12 @@
-import React, { Dispatch, ReactElement } from "react";
+import React, { ChangeEvent, Dispatch, ReactElement } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useRouter } from "next/router";
 import { useI18n } from "next-localization";
-import { Combobox } from "hds-react";
+import { Combobox, TextInput } from "hds-react";
 import { NotificationAction, NotificationValidationAction } from "../../state/actions/types";
-import { setNotificationTag } from "../../state/actions/notification";
+import { setNotificationExtraKeywords, setNotificationTag } from "../../state/actions/notification";
 import { RootState } from "../../state/reducers";
+import { MAX_LENGTH } from "../../types/constants";
 import { OptionType, TagOption } from "../../types/general";
 import { defaultLocale } from "../../utils/i18n";
 import { isTagValid } from "../../utils/validation";
@@ -20,7 +21,7 @@ const Tags = (): ReactElement => {
   const { ontology_ids } = notification;
 
   const notificationExtra = useSelector((state: RootState) => state.notification.notificationExtra);
-  const { tagOptions } = notificationExtra;
+  const { tagOptions, extraKeywordsText } = notificationExtra;
 
   const notificationValidation = useSelector((state: RootState) => state.notificationValidation.notificationValidation);
   const { ontology_ids: tagsValid } = notificationValidation;
@@ -32,6 +33,10 @@ const Tags = (): ReactElement => {
 
   const updateTags = (selected: OptionType[]) => {
     dispatch(setNotificationTag(selected.map((s) => s.id as number)));
+  };
+
+  const updateExtraKeywordsText = (evt: ChangeEvent<HTMLInputElement>) => {
+    dispatch(setNotificationExtraKeywords(evt.target.value));
   };
 
   const validateTags = () => {
@@ -59,6 +64,17 @@ const Tags = (): ReactElement => {
         required
         aria-required
         multiselect
+      />
+
+      <TextInput
+        id="extraKeywordsText"
+        className="formInput"
+        label={i18n.t("notification.tags.extraKeywords.label")}
+        helperText={i18n.t("notification.tags.extraKeywords.helperText")}
+        name="extraKeywordsText"
+        value={extraKeywordsText}
+        maxLength={MAX_LENGTH}
+        onChange={updateExtraKeywordsText}
       />
     </div>
   );

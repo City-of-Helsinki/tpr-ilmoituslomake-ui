@@ -25,6 +25,7 @@ const Preview = ({ className, titleKey, includeNotifier }: PreviewProps): ReactE
     name: placeName,
     description: { short: shortDesc, long: longDesc },
     ontology_ids,
+    extra_keywords,
     address: {
       fi: { street: streetFi, postal_code: postalCodeFi, post_office: postOfficeFi, neighborhood: neighborhoodFi },
       sv: { street: streetSv, postal_code: postalCodeSv, post_office: postOfficeSv, neighborhood: neighborhoodSv },
@@ -86,6 +87,13 @@ const Preview = ({ className, titleKey, includeNotifier }: PreviewProps): ReactE
           .map((tag) => (
             <div key={`tag_${tag.id}`}>{tag.ontologyword[router.locale || defaultLocale] as string}</div>
           ))}
+      </div>
+      <div className={`${styles.gridHeading} ${styles.gridContent}`}>{i18n.t("notification.tags.extra")}</div>
+      <div className={`${styles.gridPlaceInfo} ${styles.gridContent}`}>
+        {extra_keywords.map((extraKeyword, index) => {
+          const key = `extraKeyword_${index}`;
+          return <div key={key}>{extraKeyword}</div>;
+        })}
       </div>
 
       {includeNotifier && (

@@ -12,6 +12,7 @@ import {
   SET_MODERATION_LONG_DESCRIPTION,
   SET_MODERATION_TAG,
   SET_MODERATION_TAG_OPTIONS,
+  SET_MODERATION_EXTRA_KEYWORDS,
   SET_MODERATION_ADDRESS,
   SET_MODERATION_LOCATION,
   SET_MODERATION_CONTACT,
@@ -139,6 +140,21 @@ const moderation = (state = initialState, action: AnyAction): ModerationState =>
       return {
         ...state,
         moderationExtra: { ...state.moderationExtra, tagOptions: action.payload },
+      };
+    }
+
+    case SET_MODERATION_EXTRA_KEYWORDS: {
+      console.log("SET_MODERATION_EXTRA_KEYWORDS", action.payload);
+      return {
+        ...state,
+        modifiedTask: {
+          ...state.modifiedTask,
+          extra_keywords: action.payload
+            .split(",")
+            .map((extra: string) => extra.trim())
+            .filter((extra: string) => extra.length > 0),
+        },
+        moderationExtra: { ...state.moderationExtra, extraKeywordsTextModified: action.payload },
       };
     }
 

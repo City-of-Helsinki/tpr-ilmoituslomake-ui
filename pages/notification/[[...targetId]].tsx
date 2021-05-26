@@ -161,7 +161,7 @@ export const getServerSideProps: GetServerSideProps = async ({ req, resolvedUrl,
         // Merge the notification details from the backend
         // If the current user matches the notifier and they are the representative of the place, also merge the notifier details
         // In all other cases, remove the previous notifier details
-        const { notifier, images, ...dataToUse } = targetResult.data;
+        const { notifier, extra_keywords, images, ...dataToUse } = targetResult.data;
 
         initialReduxState.notification = {
           ...initialReduxState.notification,
@@ -173,10 +173,12 @@ export const getServerSideProps: GetServerSideProps = async ({ req, resolvedUrl,
               targetResult.is_notifier && notifier && notifier.notifier_type === NotifierType.Representative
                 ? { ...INITIAL_NOTIFICATION.notifier, ...notifier }
                 : INITIAL_NOTIFICATION.notifier,
+            extra_keywords,
           },
           notificationExtra: {
             ...initialReduxState.notification.notificationExtra,
             inputLanguages: getPreviousInputLanguages(locale || defaultLocale, targetResult.data.name),
+            extraKeywordsText: extra_keywords.join(", "),
             photos: images.map((image) => {
               return {
                 uuid: image.uuid ?? "",

@@ -156,7 +156,7 @@ export const getServerSideProps: GetServerSideProps = async ({ req, params, loca
 
       try {
         // Merge the notification details from the backend, but remove the previous notifier details if present
-        const { notifier, images, ...dataToUse } = targetResult.data;
+        const { notifier, extra_keywords, images, ...dataToUse } = targetResult.data;
 
         initialReduxState.notification = {
           ...initialReduxState.notification,
@@ -165,10 +165,12 @@ export const getServerSideProps: GetServerSideProps = async ({ req, params, loca
             ...initialReduxState.notification.notification,
             ...dataToUse,
             notifier: INITIAL_NOTIFICATION.notifier,
+            extra_keywords,
           },
           notificationExtra: {
             ...initialReduxState.notification.notificationExtra,
             inputLanguages: getPreviousInputLanguages(defaultLocale, targetResult.data.name),
+            extraKeywordsText: extra_keywords.join(", "),
             photos: images.map((image) => {
               return {
                 uuid: image.uuid ?? "",

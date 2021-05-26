@@ -5,6 +5,7 @@ import {
   SET_MODERATION_SHORT_DESCRIPTION_STATUS,
   SET_MODERATION_LONG_DESCRIPTION_STATUS,
   SET_MODERATION_TAG_STATUS,
+  SET_MODERATION_EXTRA_KEYWORDS_STATUS,
   SET_MODERATION_ADDRESS_STATUS,
   SET_MODERATION_LOCATION_STATUS,
   SET_MODERATION_CONTACT_STATUS,
@@ -39,6 +40,11 @@ export const setModerationLongDescriptionStatus = (status: KeyValueStatus): Mode
 
 export const setModerationTagStatus = (status: ModerationStatus): ModerationStatusAction => ({
   type: SET_MODERATION_TAG_STATUS,
+  payload: status,
+});
+
+export const setModerationExtraKeywordsStatus = (status: ModerationStatus): ModerationStatusAction => ({
+  type: SET_MODERATION_EXTRA_KEYWORDS_STATUS,
   payload: status,
 });
 

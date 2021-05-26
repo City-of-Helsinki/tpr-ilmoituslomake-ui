@@ -48,7 +48,7 @@ const ModerationTaskDetail = (): ReactElement => {
           isModerated(moderationStatus.description.short[option]),
           isModerated(moderationStatus.description.long[option]),
         ]);
-        const moderated2 = [isModerated(moderationStatus.ontology_ids)];
+        const moderated2 = [isModerated(moderationStatus.ontology_ids), isModerated(moderationStatus.extra_keywords)];
 
         return moderated1.every((mod) => mod) && moderated2.every((mod) => mod);
       }
@@ -210,6 +210,8 @@ export const getServerSideProps: GetServerSideProps = async ({ req, resolvedUrl,
               fullName: taskResult.moderator ? `${taskResult.moderator.first_name} ${taskResult.moderator.last_name}`.trim() : "",
               email: taskResult.moderator && taskResult.moderator.email ? taskResult.moderator.email : "",
             },
+            extraKeywordsTextSelected: targetData.extra_keywords.join(", "),
+            extraKeywordsTextModified: modifiedTask.extra_keywords.join(", "),
             photosUuids: uuids,
             photosSelected: uuids.map((uuid) => {
               const originalImage = originalImages.find((i) => i.uuid === uuid);

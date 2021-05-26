@@ -9,6 +9,7 @@ import {
   SET_MODERATION_LONG_DESCRIPTION,
   SET_MODERATION_TAG,
   SET_MODERATION_TAG_OPTIONS,
+  SET_MODERATION_EXTRA_KEYWORDS,
   SET_MODERATION_ADDRESS,
   SET_MODERATION_LOCATION,
   SET_MODERATION_CONTACT,
@@ -75,6 +76,11 @@ export const setModerationTag = (values: number[]): ModerationAction => ({
 export const setModerationTagOptions = (options: TagOption[]): ModerationAction => ({
   type: SET_MODERATION_TAG_OPTIONS,
   payload: options,
+});
+
+export const setModerationExtraKeywords = (value: string): ModerationAction => ({
+  type: SET_MODERATION_EXTRA_KEYWORDS,
+  payload: value,
 });
 
 export const setModerationAddress = (language: string, value: KeyValueString): ModerationAction => ({

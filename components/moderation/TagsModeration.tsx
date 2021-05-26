@@ -1,11 +1,11 @@
-import React, { Dispatch, ReactElement } from "react";
+import React, { ChangeEvent, Dispatch, ReactElement } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useRouter } from "next/router";
 import { useI18n } from "next-localization";
-import { Combobox } from "hds-react";
+import { Combobox, TextInput } from "hds-react";
 import { ModerationAction, ModerationStatusAction } from "../../state/actions/types";
-import { setModerationTag } from "../../state/actions/moderation";
-import { setModerationTagStatus } from "../../state/actions/moderationStatus";
+import { setModerationExtraKeywords, setModerationTag } from "../../state/actions/moderation";
+import { setModerationExtraKeywordsStatus, setModerationTagStatus } from "../../state/actions/moderationStatus";
 import { RootState } from "../../state/reducers";
 import { ModerationStatus } from "../../types/constants";
 import { OptionType, TagOption } from "../../types/general";
@@ -25,10 +25,10 @@ const TagsModeration = (): ReactElement => {
   const { ontology_ids: tagsModified } = modifiedTask;
 
   const moderationExtra = useSelector((state: RootState) => state.moderation.moderationExtra);
-  const { taskType, taskStatus, tagOptions } = moderationExtra;
+  const { taskType, taskStatus, tagOptions, extraKeywordsTextSelected, extraKeywordsTextModified } = moderationExtra;
 
   const moderationStatus = useSelector((state: RootState) => state.moderationStatus.moderationStatus);
-  const { ontology_ids: tagsStatus } = moderationStatus;
+  const { ontology_ids: tagsStatus, extra_keywords: extraKeywordsStatus } = moderationStatus;
 
   const convertOptions = (options: TagOption[]): OptionType[] => {
     return options.map((tag) => ({ id: tag.id, label: tag.ontologyword[router.locale || defaultLocale] as string }));
@@ -42,8 +42,16 @@ const TagsModeration = (): ReactElement => {
     dispatch(setModerationTag(selected.map((s) => s.id as number)));
   };
 
+  const updateExtraKeywords = (evt: ChangeEvent<HTMLInputElement>) => {
+    dispatch(setModerationExtraKeywords(evt.target.value));
+  };
+
   const updateTagStatus = (language: string, status: ModerationStatus) => {
     dispatchStatus(setModerationTagStatus(status));
+  };
+
+  const updateExtraKeywordsStatus = (language: string, status: ModerationStatus) => {
+    dispatchStatus(setModerationExtraKeywordsStatus(status));
   };
 
   return (
@@ -73,6 +81,20 @@ const TagsModeration = (): ReactElement => {
               multiselect
             />
           }
+        />
+
+        <ModerationSection
+          id="extraKeywordsText"
+          fieldName="extraKeywordsText"
+          selectedValue={extraKeywordsTextSelected}
+          modifiedValue={extraKeywordsTextModified}
+          moderationStatus={extraKeywordsStatus}
+          taskType={taskType}
+          taskStatus={taskStatus}
+          modifyButtonLabel={i18n.t("moderation.tags.extra")}
+          changeCallback={updateExtraKeywords}
+          statusCallback={updateExtraKeywordsStatus}
+          ModerationComponent={<TextInput id="extraKeywordsText" label={i18n.t("moderation.tags.extra")} name="extraKeywordsText" />}
         />
       </div>
     </div>

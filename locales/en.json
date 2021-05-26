@@ -319,9 +319,14 @@
     "tags": {
       "title": "Tags",
       "tagSelection": "Tag selection",
+      "extra": "Additional keywords",
       "add": {
         "label": "Add tag",
-        "helperText": "Search or choose from the list. Choose max. 5 words."
+        "helperText": "Search or choose from the list. Choose max. 5 words"
+      },
+      "extraKeywords": {
+        "label": "Write extra wishes for keywords",
+        "helperText": "Use a comma to separate the keywords"
       }
     },
     "terms": {
@@ -560,6 +565,7 @@
     },
     "tags": {
       "title": "Asiasanat",
+      "extra": "Käyttäjän toivomat lisähakusanat",
       "add": {
         "label": "Lisää asiasana"
       }

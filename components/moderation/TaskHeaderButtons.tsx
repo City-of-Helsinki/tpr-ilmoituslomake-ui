@@ -158,6 +158,7 @@ const TaskHeaderButtons = ({ isModerated }: TaskHeaderButtonsProps): ReactElemen
             },
             images: [],
             ontology_ids: moderationStatus.ontology_ids === ModerationStatus.Approved ? modifiedTask.ontology_ids : selectedTask.ontology_ids,
+            extra_keywords: moderationStatus.extra_keywords === ModerationStatus.Approved ? modifiedTask.extra_keywords : selectedTask.extra_keywords,
           }
         : modifiedTask;
 

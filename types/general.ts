@@ -88,6 +88,7 @@ export interface NotificationExtra {
   inputLanguages: string[];
   photos: Photo[];
   tagOptions: TagOption[];
+  extraKeywordsText: string;
   locationOriginal: [number, number];
   addressFound?: AddressSearchResult;
 }
@@ -228,6 +229,8 @@ export interface ModerationExtra {
   photosSelected: Photo[];
   photosModified: Photo[];
   tagOptions: TagOption[];
+  extraKeywordsTextSelected: string;
+  extraKeywordsTextModified: string;
   published: boolean;
   created_at: string;
   updated_at: string;

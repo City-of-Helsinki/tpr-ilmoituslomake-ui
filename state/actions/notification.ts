@@ -10,6 +10,7 @@ import {
   SET_NOTIFICATION_LONG_DESCRIPTION,
   SET_NOTIFICATION_TAG,
   SET_NOTIFICATION_TAG_OPTIONS,
+  SET_NOTIFICATION_EXTRA_KEYWORDS,
   SET_NOTIFICATION_NOTIFIER,
   SET_NOTIFICATION_ADDRESS,
   SET_NOTIFICATION_ADDRESS_FOUND,
@@ -85,6 +86,11 @@ export const setNotificationTag = (values: number[]): NotificationAction => ({
 export const setNotificationTagOptions = (options: TagOption[]): NotificationAction => ({
   type: SET_NOTIFICATION_TAG_OPTIONS,
   payload: options,
+});
+
+export const setNotificationExtraKeywords = (value: string): NotificationAction => ({
+  type: SET_NOTIFICATION_EXTRA_KEYWORDS,
+  payload: value,
 });
 
 export const setNotificationNotifier = (keyValue: KeyValueString): NotificationAction => ({

@@ -7,6 +7,7 @@ import {
   SET_MODERATION_SHORT_DESCRIPTION_STATUS,
   SET_MODERATION_LONG_DESCRIPTION_STATUS,
   SET_MODERATION_TAG_STATUS,
+  SET_MODERATION_EXTRA_KEYWORDS_STATUS,
   SET_MODERATION_ADDRESS_STATUS,
   SET_MODERATION_LOCATION_STATUS,
   SET_MODERATION_CONTACT_STATUS,
@@ -74,6 +75,14 @@ const moderationStatus = (state = initialState, action: AnyAction): ModerationSt
       return {
         ...state,
         moderationStatus: { ...state.moderationStatus, ontology_ids: action.payload },
+      };
+    }
+
+    case SET_MODERATION_EXTRA_KEYWORDS_STATUS: {
+      console.log("SET_MODERATION_EXTRA_KEYWORDS_STATUS", action.payload);
+      return {
+        ...state,
+        moderationStatus: { ...state.moderationStatus, extra_keywords: action.payload },
       };
     }
 

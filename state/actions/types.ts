@@ -14,6 +14,7 @@ import {
   SET_NOTIFICATION_LONG_DESCRIPTION,
   SET_NOTIFICATION_TAG,
   SET_NOTIFICATION_TAG_OPTIONS,
+  SET_NOTIFICATION_EXTRA_KEYWORDS,
   SET_NOTIFICATION_NOTIFIER,
   SET_NOTIFICATION_ADDRESS,
   SET_NOTIFICATION_ADDRESS_FOUND,
@@ -51,6 +52,7 @@ import {
   SET_MODERATION_LONG_DESCRIPTION,
   SET_MODERATION_TAG,
   SET_MODERATION_TAG_OPTIONS,
+  SET_MODERATION_EXTRA_KEYWORDS,
   SET_MODERATION_ADDRESS,
   SET_MODERATION_LOCATION,
   SET_MODERATION_CONTACT,
@@ -61,6 +63,7 @@ import {
   SET_MODERATION_SHORT_DESCRIPTION_STATUS,
   SET_MODERATION_LONG_DESCRIPTION_STATUS,
   SET_MODERATION_TAG_STATUS,
+  SET_MODERATION_EXTRA_KEYWORDS_STATUS,
   SET_MODERATION_ADDRESS_STATUS,
   SET_MODERATION_LOCATION_STATUS,
   SET_MODERATION_CONTACT_STATUS,
@@ -141,6 +144,11 @@ interface SetNotificationTagOptionsAction extends AnyAction {
   payload: TagOption[];
 }
 
+interface SetNotificationExtraKeywordsAction extends AnyAction {
+  type: typeof SET_NOTIFICATION_EXTRA_KEYWORDS;
+  payload: string;
+}
+
 interface SetNotificationNotifierAction extends AnyAction {
   type: typeof SET_NOTIFICATION_NOTIFIER;
   payload: KeyValueString;
@@ -212,6 +220,7 @@ export type NotificationAction =
   | SetNotificationLongDescriptionAction
   | SetNotificationTagAction
   | SetNotificationTagOptionsAction
+  | SetNotificationExtraKeywordsAction
   | SetNotificationNotifierAction
   | SetNotificationAddressAction
   | SetNotificationAddressFoundAction
@@ -368,6 +377,11 @@ interface SetModerationTagAction extends AnyAction {
   payload: number[];
 }
 
+interface SetModerationExtraKeywordsAction extends AnyAction {
+  type: typeof SET_MODERATION_EXTRA_KEYWORDS;
+  payload: string;
+}
+
 interface SetModerationTagOptionsAction extends AnyAction {
   type: typeof SET_MODERATION_TAG_OPTIONS;
   payload: TagOption[];
@@ -414,6 +428,7 @@ export type ModerationAction =
   | SetModerationLongDescriptionAction
   | SetModerationTagAction
   | SetModerationTagOptionsAction
+  | SetModerationExtraKeywordsAction
   | SetModerationAddressAction
   | SetModerationLocationAction
   | SetModerationContactAction
@@ -443,6 +458,11 @@ interface SetModerationLongDescriptionStatusAction extends AnyAction {
 
 interface SetModerationTagStatusAction extends AnyAction {
   type: typeof SET_MODERATION_TAG_STATUS;
+  payload: ModerationStatus;
+}
+
+interface SetModerationExtraKeywordsStatusAction extends AnyAction {
+  type: typeof SET_MODERATION_EXTRA_KEYWORDS_STATUS;
   payload: ModerationStatus;
 }
 
@@ -487,6 +507,7 @@ export type ModerationStatusAction =
   | SetModerationShortDescriptionStatusAction
   | SetModerationLongDescriptionStatusAction
   | SetModerationTagStatusAction
+  | SetModerationExtraKeywordsStatusAction
   | SetModerationAddressStatusAction
   | SetModerationLocationStatusAction
   | SetModerationContactStatusAction

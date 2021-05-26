@@ -319,9 +319,14 @@
     "tags": {
       "title": "Ämnesord",
       "tagSelection": "Val av ämnesord",
+      "extra": "Ytterligare nyckelord",
       "add": {
         "label": "Lägg till ämnesord",
-        "helperText": "Sök eller välj från listan. Välj max. 5 ord."
+        "helperText": "Sök eller välj från listan. Välj max. 5 ord"
+      },
+      "extraKeywords": {
+        "label": "Skriv fler önskningar som nyckelord",
+        "helperText": "Separera nyckelord med ett komma"
       }
     },
     "terms": {
@@ -560,6 +565,7 @@
     },
     "tags": {
       "title": "Asiasanat",
+      "extra": "Käyttäjän toivomat lisähakusanat",
       "add": {
         "label": "Lisää asiasana"
       }
