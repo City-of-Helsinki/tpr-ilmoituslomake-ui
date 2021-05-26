@@ -48,7 +48,6 @@ export const approveModeration = async (
         }
       }
 
-      // TODO - handle new images including the base64 value
       const postData = {
         data: {
           ...approvedTask,

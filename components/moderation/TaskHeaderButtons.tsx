@@ -168,29 +168,46 @@ const TaskHeaderButtons = ({ isModerated }: TaskHeaderButtonsProps): ReactElemen
     const approvedPhotos =
       taskType === TaskType.NewPlace || taskType === TaskType.PlaceChange
         ? photosUuids
-            .filter((uuid) => photosModified.some((photo) => photo.uuid === uuid))
             .map((uuid, index) => {
-              const photoSelected = photosSelected[index] || { altText: {} };
-              const photoModified = photosModified[index] || { altText: {} };
-              const photoStatus = photosStatus[index] || { altText: {} };
+              const photoSelected = photosSelected[index];
+              const photoModified = photosModified[index];
+              const photoStatus = photosStatus[index];
               const { sourceType, new: isNewImage } = photoModified;
+              const isPhotoToBeApproved = photosModified.some((photo) => photo.uuid === uuid);
 
-              return {
-                index,
-                uuid,
-                sourceType,
-                url: getApprovedValue(photoStatus.url, photoSelected.url, photoModified.url),
-                altText: {
-                  fi: getApprovedValue(photoStatus.altText.fi, photoSelected.altText.fi ?? "", photoModified.altText.fi ?? ""),
-                  sv: getApprovedValue(photoStatus.altText.sv, photoSelected.altText.sv ?? "", photoModified.altText.sv ?? ""),
-                  en: getApprovedValue(photoStatus.altText.en, photoSelected.altText.en ?? "", photoModified.altText.en ?? ""),
-                },
-                permission: getApprovedValue(photoStatus.permission, photoSelected.permission as string, photoModified.permission as string),
-                source: getApprovedValue(photoStatus.source, photoSelected.source, photoModified.source),
-                new: isNewImage,
-                base64: getApprovedValue(photoStatus.url, photoSelected.base64 as string, photoModified.base64 as string),
-                preview: getApprovedValue(photoStatus.url, photoSelected.preview as string, photoModified.preview as string),
-              };
+              return isPhotoToBeApproved
+                ? {
+                    index,
+                    uuid,
+                    sourceType,
+                    url: getApprovedValue(photoStatus.url, photoSelected.url, photoModified.url),
+                    altText: {
+                      fi: getApprovedValue(photoStatus.altText.fi, photoSelected.altText.fi ?? "", photoModified.altText.fi ?? ""),
+                      sv: getApprovedValue(photoStatus.altText.sv, photoSelected.altText.sv ?? "", photoModified.altText.sv ?? ""),
+                      en: getApprovedValue(photoStatus.altText.en, photoSelected.altText.en ?? "", photoModified.altText.en ?? ""),
+                    },
+                    permission: getApprovedValue(photoStatus.permission, photoSelected.permission as string, photoModified.permission as string),
+                    source: getApprovedValue(photoStatus.source, photoSelected.source, photoModified.source),
+                    new: isNewImage,
+                    base64: getApprovedValue(photoStatus.url, photoSelected.base64 as string, photoModified.base64 as string),
+                    preview: getApprovedValue(photoStatus.url, photoSelected.preview as string, photoModified.preview as string),
+                  }
+                : {
+                    index,
+                    uuid,
+                    sourceType: "",
+                    url: "",
+                    altText: {
+                      fi: "",
+                      sv: "",
+                      en: "",
+                    },
+                    permission: "",
+                    source: "",
+                    new: isNewImage,
+                    base64: "",
+                    preview: "",
+                  };
             })
             .filter((photo) => !!photo.url && photo.url.length > 0)
         : modifiedTask.images.map((photo, index) => {

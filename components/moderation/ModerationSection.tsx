@@ -73,7 +73,7 @@ const ModerationSection = ({
     // Enable modified fields to be edited by default if they have a value
     if (
       moderationStatus === ModerationStatus.Unknown &&
-      ((selectedValue && selectedValue.length > 0) || (modifiedValue && modifiedValue.length > 0)) &&
+      ((selectedValue && selectedValue.length > 0 && !modifyButtonHidden) || (modifiedValue && modifiedValue.length > 0)) &&
       !bypassModifiedFieldCheck
     ) {
       statusCallback(fieldName, ModerationStatus.Edited);
