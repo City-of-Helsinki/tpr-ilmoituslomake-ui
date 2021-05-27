@@ -152,14 +152,16 @@ const PhotosModeration = (): ReactElement => {
 
             {(taskType === TaskType.NewPlace || taskType === TaskType.PlaceChange || pageStatus === ModerationStatus.Edited) && (
               <div className="gridLayoutContainer moderation">
-                <div className="gridColumn1">
-                  {!modifiedImage && (
-                    <HdsNotification size="small" type="alert">
-                      {i18n.t(`moderation.photos.removed`)}
-                    </HdsNotification>
-                  )}
-                </div>
-                <div className="gridColumn2">
+                {(taskType === TaskType.NewPlace || taskType === TaskType.PlaceChange) && (
+                  <div className="gridColumn1">
+                    {!modifiedImage && (
+                      <HdsNotification size="small" type="alert">
+                        {i18n.t(`moderation.photos.removed`)}
+                      </HdsNotification>
+                    )}
+                  </div>
+                )}
+                <div className={taskType === TaskType.NewPlace || taskType === TaskType.PlaceChange ? "gridColumn2" : "gridColumn1"}>
                   {isNewImage && sourceTypeModified === PhotoSourceType.Device && (
                     <>
                       <input className="hidden" type="file" ref={ref} onChange={(evt) => fetchPhoto(index, evt)} />

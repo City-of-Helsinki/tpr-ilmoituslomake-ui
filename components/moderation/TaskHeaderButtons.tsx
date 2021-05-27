@@ -172,6 +172,8 @@ const TaskHeaderButtons = ({ isModerated }: TaskHeaderButtonsProps): ReactElemen
           }
         : modifiedTask;
 
+    // Save the moderated image data for new or changed places using approved values only
+    // For tip change requests, the images are handled by the moderator themselves, so use the modified image values as specified
     // The moderation approval for new images needs both the original url and the proxied preview url
     // Filter out photos that the user has removed
     // After checking, filter out any invalid images, so those with an empty url
@@ -220,10 +222,47 @@ const TaskHeaderButtons = ({ isModerated }: TaskHeaderButtonsProps): ReactElemen
                   };
             })
             .filter((photo) => !!photo.url && photo.url.length > 0)
-        : modifiedTask.images.map((photo, index) => {
-            const { uuid, source_type: sourceType, url, alt_text: altText, permission, source } = photo;
-            return { index, uuid, sourceType, url, altText, permission, source };
-          });
+        : photosUuids
+            .map((uuid, index) => {
+              const photoModified = photosModified[index];
+              const { sourceType, new: isNewImage } = photoModified;
+              const isPhotoToBeApproved = photosModified.some((photo) => photo.uuid === uuid);
+
+              return isPhotoToBeApproved
+                ? {
+                    index,
+                    uuid,
+                    sourceType,
+                    url: photoModified.url,
+                    altText: {
+                      fi: photoModified.altText.fi ?? "",
+                      sv: photoModified.altText.sv ?? "",
+                      en: photoModified.altText.en ?? "",
+                    },
+                    permission: photoModified.permission,
+                    source: photoModified.source,
+                    new: isNewImage,
+                    base64: photoModified.base64,
+                    preview: photoModified.preview,
+                  }
+                : {
+                    index,
+                    uuid,
+                    sourceType: "",
+                    url: "",
+                    altText: {
+                      fi: "",
+                      sv: "",
+                      en: "",
+                    },
+                    permission: "",
+                    source: "",
+                    new: isNewImage,
+                    base64: "",
+                    preview: "",
+                  };
+            })
+            .filter((photo) => !!photo.url && photo.url.length > 0);
 
     approveModeration(currentUser, modifiedTaskId, approvedTask, approvedPhotos, moderationExtra, router, setToast);
   };

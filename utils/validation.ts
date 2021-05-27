@@ -244,12 +244,14 @@ export const isPhotoBase64Valid = (
   const { photos } = notificationExtra;
   const photo = photos[index];
   const schema =
-    !photo.new || photo.sourceType === PhotoSourceType.Link
-      ? string().required("notification.message.fieldRequired").url("notification.message.fieldFormatUrl")
-      : string().required("notification.message.fieldRequired");
+    photo.new && photo.sourceType === PhotoSourceType.Device
+      ? string()
+          .required("notification.message.fieldRequired")
+          .matches(/image\/jpeg/, "notification.message.fieldNotJpeg")
+      : string();
   const result = isValid(schema, base64);
 
-  if (result.valid) {
+  if (result.valid && photo.new && photo.sourceType === PhotoSourceType.Device) {
     // The base64 string should start with "data:image/jpeg;base64," to be valid
     // Check the approximate size of the image using the formula from https://en.wikipedia.org/wiki/Base64
     const regex = new RegExp(/image\/jpeg/);
