@@ -35,7 +35,7 @@ const Tip = (): ReactElement => {
     if (ref.current) {
       ref.current.scrollIntoView();
     }
-  });
+  }, [pageValid]);
 
   return (
     <Layout>
