@@ -138,6 +138,7 @@
       "fieldTooLong": "$fieldName on liian pitkä",
       "fieldTooShort": "$fieldName on liian lyhyt",
       "fieldNotJpeg": "Valitun kuvan formaatti on virheellinen, kuvien tulee olla JPEG-muotoinen",
+      "fieldImageTooLarge": "Valitun kuvan koko on liian suuri, ei sen koko saa ylittää 4 MB:a",
       "fieldLanguage": "Yksi kieli on pakollinen",
       "fieldOther": "Tarkista tieto"
     },

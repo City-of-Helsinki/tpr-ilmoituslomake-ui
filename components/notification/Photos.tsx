@@ -17,7 +17,7 @@ import {
   PhotoSourceType,
 } from "../../types/constants";
 import { PhotoValidation } from "../../types/notification_validation";
-import { isPhotoFieldValid, isPhotoAltTextValid } from "../../utils/validation";
+import { isPhotoFieldValid, isPhotoAltTextValid, isPhotoBase64Valid } from "../../utils/validation";
 import NotificationNotice from "./NotificationNotice";
 import styles from "./Photos.module.scss";
 
@@ -105,14 +105,7 @@ const Photos = (): ReactElement => {
   };
 
   const validatePhotoBase64 = (index: number, base64: string) => {
-    // The base64 string should start with "data:image/jpeg;base64," to be valid
-    const regex = new RegExp(/image\/jpeg/);
-    const base64Valid = base64 ? regex.test(base64) : false;
-    dispatchValidation(
-      setNotificationPhotoValidation(index, {
-        base64: { valid: base64Valid, message: !base64Valid ? "notification.message.fieldNotJpeg" : undefined },
-      })
-    );
+    isPhotoBase64Valid(index, base64, notificationExtra, dispatchValidation);
   };
 
   const fetchPhoto = async (index: number, evt: ChangeEvent<HTMLInputElement>) => {

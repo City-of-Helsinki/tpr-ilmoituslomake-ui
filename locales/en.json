@@ -138,6 +138,7 @@
       "fieldTooLong": "$fieldName is too long",
       "fieldTooShort": "$fieldName is too short",
       "fieldNotJpeg": "The format of the selected image is incorrect, images must be in JPEG format",
+      "fieldImageTooLarge": "The size of the selected image is too large, it must not exceed 4 MB in size",
       "fieldLanguage": "At least one language is mandatory",
       "fieldOther": "Check information"
     },

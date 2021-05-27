@@ -26,6 +26,7 @@ import {
   MIN_LENGTH_LONG_DESC,
   MAX_LENGTH_LONG_DESC,
   MAX_LENGTH_PHOTO_DESC,
+  MAX_PHOTO_BYTES,
   PhotoSourceType,
   ItemType,
 } from "../types/constants";
@@ -234,6 +235,40 @@ export const isWebsiteValid = (language: string, notification: NotificationSchem
   return result.valid;
 };
 
+export const isPhotoBase64Valid = (
+  index: number,
+  base64: string,
+  notificationExtra: NotificationExtra,
+  dispatch: Dispatch<NotificationValidationAction>
+): boolean => {
+  const { photos } = notificationExtra;
+  const photo = photos[index];
+  const schema =
+    !photo.new || photo.sourceType === PhotoSourceType.Link
+      ? string().required("notification.message.fieldRequired").url("notification.message.fieldFormatUrl")
+      : string().required("notification.message.fieldRequired");
+  const result = isValid(schema, base64);
+
+  if (result.valid) {
+    // The base64 string should start with "data:image/jpeg;base64," to be valid
+    // Check the approximate size of the image using the formula from https://en.wikipedia.org/wiki/Base64
+    const regex = new RegExp(/image\/jpeg/);
+    const base64ValidFormat = base64 ? regex.test(base64) : false;
+    const approxBytes = base64 ? (base64.length - 814) / 1.37 : 0;
+    const base64ValidSize = base64 ? approxBytes < MAX_PHOTO_BYTES : false;
+
+    result.valid = base64ValidFormat && base64ValidSize;
+    if (!base64ValidFormat) {
+      result.message = "notification.message.fieldNotJpeg";
+    } else if (!base64ValidSize) {
+      result.message = "notification.message.fieldImageTooLarge";
+    }
+  }
+
+  dispatch(setNotificationPhotoValidation(index, { base64: result }));
+  return result.valid;
+};
+
 export const isPhotoFieldValid = (
   index: number,
   photoField: string,
@@ -249,15 +284,6 @@ export const isPhotoFieldValid = (
         !photo.new || photo.sourceType === PhotoSourceType.Link
           ? string().required("notification.message.fieldRequired").url("notification.message.fieldFormatUrl")
           : string().required("notification.message.fieldRequired");
-      break;
-    }
-    case "base64": {
-      schema =
-        photo.new && photo.sourceType === PhotoSourceType.Device
-          ? string()
-              .required("notification.message.fieldRequired")
-              .matches(/image\/jpeg/, "notification.message.fieldNotJpeg")
-          : string();
       break;
     }
     default: {
@@ -344,7 +370,7 @@ export const isPageValid = (
           isPhotoFieldValid(index, "url", notificationExtra, dispatch),
           isPhotoFieldValid(index, "permission", notificationExtra, dispatch),
           isPhotoFieldValid(index, "source", notificationExtra, dispatch),
-          isPhotoFieldValid(index, "base64", notificationExtra, dispatch),
+          isPhotoBase64Valid(index, photo.base64 as string, notificationExtra, dispatch),
         ];
         const photoValid2 = inputLanguages.flatMap((option) => [isPhotoAltTextValid(index, option, notificationExtra, dispatch)]);
         return photoValid1.every((valid) => valid) && photoValid2.every((valid) => valid);

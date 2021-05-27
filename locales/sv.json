@@ -138,6 +138,7 @@
       "fieldTooLong": "$fieldName är för lång",
       "fieldTooShort": "$fieldName är för kort",
       "fieldNotJpeg": "Formatet för den valda bilden är felaktig, bildformatet bör vara JPEG.",
+      "fieldImageTooLarge": "Storleken för den valda bilden är för stor, den får inte överskrida 4 MB",
       "fieldLanguage": "Ett språk är obligatoriskt",
       "fieldOther": "Kontrollera informationen"
     },
@@ -248,7 +249,7 @@
       "photo": {
         "title": "Foto",
         "notice1": "Välj sådana foton som bäst avbildar ditt ställe och som är lockande och av hög kvalitet. Det får inte finnas extra text, datum, vattenstämpel eller dylikt på fotot.",
-        "notice2": "Fotot skall vara minst 1920 x 1080 pixel, i JPEG-format, och den får inte överskrida 4MB. Fotot skall helst vara en vågrät bild."
+        "notice2": "Fotot skall vara minst 1920 x 1080 pixel, i JPEG-format, och den får inte överskrida 4 MB. Fotot skall helst vara en vågrät bild."
       },
       "url": {
         "labelDevice": "Välj ett foto från din enhet",
