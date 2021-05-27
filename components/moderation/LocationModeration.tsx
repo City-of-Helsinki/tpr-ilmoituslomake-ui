@@ -17,16 +17,40 @@ const LocationModeration = (): ReactElement => {
   const selectedTask = useSelector((state: RootState) => state.moderation.selectedTask);
   const {
     address: {
-      fi: { street: streetFiSelected, postal_code: postalCodeFiSelected, post_office: postOfficeFiSelected, neighborhood: neighborhoodFiSelected },
-      sv: { street: streetSvSelected, postal_code: postalCodeSvSelected, post_office: postOfficeSvSelected, neighborhood: neighborhoodSvSelected },
+      fi: {
+        street: streetFiSelected,
+        postal_code: postalCodeFiSelected,
+        post_office: postOfficeFiSelected,
+        neighborhood_id: neighborhoodIdFiSelected,
+        neighborhood: neighborhoodFiSelected,
+      },
+      sv: {
+        street: streetSvSelected,
+        postal_code: postalCodeSvSelected,
+        post_office: postOfficeSvSelected,
+        neighborhood_id: neighborhoodIdSvSelected,
+        neighborhood: neighborhoodSvSelected,
+      },
     },
   } = selectedTask;
 
   const modifiedTask = useSelector((state: RootState) => state.moderation.modifiedTask);
   const {
     address: {
-      fi: { street: streetFiModified, postal_code: postalCodeFiModified, post_office: postOfficeFiModified, neighborhood: neighborhoodFiModified },
-      sv: { street: streetSvModified, postal_code: postalCodeSvModified, post_office: postOfficeSvModified, neighborhood: neighborhoodSvModified },
+      fi: {
+        street: streetFiModified,
+        postal_code: postalCodeFiModified,
+        post_office: postOfficeFiModified,
+        neighborhood_id: neighborhoodIdFiModified,
+        neighborhood: neighborhoodFiModified,
+      },
+      sv: {
+        street: streetSvModified,
+        postal_code: postalCodeSvModified,
+        post_office: postOfficeSvModified,
+        neighborhood_id: neighborhoodIdSvModified,
+        neighborhood: neighborhoodSvModified,
+      },
     },
   } = modifiedTask;
 
@@ -48,7 +72,15 @@ const LocationModeration = (): ReactElement => {
 
   const updateAddressStatus = (language: string, status: ModerationStatus) => {
     // Update all address fields to the same status
-    dispatchStatus(setModerationAddressStatus(language, { street: status, postal_code: status, post_office: status, neighborhood: status }));
+    dispatchStatus(
+      setModerationAddressStatus(language, {
+        street: status,
+        postal_code: status,
+        post_office: status,
+        neighborhood_id: status,
+        neighborhood: status,
+      })
+    );
   };
 
   return (
@@ -121,6 +153,29 @@ const LocationModeration = (): ReactElement => {
         />
 
         <ModerationSection
+          id="neighborhoodIdFi"
+          fieldName="fi"
+          selectedValue={neighborhoodIdFiSelected}
+          modifiedValue={neighborhoodIdFiModified}
+          moderationStatus={addressFiStatus}
+          taskType={taskType}
+          taskStatus={taskStatus}
+          modifyButtonLabel={`${i18n.t("moderation.location.address")} ${i18n.t("common.inLanguage.fi")}`}
+          modifyButtonHidden
+          actionButtonHidden
+          bypassModifiedFieldCheck
+          changeCallback={(evt: ChangeEvent<HTMLInputElement>) => updateAddress("fi", evt)}
+          statusCallback={updateAddressStatus}
+          ModerationComponent={
+            <TextInput
+              id="neighborhoodIdFi"
+              label={`${i18n.t("moderation.location.neighborhoodId.label")} ${i18n.t("common.inLanguage.fi")}`}
+              name="neighborhoodId"
+            />
+          }
+        />
+
+        <ModerationSection
           id="neighborhoodFi"
           fieldName="fi"
           selectedValue={neighborhoodFiSelected}
@@ -166,6 +221,7 @@ const LocationModeration = (): ReactElement => {
             />
           }
         />
+
         <ModerationSection
           id="postalCodeSv"
           fieldName="sv"
@@ -187,6 +243,7 @@ const LocationModeration = (): ReactElement => {
             />
           }
         />
+
         <ModerationSection
           id="postalOfficeSv"
           fieldName="sv"
@@ -208,6 +265,30 @@ const LocationModeration = (): ReactElement => {
             />
           }
         />
+
+        <ModerationSection
+          id="neighborhoodIdSv"
+          fieldName="sv"
+          selectedValue={neighborhoodIdSvSelected}
+          modifiedValue={neighborhoodIdSvModified}
+          moderationStatus={addressSvStatus}
+          taskType={taskType}
+          taskStatus={taskStatus}
+          modifyButtonLabel={`${i18n.t("moderation.location.address")} ${i18n.t("common.inLanguage.sv")}`}
+          modifyButtonHidden
+          actionButtonHidden
+          bypassModifiedFieldCheck
+          changeCallback={(evt: ChangeEvent<HTMLInputElement>) => updateAddress("sv", evt)}
+          statusCallback={updateAddressStatus}
+          ModerationComponent={
+            <TextInput
+              id="neighborhoodIdSv"
+              label={`${i18n.t("moderation.location.neighborhoodId.label")} ${i18n.t("common.inLanguage.sv")}`}
+              name="neighborhoodId"
+            />
+          }
+        />
+
         <ModerationSection
           id="neighborhoodSv"
           fieldName="sv"
@@ -229,7 +310,7 @@ const LocationModeration = (): ReactElement => {
               name="neighborhood"
             />
           }
-        />{" "}
+        />
       </div>
     </div>
   );

@@ -26,8 +26,24 @@ export const setModerationStatus = (photos: Photo[] = [], dispatch: Dispatch<Mod
   dispatch(setModerationTagStatus(newStatus));
   dispatch(setModerationMatkoTagStatus(newStatus));
   dispatch(setModerationExtraKeywordsStatus(newStatus));
-  dispatch(setModerationAddressStatus("fi", { street: newStatus, postal_code: newStatus, post_office: newStatus, neighborhood: newStatus }));
-  dispatch(setModerationAddressStatus("sv", { street: newStatus, postal_code: newStatus, post_office: newStatus, neighborhood: newStatus }));
+  dispatch(
+    setModerationAddressStatus("fi", {
+      street: newStatus,
+      postal_code: newStatus,
+      post_office: newStatus,
+      neighborhood_id: newStatus,
+      neighborhood: newStatus,
+    })
+  );
+  dispatch(
+    setModerationAddressStatus("sv", {
+      street: newStatus,
+      postal_code: newStatus,
+      post_office: newStatus,
+      neighborhood_id: newStatus,
+      neighborhood: newStatus,
+    })
+  );
   dispatch(setModerationLocationStatus(newStatus));
   dispatch(setModerationContactStatus({ phone: newStatus }));
   dispatch(setModerationContactStatus({ email: newStatus }));

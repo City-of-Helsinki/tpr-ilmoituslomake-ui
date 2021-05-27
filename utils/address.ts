@@ -20,14 +20,14 @@ export const getNeighborhood = async (router: NextRouter, lon: number, lat: numb
 
     if (neighbourhoodResult.results && neighbourhoodResult.results.length > 0) {
       // Use the first result
-      const { name: { fi: resultNameFi = "", sv: resultNameSv = "" } = {} } = neighbourhoodResult.results[0];
+      const { origin_id: neighborhoodId = "", name: { fi: resultNameFi = "", sv: resultNameSv = "" } = {} } = neighbourhoodResult.results[0];
       console.log("USING NEIGHBOURHOOD RESULT", neighbourhoodResult.results[0]);
 
-      dispatch(setNotificationAddress("fi", { neighborhood: resultNameFi }));
-      dispatch(setNotificationAddress("sv", { neighborhood: resultNameSv }));
+      dispatch(setNotificationAddress("fi", { neighborhood_id: neighborhoodId, neighborhood: resultNameFi }));
+      dispatch(setNotificationAddress("sv", { neighborhood_id: neighborhoodId, neighborhood: resultNameSv }));
     } else {
-      dispatch(setNotificationAddress("fi", { neighborhood: "" }));
-      dispatch(setNotificationAddress("sv", { neighborhood: "" }));
+      dispatch(setNotificationAddress("fi", { neighborhood_id: "", neighborhood: "" }));
+      dispatch(setNotificationAddress("sv", { neighborhood_id: "", neighborhood: "" }));
     }
   }
 };
@@ -81,8 +81,8 @@ export const geocodeAddress = async (
     } else {
       dispatch(setNotificationLocation([0, 0]));
       dispatch(setNotificationOriginalLocation([0, 0]));
-      dispatch(setNotificationAddress("fi", { neighborhood: "" }));
-      dispatch(setNotificationAddress("sv", { neighborhood: "" }));
+      dispatch(setNotificationAddress("fi", { neighborhood_id: "", neighborhood: "" }));
+      dispatch(setNotificationAddress("sv", { neighborhood_id: "", neighborhood: "" }));
       dispatch(setNotificationAddressFound(undefined));
     }
   }

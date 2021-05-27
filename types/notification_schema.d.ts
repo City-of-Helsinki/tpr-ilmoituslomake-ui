@@ -39,6 +39,7 @@ export interface NotificationSchema {
       street: string;
       postal_code: string;
       post_office: string;
+      neighborhood_id: string;
       neighborhood: string;
       [k: string]: unknown;
     };
@@ -46,6 +47,7 @@ export interface NotificationSchema {
       street: string;
       postal_code: string;
       post_office: string;
+      neighborhood_id: string;
       neighborhood: string;
       [k: string]: unknown;
     };

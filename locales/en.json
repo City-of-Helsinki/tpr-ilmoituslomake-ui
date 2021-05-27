@@ -487,6 +487,9 @@
       "postalOffice": {
         "label": "Postitoimipaikka"
       },
+      "neighborhoodId": {
+        "label": "Kaupunginosatunnus"
+      },
       "neighborhood": {
         "label": "Kaupunginosa"
       }

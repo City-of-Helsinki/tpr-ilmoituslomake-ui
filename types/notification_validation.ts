@@ -42,12 +42,14 @@ export interface NotificationValidationSchema {
       street: Validation;
       postal_code: Validation;
       post_office: Validation;
+      neighborhood_id?: Validation;
       neighborhood?: Validation;
     };
     sv: {
       street: Validation;
       postal_code: Validation;
       post_office: Validation;
+      neighborhood_id?: Validation;
       neighborhood?: Validation;
     };
   };

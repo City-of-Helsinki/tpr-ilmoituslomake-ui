@@ -124,6 +124,11 @@ const TaskHeaderButtons = ({ isModerated }: TaskHeaderButtonsProps): ReactElemen
                   selectedTask.address.fi.post_office,
                   modifiedTask.address.fi.post_office
                 ),
+                neighborhood_id: getApprovedValue(
+                  moderationStatus.address.fi.neighborhood_id,
+                  selectedTask.address.fi.neighborhood_id,
+                  modifiedTask.address.fi.neighborhood_id
+                ),
                 neighborhood: getApprovedValue(
                   moderationStatus.address.fi.neighborhood,
                   selectedTask.address.fi.neighborhood,
@@ -141,6 +146,11 @@ const TaskHeaderButtons = ({ isModerated }: TaskHeaderButtonsProps): ReactElemen
                   moderationStatus.address.sv.post_office,
                   selectedTask.address.sv.post_office,
                   modifiedTask.address.sv.post_office
+                ),
+                neighborhood_id: getApprovedValue(
+                  moderationStatus.address.sv.neighborhood_id,
+                  selectedTask.address.sv.neighborhood_id,
+                  modifiedTask.address.sv.neighborhood_id
                 ),
                 neighborhood: getApprovedValue(
                   moderationStatus.address.sv.neighborhood,

@@ -40,12 +40,14 @@ export interface ModerationStatusSchema {
       street: ModerationStatus;
       postal_code: ModerationStatus;
       post_office: ModerationStatus;
+      neighborhood_id: ModerationStatus;
       neighborhood: ModerationStatus;
     };
     sv: {
       street: ModerationStatus;
       postal_code: ModerationStatus;
       post_office: ModerationStatus;
+      neighborhood_id: ModerationStatus;
       neighborhood: ModerationStatus;
     };
   };
