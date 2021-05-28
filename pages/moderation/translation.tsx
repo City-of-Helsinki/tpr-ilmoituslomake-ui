@@ -5,7 +5,7 @@ import { useI18n } from "next-localization";
 import { initStore } from "../../state/store";
 import { CLEAR_STATE } from "../../types/constants";
 import i18nLoader from "../../utils/i18n";
-import { checkUser, redirectToLogin } from "../../utils/serverside";
+import { checkUser, redirectToLogin, redirectToNotAuthorized } from "../../utils/serverside";
 import Layout from "../../components/common/Layout";
 import ModerationHeader from "../../components/moderation/ModerationHeader";
 
@@ -45,6 +45,10 @@ export const getServerSideProps: GetServerSideProps = async ({ req, resolvedUrl,
   if (!user) {
     // Invalid user but login is required, so redirect to login
     return redirectToLogin(resolvedUrl);
+  }
+  if (user && !user.is_staff) {
+    // Valid user but moderator login is required, so redirect to not authorized page
+    return redirectToNotAuthorized();
   }
   if (user && user.authenticated) {
     initialReduxState.general.user = user;

@@ -22,6 +22,17 @@ export const redirectToLogin = (resolvedUrl: string): { redirect: Redirect } => 
   };
 };
 
+export const redirectToNotAuthorized = (): { redirect: Redirect } => {
+  // The server-side needs to redirect the client-side, so don't use getOriginServerSide here
+  // The base path is needed to make sure the login page redirects work correctly in the server environment
+  return {
+    redirect: {
+      destination: `${process.env.BASE_PATH}/notauthorized/`,
+      permanent: false,
+    },
+  };
+};
+
 export const checkUser = async (req: IncomingMessage): Promise<User | undefined> => {
   // Check the current user
   // TODO: define how a moderator user is identified
