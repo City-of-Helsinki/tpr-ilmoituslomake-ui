@@ -18,6 +18,7 @@ export const redirectToLogin = (resolvedUrl: string): { redirect: Redirect } => 
     redirect: {
       destination: `${process.env.BASE_PATH}/helauth/login/?next=${process.env.BASE_PATH}${resolvedUrl}`,
       permanent: false,
+      basePath: false,
     },
   };
 };
@@ -29,6 +30,7 @@ export const redirectToNotAuthorized = (): { redirect: Redirect } => {
     redirect: {
       destination: `${process.env.BASE_PATH}/notauthorized/`,
       permanent: false,
+      basePath: false,
     },
   };
 };
