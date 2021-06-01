@@ -82,7 +82,8 @@ export const approveModeration = async (
         if (approveResult.id) {
           // Reload the current page instead of redirecting to the task list page
           // router.push(`/moderation/task`);
-          router.reload();
+          console.log("router approve", router);
+          // router.reload();
         } else {
           setToast(Toast.SaveFailed);
         }
@@ -152,7 +153,8 @@ export const rejectModeration = async (
 
         // Reload the current page instead of redirecting to the task list page
         // router.push(`/moderation/task`);
-        router.reload();
+        console.log("router reject", router);
+        // router.reload();
       } else {
         setToast(Toast.SaveFailed);
 
@@ -219,7 +221,8 @@ export const deleteModeration = async (
 
         // Reload the current page instead of redirecting to the task list page
         // router.push(`/moderation/task`);
-        router.reload();
+        console.log("router delete", router);
+        // router.reload();
       } else {
         setToast(Toast.SaveFailed);
 
