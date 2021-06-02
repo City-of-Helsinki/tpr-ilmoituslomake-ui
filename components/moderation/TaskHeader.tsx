@@ -22,10 +22,10 @@ const TaskHeader = ({ isModerated }: TaskHeaderProps): ReactElement => {
 
   const selectedTaskId = useSelector((state: RootState) => state.moderation.selectedTaskId);
   const selectedTask = useSelector((state: RootState) => state.moderation.selectedTask);
-  const { name: placeNameSelected, comments } = selectedTask;
+  const { name: placeNameSelected } = selectedTask;
 
   const modifiedTask = useSelector((state: RootState) => state.moderation.modifiedTask);
-  const { name: placeNameModified, notifier: { notifier_type, full_name, email, phone } = {} } = modifiedTask;
+  const { name: placeNameModified, notifier: { notifier_type, full_name, email, phone } = {}, comments } = modifiedTask;
 
   const moderationExtra = useSelector((state: RootState) => state.moderation.moderationExtra);
   const {
