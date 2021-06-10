@@ -627,11 +627,11 @@
       "closed": "Valmis"
     },
     "taskType": {
-      "placeChange": "Kohde muutos",
+      "placeChange": "Muutos kohteeseen",
       "newPlace": "Uusi kohde",
-      "changeTip": "Muutos vinkki",
-      "addTip": "Lisäys vinkki",
-      "removeTip": "Poisto vinkki",
+      "changeTip": "Vinkki (muutos)",
+      "addTip": "Vinkki (uusi)",
+      "removeTip": "Vinkki (poisto)",
       "placeInfo": "Kohdetiedot"
     },
     "translationNotice": {
