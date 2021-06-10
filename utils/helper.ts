@@ -1,6 +1,6 @@
 import { LANGUAGE_OPTIONS } from "../types/constants";
 
-export const getDisplayName = (locale: string, name: { [key: string]: unknown }, userPlaceName?: string): string => {
+export const getDisplayName = (locale: string, name: { [key: string]: unknown }, userPlaceName?: string, defaultName?: string): string => {
   if (userPlaceName && userPlaceName.length > 0) {
     // For a tip about a new place, only the user-defined place name is available
     return userPlaceName;
@@ -17,7 +17,7 @@ export const getDisplayName = (locale: string, name: { [key: string]: unknown },
       }
     }
   }
-  return "";
+  return defaultName ?? "";
 };
 
 export default getDisplayName;

@@ -618,7 +618,8 @@
       "nameId": "Nimi (tunnus)",
       "type": "Tyyppi",
       "notified": "Ilmoitettu",
-      "status": "Status"
+      "status": "Status",
+      "empty": "(Vinkki)"
     },
     "taskStatus": {
       "open": "Uusi",
