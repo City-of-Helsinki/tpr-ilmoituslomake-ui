@@ -50,18 +50,21 @@ const ModerationHeader = (props: ModerationHeaderProps): ReactElement => {
       <Navigation.Row variant="inline">
         <Navigation.Item
           className={styles.navigationItem}
+          href="#"
           label={`${i18n.t("moderation.page.front")}`}
           active={currentPage === 1}
           onClick={() => changePage(1)}
         />
         <Navigation.Item
           className={styles.navigationItem}
+          href="#"
           label={`${i18n.t("moderation.page.place")}`}
           active={currentPage === 2}
           onClick={() => changePage(2)}
         />
         <Navigation.Item
           className={styles.navigationItem}
+          href="#"
           label={`${i18n.t("moderation.page.task")}`}
           active={currentPage === 3}
           onClick={() => changePage(3)}
@@ -69,12 +72,14 @@ const ModerationHeader = (props: ModerationHeaderProps): ReactElement => {
         {/*
         <Navigation.Item
           className={styles.navigationItem}
+          href="#"
           label={`${i18n.t("moderation.page.organisation")}`}
           active={currentPage === 4}
           onClick={() => changePage(4)}
         />
         <Navigation.Item
           className={styles.navigationItem}
+          href="#"
           label={`${i18n.t("moderation.page.translation")}`}
           active={currentPage === 5}
           onClick={() => changePage(5)}
