@@ -22,7 +22,7 @@ const PlaceSearch = (): ReactElement => {
 
   const currentUser = useSelector((state: RootState) => state.general.user);
   const placeSearch = useSelector((state: RootState) => state.moderation.placeSearch);
-  const { placeName, language, address, district, ontologyIds, comment, publishPermission } = placeSearch;
+  const { placeName, language, address, district, ontologyIds, publishPermission } = placeSearch;
 
   const moderationExtra = useSelector((state: RootState) => state.moderation.moderationExtra);
   const { tagOptions = [] } = moderationExtra;
@@ -72,7 +72,6 @@ const PlaceSearch = (): ReactElement => {
       ...(placeName.length > 0 && { search_name__contains: placeName.toLowerCase() }),
       ...(address.length > 0 && { search_address__contains: address.toLowerCase() }),
       ...(ontologyIds.length > 0 && { data__ontology_ids__contains: ontologyIds }),
-      ...(comment.length > 0 && { search_comments__contains: comment.toLowerCase() }),
       ...(publishPermission && { published: publishPermission === "yes" }),
       ...(district.length > 0 && { search_neighborhood: district.toLowerCase() }),
       ...(language.length > 0 && { lang: language }),
@@ -201,14 +200,6 @@ const PlaceSearch = (): ReactElement => {
           selectedItemRemoveButtonAriaLabel={i18n.t("notification.button.remove")}
           clearButtonAriaLabel={i18n.t("notification.button.clearAllSelections")}
           multiselect
-        />
-        <TextInput
-          id="comment"
-          className={styles.gridColumn2}
-          label={i18n.t("moderation.placeSearch.comment.label")}
-          name="comment"
-          value={comment}
-          onChange={updateSearchText}
         />
 
         <div className={`${styles.gridColumn1} ${styles.searchButtons}`}>
