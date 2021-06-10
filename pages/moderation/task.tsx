@@ -1,10 +1,8 @@
 import React, { ReactElement } from "react";
-import { useSelector } from "react-redux";
 import { GetServerSideProps } from "next";
 import Head from "next/head";
 import { useI18n } from "next-localization";
 import { initStore } from "../../state/store";
-import { RootState } from "../../state/reducers";
 import { CLEAR_STATE } from "../../types/constants";
 import { checkUser, redirectToLogin, redirectToNotAuthorized } from "../../utils/serverside";
 import i18nLoader from "../../utils/i18n";
@@ -16,8 +14,6 @@ import TaskResults from "../../components/moderation/TaskResults";
 const ModerationTask = (): ReactElement => {
   const i18n = useI18n();
 
-  const taskResults = useSelector((state: RootState) => state.moderation.taskResults);
-
   return (
     <Layout>
       <Head>
@@ -26,7 +22,7 @@ const ModerationTask = (): ReactElement => {
       <ModerationHeader currentPage={3} />
       <main id="content">
         <TaskSearch />
-        {taskResults.length > 0 && <TaskResults />}
+        <TaskResults />
       </main>
     </Layout>
   );

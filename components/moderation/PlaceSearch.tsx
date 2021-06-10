@@ -103,6 +103,7 @@ const PlaceSearch = (): ReactElement => {
       } else {
         dispatch(setModerationPlaceResults({ results: [], count: 0 }));
       }
+      dispatch(setModerationPlaceSearch({ ...placeSearch, searchDone: true }));
     }
   };
 

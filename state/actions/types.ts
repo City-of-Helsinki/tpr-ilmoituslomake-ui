@@ -85,7 +85,7 @@ import {
   MatkoTagOption,
   ModerationPlaceResults,
   ModerationPlaceSearch,
-  ModerationTodoResult,
+  ModerationTodoResults,
   NotificationExtra,
   NotificationPlaceResults,
   NotificationPlaceSearch,
@@ -358,7 +358,7 @@ interface SetModerationTaskSearchAction extends AnyAction {
 
 interface SetModerationTaskResultsAction extends AnyAction {
   type: typeof SET_MODERATION_TASK_RESULTS;
-  payload: ModerationTodoResult[];
+  payload: ModerationTodoResults;
 }
 
 interface SetModerationNameAction extends AnyAction {

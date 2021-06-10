@@ -10,7 +10,7 @@ import {
   ModerationPlaceSearch,
   ModerationPlaceResults,
   TaskSearch,
-  ModerationTodoResult,
+  ModerationTodoResults,
   ModerationExtra,
 } from "../../types/general";
 import { ModerationStatusSchema } from "../../types/moderation_status";
@@ -43,7 +43,7 @@ export interface ModerationState {
   placeSearch: ModerationPlaceSearch;
   placeResults: ModerationPlaceResults;
   taskSearch: TaskSearch;
-  taskResults: ModerationTodoResult[];
+  taskResults: ModerationTodoResults;
   selectedTaskId: number;
   selectedTask: NotificationSchema;
   modifiedTaskId: number;

@@ -34,6 +34,7 @@ const initialState: ModerationState = {
     district: "",
     ontologyIds: [],
     comment: "",
+    searchDone: false,
   },
   placeResults: {
     results: [],
@@ -42,8 +43,12 @@ const initialState: ModerationState = {
   taskSearch: {
     placeName: "",
     taskType: TaskType.Unknown,
+    searchDone: false,
   },
-  taskResults: [],
+  taskResults: {
+    results: [],
+    count: 0,
+  },
   selectedTaskId: 0,
   selectedTask: { ...INITIAL_NOTIFICATION, location: [0, 0] },
   modifiedTaskId: 0,

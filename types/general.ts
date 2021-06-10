@@ -148,6 +148,7 @@ export interface ModerationPlaceSearch {
   ontologyIds: number[];
   comment: string;
   publishPermission?: string;
+  searchDone: boolean;
 }
 
 export interface ModerationPlaceResult {
@@ -168,6 +169,7 @@ export interface ModerationPlaceResults {
 export interface TaskSearch {
   placeName: string;
   taskType: TaskType;
+  searchDone: boolean;
 }
 
 export interface ModerationTodoResult {
@@ -203,6 +205,12 @@ export interface ModerationTodoResult {
   updated: Date;
   taskType: TaskType;
   taskStatus: TaskStatus;
+}
+
+export interface ModerationTodoResults {
+  results: ModerationTodoResult[];
+  count: number;
+  next?: string;
 }
 
 export interface ModerationTodoSchema {

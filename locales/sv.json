@@ -563,6 +563,7 @@
     "placeResults": {
       "found": "Löytyi",
       "places": "kohdetta",
+      "notFound": "Kohteita ei löytynyt",
       "nameId": "Nimi (tunnus)",
       "address": "Osoite",
       "modifiedLast": "Muokattu viimeksi",
@@ -613,6 +614,7 @@
     "taskResults": {
       "found": "Löytyi",
       "tasks": "tehtävää",
+      "notFound": "Tehtäviä ei löytynyt",
       "nameId": "Nimi (tunnus)",
       "type": "Tyyppi",
       "notified": "Ilmoitettu",

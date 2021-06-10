@@ -49,30 +49,38 @@ const TaskSearch = (): ReactElement => {
     const searchCategory = taskType !== TaskType.Unknown ? `&category=${getTaskCategoryFromType(taskType)}` : "";
     const taskResponse = await fetch(`${getOrigin(router)}/api/moderation/todos/find/?search=${placeName.trim()}${searchCategory}`);
     if (taskResponse.ok) {
-      const taskResult = await (taskResponse.json() as Promise<{ results: ModerationTodoResult[] }>);
+      const taskResult = await (taskResponse.json() as Promise<{ count: number; next: string; results: ModerationTodoResult[] }>);
 
       console.log("TASK RESPONSE", taskResult);
 
       if (taskResult && taskResult.results && taskResult.results.length > 0) {
+        const { results, count, next } = taskResult;
+
         // Parse the date strings to date objects
-        const results = taskResult.results
-          .filter((result) => {
-            const searchItemType = taskType !== TaskType.Unknown ? getTaskItemTypeFromType(taskType) : "";
-            return searchItemType.length === 0 || searchItemType === result.item_type;
+        dispatch(
+          setModerationTaskResults({
+            results: results
+              .filter((result) => {
+                const searchItemType = taskType !== TaskType.Unknown ? getTaskItemTypeFromType(taskType) : "";
+                return searchItemType.length === 0 || searchItemType === result.item_type;
+              })
+              .map((result) => {
+                return {
+                  ...result,
+                  created: moment(result.created_at).toDate(),
+                  updated: moment(result.updated_at).toDate(),
+                  taskType: getTaskType(result.category, result.item_type),
+                  taskStatus: getTaskStatus(result.status),
+                };
+              }),
+            count,
+            next,
           })
-          .map((result) => {
-            return {
-              ...result,
-              created: moment(result.created_at).toDate(),
-              updated: moment(result.updated_at).toDate(),
-              taskType: getTaskType(result.category, result.item_type),
-              taskStatus: getTaskStatus(result.status),
-            };
-          });
-        dispatch(setModerationTaskResults(results));
+        );
       } else {
-        dispatch(setModerationTaskResults([]));
+        dispatch(setModerationTaskResults({ results: [], count: 0 }));
       }
+      dispatch(setModerationTaskSearch({ ...taskSearch, searchDone: true }));
     }
   };
 
