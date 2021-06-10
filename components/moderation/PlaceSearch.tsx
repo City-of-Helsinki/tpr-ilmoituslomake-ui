@@ -69,12 +69,12 @@ const PlaceSearch = (): ReactElement => {
 
   const searchPlaces = async () => {
     const searchObject = {
-      ...(placeName.length > 0 && { search_name__contains: placeName }),
-      ...(address.length > 0 && { search_address__contains: address }),
+      ...(placeName.length > 0 && { search_name__contains: placeName.toLowerCase() }),
+      ...(address.length > 0 && { search_address__contains: address.toLowerCase() }),
       ...(ontologyIds.length > 0 && { data__ontology_ids__contains: ontologyIds }),
-      ...(comment.length > 0 && { search_comments__contains: comment }),
+      ...(comment.length > 0 && { search_comments__contains: comment.toLowerCase() }),
       ...(publishPermission && { published: publishPermission === "yes" }),
-      ...(district.length > 0 && { search_neighborhood: district }),
+      ...(district.length > 0 && { search_neighborhood: district.toLowerCase() }),
       ...(language.length > 0 && { lang: language }),
     };
 
