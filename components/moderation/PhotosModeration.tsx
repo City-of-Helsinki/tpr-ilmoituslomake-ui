@@ -150,7 +150,11 @@ const PhotosModeration = (): ReactElement => {
 
             <PhotoPreviewModeration index={index} />
 
-            {(taskType === TaskType.NewPlace || taskType === TaskType.PlaceChange || pageStatus === ModerationStatus.Edited) && (
+            {(taskType === TaskType.NewPlace ||
+              taskType === TaskType.PlaceChange ||
+              taskType === TaskType.ChangeTip ||
+              taskType === TaskType.AddTip ||
+              pageStatus === ModerationStatus.Edited) && (
               <div className="gridLayoutContainer moderation">
                 {(taskType === TaskType.NewPlace || taskType === TaskType.PlaceChange) && (
                   <div className="gridColumn1">
@@ -161,7 +165,16 @@ const PhotosModeration = (): ReactElement => {
                     )}
                   </div>
                 )}
-                <div className={taskType === TaskType.NewPlace || taskType === TaskType.PlaceChange ? "gridColumn2" : "gridColumn1"}>
+                <div
+                  className={
+                    taskType === TaskType.NewPlace ||
+                    taskType === TaskType.PlaceChange ||
+                    taskType === TaskType.ChangeTip ||
+                    taskType === TaskType.AddTip
+                      ? "gridColumn2"
+                      : "gridColumn1"
+                  }
+                >
                   {isNewImage && sourceTypeModified === PhotoSourceType.Device && (
                     <>
                       <input className="hidden" type="file" ref={ref} onChange={(evt) => fetchPhoto(index, evt)} />
@@ -255,7 +268,11 @@ const PhotosModeration = (): ReactElement => {
         );
       })}
 
-      {(taskType === TaskType.NewPlace || taskType === TaskType.PlaceChange || pageStatus === ModerationStatus.Edited) &&
+      {(taskType === TaskType.NewPlace ||
+        taskType === TaskType.PlaceChange ||
+        taskType === TaskType.ChangeTip ||
+        taskType === TaskType.AddTip ||
+        pageStatus === ModerationStatus.Edited) &&
         taskStatus !== TaskStatus.Closed && (
           <div className={`gridLayoutContainer moderation ${styles.addNewContainer}`}>
             <div className="gridColumn1">

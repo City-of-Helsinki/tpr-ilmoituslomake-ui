@@ -50,7 +50,7 @@ const ModerationSection = ({
   ModerationComponent,
   isSelectionGroupWrapper,
 }: ModerationSectionProps): ReactElement => {
-  if (taskType === TaskType.ChangeTip || taskType === TaskType.AddTip || taskType === TaskType.RemoveTip || taskType === TaskType.PlaceInfo) {
+  if (taskType === TaskType.RemoveTip || taskType === TaskType.PlaceInfo) {
     return (
       <>
         {selectedHeaderText && moderationStatus !== ModerationStatus.Edited && <h4 className="gridColumn1 moderation">{selectedHeaderText}</h4>}
@@ -69,7 +69,6 @@ const ModerationSection = ({
     );
   }
 
-  if (taskType === TaskType.NewPlace || taskType === TaskType.PlaceChange) {
     // Enable modified fields to be edited by default if they have a value
     if (
       moderationStatus === ModerationStatus.Unknown &&
@@ -77,6 +76,7 @@ const ModerationSection = ({
       !bypassModifiedFieldCheck
     ) {
       statusCallback(fieldName, ModerationStatus.Edited);
+  if (taskType === TaskType.NewPlace || taskType === TaskType.PlaceChange || taskType === TaskType.ChangeTip || taskType === TaskType.AddTip) {
     }
 
     return (

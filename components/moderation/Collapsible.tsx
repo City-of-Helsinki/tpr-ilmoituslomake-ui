@@ -39,7 +39,10 @@ const Collapsible = ({ section, title, taskType, taskStatus, isModerated, forceE
           <h3 className="moderation">{title}</h3>
         </div>
         <div className={styles.status}>
-          {(taskType === TaskType.NewPlace || taskType === TaskType.PlaceChange) && (
+          {(taskType === TaskType.NewPlace ||
+            taskType === TaskType.PlaceChange ||
+            taskType === TaskType.ChangeTip ||
+            taskType === TaskType.AddTip) && (
             <TaskStatusLabel status={isModerated || taskStatus === TaskStatus.Closed ? TaskStatus.Closed : TaskStatus.InProgress} />
           )}
         </div>

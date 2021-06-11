@@ -62,7 +62,7 @@ const MapModeration = ({ setMapsReady }: MapModerationProps): ReactElement => {
   const [initialLocationStatus, setInitialLocationStatus] = useState<ModerationStatus | undefined>(ModerationStatus.Edited);
 
   useEffect(() => {
-    if (taskType === TaskType.NewPlace || taskType === TaskType.PlaceChange) {
+    if (taskType === TaskType.NewPlace || taskType === TaskType.PlaceChange || taskType === TaskType.ChangeTip || taskType === TaskType.AddTip) {
       // Both maps are needed
       if (setMapsReady) {
         setMapsReady(map1Ready && map2Ready);
@@ -78,7 +78,7 @@ const MapModeration = ({ setMapsReady }: MapModerationProps): ReactElement => {
     }
   }, [taskType, map1Ready, map2Ready, setMapsReady, setInitialLocationStatus, updateLocationStatus]);
 
-  if (taskType === TaskType.ChangeTip || taskType === TaskType.AddTip || taskType === TaskType.RemoveTip || taskType === TaskType.PlaceInfo) {
+  if (taskType === TaskType.RemoveTip || taskType === TaskType.PlaceInfo) {
     return (
       <div className="formSection">
         <div className="gridLayoutContainer moderation">
@@ -103,7 +103,7 @@ const MapModeration = ({ setMapsReady }: MapModerationProps): ReactElement => {
     );
   }
 
-  if (taskType === TaskType.NewPlace || taskType === TaskType.PlaceChange) {
+  if (taskType === TaskType.NewPlace || taskType === TaskType.PlaceChange || taskType === TaskType.ChangeTip || taskType === TaskType.AddTip) {
     return (
       <div className="formSection">
         <div className="gridLayoutContainer moderation">

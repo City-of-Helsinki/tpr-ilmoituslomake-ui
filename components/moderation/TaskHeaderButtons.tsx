@@ -1,13 +1,11 @@
-import React, { Dispatch, ReactElement, useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import React, { ReactElement, useState } from "react";
+import { useSelector } from "react-redux";
 import { useRouter } from "next/router";
 import { useI18n } from "next-localization";
 import { Button, IconArrowRight, IconArrowUndo, IconTrash } from "hds-react";
-import { ModerationStatusAction } from "../../state/actions/types";
 import { RootState } from "../../state/reducers";
 import { ItemType, ModerationStatus, TaskStatus, TaskType, Toast } from "../../types/constants";
 import { approveModeration, deleteModeration, saveModerationChangeRequest, rejectModeration } from "../../utils/moderation";
-import setModerationStatus from "../../utils/status";
 import ModalConfirmation from "../common/ModalConfirmation";
 import ToastNotification from "../common/ToastNotification";
 import styles from "./TaskHeaderButtons.module.scss";
@@ -18,7 +16,6 @@ interface TaskHeaderButtonsProps {
 
 const TaskHeaderButtons = ({ isModerated }: TaskHeaderButtonsProps): ReactElement => {
   const i18n = useI18n();
-  const dispatchStatus = useDispatch<Dispatch<ModerationStatusAction>>();
   const router = useRouter();
 
   const currentUser = useSelector((state: RootState) => state.general.user);
@@ -30,7 +27,6 @@ const TaskHeaderButtons = ({ isModerated }: TaskHeaderButtonsProps): ReactElemen
 
   const moderationExtra = useSelector((state: RootState) => state.moderation.moderationExtra);
   const { photosUuids, photosSelected, photosModified, taskType, taskStatus } = moderationExtra;
-  const pageStatus = useSelector((state: RootState) => state.moderationStatus.pageStatus);
   const moderationStatus = useSelector((state: RootState) => state.moderationStatus.moderationStatus);
   const { photos: photosStatus } = moderationStatus;
 
@@ -38,11 +34,6 @@ const TaskHeaderButtons = ({ isModerated }: TaskHeaderButtonsProps): ReactElemen
   const [confirmApproval, setConfirmApproval] = useState(false);
   const [confirmRejection, setConfirmRejection] = useState(false);
   const [confirmDeletion, setConfirmDeletion] = useState(false);
-
-  const modifyTask = () => {
-    // Make the components editable for using tip info
-    setModerationStatus(photosModified, dispatchStatus);
-  };
 
   const makePlaceInfoChangeRequest = (itemType: ItemType) => {
     // Make a new moderation task for the notification place by making a change request
@@ -90,7 +81,7 @@ const TaskHeaderButtons = ({ isModerated }: TaskHeaderButtonsProps): ReactElemen
     // Save the moderated data for new or changed places using approved values only
     // For tip change requests just use the modified values
     const approvedTask =
-      taskType === TaskType.NewPlace || taskType === TaskType.PlaceChange
+      taskType === TaskType.NewPlace || taskType === TaskType.PlaceChange || taskType === TaskType.ChangeTip || taskType === TaskType.AddTip
         ? {
             ...modifiedTask,
             name: {
@@ -178,7 +169,7 @@ const TaskHeaderButtons = ({ isModerated }: TaskHeaderButtonsProps): ReactElemen
     // Filter out photos that the user has removed
     // After checking, filter out any invalid images, so those with an empty url
     const approvedPhotos =
-      taskType === TaskType.NewPlace || taskType === TaskType.PlaceChange
+      taskType === TaskType.NewPlace || taskType === TaskType.PlaceChange || taskType === TaskType.ChangeTip || taskType === TaskType.AddTip
         ? photosUuids
             .map((uuid, index) => {
               const photoSelected = photosSelected[index];
@@ -279,7 +270,7 @@ const TaskHeaderButtons = ({ isModerated }: TaskHeaderButtonsProps): ReactElemen
 
   return (
     <div className={styles.taskHeaderButtons}>
-      {(taskType === TaskType.NewPlace || taskType === TaskType.PlaceChange) && (
+      {(taskType === TaskType.NewPlace || taskType === TaskType.PlaceChange || taskType === TaskType.ChangeTip || taskType === TaskType.AddTip) && (
         <div className={styles.buttonRow}>
           {/* <Button variant="secondary">{i18n.t("moderation.button.requestTranslation")}</Button> */}
           <Button
@@ -297,30 +288,6 @@ const TaskHeaderButtons = ({ isModerated }: TaskHeaderButtonsProps): ReactElemen
           >
             {i18n.t("moderation.button.saveInformation")}
           </Button>
-        </div>
-      )}
-
-      {(taskType === TaskType.ChangeTip || taskType === TaskType.AddTip) && (
-        <div className={styles.buttonRow}>
-          {/* <Button variant="secondary">{i18n.t("moderation.button.requestTranslation")}</Button> */}
-          <Button
-            variant="secondary"
-            iconRight={<IconArrowUndo aria-hidden />}
-            onClick={openRejectionConfirmation}
-            disabled={taskStatus === TaskStatus.Closed}
-          >
-            {i18n.t("moderation.button.rejectChangeRequest")}
-          </Button>
-          {pageStatus !== ModerationStatus.Edited && (
-            <Button variant="secondary" onClick={modifyTask} disabled={taskStatus === TaskStatus.Closed}>
-              {i18n.t("moderation.button.openForModifying")}
-            </Button>
-          )}
-          {pageStatus === ModerationStatus.Edited && (
-            <Button iconRight={<IconArrowRight aria-hidden />} onClick={openApprovalConfirmation} disabled={taskStatus === TaskStatus.Closed}>
-              {i18n.t("moderation.button.saveInformation")}
-            </Button>
-          )}
         </div>
       )}
 
