@@ -605,11 +605,14 @@
       "status": "Tila",
       "moderator": "Moderoija",
       "notifier": "Ilmoittaja",
+      "placeNotifier": "Kohteen ilmoittaja",
+      "tipNotifier": "Vinkin ilmoittaja",
       "representative": "On kohteen edustaja",
       "notRepresentative": "Ei ole kohteen edustaja",
       "messageFromNotifier": "Viesti ilmoittajalta",
       "moderatorChangeRequest": "Moderoijan muutospyyntö",
-      "addPlaceName": "Uuden kohteen nimi"
+      "addPlaceName": "Uuden kohteen nimi",
+      "addPlaceTip": "Vinkki"
     },
     "taskSearch": {
       "title": "Moderointitehtävät",

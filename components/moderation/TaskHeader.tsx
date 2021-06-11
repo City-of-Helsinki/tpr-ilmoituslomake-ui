@@ -73,29 +73,35 @@ const TaskHeader = ({ isModerated }: TaskHeaderProps): ReactElement => {
       <div className={styles.lowerRow}>
         <div className={styles.notifier}>
           <div className={styles.notifierType}>
-            <div className={styles.bold}>{i18n.t("moderation.taskHeader.notifier")}</div>
-            {(taskType === TaskType.NewPlace || taskType === TaskType.PlaceChange || taskType === TaskType.PlaceInfo) &&
-              (notifier_type === NotifierType.Representative ? (
-                <>
-                  <IconCheck size="s" aria-hidden />
-                  <div>{i18n.t("moderation.taskHeader.representative")}</div>
-                </>
-              ) : (
-                <>
-                  <IconCross size="s" aria-hidden />
-                  <div>{i18n.t("moderation.taskHeader.notRepresentative")}</div>
-                </>
-              ))}
+            <div className={styles.bold}>
+              {taskType === TaskType.ChangeTip || taskType === TaskType.AddTip || taskType === TaskType.RemoveTip
+                ? i18n.t("moderation.taskHeader.placeNotifier")
+                : i18n.t("moderation.taskHeader.notifier")}
+            </div>
+            {notifier_type === NotifierType.Representative ? (
+              <>
+                <IconCheck size="s" aria-hidden />
+                <div>{i18n.t("moderation.taskHeader.representative")}</div>
+              </>
+            ) : (
+              <>
+                <IconCross size="s" aria-hidden />
+                <div>{i18n.t("moderation.taskHeader.notRepresentative")}</div>
+              </>
+            )}
           </div>
-          {(taskType === TaskType.ChangeTip || taskType === TaskType.AddTip || taskType === TaskType.RemoveTip) && <div>{userDetails}</div>}
-          {(taskType === TaskType.NewPlace || taskType === TaskType.PlaceChange || taskType === TaskType.PlaceInfo) && (
-            <>
-              <div>{full_name}</div>
-              <div>{email}</div>
-              <div>{phone}</div>
-            </>
-          )}
+          <div>{full_name}</div>
+          <div>{email}</div>
+          <div>{phone}</div>
         </div>
+
+        {(taskType === TaskType.ChangeTip || taskType === TaskType.AddTip || taskType === TaskType.RemoveTip) && (
+          <div className={styles.tipNotifier}>
+            <div className={styles.bold}>{i18n.t("moderation.taskHeader.tipNotifier")}</div>
+            <div>{userDetails}</div>
+          </div>
+        )}
+
         <div className={styles.comment}>
           <div className={styles.bold}>{i18n.t("moderation.taskHeader.messageFromNotifier")}</div>
           {(taskType === TaskType.ChangeTip || taskType === TaskType.AddTip || taskType === TaskType.RemoveTip) && (
@@ -105,7 +111,12 @@ const TaskHeader = ({ isModerated }: TaskHeaderProps): ReactElement => {
                   {i18n.t("moderation.taskHeader.addPlaceName")}: {userPlaceName}
                 </div>
               )}
-              <div>{userComments}</div>
+              {taskType === TaskType.AddTip && (
+                <div>
+                  {i18n.t("moderation.taskHeader.addPlaceTip")}: {userComments}
+                </div>
+              )}
+              {taskType !== TaskType.AddTip && <div>{userComments}</div>}
             </>
           )}
           {(taskType === TaskType.NewPlace || taskType === TaskType.PlaceChange) && <div>{comments}</div>}
