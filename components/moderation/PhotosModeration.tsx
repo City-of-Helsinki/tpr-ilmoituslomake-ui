@@ -140,6 +140,8 @@ const PhotosModeration = (): ReactElement => {
                 modifiedHeaderText={`${i18n.t("moderation.photos.photo.title")} ${index + 1}${i18n.t("moderation.task.modified")}`}
                 modifyButtonLabel={i18n.t(urlLabelKey)}
                 modifyButtonHidden
+                actionButtonHidden={!modifiedImage}
+                bypassModifiedFieldCheck={!modifiedImage}
                 forceDisabled={!isNewImage || sourceTypeModified === PhotoSourceType.Device}
                 changeCallback={(evt: ChangeEvent<HTMLInputElement>) => updatePhoto(index, evt)}
                 blurCallback={(evt: ChangeEvent<HTMLInputElement>) => fetchPhoto(index, evt)}
@@ -209,6 +211,8 @@ const PhotosModeration = (): ReactElement => {
                     taskStatus={taskStatus}
                     modifyButtonLabel={`${i18n.t("moderation.photos.altText.label")} ${i18n.t(`common.inLanguage.${option}`)}`}
                     modifyButtonHidden={!modifiedImage}
+                    actionButtonHidden={!modifiedImage}
+                    bypassModifiedFieldCheck={!modifiedImage}
                     changeCallback={(evt: ChangeEvent<HTMLTextAreaElement>) => updatePhotoAltText(index, evt)}
                     statusCallback={(language, status) => updatePhotoAltTextStatus(index, language, status)}
                     ModerationComponent={
@@ -235,6 +239,8 @@ const PhotosModeration = (): ReactElement => {
                 taskStatus={taskStatus}
                 modifyButtonLabel={i18n.t("moderation.photos.permission.label")}
                 modifyButtonHidden={!modifiedImage}
+                actionButtonHidden={!modifiedImage}
+                bypassModifiedFieldCheck={!modifiedImage}
                 changeCallback={(evt: ChangeEvent<HTMLInputElement>) => updatePhoto(index, evt)}
                 statusCallback={(fieldName, status) => updatePhotoStatus(index, fieldName, status)}
                 ModerationComponent={
@@ -258,6 +264,8 @@ const PhotosModeration = (): ReactElement => {
                 taskStatus={taskStatus}
                 modifyButtonLabel={i18n.t("moderation.photos.source.label")}
                 modifyButtonHidden={!modifiedImage}
+                actionButtonHidden={!modifiedImage}
+                bypassModifiedFieldCheck={!modifiedImage}
                 changeCallback={(evt: ChangeEvent<HTMLInputElement>) => updatePhoto(index, evt)}
                 statusCallback={(fieldName, status) => updatePhotoStatus(index, fieldName, status)}
                 ModerationComponent={<TextInput id={`source_${index}`} label={i18n.t("moderation.photos.source.label")} name="source" />}

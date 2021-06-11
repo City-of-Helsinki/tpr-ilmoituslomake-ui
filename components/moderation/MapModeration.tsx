@@ -44,6 +44,17 @@ const MapModeration = ({ setMapsReady }: MapModerationProps): ReactElement => {
       ? MAP_INITIAL_MARKER_ZOOM
       : MAP_INITIAL_ZOOM;
 
+  const isLocationValid = (location: [number, number]) => location && location.length === 2 && location[0] > 0 && location[1] > 0;
+
+  const isLocationChanged = () => {
+    return (
+      isLocationValid(locationSelected) &&
+      isLocationValid(locationModified) &&
+      locationSelected[0] !== locationModified[0] &&
+      locationSelected[1] !== locationModified[1]
+    );
+  };
+
   const updateLocation = (coordinates: [number, number]) => {
     dispatch(setModerationLocation(coordinates));
   };
@@ -59,7 +70,24 @@ const MapModeration = ({ setMapsReady }: MapModerationProps): ReactElement => {
   // The maps only initialise properly when not hidden, so use flags to only hide the maps after they are ready
   const [map1Ready, setMap1Ready] = useState<boolean>(false);
   const [map2Ready, setMap2Ready] = useState<boolean>(false);
-  const [initialLocationStatus, setInitialLocationStatus] = useState<ModerationStatus | undefined>(ModerationStatus.Edited);
+
+  // Enable the modified location to be edited by default if it is different from the selected location
+  // For tip change requests, enable the location to be edited by default
+  let initialStatus = locationStatus;
+  if (locationStatus === ModerationStatus.Unknown) {
+    if (
+      !isLocationValid(locationSelected) ||
+      !isLocationValid(locationModified) ||
+      isLocationChanged() ||
+      taskType === TaskType.ChangeTip ||
+      taskType === TaskType.AddTip
+    ) {
+      initialStatus = ModerationStatus.Edited;
+    } else if (isLocationValid(locationSelected) || isLocationValid(locationModified)) {
+      initialStatus = ModerationStatus.Approved;
+    }
+  }
+  const [initialLocationStatus, setInitialLocationStatus] = useState<ModerationStatus | undefined>(initialStatus);
 
   useEffect(() => {
     if (taskType === TaskType.NewPlace || taskType === TaskType.PlaceChange || taskType === TaskType.ChangeTip || taskType === TaskType.AddTip) {
@@ -67,16 +95,16 @@ const MapModeration = ({ setMapsReady }: MapModerationProps): ReactElement => {
       if (setMapsReady) {
         setMapsReady(map1Ready && map2Ready);
       }
-      if (map2Ready) {
+      if (map2Ready && initialLocationStatus) {
         // Enable the location to be edited by default
+        updateLocationStatus("", initialLocationStatus);
         setInitialLocationStatus(undefined);
-        updateLocationStatus("", ModerationStatus.Edited);
       }
     } else if (setMapsReady) {
       // Only one map is needed
       setMapsReady(map1Ready);
     }
-  }, [taskType, map1Ready, map2Ready, setMapsReady, setInitialLocationStatus, updateLocationStatus]);
+  }, [taskType, map1Ready, map2Ready, setMapsReady, initialLocationStatus, setInitialLocationStatus, updateLocationStatus]);
 
   if (taskType === TaskType.RemoveTip || taskType === TaskType.PlaceInfo) {
     return (

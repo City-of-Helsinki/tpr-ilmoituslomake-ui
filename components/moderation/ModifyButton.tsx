@@ -41,15 +41,17 @@ const ModifyButton = ({
       {(moderationStatus === ModerationStatus.Approved || moderationStatus === ModerationStatus.Rejected) && (
         <>
           {children}
-          <Button
-            variant="supplementary"
-            size="small"
-            iconLeft={<IconPen aria-hidden />}
-            onClick={() => modifyCallback(fieldName, ModerationStatus.Edited)}
-            disabled={taskStatus === TaskStatus.Closed}
-          >
-            {i18n.t("moderation.button.modify")}
-          </Button>
+          {!hidden && (
+            <Button
+              variant="supplementary"
+              size="small"
+              iconLeft={<IconPen aria-hidden />}
+              onClick={() => modifyCallback(fieldName, ModerationStatus.Edited)}
+              disabled={taskStatus === TaskStatus.Closed}
+            >
+              {i18n.t("moderation.button.modify")}
+            </Button>
+          )}
         </>
       )}
     </div>

@@ -119,6 +119,7 @@ const LocationModeration = (): ReactElement => {
           modifyButtonLabel={`${i18n.t("moderation.location.address")} ${i18n.t("common.inLanguage.fi")}`}
           modifyButtonHidden
           actionButtonHidden
+          bypassModifiedFieldCheck
           changeCallback={(evt: ChangeEvent<HTMLInputElement>) => updateAddress("fi", evt)}
           statusCallback={updateAddressStatus}
           ModerationComponent={
@@ -141,6 +142,7 @@ const LocationModeration = (): ReactElement => {
           modifyButtonLabel={`${i18n.t("moderation.location.address")} ${i18n.t("common.inLanguage.fi")}`}
           modifyButtonHidden
           actionButtonHidden
+          bypassModifiedFieldCheck
           changeCallback={(evt: ChangeEvent<HTMLInputElement>) => updateAddress("fi", evt)}
           statusCallback={updateAddressStatus}
           ModerationComponent={
@@ -233,6 +235,7 @@ const LocationModeration = (): ReactElement => {
           modifyButtonLabel={`${i18n.t("moderation.location.address")} ${i18n.t("common.inLanguage.sv")}`}
           modifyButtonHidden
           actionButtonHidden
+          bypassModifiedFieldCheck
           changeCallback={(evt: ChangeEvent<HTMLInputElement>) => updateAddress("sv", evt)}
           statusCallback={updateAddressStatus}
           ModerationComponent={
@@ -255,6 +258,7 @@ const LocationModeration = (): ReactElement => {
           modifyButtonLabel={`${i18n.t("moderation.location.address")} ${i18n.t("common.inLanguage.sv")}`}
           modifyButtonHidden
           actionButtonHidden
+          bypassModifiedFieldCheck
           changeCallback={(evt: ChangeEvent<HTMLInputElement>) => updateAddress("sv", evt)}
           statusCallback={updateAddressStatus}
           ModerationComponent={

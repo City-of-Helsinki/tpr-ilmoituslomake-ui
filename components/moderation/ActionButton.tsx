@@ -10,14 +10,15 @@ interface ActionButtonProps {
   moderationStatus: ModerationStatus;
   taskStatus: TaskStatus;
   actionCallback: (fieldName: string, status: ModerationStatus) => void;
+  hidden?: boolean;
 }
 
-const ActionButton = ({ className, fieldName, moderationStatus, taskStatus, actionCallback }: ActionButtonProps): ReactElement => {
+const ActionButton = ({ className, fieldName, moderationStatus, taskStatus, actionCallback, hidden }: ActionButtonProps): ReactElement => {
   const i18n = useI18n();
 
   return (
     <div className={`${styles.action} ${className}`}>
-      {moderationStatus === ModerationStatus.Edited && (
+      {moderationStatus === ModerationStatus.Edited && !hidden && (
         <div>
           <Button
             className={taskStatus !== TaskStatus.Closed ? styles.approveSecondary : ""}
@@ -41,7 +42,7 @@ const ActionButton = ({ className, fieldName, moderationStatus, taskStatus, acti
           </Button>
         </div>
       )}
-      {moderationStatus === ModerationStatus.Approved && (
+      {moderationStatus === ModerationStatus.Approved && !hidden && (
         <Button
           className={styles.approve}
           iconLeft={<IconCheck aria-hidden />}
@@ -52,7 +53,7 @@ const ActionButton = ({ className, fieldName, moderationStatus, taskStatus, acti
           {i18n.t("moderation.button.approved")}
         </Button>
       )}
-      {moderationStatus === ModerationStatus.Rejected && (
+      {moderationStatus === ModerationStatus.Rejected && !hidden && (
         <Button
           className={styles.reject}
           iconLeft={<IconCross aria-hidden />}
@@ -69,6 +70,7 @@ const ActionButton = ({ className, fieldName, moderationStatus, taskStatus, acti
 
 ActionButton.defaultProps = {
   className: "",
+  hidden: false,
 };
 
 export default ActionButton;

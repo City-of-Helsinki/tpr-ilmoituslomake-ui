@@ -69,14 +69,27 @@ const ModerationSection = ({
     );
   }
 
-    // Enable modified fields to be edited by default if they have a value
-    if (
-      moderationStatus === ModerationStatus.Unknown &&
-      ((selectedValue && selectedValue.length > 0 && !modifyButtonHidden) || (modifiedValue && modifiedValue.length > 0)) &&
-      !bypassModifiedFieldCheck
-    ) {
-      statusCallback(fieldName, ModerationStatus.Edited);
   if (taskType === TaskType.NewPlace || taskType === TaskType.PlaceChange || taskType === TaskType.ChangeTip || taskType === TaskType.AddTip) {
+    // Enable modified fields to be edited by default if they have a value different from the selected field
+    // For tip change requests, enable all fields to be edited by default
+    if (moderationStatus === ModerationStatus.Unknown && !bypassModifiedFieldCheck) {
+      if (taskType === TaskType.ChangeTip || taskType === TaskType.AddTip) {
+        // Tip change request
+        statusCallback(fieldName, ModerationStatus.Edited);
+      } else if (
+        Array.isArray(selectedValue) &&
+        Array.isArray(modifiedValue) &&
+        selectedValue.map((s) => s.id).join() !== modifiedValue.map((m) => m.id).join()
+      ) {
+        // Combobox selected and modified values are different, and there is a value
+        statusCallback(fieldName, ModerationStatus.Edited);
+      } else if (!Array.isArray(selectedValue) && !Array.isArray(modifiedValue) && selectedValue !== modifiedValue) {
+        // Text string selected and modified values are different, and there is a value
+        statusCallback(fieldName, ModerationStatus.Edited);
+      } else if ((selectedValue !== undefined && selectedValue.length > 0) || (modifiedValue !== undefined && modifiedValue.length > 0)) {
+        // Selected and modified values are the same, and there is a value
+        statusCallback(fieldName, ModerationStatus.Approved);
+      }
     }
 
     return (
@@ -116,15 +129,14 @@ const ModerationSection = ({
           })}
         </ModifyButton>
 
-        {!actionButtonHidden && (
-          <ActionButton
-            className="gridColumn3"
-            fieldName={fieldName}
-            moderationStatus={moderationStatus}
-            taskStatus={taskStatus}
-            actionCallback={statusCallback}
-          />
-        )}
+        <ActionButton
+          className="gridColumn3"
+          fieldName={fieldName}
+          moderationStatus={moderationStatus}
+          taskStatus={taskStatus}
+          actionCallback={statusCallback}
+          hidden={actionButtonHidden}
+        />
       </>
     );
   }
