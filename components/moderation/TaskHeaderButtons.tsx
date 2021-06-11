@@ -33,7 +33,11 @@ const TaskHeaderButtons = ({ isModerated }: TaskHeaderButtonsProps): ReactElemen
   const [toast, setToast] = useState<Toast>();
   const [confirmApproval, setConfirmApproval] = useState(false);
   const [confirmRejection, setConfirmRejection] = useState(false);
+  const [confirmSave, setConfirmSave] = useState(false);
   const [confirmDeletion, setConfirmDeletion] = useState(false);
+  const [confirmAddCancellation, setConfirmAddCancellation] = useState(false);
+  const [confirmChangeCancellation, setConfirmChangeCancellation] = useState(false);
+  const [confirmDeleteCancellation, setConfirmDeleteCancellation] = useState(false);
 
   const makePlaceInfoChangeRequest = (itemType: ItemType) => {
     // Make a new moderation task for the notification place by making a change request
@@ -63,6 +67,14 @@ const TaskHeaderButtons = ({ isModerated }: TaskHeaderButtonsProps): ReactElemen
     setConfirmRejection(false);
   };
 
+  const openSaveConfirmation = () => {
+    setConfirmSave(true);
+  };
+
+  const closeSaveConfirmation = () => {
+    setConfirmSave(false);
+  };
+
   const openDeletionConfirmation = () => {
     setConfirmDeletion(true);
   };
@@ -71,12 +83,37 @@ const TaskHeaderButtons = ({ isModerated }: TaskHeaderButtonsProps): ReactElemen
     setConfirmDeletion(false);
   };
 
+  const openAddCancellationConfirmation = () => {
+    setConfirmAddCancellation(true);
+  };
+
+  const closeAddCancellationConfirmation = () => {
+    setConfirmAddCancellation(false);
+  };
+
+  const openChangeCancellationConfirmation = () => {
+    setConfirmChangeCancellation(true);
+  };
+
+  const closeChangeCancellationConfirmation = () => {
+    setConfirmChangeCancellation(false);
+  };
+
+  const openDeleteCancellationConfirmation = () => {
+    setConfirmDeleteCancellation(true);
+  };
+
+  const closeDeleteCancellationConfirmation = () => {
+    setConfirmDeleteCancellation(false);
+  };
+
   const getApprovedValue = (statusToCheck: ModerationStatus, selectedValue: string, modifiedValue: string) => {
     return statusToCheck === ModerationStatus.Approved ? modifiedValue : selectedValue;
   };
 
   const approveTask = () => {
     closeApprovalConfirmation();
+    closeSaveConfirmation();
 
     // Save the moderated data for new or changed places using approved values only
     // For tip change requests just use the modified values
@@ -270,7 +307,7 @@ const TaskHeaderButtons = ({ isModerated }: TaskHeaderButtonsProps): ReactElemen
 
   return (
     <div className={styles.taskHeaderButtons}>
-      {(taskType === TaskType.NewPlace || taskType === TaskType.PlaceChange || taskType === TaskType.ChangeTip || taskType === TaskType.AddTip) && (
+      {(taskType === TaskType.NewPlace || taskType === TaskType.PlaceChange) && (
         <div className={styles.buttonRow}>
           {/* <Button variant="secondary">{i18n.t("moderation.button.requestTranslation")}</Button> */}
           <Button
@@ -291,15 +328,36 @@ const TaskHeaderButtons = ({ isModerated }: TaskHeaderButtonsProps): ReactElemen
         </div>
       )}
 
+      {(taskType === TaskType.ChangeTip || taskType === TaskType.AddTip) && (
+        <div className={styles.buttonRow}>
+          {/* <Button variant="secondary">{i18n.t("moderation.button.requestTranslation")}</Button> */}
+          <Button
+            variant="secondary"
+            iconRight={<IconArrowUndo aria-hidden />}
+            onClick={taskType === TaskType.ChangeTip ? openChangeCancellationConfirmation : openAddCancellationConfirmation}
+            disabled={taskStatus === TaskStatus.Closed}
+          >
+            {taskType === TaskType.ChangeTip ? i18n.t("moderation.button.cancelChange") : i18n.t("moderation.button.cancelAdd")}
+          </Button>
+          <Button
+            iconRight={<IconArrowRight aria-hidden />}
+            onClick={openSaveConfirmation}
+            disabled={!isModerated || taskStatus === TaskStatus.Closed}
+          >
+            {i18n.t("moderation.button.saveInformation")}
+          </Button>
+        </div>
+      )}
+
       {taskType === TaskType.RemoveTip && (
         <div className={styles.buttonRow}>
           <Button
             variant="secondary"
             iconRight={<IconArrowUndo aria-hidden />}
-            onClick={openRejectionConfirmation}
+            onClick={openDeleteCancellationConfirmation}
             disabled={taskStatus === TaskStatus.Closed}
           >
-            {i18n.t("moderation.button.rejectChangeRequest")}
+            {i18n.t("moderation.button.cancelRemove")}
           </Button>
           <Button iconRight={<IconTrash aria-hidden />} onClick={openDeletionConfirmation} disabled={taskStatus === TaskStatus.Closed}>
             {i18n.t("moderation.button.removePlace")}
@@ -332,7 +390,7 @@ const TaskHeaderButtons = ({ isModerated }: TaskHeaderButtonsProps): ReactElemen
           open={confirmApproval}
           titleKey="moderation.button.approveChangeRequest"
           messageKey="moderation.confirmation.approveChangeRequest"
-          cancelKey="moderation.button.cancel"
+          cancelKey="moderation.button.back"
           confirmKey="moderation.button.approve"
           closeCallback={closeApprovalConfirmation}
           confirmCallback={approveTask}
@@ -344,10 +402,22 @@ const TaskHeaderButtons = ({ isModerated }: TaskHeaderButtonsProps): ReactElemen
           open={confirmRejection}
           titleKey="moderation.button.rejectChangeRequest"
           messageKey="moderation.confirmation.rejectChangeRequest"
-          cancelKey="moderation.button.cancel"
+          cancelKey="moderation.button.back"
           confirmKey="moderation.button.reject"
           closeCallback={closeRejectionConfirmation}
           confirmCallback={rejectTask}
+        />
+      )}
+
+      {confirmSave && (
+        <ModalConfirmation
+          open={confirmSave}
+          titleKey="moderation.button.savePlace"
+          messageKey="moderation.confirmation.savePlace"
+          cancelKey="moderation.button.back"
+          confirmKey="moderation.button.save"
+          closeCallback={closeSaveConfirmation}
+          confirmCallback={approveTask}
         />
       )}
 
@@ -356,10 +426,46 @@ const TaskHeaderButtons = ({ isModerated }: TaskHeaderButtonsProps): ReactElemen
           open={confirmDeletion}
           titleKey="moderation.button.removePlace"
           messageKey="moderation.confirmation.removePlace"
-          cancelKey="moderation.button.cancel"
+          cancelKey="moderation.button.back"
           confirmKey="moderation.button.remove"
           closeCallback={closeDeletionConfirmation}
           confirmCallback={removePlace}
+        />
+      )}
+
+      {confirmAddCancellation && (
+        <ModalConfirmation
+          open={confirmAddCancellation}
+          titleKey="moderation.button.cancelAdd"
+          messageKey="moderation.confirmation.cancelAdd"
+          cancelKey="moderation.button.back"
+          confirmKey="moderation.button.cancelAdd"
+          closeCallback={closeAddCancellationConfirmation}
+          confirmCallback={rejectTask}
+        />
+      )}
+
+      {confirmChangeCancellation && (
+        <ModalConfirmation
+          open={confirmChangeCancellation}
+          titleKey="moderation.button.cancelChange"
+          messageKey="moderation.confirmation.cancelChange"
+          cancelKey="moderation.button.back"
+          confirmKey="moderation.button.cancelChange"
+          closeCallback={closeChangeCancellationConfirmation}
+          confirmCallback={rejectTask}
+        />
+      )}
+
+      {confirmDeleteCancellation && (
+        <ModalConfirmation
+          open={confirmDeleteCancellation}
+          titleKey="moderation.button.cancelRemove"
+          messageKey="moderation.confirmation.cancelRemove"
+          cancelKey="moderation.button.back"
+          confirmKey="moderation.button.cancelRemove"
+          closeCallback={closeDeleteCancellationConfirmation}
+          confirmCallback={rejectTask}
         />
       )}
 

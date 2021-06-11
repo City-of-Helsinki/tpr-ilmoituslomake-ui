@@ -397,6 +397,7 @@
       "rejected": "Hylätty",
       "modify": "Muokkaa",
       "cancel": "Keskeytä",
+      "back": "Peru",
       "showMore": "Näytä lisää",
       "addNewPlace": "Lisää uusi kohde",
       "allPlaces": "Kaikki kohteet",
@@ -404,11 +405,16 @@
       "requestTranslation": "Pyydä käännös",
       "approveChangeRequest": "Hyväksy muutospyyntö",
       "rejectChangeRequest": "Hylkää muutospyyntö",
+      "cancelAdd": "Peruuta lisäys",
+      "cancelChange": "Peruuta muutos",
+      "cancelRemove": "Peruuta poisto",
       "openForModifying": "Avaa muokattavaksi",
+      "savePlace": "Tallenna kohde",
       "removePlace": "Poista kohde",
       "saveIncomplete": "Tallenna keskeneräisenä",
       "saveInformation": "Tallenna tiedot",
       "clearAllSelections": "Poista kaikki valinnat",
+      "save": "Tallenna",
       "remove": "Poista",
       "toggleMenu": "Vaihdele valikko",
       "selectFromDevice": "Valitse laitteelta"
@@ -439,9 +445,13 @@
       "fieldOther": "Tarkista tieto"
     },
     "confirmation": {
-      "approveChangeRequest": "Haluatko varmasti tallentaa ja hyväksyä muutospyynnön?",
-      "rejectChangeRequest": "Haluatko varmasti hylätä muutospyynnön?",
-      "removePlace": "Haluatko varmasti poistaa kohteen?"
+      "approveChangeRequest": "Oletko varma, että haluat tallentaa ja hyväksyä muutospyynnön?",
+      "rejectChangeRequest": "Oletko varma, että haluat hylätä muutospyynnön?",
+      "savePlace": "Oletko varma, että haluat tallentaa kohteen?",
+      "removePlace": "Oletko varma, että haluat poistaa kohteen?",
+      "cancelAdd": "Oletko varma, että haluat peruuttaa lisäyksen?",
+      "cancelChange": "Oletko varma, että haluat peruuttaa muutoksen?",
+      "cancelRemove": "Oletko varma, että haluat peruuttaa poiston?"
     },
     "contact": {
       "title": "Muut yhteystiedot",
