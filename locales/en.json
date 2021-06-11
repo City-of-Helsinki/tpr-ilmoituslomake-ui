@@ -565,7 +565,7 @@
         "label": "Moderoijan kommentti"
       },
       "publishPermission": {
-        "label": "Julkaisulupa",
+        "label": "Julkaistu",
         "yes": "Kyllä",
         "no": "Ei"
       }
@@ -577,7 +577,7 @@
       "nameId": "Nimi (tunnus)",
       "address": "Osoite",
       "modifiedLast": "Muokattu viimeksi",
-      "publishPermission": "Julkaisulupa"
+      "publishPermission": "Julkaistu"
     },
     "tags": {
       "title": "Asiasanat",
@@ -598,7 +598,7 @@
     "taskHeader": {
       "taskType": "Tehtävätyyppi",
       "publishPermission": {
-        "label": "Julkaisulupa",
+        "label": "Julkaistu",
         "yes": "Kyllä",
         "no": "Ei"
       },
