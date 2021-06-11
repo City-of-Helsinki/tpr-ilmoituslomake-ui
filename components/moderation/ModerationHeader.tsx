@@ -46,7 +46,7 @@ const ModerationHeader = (props: ModerationHeaderProps): ReactElement => {
   };
 
   return (
-    <Header includeLanguageSelector={false}>
+    <Header includeLanguageSelector={false} homePagePath="/moderation/front">
       <Navigation.Row variant="inline">
         <Navigation.Item
           className={styles.navigationItem}

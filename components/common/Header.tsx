@@ -10,6 +10,7 @@ import getOrigin from "../../utils/request";
 
 interface HeaderProps {
   includeLanguageSelector?: boolean;
+  homePagePath?: string;
   children?: React.ReactNode;
 }
 
@@ -18,7 +19,7 @@ interface HeaderProps {
 // @ts-ignore: A dynamic import must be used to force client-side rendering regardless of the typescript errors
 const DynamicNavigation = dynamic(() => import("hds-react").then((hds) => hds.Navigation), { ssr: false });
 
-const Header = ({ includeLanguageSelector, children }: HeaderProps): ReactElement => {
+const Header = ({ includeLanguageSelector, homePagePath, children }: HeaderProps): ReactElement => {
   const i18n = useI18n();
   const router = useRouter();
 
@@ -48,7 +49,7 @@ const Header = ({ includeLanguageSelector, children }: HeaderProps): ReactElemen
       // @ts-ignore: The HDS Navigation component comes from a dynamic import, see above for details
       title={i18n.t("common.header.title")}
       titleAriaLabel={i18n.t("common.header.titleAlt")}
-      titleUrl={`${router.basePath}/`}
+      titleUrl={`${router.basePath}${homePagePath}/`}
       menuToggleAriaLabel="menu"
       skipTo="#content"
       skipToContentLabel={i18n.t("common.header.skipToContent")}
@@ -85,6 +86,7 @@ const Header = ({ includeLanguageSelector, children }: HeaderProps): ReactElemen
 
 Header.defaultProps = {
   includeLanguageSelector: true,
+  homePagePath: "",
   children: [],
 };
 
