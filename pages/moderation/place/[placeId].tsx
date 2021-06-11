@@ -14,6 +14,7 @@ import Layout from "../../../components/common/Layout";
 import ModerationHeader from "../../../components/moderation/ModerationHeader";
 import Collapsible from "../../../components/moderation/Collapsible";
 import TaskHeader from "../../../components/moderation/TaskHeader";
+import TaskHeaderButtons from "../../../components/moderation/TaskHeaderButtons";
 import ContactModeration from "../../../components/moderation/ContactModeration";
 import DescriptionModeration from "../../../components/moderation/DescriptionModeration";
 import LinksModeration from "../../../components/moderation/LinksModeration";
@@ -55,6 +56,7 @@ const ModerationPlaceDetail = (): ReactElement => {
           <Collapsible section={3} title={i18n.t("moderation.task.photos")} taskType={taskType} taskStatus={taskStatus}>
             <PhotosModeration />
           </Collapsible>
+          <TaskHeaderButtons />
         </main>
       )}
     </Layout>

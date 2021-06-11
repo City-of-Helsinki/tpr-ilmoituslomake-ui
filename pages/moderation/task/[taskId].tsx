@@ -16,6 +16,7 @@ import Layout from "../../../components/common/Layout";
 import ModerationHeader from "../../../components/moderation/ModerationHeader";
 import Collapsible from "../../../components/moderation/Collapsible";
 import TaskHeader from "../../../components/moderation/TaskHeader";
+import TaskHeaderButtons from "../../../components/moderation/TaskHeaderButtons";
 import ContactModeration from "../../../components/moderation/ContactModeration";
 import DescriptionModeration from "../../../components/moderation/DescriptionModeration";
 import LinksModeration from "../../../components/moderation/LinksModeration";
@@ -136,6 +137,7 @@ const ModerationTaskDetail = (): ReactElement => {
           >
             <PhotosModeration />
           </Collapsible>
+          <TaskHeaderButtons isModerated={isSectionModerated(1) && isSectionModerated(2) && isSectionModerated(3)} />
         </main>
       )}
     </Layout>
