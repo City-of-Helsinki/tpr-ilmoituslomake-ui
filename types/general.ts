@@ -219,6 +219,9 @@ export interface ModerationTodoSchema {
   target: {
     id: number;
     data: NotificationSchema;
+    user: User;
+    created_at: string;
+    updated_at: string;
   };
   notification_target: {
     id: number;
@@ -263,5 +266,9 @@ export interface ModerationExtra {
   moderator: {
     fullName: string;
     email: string;
+  };
+  lastUpdated: {
+    fullName: string;
+    updated_at: string;
   };
 }

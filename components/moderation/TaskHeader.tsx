@@ -37,6 +37,7 @@ const TaskHeader = ({ isModerated }: TaskHeaderProps): ReactElement => {
     userComments,
     userDetails,
     moderator: { fullName: moderatorName },
+    lastUpdated: { fullName: lastUpdatedBy, updated_at: lastUpdatedTime },
   } = moderationExtra;
 
   return (
@@ -53,6 +54,11 @@ const TaskHeader = ({ isModerated }: TaskHeaderProps): ReactElement => {
           <div className={styles.bold}>{i18n.t("moderation.taskHeader.taskType")}</div>
           <div>{taskType !== TaskType.Unknown ? i18n.t(`moderation.taskType.${taskType}`) : ""}</div>
           <div>{moment(created_at).format(DATETIME_FORMAT)}</div>
+        </div>
+        <div>
+          <div className={styles.bold}>{i18n.t("moderation.taskHeader.lastUpdated")}</div>
+          <div>{lastUpdatedBy}</div>
+          <div>{lastUpdatedTime.length > 0 ? moment(lastUpdatedTime).format(DATETIME_FORMAT) : ""}</div>
         </div>
         <div>
           <div className={styles.bold}>{i18n.t("moderation.taskHeader.publishPermission.label")}</div>
@@ -74,7 +80,12 @@ const TaskHeader = ({ isModerated }: TaskHeaderProps): ReactElement => {
         <div className={styles.notifier}>
           <div className={styles.notifierType}>
             <div className={styles.bold}>
-              {taskType === TaskType.ChangeTip || taskType === TaskType.AddTip || taskType === TaskType.RemoveTip
+              {taskType === TaskType.ChangeTip ||
+              taskType === TaskType.AddTip ||
+              taskType === TaskType.RemoveTip ||
+              taskType === TaskType.ModeratorChange ||
+              taskType === TaskType.ModeratorAdd ||
+              taskType === TaskType.ModeratorRemove
                 ? i18n.t("moderation.taskHeader.placeNotifier")
                 : i18n.t("moderation.taskHeader.notifier")}
             </div>
@@ -102,25 +113,38 @@ const TaskHeader = ({ isModerated }: TaskHeaderProps): ReactElement => {
           </div>
         )}
 
-        <div className={styles.comment}>
-          <div className={styles.bold}>{i18n.t("moderation.taskHeader.messageFromNotifier")}</div>
-          {(taskType === TaskType.ChangeTip || taskType === TaskType.AddTip || taskType === TaskType.RemoveTip) && (
-            <>
-              {taskType === TaskType.AddTip && userPlaceName.length > 0 && (
-                <div>
-                  {i18n.t("moderation.taskHeader.addPlaceName")}: {userPlaceName}
-                </div>
-              )}
-              {taskType === TaskType.AddTip && (
-                <div>
-                  {i18n.t("moderation.taskHeader.addPlaceTip")}: {userComments}
-                </div>
-              )}
-              {taskType !== TaskType.AddTip && <div>{userComments}</div>}
-            </>
-          )}
-          {(taskType === TaskType.NewPlace || taskType === TaskType.PlaceChange) && <div>{comments}</div>}
-        </div>
+        {(taskType === TaskType.ModeratorChange || taskType === TaskType.ModeratorAdd || taskType === TaskType.ModeratorRemove) && (
+          <div className={styles.tipNotifier}>
+            <div className={styles.bold}>{i18n.t("moderation.taskHeader.moderatorChangeMaker")}</div>
+            <div>{userDetails}</div>
+          </div>
+        )}
+
+        {(taskType === TaskType.NewPlace ||
+          taskType === TaskType.PlaceChange ||
+          taskType === TaskType.ChangeTip ||
+          taskType === TaskType.AddTip ||
+          taskType === TaskType.RemoveTip) && (
+          <div className={styles.comment}>
+            <div className={styles.bold}>{i18n.t("moderation.taskHeader.messageFromNotifier")}</div>
+            {(taskType === TaskType.ChangeTip || taskType === TaskType.AddTip || taskType === TaskType.RemoveTip) && (
+              <>
+                {taskType === TaskType.AddTip && userPlaceName.length > 0 && (
+                  <div>
+                    {i18n.t("moderation.taskHeader.addPlaceName")}: {userPlaceName}
+                  </div>
+                )}
+                {taskType === TaskType.AddTip && (
+                  <div>
+                    {i18n.t("moderation.taskHeader.addPlaceTip")}: {userComments}
+                  </div>
+                )}
+                {taskType !== TaskType.AddTip && <div>{userComments}</div>}
+              </>
+            )}
+            {(taskType === TaskType.NewPlace || taskType === TaskType.PlaceChange) && <div>{comments}</div>}
+          </div>
+        )}
       </div>
     </div>
   );

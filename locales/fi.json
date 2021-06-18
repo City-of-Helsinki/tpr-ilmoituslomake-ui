@@ -600,6 +600,7 @@
     },
     "taskHeader": {
       "taskType": "Tehtävätyyppi",
+      "lastUpdated": "Kohde viimeksi päivitetty",
       "publishPermission": {
         "label": "Julkaistu",
         "yes": "Kyllä",
@@ -614,6 +615,7 @@
       "notRepresentative": "Ei ole kohteen edustaja",
       "messageFromNotifier": "Viesti ilmoittajalta",
       "moderatorChangeRequest": "Moderoijan muutospyyntö",
+      "moderatorChangeMaker": "Moderoijan muutospyynön tekijä",
       "addPlaceName": "Uuden kohteen nimi",
       "addPlaceTip": "Vinkki"
     },

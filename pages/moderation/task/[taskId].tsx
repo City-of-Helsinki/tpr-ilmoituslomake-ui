@@ -183,7 +183,12 @@ export const getServerSideProps: GetServerSideProps = async ({ req, resolvedUrl,
         // taskResult.target.data is the original existing notification, and is available for modified places and change requests
         // taskResult.data is the new or modified notification, and is available for new and modified places
         // taskResult.notification_target.data is the new or modified notification with proxied image urls (for new images only)
-        const { id: targetId, data: targetData } = taskResult.target || { id: 0, data: INITIAL_NOTIFICATION };
+        const {
+          id: targetId,
+          data: targetData,
+          user: lastUpdatedUser,
+          updated_at: lastUpdatedTime,
+        } = taskResult.target || { id: 0, data: INITIAL_NOTIFICATION };
         const { data: imageData } = taskResult.notification_target || { id: 0, data: INITIAL_NOTIFICATION };
         const modifiedTask = !taskResult.data || !taskResult.data.name ? targetData : (taskResult.data as NotificationSchema);
 
@@ -218,6 +223,10 @@ export const getServerSideProps: GetServerSideProps = async ({ req, resolvedUrl,
             moderator: {
               fullName: taskResult.moderator ? `${taskResult.moderator.first_name} ${taskResult.moderator.last_name}`.trim() : "",
               email: taskResult.moderator && taskResult.moderator.email ? taskResult.moderator.email : "",
+            },
+            lastUpdated: {
+              fullName: lastUpdatedUser ? `${lastUpdatedUser.first_name} ${lastUpdatedUser.last_name}`.trim() : "",
+              updated_at: lastUpdatedTime || "",
             },
             extraKeywordsTextSelected: targetData.extra_keywords.join(", "),
             extraKeywordsTextModified: modifiedTask.extra_keywords.join(", "),
