@@ -50,7 +50,7 @@ const Header = ({ includeLanguageSelector, homePagePath, children }: HeaderProps
       title={i18n.t("common.header.title")}
       titleAriaLabel={i18n.t("common.header.titleAlt")}
       titleUrl={`${router.basePath}${homePagePath}/`}
-      menuToggleAriaLabel="menu"
+      menuToggleAriaLabel={i18n.t("common.header.openMenu")}
       skipTo="#content"
       skipToContentLabel={i18n.t("common.header.skipToContent")}
     >
