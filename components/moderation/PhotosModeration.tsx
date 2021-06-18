@@ -156,6 +156,8 @@ const PhotosModeration = (): ReactElement => {
               taskType === TaskType.PlaceChange ||
               taskType === TaskType.ChangeTip ||
               taskType === TaskType.AddTip ||
+              taskType === TaskType.ModeratorChange ||
+              taskType === TaskType.ModeratorAdd ||
               pageStatus === ModerationStatus.Edited) && (
               <div className="gridLayoutContainer moderation">
                 {(taskType === TaskType.NewPlace || taskType === TaskType.PlaceChange) && (
@@ -172,7 +174,9 @@ const PhotosModeration = (): ReactElement => {
                     taskType === TaskType.NewPlace ||
                     taskType === TaskType.PlaceChange ||
                     taskType === TaskType.ChangeTip ||
-                    taskType === TaskType.AddTip
+                    taskType === TaskType.AddTip ||
+                    taskType === TaskType.ModeratorChange ||
+                    taskType === TaskType.ModeratorAdd
                       ? "gridColumn2"
                       : "gridColumn1"
                   }
@@ -280,6 +284,8 @@ const PhotosModeration = (): ReactElement => {
         taskType === TaskType.PlaceChange ||
         taskType === TaskType.ChangeTip ||
         taskType === TaskType.AddTip ||
+        taskType === TaskType.ModeratorChange ||
+        taskType === TaskType.ModeratorAdd ||
         pageStatus === ModerationStatus.Edited) &&
         taskStatus !== TaskStatus.Closed && (
           <div className={`gridLayoutContainer moderation ${styles.addNewContainer}`}>

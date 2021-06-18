@@ -18,7 +18,7 @@ const PhotoPreviewModeration = ({ index }: PhotoPreviewModerationProps): ReactEl
   const { photos: photosStatus } = moderationStatus;
   const { url: photoStatus } = photosStatus[index] || {};
 
-  if (taskType === TaskType.RemoveTip || taskType === TaskType.PlaceInfo) {
+  if (taskType === TaskType.RemoveTip || taskType === TaskType.ModeratorRemove || taskType === TaskType.PlaceInfo) {
     return (
       <div className="gridLayoutContainer moderation">
         <div className={`gridColumn1 ${styles.imagePreview}`}>
@@ -28,7 +28,14 @@ const PhotoPreviewModeration = ({ index }: PhotoPreviewModerationProps): ReactEl
     );
   }
 
-  if (taskType === TaskType.NewPlace || taskType === TaskType.PlaceChange || taskType === TaskType.ChangeTip || taskType === TaskType.AddTip) {
+  if (
+    taskType === TaskType.NewPlace ||
+    taskType === TaskType.PlaceChange ||
+    taskType === TaskType.ChangeTip ||
+    taskType === TaskType.AddTip ||
+    taskType === TaskType.ModeratorChange ||
+    taskType === TaskType.ModeratorAdd
+  ) {
     return (
       <div className="gridLayoutContainer moderation">
         <div className={`gridColumn1 ${styles.imagePreview}`}>

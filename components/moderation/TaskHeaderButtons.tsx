@@ -118,7 +118,12 @@ const TaskHeaderButtons = ({ isModerated }: TaskHeaderButtonsProps): ReactElemen
     // Save the moderated data for new or changed places using approved values only
     // For tip change requests just use the modified values
     const approvedTask =
-      taskType === TaskType.NewPlace || taskType === TaskType.PlaceChange || taskType === TaskType.ChangeTip || taskType === TaskType.AddTip
+      taskType === TaskType.NewPlace ||
+      taskType === TaskType.PlaceChange ||
+      taskType === TaskType.ChangeTip ||
+      taskType === TaskType.AddTip ||
+      taskType === TaskType.ModeratorChange ||
+      taskType === TaskType.ModeratorAdd
         ? {
             ...modifiedTask,
             name: {
@@ -206,7 +211,12 @@ const TaskHeaderButtons = ({ isModerated }: TaskHeaderButtonsProps): ReactElemen
     // Filter out photos that the user has removed
     // After checking, filter out any invalid images, so those with an empty url
     const approvedPhotos =
-      taskType === TaskType.NewPlace || taskType === TaskType.PlaceChange || taskType === TaskType.ChangeTip || taskType === TaskType.AddTip
+      taskType === TaskType.NewPlace ||
+      taskType === TaskType.PlaceChange ||
+      taskType === TaskType.ChangeTip ||
+      taskType === TaskType.AddTip ||
+      taskType === TaskType.ModeratorChange ||
+      taskType === TaskType.ModeratorAdd
         ? photosUuids
             .map((uuid, index) => {
               const photoSelected = photosSelected[index];
@@ -328,16 +338,25 @@ const TaskHeaderButtons = ({ isModerated }: TaskHeaderButtonsProps): ReactElemen
         </div>
       )}
 
-      {(taskType === TaskType.ChangeTip || taskType === TaskType.AddTip) && (
+      {(taskType === TaskType.ChangeTip ||
+        taskType === TaskType.AddTip ||
+        taskType === TaskType.ModeratorChange ||
+        taskType === TaskType.ModeratorAdd) && (
         <div className={styles.buttonRow}>
           {/* <Button variant="secondary">{i18n.t("moderation.button.requestTranslation")}</Button> */}
           <Button
             variant="secondary"
             iconRight={<IconArrowUndo aria-hidden />}
-            onClick={taskType === TaskType.ChangeTip ? openChangeCancellationConfirmation : openAddCancellationConfirmation}
+            onClick={
+              taskType === TaskType.ChangeTip || taskType === TaskType.ModeratorChange
+                ? openChangeCancellationConfirmation
+                : openAddCancellationConfirmation
+            }
             disabled={taskStatus === TaskStatus.Closed}
           >
-            {taskType === TaskType.ChangeTip ? i18n.t("moderation.button.cancelChange") : i18n.t("moderation.button.cancelAdd")}
+            {taskType === TaskType.ChangeTip || taskType === TaskType.ModeratorChange
+              ? i18n.t("moderation.button.cancelChange")
+              : i18n.t("moderation.button.cancelAdd")}
           </Button>
           <Button
             iconRight={<IconArrowRight aria-hidden />}
@@ -349,7 +368,7 @@ const TaskHeaderButtons = ({ isModerated }: TaskHeaderButtonsProps): ReactElemen
         </div>
       )}
 
-      {taskType === TaskType.RemoveTip && (
+      {(taskType === TaskType.RemoveTip || taskType === TaskType.ModeratorRemove) && (
         <div className={styles.buttonRow}>
           <Button
             variant="secondary"

@@ -42,7 +42,9 @@ const Collapsible = ({ section, title, taskType, taskStatus, isModerated, forceE
           {(taskType === TaskType.NewPlace ||
             taskType === TaskType.PlaceChange ||
             taskType === TaskType.ChangeTip ||
-            taskType === TaskType.AddTip) && (
+            taskType === TaskType.AddTip ||
+            taskType === TaskType.ModeratorChange ||
+            taskType === TaskType.ModeratorAdd) && (
             <TaskStatusLabel status={isModerated || taskStatus === TaskStatus.Closed ? TaskStatus.Closed : TaskStatus.InProgress} />
           )}
         </div>

@@ -635,7 +635,8 @@
       "type": "Tyyppi",
       "notified": "Ilmoitettu",
       "status": "Status",
-      "empty": "(Vinkki)"
+      "empty": "(Vinkki)",
+      "emptyMod": "(Lisäys)"
     },
     "taskStatus": {
       "open": "Uusi",
@@ -648,6 +649,9 @@
       "changeTip": "Vinkki (muutos)",
       "addTip": "Vinkki (uusi)",
       "removeTip": "Vinkki (poisto)",
+      "moderatorChange": "Moderoijan muutos",
+      "moderatorAdd": "Moderoijan lisäys",
+      "moderatorRemove": "Moderoijan poisto",
       "placeInfo": "Kohdetiedot"
     },
     "translationNotice": {

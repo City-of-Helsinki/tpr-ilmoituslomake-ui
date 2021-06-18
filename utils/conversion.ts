@@ -23,6 +23,17 @@ export const getTaskType = (category: string, itemType: string): TaskType => {
       return TaskType.RemoveTip;
     }
   }
+  if (taskCategory === TaskCategory.ModeratorChangeRequest) {
+    if (taskItemType === ItemType.ChangeRequestChange) {
+      return TaskType.ModeratorChange;
+    }
+    if (taskItemType === ItemType.ChangeRequestAdd) {
+      return TaskType.ModeratorAdd;
+    }
+    if (taskItemType === ItemType.ChangeRequestDelete) {
+      return TaskType.ModeratorRemove;
+    }
+  }
   return TaskType.Unknown;
 };
 
@@ -35,6 +46,10 @@ export const getTaskCategoryFromType = (taskType: TaskType): TaskCategory => {
     case TaskType.AddTip:
     case TaskType.RemoveTip:
       return TaskCategory.ChangeRequest;
+    case TaskType.ModeratorChange:
+    case TaskType.ModeratorAdd:
+    case TaskType.ModeratorRemove:
+      return TaskCategory.ModeratorChangeRequest;
     default:
       return TaskCategory.Unknown;
   }
@@ -47,10 +62,13 @@ export const getTaskItemTypeFromType = (taskType: TaskType): ItemType => {
     case TaskType.PlaceChange:
       return ItemType.ModerationTaskModified;
     case TaskType.ChangeTip:
+    case TaskType.ModeratorChange:
       return ItemType.ChangeRequestChange;
     case TaskType.AddTip:
+    case TaskType.ModeratorAdd:
       return ItemType.ChangeRequestAdd;
     case TaskType.RemoveTip:
+    case TaskType.ModeratorRemove:
       return ItemType.ChangeRequestDelete;
     default:
       return ItemType.Unknown;

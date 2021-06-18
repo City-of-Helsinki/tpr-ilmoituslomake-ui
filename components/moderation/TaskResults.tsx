@@ -88,9 +88,12 @@ const TaskResults = (): ReactElement => {
                   <div className={`${styles.gridColumn1} ${styles.gridContent} ${styles.gridButton}`}>
                     <Link href={`/moderation/task/${id}`}>
                       <Button variant="supplementary" size="small" iconLeft={<IconPen aria-hidden />}>
-                        {`${getDisplayName(router.locale || defaultLocale, name, user_place_name, i18n.t("moderation.taskResults.empty"))}${
-                          targetId ? ` (${targetId})` : ""
-                        }`}
+                        {`${getDisplayName(
+                          router.locale || defaultLocale,
+                          name,
+                          user_place_name,
+                          taskType === TaskType.ModeratorAdd ? i18n.t("moderation.taskResults.emptyMod") : i18n.t("moderation.taskResults.empty")
+                        )}${targetId ? ` (${targetId})` : ""}`}
                       </Button>
                     </Link>
                   </div>

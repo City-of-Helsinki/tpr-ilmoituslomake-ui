@@ -255,7 +255,7 @@ export const saveModerationChangeRequest = async (
 
       console.log("SENDING", postData);
 
-      const changeRequestResponse = await fetch(`${getOrigin(router)}/api/change_request/`, {
+      const changeRequestResponse = await fetch(`${getOrigin(router)}/api/moderation/moderator_edit/`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

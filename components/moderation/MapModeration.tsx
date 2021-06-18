@@ -80,7 +80,9 @@ const MapModeration = ({ setMapsReady }: MapModerationProps): ReactElement => {
       !isLocationValid(locationModified) ||
       isLocationChanged() ||
       taskType === TaskType.ChangeTip ||
-      taskType === TaskType.AddTip
+      taskType === TaskType.AddTip ||
+      taskType === TaskType.ModeratorChange ||
+      taskType === TaskType.ModeratorAdd
     ) {
       initialStatus = ModerationStatus.Edited;
     } else if (isLocationValid(locationSelected) || isLocationValid(locationModified)) {
@@ -90,7 +92,14 @@ const MapModeration = ({ setMapsReady }: MapModerationProps): ReactElement => {
   const [initialLocationStatus, setInitialLocationStatus] = useState<ModerationStatus | undefined>(initialStatus);
 
   useEffect(() => {
-    if (taskType === TaskType.NewPlace || taskType === TaskType.PlaceChange || taskType === TaskType.ChangeTip || taskType === TaskType.AddTip) {
+    if (
+      taskType === TaskType.NewPlace ||
+      taskType === TaskType.PlaceChange ||
+      taskType === TaskType.ChangeTip ||
+      taskType === TaskType.AddTip ||
+      taskType === TaskType.ModeratorChange ||
+      taskType === TaskType.ModeratorAdd
+    ) {
       // Both maps are needed
       if (setMapsReady) {
         setMapsReady(map1Ready && map2Ready);
@@ -106,7 +115,7 @@ const MapModeration = ({ setMapsReady }: MapModerationProps): ReactElement => {
     }
   }, [taskType, map1Ready, map2Ready, setMapsReady, initialLocationStatus, setInitialLocationStatus, updateLocationStatus]);
 
-  if (taskType === TaskType.RemoveTip || taskType === TaskType.PlaceInfo) {
+  if (taskType === TaskType.RemoveTip || taskType === TaskType.ModeratorRemove || taskType === TaskType.PlaceInfo) {
     return (
       <div className="formSection">
         <div className="gridLayoutContainer moderation">
@@ -131,7 +140,14 @@ const MapModeration = ({ setMapsReady }: MapModerationProps): ReactElement => {
     );
   }
 
-  if (taskType === TaskType.NewPlace || taskType === TaskType.PlaceChange || taskType === TaskType.ChangeTip || taskType === TaskType.AddTip) {
+  if (
+    taskType === TaskType.NewPlace ||
+    taskType === TaskType.PlaceChange ||
+    taskType === TaskType.ChangeTip ||
+    taskType === TaskType.AddTip ||
+    taskType === TaskType.ModeratorChange ||
+    taskType === TaskType.ModeratorAdd
+  ) {
     return (
       <div className="formSection">
         <div className="gridLayoutContainer moderation">

@@ -33,6 +33,9 @@ const TaskSearch = (): ReactElement => {
     { id: TaskType.ChangeTip, label: i18n.t("moderation.taskType.changeTip") },
     { id: TaskType.AddTip, label: i18n.t("moderation.taskType.addTip") },
     { id: TaskType.RemoveTip, label: i18n.t("moderation.taskType.removeTip") },
+    { id: TaskType.ModeratorChange, label: i18n.t("moderation.taskType.moderatorChange") },
+    { id: TaskType.ModeratorAdd, label: i18n.t("moderation.taskType.moderatorAdd") },
+    { id: TaskType.ModeratorRemove, label: i18n.t("moderation.taskType.moderatorRemove") },
   ];
 
   const convertValue = (value: string | undefined): OptionTypeWithEnumId | undefined => taskTypeOptions.find((t) => t.id === value);

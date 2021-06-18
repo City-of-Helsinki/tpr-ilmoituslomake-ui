@@ -25,6 +25,7 @@ export enum ModerationStatus {
 export enum TaskCategory {
   Unknown = "unknown",
   ChangeRequest = "change_request",
+  ModeratorChangeRequest = "moderator_edit",
   ModerationTask = "moderation_task",
 }
 
@@ -51,6 +52,9 @@ export enum TaskType {
   ChangeTip = "changeTip",
   AddTip = "addTip",
   RemoveTip = "removeTip",
+  ModeratorChange = "moderatorChange",
+  ModeratorAdd = "moderatorAdd",
+  ModeratorRemove = "moderatorRemove",
   PlaceInfo = "placeInfo",
 }
 

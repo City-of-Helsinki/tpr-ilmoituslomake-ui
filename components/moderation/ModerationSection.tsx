@@ -50,7 +50,7 @@ const ModerationSection = ({
   ModerationComponent,
   isSelectionGroupWrapper,
 }: ModerationSectionProps): ReactElement => {
-  if (taskType === TaskType.RemoveTip || taskType === TaskType.PlaceInfo) {
+  if (taskType === TaskType.RemoveTip || taskType === TaskType.ModeratorRemove || taskType === TaskType.PlaceInfo) {
     return (
       <>
         {selectedHeaderText && moderationStatus !== ModerationStatus.Edited && <h4 className="gridColumn1 moderation">{selectedHeaderText}</h4>}
@@ -69,11 +69,23 @@ const ModerationSection = ({
     );
   }
 
-  if (taskType === TaskType.NewPlace || taskType === TaskType.PlaceChange || taskType === TaskType.ChangeTip || taskType === TaskType.AddTip) {
+  if (
+    taskType === TaskType.NewPlace ||
+    taskType === TaskType.PlaceChange ||
+    taskType === TaskType.ChangeTip ||
+    taskType === TaskType.AddTip ||
+    taskType === TaskType.ModeratorChange ||
+    taskType === TaskType.ModeratorAdd
+  ) {
     // Enable modified fields to be edited by default if they have a value different from the selected field
     // For tip change requests, enable all fields to be edited by default
     if (moderationStatus === ModerationStatus.Unknown && !bypassModifiedFieldCheck) {
-      if (taskType === TaskType.ChangeTip || taskType === TaskType.AddTip) {
+      if (
+        taskType === TaskType.ChangeTip ||
+        taskType === TaskType.AddTip ||
+        taskType === TaskType.ModeratorChange ||
+        taskType === TaskType.ModeratorAdd
+      ) {
         // Tip change request
         statusCallback(fieldName, ModerationStatus.Edited);
       } else if (
