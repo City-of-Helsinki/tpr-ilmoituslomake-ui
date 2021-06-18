@@ -154,6 +154,7 @@ export interface ModerationPlaceSearch {
 
 export interface ModerationPlaceResult {
   id: number;
+  user: User;
   data: NotificationSchema;
   published: boolean;
   created_at: string;

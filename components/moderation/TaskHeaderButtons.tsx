@@ -1,5 +1,6 @@
 import React, { ReactElement, useState } from "react";
 import { useSelector } from "react-redux";
+import Link from "next/link";
 import { useRouter } from "next/router";
 import { useI18n } from "next-localization";
 import { Button, IconArrowRight, IconArrowUndo, IconTrash } from "hds-react";
@@ -386,6 +387,12 @@ const TaskHeaderButtons = ({ isModerated }: TaskHeaderButtonsProps): ReactElemen
 
       {taskType === TaskType.PlaceInfo && (
         <div className={styles.buttonRow}>
+          <Link href="/moderation/place">
+            <Button variant="secondary" className={styles.returnButton}>
+              {i18n.t("moderation.button.returnToSearch")}
+            </Button>
+          </Link>
+          <div className="flexSpace" />
           <Button
             variant="secondary"
             onClick={() => makePlaceInfoChangeRequest(ItemType.ChangeRequestChange)}

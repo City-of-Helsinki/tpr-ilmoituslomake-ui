@@ -3,10 +3,17 @@
 .taskHeaderButtons {
   button {
     margin-left: $spacing-s;
+
+    &.returnButton {
+      margin-left: 0;
+    }
   }
 
   .buttonRow {
-    text-align: right;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-end;
     margin-bottom: $spacing-xs;
   }
 }

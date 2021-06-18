@@ -124,7 +124,8 @@ const TaskHeader = ({ isModerated }: TaskHeaderProps): ReactElement => {
           taskType === TaskType.PlaceChange ||
           taskType === TaskType.ChangeTip ||
           taskType === TaskType.AddTip ||
-          taskType === TaskType.RemoveTip) && (
+          taskType === TaskType.RemoveTip ||
+          taskType === TaskType.PlaceInfo) && (
           <div className={styles.comment}>
             <div className={styles.bold}>{i18n.t("moderation.taskHeader.messageFromNotifier")}</div>
             {(taskType === TaskType.ChangeTip || taskType === TaskType.AddTip || taskType === TaskType.RemoveTip) && (
@@ -142,7 +143,7 @@ const TaskHeader = ({ isModerated }: TaskHeaderProps): ReactElement => {
                 {taskType !== TaskType.AddTip && <div>{userComments}</div>}
               </>
             )}
-            {(taskType === TaskType.NewPlace || taskType === TaskType.PlaceChange) && <div>{comments}</div>}
+            {(taskType === TaskType.NewPlace || taskType === TaskType.PlaceChange || taskType === TaskType.PlaceInfo) && <div>{comments}</div>}
           </div>
         )}
       </div>

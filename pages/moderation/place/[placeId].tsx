@@ -98,7 +98,7 @@ export const getServerSideProps: GetServerSideProps = async ({ req, resolvedUrl,
       const placeResult = await (placeResponse.json() as Promise<ModerationPlaceResult>);
 
       try {
-        const placeData = placeResult.data || INITIAL_NOTIFICATION;
+        const { data: placeData, user: lastUpdatedUser, updated_at: lastUpdatedTime } = placeResult || { data: INITIAL_NOTIFICATION };
 
         initialReduxState.moderation = {
           ...initialReduxState.moderation,
@@ -119,6 +119,10 @@ export const getServerSideProps: GetServerSideProps = async ({ req, resolvedUrl,
             moderator: {
               fullName: "",
               email: "",
+            },
+            lastUpdated: {
+              fullName: lastUpdatedUser ? `${lastUpdatedUser.first_name} ${lastUpdatedUser.last_name}`.trim() : "",
+              updated_at: lastUpdatedTime || "",
             },
             extraKeywordsTextSelected: placeData.extra_keywords.join(", "),
             extraKeywordsTextModified: placeData.extra_keywords.join(", "),
