@@ -5,7 +5,7 @@ import { useI18n } from "next-localization";
 import { initStore } from "../../state/store";
 import { CLEAR_STATE } from "../../types/constants";
 import i18nLoader from "../../utils/i18n";
-import { checkUser, getTags, redirectToLogin, redirectToNotAuthorized } from "../../utils/serverside";
+import { checkUser, getMatkoTags, getTags, redirectToLogin, redirectToNotAuthorized } from "../../utils/serverside";
 import Layout from "../../components/common/Layout";
 import ModerationHeader from "../../components/moderation/ModerationHeader";
 import PlaceSearch from "../../components/moderation/PlaceSearch";
@@ -50,6 +50,7 @@ export const getServerSideProps: GetServerSideProps = async ({ req, resolvedUrl,
   }
 
   initialReduxState.moderation.moderationExtra.tagOptions = await getTags();
+  initialReduxState.moderation.moderationExtra.matkoTagOptions = await getMatkoTags();
 
   return {
     props: {

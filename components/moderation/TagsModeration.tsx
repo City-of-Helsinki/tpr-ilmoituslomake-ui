@@ -9,6 +9,7 @@ import { setModerationExtraKeywordsStatus, setModerationMatkoTagStatus, setModer
 import { RootState } from "../../state/reducers";
 import { ModerationStatus } from "../../types/constants";
 import { MatkoTagOption, OptionType, TagOption } from "../../types/general";
+import { sortByOptionLabel } from "../../utils/helper";
 import { defaultLocale } from "../../utils/i18n";
 import ModerationSection from "./ModerationSection";
 
@@ -31,11 +32,11 @@ const TagsModeration = (): ReactElement => {
   const { ontology_ids: tagsStatus, extra_keywords: extraKeywordsStatus, matko_ids: matkoTagsStatus } = moderationStatus;
 
   const convertOptions = (options: TagOption[]): OptionType[] => {
-    return options.map((tag) => ({ id: tag.id, label: tag.ontologyword[router.locale || defaultLocale] as string }));
+    return options.map((tag) => ({ id: tag.id, label: tag.ontologyword[router.locale || defaultLocale] as string })).sort(sortByOptionLabel);
   };
 
   const convertMatkoOptions = (options: MatkoTagOption[]): OptionType[] => {
-    return options.map((tag) => ({ id: tag.id, label: tag.matkoword[router.locale || defaultLocale] as string }));
+    return options.map((tag) => ({ id: tag.id, label: tag.matkoword[router.locale || defaultLocale] as string })).sort(sortByOptionLabel);
   };
 
   const convertValues = (values: number[]): OptionType[] => {

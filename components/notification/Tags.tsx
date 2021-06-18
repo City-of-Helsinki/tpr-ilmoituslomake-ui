@@ -8,6 +8,7 @@ import { setNotificationExtraKeywords, setNotificationTag } from "../../state/ac
 import { RootState } from "../../state/reducers";
 import { MAX_LENGTH } from "../../types/constants";
 import { OptionType, TagOption } from "../../types/general";
+import { sortByOptionLabel } from "../../utils/helper";
 import { defaultLocale } from "../../utils/i18n";
 import { isTagValid } from "../../utils/validation";
 
@@ -27,7 +28,7 @@ const Tags = (): ReactElement => {
   const { ontology_ids: tagsValid } = notificationValidation;
 
   const convertOptions = (options: TagOption[]): OptionType[] =>
-    options.map((tag) => ({ id: tag.id, label: tag.ontologyword[router.locale || defaultLocale] as string }));
+    options.map((tag) => ({ id: tag.id, label: tag.ontologyword[router.locale || defaultLocale] as string })).sort(sortByOptionLabel);
 
   const convertValues = (values: number[]): OptionType[] => convertOptions(tagOptions.filter((tag) => values.includes(tag.id)));
 

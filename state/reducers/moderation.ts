@@ -33,6 +33,7 @@ const initialState: ModerationState = {
     address: "",
     district: "",
     ontologyIds: [],
+    matkoIds: [],
     comment: "",
     searchDone: false,
   },

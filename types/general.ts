@@ -146,6 +146,7 @@ export interface ModerationPlaceSearch {
   address: string;
   district: string;
   ontologyIds: number[];
+  matkoIds: number[];
   comment: string;
   publishPermission?: string;
   searchDone: boolean;

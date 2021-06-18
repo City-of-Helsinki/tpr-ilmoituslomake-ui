@@ -8,7 +8,8 @@ import { ModerationAction } from "../../state/actions/types";
 import { setModerationPlaceSearch, clearModerationPlaceSearch, setModerationPlaceResults } from "../../state/actions/moderation";
 import { RootState } from "../../state/reducers";
 import { ItemType, Toast } from "../../types/constants";
-import { ModerationPlaceResult, OptionType, TagOption } from "../../types/general";
+import { MatkoTagOption, ModerationPlaceResult, OptionType, TagOption } from "../../types/general";
+import { sortByOptionLabel } from "../../utils/helper";
 import { defaultLocale } from "../../utils/i18n";
 import { saveModerationChangeRequest } from "../../utils/moderation";
 import getOrigin from "../../utils/request";
@@ -22,10 +23,10 @@ const PlaceSearch = (): ReactElement => {
 
   const currentUser = useSelector((state: RootState) => state.general.user);
   const placeSearch = useSelector((state: RootState) => state.moderation.placeSearch);
-  const { placeName, language, address, district, ontologyIds, publishPermission } = placeSearch;
+  const { placeName, language, address, district, ontologyIds, matkoIds, publishPermission } = placeSearch;
 
   const moderationExtra = useSelector((state: RootState) => state.moderation.moderationExtra);
-  const { tagOptions = [] } = moderationExtra;
+  const { tagOptions = [], matkoTagOptions = [] } = moderationExtra;
 
   const [toast, setToast] = useState<Toast>();
 
@@ -40,9 +41,14 @@ const PlaceSearch = (): ReactElement => {
   const convertValueWithId = (value: string | undefined): OptionType | undefined => languageOptions.find((l) => l.id === value);
 
   const convertOptions = (options: TagOption[]): OptionType[] =>
-    options.map((tag) => ({ id: tag.id, label: tag.ontologyword[router.locale || defaultLocale] as string }));
+    options.map((tag) => ({ id: tag.id, label: tag.ontologyword[router.locale || defaultLocale] as string })).sort(sortByOptionLabel);
+
+  const convertMatkoOptions = (options: MatkoTagOption[]): OptionType[] =>
+    options.map((tag) => ({ id: tag.id, label: tag.matkoword[router.locale || defaultLocale] as string })).sort(sortByOptionLabel);
 
   const convertValues = (values: number[]): OptionType[] => convertOptions(tagOptions.filter((tag) => values.includes(tag.id)));
+
+  const convertMatkoValues = (values: number[]): OptionType[] => convertMatkoOptions(matkoTagOptions.filter((tag) => values.includes(tag.id)));
 
   const updateSearchText = (evt: ChangeEvent<HTMLInputElement>) => {
     dispatch(setModerationPlaceSearch({ ...placeSearch, [evt.target.name]: evt.target.value }));
@@ -54,6 +60,10 @@ const PlaceSearch = (): ReactElement => {
 
   const updateSearchTags = (selected: OptionType[]) => {
     dispatch(setModerationPlaceSearch({ ...placeSearch, ontologyIds: selected.map((s) => s.id as number) }));
+  };
+
+  const updateSearchMatkoTags = (selected: OptionType[]) => {
+    dispatch(setModerationPlaceSearch({ ...placeSearch, matkoIds: selected.map((s) => s.id as number) }));
   };
 
   const updatePublishPermission = (evt: ChangeEvent<HTMLInputElement>) => {
@@ -72,6 +82,7 @@ const PlaceSearch = (): ReactElement => {
       ...(placeName.length > 0 && { search_name__contains: placeName.toLowerCase() }),
       ...(address.length > 0 && { search_address__contains: address.toLowerCase() }),
       ...(ontologyIds.length > 0 && { data__ontology_ids__contains: ontologyIds }),
+      ...(matkoIds.length > 0 && { data__matko_ids__contains: matkoIds }),
       ...(publishPermission && { published: publishPermission === "yes" }),
       ...(district.length > 0 && { search_neighborhood: district.toLowerCase() }),
       ...(language.length > 0 && { lang: language }),
@@ -196,6 +207,20 @@ const PlaceSearch = (): ReactElement => {
           value={convertValues(ontologyIds)}
           onChange={updateSearchTags}
           label={i18n.t("moderation.placeSearch.tag.label")}
+          toggleButtonAriaLabel={i18n.t("notification.button.toggleMenu")}
+          selectedItemRemoveButtonAriaLabel={i18n.t("notification.button.remove")}
+          clearButtonAriaLabel={i18n.t("notification.button.clearAllSelections")}
+          multiselect
+        />
+
+        <Combobox
+          id="matkoTag"
+          className={styles.gridColumn2}
+          // @ts-ignore: Erroneous error that the type for options should be OptionType[][]
+          options={convertMatkoOptions(matkoTagOptions)}
+          value={convertMatkoValues(matkoIds)}
+          onChange={updateSearchMatkoTags}
+          label={i18n.t("moderation.placeSearch.matko.label")}
           toggleButtonAriaLabel={i18n.t("notification.button.toggleMenu")}
           selectedItemRemoveButtonAriaLabel={i18n.t("notification.button.remove")}
           clearButtonAriaLabel={i18n.t("notification.button.clearAllSelections")}

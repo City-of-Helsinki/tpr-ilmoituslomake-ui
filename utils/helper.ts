@@ -1,4 +1,5 @@
 import { LANGUAGE_OPTIONS } from "../types/constants";
+import { OptionType } from "../types/general";
 
 export const getDisplayName = (locale: string, name: { [key: string]: unknown }, userPlaceName?: string, defaultName?: string): string => {
   if (userPlaceName && userPlaceName.length > 0) {
@@ -20,4 +21,14 @@ export const getDisplayName = (locale: string, name: { [key: string]: unknown },
   return defaultName ?? "";
 };
 
-export default getDisplayName;
+export const sortByOptionLabel = (a: OptionType, b: OptionType): number => {
+  const labelA = a.label.toLowerCase();
+  const labelB = b.label.toLowerCase();
+  if (labelA < labelB) {
+    return -1;
+  }
+  if (labelA > labelB) {
+    return 1;
+  }
+  return 0;
+};

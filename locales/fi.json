@@ -561,6 +561,9 @@
       "tag": {
         "label": "Asiasana"
       },
+      "matko": {
+        "label": "Matko asiasana"
+      },
       "comment": {
         "label": "Moderoijan kommentti"
       },
