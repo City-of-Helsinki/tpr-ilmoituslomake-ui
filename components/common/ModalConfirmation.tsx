@@ -31,11 +31,11 @@ const ModalConfirmation = ({
         <div className={styles.title}>{i18n.t(titleKey as string)}</div>
         <div>{i18n.t(messageKey)}</div>
         <div className={styles.buttons}>
+          <Button onClick={confirmCallback}>{i18n.t(confirmKey)}</Button>
+          <div className="flexSpace" />
           <Button variant="secondary" onClick={closeCallback}>
             {i18n.t(cancelKey)}
           </Button>
-          <div className="flexSpace" />
-          <Button onClick={confirmCallback}>{i18n.t(confirmKey)}</Button>
         </div>
       </div>
     </Dialog>
