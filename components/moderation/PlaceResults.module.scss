@@ -21,6 +21,14 @@
     column-gap: 0;
     row-gap: 0;
 
+    .gridHeader {
+      font-size: $fontsize-heading-s !important;
+      font-weight: 700;
+      background-color: $color-fog-light;
+      padding: $spacing-xs;
+      margin: $spacing-s 0;
+    }
+
     .gridContent {
       padding: $spacing-xs;
 

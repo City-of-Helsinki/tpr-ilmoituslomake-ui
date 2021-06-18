@@ -33,7 +33,7 @@ const Collapsible = ({ section, title, taskType, taskStatus, isModerated, forceE
     <div className={styles.collapsible}>
       <div className={styles.header}>
         <div className={styles.section}>
-          <h2 className="moderation">{section}</h2>
+          <h3 className="moderation">{section}</h3>
         </div>
         <div className={styles.title}>
           <h3 className="moderation">{title}</h3>

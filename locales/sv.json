@@ -601,7 +601,7 @@
     },
     "taskHeader": {
       "taskType": "Tehtävätyyppi",
-      "lastUpdated": "Kohde viimeksi päivitetty",
+      "lastUpdated": "Kohde viimeksi muokattu",
       "publishPermission": {
         "label": "Julkaistu",
         "yes": "Kyllä",

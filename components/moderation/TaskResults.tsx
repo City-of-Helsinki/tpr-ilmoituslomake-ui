@@ -73,10 +73,10 @@ const TaskResults = (): ReactElement => {
 
       {results.length > 0 && (
         <div className={`gridLayoutContainer ${styles.results}`}>
-          <h3 className={`${styles.gridColumn1} gridHeader moderation`}>{i18n.t("moderation.taskResults.nameId")}</h3>
-          <h3 className={`${styles.gridColumn2} gridHeader moderation`}>{i18n.t("moderation.taskResults.type")}</h3>
-          <h3 className={`${styles.gridColumn3} gridHeader moderation`}>{i18n.t("moderation.taskResults.notified")}</h3>
-          <h3 className={`${styles.gridColumn4} gridHeader moderation`}>{i18n.t("moderation.taskResults.status")}</h3>
+          <div className={`${styles.gridColumn1} ${styles.gridHeader} moderation`}>{i18n.t("moderation.taskResults.nameId")}</div>
+          <div className={`${styles.gridColumn2} ${styles.gridHeader} moderation`}>{i18n.t("moderation.taskResults.type")}</div>
+          <div className={`${styles.gridColumn3} ${styles.gridHeader} moderation`}>{i18n.t("moderation.taskResults.notified")}</div>
+          <div className={`${styles.gridColumn4} ${styles.gridHeader} moderation`}>{i18n.t("moderation.taskResults.status")}</div>
           {results
             .sort((a: ModerationTodoResult, b: ModerationTodoResult) => b.created.getTime() - a.created.getTime())
             .map((result) => {
