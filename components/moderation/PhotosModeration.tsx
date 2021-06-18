@@ -213,6 +213,10 @@ const PhotosModeration = (): ReactElement => {
                     moderationStatus={photosStatus[index].altText[option]}
                     taskType={taskType}
                     taskStatus={taskStatus}
+                    helperText={i18n.t("moderation.photos.altText.helperText")}
+                    tooltipButtonLabel={i18n.t("moderation.button.openHelp")}
+                    tooltipLabel={i18n.t("moderation.photos.altText.tooltipLabel")}
+                    tooltipText={i18n.t("moderation.photos.altText.tooltipText")}
                     modifyButtonLabel={`${i18n.t("moderation.photos.altText.label")} ${i18n.t(`common.inLanguage.${option}`)}`}
                     modifyButtonHidden={!modifiedImage}
                     actionButtonHidden={!modifiedImage}
@@ -250,6 +254,7 @@ const PhotosModeration = (): ReactElement => {
                 ModerationComponent={
                   <SelectionGroupWrapper
                     id={`permission_${index}`}
+                    horizontal={false}
                     label={i18n.t("moderation.photos.permission.label")}
                     radioButtonLabels={[i18n.t("moderation.photos.permission.myHelsinki"), i18n.t("moderation.photos.permission.creativeCommons")]}
                     radioButtonValues={[PhotoPermission.MyHelsinki, PhotoPermission.CreativeCommons]}

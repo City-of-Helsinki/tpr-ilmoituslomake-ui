@@ -47,6 +47,7 @@ const ContactModeration = (): ReactElement => {
           taskStatus={taskStatus}
           selectedHeaderText={`${i18n.t("moderation.contact.title")}${i18n.t("moderation.task.selected")}`}
           modifiedHeaderText={`${i18n.t("moderation.contact.title")}${i18n.t("moderation.task.modified")}`}
+          helperText={i18n.t("moderation.contact.phone.helperText")}
           modifyButtonLabel={i18n.t("moderation.contact.phone.label")}
           changeCallback={updateContact}
           statusCallback={updateContactStatus}

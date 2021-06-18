@@ -5,6 +5,7 @@ import { RadioButton, SelectionGroup } from "hds-react";
 interface SelectionGroupWrapperProps {
   id: string;
   className?: string;
+  horizontal: boolean;
   label: string;
   radiobuttonname?: string;
   radioButtonLabels: string[];
@@ -17,6 +18,7 @@ interface SelectionGroupWrapperProps {
 const SelectionGroupWrapper = ({
   id,
   className,
+  horizontal,
   label,
   radiobuttonname,
   radioButtonLabels,
@@ -26,7 +28,7 @@ const SelectionGroupWrapper = ({
   disabled,
 }: SelectionGroupWrapperProps): ReactElement => {
   return (
-    <SelectionGroup id={id} className={className} direction="horizontal" label={label} disabled={disabled}>
+    <SelectionGroup id={id} className={className} direction={horizontal ? "horizontal" : "vertical"} label={label} disabled={disabled}>
       {radioButtonValues.map((rbValue, index) => (
         <RadioButton
           id={`${id}_${rbValue}`}

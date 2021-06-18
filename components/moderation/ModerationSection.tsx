@@ -14,6 +14,10 @@ interface ModerationSectionProps {
   taskStatus: TaskStatus;
   selectedHeaderText?: string;
   modifiedHeaderText?: string;
+  helperText?: string;
+  tooltipButtonLabel?: string;
+  tooltipLabel?: string;
+  tooltipText?: string;
   modifyButtonLabel: string;
   modifyButtonHidden?: boolean;
   actionButtonHidden?: boolean;
@@ -39,6 +43,10 @@ const ModerationSection = ({
   taskStatus,
   selectedHeaderText,
   modifiedHeaderText,
+  helperText,
+  tooltipButtonLabel,
+  tooltipLabel,
+  tooltipText,
   modifyButtonLabel,
   modifyButtonHidden,
   actionButtonHidden,
@@ -132,6 +140,10 @@ const ModerationSection = ({
             value: modifiedValue,
             onChange: changeCallback,
             onBlur: blurCallback,
+            helperText: moderationStatus === ModerationStatus.Edited ? helperText : undefined,
+            tooltipButtonLabel: moderationStatus === ModerationStatus.Edited ? tooltipButtonLabel : undefined,
+            tooltipLabel: moderationStatus === ModerationStatus.Edited ? tooltipLabel : undefined,
+            tooltipText: moderationStatus === ModerationStatus.Edited ? tooltipText : undefined,
             disabled:
               moderationStatus === ModerationStatus.Approved ||
               moderationStatus === ModerationStatus.Rejected ||
@@ -161,6 +173,10 @@ ModerationSection.defaultProps = {
   modifiedValue: undefined,
   selectedHeaderText: undefined,
   modifiedHeaderText: undefined,
+  helperText: undefined,
+  tooltipButtonLabel: undefined,
+  tooltipLabel: undefined,
+  tooltipText: undefined,
   modifyButtonHidden: false,
   actionButtonHidden: false,
   bypassModifiedFieldCheck: false,

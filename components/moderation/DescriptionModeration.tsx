@@ -112,6 +112,10 @@ const DescriptionModeration = (): ReactElement => {
             modifiedHeaderText={
               index === 0 ? `${i18n.t("moderation.description.shortDescription.title")}${i18n.t("moderation.task.modified")}` : undefined
             }
+            helperText={i18n.t("moderation.description.shortDescription.helperText")}
+            tooltipButtonLabel={i18n.t("moderation.button.openHelp")}
+            tooltipLabel={i18n.t("moderation.description.shortDescription.tooltipLabel")}
+            tooltipText={i18n.t("moderation.description.shortDescription.tooltipText")}
             modifyButtonLabel={`${i18n.t("moderation.description.shortDescription.label")} ${i18n.t(`common.inLanguage.${option}`)}`}
             changeCallback={updateShortDescription}
             statusCallback={updateShortDescriptionStatus}
@@ -144,6 +148,10 @@ const DescriptionModeration = (): ReactElement => {
             modifiedHeaderText={
               index === 0 ? `${i18n.t("moderation.description.longDescription.title")}${i18n.t("moderation.task.modified")}` : undefined
             }
+            helperText={`${i18n.t("moderation.description.longDescription.helperText")} (${(longDescModified[option] as string).length})`}
+            tooltipButtonLabel={i18n.t("moderation.button.openHelp")}
+            tooltipLabel={i18n.t("moderation.description.longDescription.tooltipLabel")}
+            tooltipText={i18n.t("moderation.description.longDescription.tooltipText")}
             modifyButtonLabel={`${i18n.t("moderation.description.longDescription.label")} ${i18n.t(`common.inLanguage.${option}`)}`}
             changeCallback={updateLongDescription}
             statusCallback={updateLongDescriptionStatus}

@@ -92,6 +92,7 @@ const TagsModeration = (): ReactElement => {
               id="tag"
               options={convertOptions(tagOptions)}
               label={i18n.t("moderation.tags.title")}
+              helper={tagsStatus === ModerationStatus.Edited ? i18n.t("moderation.tags.add.helperText") : undefined}
               toggleButtonAriaLabel={i18n.t("moderation.button.toggleMenu")}
               selectedItemRemoveButtonAriaLabel={i18n.t("moderation.button.remove")}
               clearButtonAriaLabel={i18n.t("moderation.button.clearAllSelections")}
@@ -108,10 +109,11 @@ const TagsModeration = (): ReactElement => {
           moderationStatus={extraKeywordsStatus}
           taskType={taskType}
           taskStatus={taskStatus}
-          modifyButtonLabel={i18n.t("moderation.tags.extra")}
+          helperText={i18n.t("moderation.tags.extraKeywords.helperText")}
+          modifyButtonLabel={i18n.t("moderation.tags.extraKeywords.label")}
           changeCallback={updateExtraKeywords}
           statusCallback={updateExtraKeywordsStatus}
-          ModerationComponent={<TextInput id="extraKeywordsText" label={i18n.t("moderation.tags.extra")} name="extraKeywordsText" />}
+          ModerationComponent={<TextInput id="extraKeywordsText" label={i18n.t("moderation.tags.extraKeywords.label")} name="extraKeywordsText" />}
         />
 
         <ModerationSection
@@ -130,6 +132,7 @@ const TagsModeration = (): ReactElement => {
               id="tag"
               options={convertMatkoOptions(matkoTagOptions)}
               label={i18n.t("moderation.tags.matko")}
+              helper={matkoTagsStatus === ModerationStatus.Edited ? i18n.t("moderation.tags.add.helperText") : undefined}
               toggleButtonAriaLabel={i18n.t("moderation.button.toggleMenu")}
               selectedItemRemoveButtonAriaLabel={i18n.t("moderation.button.remove")}
               clearButtonAriaLabel={i18n.t("moderation.button.clearAllSelections")}

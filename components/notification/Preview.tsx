@@ -171,8 +171,8 @@ const Preview = ({ className, titleKey, includeNotifier }: PreviewProps): ReactE
                 </div>
                 <div className={`${styles.gridHeading} ${styles.gridContent}`}>{i18n.t("notification.photos.permission.label")}</div>
                 <div className={`${styles.gridPlaceInfo} ${styles.gridContent}`}>
-                  {permission === PhotoPermission.MyHelsinki && i18n.t("notification.photos.permission.myHelsinki2")}
-                  {permission === PhotoPermission.CreativeCommons && i18n.t("notification.photos.permission.creativeCommons3")}
+                  {permission === PhotoPermission.MyHelsinki && i18n.t("notification.photos.permission.myHelsinki")}
+                  {permission === PhotoPermission.CreativeCommons && i18n.t("notification.photos.permission.creativeCommons1")}
                 </div>
                 <div className={`${styles.gridHeading} ${styles.gridContent}`}>{i18n.t("notification.photos.source.label")}</div>
                 <div className={`${styles.gridPlaceInfo} ${styles.gridContent}`}>{source}</div>

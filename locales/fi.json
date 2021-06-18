@@ -400,6 +400,7 @@
       "cancel": "Keskeytä",
       "back": "Peru",
       "returnToSearch": "Palaa hakuun",
+      "openHelp": "Avaa ohje",
       "showMore": "Näytä lisää",
       "addNewPlace": "Lisää uusi kohde",
       "allPlaces": "Kaikki kohteet",
@@ -458,7 +459,8 @@
     "contact": {
       "title": "Muut yhteystiedot",
       "phone": {
-        "label": "Kohteen puhelinnumero"
+        "label": "Kohteen puhelinnumero",
+        "helperText": "Puhelinnumeron muoto on esim. 0501234567 tai +358501234567"
       },
       "email": {
         "label": "Kohteen sähköpostiosoite"
@@ -471,11 +473,17 @@
       },
       "shortDescription": {
         "title": "Lyhyt kuvaus",
-        "label": "Kohteen lyhyt kuvaus"
+        "label": "Kohteen lyhyt kuvaus",
+        "helperText": "Huomioi, että teksti ei saa olla me-muodossa. Pituus max. 150 merkkiä",
+        "tooltipLabel": "Paranna löydettävyyttä",
+        "tooltipText": "Lyhyen kuvauksen avulla toimipaikka löytyy paremmin hakukoneella."
       },
       "longDescription": {
         "title": "Pitkä kuvaus",
-        "label": "Kohteen pitkä kuvaus"
+        "label": "Kohteen pitkä kuvaus",
+        "helperText": "Lisää tähän myös tietoa aukiolojoista. Huomioi, että teksti ei saa olla me-muodossa. Pituus 120 - 4000 merkkiä",
+        "tooltipLabel": "Laajempi kuvaus",
+        "tooltipText": "Voit halutessasi sisällyttää tähän lyhyen kuvauksen ja täydentää kuvausta tarpeesi mukaan."
       }
     },
     "intro": {
@@ -483,7 +491,10 @@
     },
     "links": {
       "website": {
-        "label": "Verkkosivusto"
+        "label": "Verkkosivusto",
+        "helperText": "Linkin muoto on esim. https://myhelsinki.fi",
+        "tooltipLabel": "Linkki lisätietoihin",
+        "tooltipText": "Voit lisätä tähän kohteen verkkosivun tai sosiaallisen median tilin osoitteen."
       },
       "socialMedia": {
         "label": "Sosiaalinen media"
@@ -527,13 +538,16 @@
         "labelLink": "Valokuvan verkko-osoite (url)"
       },
       "altText": {
-        "label": "Kuvan lyhyt kuvailu (alt-teksti)"
+        "label": "Kuvan lyhyt kuvailu (alt-teksti)",
+        "helperText": "Kirjoita tiivis ja mahdollisimman lyhyt kuvailu kuvasta. Pituus max. 125 merkkiä",
+        "tooltipLabel": "Kuvailutekstin käyttö",
+        "tooltipText": "Kuvailun (alt-teksti) avulla kerrotaan kuvan sisältämä tieto hakukoneelle tai niille henkilöille, jotka eivät jostain syystä näe itse kuvaa. Syynä voi olla näkövamma tai se, että kuvat eivät ole latautuneet, tai henkilö ei ole halunnut ladata niitä."
       },
       "permission": {
         "title": "Käyttöoikeudet",
         "label": "Kuvan käyttöoikeudet",
-        "myHelsinki": "MyHelsinki",
-        "creativeCommons": "Creative Commons"
+        "myHelsinki": "Kuvaa saa käyttää ainoastaan ko. kohteen yhteydessä esim. MyHelsinki.fi-sivustolla. Kuvaa voidaan jakaa myös avoimena datana kolmansille osapuolille MyHelsinki-avoimen rajapinnan kautta. Kuvan käyttö tai siirto muihin tarkoituksiin on kielletty. Kuvaa käytettäessä on ehdottomasti mainittava kuvan lähde ja kuvaaja.",
+        "creativeCommons": "Kuvaa saa jakaa Creative Commons BY 4.0.-lisenssillä. Kuvaa käytettäessä on ehdottomasti mainittava kuvan lähde ja kuvaaja."
       },
       "source": {
         "label": "Kuvalähde"
@@ -587,9 +601,13 @@
     "tags": {
       "title": "Asiasanat",
       "matko": "Matko asiasanat",
-      "extra": "Käyttäjän toivomat lisähakusanat",
       "add": {
-        "label": "Lisää asiasana"
+        "label": "Lisää asiasana",
+        "helperText": "Hae tai valitse listalta. Valitse max. 5 sanaa"
+      },
+      "extraKeywords": {
+        "label": "Käyttäjän toivomat lisähakusanat",
+        "helperText": "Erota asiasanat pilkulla"
       }
     },
     "task": {
