@@ -1,4 +1,4 @@
-import React, { Dispatch, ChangeEvent, ReactElement, useCallback, useEffect } from "react";
+import React, { Dispatch, ChangeEvent, ReactElement, useCallback, useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useRouter } from "next/router";
 import { useI18n } from "next-localization";
@@ -16,6 +16,7 @@ const Location = (): ReactElement => {
   const dispatch = useDispatch<Dispatch<NotificationAction>>();
   const dispatchValidation = useDispatch<Dispatch<NotificationValidationAction>>();
   const router = useRouter();
+  const [fieldFocus, setFieldFocus] = useState<boolean>(false);
 
   const notification = useSelector((state: RootState) => state.notification.notification);
   const {
@@ -39,6 +40,7 @@ const Location = (): ReactElement => {
 
   const updateAddress = (language: string, evt: ChangeEvent<HTMLInputElement>) => {
     dispatch(setNotificationAddress(language, { [evt.target.name]: evt.target.value }));
+    setFieldFocus(true);
   };
 
   const validateAddress = (language: string, evt: ChangeEvent<HTMLInputElement>) => {
@@ -48,7 +50,8 @@ const Location = (): ReactElement => {
       })
     );
     isAddressFieldValid(language, evt.target.name, notification, dispatchValidation);
-    isWholeAddressValid(language, notification, notificationExtra, dispatchValidation);
+    // isWholeAddressValid(language, notification, notificationExtra, dispatchValidation);
+    setFieldFocus(false);
   };
 
   const isAddressComplete = useCallback(() => {
@@ -83,10 +86,18 @@ const Location = (): ReactElement => {
 
   useEffect(() => {
     // Search the address automatically when complete
-    if (isAddressComplete()) {
+    if (isAddressComplete() && !fieldFocus) {
       searchAddress(router, streetFi, postOfficeFi, streetSv, postOfficeSv, dispatch);
     }
-  }, [isAddressComplete, router, streetFi, postOfficeFi, streetSv, postOfficeSv, dispatch]);
+  }, [isAddressComplete, fieldFocus, router, streetFi, postOfficeFi, streetSv, postOfficeSv, dispatch]);
+
+  useEffect(() => {
+    // Validate the address automatically when complete
+    if (isAddressComplete() && !fieldFocus) {
+      const language = router.locale === "sv" ? "sv" : "fi";
+      isWholeAddressValid(language, notification, notificationExtra, dispatchValidation);
+    }
+  }, [isAddressComplete, fieldFocus, router, notification, notificationExtra, dispatch, dispatchValidation]);
 
   return (
     <div className="formSection">
