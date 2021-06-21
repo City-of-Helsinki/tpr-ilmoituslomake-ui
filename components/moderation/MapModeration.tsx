@@ -72,16 +72,14 @@ const MapModeration = ({ setMapsReady }: MapModerationProps): ReactElement => {
   const [map2Ready, setMap2Ready] = useState<boolean>(false);
 
   // Enable the modified location to be edited by default if it is different from the selected location
-  // For tip change requests, enable the location to be edited by default
+  // For tip change requests about new places, enable the location to be edited by default
   let initialStatus = locationStatus;
   if (locationStatus === ModerationStatus.Unknown) {
     if (
       !isLocationValid(locationSelected) ||
       !isLocationValid(locationModified) ||
       isLocationChanged() ||
-      taskType === TaskType.ChangeTip ||
       taskType === TaskType.AddTip ||
-      taskType === TaskType.ModeratorChange ||
       taskType === TaskType.ModeratorAdd
     ) {
       initialStatus = ModerationStatus.Edited;

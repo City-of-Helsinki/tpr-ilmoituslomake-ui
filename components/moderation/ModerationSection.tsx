@@ -86,15 +86,10 @@ const ModerationSection = ({
     taskType === TaskType.ModeratorAdd
   ) {
     // Enable modified fields to be edited by default if they have a value different from the selected field
-    // For tip change requests, enable all fields to be edited by default
+    // For tip change requests about new places, enable all fields to be edited by default
     if (moderationStatus === ModerationStatus.Unknown && !bypassModifiedFieldCheck) {
-      if (
-        taskType === TaskType.ChangeTip ||
-        taskType === TaskType.AddTip ||
-        taskType === TaskType.ModeratorChange ||
-        taskType === TaskType.ModeratorAdd
-      ) {
-        // Tip change request
+      if (taskType === TaskType.AddTip || taskType === TaskType.ModeratorAdd) {
+        // Tip change request for new place
         statusCallback(fieldName, ModerationStatus.Edited);
       } else if (
         Array.isArray(selectedValue) &&
