@@ -320,6 +320,15 @@ const TaskHeaderButtons = ({ isModerated }: TaskHeaderButtonsProps): ReactElemen
     <div className={styles.taskHeaderButtons}>
       {(taskType === TaskType.NewPlace || taskType === TaskType.PlaceChange) && (
         <div className={styles.buttonRow}>
+          {taskStatus === TaskStatus.Closed && selectedTaskId > 0 && (
+            <Button
+              variant="secondary"
+              onClick={() => makePlaceInfoChangeRequest(ItemType.ChangeRequestChange)}
+              disabled={taskStatus !== TaskStatus.Closed}
+            >
+              {i18n.t("moderation.button.openForModifying")}
+            </Button>
+          )}
           {/* <Button variant="secondary">{i18n.t("moderation.button.requestTranslation")}</Button> */}
           <Button
             variant="secondary"
@@ -344,6 +353,15 @@ const TaskHeaderButtons = ({ isModerated }: TaskHeaderButtonsProps): ReactElemen
         taskType === TaskType.ModeratorChange ||
         taskType === TaskType.ModeratorAdd) && (
         <div className={styles.buttonRow}>
+          {taskStatus === TaskStatus.Closed && selectedTaskId > 0 && (
+            <Button
+              variant="secondary"
+              onClick={() => makePlaceInfoChangeRequest(ItemType.ChangeRequestChange)}
+              disabled={taskStatus !== TaskStatus.Closed}
+            >
+              {i18n.t("moderation.button.openForModifying")}
+            </Button>
+          )}
           {/* <Button variant="secondary">{i18n.t("moderation.button.requestTranslation")}</Button> */}
           <Button
             variant="secondary"

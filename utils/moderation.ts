@@ -269,7 +269,9 @@ export const saveModerationChangeRequest = async (
 
         if (changeRequestResult.id) {
           // Redirect to the task page showing the new change request already in edit mode
-          router.push(`/moderation/task/${changeRequestResult.id}/?edit=1`);
+          // 21.6.2021 - Separate edit mode not used anymore due to changes to the moderation workflow, but left here in case needed later
+          // router.push(`/moderation/task/${changeRequestResult.id}/?edit=1`);
+          router.push(`/moderation/task/${changeRequestResult.id}`);
         } else {
           setToast(Toast.SaveFailed);
         }

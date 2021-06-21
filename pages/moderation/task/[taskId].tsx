@@ -298,6 +298,7 @@ export const getServerSideProps: GetServerSideProps = async ({ req, resolvedUrl,
         } else {
           // In cases where the moderator has opened a change request themselves, make the moderation status 'edited'
           // to save the moderator the step of clicking the button to open the change request for editing
+          // 21.6.2021 - Separate edit mode not used anymore due to changes to the moderation workflow, but left here in case needed later
           initialReduxState.moderationStatus = {
             pageStatus: ModerationStatus.Edited,
             moderationStatus: {
