@@ -310,6 +310,10 @@ export const INITIAL_MODERATION_EXTRA = {
     fullName: "",
     email: "",
   },
+  lastUpdated: {
+    fullName: "",
+    updated_at: "",
+  },
 };
 
 const getInitialModerationStatus = (moderationStatus: ModerationStatus) => {
