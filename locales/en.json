@@ -519,7 +519,8 @@
       }
     },
     "map": {
-      "title": "Kohde kartalla"
+      "title": "Kohde kartalla",
+      "geocode": "Näytä kartalla"
     },
     "newTasks": {
       "title": "Uudet moderointitehtävät"

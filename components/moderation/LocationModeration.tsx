@@ -1,16 +1,19 @@
 import React, { Dispatch, ChangeEvent, ReactElement } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import { useRouter } from "next/router";
 import { useI18n } from "next-localization";
-import { TextInput } from "hds-react";
+import { Button, TextInput } from "hds-react";
 import { ModerationAction, ModerationStatusAction } from "../../state/actions/types";
 import { setModerationAddress } from "../../state/actions/moderation";
 import { setModerationAddressStatus } from "../../state/actions/moderationStatus";
 import { RootState } from "../../state/reducers";
-import { ModerationStatus } from "../../types/constants";
+import { ModerationStatus, TaskStatus } from "../../types/constants";
+import { searchModerationAddress } from "../../utils/addressModeration";
 import ModerationSection from "./ModerationSection";
 
 const LocationModeration = (): ReactElement => {
   const i18n = useI18n();
+  const router = useRouter();
   const dispatch = useDispatch<Dispatch<ModerationAction>>();
   const dispatchStatus = useDispatch<Dispatch<ModerationStatusAction>>();
 
@@ -201,6 +204,22 @@ const LocationModeration = (): ReactElement => {
         />
       </div>
 
+      {addressFiStatus === ModerationStatus.Edited && (
+        <div className="gridLayoutContainer moderation">
+          <div className="gridColumn1" />
+          <div className="gridColumn2">
+            <Button
+              variant="secondary"
+              onClick={() => searchModerationAddress(router, streetFiModified, postOfficeFiModified, dispatch)}
+              disabled={taskStatus === TaskStatus.Closed}
+            >
+              {i18n.t("moderation.map.geocode")}
+            </Button>
+          </div>
+          <div className="gridColumn3" />
+        </div>
+      )}
+
       <div className="gridLayoutContainer moderation">
         <ModerationSection
           id="streetAddressSv"
@@ -316,6 +335,22 @@ const LocationModeration = (): ReactElement => {
           }
         />
       </div>
+
+      {addressSvStatus === ModerationStatus.Edited && (
+        <div className="gridLayoutContainer moderation">
+          <div className="gridColumn1" />
+          <div className="gridColumn2">
+            <Button
+              variant="secondary"
+              onClick={() => searchModerationAddress(router, streetSvModified, postOfficeSvModified, dispatch)}
+              disabled={taskStatus === TaskStatus.Closed}
+            >
+              {i18n.t("moderation.map.geocode")}
+            </Button>
+          </div>
+          <div className="gridColumn3" />
+        </div>
+      )}
     </div>
   );
 };
