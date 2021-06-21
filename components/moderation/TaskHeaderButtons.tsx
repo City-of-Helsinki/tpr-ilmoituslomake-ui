@@ -308,6 +308,10 @@ const TaskHeaderButtons = ({ isModerated }: TaskHeaderButtonsProps): ReactElemen
 
   const rejectTask = () => {
     closeRejectionConfirmation();
+    closeAddCancellationConfirmation();
+    closeChangeCancellationConfirmation();
+    closeDeleteCancellationConfirmation();
+
     rejectModeration(currentUser, modifiedTaskId, moderationExtra, router, setToast);
   };
 

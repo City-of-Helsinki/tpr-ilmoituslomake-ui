@@ -80,9 +80,10 @@ export const approveModeration = async (
         console.log("APPROVE RESPONSE", approveResult);
 
         if (approveResult.id) {
-          // Reload the current page instead of redirecting to the task list page
-          // router.push(`/moderation/task`);
-          router.reload();
+          // Reload the current page to update the page statuses
+          // router.reload();
+          router.push(`/moderation/task/${modifiedTaskId}`);
+          setToast(Toast.SaveSucceeded);
         } else {
           setToast(Toast.SaveFailed);
         }
@@ -150,9 +151,10 @@ export const rejectModeration = async (
         const rejectResult = await rejectResponse.text();
         console.log("REJECT RESPONSE", rejectResult);
 
-        // Reload the current page instead of redirecting to the task list page
-        // router.push(`/moderation/task`);
-        router.reload();
+        // Reload the current page to update the page statuses
+        // router.reload();
+        router.push(`/moderation/task/${modifiedTaskId}`);
+        setToast(Toast.RejectSucceeded);
       } else {
         setToast(Toast.SaveFailed);
 
@@ -212,14 +214,13 @@ export const deleteModeration = async (
         },
       });
       if (deleteResponse.ok) {
-        // setToast(Toast.SaveSucceeded);
-
         const deleteResult = await deleteResponse.text();
         console.log("DELETE RESPONSE", deleteResult);
 
-        // Reload the current page instead of redirecting to the task list page
-        // router.push(`/moderation/task`);
-        router.reload();
+        // Reload the current page to update the page statuses
+        // router.reload();
+        router.push(`/moderation/task/${modifiedTaskId}`);
+        setToast(Toast.DeleteSucceeded);
       } else {
         setToast(Toast.SaveFailed);
 

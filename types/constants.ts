@@ -63,6 +63,8 @@ export enum Toast {
   ValidationFailed = "validationFailed",
   SaveFailed = "saveFailed",
   SaveSucceeded = "saveSucceeded",
+  RejectSucceeded = "rejectSucceeded",
+  DeleteSucceeded = "deleteSucceeded",
 }
 
 export const LANGUAGE_OPTIONS = ["fi", "sv", "en"];

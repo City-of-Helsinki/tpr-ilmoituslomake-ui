@@ -439,6 +439,14 @@
         "title": "Tallennus onnistui!",
         "message": ""
       },
+      "rejectSucceeded": {
+        "title": "Peruutus onnistui!",
+        "message": ""
+      },
+      "deleteSucceeded": {
+        "title": "Poisto onnistui!",
+        "message": ""
+      },
       "close": "Sulje viesti",
       "fieldRequired": "$fieldName on pakollinen tieto",
       "fieldFormat": "$fieldName on annettava oikeassa muodossa",
