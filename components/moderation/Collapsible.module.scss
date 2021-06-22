@@ -47,6 +47,15 @@
       button {
         color: $color-black;
         border: 0;
+
+        &:hover {
+          outline: solid $color-bus 3px !important;
+          outline-offset: 4px !important;
+        }
+
+        &:focus::after {
+          border-color: $color-bus;
+        }
       }
     }
   }
