@@ -1,5 +1,6 @@
 import { ModerationStatus, TaskStatus, TaskType } from "./constants";
 import { NotificationSchema } from "./notification_schema";
+import { TranslationSchema } from "./translation_schema";
 
 export interface User {
   authenticated: boolean;
@@ -119,6 +120,27 @@ export interface NotificationPlaceResult {
 
 export interface NotificationPlaceResults {
   results: NotificationPlaceResult[];
+  count: number;
+  next?: string;
+}
+
+export interface TranslationTaskSearch {
+  placeName: string;
+  requestName: string;
+  searchDone: boolean;
+}
+
+export interface TranslationTaskResult {
+  id: number;
+  data: TranslationSchema;
+  requestName: string;
+  moderatorRequester: string;
+  taskStatus: string;
+  updated_at: string;
+}
+
+export interface TranslationTaskResults {
+  results: TranslationTaskResult[];
   count: number;
   next?: string;
 }

@@ -42,6 +42,8 @@ import {
   SET_NOTIFICATION_PHOTO_ALT_TEXT_VALIDATION,
   REMOVE_NOTIFICATION_PHOTO_VALIDATION,
   SET_NOTIFICATION_TIP_VALIDATION,
+  SET_TRANSLATION_TASK_SEARCH,
+  SET_TRANSLATION_TASK_RESULTS,
   SET_MODERATION_PLACE_SEARCH,
   CLEAR_MODERATION_PLACE_SEARCH,
   SET_MODERATION_PLACE_RESULTS,
@@ -92,6 +94,8 @@ import {
   NotificationPlaceSearch,
   Photo,
   TagOption,
+  TranslationTaskResults,
+  TranslationTaskSearch,
   Validation,
 } from "../../types/general";
 import { NotificationSchema } from "../../types/notification_schema";
@@ -335,6 +339,18 @@ export type NotificationValidationAction =
   | SetNotificationPhotoAltTextValidationAction
   | RemoveNotificationPhotoValidationAction
   | SetNotificationTipValidationAction;
+
+interface SetTranslationTaskSearchAction extends AnyAction {
+  type: typeof SET_TRANSLATION_TASK_SEARCH;
+  payload: TranslationTaskSearch;
+}
+
+interface SetTranslationTaskResultsAction extends AnyAction {
+  type: typeof SET_TRANSLATION_TASK_RESULTS;
+  payload: TranslationTaskResults;
+}
+
+export type TranslationAction = SetTranslationTaskSearchAction | SetTranslationTaskResultsAction;
 
 interface SetModerationPlaceSearchAction extends AnyAction {
   type: typeof SET_MODERATION_PLACE_SEARCH;
