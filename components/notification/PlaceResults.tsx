@@ -5,7 +5,7 @@ import { useRouter } from "next/router";
 import { useI18n } from "next-localization";
 import { Button, IconAngleRight, IconLocation, IconStarFill } from "hds-react";
 import moment from "moment";
-import { NotificationAction } from "../../state/actions/types";
+import { NotificationAction } from "../../state/actions/notificationTypes";
 import { setNotificationPlaceResults } from "../../state/actions/notification";
 import { RootState } from "../../state/reducers";
 import { NotifierType } from "../../types/constants";

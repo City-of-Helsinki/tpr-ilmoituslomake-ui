@@ -2,7 +2,7 @@ import React, { Dispatch, ChangeEvent, ReactElement } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useI18n } from "next-localization";
 import { TextArea } from "hds-react";
-import { NotificationAction } from "../../state/actions/types";
+import { NotificationAction } from "../../state/actions/notificationTypes";
 import { setNotificationComments } from "../../state/actions/notification";
 import { RootState } from "../../state/reducers";
 import { MAX_LENGTH_LONG_DESC } from "../../types/constants";

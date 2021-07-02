@@ -1,6 +1,6 @@
 import { Dispatch } from "react";
 import { NextRouter } from "next/router";
-import { NotificationAction } from "../state/actions/types";
+import { NotificationAction } from "../state/actions/notificationTypes";
 import {
   setNotificationAddress,
   setNotificationAddressFound,

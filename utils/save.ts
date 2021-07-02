@@ -1,7 +1,8 @@
 import { Dispatch, SetStateAction } from "react";
 import { NextRouter } from "next/router";
 import Cookies from "js-cookie";
-import { NotificationAction, NotificationValidationAction } from "../state/actions/types";
+import { NotificationAction } from "../state/actions/notificationTypes";
+import { NotificationValidationAction } from "../state/actions/notificationValidationTypes";
 import { setPage, setSentNotification } from "../state/actions/notification";
 import { ItemType, Toast, SENT_INFO_PAGE } from "../types/constants";
 import { ChangeRequestSchema, NotificationExtra, User } from "../types/general";

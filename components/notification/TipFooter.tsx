@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { useI18n } from "next-localization";
 import { Button } from "hds-react";
-import { NotificationValidationAction } from "../../state/actions/types";
+import { NotificationValidationAction } from "../../state/actions/notificationValidationTypes";
 import { setPageValid } from "../../state/actions/notificationValidation";
 import { RootState } from "../../state/reducers";
 import { Toast } from "../../types/constants";

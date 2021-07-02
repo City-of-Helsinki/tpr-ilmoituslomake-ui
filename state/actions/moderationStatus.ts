@@ -17,7 +17,7 @@ import {
 } from "../../types/constants";
 import { KeyValueStatus } from "../../types/general";
 import { PhotoStatus } from "../../types/moderation_status";
-import { ModerationStatusAction } from "./types";
+import { ModerationStatusAction } from "./moderationStatusTypes";
 
 export const setPageStatus = (status: ModerationStatus): ModerationStatusAction => ({
   type: SET_PAGE_STATUS,

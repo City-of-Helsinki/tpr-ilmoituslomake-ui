@@ -18,7 +18,7 @@ import {
 } from "../../types/constants";
 import { KeyValueValidation, Validation } from "../../types/general";
 import { PhotoValidation } from "../../types/notification_validation";
-import { NotificationValidationAction } from "./types";
+import { NotificationValidationAction } from "./notificationValidationTypes";
 
 export const setPageValid = (valid: boolean): NotificationValidationAction => ({
   type: SET_PAGE_VALID,

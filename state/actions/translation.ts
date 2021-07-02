@@ -1,7 +1,7 @@
 import { SET_TRANSLATION_TASK_SEARCH, SET_TRANSLATION_TASK_RESULTS } from "../../types/constants";
 import { TranslationTaskResults, TranslationTaskSearch } from "../../types/general";
 import { TranslationSchema } from "../../types/translation_schema";
-import { TranslationAction } from "./types";
+import { TranslationAction } from "./translationTypes";
 
 export const setTranslationTaskSearch = (taskSearch: TranslationTaskSearch): TranslationAction => ({
   type: SET_TRANSLATION_TASK_SEARCH,

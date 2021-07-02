@@ -4,7 +4,7 @@ import addFormats from "ajv-formats";
 import { string, number } from "yup";
 import StringSchema from "yup/lib/string";
 import NumberSchema from "yup/lib/number";
-import { NotificationValidationAction } from "../state/actions/types";
+import { NotificationValidationAction } from "../state/actions/notificationValidationTypes";
 import {
   setNotificationInputLanguageValidation,
   setNotificationNameValidation,

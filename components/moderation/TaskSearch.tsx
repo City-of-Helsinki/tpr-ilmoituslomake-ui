@@ -4,7 +4,7 @@ import { useRouter } from "next/router";
 import { useI18n } from "next-localization";
 import { Button, Select, TextInput } from "hds-react";
 import moment from "moment";
-import { ModerationAction } from "../../state/actions/types";
+import { ModerationAction } from "../../state/actions/moderationTypes";
 import { setModerationTaskSearch, setModerationTaskResults } from "../../state/actions/moderation";
 import { RootState } from "../../state/reducers";
 import { TaskType } from "../../types/constants";

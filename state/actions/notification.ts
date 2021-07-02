@@ -36,7 +36,7 @@ import {
   TagOption,
 } from "../../types/general";
 import { NotificationSchema } from "../../types/notification_schema";
-import { NotificationAction } from "./types";
+import { NotificationAction } from "./notificationTypes";
 
 export const setPage = (pageNumber: number): NotificationAction => ({
   type: SET_PAGE,

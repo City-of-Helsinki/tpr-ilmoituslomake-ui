@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { useRouter } from "next/router";
 import { useI18n } from "next-localization";
 import { Button, RadioButton, SelectionGroup, TextInput } from "hds-react";
-import { NotificationAction } from "../../state/actions/types";
+import { NotificationAction } from "../../state/actions/notificationTypes";
 import { setNotificationPlaceResults, setNotificationPlaceSearch } from "../../state/actions/notification";
 import { RootState } from "../../state/reducers";
 import { NotifierType, MAX_LENGTH } from "../../types/constants";

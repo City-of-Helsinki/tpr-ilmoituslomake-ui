@@ -1,5 +1,5 @@
 import { Dispatch } from "react";
-import { ModerationStatusAction } from "../state/actions/types";
+import { ModerationStatusAction } from "../state/actions/moderationStatusTypes";
 import {
   setPageStatus,
   setModerationAddressStatus,

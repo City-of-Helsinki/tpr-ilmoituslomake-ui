@@ -1,6 +1,6 @@
 import { Dispatch } from "react";
 import { NextRouter } from "next/router";
-import { ModerationAction } from "../state/actions/types";
+import { ModerationAction } from "../state/actions/moderationTypes";
 import { setModerationAddress, setModerationLocation } from "../state/actions/moderation";
 import getOrigin from "./request";
 import { NEIGHBOURHOOD_URL, SEARCH_URL } from "../types/constants";

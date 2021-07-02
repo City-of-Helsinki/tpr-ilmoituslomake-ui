@@ -2,7 +2,8 @@ import React, { Dispatch, ReactElement, useCallback, useEffect, useState } from 
 import { useSelector, useDispatch } from "react-redux";
 import dynamic from "next/dynamic";
 import { useI18n } from "next-localization";
-import { ModerationAction, ModerationStatusAction } from "../../state/actions/types";
+import { ModerationAction } from "../../state/actions/moderationTypes";
+import { ModerationStatusAction } from "../../state/actions/moderationStatusTypes";
 import { setModerationLocation } from "../../state/actions/moderation";
 import { setModerationLocationStatus } from "../../state/actions/moderationStatus";
 import { RootState } from "../../state/reducers";

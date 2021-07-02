@@ -4,7 +4,7 @@ import { useRouter } from "next/router";
 import { useI18n } from "next-localization";
 import { Button, Checkbox, Combobox, IconPlus, Select, SelectionGroup, TextInput } from "hds-react";
 import moment from "moment";
-import { ModerationAction } from "../../state/actions/types";
+import { ModerationAction } from "../../state/actions/moderationTypes";
 import { setModerationPlaceSearch, clearModerationPlaceSearch, setModerationPlaceResults } from "../../state/actions/moderation";
 import { RootState } from "../../state/reducers";
 import { ItemType, Toast } from "../../types/constants";

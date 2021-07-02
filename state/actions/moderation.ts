@@ -19,7 +19,7 @@ import {
   SET_MODERATION_PHOTO,
   REMOVE_MODERATION_PHOTO,
 } from "../../types/constants";
-import { ModerationAction } from "./types";
+import { ModerationAction } from "./moderationTypes";
 import {
   KeyValueString,
   MatkoTagOption,

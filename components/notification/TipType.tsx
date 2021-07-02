@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { useI18n } from "next-localization";
 import { RadioButton, SelectionGroup } from "hds-react";
 import { useMediaQuery } from "react-responsive";
-import { NotificationAction } from "../../state/actions/types";
+import { NotificationAction } from "../../state/actions/notificationTypes";
 import { setNotificationTip } from "../../state/actions/notification";
 import { RootState } from "../../state/reducers";
 import { ItemType } from "../../types/constants";

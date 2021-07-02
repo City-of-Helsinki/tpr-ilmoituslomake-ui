@@ -6,7 +6,7 @@ import { Koros, Navigation } from "hds-react";
 import { Stepper, Step, StepLabel, CircularProgress } from "@material-ui/core";
 import { StylesProvider } from "@material-ui/core/styles";
 import Header from "../common/Header";
-import { NotificationAction } from "../../state/actions/types";
+import { NotificationAction } from "../../state/actions/notificationTypes";
 import { setPage } from "../../state/actions/notification";
 import { RootState } from "../../state/reducers";
 import { MAX_PAGE } from "../../types/constants";

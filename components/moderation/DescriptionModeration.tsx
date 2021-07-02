@@ -2,7 +2,8 @@ import React, { Dispatch, ChangeEvent, ReactElement } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useI18n } from "next-localization";
 import { TextInput, TextArea } from "hds-react";
-import { ModerationAction, ModerationStatusAction } from "../../state/actions/types";
+import { ModerationAction } from "../../state/actions/moderationTypes";
+import { ModerationStatusAction } from "../../state/actions/moderationStatusTypes";
 import { setModerationName, setModerationShortDescription, setModerationLongDescription } from "../../state/actions/moderation";
 import {
   setModerationNameStatus,
