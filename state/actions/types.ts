@@ -85,13 +85,13 @@ import {
   MatkoTagOption,
   ModerationPlaceResults,
   ModerationPlaceSearch,
+  ModerationTaskSearch,
   ModerationTodoResults,
   NotificationExtra,
   NotificationPlaceResults,
   NotificationPlaceSearch,
   Photo,
   TagOption,
-  TaskSearch,
   Validation,
 } from "../../types/general";
 import { NotificationSchema } from "../../types/notification_schema";
@@ -353,7 +353,7 @@ interface SetModerationPlaceResultsAction extends AnyAction {
 
 interface SetModerationTaskSearchAction extends AnyAction {
   type: typeof SET_MODERATION_TASK_SEARCH;
-  payload: TaskSearch;
+  payload: ModerationTaskSearch;
 }
 
 interface SetModerationTaskResultsAction extends AnyAction {

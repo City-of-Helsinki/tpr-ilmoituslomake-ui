@@ -168,7 +168,7 @@ export interface ModerationPlaceResults {
   next?: string;
 }
 
-export interface TaskSearch {
+export interface ModerationTaskSearch {
   placeName: string;
   taskType: TaskType;
   searchDone: boolean;

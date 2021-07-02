@@ -25,10 +25,10 @@ import {
   MatkoTagOption,
   ModerationPlaceResults,
   ModerationPlaceSearch,
+  ModerationTaskSearch,
   ModerationTodoResults,
   Photo,
   TagOption,
-  TaskSearch,
 } from "../../types/general";
 
 export const setModerationPlaceSearch = (placeSearch: ModerationPlaceSearch): ModerationAction => ({
@@ -46,7 +46,7 @@ export const setModerationPlaceResults = (placeResults: ModerationPlaceResults):
   payload: placeResults,
 });
 
-export const setModerationTaskSearch = (taskSearch: TaskSearch): ModerationAction => ({
+export const setModerationTaskSearch = (taskSearch: ModerationTaskSearch): ModerationAction => ({
   type: SET_MODERATION_TASK_SEARCH,
   payload: taskSearch,
 });
