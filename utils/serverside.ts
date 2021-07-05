@@ -37,7 +37,6 @@ export const redirectToNotAuthorized = (): { redirect: Redirect } => {
 
 export const checkUser = async (req: IncomingMessage): Promise<User | undefined> => {
   // Check the current user
-  // TODO: define how a moderator user is identified
   const userResponse = await fetch(`${getOriginServerSide()}/api/user/?format=json`, { headers: { cookie: req.headers.cookie as string } });
 
   if (!userResponse.ok) {
@@ -54,7 +53,10 @@ export const checkUser = async (req: IncomingMessage): Promise<User | undefined>
   }
 
   // Valid user
-  return { authenticated: true, ...user };
+  // return { authenticated: true, ...user };
+
+  // TEST - is_translator - FOR DEVELOPMENT USE ONLY
+  return { authenticated: true, is_translator: true, ...user };
 };
 
 export const getTags = async (): Promise<TagOption[]> => {

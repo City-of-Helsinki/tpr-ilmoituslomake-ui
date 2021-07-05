@@ -4,9 +4,10 @@ import notification from "./notification";
 import notificationValidation from "./notificationValidation";
 import moderation from "./moderation";
 import moderationStatus from "./moderationStatus";
+import translation from "./translation";
 import { CLEAR_STATE } from "../../types/constants";
 
-const appReducer = combineReducers({ general, notification, notificationValidation, moderation, moderationStatus });
+const appReducer = combineReducers({ general, notification, notificationValidation, moderation, moderationStatus, translation });
 
 export type RootState = ReturnType<typeof appReducer>;
 

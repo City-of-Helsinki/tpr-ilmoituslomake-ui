@@ -371,6 +371,46 @@
       }
     }
   },
+  "translation": {
+    "title": "Translations",
+    "button": {
+      "search": "Search",
+      "showMore": "Show more"
+    },
+    "intro": {
+      "title": "Welcome!"
+    },
+    "taskSearch": {
+      "title": "Your translation tasks",
+      "placeName": {
+        "label": "Place name",
+        "helperText": "When the field is empty and you select Search, you will see all locations"
+      },
+      "request": {
+        "label": "Request"
+      },
+      "ownPlacesOnly": {
+        "label": "Show",
+        "yes": "Only your own locations",
+        "no": "All locations"
+      }
+    },
+    "taskResults": {
+      "found": "Found",
+      "tasks": "tasks",
+      "notFound": "Tasks not found",
+      "translationTask": "Translation task",
+      "request": "Request",
+      "moderator": "From",
+      "status": "Status",
+      "empty": "(No name)"
+    },
+    "taskStatus": {
+      "open": "Not started",
+      "inProgress": "Draft",
+      "closed": "Done"
+    }
+  },
   "moderation": {
     "title": "Moderointi",
     "page": {

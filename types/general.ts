@@ -8,6 +8,7 @@ export interface User {
   first_name: string;
   last_name: string;
   is_staff: boolean;
+  is_translator: boolean;
   email: string;
 }
 
@@ -126,17 +127,38 @@ export interface NotificationPlaceResults {
 
 export interface TranslationTaskSearch {
   placeName: string;
-  requestName: string;
+  request: string;
+  requestOptions: OptionType[];
+  taskStatus: string;
+  groupByRequest: boolean;
   searchDone: boolean;
 }
 
 export interface TranslationTaskResult {
   id: number;
-  data: TranslationSchema;
-  requestName: string;
-  moderatorRequester: string;
-  taskStatus: string;
+  request: string;
+  target: {
+    id: number;
+    name: {
+      fi: string;
+      sv: string;
+      en: string;
+    };
+  };
+  category: string;
+  item_type: string;
+  status: string;
+  moderator: {
+    first_name?: string;
+    last_name?: string;
+    email?: string;
+  };
+  created_at: string;
   updated_at: string;
+  created: Date;
+  updated: Date;
+  taskType: TaskType;
+  taskStatus: TaskStatus;
 }
 
 export interface TranslationTaskResults {

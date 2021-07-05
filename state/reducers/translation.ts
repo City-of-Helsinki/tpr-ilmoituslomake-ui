@@ -5,7 +5,10 @@ import { SET_TRANSLATION_TASK_SEARCH, SET_TRANSLATION_TASK_RESULTS } from "../..
 const initialState: TranslationState = {
   taskSearch: {
     placeName: "",
-    requestName: "",
+    request: "",
+    requestOptions: [],
+    taskStatus: "",
+    groupByRequest: false,
     searchDone: false,
   },
   taskResults: {

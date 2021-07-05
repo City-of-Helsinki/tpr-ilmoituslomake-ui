@@ -1,0 +1,19 @@
+@import "~hds-design-tokens/lib/all.scss";
+
+.taskSearch {
+  .search {
+    align-items: end;
+
+    .gridInputPlaceName {
+      grid-column: span 4;
+    }
+
+    .gridInputRequest {
+      grid-column: span 2;
+    }
+
+    .gridButton {
+      grid-column: span 2;
+    }
+  }
+}
