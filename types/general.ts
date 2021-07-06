@@ -134,7 +134,7 @@ export interface TranslationTaskSearch {
   searchDone: boolean;
 }
 
-export interface TranslationTaskResult {
+export interface TranslationTodoResult {
   id: number;
   request: string;
   target: {
@@ -161,8 +161,8 @@ export interface TranslationTaskResult {
   taskStatus: TaskStatus;
 }
 
-export interface TranslationTaskResults {
-  results: TranslationTaskResult[];
+export interface TranslationTodoResults {
+  results: TranslationTodoResult[];
   count: number;
   next?: string;
 }

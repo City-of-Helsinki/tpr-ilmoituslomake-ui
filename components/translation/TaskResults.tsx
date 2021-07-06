@@ -8,7 +8,7 @@ import moment from "moment";
 import { TranslationAction } from "../../state/actions/translationTypes";
 import { setTranslationTaskResults } from "../../state/actions/translation";
 import { RootState } from "../../state/reducers";
-import { TranslationTaskResult } from "../../types/general";
+import { TranslationTodoResult } from "../../types/general";
 import { getTaskStatus, getTaskType } from "../../utils/conversion";
 import { getDisplayName } from "../../utils/helper";
 import { defaultLocale } from "../../utils/i18n";
@@ -29,7 +29,7 @@ const TaskResults = (): ReactElement => {
     if (next) {
       const taskResponse = await fetch(next);
       if (taskResponse.ok) {
-        const taskResult = await (taskResponse.json() as Promise<{ count: number; next: string; results: TranslationTaskResult[] }>);
+        const taskResult = await (taskResponse.json() as Promise<{ count: number; next: string; results: TranslationTodoResult[] }>);
 
         console.log("TASK RESPONSE", taskResult);
 
@@ -79,7 +79,7 @@ const TaskResults = (): ReactElement => {
           <div className={`${styles.gridColumn3} ${styles.gridHeader}`}>{i18n.t("translation.taskResults.moderator")}</div>
           <div className={`${styles.gridColumn4} ${styles.gridHeader}`}>{i18n.t("translation.taskResults.status")}</div>
           {results
-            .sort((a: TranslationTaskResult, b: TranslationTaskResult) => b.updated.getTime() - a.updated.getTime())
+            .sort((a: TranslationTodoResult, b: TranslationTodoResult) => b.updated.getTime() - a.updated.getTime())
             .map((result) => {
               const { id, request: resultRequest, target, moderator, taskStatus } = result;
               const { id: targetId, name } = target || {};

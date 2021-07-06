@@ -11,8 +11,8 @@ import {
   NotificationExtra,
   NotificationPlaceResults,
   NotificationPlaceSearch,
-  TranslationTaskResults,
   TranslationTaskSearch,
+  TranslationTodoResults,
   User,
 } from "../../types/general";
 import { ModerationStatusSchema } from "../../types/moderation_status";
@@ -43,7 +43,7 @@ export interface NotificationValidationState {
 
 export interface TranslationState {
   taskSearch: TranslationTaskSearch;
-  taskResults: TranslationTaskResults;
+  taskResults: TranslationTodoResults;
 }
 
 export interface ModerationState {

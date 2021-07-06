@@ -1,6 +1,6 @@
 import { AnyAction } from "redux";
 import { SET_TRANSLATION_TASK_SEARCH, SET_TRANSLATION_TASK_RESULTS } from "../../types/constants";
-import { TranslationTaskResults, TranslationTaskSearch } from "../../types/general";
+import { TranslationTaskSearch, TranslationTodoResults } from "../../types/general";
 
 interface SetTranslationTaskSearchAction extends AnyAction {
   type: typeof SET_TRANSLATION_TASK_SEARCH;
@@ -9,7 +9,7 @@ interface SetTranslationTaskSearchAction extends AnyAction {
 
 interface SetTranslationTaskResultsAction extends AnyAction {
   type: typeof SET_TRANSLATION_TASK_RESULTS;
-  payload: TranslationTaskResults;
+  payload: TranslationTodoResults;
 }
 
 export type TranslationAction = SetTranslationTaskSearchAction | SetTranslationTaskResultsAction;
