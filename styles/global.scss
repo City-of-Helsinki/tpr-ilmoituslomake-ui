@@ -44,7 +44,8 @@ body {
 h1 {
   font-size: $fontsize-heading-xl !important;
 
-  &.moderation {
+  &.moderation,
+  &.translation {
     font-size: $fontsize-heading-l !important;
   }
 
@@ -56,7 +57,8 @@ h1 {
 h2 {
   font-size: $fontsize-heading-l !important;
 
-  &.moderation {
+  &.moderation,
+  &.translation {
     font-size: $fontsize-heading-m !important;
   }
 
@@ -68,7 +70,8 @@ h2 {
 h3 {
   font-size: $fontsize-heading-m !important;
 
-  &.moderation {
+  &.moderation,
+  &.translation {
     font-size: $fontsize-heading-s !important;
   }
 
@@ -81,7 +84,8 @@ h4 {
   font-size: $fontsize-heading-s !important;
   margin: 0;
 
-  &.moderation {
+  &.moderation,
+  &.translation {
     font-size: $fontsize-heading-xs !important;
   }
 
@@ -94,7 +98,8 @@ h5 {
   font-size: $fontsize-heading-xs !important;
   margin: 0;
 
-  &.moderation {
+  &.moderation,
+  &.translation {
     font-size: $fontsize-heading-xxs !important;
   }
 

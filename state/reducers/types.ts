@@ -1,5 +1,5 @@
 import { LatLngExpression } from "leaflet";
-import { ModerationStatus } from "../../types/constants";
+import { ModerationStatus, TranslationStatus } from "../../types/constants";
 import {
   ChangeRequestSchema,
   ChangeRequestValidationSchema,
@@ -11,6 +11,7 @@ import {
   NotificationExtra,
   NotificationPlaceResults,
   NotificationPlaceSearch,
+  TranslationExtra,
   TranslationTaskSearch,
   TranslationTodoResults,
   User,
@@ -18,6 +19,8 @@ import {
 import { ModerationStatusSchema } from "../../types/moderation_status";
 import { NotificationSchema } from "../../types/notification_schema";
 import { NotificationValidationSchema } from "../../types/notification_validation";
+import { TranslationSchema } from "../../types/translation_schema";
+import { TranslationStatusSchema } from "../../types/translation_status";
 
 export interface GeneralState {
   user?: User;
@@ -44,6 +47,16 @@ export interface NotificationValidationState {
 export interface TranslationState {
   taskSearch: TranslationTaskSearch;
   taskResults: TranslationTodoResults;
+  selectedTaskId: number;
+  selectedTask: NotificationSchema;
+  translatedTaskId: number;
+  translatedTask: TranslationSchema;
+  translationExtra: TranslationExtra;
+}
+
+export interface TranslationStatusState {
+  pageStatus: TranslationStatus;
+  translationStatus: TranslationStatusSchema;
 }
 
 export interface ModerationState {

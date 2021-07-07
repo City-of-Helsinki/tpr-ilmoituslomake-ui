@@ -1,4 +1,4 @@
-import { ModerationStatus, TaskStatus, TaskType } from "./constants";
+import { ModerationStatus, TaskStatus, TaskType, TranslationStatus } from "./constants";
 import { NotificationSchema } from "./notification_schema";
 import { TranslationSchema } from "./translation_schema";
 
@@ -33,6 +33,10 @@ export interface KeyValueStatus {
   [key: string]: ModerationStatus;
 }
 
+export interface KeyValueTranslationStatus {
+  [key: string]: TranslationStatus;
+}
+
 export type OptionType = {
   id: string | number;
   label: string;
@@ -61,6 +65,22 @@ export interface Photo {
     fi: string;
     sv: string;
     en: string;
+    [key: string]: unknown;
+  };
+  permission?: string;
+  source: string;
+  new?: boolean;
+  base64?: string;
+  preview?: string;
+  [key: string]: unknown;
+}
+
+export interface PhotoTranslation {
+  uuid: string;
+  sourceType: string;
+  url: string;
+  altText: {
+    lang: string;
     [key: string]: unknown;
   };
   permission?: string;
@@ -148,6 +168,7 @@ export interface TranslationTodoResult {
   category: string;
   item_type: string;
   status: string;
+  translator: User;
   moderator: {
     first_name?: string;
     last_name?: string;
@@ -165,6 +186,51 @@ export interface TranslationTodoResults {
   results: TranslationTodoResult[];
   count: number;
   next?: string;
+}
+
+export interface TranslationTodoSchema {
+  id: number;
+  request: string;
+  target: {
+    id: number;
+    data: NotificationSchema;
+    created_at: string;
+    updated_at: string;
+  };
+  category: string;
+  item_type: string;
+  status: string;
+  data: TranslationSchema;
+  translator: User;
+  moderator: {
+    first_name?: string;
+    last_name?: string;
+    email?: string;
+  };
+  created_at: string;
+  updated_at: string;
+  created: Date;
+  updated: Date;
+  taskType: TaskType;
+  taskStatus: TaskStatus;
+}
+
+export interface TranslationExtra {
+  photosSelected: Photo[];
+  photosTranslated: PhotoTranslation[];
+  request: string;
+  created_at: string;
+  updated_at: string;
+  taskType: TaskType;
+  taskStatus: TaskStatus;
+  translator: {
+    fullName: string;
+    email: string;
+  };
+  moderator: {
+    fullName: string;
+    email: string;
+  };
 }
 
 export interface ChangeRequestSchema {

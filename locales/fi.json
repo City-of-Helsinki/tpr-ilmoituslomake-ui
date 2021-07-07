@@ -375,10 +375,64 @@
     "title": "Translations",
     "button": {
       "search": "Search",
-      "showMore": "Show more"
+      "showMore": "Show more",
+      "returnToRequests": "Return to requests",
+      "saveDraft": "Save draft",
+      "sendTranslation": "Send translation",
+      "modify": "Modify",
+      "done": "Done",
+      "openHelp": "Open help",
+      "save": "Save",
+      "back": "Back"
+    },
+    "message": {
+      "notAuthenticated": {
+        "title": "Login before sending",
+        "message": ""
+      },
+      "validationFailed": {
+        "title": "Errors in the form",
+        "message": "Please check the information, incorrect fields are highlighted below"
+      },
+      "saveFailed": {
+        "title": "Form submission failed",
+        "message": "Sorry, a technical error prevented the form from submitting. Please try again later."
+      },
+      "saveSucceeded": {
+        "title": "Submitted successfully!",
+        "message": "Thanks for your submission! The information will be reviewed before publication."
+      },
+      "close": "Close message",
+      "fieldRequired": "$fieldName is mandatory information",
+      "fieldFormat": "$fieldName must be entered in the right format",
+      "fieldFormatUrl": "$fieldName must be entered in the right format (e.g. https://myhelsinki.fi)",
+      "fieldTooLong": "$fieldName is too long",
+      "fieldTooShort": "$fieldName is too short",
+      "fieldNotJpeg": "The format of the selected image is incorrect, images must be in JPEG format",
+      "fieldImageTooLarge": "The size of the selected image is too large, it must not exceed 4 MB in size",
+      "fieldLanguage": "At least one language is mandatory",
+      "fieldOther": "Check information"
+    },
+    "confirmation": {
+      "saveDraft": "Are you sure that you want to save?",
+      "sendTranslation": "Are you sure that you want to send the translation?"
     },
     "intro": {
       "title": "Welcome!"
+    },
+    "task": {
+      "title": "Translations",
+      "basic": "Place details",
+      "photo": "Photo"
+    },
+    "taskHeader": {
+      "taskType": "Task type",
+      "created": "Created",
+      "status": "Status",
+      "translator": "Translator",
+      "request": "Translation request",
+      "moderator": "From",
+      "messageFromModerator": "Message"
     },
     "taskSearch": {
       "title": "Your translation tasks",
@@ -409,6 +463,50 @@
       "open": "Not started",
       "inProgress": "Draft",
       "closed": "Done"
+    },
+    "taskType": {
+      "translation": "Translation task"
+    },
+    "description": {
+      "placeName": {
+        "title": "Name",
+        "label": "Place name"
+      },
+      "shortDescription": {
+        "title": "Short description",
+        "label": "Short description",
+        "helperText": "Note that the text must not be written in ‘we’ format. Length max. 150 characters",
+        "tooltipLabel": "Improve findability",
+        "tooltipText": "A shorter description makes the location easier to find by a search engine."
+      },
+      "longDescription": {
+        "title": "Detailed description",
+        "label": "Detailed description",
+        "helperText": "You can also add information about opening hours here. Note that the text must not be written in ‘we’ format. Length 120 - 4000 characters",
+        "tooltipLabel": "More detailed description",
+        "tooltipText": "If you prefer, you can include a short description here and complete it later as needed."
+      }
+    },
+    "photos": {
+      "title": "Photos",
+      "photo": {
+        "title": "Photo"
+      },
+      "url": {
+        "labelDevice": "Select an image from your device",
+        "labelLink": "Photo web address (url)"
+      },
+      "altText": {
+        "label": "Short description of photo (alt-text)",
+        "helperText": "Write a short description of the photo. Max length 125 characters",
+        "tooltipLabel": "Use of descriptive text",
+        "tooltipText": "A description (alt text) is used to describe the information contained in an image to a search engine or to people who, for whatever reason, cannot see the image itself. This could be due to visual impairment, the images having not been uploaded, or the viewer has chosen not to load them.."
+      },
+      "source": {
+        "label": "Image source",
+        "tooltipLabel": "Image source",
+        "tooltipText": "Photographer or other photo owner e.g. organisation"
+      }
     }
   },
   "moderation": {

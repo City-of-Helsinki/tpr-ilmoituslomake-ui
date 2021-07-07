@@ -4,8 +4,6 @@ import { NextApiRequest, NextApiResponse } from "next";
 // This can be removed after the backend has been implemented
 
 const handler = (req: NextApiRequest, res: NextApiResponse): void => {
-  console.log("handler", req);
-
   res.status(200).json({
     count: 4,
     next: null,
@@ -25,6 +23,12 @@ const handler = (req: NextApiRequest, res: NextApiResponse): void => {
         category: "translation_task",
         item_type: "created",
         status: "open",
+        translator: {
+          first_name: "Anthony",
+          last_name: "Brown",
+          is_translator: true,
+          email: "ant.brown@cgi.com",
+        },
         moderator: {
           first_name: "Anthony",
           last_name: "Brown",
@@ -48,6 +52,12 @@ const handler = (req: NextApiRequest, res: NextApiResponse): void => {
         category: "translation_task",
         item_type: "created",
         status: "in_progress",
+        translator: {
+          first_name: "Anthony",
+          last_name: "Brown",
+          is_translator: true,
+          email: "ant.brown@cgi.com",
+        },
         moderator: {
           first_name: "Anthony",
           last_name: "Brown",
@@ -61,7 +71,7 @@ const handler = (req: NextApiRequest, res: NextApiResponse): void => {
         id: 3,
         request: "05.07.2021",
         target: {
-          id: 3,
+          id: 34,
           name: {
             en: "test 3",
             fi: "test 3",
@@ -71,6 +81,12 @@ const handler = (req: NextApiRequest, res: NextApiResponse): void => {
         category: "translation_task",
         item_type: "created",
         status: "closed",
+        translator: {
+          first_name: "Anthony",
+          last_name: "Brown",
+          is_translator: true,
+          email: "ant.brown@cgi.com",
+        },
         moderator: {
           first_name: "Anthony",
           last_name: "Brown",
@@ -84,7 +100,7 @@ const handler = (req: NextApiRequest, res: NextApiResponse): void => {
         id: 4,
         request: "06.07.2021",
         target: {
-          id: 1,
+          id: 45,
           name: {
             en: "test 4",
             fi: "test 4",
@@ -94,6 +110,12 @@ const handler = (req: NextApiRequest, res: NextApiResponse): void => {
         category: "translation_task",
         item_type: "created",
         status: "open",
+        translator: {
+          first_name: "Anthony",
+          last_name: "Brown",
+          is_translator: true,
+          email: "ant.brown@cgi.com",
+        },
         moderator: {
           first_name: "Anthony",
           last_name: "Brown",

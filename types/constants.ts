@@ -22,11 +22,18 @@ export enum ModerationStatus {
   Rejected = "rejected",
 }
 
+export enum TranslationStatus {
+  Unknown = "unknown",
+  Edited = "edited",
+  Done = "done",
+}
+
 export enum TaskCategory {
   Unknown = "unknown",
   ChangeRequest = "change_request",
   ModeratorChangeRequest = "moderator_edit",
   ModerationTask = "moderation_task",
+  TranslationTask = "translation_task",
 }
 
 export enum ItemType {
@@ -36,6 +43,7 @@ export enum ItemType {
   ChangeRequestDelete = "delete",
   ModerationTaskCreated = "created",
   ModerationTaskModified = "modified",
+  TranslationTaskCreated = "created",
 }
 
 export enum TaskStatus {
@@ -56,6 +64,7 @@ export enum TaskType {
   ModeratorAdd = "moderatorAdd",
   ModeratorRemove = "moderatorRemove",
   PlaceInfo = "placeInfo",
+  Translation = "translation",
 }
 
 export enum Toast {
@@ -143,6 +152,16 @@ export const SET_NOTIFICATION_TIP_VALIDATION = "SET_NOTIFICATION_TIP_VALIDATION"
 
 export const SET_TRANSLATION_TASK_SEARCH = "SET_TRANSLATION_TASK_SEARCH";
 export const SET_TRANSLATION_TASK_RESULTS = "SET_TRANSLATION_TASK_RESULTS";
+export const SET_TRANSLATION_NAME = "SET_TRANSLATION_NAME";
+export const SET_TRANSLATION_SHORT_DESCRIPTION = "SET_TRANSLATION_SHORT_DESCRIPTION";
+export const SET_TRANSLATION_LONG_DESCRIPTION = "SET_TRANSLATION_LONG_DESCRIPTION";
+export const SET_TRANSLATION_PHOTO = "SET_TRANSLATION_PHOTO";
+
+export const SET_TRANSLATION_NAME_STATUS = "SET_TRANSLATION_NAME_STATUS";
+export const SET_TRANSLATION_SHORT_DESCRIPTION_STATUS = "SET_TRANSLATION_SHORT_DESCRIPTION_STATUS";
+export const SET_TRANSLATION_LONG_DESCRIPTION_STATUS = "SET_TRANSLATION_LONG_DESCRIPTION_STATUS";
+export const SET_TRANSLATION_PHOTO_STATUS = "SET_TRANSLATION_PHOTO_STATUS";
+export const SET_TRANSLATION_PHOTO_ALT_TEXT_STATUS = "SET_TRANSLATION_PHOTO_ALT_TEXT_STATUS";
 
 export const SET_MODERATION_PLACE_SEARCH = "SET_MODERATION_PLACE_SEARCH";
 export const CLEAR_MODERATION_PLACE_SEARCH = "CLEAR_MODERATION_PLACE_SEARCH";
@@ -291,6 +310,89 @@ export const INITIAL_NOTIFICATION_VALIDATION = {
     full_name: { valid: true },
     email: { valid: true },
     phone: { valid: true },
+  },
+  photos: [],
+};
+
+export const INITIAL_TRANSLATION = {
+  language: "",
+  organization: {},
+  name: {
+    lang: "",
+  },
+  location: [0, 0],
+  description: {
+    short: {
+      lang: "",
+    },
+    long: {
+      lang: "",
+    },
+  },
+  address: {
+    fi: {
+      street: "",
+      postal_code: "",
+      post_office: "",
+      neighborhood_id: "",
+      neighborhood: "",
+    },
+    sv: {
+      street: "",
+      postal_code: "",
+      post_office: "",
+      neighborhood_id: "",
+      neighborhood: "",
+    },
+  },
+  phone: "",
+  email: "",
+  website: {
+    lang: "",
+  },
+  images: [],
+  opening_times: {},
+  ontology_ids: [],
+  matko_ids: [],
+  extra_keywords: [],
+  comments: "",
+  notifier: {
+    notifier_type: "",
+    full_name: "",
+    email: "",
+    phone: "",
+  },
+};
+
+export const INITIAL_TRANSLATION_EXTRA = {
+  photosSelected: [],
+  photosTranslated: [],
+  request: "",
+  created_at: "",
+  updated_at: "",
+  taskType: TaskType.Unknown,
+  taskStatus: TaskStatus.Unknown,
+  translator: {
+    fullName: "",
+    email: "",
+  },
+  moderator: {
+    fullName: "",
+    email: "",
+  },
+};
+
+export const INITIAL_TRANSLATION_STATUS = {
+  name: {
+    lang: TranslationStatus.Unknown,
+  },
+  description: {
+    short: {
+      lang: TranslationStatus.Unknown,
+    },
+    long: {
+      lang: TranslationStatus.Unknown,
+    },
   },
   photos: [],
 };

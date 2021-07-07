@@ -1,0 +1,70 @@
+@import "~hds-design-tokens/lib/all.scss";
+
+.collapsible {
+  margin-bottom: $spacing-layout-s;
+
+  .header {
+    display: flex;
+    flex-direction: row;
+    align-items: stretch;
+    height: $spacing-layout-l;
+    margin-bottom: $spacing-layout-s;
+
+    .section {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      flex-grow: 0;
+      padding: 0 $spacing-l;
+      background-color: $color-copper-light;
+    }
+
+    .title {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      flex-grow: 0;
+      padding: 0 $spacing-l;
+      background-color: $color-fog-light;
+    }
+
+    .status {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      flex-grow: 1;
+      padding: 0 $spacing-l;
+      background-color: $color-fog-light;
+    }
+
+    .button {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      flex-grow: 0;
+      background-color: $color-fog-light;
+
+      button {
+        color: $color-black;
+        border: 0;
+
+        &:hover {
+          outline: solid $color-bus 3px !important;
+          outline-offset: 4px !important;
+        }
+
+        &:focus::after {
+          border-color: $color-bus;
+        }
+      }
+    }
+  }
+
+  .expanded {
+    display: block;
+  }
+
+  .collapsed {
+    display: none;
+  }
+}
