@@ -272,6 +272,9 @@ const PhotosModeration = (): ReactElement => {
                 moderationStatus={photosStatus[index].source}
                 taskType={taskType}
                 taskStatus={taskStatus}
+                tooltipButtonLabel={i18n.t("moderation.button.openHelp")}
+                tooltipLabel={i18n.t("moderation.photos.source.tooltipLabel")}
+                tooltipText={i18n.t("moderation.photos.source.tooltipText")}
                 modifyButtonLabel={i18n.t("moderation.photos.source.label")}
                 modifyButtonHidden={!modifiedImage}
                 actionButtonHidden={!modifiedImage}

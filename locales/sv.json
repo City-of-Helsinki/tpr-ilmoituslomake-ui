@@ -599,7 +599,9 @@
         "creativeCommons": "Kuvaa saa jakaa Creative Commons BY 4.0.-lisenssillä. Kuvaa käytettäessä on ehdottomasti mainittava kuvan lähde ja kuvaaja."
       },
       "source": {
-        "label": "Kuvalähde"
+        "label": "Kuvalähde",
+        "tooltipLabel": "Kuvalähde",
+        "tooltipText": "Valokuvaaja tai muu kuvan omistaja, esim. organisaatio."
       },
       "addNewFromDevice": "Lisää kuva laitteelta",
       "addNewFromLink": "Lisää kuvalinkki",
