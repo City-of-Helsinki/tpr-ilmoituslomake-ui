@@ -81,4 +81,7 @@ export interface ModerationTranslationState {
   taskSearch: TranslationTaskSearch;
   taskResults: TranslationTodoResults;
   selectedTasks: TranslationSelectedItems;
+  placeSearch: ModerationPlaceSearch;
+  placeResults: ModerationPlaceResults;
+  selectedPlaces: TranslationSelectedItems;
 }

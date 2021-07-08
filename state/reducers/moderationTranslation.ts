@@ -4,6 +4,10 @@ import {
   SET_MODERATION_TRANSLATION_TASK_RESULTS,
   SET_MODERATION_TRANSLATION_TASK_SEARCH,
   SET_MODERATION_TRANSLATION_SELECTED_TASKS,
+  SET_MODERATION_TRANSLATION_PLACE_SEARCH,
+  CLEAR_MODERATION_TRANSLATION_PLACE_SEARCH,
+  SET_MODERATION_TRANSLATION_PLACE_RESULTS,
+  SET_MODERATION_TRANSLATION_SELECTED_PLACES,
 } from "../../types/constants";
 
 const initialState: ModerationTranslationState = {
@@ -20,6 +24,24 @@ const initialState: ModerationTranslationState = {
     count: 0,
   },
   selectedTasks: {
+    selectedIds: [],
+    isAllSelected: false,
+  },
+  placeSearch: {
+    placeName: "",
+    language: "",
+    address: "",
+    district: "",
+    ontologyIds: [],
+    matkoIds: [],
+    comment: "",
+    searchDone: false,
+  },
+  placeResults: {
+    results: [],
+    count: 0,
+  },
+  selectedPlaces: {
     selectedIds: [],
     isAllSelected: false,
   },
@@ -48,6 +70,38 @@ const moderationTranslation = (state = initialState, action: AnyAction): Moderat
       return {
         ...state,
         selectedTasks: action.payload,
+      };
+    }
+
+    case SET_MODERATION_TRANSLATION_PLACE_SEARCH: {
+      console.log("SET_MODERATION_TRANSLATION_PLACE_SEARCH", action.payload);
+      return {
+        ...state,
+        placeSearch: action.payload,
+      };
+    }
+
+    case CLEAR_MODERATION_TRANSLATION_PLACE_SEARCH: {
+      console.log("CLEAR_MODERATION_TRANSLATION_PLACE_SEARCH", action.payload);
+      return {
+        ...state,
+        placeSearch: initialState.placeSearch,
+      };
+    }
+
+    case SET_MODERATION_TRANSLATION_PLACE_RESULTS: {
+      console.log("SET_MODERATION_TRANSLATION_PLACE_RESULTS", action.payload);
+      return {
+        ...state,
+        placeResults: action.payload || [],
+      };
+    }
+
+    case SET_MODERATION_TRANSLATION_SELECTED_PLACES: {
+      console.log("SET_MODERATION_TRANSLATION_SELECTED_PLACES", action.payload);
+      return {
+        ...state,
+        selectedPlaces: action.payload,
       };
     }
 
