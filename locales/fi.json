@@ -439,16 +439,10 @@
     "taskSearch": {
       "title": "Your translation tasks",
       "placeName": {
-        "label": "Place name",
-        "helperText": "When the field is empty and you select Search, you will see all locations"
+        "label": "Place name"
       },
       "request": {
         "label": "Request"
-      },
-      "ownPlacesOnly": {
-        "label": "Show",
-        "yes": "Only your own locations",
-        "no": "All locations"
       }
     },
     "taskResults": {
@@ -560,7 +554,8 @@
       "save": "Tallenna",
       "remove": "Poista",
       "toggleMenu": "Vaihdele valikko",
-      "selectFromDevice": "Valitse laitteelta"
+      "selectFromDevice": "Valitse laitteelta",
+      "cancelTranslationTask": "Peru käännöstehtävä"
     },
     "message": {
       "notAuthenticated": {
@@ -830,6 +825,37 @@
     "translationNotice": {
       "title": "Käännösten hallinta",
       "manageTranslation": "Hallinoi käännöspyyntöjä"
+    },
+    "translation": {
+      "taskSearch": {
+        "title": "Käännöspyynnöt ja -tehtävät",
+        "placeName": {
+          "label": "Kohteen nimi"
+        },
+        "request": {
+          "label": "Käännöspyyntö"
+        }
+      },
+      "taskResults": {
+        "found": "Löytyi",
+        "tasks": "tehtävää",
+        "notFound": "Tehtäviä ei löytynyt",
+        "selectAll": "Valitse kaikki",
+        "translationTask": "Kohde",
+        "request": "Pyyntö",
+        "languagePair": "Kielipari",
+        "translator": "Kääntäjä",
+        "status": "Tila",
+        "empty": "(Ei nimeä)"
+      },
+      "taskStatus": {
+        "open": "Aloittamatta",
+        "inProgress": "Kesken",
+        "closed": "Valmis"
+      },
+      "taskType": {
+        "translation": "Käännöspyyntö"
+      }
     }
   }
 }

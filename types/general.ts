@@ -192,6 +192,11 @@ export interface TranslationTodoResults {
   next?: string;
 }
 
+export interface TranslationSelectedTasks {
+  selectedTaskIds: string[];
+  isAllSelected: boolean;
+}
+
 export interface TranslationTodoSchema {
   id: number;
   request: string;

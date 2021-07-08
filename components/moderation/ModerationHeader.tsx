@@ -29,13 +29,13 @@ const ModerationHeader = (props: ModerationHeaderProps): ReactElement => {
         router.push("/moderation/task");
         break;
       }
-      /*
       case 4: {
-        router.push("/moderation/organisation");
+        router.push("/moderation/translation");
         break;
       }
+      /*
       case 5: {
-        router.push("/moderation/translation");
+        router.push("/moderation/organisation");
         break;
       }
       */
@@ -69,18 +69,18 @@ const ModerationHeader = (props: ModerationHeaderProps): ReactElement => {
           active={currentPage === 3}
           onClick={() => changePage(3)}
         />
+        <Navigation.Item
+          className={styles.navigationItem}
+          href="#"
+          label={`${i18n.t("moderation.page.translation")}`}
+          active={currentPage === 4}
+          onClick={() => changePage(4)}
+        />
         {/*
         <Navigation.Item
           className={styles.navigationItem}
           href="#"
           label={`${i18n.t("moderation.page.organisation")}`}
-          active={currentPage === 4}
-          onClick={() => changePage(4)}
-        />
-        <Navigation.Item
-          className={styles.navigationItem}
-          href="#"
-          label={`${i18n.t("moderation.page.translation")}`}
           active={currentPage === 5}
           onClick={() => changePage(5)}
         />

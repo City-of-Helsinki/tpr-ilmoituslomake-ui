@@ -3,20 +3,24 @@ import { useSelector, useDispatch } from "react-redux";
 import { useI18n } from "next-localization";
 import { Button, Select, TextInput } from "hds-react";
 import moment from "moment";
-import { TranslationAction } from "../../state/actions/translationTypes";
-import { setTranslationTaskResults, setTranslationTaskSearch } from "../../state/actions/translation";
-import { RootState } from "../../state/reducers";
-import { MAX_LENGTH } from "../../types/constants";
-import { OptionType, TranslationTodoResult } from "../../types/general";
-import { getTaskStatus, getTaskType } from "../../utils/conversion";
-import { getOriginMockTranslationsOnly } from "../../utils/request";
+import { ModerationTranslationAction } from "../../../state/actions/moderationTranslationTypes";
+import {
+  setModerationTranslationSelectedTasks,
+  setModerationTranslationTaskResults,
+  setModerationTranslationTaskSearch,
+} from "../../../state/actions/moderationTranslation";
+import { RootState } from "../../../state/reducers";
+import { MAX_LENGTH } from "../../../types/constants";
+import { OptionType, TranslationTodoResult } from "../../../types/general";
+import { getTaskStatus, getTaskType } from "../../../utils/conversion";
+import { getOriginMockTranslationsOnly } from "../../../utils/request";
 import styles from "./TaskSearch.module.scss";
 
 const TaskSearch = (): ReactElement => {
   const i18n = useI18n();
-  const dispatch = useDispatch<Dispatch<TranslationAction>>();
+  const dispatch = useDispatch<Dispatch<ModerationTranslationAction>>();
 
-  const taskSearch = useSelector((state: RootState) => state.translation.taskSearch);
+  const taskSearch = useSelector((state: RootState) => state.moderationTranslation.taskSearch);
   const { placeName, request: searchRequest, requestOptions } = taskSearch;
 
   const convertOptions = (options: string[]): OptionType[] => options.map((option) => ({ id: option, label: option }));
@@ -24,16 +28,16 @@ const TaskSearch = (): ReactElement => {
   // const convertValue = (value: string | undefined): OptionType | undefined => requestOptions.find((t) => t.id === value);
 
   const updateSearchText = (evt: ChangeEvent<HTMLInputElement>) => {
-    dispatch(setTranslationTaskSearch({ ...taskSearch, [evt.target.name]: evt.target.value }));
+    dispatch(setModerationTranslationTaskSearch({ ...taskSearch, [evt.target.name]: evt.target.value }));
   };
 
   const updateSearchRequestOption = (selected: OptionType) => {
-    dispatch(setTranslationTaskSearch({ ...taskSearch, request: selected.id as string }));
+    dispatch(setModerationTranslationTaskSearch({ ...taskSearch, request: selected.id as string }));
   };
 
   const searchTasks = async () => {
-    // const taskResponse = await fetch(`${getOrigin(router)}/api/translation/todos/find/?search=${placeName.trim()}`);
-    const taskResponse = await fetch(`${getOriginMockTranslationsOnly()}/api/translation/todos/find/?search=${placeName.trim()}`);
+    // const taskResponse = await fetch(`${getOrigin(router)}/api/moderation/translation/tasks/find/?search=${placeName.trim()}`);
+    const taskResponse = await fetch(`${getOriginMockTranslationsOnly()}/api/moderation/translation/tasks/find/?search=${placeName.trim()}`);
     if (taskResponse.ok) {
       const taskResult = await (taskResponse.json() as Promise<{ count: number; next: string; results: TranslationTodoResult[] }>);
 
@@ -43,7 +47,7 @@ const TaskSearch = (): ReactElement => {
         const { results, count, next } = taskResult;
 
         dispatch(
-          setTranslationTaskResults({
+          setModerationTranslationTaskResults({
             results: results
               .filter((result) => {
                 const { request: resultRequest } = result;
@@ -64,7 +68,7 @@ const TaskSearch = (): ReactElement => {
         );
 
         dispatch(
-          setTranslationTaskSearch({
+          setModerationTranslationTaskSearch({
             ...taskSearch,
             requestOptions: [
               { id: "", label: "" },
@@ -74,10 +78,18 @@ const TaskSearch = (): ReactElement => {
           })
         );
       } else {
-        dispatch(setTranslationTaskResults({ results: [], count: 0 }));
+        dispatch(setModerationTranslationTaskResults({ results: [], count: 0 }));
 
-        dispatch(setTranslationTaskSearch({ ...taskSearch, searchDone: true }));
+        dispatch(setModerationTranslationTaskSearch({ ...taskSearch, searchDone: true }));
       }
+
+      // Clear any previously selected tasks
+      dispatch(
+        setModerationTranslationSelectedTasks({
+          selectedTaskIds: [],
+          isAllSelected: false,
+        })
+      );
     }
   };
 
@@ -88,13 +100,13 @@ const TaskSearch = (): ReactElement => {
 
   return (
     <div className={`formSection ${styles.taskSearch}`}>
-      <h2>{i18n.t("translation.taskSearch.title")}</h2>
+      <h1 className="moderation">{i18n.t("moderation.translation.taskSearch.title")}</h1>
 
       <div className={`gridLayoutContainer ${styles.search}`}>
         <TextInput
           id="placeName"
           className={styles.gridInputPlaceName}
-          label={i18n.t("translation.taskSearch.placeName.label")}
+          label={i18n.t("moderation.translation.taskSearch.placeName.label")}
           name="placeName"
           value={placeName}
           maxLength={MAX_LENGTH}
@@ -106,12 +118,12 @@ const TaskSearch = (): ReactElement => {
           options={requestOptions}
           // value={convertValue(searchRequest)}
           onChange={updateSearchRequestOption}
-          label={i18n.t("translation.taskSearch.request.label")}
-          selectedItemRemoveButtonAriaLabel={i18n.t("translation.button.remove")}
-          clearButtonAriaLabel={i18n.t("translation.button.clearAllSelections")}
+          label={i18n.t("moderation.translation.taskSearch.request.label")}
+          selectedItemRemoveButtonAriaLabel={i18n.t("moderation.button.remove")}
+          clearButtonAriaLabel={i18n.t("moderation.button.clearAllSelections")}
         />
         <div className={styles.gridButton}>
-          <Button onClick={searchTasks}>{i18n.t("translation.button.search")}</Button>
+          <Button onClick={searchTasks}>{i18n.t("moderation.button.search")}</Button>
         </div>
       </div>
     </div>
