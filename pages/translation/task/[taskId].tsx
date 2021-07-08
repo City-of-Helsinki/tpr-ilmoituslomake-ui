@@ -10,8 +10,7 @@ import { PhotoSchema, TranslationTodoSchema } from "../../../types/general";
 import { PhotoTranslationStatus } from "../../../types/translation_status";
 import { getTaskStatus, getTaskType } from "../../../utils/conversion";
 import i18nLoader from "../../../utils/i18n";
-import { getOriginMockTranslationsOnly } from "../../../utils/request";
-import { checkUser, redirectToLogin, redirectToNotAuthorized } from "../../../utils/serverside";
+import { checkUser, getOriginServerSide, redirectToLogin, redirectToNotAuthorized } from "../../../utils/serverside";
 import Layout from "../../../components/common/Layout";
 import Header from "../../../components/common/Header";
 import Collapsible from "../../../components/translation/Collapsible";
@@ -128,7 +127,7 @@ export const getServerSideProps: GetServerSideProps = async ({ req, resolvedUrl,
   if (params) {
     const { taskId } = params;
     // const taskResponse = await fetch(`${getOriginServerSide()}/api/translation/todos/${taskId}/`, {
-    const taskResponse = await fetch(`${getOriginMockTranslationsOnly()}/api/translation/todos/${taskId}/`, {
+    const taskResponse = await fetch(`http://localhost/mockapi/translation/todos/${taskId}/`, {
       headers: { cookie: req.headers.cookie as string },
     });
 

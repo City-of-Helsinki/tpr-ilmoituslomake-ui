@@ -9,8 +9,4 @@ export const getOrigin = (router: NextRouter): string => {
   return `${origin}${router.basePath}`;
 };
 
-export const getOriginMockTranslationsOnly = (): string => {
-  return "http://localhost:3000";
-};
-
 export default getOrigin;

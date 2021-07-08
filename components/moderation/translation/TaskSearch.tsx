@@ -1,5 +1,6 @@
 import React, { Dispatch, ChangeEvent, ReactElement, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import { useRouter } from "next/router";
 import { useI18n } from "next-localization";
 import { Button, Select, TextInput } from "hds-react";
 import moment from "moment";
@@ -13,12 +14,13 @@ import { RootState } from "../../../state/reducers";
 import { MAX_LENGTH } from "../../../types/constants";
 import { OptionType, TranslationTodoResult } from "../../../types/general";
 import { getTaskStatus, getTaskType } from "../../../utils/conversion";
-import { getOriginMockTranslationsOnly } from "../../../utils/request";
+import getOrigin from "../../../utils/request";
 import styles from "./TaskSearch.module.scss";
 
 const TaskSearch = (): ReactElement => {
   const i18n = useI18n();
   const dispatch = useDispatch<Dispatch<ModerationTranslationAction>>();
+  const router = useRouter();
 
   const taskSearch = useSelector((state: RootState) => state.moderationTranslation.taskSearch);
   const { placeName, request: searchRequest, requestOptions } = taskSearch;
@@ -37,7 +39,7 @@ const TaskSearch = (): ReactElement => {
 
   const searchTasks = async () => {
     // const taskResponse = await fetch(`${getOrigin(router)}/api/moderation/translation/tasks/find/?search=${placeName.trim()}`);
-    const taskResponse = await fetch(`${getOriginMockTranslationsOnly()}/api/moderation/translation/tasks/find/?search=${placeName.trim()}`);
+    const taskResponse = await fetch(`${getOrigin(router)}/mockapi/moderation/translation/tasks/find/?search=${placeName.trim()}`);
     if (taskResponse.ok) {
       const taskResult = await (taskResponse.json() as Promise<{ count: number; next: string; results: TranslationTodoResult[] }>);
 
