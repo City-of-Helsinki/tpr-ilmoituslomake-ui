@@ -25,7 +25,7 @@ const TaskResults = (): ReactElement => {
   const taskSearch = useSelector((state: RootState) => state.moderationTranslation.taskSearch);
   const { request: searchRequest, searchDone } = taskSearch;
   const selectedTasks = useSelector((state: RootState) => state.moderationTranslation.selectedTasks);
-  const { selectedTaskIds, isAllSelected } = selectedTasks;
+  const { selectedIds: selectedTaskIds, isAllSelected } = selectedTasks;
 
   const fetchMoreResults = async () => {
     if (next) {
@@ -71,7 +71,7 @@ const TaskResults = (): ReactElement => {
     const newSelectedTaskIds = evt.target.checked ? [...selectedTaskIds, taskId] : selectedTaskIds.filter((id) => id !== taskId);
     dispatch(
       setModerationTranslationSelectedTasks({
-        selectedTaskIds: newSelectedTaskIds,
+        selectedIds: newSelectedTaskIds,
         isAllSelected: newSelectedTaskIds.length === results.length,
       })
     );
@@ -80,7 +80,7 @@ const TaskResults = (): ReactElement => {
   const selectAllTasks = () => {
     dispatch(
       setModerationTranslationSelectedTasks({
-        selectedTaskIds: !isAllSelected ? results.map((result) => String(result.id)) : [],
+        selectedIds: !isAllSelected ? results.map((result) => String(result.id)) : [],
         isAllSelected: !isAllSelected,
       })
     );
@@ -98,18 +98,20 @@ const TaskResults = (): ReactElement => {
         )}`}</h2>
       )}
 
-      <div className={styles.optionsRow}>
-        <Checkbox
-          id="selectAllTasks"
-          label={i18n.t("moderation.translation.taskResults.selectAll")}
-          checked={isAllSelected}
-          onChange={selectAllTasks}
-        />
-        <div className="flexSpace" />
-        <Button variant="secondary" onClick={cancelTranslationTask}>
-          {i18n.t("moderation.button.cancelTranslationTask")}
-        </Button>
-      </div>
+      {results.length > 0 && (
+        <div className={styles.optionsRow}>
+          <Checkbox
+            id="selectAllTasks"
+            label={i18n.t("moderation.translation.taskResults.selectAll")}
+            checked={isAllSelected}
+            onChange={selectAllTasks}
+          />
+          <div className="flexSpace" />
+          <Button variant="secondary" onClick={cancelTranslationTask}>
+            {i18n.t("moderation.button.cancelTranslationTask")}
+          </Button>
+        </div>
+      )}
 
       {searchDone && results.length === 0 && <h2>{i18n.t("moderation.translation.taskResults.notFound")}</h2>}
 
@@ -123,22 +125,22 @@ const TaskResults = (): ReactElement => {
           {results
             .sort((a: TranslationTodoResult, b: TranslationTodoResult) => b.updated.getTime() - a.updated.getTime())
             .map((result) => {
-              const { id, request: resultRequest, language, target, translator, taskStatus } = result;
+              const { id: taskId, request: resultRequest, language, target, translator, taskStatus } = result;
               const { id: targetId, name } = target || {};
               const { from: translateFrom, to: translateTo } = language;
 
               return (
-                <Fragment key={`taskresult_${id}`}>
+                <Fragment key={`taskresult_${taskId}`}>
                   <div className={`${styles.gridColumn1} ${styles.gridContent} ${styles.gridButton}`}>
                     <div className={styles.checkboxLink}>
                       <Checkbox
-                        id={`taskcheckbox_${id}`}
-                        value={`task_${id}`}
-                        checked={selectedTaskIds.includes(String(id))}
+                        id={`taskcheckbox_${taskId}`}
+                        value={`task_${taskId}`}
+                        checked={selectedTaskIds.includes(String(taskId))}
                         onChange={updateSelectedTasks}
                       />
 
-                      <Link href={`/moderation/translation/task/${id}`}>
+                      <Link href={`/moderation/translation/task/${taskId}`}>
                         <Button variant="supplementary" size="small" iconLeft={<IconPen aria-hidden />}>
                           {`${getDisplayName(router.locale || defaultLocale, name, undefined, i18n.t("moderation.translation.taskResults.empty"))}${
                             targetId ? ` (${targetId})` : ""

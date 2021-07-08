@@ -85,7 +85,7 @@ const PlaceResults = (): ReactElement => {
               } = data || {};
 
               return (
-                <Fragment key={`taskresult_${targetId}`}>
+                <Fragment key={`placeresult_${targetId}`}>
                   <div className={`${styles.gridColumn1} ${styles.gridContent} ${styles.gridButton}`}>
                     <Link href={`/moderation/place/${targetId}`}>
                       <Button variant="supplementary" size="small" iconLeft={<IconPen aria-hidden />}>

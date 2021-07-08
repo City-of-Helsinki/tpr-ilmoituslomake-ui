@@ -3,7 +3,11 @@ import {
   SET_MODERATION_TRANSLATION_TASK_RESULTS,
   SET_MODERATION_TRANSLATION_SELECTED_TASKS,
 } from "../../types/constants";
-import { TranslationSelectedTasks, TranslationTaskSearch, TranslationTodoResults } from "../../types/general";
+import {
+  TranslationSelectedItems,
+  TranslationTaskSearch,
+  TranslationTodoResults,
+} from "../../types/general";
 import { ModerationTranslationAction } from "./moderationTranslationTypes";
 
 export const setModerationTranslationTaskSearch = (taskSearch: TranslationTaskSearch): ModerationTranslationAction => ({
@@ -16,7 +20,7 @@ export const setModerationTranslationTaskResults = (taskResults: TranslationTodo
   payload: taskResults,
 });
 
-export const setModerationTranslationSelectedTasks = (taskIds: TranslationSelectedTasks): ModerationTranslationAction => ({
+export const setModerationTranslationSelectedTasks = (taskIds: TranslationSelectedItems): ModerationTranslationAction => ({
   type: SET_MODERATION_TRANSLATION_SELECTED_TASKS,
   payload: taskIds,
 });

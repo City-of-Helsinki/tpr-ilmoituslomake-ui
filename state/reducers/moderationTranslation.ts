@@ -20,7 +20,7 @@ const initialState: ModerationTranslationState = {
     count: 0,
   },
   selectedTasks: {
-    selectedTaskIds: [],
+    selectedIds: [],
     isAllSelected: false,
   },
 };

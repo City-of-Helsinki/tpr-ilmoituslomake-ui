@@ -88,7 +88,7 @@ const TaskSearch = (): ReactElement => {
       // Clear any previously selected tasks
       dispatch(
         setModerationTranslationSelectedTasks({
-          selectedTaskIds: [],
+          selectedIds: [],
           isAllSelected: false,
         })
       );
@@ -102,7 +102,9 @@ const TaskSearch = (): ReactElement => {
 
   return (
     <div className={`formSection ${styles.taskSearch}`}>
-      <h1 className="moderation">{i18n.t("moderation.translation.taskSearch.title")}</h1>
+      <div className={styles.header}>
+        <h1 className="moderation">{i18n.t("moderation.translation.taskSearch.title")}</h1>
+      </div>
 
       <div className={`gridLayoutContainer ${styles.search}`}>
         <TextInput

@@ -1,6 +1,13 @@
 @import "~hds-design-tokens/lib/all.scss";
 
 .taskSearch {
+  .header {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin: $spacing-s 0;
+  }
+
   .search {
     align-items: end;
 

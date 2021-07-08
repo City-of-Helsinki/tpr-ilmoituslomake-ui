@@ -192,8 +192,8 @@ export interface TranslationTodoResults {
   next?: string;
 }
 
-export interface TranslationSelectedTasks {
-  selectedTaskIds: string[];
+export interface TranslationSelectedItems {
+  selectedIds: string[];
   isAllSelected: boolean;
 }
 

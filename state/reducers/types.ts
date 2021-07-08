@@ -12,7 +12,7 @@ import {
   NotificationPlaceResults,
   NotificationPlaceSearch,
   TranslationExtra,
-  TranslationSelectedTasks,
+  TranslationSelectedItems,
   TranslationTaskSearch,
   TranslationTodoResults,
   User,
@@ -80,5 +80,5 @@ export interface ModerationStatusState {
 export interface ModerationTranslationState {
   taskSearch: TranslationTaskSearch;
   taskResults: TranslationTodoResults;
-  selectedTasks: TranslationSelectedTasks;
+  selectedTasks: TranslationSelectedItems;
 }
