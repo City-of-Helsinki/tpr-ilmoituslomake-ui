@@ -150,6 +150,7 @@ export const getServerSideProps: GetServerSideProps = async ({ req, resolvedUrl,
           translationExtra: {
             ...initialReduxState.translation.translationExtra,
             request: taskResult.request,
+            language: taskResult.language,
             created_at: taskResult.created_at,
             updated_at: taskResult.updated_at,
             taskType: getTaskType(taskResult.category, taskResult.item_type),

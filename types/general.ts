@@ -157,6 +157,10 @@ export interface TranslationTaskSearch {
 export interface TranslationTodoResult {
   id: number;
   request: string;
+  language: {
+    from: string;
+    to: string;
+  };
   target: {
     id: number;
     name: {
@@ -191,6 +195,10 @@ export interface TranslationTodoResults {
 export interface TranslationTodoSchema {
   id: number;
   request: string;
+  language: {
+    from: string;
+    to: string;
+  };
   target: {
     id: number;
     data: NotificationSchema;
@@ -219,6 +227,10 @@ export interface TranslationExtra {
   photosSelected: Photo[];
   photosTranslated: PhotoTranslation[];
   request: string;
+  language: {
+    from: string;
+    to: string;
+  };
   created_at: string;
   updated_at: string;
   taskType: TaskType;

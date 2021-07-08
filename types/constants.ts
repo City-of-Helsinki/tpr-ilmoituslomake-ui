@@ -368,6 +368,10 @@ export const INITIAL_TRANSLATION_EXTRA = {
   photosSelected: [],
   photosTranslated: [],
   request: "",
+  language: {
+    from: "",
+    to: "",
+  },
   created_at: "",
   updated_at: "",
   taskType: TaskType.Unknown,

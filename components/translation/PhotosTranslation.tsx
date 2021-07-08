@@ -20,16 +20,18 @@ const PhotosTranslation = ({ index }: PhotosTranslationProps): ReactElement => {
   const dispatch = useDispatch<Dispatch<TranslationAction>>();
   const dispatchStatus = useDispatch<Dispatch<TranslationStatusAction>>();
 
-  const translatedTask = useSelector((state: RootState) => state.translation.translatedTask);
-  const { language: translateTo } = translatedTask;
-
   const translationExtra = useSelector((state: RootState) => state.translation.translationExtra);
-  const { photosSelected, photosTranslated, taskType, taskStatus } = translationExtra;
+  const {
+    language: { from: translateFrom, to: translateTo },
+    photosSelected,
+    photosTranslated,
+    taskType,
+    taskStatus,
+  } = translationExtra;
 
   const translationStatus = useSelector((state: RootState) => state.translationStatus.translationStatus);
   const { photos: photosStatus } = translationStatus;
 
-  const translateFrom = "en";
   const fromOption = "en";
   const toOption = "lang";
 

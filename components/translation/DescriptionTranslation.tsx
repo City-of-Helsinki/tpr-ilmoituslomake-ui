@@ -28,13 +28,16 @@ const DescriptionTranslation = (): ReactElement => {
 
   const translatedTask = useSelector((state: RootState) => state.translation.translatedTask);
   const {
-    language: translateTo,
     name: placeNameTranslated,
     description: { short: shortDescTranslated, long: longDescTranslated },
   } = translatedTask;
 
   const translationExtra = useSelector((state: RootState) => state.translation.translationExtra);
-  const { taskType, taskStatus } = translationExtra;
+  const {
+    language: { from: translateFrom, to: translateTo },
+    taskType,
+    taskStatus,
+  } = translationExtra;
 
   const translationStatus = useSelector((state: RootState) => state.translationStatus.translationStatus);
   const {
@@ -42,7 +45,6 @@ const DescriptionTranslation = (): ReactElement => {
     description: { short: shortDescStatus, long: longDescStatus },
   } = translationStatus;
 
-  const translateFrom = "en";
   const fromOption = "en";
   const toOption = "lang";
 

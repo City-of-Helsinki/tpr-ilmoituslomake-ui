@@ -7,6 +7,10 @@ const handler = (req: NextApiRequest, res: NextApiResponse): void => {
   res.status(200).json({
     id: 1,
     request: "05.07.2021",
+    language: {
+      from: "en",
+      to: "zh",
+    },
     target: {
       id: 1,
       published: true,

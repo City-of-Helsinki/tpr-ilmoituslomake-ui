@@ -23,12 +23,10 @@ const TaskHeader = ({ isTranslated }: TaskHeaderProps): ReactElement => {
   const selectedTask = useSelector((state: RootState) => state.translation.selectedTask);
   const { name: placeNameSelected } = selectedTask;
 
-  const translatedTask = useSelector((state: RootState) => state.translation.translatedTask);
-  const { language: translateTo } = translatedTask;
-
   const translationExtra = useSelector((state: RootState) => state.translation.translationExtra);
   const {
     request,
+    language: { from: translateFrom, to: translateTo },
     created_at,
     taskType,
     taskStatus,
@@ -49,7 +47,7 @@ const TaskHeader = ({ isTranslated }: TaskHeaderProps): ReactElement => {
         <div>
           <div className={styles.bold}>{i18n.t("translation.taskHeader.taskType")}</div>
           <div>{taskType !== TaskType.Unknown ? i18n.t(`translation.taskType.${taskType}`) : ""}</div>
-          <div>{translateTo}</div>
+          <div>{`${translateFrom.toUpperCase()}-${translateTo.toUpperCase()}`}</div>
         </div>
         <div>
           <div className={styles.bold}>{i18n.t("translation.taskHeader.created")}</div>
