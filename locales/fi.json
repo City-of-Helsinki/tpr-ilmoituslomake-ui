@@ -379,6 +379,8 @@
       "returnToRequests": "Return to requests",
       "saveDraft": "Save draft",
       "sendTranslation": "Send translation",
+      "expand": "Expand",
+      "collapse": "Collapse",
       "modify": "Modify",
       "done": "Done",
       "openHelp": "Open help",

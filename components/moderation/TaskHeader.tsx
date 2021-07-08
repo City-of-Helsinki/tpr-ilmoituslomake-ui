@@ -8,7 +8,7 @@ import { RootState } from "../../state/reducers";
 import { DATETIME_FORMAT, NotifierType, TaskType } from "../../types/constants";
 import { getDisplayName } from "../../utils/helper";
 import { defaultLocale } from "../../utils/i18n";
-import TaskStatusLabel from "./TaskStatusLabel";
+import TaskStatusLabel from "../common/TaskStatusLabel";
 import TaskHeaderButtons from "./TaskHeaderButtons";
 import styles from "./TaskHeader.module.scss";
 
@@ -67,7 +67,7 @@ const TaskHeader = ({ isModerated }: TaskHeaderProps): ReactElement => {
         <div>
           <div className={styles.bold}>{i18n.t("moderation.taskHeader.status")}</div>
           <div>
-            <TaskStatusLabel status={taskStatus} />
+            <TaskStatusLabel prefix="moderation" status={taskStatus} />
           </div>
         </div>
         <div>

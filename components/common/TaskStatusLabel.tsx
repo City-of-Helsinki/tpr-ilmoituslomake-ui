@@ -4,23 +4,25 @@ import { IconCheck, StatusLabel } from "hds-react";
 import { TaskStatus } from "../../types/constants";
 
 interface TaskStatusLabelProps {
+  prefix: string;
   status: TaskStatus;
+  includeIcons?: boolean;
 }
 
-const TaskStatusLabel = ({ status }: TaskStatusLabelProps): ReactElement | null => {
+const TaskStatusLabel = ({ prefix, status, includeIcons }: TaskStatusLabelProps): ReactElement | null => {
   const i18n = useI18n();
 
   switch (status) {
     case TaskStatus.Open: {
-      return <StatusLabel type="alert">{i18n.t("translation.taskStatus.open")}</StatusLabel>;
+      return <StatusLabel type="alert">{i18n.t(`${prefix}.taskStatus.open`)}</StatusLabel>;
     }
     case TaskStatus.InProgress: {
-      return <StatusLabel type="info">{i18n.t("translation.taskStatus.inProgress")}</StatusLabel>;
+      return <StatusLabel type="info">{i18n.t(`${prefix}.taskStatus.inProgress`)}</StatusLabel>;
     }
     case TaskStatus.Closed: {
       return (
-        <StatusLabel type="success" iconLeft={<IconCheck />}>
-          {i18n.t("translation.taskStatus.closed")}
+        <StatusLabel type="success" iconLeft={includeIcons && <IconCheck />}>
+          {i18n.t(`${prefix}.taskStatus.closed`)}
         </StatusLabel>
       );
     }
@@ -28,6 +30,10 @@ const TaskStatusLabel = ({ status }: TaskStatusLabelProps): ReactElement | null 
       return null;
     }
   }
+};
+
+TaskStatusLabel.defaultProps = {
+  includeIcons: false,
 };
 
 export default TaskStatusLabel;

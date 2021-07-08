@@ -10,7 +10,7 @@ import { getTaskStatus, getTaskType } from "../../utils/conversion";
 import { getDisplayName } from "../../utils/helper";
 import { defaultLocale } from "../../utils/i18n";
 import getOrigin from "../../utils/request";
-import TaskStatusLabel from "./TaskStatusLabel";
+import TaskStatusLabel from "../common/TaskStatusLabel";
 import styles from "./NewTasks.module.scss";
 
 const NewTasks = (): ReactElement => {
@@ -78,7 +78,7 @@ const NewTasks = (): ReactElement => {
                 </div>
                 <div className={`${styles.gridColumn3} ${styles.gridContent}`}>{moment(created).format(DATETIME_FORMAT)}</div>
                 <div className={`${styles.gridColumn4} ${styles.gridContent}`}>
-                  <TaskStatusLabel status={getTaskStatus(status)} />
+                  <TaskStatusLabel prefix="moderation" status={getTaskStatus(status)} />
                 </div>
               </Fragment>
             );

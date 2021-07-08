@@ -12,7 +12,7 @@ import { TranslationTodoResult } from "../../types/general";
 import { getTaskStatus, getTaskType } from "../../utils/conversion";
 import { getDisplayName } from "../../utils/helper";
 import { defaultLocale } from "../../utils/i18n";
-import TaskStatusLabel from "./TaskStatusLabel";
+import TaskStatusLabel from "../common/TaskStatusLabel";
 import styles from "./TaskResults.module.scss";
 
 const TaskResults = (): ReactElement => {
@@ -100,7 +100,7 @@ const TaskResults = (): ReactElement => {
                     {moderator ? `${moderator.first_name} ${moderator.last_name}`.trim() : ""}
                   </div>
                   <div className={`${styles.gridColumn4} ${styles.gridContent}`}>
-                    <TaskStatusLabel status={taskStatus} />
+                    <TaskStatusLabel prefix="translation" status={taskStatus} includeIcons />
                   </div>
                 </Fragment>
               );

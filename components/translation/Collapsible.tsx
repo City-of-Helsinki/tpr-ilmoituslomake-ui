@@ -2,7 +2,7 @@ import React, { ReactElement, ReactNode, useState, useEffect } from "react";
 import { useI18n } from "next-localization";
 import { Button, IconMinus, IconPlus } from "hds-react";
 import { TaskStatus } from "../../types/constants";
-import TaskStatusLabel from "./TaskStatusLabel";
+import TaskStatusLabel from "../common/TaskStatusLabel";
 import styles from "./Collapsible.module.scss";
 
 interface CollapsibleProps {
@@ -32,22 +32,26 @@ const Collapsible = ({ section, title, taskStatus, isTranslated, forceExpanded, 
     <div className={styles.collapsible}>
       <div className={styles.header}>
         <div className={styles.section}>
-          <h3 className="moderation">{section}</h3>
+          <h3 className="translation">{section}</h3>
         </div>
         <div className={styles.title}>
-          <h3 className="moderation">{title}</h3>
+          <h3 className="translation">{title}</h3>
         </div>
         <div className={styles.status}>
-          <TaskStatusLabel status={isTranslated || taskStatus === TaskStatus.Closed ? TaskStatus.Closed : TaskStatus.InProgress} />
+          <TaskStatusLabel
+            prefix="translation"
+            status={isTranslated || taskStatus === TaskStatus.Closed ? TaskStatus.Closed : TaskStatus.InProgress}
+            includeIcons
+          />
         </div>
         <div className={styles.button}>
           {expanded && (
-            <Button variant="secondary" size="small" aria-label={i18n.t("moderation.button.collapse")} onClick={toggle}>
+            <Button variant="secondary" size="small" aria-label={i18n.t("translation.button.collapse")} onClick={toggle}>
               <IconMinus aria-hidden />
             </Button>
           )}
           {!expanded && (
-            <Button variant="secondary" size="small" aria-label={i18n.t("moderation.button.expand")} onClick={toggle}>
+            <Button variant="secondary" size="small" aria-label={i18n.t("translation.button.expand")} onClick={toggle}>
               <IconPlus aria-hidden />
             </Button>
           )}

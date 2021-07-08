@@ -7,7 +7,7 @@ import { RootState } from "../../state/reducers";
 import { DATETIME_FORMAT, TaskType } from "../../types/constants";
 import { getDisplayName } from "../../utils/helper";
 import { defaultLocale } from "../../utils/i18n";
-import TaskStatusLabel from "./TaskStatusLabel";
+import TaskStatusLabel from "../common/TaskStatusLabel";
 import TaskHeaderButtons from "./TaskHeaderButtons";
 import styles from "./TaskHeader.module.scss";
 
@@ -58,7 +58,7 @@ const TaskHeader = ({ isTranslated }: TaskHeaderProps): ReactElement => {
         <div>
           <div className={styles.bold}>{i18n.t("translation.taskHeader.status")}</div>
           <div>
-            <TaskStatusLabel status={taskStatus} />
+            <TaskStatusLabel prefix="translation" status={taskStatus} includeIcons />
           </div>
         </div>
         <div>

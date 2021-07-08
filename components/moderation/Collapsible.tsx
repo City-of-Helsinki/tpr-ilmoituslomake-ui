@@ -2,7 +2,7 @@ import React, { ReactElement, ReactNode, useState, useEffect } from "react";
 import { useI18n } from "next-localization";
 import { Button, IconMinus, IconPlus } from "hds-react";
 import { TaskStatus, TaskType } from "../../types/constants";
-import TaskStatusLabel from "./TaskStatusLabel";
+import TaskStatusLabel from "../common/TaskStatusLabel";
 import styles from "./Collapsible.module.scss";
 
 interface CollapsibleProps {
@@ -45,7 +45,10 @@ const Collapsible = ({ section, title, taskType, taskStatus, isModerated, forceE
             taskType === TaskType.AddTip ||
             taskType === TaskType.ModeratorChange ||
             taskType === TaskType.ModeratorAdd) && (
-            <TaskStatusLabel status={isModerated || taskStatus === TaskStatus.Closed ? TaskStatus.Closed : TaskStatus.InProgress} />
+            <TaskStatusLabel
+              prefix="moderation"
+              status={isModerated || taskStatus === TaskStatus.Closed ? TaskStatus.Closed : TaskStatus.InProgress}
+            />
           )}
         </div>
         <div className={styles.button}>
