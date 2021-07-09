@@ -375,17 +375,19 @@ export const INITIAL_TRANSLATION = {
 export const INITIAL_TRANSLATION_EXTRA = {
   photosSelected: [],
   photosTranslated: [],
+  requestId: 0,
   request: "",
   language: {
     from: "",
     to: "",
   },
+  message: "",
   created_at: "",
   updated_at: "",
   taskType: TaskType.Unknown,
   taskStatus: TaskStatus.Unknown,
   translator: {
-    fullName: "",
+    name: "",
     email: "",
   },
   moderator: {

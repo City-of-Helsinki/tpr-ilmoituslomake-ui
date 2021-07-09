@@ -148,14 +148,16 @@ export const getServerSideProps: GetServerSideProps = async ({ req, resolvedUrl,
           translatedTask,
           translationExtra: {
             ...initialReduxState.translation.translationExtra,
+            requestId: taskResult.requestId,
             request: taskResult.request,
             language: taskResult.language,
+            message: taskResult.message,
             created_at: taskResult.created_at,
             updated_at: taskResult.updated_at,
             taskType: getTaskType(taskResult.category, taskResult.item_type),
             taskStatus: getTaskStatus(taskResult.status),
             translator: {
-              fullName: taskResult.translator ? `${taskResult.translator.first_name} ${taskResult.translator.last_name}`.trim() : "",
+              name: taskResult.translator && taskResult.translator.name ? taskResult.translator.name : "",
               email: taskResult.translator && taskResult.translator.email ? taskResult.translator.email : "",
             },
             moderator: {

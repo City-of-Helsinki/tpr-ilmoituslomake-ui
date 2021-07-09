@@ -27,10 +27,11 @@ const TaskHeader = ({ isTranslated }: TaskHeaderProps): ReactElement => {
   const {
     request,
     language: { from: translateFrom, to: translateTo },
+    message,
     created_at,
     taskType,
     taskStatus,
-    translator: { fullName: translatorName },
+    translator: { name: translatorName },
     moderator: { fullName: moderatorName },
   } = translationExtra;
 
@@ -75,7 +76,7 @@ const TaskHeader = ({ isTranslated }: TaskHeaderProps): ReactElement => {
 
         <div className={styles.comment}>
           <div className={styles.bold}>{i18n.t("translation.taskHeader.messageFromModerator")}</div>
-          <div>TODO</div>
+          <div>{message}</div>
         </div>
       </div>
     </div>

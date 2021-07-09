@@ -156,11 +156,13 @@ export interface TranslationTaskSearch {
 
 export interface TranslationTodoResult {
   id: number;
+  requestId: number;
   request: string;
   language: {
     from: string;
     to: string;
   };
+  message: string;
   target: {
     id: number;
     name: {
@@ -172,11 +174,14 @@ export interface TranslationTodoResult {
   category: string;
   item_type: string;
   status: string;
-  translator: User;
+  translator: {
+    name: string;
+    email: string;
+  };
   moderator: {
-    first_name?: string;
-    last_name?: string;
-    email?: string;
+    first_name: string;
+    last_name: string;
+    email: string;
   };
   created_at: string;
   updated_at: string;
@@ -199,11 +204,13 @@ export interface TranslationSelectedItems {
 
 export interface TranslationTodoSchema {
   id: number;
+  requestId: number;
   request: string;
   language: {
     from: string;
     to: string;
   };
+  message: string;
   target: {
     id: number;
     data: NotificationSchema;
@@ -214,11 +221,14 @@ export interface TranslationTodoSchema {
   item_type: string;
   status: string;
   data: TranslationSchema;
-  translator: User;
+  translator: {
+    name: string;
+    email: string;
+  };
   moderator: {
-    first_name?: string;
-    last_name?: string;
-    email?: string;
+    first_name: string;
+    last_name: string;
+    email: string;
   };
   created_at: string;
   updated_at: string;
@@ -231,17 +241,19 @@ export interface TranslationTodoSchema {
 export interface TranslationExtra {
   photosSelected: Photo[];
   photosTranslated: PhotoTranslation[];
+  requestId: number;
   request: string;
   language: {
     from: string;
     to: string;
   };
+  message: string;
   created_at: string;
   updated_at: string;
   taskType: TaskType;
   taskStatus: TaskStatus;
   translator: {
-    fullName: string;
+    name: string;
     email: string;
   };
   moderator: {

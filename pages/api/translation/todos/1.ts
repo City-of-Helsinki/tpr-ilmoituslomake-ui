@@ -6,11 +6,13 @@ import { NextApiRequest, NextApiResponse } from "next";
 const handler = (req: NextApiRequest, res: NextApiResponse): void => {
   res.status(200).json({
     id: 1,
+    requestId: 1,
     request: "05.07.2021",
     language: {
       from: "en",
       to: "zh",
     },
+    message: "test",
     target: {
       id: 1,
       published: true,
@@ -168,19 +170,16 @@ const handler = (req: NextApiRequest, res: NextApiResponse): void => {
       extra_keywords: ["extra"],
     },
     translator: {
-      first_name: "Anthony",
-      last_name: "Brown",
-      is_translator: true,
+      name: "Anthony Brown",
       email: "ant.brown@cgi.com",
     },
     moderator: {
       first_name: "Anthony",
       last_name: "Brown",
-      is_staff: true,
       email: "ant.brown@cgi.com",
     },
-    created_at: "2021-06-11T06:47:27.512075Z",
-    updated_at: "2021-06-11T07:21:31.800104Z",
+    created_at: "2021-07-05T10:40:25.063641Z",
+    updated_at: "2021-07-05T10:40:25.063667Z",
   });
 };
 
