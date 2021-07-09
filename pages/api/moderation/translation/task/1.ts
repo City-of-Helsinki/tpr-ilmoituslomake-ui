@@ -6,11 +6,13 @@ import { NextApiRequest, NextApiResponse } from "next";
 const handler = (req: NextApiRequest, res: NextApiResponse): void => {
   res.status(200).json({
     id: 1,
+    requestId: 1,
     request: "05.07.2021",
     language: {
       from: "en",
       to: "zh",
     },
+    message: "test",
     target: {
       id: 1,
       published: true,
@@ -26,7 +28,34 @@ const handler = (req: NextApiRequest, res: NextApiResponse): void => {
         },
         email: "a@b.c",
         phone: "123",
-        images: [],
+        images: [
+          {
+            url: "https://tprimages.blob.core.windows.net/tpr-notification-dev-public/1/084f941a-90aa-4690-a18a-3f5cff72932c.jpg",
+            uuid: "084f941a-90aa-4690-a18a-3f5cff72932c",
+            index: 0,
+            source: "test",
+            alt_text: {
+              en: "test",
+              fi: "test",
+              sv: "test",
+            },
+            permission: "myHelsinki",
+            source_type: "device",
+          },
+          {
+            url: "https://tprimages.blob.core.windows.net/tpr-notification-dev-public/1/573de7d7-c463-45ce-b299-0890e555dd22.jpg",
+            uuid: "573de7d7-c463-45ce-b299-0890e555dd22",
+            index: 1,
+            source: "test",
+            alt_text: {
+              en: "test",
+              fi: "test",
+              sv: "test",
+            },
+            permission: "creativeCommons",
+            source_type: "link",
+          },
+        ],
         address: {
           fi: {
             street: "mannerheimintie 10",
@@ -73,7 +102,7 @@ const handler = (req: NextApiRequest, res: NextApiResponse): void => {
     },
     category: "translation_task",
     item_type: "created",
-    status: "in_progress",
+    status: "open",
     data: {
       language: "zh",
       name: {
@@ -81,7 +110,30 @@ const handler = (req: NextApiRequest, res: NextApiResponse): void => {
       },
       email: "a@b.c",
       phone: "123",
-      images: [],
+      images: [
+        {
+          url: "https://tprimages.blob.core.windows.net/tpr-notification-dev-public/1/084f941a-90aa-4690-a18a-3f5cff72932c.jpg",
+          uuid: "084f941a-90aa-4690-a18a-3f5cff72932c",
+          index: 0,
+          source: "test_chinese",
+          alt_text: {
+            lang: "test_chinese",
+          },
+          permission: "myHelsinki",
+          source_type: "device",
+        },
+        {
+          url: "https://tprimages.blob.core.windows.net/tpr-notification-dev-public/1/573de7d7-c463-45ce-b299-0890e555dd22.jpg",
+          uuid: "573de7d7-c463-45ce-b299-0890e555dd22",
+          index: 1,
+          source: "test_chinese",
+          alt_text: {
+            lang: "test_chinese",
+          },
+          permission: "creativeCommons",
+          source_type: "link",
+        },
+      ],
       address: {
         fi: {
           street: "mannerheimintie 10",
@@ -118,19 +170,16 @@ const handler = (req: NextApiRequest, res: NextApiResponse): void => {
       extra_keywords: ["extra"],
     },
     translator: {
-      first_name: "Anthony",
-      last_name: "Brown",
-      is_translator: true,
+      name: "Anthony Brown",
       email: "ant.brown@cgi.com",
     },
     moderator: {
       first_name: "Anthony",
       last_name: "Brown",
-      is_staff: true,
       email: "ant.brown@cgi.com",
     },
-    created_at: "2021-06-11T06:47:27.512075Z",
-    updated_at: "2021-06-11T07:21:31.800104Z",
+    created_at: "2021-07-05T10:40:25.063641Z",
+    updated_at: "2021-07-05T10:40:25.063667Z",
   });
 };
 

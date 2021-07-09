@@ -8,11 +8,15 @@ import {
   ModerationPlaceSearch,
   ModerationTaskSearch,
   ModerationTodoResults,
+  ModerationTranslationRequest,
+  ModerationTranslationRequestResults,
+  ModerationTranslationRequestTaskSearch,
+  ModerationTranslationSelectedItems,
+  ModerationTranslationTaskResults,
   NotificationExtra,
   NotificationPlaceResults,
   NotificationPlaceSearch,
   TranslationExtra,
-  TranslationSelectedItems,
   TranslationTaskSearch,
   TranslationTodoResults,
   User,
@@ -78,10 +82,13 @@ export interface ModerationStatusState {
 }
 
 export interface ModerationTranslationState {
-  taskSearch: TranslationTaskSearch;
-  taskResults: TranslationTodoResults;
-  selectedTasks: TranslationSelectedItems;
+  requestSearch: ModerationTranslationRequestTaskSearch;
+  requestResults: ModerationTranslationRequestResults;
+  selectedRequests: ModerationTranslationSelectedItems;
+  taskSearch: ModerationTranslationRequestTaskSearch;
+  taskResults: ModerationTranslationTaskResults;
+  selectedTasks: ModerationTranslationSelectedItems;
   placeSearch: ModerationPlaceSearch;
   placeResults: ModerationPlaceResults;
-  selectedPlaces: TranslationSelectedItems;
+  selectedPlaces: ModerationTranslationSelectedItems;
 }

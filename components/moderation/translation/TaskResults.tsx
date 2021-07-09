@@ -8,7 +8,7 @@ import moment from "moment";
 import { ModerationTranslationAction } from "../../../state/actions/moderationTranslationTypes";
 import { setModerationTranslationSelectedTasks, setModerationTranslationTaskResults } from "../../../state/actions/moderationTranslation";
 import { RootState } from "../../../state/reducers";
-import { TranslationTodoResult } from "../../../types/general";
+import { ModerationTranslationTaskResult } from "../../../types/general";
 import { getTaskStatus, getTaskType } from "../../../utils/conversion";
 import { getDisplayName } from "../../../utils/helper";
 import { defaultLocale } from "../../../utils/i18n";
@@ -31,7 +31,11 @@ const TaskResults = (): ReactElement => {
     if (next) {
       const taskResponse = await fetch(next);
       if (taskResponse.ok) {
-        const taskResult = await (taskResponse.json() as Promise<{ count: number; next: string; results: TranslationTodoResult[] }>);
+        const taskResult = await (taskResponse.json() as Promise<{
+          count: number;
+          next: string;
+          results: ModerationTranslationTaskResult[];
+        }>);
 
         console.log("TASK RESPONSE", taskResult);
 
@@ -122,8 +126,9 @@ const TaskResults = (): ReactElement => {
           <div className={`${styles.gridColumn3} ${styles.gridHeader}`}>{i18n.t("moderation.translation.taskResults.languagePair")}</div>
           <div className={`${styles.gridColumn4} ${styles.gridHeader}`}>{i18n.t("moderation.translation.taskResults.translator")}</div>
           <div className={`${styles.gridColumn5} ${styles.gridHeader}`}>{i18n.t("moderation.translation.taskResults.status")}</div>
+
           {results
-            .sort((a: TranslationTodoResult, b: TranslationTodoResult) => b.updated.getTime() - a.updated.getTime())
+            .sort((a: ModerationTranslationTaskResult, b: ModerationTranslationTaskResult) => b.updated.getTime() - a.updated.getTime())
             .map((result) => {
               const { id: taskId, request: resultRequest, language, target, translator, taskStatus } = result;
               const { id: targetId, name } = target || {};
@@ -151,9 +156,7 @@ const TaskResults = (): ReactElement => {
                   </div>
                   <div className={`${styles.gridColumn2} ${styles.gridContent}`}>{resultRequest}</div>
                   <div className={`${styles.gridColumn3} ${styles.gridContent}`}>{`${translateFrom.toUpperCase()}-${translateTo.toUpperCase()}`}</div>
-                  <div className={`${styles.gridColumn4} ${styles.gridContent}`}>
-                    {translator ? `${translator.first_name} ${translator.last_name}`.trim() : ""}
-                  </div>
+                  <div className={`${styles.gridColumn4} ${styles.gridContent}`}>{translator.name}</div>
                   <div className={`${styles.gridColumn5} ${styles.gridContent}`}>
                     <TaskStatusLabel prefix="moderation.translation" status={taskStatus} includeIcons />
                   </div>

@@ -11,11 +11,13 @@ const handler = (req: NextApiRequest, res: NextApiResponse): void => {
     results: [
       {
         id: 1,
+        requestId: 1,
         request: "05.07.2021",
         language: {
           from: "en",
           to: "zh",
         },
+        message: "test",
         target: {
           id: 1,
           name: {
@@ -28,15 +30,12 @@ const handler = (req: NextApiRequest, res: NextApiResponse): void => {
         item_type: "created",
         status: "open",
         translator: {
-          first_name: "Anthony",
-          last_name: "Brown",
-          is_translator: true,
+          name: "Anthony Brown",
           email: "ant.brown@cgi.com",
         },
         moderator: {
           first_name: "Anthony",
           last_name: "Brown",
-          is_staff: true,
           email: "ant.brown@cgi.com",
         },
         created_at: "2021-07-05T10:40:25.063641Z",
@@ -44,11 +43,13 @@ const handler = (req: NextApiRequest, res: NextApiResponse): void => {
       },
       {
         id: 2,
+        requestId: 1,
         request: "05.07.2021",
         language: {
           from: "en",
           to: "zh",
         },
+        message: "test",
         target: {
           id: 2,
           name: {
@@ -61,15 +62,12 @@ const handler = (req: NextApiRequest, res: NextApiResponse): void => {
         item_type: "created",
         status: "in_progress",
         translator: {
-          first_name: "Anthony",
-          last_name: "Brown",
-          is_translator: true,
+          name: "Anthony Brown",
           email: "ant.brown@cgi.com",
         },
         moderator: {
           first_name: "Anthony",
           last_name: "Brown",
-          is_staff: true,
           email: "ant.brown@cgi.com",
         },
         created_at: "2021-07-05T10:40:25.063641Z",
@@ -77,11 +75,13 @@ const handler = (req: NextApiRequest, res: NextApiResponse): void => {
       },
       {
         id: 3,
+        requestId: 1,
         request: "05.07.2021",
         language: {
           from: "en",
           to: "zh",
         },
+        message: "test",
         target: {
           id: 34,
           name: {
@@ -94,15 +94,12 @@ const handler = (req: NextApiRequest, res: NextApiResponse): void => {
         item_type: "created",
         status: "closed",
         translator: {
-          first_name: "Anthony",
-          last_name: "Brown",
-          is_translator: true,
+          name: "Anthony Brown",
           email: "ant.brown@cgi.com",
         },
         moderator: {
           first_name: "Anthony",
           last_name: "Brown",
-          is_staff: true,
           email: "ant.brown@cgi.com",
         },
         created_at: "2021-07-05T10:40:25.063641Z",
@@ -110,11 +107,13 @@ const handler = (req: NextApiRequest, res: NextApiResponse): void => {
       },
       {
         id: 4,
+        requestId: 2,
         request: "06.07.2021",
         language: {
           from: "en",
           to: "zh",
         },
+        message: "test",
         target: {
           id: 45,
           name: {
@@ -127,15 +126,12 @@ const handler = (req: NextApiRequest, res: NextApiResponse): void => {
         item_type: "created",
         status: "open",
         translator: {
-          first_name: "Anthony",
-          last_name: "Brown",
-          is_translator: true,
+          name: "Anthony Brown",
           email: "ant.brown@cgi.com",
         },
         moderator: {
           first_name: "Anthony",
           last_name: "Brown",
-          is_staff: true,
           email: "ant.brown@cgi.com",
         },
         created_at: "2021-07-06T10:40:25.063641Z",

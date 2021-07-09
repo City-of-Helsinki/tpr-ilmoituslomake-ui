@@ -1,8 +1,8 @@
-import React, { ReactElement } from "react";
+import React, { ReactElement, useState } from "react";
 import { GetServerSideProps } from "next";
 import Head from "next/head";
 import { useI18n } from "next-localization";
-import { Tab, TabList, TabPanel, Tabs } from "hds-react";
+import { RadioButton, SelectionGroup, Tab, TabList, TabPanel, Tabs } from "hds-react";
 import { initStore } from "../../state/store";
 import { CLEAR_STATE } from "../../types/constants";
 import i18nLoader from "../../utils/i18n";
@@ -11,11 +11,15 @@ import Layout from "../../components/common/Layout";
 import ModerationHeader from "../../components/moderation/ModerationHeader";
 import PlaceSearch from "../../components/moderation/translation/PlaceSearch";
 import PlaceResults from "../../components/moderation/translation/PlaceResults";
+import RequestResults from "../../components/moderation/translation/RequestResults";
 import TaskSearch from "../../components/moderation/translation/TaskSearch";
 import TaskResults from "../../components/moderation/translation/TaskResults";
+import styles from "./translation.module.scss";
 
 const ModerationTranslation = (): ReactElement => {
   const i18n = useI18n();
+
+  const [showResults, setShowResults] = useState<string>("requests");
 
   return (
     <Layout>
@@ -31,7 +35,31 @@ const ModerationTranslation = (): ReactElement => {
           </TabList>
           <TabPanel>
             <TaskSearch />
-            <TaskResults />
+
+            <div className={styles.showResults}>
+              <div>{i18n.t("moderation.translation.taskSearch.showResults.show")}</div>
+              <SelectionGroup id="showResults" direction="horizontal">
+                <RadioButton
+                  id="showResults_requests"
+                  label={i18n.t("moderation.translation.taskSearch.showResults.requests")}
+                  name="showResult"
+                  value="requests"
+                  checked={showResults === "requests"}
+                  onChange={() => setShowResults("requests")}
+                />
+                <RadioButton
+                  id="showResults_tasks"
+                  label={i18n.t("moderation.translation.taskSearch.showResults.tasks")}
+                  name="showResult"
+                  value="tasks"
+                  checked={showResults === "tasks"}
+                  onChange={() => setShowResults("tasks")}
+                />
+              </SelectionGroup>
+            </div>
+
+            {showResults === "requests" && <RequestResults />}
+            {showResults === "tasks" && <TaskResults />}
           </TabPanel>
           <TabPanel>
             <PlaceSearch />

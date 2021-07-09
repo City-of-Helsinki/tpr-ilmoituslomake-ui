@@ -1,4 +1,7 @@
 import {
+  SET_MODERATION_TRANSLATION_REQUEST_SEARCH,
+  SET_MODERATION_TRANSLATION_REQUEST_RESULTS,
+  SET_MODERATION_TRANSLATION_SELECTED_REQUESTS,
   SET_MODERATION_TRANSLATION_TASK_SEARCH,
   SET_MODERATION_TRANSLATION_TASK_RESULTS,
   SET_MODERATION_TRANSLATION_SELECTED_TASKS,
@@ -10,23 +13,39 @@ import {
 import {
   ModerationPlaceResults,
   ModerationPlaceSearch,
-  TranslationSelectedItems,
-  TranslationTaskSearch,
-  TranslationTodoResults,
+  ModerationTranslationRequestResults,
+  ModerationTranslationRequestTaskSearch,
+  ModerationTranslationSelectedItems,
+  ModerationTranslationTaskResults,
 } from "../../types/general";
 import { ModerationTranslationAction } from "./moderationTranslationTypes";
 
-export const setModerationTranslationTaskSearch = (taskSearch: TranslationTaskSearch): ModerationTranslationAction => ({
+export const setModerationTranslationRequestSearch = (requestSearch: ModerationTranslationRequestTaskSearch): ModerationTranslationAction => ({
+  type: SET_MODERATION_TRANSLATION_REQUEST_SEARCH,
+  payload: requestSearch,
+});
+
+export const setModerationTranslationRequestResults = (requestResults: ModerationTranslationRequestResults): ModerationTranslationAction => ({
+  type: SET_MODERATION_TRANSLATION_REQUEST_RESULTS,
+  payload: requestResults,
+});
+
+export const setModerationTranslationSelectedRequests = (requestIds: ModerationTranslationSelectedItems): ModerationTranslationAction => ({
+  type: SET_MODERATION_TRANSLATION_SELECTED_REQUESTS,
+  payload: requestIds,
+});
+
+export const setModerationTranslationTaskSearch = (taskSearch: ModerationTranslationRequestTaskSearch): ModerationTranslationAction => ({
   type: SET_MODERATION_TRANSLATION_TASK_SEARCH,
   payload: taskSearch,
 });
 
-export const setModerationTranslationTaskResults = (taskResults: TranslationTodoResults): ModerationTranslationAction => ({
+export const setModerationTranslationTaskResults = (taskResults: ModerationTranslationTaskResults): ModerationTranslationAction => ({
   type: SET_MODERATION_TRANSLATION_TASK_RESULTS,
   payload: taskResults,
 });
 
-export const setModerationTranslationSelectedTasks = (taskIds: TranslationSelectedItems): ModerationTranslationAction => ({
+export const setModerationTranslationSelectedTasks = (taskIds: ModerationTranslationSelectedItems): ModerationTranslationAction => ({
   type: SET_MODERATION_TRANSLATION_SELECTED_TASKS,
   payload: taskIds,
 });
@@ -46,7 +65,7 @@ export const setModerationTranslationPlaceResults = (placeResults: ModerationPla
   payload: placeResults,
 });
 
-export const setModerationTranslationSelectedPlaces = (placeIds: TranslationSelectedItems): ModerationTranslationAction => ({
+export const setModerationTranslationSelectedPlaces = (placeIds: ModerationTranslationSelectedItems): ModerationTranslationAction => ({
   type: SET_MODERATION_TRANSLATION_SELECTED_PLACES,
   payload: placeIds,
 });

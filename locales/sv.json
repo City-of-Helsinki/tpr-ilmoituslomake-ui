@@ -555,6 +555,7 @@
       "remove": "Poista",
       "toggleMenu": "Vaihdele valikko",
       "selectFromDevice": "Valitse laitteelta",
+      "cancelTranslationRequest": "Peru käännöspyyntö",
       "cancelTranslationTask": "Peru käännöstehtävä",
       "requestSelectedTranslation": "Pyydä käännös valituille"
     },
@@ -840,7 +841,24 @@
         },
         "request": {
           "label": "Käännöspyyntö"
+        },
+        "showResults": {
+          "show": "Näytä",
+          "requests": "Käännöspyyntöjä",
+          "tasks": "Yksittäiset käännöskohteet"
         }
+      },
+      "requestResults": {
+        "found": "Löytyi",
+        "requests": "pyyntöä",
+        "notFound": "Pyyntöjä ei löytynyt",
+        "selectAll": "Valitse kaikki",
+        "translationRequest": "Pyyntö",
+        "translator": "Kääntäjä",
+        "languagePair": "Kielipari",
+        "translationTasks": "Tehtäviä",
+        "status": "Tila",
+        "empty": "(Ei nimeä)"
       },
       "taskResults": {
         "found": "Löytyi",

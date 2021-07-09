@@ -1,5 +1,8 @@
 import { AnyAction } from "redux";
 import {
+  SET_MODERATION_TRANSLATION_REQUEST_SEARCH,
+  SET_MODERATION_TRANSLATION_REQUEST_RESULTS,
+  SET_MODERATION_TRANSLATION_SELECTED_REQUESTS,
   SET_MODERATION_TRANSLATION_TASK_SEARCH,
   SET_MODERATION_TRANSLATION_TASK_RESULTS,
   SET_MODERATION_TRANSLATION_SELECTED_TASKS,
@@ -11,24 +14,40 @@ import {
 import {
   ModerationPlaceResults,
   ModerationPlaceSearch,
-  TranslationSelectedItems,
-  TranslationTaskSearch,
-  TranslationTodoResults,
+  ModerationTranslationRequestResults,
+  ModerationTranslationRequestTaskSearch,
+  ModerationTranslationSelectedItems,
+  ModerationTranslationTaskResults,
 } from "../../types/general";
+
+interface SetModerationTranslationRequestSearchAction extends AnyAction {
+  type: typeof SET_MODERATION_TRANSLATION_REQUEST_SEARCH;
+  payload: ModerationTranslationRequestTaskSearch;
+}
+
+interface SetModerationTranslationRequestResultsAction extends AnyAction {
+  type: typeof SET_MODERATION_TRANSLATION_REQUEST_RESULTS;
+  payload: ModerationTranslationRequestResults;
+}
+
+interface SetModerationTranslationSelectedRequestsAction extends AnyAction {
+  type: typeof SET_MODERATION_TRANSLATION_SELECTED_REQUESTS;
+  payload: ModerationTranslationSelectedItems;
+}
 
 interface SetModerationTranslationTaskSearchAction extends AnyAction {
   type: typeof SET_MODERATION_TRANSLATION_TASK_SEARCH;
-  payload: TranslationTaskSearch;
+  payload: ModerationTranslationRequestTaskSearch;
 }
 
 interface SetModerationTranslationTaskResultsAction extends AnyAction {
   type: typeof SET_MODERATION_TRANSLATION_TASK_RESULTS;
-  payload: TranslationTodoResults;
+  payload: ModerationTranslationTaskResults;
 }
 
 interface SetModerationTranslationSelectedTasksAction extends AnyAction {
   type: typeof SET_MODERATION_TRANSLATION_SELECTED_TASKS;
-  payload: TranslationSelectedItems;
+  payload: ModerationTranslationSelectedItems;
 }
 
 interface SetModerationTranslationPlaceSearchAction extends AnyAction {
@@ -48,10 +67,13 @@ interface SetModerationTranslationPlaceResultsAction extends AnyAction {
 
 interface SetModerationTranslationSelectedPlacesAction extends AnyAction {
   type: typeof SET_MODERATION_TRANSLATION_SELECTED_PLACES;
-  payload: TranslationSelectedItems;
+  payload: ModerationTranslationSelectedItems;
 }
 
 export type ModerationTranslationAction =
+  | SetModerationTranslationRequestSearchAction
+  | SetModerationTranslationRequestResultsAction
+  | SetModerationTranslationSelectedRequestsAction
   | SetModerationTranslationTaskSearchAction
   | SetModerationTranslationTaskResultsAction
   | SetModerationTranslationSelectedTasksAction

@@ -1,0 +1,12 @@
+@import "~hds-design-tokens/lib/all.scss";
+
+.showResults {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-end;
+  margin-bottom: $spacing-layout-s;
+
+  fieldset {
+    margin-left: $spacing-s;
+  }
+}

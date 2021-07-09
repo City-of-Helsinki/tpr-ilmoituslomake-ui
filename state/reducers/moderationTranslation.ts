@@ -1,8 +1,11 @@
 import { AnyAction } from "redux";
 import { ModerationTranslationState } from "./types";
 import {
-  SET_MODERATION_TRANSLATION_TASK_RESULTS,
+  SET_MODERATION_TRANSLATION_REQUEST_SEARCH,
+  SET_MODERATION_TRANSLATION_REQUEST_RESULTS,
+  SET_MODERATION_TRANSLATION_SELECTED_REQUESTS,
   SET_MODERATION_TRANSLATION_TASK_SEARCH,
+  SET_MODERATION_TRANSLATION_TASK_RESULTS,
   SET_MODERATION_TRANSLATION_SELECTED_TASKS,
   SET_MODERATION_TRANSLATION_PLACE_SEARCH,
   CLEAR_MODERATION_TRANSLATION_PLACE_SEARCH,
@@ -11,6 +14,22 @@ import {
 } from "../../types/constants";
 
 const initialState: ModerationTranslationState = {
+  requestSearch: {
+    placeName: "",
+    request: "",
+    requestOptions: [],
+    taskStatus: "",
+    groupByRequest: false,
+    searchDone: false,
+  },
+  requestResults: {
+    results: [],
+    count: 0,
+  },
+  selectedRequests: {
+    selectedIds: [],
+    isAllSelected: false,
+  },
   taskSearch: {
     placeName: "",
     request: "",
@@ -49,6 +68,30 @@ const initialState: ModerationTranslationState = {
 
 const moderationTranslation = (state = initialState, action: AnyAction): ModerationTranslationState => {
   switch (action.type) {
+    case SET_MODERATION_TRANSLATION_REQUEST_SEARCH: {
+      console.log("SET_MODERATION_TRANSLATION_REQUEST_SEARCH", action.payload);
+      return {
+        ...state,
+        requestSearch: action.payload,
+      };
+    }
+
+    case SET_MODERATION_TRANSLATION_REQUEST_RESULTS: {
+      console.log("SET_MODERATION_TRANSLATION_REQUEST_RESULTS", action.payload);
+      return {
+        ...state,
+        requestResults: action.payload,
+      };
+    }
+
+    case SET_MODERATION_TRANSLATION_SELECTED_REQUESTS: {
+      console.log("SET_MODERATION_TRANSLATION_SELECTED_REQUESTS", action.payload);
+      return {
+        ...state,
+        selectedRequests: action.payload,
+      };
+    }
+
     case SET_MODERATION_TRANSLATION_TASK_SEARCH: {
       console.log("SET_MODERATION_TRANSLATION_TASK_SEARCH", action.payload);
       return {
