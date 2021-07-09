@@ -91,4 +91,5 @@ export interface ModerationTranslationState {
   placeSearch: ModerationPlaceSearch;
   placeResults: ModerationPlaceResults;
   selectedPlaces: ModerationTranslationSelectedItems;
+  requestDetail: ModerationTranslationRequest;
 }

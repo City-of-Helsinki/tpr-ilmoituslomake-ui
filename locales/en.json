@@ -879,6 +879,23 @@
       },
       "taskType": {
         "translation": "Käännöspyyntö"
+      },
+      "request": {
+        "title": "Käännöspyyntö",
+        "places": "Kohteet",
+        "translationDetails": "Käännöstiedot",
+        "translatorName": {
+          "label": "Kääntäjän nimi"
+        },
+        "translatorEmail": {
+          "label": "Kääntäjän sähköpostiosoite"
+        },
+        "translationLanguage": {
+          "label": "Valitse käännöskielet"
+        },
+        "message": {
+          "label": "Viesti kääntäjälle"
+        }
       }
     }
   }

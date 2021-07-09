@@ -11,6 +11,7 @@ import {
   CLEAR_MODERATION_TRANSLATION_PLACE_SEARCH,
   SET_MODERATION_TRANSLATION_PLACE_RESULTS,
   SET_MODERATION_TRANSLATION_SELECTED_PLACES,
+  SET_MODERATION_TRANSLATION_REQUEST,
 } from "../../types/constants";
 
 const initialState: ModerationTranslationState = {
@@ -63,6 +64,20 @@ const initialState: ModerationTranslationState = {
   selectedPlaces: {
     selectedIds: [],
     isAllSelected: false,
+  },
+  requestDetail: {
+    requestId: 0,
+    request: "",
+    selectedPlaces: [],
+    language: {
+      from: "",
+      to: "",
+    },
+    message: "",
+    translator: {
+      name: "",
+      email: "",
+    },
   },
 };
 
@@ -145,6 +160,14 @@ const moderationTranslation = (state = initialState, action: AnyAction): Moderat
       return {
         ...state,
         selectedPlaces: action.payload,
+      };
+    }
+
+    case SET_MODERATION_TRANSLATION_REQUEST: {
+      console.log("SET_MODERATION_TRANSLATION_REQUEST", action.payload);
+      return {
+        ...state,
+        requestDetail: action.payload,
       };
     }
 

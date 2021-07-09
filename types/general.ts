@@ -425,19 +425,17 @@ export interface ModerationTranslationRequestResult {
     to: string;
   };
   message: string;
-  tasks: [
-    {
+  tasks: {
+    id: number;
+    target: {
       id: number;
-      target: {
-        id: number;
-        name: {
-          fi: string;
-          sv: string;
-          en: string;
-        };
+      name: {
+        fi: string;
+        sv: string;
+        en: string;
       };
-    }
-  ];
+    };
+  }[];
   category: string;
   item_type: string;
   status: string;
@@ -510,4 +508,26 @@ export interface ModerationTranslationTaskResults {
 export interface ModerationTranslationSelectedItems {
   selectedIds: string[];
   isAllSelected: boolean;
+}
+
+export interface ModerationTranslationRequest {
+  requestId: number;
+  request: string;
+  selectedPlaces: {
+    id: number;
+    name: {
+      fi: string;
+      sv: string;
+      en: string;
+    };
+  }[];
+  language: {
+    from: string;
+    to: string;
+  };
+  message: string;
+  translator: {
+    name: string;
+    email: string;
+  };
 }

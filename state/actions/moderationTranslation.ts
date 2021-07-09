@@ -9,10 +9,12 @@ import {
   CLEAR_MODERATION_TRANSLATION_PLACE_SEARCH,
   SET_MODERATION_TRANSLATION_PLACE_RESULTS,
   SET_MODERATION_TRANSLATION_SELECTED_PLACES,
+  SET_MODERATION_TRANSLATION_REQUEST,
 } from "../../types/constants";
 import {
   ModerationPlaceResults,
   ModerationPlaceSearch,
+  ModerationTranslationRequest,
   ModerationTranslationRequestResults,
   ModerationTranslationRequestTaskSearch,
   ModerationTranslationSelectedItems,
@@ -68,4 +70,9 @@ export const setModerationTranslationPlaceResults = (placeResults: ModerationPla
 export const setModerationTranslationSelectedPlaces = (placeIds: ModerationTranslationSelectedItems): ModerationTranslationAction => ({
   type: SET_MODERATION_TRANSLATION_SELECTED_PLACES,
   payload: placeIds,
+});
+
+export const setModerationTranslationRequest = (requestDetail: ModerationTranslationRequest): ModerationTranslationAction => ({
+  type: SET_MODERATION_TRANSLATION_REQUEST,
+  payload: requestDetail,
 });

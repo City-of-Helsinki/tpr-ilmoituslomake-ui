@@ -10,10 +10,12 @@ import {
   CLEAR_MODERATION_TRANSLATION_PLACE_SEARCH,
   SET_MODERATION_TRANSLATION_PLACE_RESULTS,
   SET_MODERATION_TRANSLATION_SELECTED_PLACES,
+  SET_MODERATION_TRANSLATION_REQUEST,
 } from "../../types/constants";
 import {
   ModerationPlaceResults,
   ModerationPlaceSearch,
+  ModerationTranslationRequest,
   ModerationTranslationRequestResults,
   ModerationTranslationRequestTaskSearch,
   ModerationTranslationSelectedItems,
@@ -70,6 +72,11 @@ interface SetModerationTranslationSelectedPlacesAction extends AnyAction {
   payload: ModerationTranslationSelectedItems;
 }
 
+interface SetModerationTranslationRequestAction extends AnyAction {
+  type: typeof SET_MODERATION_TRANSLATION_REQUEST;
+  payload: ModerationTranslationRequest;
+}
+
 export type ModerationTranslationAction =
   | SetModerationTranslationRequestSearchAction
   | SetModerationTranslationRequestResultsAction
@@ -80,4 +87,5 @@ export type ModerationTranslationAction =
   | SetModerationTranslationPlaceSearchAction
   | ClearModerationTranslationPlaceSearchAction
   | SetModerationTranslationPlaceResultsAction
-  | SetModerationTranslationSelectedPlacesAction;
+  | SetModerationTranslationSelectedPlacesAction
+  | SetModerationTranslationRequestAction;
