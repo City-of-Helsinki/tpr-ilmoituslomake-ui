@@ -123,6 +123,18 @@ export interface NotificationExtra {
   tagOptions: TagOption[];
   extraKeywordsText: string;
   locationOriginal: [number, number];
+  addressOriginal: {
+    fi: {
+      street: string;
+      postal_code: string;
+      post_office: string;
+    };
+    sv: {
+      street: string;
+      postal_code: string;
+      post_office: string;
+    };
+  };
   addressFound?: AddressSearchResult;
 }
 
