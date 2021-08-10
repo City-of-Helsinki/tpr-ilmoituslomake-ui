@@ -6,7 +6,7 @@ import { useI18n } from "next-localization";
 import { IconCheckCircleFill } from "hds-react";
 import { RootState } from "../../state/reducers";
 import { initStore } from "../../state/store";
-import { NotifierType, CLEAR_STATE, INITIAL_NOTIFICATION, SENT_INFO_PAGE } from "../../types/constants";
+import { NotifierType, CLEAR_STATE, INITIAL_NOTIFICATION, INITIAL_NOTIFICATION_EXTRA, SENT_INFO_PAGE } from "../../types/constants";
 import { NotificationSchema } from "../../types/notification_schema";
 import { PhotoValidation } from "../../types/notification_validation";
 import i18nLoader, { defaultLocale } from "../../utils/i18n";
@@ -179,6 +179,7 @@ export const getServerSideProps: GetServerSideProps = async ({ req, resolvedUrl,
             ...initialReduxState.notification.notificationExtra,
             inputLanguages: getPreviousInputLanguages(locale || defaultLocale, targetResult.data.name),
             extraKeywordsText: extra_keywords.join(", "),
+            addressOriginal: dataToUse.address || INITIAL_NOTIFICATION_EXTRA.addressOriginal,
             photos: images.map((image) => {
               return {
                 uuid: image.uuid ?? "",

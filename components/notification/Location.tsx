@@ -27,7 +27,7 @@ const Location = (): ReactElement => {
   } = notification;
 
   const notificationExtra = useSelector((state: RootState) => state.notification.notificationExtra);
-  const { addressFound } = notificationExtra;
+  const { addressOriginal, addressFound } = notificationExtra;
 
   const notificationValidation = useSelector((state: RootState) => state.notificationValidation.notificationValidation);
   const {
@@ -84,20 +84,31 @@ const Location = (): ReactElement => {
     postOfficeSvValid,
   ]);
 
+  const isAddressChanged = useCallback(() => {
+    const {
+      fi: { street: streetFiOriginal, postal_code: postalCodeFiOriginal, post_office: postOfficeFiOriginal },
+      sv: { street: streetSvOriginal, postal_code: postalCodeSvOriginal, post_office: postOfficeSvOriginal },
+    } = addressOriginal;
+
+    return router.locale === "sv"
+      ? streetSv !== streetSvOriginal || postalCodeSv !== postalCodeSvOriginal || postOfficeSv !== postOfficeSvOriginal
+      : streetFi !== streetFiOriginal || postalCodeFi !== postalCodeFiOriginal || postOfficeFi !== postOfficeFiOriginal;
+  }, [router.locale, streetFi, postalCodeFi, postOfficeFi, streetSv, postalCodeSv, postOfficeSv, addressOriginal]);
+
   useEffect(() => {
     // Search the address automatically when complete
-    if (isAddressComplete() && !fieldFocus) {
+    if (isAddressComplete() && isAddressChanged() && !fieldFocus) {
       searchAddress(router, streetFi, postOfficeFi, streetSv, postOfficeSv, dispatch);
     }
-  }, [isAddressComplete, fieldFocus, router, streetFi, postOfficeFi, streetSv, postOfficeSv, dispatch]);
+  }, [isAddressComplete, isAddressChanged, fieldFocus, router, streetFi, postOfficeFi, streetSv, postOfficeSv, dispatch]);
 
   useEffect(() => {
     // Validate the address automatically when complete
-    if (isAddressComplete() && !fieldFocus) {
+    if (isAddressComplete() && isAddressChanged() && !fieldFocus) {
       const language = router.locale === "sv" ? "sv" : "fi";
       isWholeAddressValid(language, notification, notificationExtra, dispatchValidation);
     }
-  }, [isAddressComplete, fieldFocus, router, notification, notificationExtra, dispatch, dispatchValidation]);
+  }, [isAddressComplete, isAddressChanged, fieldFocus, router, notification, notificationExtra, dispatch, dispatchValidation]);
 
   return (
     <div className="formSection">

@@ -238,6 +238,18 @@ export const INITIAL_NOTIFICATION_EXTRA = {
   tagOptions: [],
   extraKeywordsText: "",
   locationOriginal: [0, 0],
+  addressOriginal: {
+    fi: {
+      street: "",
+      postal_code: "",
+      post_office: "",
+    },
+    sv: {
+      street: "",
+      postal_code: "",
+      post_office: "",
+    },
+  },
 };
 
 export const INITIAL_NOTIFICATION_VALIDATION = {
