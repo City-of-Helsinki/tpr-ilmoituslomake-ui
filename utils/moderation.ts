@@ -2,7 +2,7 @@ import { Dispatch, SetStateAction } from "react";
 import { NextRouter } from "next/router";
 import Cookies from "js-cookie";
 import { ItemType, Toast } from "../types/constants";
-import { ChangeRequestSchema, ModerationExtra, Photo, User } from "../types/general";
+import { ChangeRequestSchema, ModerationExtra, ModerationTranslationRequest, Photo, User } from "../types/general";
 import { NotificationSchema } from "../types/notification_schema";
 import getOrigin from "./request";
 
@@ -281,6 +281,125 @@ export const saveModerationChangeRequest = async (
 
         const changeRequestResult = await changeRequestResponse.text();
         console.log("FAILED", changeRequestResult);
+      }
+    } else if (!valid) {
+      setToast(Toast.ValidationFailed);
+    } else {
+      setToast(Toast.NotAuthenticated);
+    }
+  } catch (err) {
+    console.log("ERROR", err);
+    setToast(Toast.SaveFailed);
+  }
+};
+
+export const saveModerationTranslationRequest = async (
+  currentUser: User | undefined,
+  requestDetail: ModerationTranslationRequest,
+  router: NextRouter,
+  setToast: Dispatch<SetStateAction<Toast | undefined>>
+): Promise<void> => {
+  try {
+    // TODO - fix validation
+    // const valid = validateTranslationData(translatedTask);
+    const valid = true;
+
+    if (currentUser?.authenticated && valid) {
+      // Send the Cross Site Request Forgery token, otherwise the backend returns the error "CSRF Failed: CSRF token missing or incorrect."
+      const csrftoken = Cookies.get("csrftoken");
+
+      const { requestId, selectedPlaces, language, message, translator } = requestDetail;
+
+      const postData = {
+        ...(requestId > 0 && { id: requestId }),
+        // request,
+        // draft,
+        targets: selectedPlaces.map((place) => place.id),
+        language,
+        message,
+        translator,
+      };
+
+      console.log("SENDING", postData);
+
+      // Save the translation request
+      const saveResponse = await fetch(`${getOrigin(router)}/api/moderation_translation/save_request/`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "X-CSRFToken": csrftoken as string,
+        },
+        mode: "same-origin",
+        body: JSON.stringify(postData),
+      });
+      if (saveResponse.ok) {
+        const saveResult = await saveResponse.json();
+        console.log("SAVE RESPONSE", saveResult);
+
+        if (saveResult.id) {
+          // Reload the current page to update the page statuses
+          // router.reload();
+          router.push(`/moderation/translation/request/${saveResult.id}`);
+          setToast(Toast.SaveSucceeded);
+        } else {
+          setToast(Toast.SaveFailed);
+        }
+      } else {
+        setToast(Toast.SaveFailed);
+
+        const saveResult = await saveResponse.text();
+        console.log("SAVE FAILED", saveResult);
+      }
+    } else if (!valid) {
+      setToast(Toast.ValidationFailed);
+    } else {
+      setToast(Toast.NotAuthenticated);
+    }
+  } catch (err) {
+    console.log("ERROR", err);
+    setToast(Toast.SaveFailed);
+  }
+};
+
+export const cancelModerationTranslationRequest = async (
+  currentUser: User | undefined,
+  requestId: number,
+  router: NextRouter,
+  setToast: Dispatch<SetStateAction<Toast | undefined>>
+): Promise<void> => {
+  try {
+    // TODO - fix validation
+    // const valid = validateTranslationData(translatedTask);
+    const valid = true;
+
+    if (currentUser?.authenticated && valid) {
+      // Send the Cross Site Request Forgery token, otherwise the backend returns the error "CSRF Failed: CSRF token missing or incorrect."
+      const csrftoken = Cookies.get("csrftoken");
+
+      // Cancel the translation request
+      const cancelResponse = await fetch(`${getOrigin(router)}/api/moderation_translation/cancel_request/${requestId}/`, {
+        method: "DELETE",
+        headers: {
+          "X-CSRFToken": csrftoken as string,
+        },
+      });
+      if (cancelResponse.ok) {
+        const cancelResult = await cancelResponse.json();
+        console.log("CANCEL RESPONSE", cancelResult);
+
+        if (cancelResult.id) {
+          // Reload the current page to update the page statuses
+          // router.reload();
+          router.push(`/moderation/translation/request/${requestId}`);
+          setToast(Toast.SaveSucceeded);
+        } else {
+          setToast(Toast.SaveFailed);
+        }
+      } else {
+        setToast(Toast.SaveFailed);
+
+        const saveResult = await cancelResponse.text();
+        console.log("CANCEL FAILED", saveResult);
       }
     } else if (!valid) {
       setToast(Toast.ValidationFailed);

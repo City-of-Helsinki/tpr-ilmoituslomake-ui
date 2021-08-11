@@ -532,6 +532,8 @@
       "rejected": "Hylätty",
       "modify": "Muokkaa",
       "cancel": "Keskeytä",
+      "cancel2": "Peruuta",
+      "close": "Sulje",
       "back": "Peru",
       "returnToSearch": "Palaa hakuun",
       "openHelp": "Avaa ohje",
@@ -555,6 +557,7 @@
       "remove": "Poista",
       "toggleMenu": "Vaihdele valikko",
       "selectFromDevice": "Valitse laitteelta",
+      "saveTranslationRequest": "Tallenna käännöspyyntö",
       "cancelTranslationRequest": "Peru käännöspyyntö",
       "cancelTranslationTask": "Peru käännöstehtävä",
       "requestSelectedTranslation": "Pyydä käännös valituille"
@@ -599,7 +602,9 @@
       "removePlace": "Oletko varma, että haluat poistaa kohteen?",
       "cancelAdd": "Oletko varma, että haluat peruuttaa lisäyksen?",
       "cancelChange": "Oletko varma, että haluat peruuttaa muutoksen?",
-      "cancelRemove": "Oletko varma, että haluat peruuttaa poiston?"
+      "cancelRemove": "Oletko varma, että haluat peruuttaa poiston?",
+      "saveTranslationRequest": "Oletko varma, että haluat tallentaa käännöspyynnön?",
+      "cancelTranslationRequest": "Oletko varma, että haluat peruuttaa käännöspyynnön?"
     },
     "contact": {
       "title": "Muut yhteystiedot",
@@ -882,7 +887,16 @@
       },
       "request": {
         "title": "Käännöspyyntö",
+        "status": "Tila",
+        "taskStatus": {
+          "open": "Aloittamatta",
+          "in_progress": "Kesken",
+          "closed": "Valmis"
+        },
+        "request": "Pyyntö",
+        "translationTasks": "Tehtäviä",
         "places": "Kohteet",
+        "placesToTranslate": "Käännettävät kohteet",
         "translationDetails": "Käännöstiedot",
         "translatorName": {
           "label": "Kääntäjän nimi"

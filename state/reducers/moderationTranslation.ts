@@ -1,6 +1,8 @@
 import { AnyAction } from "redux";
 import { ModerationTranslationState } from "./types";
 import {
+  TaskStatus,
+  TaskType,
   SET_MODERATION_TRANSLATION_REQUEST_SEARCH,
   SET_MODERATION_TRANSLATION_REQUEST_RESULTS,
   SET_MODERATION_TRANSLATION_SELECTED_REQUESTS,
@@ -78,6 +80,8 @@ const initialState: ModerationTranslationState = {
       name: "",
       email: "",
     },
+    taskType: TaskType.Unknown,
+    taskStatus: TaskStatus.Unknown,
   },
 };
 

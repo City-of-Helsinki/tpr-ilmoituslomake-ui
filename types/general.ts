@@ -542,4 +542,6 @@ export interface ModerationTranslationRequest {
     name: string;
     email: string;
   };
+  taskType: TaskType;
+  taskStatus: TaskStatus;
 }

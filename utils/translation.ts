@@ -37,8 +37,7 @@ export const saveTranslation = async (
 
       console.log("SENDING", postData);
 
-      // Save and approve the moderation task with the possibly modified data
-      // Note: this will also make the notificaton data available to normal users
+      // Save the translation task
       const saveResponse = await fetch(`${getOrigin(router)}/api/translation/save/${translatedTaskId}/`, {
         method: "PUT",
         headers: {

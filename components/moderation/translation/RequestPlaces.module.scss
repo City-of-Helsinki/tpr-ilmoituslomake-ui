@@ -1,0 +1,29 @@
+@import "~hds-design-tokens/lib/all.scss";
+
+.placeContainer {
+  display: flex;
+  flex-direction: column;
+
+  .placeItem {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    background-color: $color-bus;
+    margin-bottom: $spacing-2-xs;
+
+    .placeName {
+      flex-grow: 1;
+      color: $color-white;
+      margin-left: $spacing-s;
+    }
+
+    button {
+      color: $color-white;
+      border: 0;
+
+      &:hover {
+        color: $color-black;
+      }
+    }
+  }
+}

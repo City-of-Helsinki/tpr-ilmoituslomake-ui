@@ -5,10 +5,13 @@ import { useI18n } from "next-localization";
 import { initStore } from "../../../../state/store";
 import { CLEAR_STATE } from "../../../../types/constants";
 import { ModerationTranslationRequestResult } from "../../../../types/general";
+import { getTaskStatus, getTaskType } from "../../../../utils/conversion";
 import i18nLoader from "../../../../utils/i18n";
 import { checkUser, redirectToLogin, redirectToNotAuthorized } from "../../../../utils/serverside";
 import Layout from "../../../../components/common/Layout";
 import ModerationHeader from "../../../../components/moderation/ModerationHeader";
+import RequestHeaderButtons from "../../../../components/moderation/translation/RequestHeaderButtons";
+import RequestStatus from "../../../../components/moderation/translation/RequestStatus";
 import RequestPlaces from "../../../../components/moderation/translation/RequestPlaces";
 import RequestDetail from "../../../../components/moderation/translation/RequestDetail";
 
@@ -22,8 +25,14 @@ const ModerationTranslation = (): ReactElement => {
       </Head>
       <ModerationHeader currentPage={4} />
       <main id="content">
+        <h1 className="moderation">{i18n.t("moderation.translation.request.title")}</h1>
+        <RequestHeaderButtons />
+
+        <RequestStatus />
         <RequestPlaces />
         <RequestDetail />
+
+        <RequestHeaderButtons />
       </main>
     </Layout>
   );
@@ -62,18 +71,20 @@ export const getServerSideProps: GetServerSideProps = async ({ req, resolvedUrl,
       const requestResult = await (requestResponse.json() as Promise<ModerationTranslationRequestResult>);
 
       try {
-        const { id: requestIdNum, request, tasks, language, message, translator } = requestResult;
+        const { tasks } = requestResult;
         const selectedPlaces = tasks.map((task) => task.target);
 
         initialReduxState.moderationTranslation = {
           ...initialReduxState.moderationTranslation,
           requestDetail: {
-            requestId: requestIdNum,
-            request,
+            requestId: requestResult.id,
+            request: requestResult.request,
             selectedPlaces,
-            language,
-            message,
-            translator,
+            language: requestResult.language,
+            message: requestResult.message,
+            translator: requestResult.translator,
+            taskType: getTaskType(requestResult.category, requestResult.item_type),
+            taskStatus: getTaskStatus(requestResult.status),
           },
         };
       } catch (err) {
