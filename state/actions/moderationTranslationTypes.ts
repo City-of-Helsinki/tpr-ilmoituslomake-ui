@@ -11,8 +11,11 @@ import {
   SET_MODERATION_TRANSLATION_PLACE_RESULTS,
   SET_MODERATION_TRANSLATION_SELECTED_PLACES,
   SET_MODERATION_TRANSLATION_REQUEST,
+  SET_MODERATION_TRANSLATION_REQUEST_PAGE_VALID,
+  SET_MODERATION_TRANSLATION_REQUEST_VALIDATION,
 } from "../../types/constants";
 import {
+  KeyValueValidation,
   ModerationPlaceResults,
   ModerationPlaceSearch,
   ModerationTranslationRequest,
@@ -77,6 +80,16 @@ interface SetModerationTranslationRequestAction extends AnyAction {
   payload: ModerationTranslationRequest;
 }
 
+interface SetModerationTranslationRequestPageValidAction extends AnyAction {
+  type: typeof SET_MODERATION_TRANSLATION_REQUEST_PAGE_VALID;
+  payload: boolean;
+}
+
+interface SetModerationTranslationRequestValidationAction extends AnyAction {
+  type: typeof SET_MODERATION_TRANSLATION_REQUEST_VALIDATION;
+  payload: KeyValueValidation;
+}
+
 export type ModerationTranslationAction =
   | SetModerationTranslationRequestSearchAction
   | SetModerationTranslationRequestResultsAction
@@ -88,4 +101,6 @@ export type ModerationTranslationAction =
   | ClearModerationTranslationPlaceSearchAction
   | SetModerationTranslationPlaceResultsAction
   | SetModerationTranslationSelectedPlacesAction
-  | SetModerationTranslationRequestAction;
+  | SetModerationTranslationRequestAction
+  | SetModerationTranslationRequestPageValidAction
+  | SetModerationTranslationRequestValidationAction;

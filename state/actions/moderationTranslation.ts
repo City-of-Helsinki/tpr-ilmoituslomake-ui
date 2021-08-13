@@ -10,8 +10,11 @@ import {
   SET_MODERATION_TRANSLATION_PLACE_RESULTS,
   SET_MODERATION_TRANSLATION_SELECTED_PLACES,
   SET_MODERATION_TRANSLATION_REQUEST,
+  SET_MODERATION_TRANSLATION_REQUEST_PAGE_VALID,
+  SET_MODERATION_TRANSLATION_REQUEST_VALIDATION,
 } from "../../types/constants";
 import {
+  KeyValueValidation,
   ModerationPlaceResults,
   ModerationPlaceSearch,
   ModerationTranslationRequest,
@@ -75,4 +78,14 @@ export const setModerationTranslationSelectedPlaces = (placeIds: ModerationTrans
 export const setModerationTranslationRequest = (requestDetail: ModerationTranslationRequest): ModerationTranslationAction => ({
   type: SET_MODERATION_TRANSLATION_REQUEST,
   payload: requestDetail,
+});
+
+export const setModerationTranslationRequestPageValid = (valid: boolean): ModerationTranslationAction => ({
+  type: SET_MODERATION_TRANSLATION_REQUEST_PAGE_VALID,
+  payload: valid,
+});
+
+export const setModerationTranslationRequestValidation = (validation: KeyValueValidation): ModerationTranslationAction => ({
+  type: SET_MODERATION_TRANSLATION_REQUEST_VALIDATION,
+  payload: validation,
 });

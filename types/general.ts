@@ -541,7 +541,17 @@ export interface ModerationTranslationRequest {
   translator: {
     name: string;
     email: string;
+    [key: string]: unknown;
   };
   taskType: TaskType;
   taskStatus: TaskStatus;
+  [key: string]: unknown;
+}
+
+export interface ModerationTranslationRequestValidation {
+  selectedPlaces: Validation;
+  language: Validation;
+  message: Validation;
+  translatorName: Validation;
+  translatorEmail: Validation;
 }

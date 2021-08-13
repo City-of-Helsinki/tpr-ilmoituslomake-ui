@@ -1,18 +1,22 @@
-import React, { ReactElement, useState } from "react";
-import { useSelector } from "react-redux";
+import React, { Dispatch, ReactElement, useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useI18n } from "next-localization";
 import { Button, IconArrowRight } from "hds-react";
+import { setModerationTranslationRequestPageValid } from "../../../state/actions/moderationTranslation";
+import { ModerationTranslationAction } from "../../../state/actions/moderationTranslationTypes";
 import { RootState } from "../../../state/reducers";
 import { TaskStatus, TaskType, Toast } from "../../../types/constants";
 import { cancelModerationTranslationRequest, saveModerationTranslationRequest } from "../../../utils/moderation";
+import { isModerationTranslationRequestPageValid } from "../../../utils/moderationValidation";
 import ModalConfirmation from "../../common/ModalConfirmation";
 import ToastNotification from "../../common/ToastNotification";
 import styles from "./RequestHeaderButtons.module.scss";
 
 const RequestHeaderButtons = (): ReactElement => {
   const i18n = useI18n();
+  const dispatchValidation = useDispatch<Dispatch<ModerationTranslationAction>>();
   const router = useRouter();
 
   const currentUser = useSelector((state: RootState) => state.general.user);
@@ -43,7 +47,15 @@ const RequestHeaderButtons = (): ReactElement => {
   const saveRequest = () => {
     closeSaveConfirmation();
 
-    saveModerationTranslationRequest(currentUser, requestDetail, router, setToast);
+    if (isModerationTranslationRequestPageValid(requestDetail, dispatchValidation)) {
+      // The page is valid, so save the request
+      saveModerationTranslationRequest(currentUser, requestDetail, router, dispatchValidation, setToast);
+      dispatchValidation(setModerationTranslationRequestPageValid(true));
+    } else {
+      // The page is not valid, but set the page to valid then invalid to force the page to show the general validation message
+      dispatchValidation(setModerationTranslationRequestPageValid(true));
+      dispatchValidation(setModerationTranslationRequestPageValid(false));
+    }
   };
 
   const cancelRequest = () => {
@@ -62,9 +74,11 @@ const RequestHeaderButtons = (): ReactElement => {
             </Button>
           </Link>
           <div className="flexSpace" />
-          <Button variant="secondary" onClick={openCancelConfirmation} disabled={taskStatus === TaskStatus.Closed}>
-            {i18n.t("moderation.button.cancelTranslationRequest")}
-          </Button>
+          {requestId > 0 && (
+            <Button variant="secondary" onClick={openCancelConfirmation} disabled={taskStatus === TaskStatus.Closed}>
+              {i18n.t("moderation.button.cancelTranslationRequest")}
+            </Button>
+          )}
           <Button iconRight={<IconArrowRight aria-hidden />} onClick={openSaveConfirmation} disabled={taskStatus === TaskStatus.Closed}>
             {i18n.t("moderation.button.saveTranslationRequest")}
           </Button>

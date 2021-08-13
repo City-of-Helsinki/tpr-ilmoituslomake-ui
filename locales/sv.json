@@ -507,6 +507,7 @@
   },
   "moderation": {
     "title": "Moderointi",
+    "mandatory": "Pakolliset tiedot on merkitty tähdellä *",
     "page": {
       "front": "Etusivu",
       "place": "Kohteet",
@@ -887,6 +888,7 @@
       },
       "request": {
         "title": "Käännöspyyntö",
+        "titleNew": "Lisää käännöspyyntö",
         "status": "Tila",
         "taskStatus": {
           "open": "Aloittamatta",
@@ -897,6 +899,7 @@
         "translationTasks": "Tehtäviä",
         "places": "Kohteet",
         "placesToTranslate": "Käännettävät kohteet",
+        "selectPlaces": "Valitse kohteet Käännökset-sivulla",
         "translationDetails": "Käännöstiedot",
         "translatorName": {
           "label": "Kääntäjän nimi"
@@ -905,7 +908,7 @@
           "label": "Kääntäjän sähköpostiosoite"
         },
         "translationLanguage": {
-          "label": "Valitse käännöskielet"
+          "label": "Käännöskielet"
         },
         "message": {
           "label": "Viesti kääntäjälle"

@@ -11,6 +11,7 @@ import {
   ModerationTranslationRequest,
   ModerationTranslationRequestResults,
   ModerationTranslationRequestTaskSearch,
+  ModerationTranslationRequestValidation,
   ModerationTranslationSelectedItems,
   ModerationTranslationTaskResults,
   NotificationExtra,
@@ -92,4 +93,6 @@ export interface ModerationTranslationState {
   placeResults: ModerationPlaceResults;
   selectedPlaces: ModerationTranslationSelectedItems;
   requestDetail: ModerationTranslationRequest;
+  requestPageValid: boolean;
+  requestValidation: ModerationTranslationRequestValidation;
 }

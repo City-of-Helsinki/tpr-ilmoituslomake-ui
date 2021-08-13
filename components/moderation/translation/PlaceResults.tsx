@@ -78,10 +78,6 @@ const PlaceResults = (): ReactElement => {
     );
   };
 
-  const requestSelectedTranslation = () => {
-    // TODO
-  };
-
   return (
     <div className={`formSection ${styles.placeResults}`}>
       {results.length > 0 && (
@@ -94,9 +90,9 @@ const PlaceResults = (): ReactElement => {
         <div className={styles.optionsRow}>
           <Checkbox id="selectAllPlaces" label={i18n.t("moderation.placeResults.selectAll")} checked={isAllSelected} onChange={selectAllPlaces} />
           <div className="flexSpace" />
-          <Button variant="secondary" onClick={requestSelectedTranslation}>
-            {i18n.t("moderation.button.requestSelectedTranslation")}
-          </Button>
+          <Link href={`/moderation/translation/request?ids=${selectedPlaceIds.join()}`}>
+            <Button variant="secondary">{i18n.t("moderation.button.requestSelectedTranslation")}</Button>
+          </Link>
         </div>
       )}
 

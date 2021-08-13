@@ -14,6 +14,8 @@ import {
   SET_MODERATION_TRANSLATION_PLACE_RESULTS,
   SET_MODERATION_TRANSLATION_SELECTED_PLACES,
   SET_MODERATION_TRANSLATION_REQUEST,
+  SET_MODERATION_TRANSLATION_REQUEST_PAGE_VALID,
+  SET_MODERATION_TRANSLATION_REQUEST_VALIDATION,
 } from "../../types/constants";
 
 const initialState: ModerationTranslationState = {
@@ -82,6 +84,14 @@ const initialState: ModerationTranslationState = {
     },
     taskType: TaskType.Unknown,
     taskStatus: TaskStatus.Unknown,
+  },
+  requestPageValid: true,
+  requestValidation: {
+    selectedPlaces: { valid: true },
+    language: { valid: true },
+    message: { valid: true },
+    translatorName: { valid: true },
+    translatorEmail: { valid: true },
   },
 };
 
@@ -172,6 +182,22 @@ const moderationTranslation = (state = initialState, action: AnyAction): Moderat
       return {
         ...state,
         requestDetail: action.payload,
+      };
+    }
+
+    case SET_MODERATION_TRANSLATION_REQUEST_PAGE_VALID: {
+      console.log("SET_MODERATION_TRANSLATION_REQUEST_PAGE_VALID", action.payload);
+      return {
+        ...state,
+        requestPageValid: action.payload,
+      };
+    }
+
+    case SET_MODERATION_TRANSLATION_REQUEST_VALIDATION: {
+      console.log("SET_MODERATION_TRANSLATION_REQUEST_VALIDATION", action.payload);
+      return {
+        ...state,
+        requestValidation: { ...state.requestValidation, ...action.payload },
       };
     }
 

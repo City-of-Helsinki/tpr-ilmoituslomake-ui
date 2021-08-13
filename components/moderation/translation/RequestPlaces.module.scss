@@ -26,4 +26,18 @@
       }
     }
   }
+
+  .selectPlacesMessage {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-end;
+
+    .icon {
+      margin-right: $spacing-2-xs;
+    }
+
+    &.error {
+      color: $color-error;
+    }
+  }
 }

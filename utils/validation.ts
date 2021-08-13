@@ -31,10 +31,10 @@ import {
   ItemType,
 } from "../types/constants";
 import { NotificationSchema } from "../types/notification_schema";
-import { ChangeRequestSchema, NotificationExtra } from "../types/general";
+import { ChangeRequestSchema, NotificationExtra, Validation } from "../types/general";
 import notificationSchema from "../schemas/notification_schema.json";
 
-const isValid = (schema: StringSchema<string | undefined> | NumberSchema<number | undefined>, fieldValue: string | number) => {
+export const isValid = (schema: StringSchema<string | undefined> | NumberSchema<number | undefined>, fieldValue: string | number): Validation => {
   let valid = true;
   let message;
   try {
