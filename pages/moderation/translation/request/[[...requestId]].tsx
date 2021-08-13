@@ -12,7 +12,7 @@ import i18nLoader from "../../../../utils/i18n";
 import { checkUser, getOriginServerSide, redirectToLogin, redirectToNotAuthorized } from "../../../../utils/serverside";
 import Layout from "../../../../components/common/Layout";
 import ModerationHeader from "../../../../components/moderation/ModerationHeader";
-import RequestHeaderButtons from "../../../../components/moderation/translation/RequestHeaderButtons";
+import RequestButtons from "../../../../components/moderation/translation/RequestButtons";
 import RequestStatus from "../../../../components/moderation/translation/RequestStatus";
 import RequestPlaces from "../../../../components/moderation/translation/RequestPlaces";
 import RequestDetail from "../../../../components/moderation/translation/RequestDetail";
@@ -55,7 +55,7 @@ const ModerationTranslation = (): ReactElement => {
           {requestId > 0 && <RequestStatus />}
           <RequestPlaces />
           <RequestDetail />
-          <RequestHeaderButtons />
+          <RequestButtons />
         </div>
       </main>
     </Layout>

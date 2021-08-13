@@ -12,9 +12,9 @@ import { cancelModerationTranslationRequest, saveModerationTranslationRequest } 
 import { isModerationTranslationRequestPageValid } from "../../../utils/moderationValidation";
 import ModalConfirmation from "../../common/ModalConfirmation";
 import ToastNotification from "../../common/ToastNotification";
-import styles from "./RequestHeaderButtons.module.scss";
+import styles from "./RequestButtons.module.scss";
 
-const RequestHeaderButtons = (): ReactElement => {
+const RequestButtons = (): ReactElement => {
   const i18n = useI18n();
   const dispatchValidation = useDispatch<Dispatch<ModerationTranslationAction>>();
   const router = useRouter();
@@ -114,8 +114,8 @@ const RequestHeaderButtons = (): ReactElement => {
   );
 };
 
-RequestHeaderButtons.defaultProps = {
+RequestButtons.defaultProps = {
   isTranslated: false,
 };
 
-export default RequestHeaderButtons;
+export default RequestButtons;
