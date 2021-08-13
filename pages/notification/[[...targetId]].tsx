@@ -23,7 +23,7 @@ import Description from "../../components/notification/Description";
 import Links from "../../components/notification/Links";
 import Location from "../../components/notification/Location";
 import Map from "../../components/notification/Map";
-import NotificationNotice from "../../components/notification/NotificationNotice";
+import NotificationNotice from "../../components/common/NotificationNotice";
 import Notifier from "../../components/notification/Notifier";
 // import Opening from "../../components/notification/Opening";
 import Photos from "../../components/notification/Photos";
@@ -31,7 +31,7 @@ import Preview from "../../components/notification/Preview";
 import SentInfoHeader from "../../components/notification/SentInfoHeader";
 import Tags from "../../components/notification/Tags";
 import Terms from "../../components/notification/Terms";
-import ValidationSummary from "../../components/notification/ValidationSummary";
+import ValidationSummary from "../../components/common/ValidationSummary";
 import styles from "./[[...targetId]].module.scss";
 
 const NotificationDetail = (): ReactElement => {
@@ -60,7 +60,7 @@ const NotificationDetail = (): ReactElement => {
         <main id="content" className={`narrowSection ${styles.content}`}>
           <h2 tabIndex={-1}>{`${currentPage} ${i18n.t("notification.main.basic")}`}</h2>
           <NotificationNotice messageKey="notification.mandatory" />
-          {!pageValid && <ValidationSummary />}
+          {!pageValid && <ValidationSummary prefix="notification" />}
           <Description />
           <Tags />
           <Notifier />
@@ -71,7 +71,7 @@ const NotificationDetail = (): ReactElement => {
         <main id="content" className={`narrowSection ${styles.content}`}>
           <h2 tabIndex={-1}>{`${currentPage} ${i18n.t("notification.main.contact")}`}</h2>
           <NotificationNotice messageKey="notification.mandatory" />
-          {!pageValid && <ValidationSummary />}
+          {!pageValid && <ValidationSummary prefix="notification" />}
           <Location />
           <Map />
           <Contact />
@@ -83,7 +83,7 @@ const NotificationDetail = (): ReactElement => {
         <main id="content" className={`narrowSection ${styles.content}`}>
           <h2 tabIndex={-1}>{`${currentPage} ${i18n.t("notification.main.photos")}`}</h2>
           <NotificationNotice messageKey="notification.photos.notice" />
-          {!pageValid && <ValidationSummary />}
+          {!pageValid && <ValidationSummary prefix="notification" />}
           <Photos />
           <NotificationFooterNav />
         </main>

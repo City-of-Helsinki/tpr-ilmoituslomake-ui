@@ -19,7 +19,7 @@ import {
 } from "../../types/constants";
 import { PhotoValidation } from "../../types/notification_validation";
 import { isPhotoFieldValid, isPhotoAltTextValid, isPhotoBase64Valid } from "../../utils/validation";
-import NotificationNotice from "./NotificationNotice";
+import NotificationNotice from "../common/NotificationNotice";
 import styles from "./Photos.module.scss";
 
 const Photos = (): ReactElement => {

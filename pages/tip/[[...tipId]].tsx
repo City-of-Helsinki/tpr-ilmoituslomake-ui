@@ -12,11 +12,11 @@ import i18nLoader from "../../utils/i18n";
 import { checkUser, getOriginServerSide } from "../../utils/serverside";
 import Layout from "../../components/common/Layout";
 import Header from "../../components/common/Header";
-import NotificationNotice from "../../components/notification/NotificationNotice";
+import NotificationNotice from "../../components/common/NotificationNotice";
 import TipPlace from "../../components/notification/TipPlace";
 import TipDetails from "../../components/notification/TipDetails";
 import TipFooter from "../../components/notification/TipFooter";
-import ValidationSummary from "../../components/notification/ValidationSummary";
+import ValidationSummary from "../../components/common/ValidationSummary";
 import styles from "./[[...tipId]].module.scss";
 
 // Note: The tip type selector has an attribute that uses a media query which does not work when server-side rendering
@@ -48,7 +48,7 @@ const Tip = (): ReactElement => {
       </div>
       <main id="content" className={`narrowSection ${styles.content}`}>
         <NotificationNotice messageKey="notification.mandatory" />
-        {!pageValid && <ValidationSummary />}
+        {!pageValid && <ValidationSummary prefix="notification" />}
         <div className={`formSection ${styles.tipInfo}`}>
           {target > 0 && <DynamicTipType />}
           <TipPlace />
