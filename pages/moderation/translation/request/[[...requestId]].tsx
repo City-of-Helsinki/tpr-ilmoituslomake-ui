@@ -19,7 +19,7 @@ import RequestDetail from "../../../../components/translation/moderation/Request
 import NotificationNotice from "../../../../components/common/NotificationNotice";
 import ValidationSummary from "../../../../components/common/ValidationSummary";
 
-const ModerationTranslation = (): ReactElement => {
+const ModerationTranslationRequestDetail = (): ReactElement => {
   const i18n = useI18n();
 
   const pageValid = useSelector((state: RootState) => state.moderationTranslation.requestPageValid);
@@ -182,4 +182,4 @@ export const getServerSideProps: GetServerSideProps = async ({ req, resolvedUrl,
   };
 };
 
-export default ModerationTranslation;
+export default ModerationTranslationRequestDetail;
