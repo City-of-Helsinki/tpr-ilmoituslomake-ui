@@ -9,11 +9,11 @@ import i18nLoader from "../../utils/i18n";
 import { checkUser, getMatkoTags, getTags, redirectToLogin, redirectToNotAuthorized } from "../../utils/serverside";
 import Layout from "../../components/common/Layout";
 import ModerationHeader from "../../components/moderation/ModerationHeader";
-import PlaceSearch from "../../components/moderation/translation/PlaceSearch";
-import PlaceResults from "../../components/moderation/translation/PlaceResults";
-import RequestResults from "../../components/moderation/translation/RequestResults";
-import TaskSearch from "../../components/moderation/translation/TaskSearch";
-import TaskResults from "../../components/moderation/translation/TaskResults";
+import PlaceSearch from "../../components/translation/moderation/PlaceSearch";
+import PlaceResults from "../../components/translation/moderation/PlaceResults";
+import RequestResults from "../../components/translation/moderation/RequestResults";
+import TaskSearch from "../../components/translation/moderation/TaskSearch";
+import TaskResults from "../../components/translation/moderation/TaskResults";
 import styles from "./translation.module.scss";
 
 const ModerationTranslation = (): ReactElement => {

@@ -12,10 +12,10 @@ import i18nLoader from "../../../../utils/i18n";
 import { checkUser, getOriginServerSide, redirectToLogin, redirectToNotAuthorized } from "../../../../utils/serverside";
 import Layout from "../../../../components/common/Layout";
 import ModerationHeader from "../../../../components/moderation/ModerationHeader";
-import RequestButtons from "../../../../components/moderation/translation/RequestButtons";
-import RequestStatus from "../../../../components/moderation/translation/RequestStatus";
-import RequestPlaces from "../../../../components/moderation/translation/RequestPlaces";
-import RequestDetail from "../../../../components/moderation/translation/RequestDetail";
+import RequestButtons from "../../../../components/translation/moderation/RequestButtons";
+import RequestStatus from "../../../../components/translation/moderation/RequestStatus";
+import RequestPlaces from "../../../../components/translation/moderation/RequestPlaces";
+import RequestDetail from "../../../../components/translation/moderation/RequestDetail";
 import NotificationNotice from "../../../../components/common/NotificationNotice";
 import ValidationSummary from "../../../../components/common/ValidationSummary";
 
