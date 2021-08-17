@@ -6,6 +6,7 @@ import ModifyButton from "./ModifyButton";
 
 interface TranslationSectionProps {
   id: string;
+  prefix: string;
   fieldName: string;
   translateFrom: string;
   translateTo: string;
@@ -36,6 +37,7 @@ interface TranslationSectionProps {
 
 const TranslationSection = ({
   id,
+  prefix,
   fieldName,
   translateFrom,
   translateTo,
@@ -84,6 +86,7 @@ const TranslationSection = ({
 
         <ModifyButton
           className="gridColumn2"
+          prefix={prefix}
           label={modifyButtonLabel}
           fieldName={fieldName}
           translationStatus={translationStatus}
@@ -109,6 +112,7 @@ const TranslationSection = ({
 
         <ActionButton
           className="gridColumn3"
+          prefix={prefix}
           fieldName={fieldName}
           translationStatus={translationStatus}
           taskStatus={taskStatus}

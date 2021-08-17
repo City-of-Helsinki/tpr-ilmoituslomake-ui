@@ -12,10 +12,13 @@ import TaskHeaderButtons from "./TaskHeaderButtons";
 import styles from "./TaskHeader.module.scss";
 
 interface TaskHeaderProps {
+  prefix: string;
+  buttonsPrefix?: string;
+  backHref: string;
   isTranslated?: boolean;
 }
 
-const TaskHeader = ({ isTranslated }: TaskHeaderProps): ReactElement => {
+const TaskHeader = ({ prefix, buttonsPrefix, backHref, isTranslated }: TaskHeaderProps): ReactElement => {
   const i18n = useI18n();
   const router = useRouter();
 
@@ -42,40 +45,40 @@ const TaskHeader = ({ isTranslated }: TaskHeaderProps): ReactElement => {
         {selectedTaskId ? ` (${selectedTaskId})` : ""}
       </h1>
 
-      <TaskHeaderButtons isTranslated={isTranslated} />
+      <TaskHeaderButtons prefix={buttonsPrefix ?? prefix} backHref={backHref} isTranslated={isTranslated} />
 
       <div className={styles.upperRow}>
         <div>
-          <div className={styles.bold}>{i18n.t("translation.taskHeader.taskType")}</div>
-          <div>{taskType !== TaskType.Unknown ? i18n.t(`translation.taskType.${taskType}`) : ""}</div>
+          <div className={styles.bold}>{i18n.t(`${prefix}.taskHeader.taskType`)}</div>
+          <div>{taskType !== TaskType.Unknown ? i18n.t(`${prefix}.taskType.${taskType}`) : ""}</div>
           <div>{`${translateFrom.toUpperCase()}-${translateTo.toUpperCase()}`}</div>
         </div>
         <div>
-          <div className={styles.bold}>{i18n.t("translation.taskHeader.created")}</div>
+          <div className={styles.bold}>{i18n.t(`${prefix}.taskHeader.created`)}</div>
           <div>{moment(created_at).format(DATETIME_FORMAT)}</div>
         </div>
         <div>
-          <div className={styles.bold}>{i18n.t("translation.taskHeader.status")}</div>
+          <div className={styles.bold}>{i18n.t(`${prefix}.taskHeader.status`)}</div>
           <div>
-            <TaskStatusLabel prefix="translation" status={taskStatus} includeIcons />
+            <TaskStatusLabel prefix={prefix} status={taskStatus} includeIcons />
           </div>
         </div>
         <div>
-          <div className={styles.bold}>{i18n.t("translation.taskHeader.translator")}</div>
+          <div className={styles.bold}>{i18n.t(`${prefix}.taskHeader.translator`)}</div>
           <div>{translatorName}</div>
         </div>
       </div>
 
       <div className={styles.lowerRow}>
         <div className={styles.moderator}>
-          <div className={styles.bold}>{i18n.t("translation.taskHeader.request")}</div>
+          <div className={styles.bold}>{i18n.t(`${prefix}.taskHeader.request`)}</div>
           <div>{request}</div>
-          <div className={styles.bold}>{i18n.t("translation.taskHeader.moderator")}</div>
+          <div className={styles.bold}>{i18n.t(`${prefix}.taskHeader.moderator`)}</div>
           <div>{moderatorName}</div>
         </div>
 
         <div className={styles.comment}>
-          <div className={styles.bold}>{i18n.t("translation.taskHeader.messageFromModerator")}</div>
+          <div className={styles.bold}>{i18n.t(`${prefix}.taskHeader.messageFromModerator`)}</div>
           <div>{message}</div>
         </div>
       </div>
@@ -84,6 +87,7 @@ const TaskHeader = ({ isTranslated }: TaskHeaderProps): ReactElement => {
 };
 
 TaskHeader.defaultProps = {
+  buttonsPrefix: undefined,
   isTranslated: false,
 };
 

@@ -6,6 +6,7 @@ import TaskStatusLabel from "../common/TaskStatusLabel";
 import styles from "./Collapsible.module.scss";
 
 interface CollapsibleProps {
+  prefix: string;
   section: number;
   title: string;
   taskStatus: TaskStatus;
@@ -14,7 +15,7 @@ interface CollapsibleProps {
   children: ReactNode;
 }
 
-const Collapsible = ({ section, title, taskStatus, isTranslated, forceExpanded, children }: CollapsibleProps): ReactElement => {
+const Collapsible = ({ prefix, section, title, taskStatus, isTranslated, forceExpanded, children }: CollapsibleProps): ReactElement => {
   const i18n = useI18n();
   const [expanded, setExpanded] = useState<boolean>(false);
 
@@ -39,19 +40,19 @@ const Collapsible = ({ section, title, taskStatus, isTranslated, forceExpanded, 
         </div>
         <div className={styles.status}>
           <TaskStatusLabel
-            prefix="translation"
+            prefix={prefix}
             status={isTranslated || taskStatus === TaskStatus.Closed ? TaskStatus.Closed : TaskStatus.InProgress}
             includeIcons
           />
         </div>
         <div className={styles.button}>
           {expanded && (
-            <Button variant="secondary" size="small" aria-label={i18n.t("translation.button.collapse")} onClick={toggle}>
+            <Button variant="secondary" size="small" aria-label={i18n.t(`${prefix}.button.collapse`)} onClick={toggle}>
               <IconMinus aria-hidden />
             </Button>
           )}
           {!expanded && (
-            <Button variant="secondary" size="small" aria-label={i18n.t("translation.button.expand")} onClick={toggle}>
+            <Button variant="secondary" size="small" aria-label={i18n.t(`${prefix}.button.expand`)} onClick={toggle}>
               <IconPlus aria-hidden />
             </Button>
           )}

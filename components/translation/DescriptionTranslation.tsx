@@ -14,7 +14,11 @@ import { RootState } from "../../state/reducers";
 import { TranslationStatus } from "../../types/constants";
 import TranslationSection from "./TranslationSection";
 
-const DescriptionTranslation = (): ReactElement => {
+interface DescriptionTranslationProps {
+  prefix: string;
+}
+
+const DescriptionTranslation = ({ prefix }: DescriptionTranslationProps): ReactElement => {
   const i18n = useI18n();
   const dispatch = useDispatch<Dispatch<TranslationAction>>();
   const dispatchStatus = useDispatch<Dispatch<TranslationStatusAction>>();
@@ -79,6 +83,7 @@ const DescriptionTranslation = (): ReactElement => {
       <div className="gridLayoutContainer translation">
         <TranslationSection
           id={`placeName_${toOption}`}
+          prefix={prefix}
           fieldName={toOption}
           translateFrom={translateFrom}
           translateTo={translateTo}
@@ -87,16 +92,17 @@ const DescriptionTranslation = (): ReactElement => {
           translationStatus={placeNameStatus[toOption]}
           taskType={taskType}
           taskStatus={taskStatus}
-          modifyButtonLabel={i18n.t("translation.description.placeName.label")}
+          modifyButtonLabel={i18n.t(`${prefix}.description.placeName.label`)}
           changeCallback={updateName}
           statusCallback={updateNameStatus}
-          TranslationComponent={<TextInput id={`placeName_${toOption}`} label={i18n.t("translation.description.placeName.label")} name={toOption} />}
+          TranslationComponent={<TextInput id={`placeName_${toOption}`} label={i18n.t(`${prefix}.description.placeName.label`)} name={toOption} />}
         />
       </div>
 
       <div className="gridLayoutContainer translation">
         <TranslationSection
           id={`shortDescription_${toOption}`}
+          prefix={prefix}
           fieldName={toOption}
           translateFrom={translateFrom}
           translateTo={translateTo}
@@ -105,15 +111,15 @@ const DescriptionTranslation = (): ReactElement => {
           translationStatus={shortDescStatus[toOption]}
           taskType={taskType}
           taskStatus={taskStatus}
-          helperText={i18n.t("translation.description.shortDescription.helperText")}
-          tooltipButtonLabel={i18n.t("translation.button.openHelp")}
-          tooltipLabel={i18n.t("translation.description.shortDescription.tooltipLabel")}
-          tooltipText={i18n.t("translation.description.shortDescription.tooltipText")}
-          modifyButtonLabel={i18n.t("translation.description.shortDescription.label")}
+          helperText={i18n.t(`${prefix}.description.shortDescription.helperText`)}
+          tooltipButtonLabel={i18n.t(`${prefix}.button.openHelp`)}
+          tooltipLabel={i18n.t(`${prefix}.description.shortDescription.tooltipLabel`)}
+          tooltipText={i18n.t(`${prefix}.description.shortDescription.tooltipText`)}
+          modifyButtonLabel={i18n.t(`${prefix}.description.shortDescription.label`)}
           changeCallback={updateShortDescription}
           statusCallback={updateShortDescriptionStatus}
           TranslationComponent={
-            <TextArea id={`shortDescription_${toOption}`} rows={3} label={i18n.t("translation.description.shortDescription.label")} name={toOption} />
+            <TextArea id={`shortDescription_${toOption}`} rows={3} label={i18n.t(`${prefix}.description.shortDescription.label`)} name={toOption} />
           }
         />
       </div>
@@ -121,6 +127,7 @@ const DescriptionTranslation = (): ReactElement => {
       <div className="gridLayoutContainer translation">
         <TranslationSection
           id={`longDescription_${toOption}`}
+          prefix={prefix}
           fieldName={toOption}
           translateFrom={translateFrom}
           translateTo={translateTo}
@@ -129,15 +136,15 @@ const DescriptionTranslation = (): ReactElement => {
           translationStatus={longDescStatus[toOption]}
           taskType={taskType}
           taskStatus={taskStatus}
-          helperText={`${i18n.t("translation.description.longDescription.helperText")}`}
-          tooltipButtonLabel={i18n.t("translation.button.openHelp")}
-          tooltipLabel={i18n.t("translation.description.longDescription.tooltipLabel")}
-          tooltipText={i18n.t("translation.description.longDescription.tooltipText")}
-          modifyButtonLabel={i18n.t("translation.description.longDescription.label")}
+          helperText={`${i18n.t(`${prefix}.description.longDescription.helperText`)}`}
+          tooltipButtonLabel={i18n.t(`${prefix}.button.openHelp`)}
+          tooltipLabel={i18n.t(`${prefix}.description.longDescription.tooltipLabel`)}
+          tooltipText={i18n.t(`${prefix}.description.longDescription.tooltipText`)}
+          modifyButtonLabel={i18n.t(`${prefix}.description.longDescription.label`)}
           changeCallback={updateLongDescription}
           statusCallback={updateLongDescriptionStatus}
           TranslationComponent={
-            <TextArea id={`longDescription_${toOption}`} rows={6} label={i18n.t("translation.description.longDescription.label")} name={toOption} />
+            <TextArea id={`longDescription_${toOption}`} rows={6} label={i18n.t(`${prefix}.description.longDescription.label`)} name={toOption} />
           }
         />
       </div>

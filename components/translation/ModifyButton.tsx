@@ -6,6 +6,7 @@ import styles from "./ModifyButton.module.scss";
 
 interface ModifyButtonProps {
   className?: string;
+  prefix: string;
   label: string;
   fieldName: string;
   translationStatus: TranslationStatus;
@@ -17,6 +18,7 @@ interface ModifyButtonProps {
 
 const ModifyButton = ({
   className,
+  prefix,
   label,
   fieldName,
   translationStatus,
@@ -35,7 +37,7 @@ const ModifyButton = ({
           variant="secondary"
           onClick={() => modifyCallback(fieldName, TranslationStatus.Edited)}
           disabled={taskStatus === TaskStatus.Closed}
-        >{`${i18n.t("translation.button.modify")} ${label.toLowerCase()}`}</Button>
+        >{`${i18n.t(`${prefix}.button.modify`)} ${label.toLowerCase()}`}</Button>
       )}
       {translationStatus === TranslationStatus.Edited && children}
       {translationStatus === TranslationStatus.Done && (
@@ -49,7 +51,7 @@ const ModifyButton = ({
               onClick={() => modifyCallback(fieldName, TranslationStatus.Edited)}
               disabled={taskStatus === TaskStatus.Closed}
             >
-              {i18n.t("translation.button.modify")}
+              {i18n.t(`${prefix}.button.modify`)}
             </Button>
           )}
         </>

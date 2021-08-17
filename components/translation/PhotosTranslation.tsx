@@ -12,10 +12,11 @@ import PhotoPreviewTranslation from "./PhotoPreviewTranslation";
 import TranslationSection from "./TranslationSection";
 
 interface PhotosTranslationProps {
+  prefix: string;
   index: number;
 }
 
-const PhotosTranslation = ({ index }: PhotosTranslationProps): ReactElement => {
+const PhotosTranslation = ({ prefix, index }: PhotosTranslationProps): ReactElement => {
   const i18n = useI18n();
   const dispatch = useDispatch<Dispatch<TranslationAction>>();
   const dispatchStatus = useDispatch<Dispatch<TranslationStatusAction>>();
@@ -62,6 +63,7 @@ const PhotosTranslation = ({ index }: PhotosTranslationProps): ReactElement => {
         <div className="gridLayoutContainer translation">
           <TranslationSection
             id={`altText_${toOption}`}
+            prefix={prefix}
             fieldName={toOption}
             translateFrom={translateFrom}
             translateTo={translateTo}
@@ -70,18 +72,19 @@ const PhotosTranslation = ({ index }: PhotosTranslationProps): ReactElement => {
             translationStatus={photosStatus[index].altText[toOption]}
             taskType={taskType}
             taskStatus={taskStatus}
-            helperText={i18n.t("translation.photos.altText.helperText")}
-            tooltipButtonLabel={i18n.t("translation.button.openHelp")}
-            tooltipLabel={i18n.t("translation.photos.altText.tooltipLabel")}
-            tooltipText={i18n.t("translation.photos.altText.tooltipText")}
-            modifyButtonLabel={i18n.t("translation.photos.altText.label")}
+            helperText={i18n.t(`${prefix}.photos.altText.helperText`)}
+            tooltipButtonLabel={i18n.t(`${prefix}.button.openHelp`)}
+            tooltipLabel={i18n.t(`${prefix}.photos.altText.tooltipLabel`)}
+            tooltipText={i18n.t(`${prefix}.photos.altText.tooltipText`)}
+            modifyButtonLabel={i18n.t(`${prefix}.photos.altText.label`)}
             changeCallback={(evt: ChangeEvent<HTMLTextAreaElement>) => updatePhotoAltText(evt)}
             statusCallback={(language, status) => updatePhotoAltTextStatus(language, status)}
-            TranslationComponent={<TextArea id={`altText_${toOption}`} rows={3} label={i18n.t("translation.photos.altText.label")} name={toOption} />}
+            TranslationComponent={<TextArea id={`altText_${toOption}`} rows={3} label={i18n.t(`${prefix}.photos.altText.label`)} name={toOption} />}
           />
 
           <TranslationSection
             id={`source_${index}`}
+            prefix={prefix}
             fieldName="source"
             translateFrom={translateFrom}
             translateTo={translateTo}
@@ -90,13 +93,13 @@ const PhotosTranslation = ({ index }: PhotosTranslationProps): ReactElement => {
             translationStatus={photosStatus[index].source}
             taskType={taskType}
             taskStatus={taskStatus}
-            tooltipButtonLabel={i18n.t("translation.button.openHelp")}
-            tooltipLabel={i18n.t("translation.photos.source.tooltipLabel")}
-            tooltipText={i18n.t("translation.photos.source.tooltipText")}
-            modifyButtonLabel={i18n.t("translation.photos.source.label")}
+            tooltipButtonLabel={i18n.t(`${prefix}.button.openHelp`)}
+            tooltipLabel={i18n.t(`${prefix}.photos.source.tooltipLabel`)}
+            tooltipText={i18n.t(`${prefix}.photos.source.tooltipText`)}
+            modifyButtonLabel={i18n.t(`${prefix}.photos.source.label`)}
             changeCallback={(evt: ChangeEvent<HTMLInputElement>) => updatePhoto(evt)}
             statusCallback={(fieldName, status) => updatePhotoTranslationStatus(fieldName, status)}
-            TranslationComponent={<TextInput id={`source_${index}`} label={i18n.t("translation.photos.source.label")} name="source" />}
+            TranslationComponent={<TextInput id={`source_${index}`} label={i18n.t(`${prefix}.photos.source.label`)} name="source" />}
           />
         </div>
       </div>

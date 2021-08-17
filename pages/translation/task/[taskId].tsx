@@ -72,11 +72,21 @@ const TranslationTask = (): ReactElement => {
       <Header includeLanguageSelector={false} homePagePath="/translation/request" />
       {translatedTaskId > 0 && (
         <main id="content">
-          <TaskHeader isTranslated={isBasicSectionTranslated() && isAllPhotoSectionsTranslated()} />
+          <TaskHeader
+            prefix="translation"
+            backHref="/translation/request"
+            isTranslated={isBasicSectionTranslated() && isAllPhotoSectionsTranslated()}
+          />
           <h2 className="translation">{i18n.t("translation.task.title")}</h2>
 
-          <Collapsible section={1} title={i18n.t("translation.task.basic")} taskStatus={taskStatus} isTranslated={isBasicSectionTranslated()}>
-            <DescriptionTranslation />
+          <Collapsible
+            prefix="translation"
+            section={1}
+            title={i18n.t("translation.task.basic")}
+            taskStatus={taskStatus}
+            isTranslated={isBasicSectionTranslated()}
+          >
+            <DescriptionTranslation prefix="translation" />
           </Collapsible>
 
           {photosTranslated.map((translatedImage, index) => {
@@ -84,18 +94,23 @@ const TranslationTask = (): ReactElement => {
 
             return (
               <Collapsible
+                prefix="translation"
                 key={key}
                 section={index + 2}
                 title={`${i18n.t("translation.task.photo")} ${index + 1}`}
                 taskStatus={taskStatus}
                 isTranslated={isPhotoSectionTranslated(index)}
               >
-                <PhotosTranslation index={index} />
+                <PhotosTranslation prefix="translation" index={index} />
               </Collapsible>
             );
           })}
 
-          <TaskHeaderButtons isTranslated={isBasicSectionTranslated() && isAllPhotoSectionsTranslated()} />
+          <TaskHeaderButtons
+            prefix="translation"
+            backHref="/translation/request"
+            isTranslated={isBasicSectionTranslated() && isAllPhotoSectionsTranslated()}
+          />
         </main>
       )}
     </Layout>

@@ -561,7 +561,11 @@
       "saveTranslationRequest": "Tallenna käännöspyyntö",
       "cancelTranslationRequest": "Peru käännöspyyntö",
       "cancelTranslationTask": "Peru käännöstehtävä",
-      "requestSelectedTranslation": "Pyydä käännös valituille"
+      "requestSelectedTranslation": "Pyydä käännös valituille",
+      "returnToRequests": "Palaa pyyntöihin",
+      "saveDraft": "Tallenna luonnos",
+      "sendTranslation": "Lähetä käännös",
+      "done": "Valmis"
     },
     "message": {
       "notAuthenticated": {
@@ -605,7 +609,9 @@
       "cancelChange": "Oletko varma, että haluat peruuttaa muutoksen?",
       "cancelRemove": "Oletko varma, että haluat peruuttaa poiston?",
       "saveTranslationRequest": "Oletko varma, että haluat tallentaa käännöspyynnön?",
-      "cancelTranslationRequest": "Oletko varma, että haluat peruuttaa käännöspyynnön?"
+      "cancelTranslationRequest": "Oletko varma, että haluat peruuttaa käännöspyynnön?",
+      "saveDraft": "Oletko varma, että haluat tallentaa?",
+      "sendTranslation": "Oletko varma, että haluat lähettää käännöksen?"
     },
     "contact": {
       "title": "Muut yhteystiedot",
@@ -877,6 +883,20 @@
         "translator": "Kääntäjä",
         "status": "Tila",
         "empty": "(Ei nimeä)"
+      },
+      "task": {
+        "title": "Käännökset",
+        "basic": "Kohteen tiedot",
+        "photo": "Kuva"
+      },
+      "taskHeader": {
+        "taskType": "Tehtävätyyppi",
+        "created": "Luotu",
+        "status": "Tila",
+        "translator": "Kääntäjä",
+        "request": "Käännöspyyntö",
+        "moderator": "Moderoija",
+        "messageFromModerator": "Viesti"
       },
       "taskStatus": {
         "open": "Aloittamatta",

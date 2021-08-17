@@ -12,10 +12,12 @@ import ToastNotification from "../common/ToastNotification";
 import styles from "./TaskHeaderButtons.module.scss";
 
 interface TaskHeaderButtonsProps {
+  prefix: string;
+  backHref: string;
   isTranslated?: boolean;
 }
 
-const TaskHeaderButtons = ({ isTranslated }: TaskHeaderButtonsProps): ReactElement => {
+const TaskHeaderButtons = ({ prefix, backHref, isTranslated }: TaskHeaderButtonsProps): ReactElement => {
   const i18n = useI18n();
   const router = useRouter();
 
@@ -58,21 +60,21 @@ const TaskHeaderButtons = ({ isTranslated }: TaskHeaderButtonsProps): ReactEleme
     <div className={styles.taskHeaderButtons}>
       {taskType === TaskType.Translation && (
         <div className={styles.buttonRow}>
-          <Link href="/translation/request">
+          <Link href={backHref}>
             <Button variant="secondary" className={styles.returnButton}>
-              {i18n.t("translation.button.returnToRequests")}
+              {i18n.t(`${prefix}.button.returnToRequests`)}
             </Button>
           </Link>
           <div className="flexSpace" />
           <Button variant="secondary" onClick={openSaveDraftConfirmation} disabled={taskStatus === TaskStatus.Closed}>
-            {i18n.t("translation.button.saveDraft")}
+            {i18n.t(`${prefix}.button.saveDraft`)}
           </Button>
           <Button
             iconRight={<IconArrowRight aria-hidden />}
             onClick={openSaveConfirmation}
             disabled={!isTranslated || taskStatus === TaskStatus.Closed}
           >
-            {i18n.t("translation.button.sendTranslation")}
+            {i18n.t(`${prefix}.button.sendTranslation`)}
           </Button>
         </div>
       )}
@@ -80,10 +82,10 @@ const TaskHeaderButtons = ({ isTranslated }: TaskHeaderButtonsProps): ReactEleme
       {confirmSave && (
         <ModalConfirmation
           open={confirmSave}
-          titleKey="translation.button.sendTranslation"
-          messageKey="translation.confirmation.sendTranslation"
-          cancelKey="translation.button.back"
-          confirmKey="translation.button.save"
+          titleKey={`${prefix}.button.sendTranslation`}
+          messageKey={`${prefix}.confirmation.sendTranslation`}
+          cancelKey={`${prefix}.button.back`}
+          confirmKey={`${prefix}.button.save`}
           closeCallback={closeSaveConfirmation}
           confirmCallback={() => saveTask(false)}
         />
@@ -92,16 +94,16 @@ const TaskHeaderButtons = ({ isTranslated }: TaskHeaderButtonsProps): ReactEleme
       {confirmSaveDraft && (
         <ModalConfirmation
           open={confirmSaveDraft}
-          titleKey="translation.button.saveDraft"
-          messageKey="translation.confirmation.saveDraft"
-          cancelKey="translation.button.back"
-          confirmKey="translation.button.save"
+          titleKey={`${prefix}.button.saveDraft`}
+          messageKey={`${prefix}.confirmation.saveDraft`}
+          cancelKey={`${prefix}.button.back`}
+          confirmKey={`${prefix}.button.save`}
           closeCallback={closeSaveDraftConfirmation}
           confirmCallback={() => saveTask(true)}
         />
       )}
 
-      {toast && <ToastNotification prefix="translation" toast={toast} setToast={setToast} />}
+      {toast && <ToastNotification prefix={prefix} toast={toast} setToast={setToast} />}
     </div>
   );
 };
