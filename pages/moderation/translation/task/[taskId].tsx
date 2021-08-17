@@ -10,7 +10,7 @@ import { PhotoSchema, TranslationTodoSchema } from "../../../../types/general";
 import { PhotoTranslationStatus } from "../../../../types/translation_status";
 import { getTaskStatus, getTaskType } from "../../../../utils/conversion";
 import i18nLoader from "../../../../utils/i18n";
-import { checkUser, redirectToLogin, redirectToNotAuthorized } from "../../../../utils/serverside";
+import { checkUser, getOriginServerSide, redirectToLogin, redirectToNotAuthorized } from "../../../../utils/serverside";
 import Layout from "../../../../components/common/Layout";
 import ModerationHeader from "../../../../components/moderation/ModerationHeader";
 import Collapsible from "../../../../components/translation/Collapsible";
@@ -142,8 +142,8 @@ export const getServerSideProps: GetServerSideProps = async ({ req, resolvedUrl,
   // Try to fetch the task details for the specified id
   if (params) {
     const { taskId } = params;
-    // const taskResponse = await fetch(`${getOriginServerSide()}/api/moderation/translation/task/${taskId}/`, {
-    const taskResponse = await fetch(`http://localhost/mockapi/moderation/translation/task/${taskId}/`, {
+    const taskResponse = await fetch(`${getOriginServerSide()}/api/moderation/translation/task/${taskId}/`, {
+      // const taskResponse = await fetch(`http://localhost/mockapi/moderation/translation/task/${taskId}/`, {
       headers: { cookie: req.headers.cookie as string },
     });
 

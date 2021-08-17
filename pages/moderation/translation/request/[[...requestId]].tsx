@@ -3,9 +3,10 @@ import { useSelector } from "react-redux";
 import { GetServerSideProps } from "next";
 import Head from "next/head";
 import { useI18n } from "next-localization";
+import moment from "moment";
 import { RootState } from "../../../../state/reducers";
 import { initStore } from "../../../../state/store";
-import { CLEAR_STATE, INITIAL_NOTIFICATION, TaskStatus, TaskType } from "../../../../types/constants";
+import { CLEAR_STATE, DATETIME_FORMAT, INITIAL_NOTIFICATION, TaskStatus, TaskType } from "../../../../types/constants";
 import { ModerationPlaceResult, ModerationTranslationRequest, ModerationTranslationRequestResult } from "../../../../types/general";
 import { getTaskStatus, getTaskType } from "../../../../utils/conversion";
 import i18nLoader from "../../../../utils/i18n";
@@ -27,6 +28,7 @@ const ModerationTranslationRequestDetail = (): ReactElement => {
 
   const requestDetail = useSelector((state: RootState) => state.moderationTranslation.requestDetail);
   const { requestId, request, selectedPlaces } = requestDetail;
+  const formattedRequest = moment(request).format(DATETIME_FORMAT);
 
   useEffect(() => {
     if (ref.current) {
@@ -43,7 +45,7 @@ const ModerationTranslationRequestDetail = (): ReactElement => {
       <div>
         <h1 ref={ref} className="moderation">
           {requestId > 0
-            ? `${request} ${i18n.t("moderation.translation.request.title")} (${selectedPlaces.length})`
+            ? `${formattedRequest} ${i18n.t("moderation.translation.request.title")} (${selectedPlaces.length})`
             : i18n.t("moderation.translation.request.titleNew")}
         </h1>
       </div>
@@ -89,8 +91,8 @@ export const getServerSideProps: GetServerSideProps = async ({ req, resolvedUrl,
   // Try to fetch the request details for the specified id
   if (params) {
     const { requestId } = params;
-    // const requestResponse = await fetch(`${getOriginServerSide()}/api/moderation/translation/request/${requestId}/`, {
-    const requestResponse = await fetch(`http://localhost/mockapi/moderation/translation/request/${requestId}/`, {
+    const requestResponse = await fetch(`${getOriginServerSide()}/api/moderation/translation/request/${requestId}/`, {
+      // const requestResponse = await fetch(`http://localhost/mockapi/moderation/translation/request/${requestId}/`, {
       headers: { cookie: req.headers.cookie as string },
     });
 

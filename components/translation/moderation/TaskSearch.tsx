@@ -14,7 +14,7 @@ import {
   setModerationTranslationTaskResults,
 } from "../../../state/actions/moderationTranslation";
 import { RootState } from "../../../state/reducers";
-import { MAX_LENGTH } from "../../../types/constants";
+import { DATETIME_FORMAT, MAX_LENGTH } from "../../../types/constants";
 import { OptionType, ModerationTranslationRequestResult, ModerationTranslationTaskResult } from "../../../types/general";
 import { getTaskStatus, getTaskType } from "../../../utils/conversion";
 import getOrigin from "../../../utils/request";
@@ -44,8 +44,8 @@ const TaskSearch = (): ReactElement => {
   };
 
   const searchRequests = async () => {
-    // const requestResponse = await fetch(`${getOrigin(router)}/api/moderation/translation/request/find/?search=${placeName.trim()}`);
-    const requestResponse = await fetch(`${getOrigin(router)}/mockapi/moderation/translation/request/find/?search=${placeName.trim()}`);
+    const requestResponse = await fetch(`${getOrigin(router)}/api/moderation/translation/request/find/?search=${placeName.trim()}`);
+    // const requestResponse = await fetch(`${getOrigin(router)}/mockapi/moderation/translation/request/find/?search=${placeName.trim()}`);
     if (requestResponse.ok) {
       const requestResult = await (requestResponse.json() as Promise<{ count: number; next: string; results: ModerationTranslationRequestResult[] }>);
 
@@ -57,10 +57,6 @@ const TaskSearch = (): ReactElement => {
         dispatch(
           setModerationTranslationRequestResults({
             results: results
-              .filter((result) => {
-                const { request: resultRequest } = result;
-                return searchRequest.length === 0 || searchRequest === resultRequest;
-              })
               .map((result) => {
                 return {
                   ...result,
@@ -68,7 +64,12 @@ const TaskSearch = (): ReactElement => {
                   updated: moment(result.updated_at).toDate(),
                   taskType: getTaskType(result.category, result.item_type),
                   taskStatus: getTaskStatus(result.status),
+                  formattedRequest: moment(result.request).format(DATETIME_FORMAT),
                 };
+              })
+              .filter((result) => {
+                const { formattedRequest } = result;
+                return searchRequest.length === 0 || searchRequest === formattedRequest;
               }),
             count,
             next,
@@ -80,7 +81,7 @@ const TaskSearch = (): ReactElement => {
             ...requestSearch,
             requestOptions: [
               { id: "", label: "" },
-              ...convertOptions(results.map((result) => result.request).filter((v, i, a) => a.indexOf(v) === i)),
+              ...convertOptions(results.map((result) => moment(result.request).format(DATETIME_FORMAT)).filter((v, i, a) => a.indexOf(v) === i)),
             ],
             searchDone: true,
           })
@@ -102,8 +103,8 @@ const TaskSearch = (): ReactElement => {
   };
 
   const searchTasks = async () => {
-    // const taskResponse = await fetch(`${getOrigin(router)}/api/moderation/translation/task/find/?search=${placeName.trim()}`);
-    const taskResponse = await fetch(`${getOrigin(router)}/mockapi/moderation/translation/task/find/?search=${placeName.trim()}`);
+    const taskResponse = await fetch(`${getOrigin(router)}/api/moderation/translation/task/find/?search=${placeName.trim()}`);
+    // const taskResponse = await fetch(`${getOrigin(router)}/mockapi/moderation/translation/task/find/?search=${placeName.trim()}`);
     if (taskResponse.ok) {
       const taskResult = await (taskResponse.json() as Promise<{ count: number; next: string; results: ModerationTranslationTaskResult[] }>);
 
@@ -115,10 +116,6 @@ const TaskSearch = (): ReactElement => {
         dispatch(
           setModerationTranslationTaskResults({
             results: results
-              .filter((result) => {
-                const { request: resultRequest } = result;
-                return searchRequest.length === 0 || searchRequest === resultRequest;
-              })
               .map((result) => {
                 return {
                   ...result,
@@ -126,7 +123,12 @@ const TaskSearch = (): ReactElement => {
                   updated: moment(result.updated_at).toDate(),
                   taskType: getTaskType(result.category, result.item_type),
                   taskStatus: getTaskStatus(result.status),
+                  formattedRequest: moment(result.request).format(DATETIME_FORMAT),
                 };
+              })
+              .filter((result) => {
+                const { formattedRequest } = result;
+                return searchRequest.length === 0 || searchRequest === formattedRequest;
               }),
             count,
             next,
@@ -138,7 +140,7 @@ const TaskSearch = (): ReactElement => {
             ...taskSearch,
             requestOptions: [
               { id: "", label: "" },
-              ...convertOptions(results.map((result) => result.request).filter((v, i, a) => a.indexOf(v) === i)),
+              ...convertOptions(results.map((result) => moment(result.request).format(DATETIME_FORMAT)).filter((v, i, a) => a.indexOf(v) === i)),
             ],
             searchDone: true,
           })

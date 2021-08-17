@@ -1,4 +1,4 @@
-import React, { Dispatch, ChangeEvent, ReactElement, Fragment } from "react";
+import React, { Dispatch, ChangeEvent, ReactElement, Fragment, useMemo } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import Link from "next/link";
 import { useI18n } from "next-localization";
@@ -7,6 +7,7 @@ import moment from "moment";
 import { ModerationTranslationAction } from "../../../state/actions/moderationTranslationTypes";
 import { setModerationTranslationRequestResults, setModerationTranslationSelectedRequests } from "../../../state/actions/moderationTranslation";
 import { RootState } from "../../../state/reducers";
+import { DATETIME_FORMAT } from "../../../types/constants";
 import { ModerationTranslationRequestResult } from "../../../types/general";
 import { getTaskStatus, getTaskType } from "../../../utils/conversion";
 import TaskStatusLabel from "../../common/TaskStatusLabel";
@@ -43,10 +44,6 @@ const RequestResults = (): ReactElement => {
               results: [
                 ...results,
                 ...moreResults
-                  .filter((result) => {
-                    const { request: resultRequest } = result;
-                    return searchRequest.length === 0 || searchRequest === resultRequest;
-                  })
                   .map((result) => {
                     return {
                       ...result,
@@ -54,7 +51,12 @@ const RequestResults = (): ReactElement => {
                       updated: moment(result.updated_at).toDate(),
                       taskType: getTaskType(result.category, result.item_type),
                       taskStatus: getTaskStatus(result.status),
+                      formattedRequest: moment(result.request).format(DATETIME_FORMAT),
                     };
+                  })
+                  .filter((result) => {
+                    const { formattedRequest } = result;
+                    return searchRequest.length === 0 || searchRequest === formattedRequest;
                   }),
               ],
               count,
@@ -90,15 +92,25 @@ const RequestResults = (): ReactElement => {
     // TODO
   };
 
+  // The results array includes duplicate translation requests, so reduce them to get the distinct requests
+  const resultsReduced = useMemo(
+    () =>
+      results.reduce((acc: ModerationTranslationRequestResult[], result) => {
+        const resultExists = acc.some((r) => r.id === result.id);
+        return !resultExists ? [...acc, result] : acc;
+      }, []),
+    [results]
+  );
+
   return (
     <div className={`formSection ${styles.requestResults}`}>
-      {results.length > 0 && (
-        <h2 className="moderation">{`${i18n.t("moderation.translation.requestResults.found")} ${results.length} / ${count} ${i18n.t(
+      {resultsReduced.length > 0 && (
+        <h2 className="moderation">{`${i18n.t("moderation.translation.requestResults.found")} ${resultsReduced.length} / ${count} ${i18n.t(
           "moderation.translation.requestResults.requests"
         )}`}</h2>
       )}
 
-      {results.length > 0 && (
+      {resultsReduced.length > 0 && (
         <div className={styles.optionsRow}>
           <Checkbox
             id="selectAllRequests"
@@ -115,9 +127,9 @@ const RequestResults = (): ReactElement => {
         </div>
       )}
 
-      {searchDone && results.length === 0 && <h2>{i18n.t("moderation.translation.requestResults.notFound")}</h2>}
+      {searchDone && resultsReduced.length === 0 && <h2>{i18n.t("moderation.translation.requestResults.notFound")}</h2>}
 
-      {results.length > 0 && (
+      {resultsReduced.length > 0 && (
         <div className={`gridLayoutContainer ${styles.results}`}>
           <div className={`${styles.gridColumn1} ${styles.gridHeader}`}>{i18n.t("moderation.translation.requestResults.translationRequest")}</div>
           <div className={`${styles.gridColumn2} ${styles.gridHeader}`}>{i18n.t("moderation.translation.requestResults.translator")}</div>
@@ -125,10 +137,10 @@ const RequestResults = (): ReactElement => {
           <div className={`${styles.gridColumn4} ${styles.gridHeader}`}>{i18n.t("moderation.translation.requestResults.translationTasks")}</div>
           <div className={`${styles.gridColumn5} ${styles.gridHeader}`}>{i18n.t("moderation.translation.requestResults.status")}</div>
 
-          {results
+          {resultsReduced
             .sort((a: ModerationTranslationRequestResult, b: ModerationTranslationRequestResult) => b.updated.getTime() - a.updated.getTime())
             .map((result) => {
-              const { id: requestId, request: resultRequest, language, tasks, translator, taskStatus } = result;
+              const { id: requestId, formattedRequest, language, tasks, translator, taskStatus } = result;
               const { from: translateFrom, to: translateTo } = language;
 
               return (
@@ -144,7 +156,7 @@ const RequestResults = (): ReactElement => {
 
                       <Link href={`/moderation/translation/request/${requestId}`}>
                         <Button variant="supplementary" size="small" iconLeft={<IconPen aria-hidden />}>
-                          {resultRequest}
+                          {formattedRequest}
                         </Button>
                       </Link>
                     </div>

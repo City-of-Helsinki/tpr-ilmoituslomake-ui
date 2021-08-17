@@ -466,6 +466,7 @@ export interface ModerationTranslationRequestResult {
   updated: Date;
   taskType: TaskType;
   taskStatus: TaskStatus;
+  formattedRequest: string;
 }
 
 export interface ModerationTranslationRequestResults {
@@ -509,6 +510,7 @@ export interface ModerationTranslationTaskResult {
   updated: Date;
   taskType: TaskType;
   taskStatus: TaskStatus;
+  formattedRequest: string;
 }
 
 export interface ModerationTranslationTaskResults {

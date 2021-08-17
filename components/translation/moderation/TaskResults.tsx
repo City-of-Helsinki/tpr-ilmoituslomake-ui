@@ -8,6 +8,7 @@ import moment from "moment";
 import { ModerationTranslationAction } from "../../../state/actions/moderationTranslationTypes";
 import { setModerationTranslationSelectedTasks, setModerationTranslationTaskResults } from "../../../state/actions/moderationTranslation";
 import { RootState } from "../../../state/reducers";
+import { DATETIME_FORMAT } from "../../../types/constants";
 import { ModerationTranslationTaskResult } from "../../../types/general";
 import { getTaskStatus, getTaskType } from "../../../utils/conversion";
 import { getDisplayName } from "../../../utils/helper";
@@ -47,10 +48,6 @@ const TaskResults = (): ReactElement => {
               results: [
                 ...results,
                 ...moreResults
-                  .filter((result) => {
-                    const { request: resultRequest } = result;
-                    return searchRequest.length === 0 || searchRequest === resultRequest;
-                  })
                   .map((result) => {
                     return {
                       ...result,
@@ -58,7 +55,12 @@ const TaskResults = (): ReactElement => {
                       updated: moment(result.updated_at).toDate(),
                       taskType: getTaskType(result.category, result.item_type),
                       taskStatus: getTaskStatus(result.status),
+                      formattedRequest: moment(result.request).format(DATETIME_FORMAT),
                     };
+                  })
+                  .filter((result) => {
+                    const { formattedRequest } = result;
+                    return searchRequest.length === 0 || searchRequest === formattedRequest;
                   }),
               ],
               count,
@@ -130,7 +132,7 @@ const TaskResults = (): ReactElement => {
           {results
             .sort((a: ModerationTranslationTaskResult, b: ModerationTranslationTaskResult) => b.updated.getTime() - a.updated.getTime())
             .map((result) => {
-              const { id: taskId, request: resultRequest, language, target, translator, taskStatus } = result;
+              const { id: taskId, formattedRequest, language, target, translator, taskStatus } = result;
               const { id: targetId, name } = target || {};
               const { from: translateFrom, to: translateTo } = language;
 
@@ -154,7 +156,7 @@ const TaskResults = (): ReactElement => {
                       </Link>
                     </div>
                   </div>
-                  <div className={`${styles.gridColumn2} ${styles.gridContent}`}>{resultRequest}</div>
+                  <div className={`${styles.gridColumn2} ${styles.gridContent}`}>{formattedRequest}</div>
                   <div className={`${styles.gridColumn3} ${styles.gridContent}`}>{`${translateFrom.toUpperCase()}-${translateTo.toUpperCase()}`}</div>
                   <div className={`${styles.gridColumn4} ${styles.gridContent}`}>{translator.name}</div>
                   <div className={`${styles.gridColumn5} ${styles.gridContent}`}>
