@@ -29,8 +29,8 @@ export const saveTranslation = async (
         data: {
           ...translatedTask,
           images: translatedPhotos.map((photo, index) => {
-            const { uuid, sourceType: source_type, url, altText: alt_text, permission, source } = photo;
-            return { index, uuid, source_type, url, alt_text, permission, source };
+            const { uuid, altText: alt_text, source } = photo;
+            return { index, uuid, alt_text, source };
           }),
         },
       };

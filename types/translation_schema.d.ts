@@ -10,14 +10,10 @@
  */
 export interface TranslationSchema {
   language: string;
-  organization: {
-    [k: string]: unknown;
-  };
   name: {
     lang: string;
     [k: string]: unknown;
   };
-  location: [number, number];
   description: {
     short: {
       lang: string;
@@ -29,27 +25,6 @@ export interface TranslationSchema {
     };
     [k: string]: unknown;
   };
-  address: {
-    fi: {
-      street: string;
-      postal_code: string;
-      post_office: string;
-      neighborhood_id: string;
-      neighborhood: string;
-      [k: string]: unknown;
-    };
-    sv: {
-      street: string;
-      postal_code: string;
-      post_office: string;
-      neighborhood_id: string;
-      neighborhood: string;
-      [k: string]: unknown;
-    };
-    [k: string]: unknown;
-  };
-  phone: string;
-  email: string;
   website: {
     lang: string;
     [k: string]: unknown;
@@ -57,9 +32,6 @@ export interface TranslationSchema {
   images: {
     index: number;
     uuid: string;
-    source_type: string;
-    url: string;
-    permission: string;
     source: string;
     alt_text: {
       lang: string;
@@ -67,19 +39,5 @@ export interface TranslationSchema {
     };
     [k: string]: unknown;
   }[];
-  opening_times: {
-    [k: string]: unknown;
-  };
-  ontology_ids: number[];
-  matko_ids: number[];
-  extra_keywords: string[];
-  comments: string;
-  notifier: {
-    notifier_type: string;
-    full_name: string;
-    email: string;
-    phone: string;
-    [k: string]: unknown;
-  };
   [k: string]: unknown;
 }

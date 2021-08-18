@@ -108,54 +108,27 @@ const handler = (req: NextApiRequest, res: NextApiResponse): void => {
       name: {
         lang: "test_chinese",
       },
-      email: "a@b.c",
-      phone: "123",
       images: [
         {
-          url: "https://tprimages.blob.core.windows.net/tpr-notification-dev-public/1/084f941a-90aa-4690-a18a-3f5cff72932c.jpg",
           uuid: "084f941a-90aa-4690-a18a-3f5cff72932c",
           index: 0,
           source: "test_chinese",
           alt_text: {
             lang: "test_chinese",
           },
-          permission: "myHelsinki",
-          source_type: "device",
         },
         {
-          url: "https://tprimages.blob.core.windows.net/tpr-notification-dev-public/1/573de7d7-c463-45ce-b299-0890e555dd22.jpg",
           uuid: "573de7d7-c463-45ce-b299-0890e555dd22",
           index: 1,
           source: "test_chinese",
           alt_text: {
             lang: "test_chinese",
           },
-          permission: "creativeCommons",
-          source_type: "link",
         },
       ],
-      address: {
-        fi: {
-          street: "mannerheimintie 10",
-          post_office: "helsinki",
-          postal_code: "00100",
-          neighborhood: "Kamppi",
-          neighborhood_id: "91-004",
-        },
-        sv: {
-          street: "",
-          post_office: "",
-          postal_code: "",
-          neighborhood: "",
-          neighborhood_id: "",
-        },
-      },
       website: {
         lang: "http://www.fi",
       },
-      comments: "test",
-      location: [60.1675352, 24.9409737],
-      matko_ids: [],
       description: {
         long: {
           lang: "testtesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttest_chinese",
@@ -164,10 +137,6 @@ const handler = (req: NextApiRequest, res: NextApiResponse): void => {
           lang: "test_chinese",
         },
       },
-      ontology_ids: [869],
-      organization: {},
-      opening_times: {},
-      extra_keywords: ["extra"],
     },
     translator: {
       name: "Anthony Brown",

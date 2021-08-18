@@ -81,31 +81,10 @@ const handler = (req: NextApiRequest, res: NextApiResponse): void => {
       name: {
         lang: "test_chinese",
       },
-      email: "a@b.c",
-      phone: "123",
       images: [],
-      address: {
-        fi: {
-          street: "mannerheimintie 10",
-          post_office: "helsinki",
-          postal_code: "00100",
-          neighborhood: "Kamppi",
-          neighborhood_id: "91-004",
-        },
-        sv: {
-          street: "",
-          post_office: "",
-          postal_code: "",
-          neighborhood: "",
-          neighborhood_id: "",
-        },
-      },
       website: {
         lang: "http://www.fi",
       },
-      comments: "test",
-      location: [60.1675352, 24.9409737],
-      matko_ids: [],
       description: {
         long: {
           lang: "testtesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttest_chinese",
@@ -114,10 +93,6 @@ const handler = (req: NextApiRequest, res: NextApiResponse): void => {
           lang: "test_chinese",
         },
       },
-      ontology_ids: [869],
-      organization: {},
-      opening_times: {},
-      extra_keywords: ["extra"],
     },
     translator: {
       name: "Anthony Brown",

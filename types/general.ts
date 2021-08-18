@@ -77,17 +77,11 @@ export interface Photo {
 
 export interface PhotoTranslation {
   uuid: string;
-  sourceType: string;
-  url: string;
   altText: {
     lang: string;
     [key: string]: unknown;
   };
-  permission?: string;
   source: string;
-  new?: boolean;
-  base64?: string;
-  preview?: string;
   [key: string]: unknown;
 }
 

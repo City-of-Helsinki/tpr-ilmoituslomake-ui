@@ -48,12 +48,7 @@ const ModerationTranslationTaskDetail = (): ReactElement => {
     const option = "lang";
 
     // Photos
-    const photoTranslated = [
-      isTranslated(translationStatus.photos[index].url),
-      isTranslated(translationStatus.photos[index].altText[option]),
-      isTranslated(translationStatus.photos[index].permission),
-      isTranslated(translationStatus.photos[index].source),
-    ];
+    const photoTranslated = [isTranslated(translationStatus.photos[index].altText[option]), isTranslated(translationStatus.photos[index].source)];
 
     return photoTranslated.every((tra) => tra);
   };
@@ -203,15 +198,10 @@ export const getServerSideProps: GetServerSideProps = async ({ req, resolvedUrl,
 
               return {
                 uuid: image.uuid ?? "",
-                sourceType: image.source_type ?? "",
-                url: image.url ?? "",
                 altText: {
                   lang: image.alt_text.lang ?? "",
                 },
-                permission: image.permission ?? "",
                 source: image.source ?? "",
-                base64: "",
-                preview: image.url ?? "",
               };
             }),
           },
@@ -223,11 +213,9 @@ export const getServerSideProps: GetServerSideProps = async ({ req, resolvedUrl,
             ...initialReduxState.translationStatus.translationStatus,
             photos: translatedTask.images.map(() => {
               return {
-                url: TranslationStatus.Unknown,
                 altText: {
                   lang: TranslationStatus.Unknown,
                 },
-                permission: TranslationStatus.Unknown,
                 source: TranslationStatus.Unknown,
               } as PhotoTranslationStatus;
             }),

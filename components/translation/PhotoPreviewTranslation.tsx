@@ -10,8 +10,8 @@ interface PhotoPreviewTranslationProps {
 
 const PhotoPreviewTranslation = ({ index }: PhotoPreviewTranslationProps): ReactElement => {
   const translationExtra = useSelector((state: RootState) => state.translation.translationExtra);
-  const { photosTranslated, taskType } = translationExtra;
-  const { preview: previewTranslated } = photosTranslated[index] || {};
+  const { photosSelected, taskType } = translationExtra;
+  const { preview: previewTranslated } = photosSelected[index] || {};
 
   if (taskType === TaskType.Translation) {
     return (

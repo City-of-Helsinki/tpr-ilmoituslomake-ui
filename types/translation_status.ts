@@ -1,12 +1,10 @@
 import { TranslationStatus } from "./constants";
 
 export interface PhotoTranslationStatus {
-  url: TranslationStatus;
   altText: {
     lang: TranslationStatus;
     [key: string]: TranslationStatus;
   };
-  permission: TranslationStatus;
   source: TranslationStatus;
   [key: string]: TranslationStatus | unknown;
 }
