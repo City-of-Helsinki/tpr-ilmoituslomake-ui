@@ -97,16 +97,18 @@ const TaskSearch = (): ReactElement => {
           maxLength={MAX_LENGTH}
           onChange={updateSearchText}
         />
-        <Select
-          id="request"
-          className={styles.gridInputRequest}
-          options={requestOptions}
-          value={convertValue(searchRequest)}
-          onChange={updateSearchRequestOption}
-          label={i18n.t("translation.taskSearch.request.label")}
-          selectedItemRemoveButtonAriaLabel={i18n.t("translation.button.remove")}
-          clearButtonAriaLabel={i18n.t("translation.button.clearAllSelections")}
-        />
+        {requestOptions.length > 0 && (
+          <Select
+            id="request"
+            className={styles.gridInputRequest}
+            options={requestOptions}
+            value={convertValue(searchRequest)}
+            onChange={updateSearchRequestOption}
+            label={i18n.t("translation.taskSearch.request.label")}
+            selectedItemRemoveButtonAriaLabel={i18n.t("translation.button.remove")}
+            clearButtonAriaLabel={i18n.t("translation.button.clearAllSelections")}
+          />
+        )}
         <div className={styles.gridButton}>
           <Button onClick={searchTasks}>{i18n.t("translation.button.search")}</Button>
         </div>

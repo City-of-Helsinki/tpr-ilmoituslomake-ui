@@ -31,7 +31,7 @@ const TaskSearch = (): ReactElement => {
 
   const convertOptions = (options: string[]): OptionType[] => options.map((option) => ({ id: option, label: option }));
 
-  // const convertValue = (value: string | undefined): OptionType | undefined => requestOptions.find((t) => t.id === value);
+  const convertValue = (value: string | undefined): OptionType | undefined => requestOptions.find((t) => t.id === value);
 
   const updateSearchText = (evt: ChangeEvent<HTMLInputElement>) => {
     dispatch(setModerationTranslationRequestSearch({ ...requestSearch, [evt.target.name]: evt.target.value }));
@@ -187,16 +187,18 @@ const TaskSearch = (): ReactElement => {
           maxLength={MAX_LENGTH}
           onChange={updateSearchText}
         />
-        <Select
-          id="request"
-          className={styles.gridInputRequest}
-          options={requestOptions}
-          // value={convertValue(searchRequest)}
-          onChange={updateSearchRequestOption}
-          label={i18n.t("moderation.translation.taskSearch.request.label")}
-          selectedItemRemoveButtonAriaLabel={i18n.t("moderation.button.remove")}
-          clearButtonAriaLabel={i18n.t("moderation.button.clearAllSelections")}
-        />
+        {requestOptions.length > 0 && (
+          <Select
+            id="request"
+            className={styles.gridInputRequest}
+            options={requestOptions}
+            value={convertValue(searchRequest)}
+            onChange={updateSearchRequestOption}
+            label={i18n.t("moderation.translation.taskSearch.request.label")}
+            selectedItemRemoveButtonAriaLabel={i18n.t("moderation.button.remove")}
+            clearButtonAriaLabel={i18n.t("moderation.button.clearAllSelections")}
+          />
+        )}
         <div className={styles.gridButton}>
           <Button onClick={searchRequestsAndTasks}>{i18n.t("moderation.button.search")}</Button>
         </div>
