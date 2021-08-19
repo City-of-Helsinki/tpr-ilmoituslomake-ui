@@ -232,3 +232,20 @@ button:hover {
 .MuiStepConnector-line {
   border-color: $color-black-70;
 }
+
+.MuiLinearProgress-root {
+  height: $spacing-m !important;
+  border-radius: $spacing-s;
+}
+
+.MuiLinearProgress-bar {
+  border-radius: $spacing-s;
+}
+
+.MuiLinearProgress-barColorPrimary {
+  background-color: $color-copper !important;
+}
+
+.MuiLinearProgress-colorPrimary {
+  background-color: $color-silver !important;
+}

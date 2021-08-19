@@ -1,14 +1,16 @@
-import React, { Dispatch, ReactElement, Fragment } from "react";
+import React, { Dispatch, ReactElement, Fragment, useMemo, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useI18n } from "next-localization";
-import { Button, IconPen } from "hds-react";
+import { Button, IconPen, RadioButton, SelectionGroup } from "hds-react";
+import { LinearProgress } from "@material-ui/core";
 import moment from "moment";
 import { TranslationAction } from "../../state/actions/translationTypes";
-import { setTranslationTaskResults } from "../../state/actions/translation";
+import { setTranslationTaskResults, setTranslationTaskSearch } from "../../state/actions/translation";
 import { RootState } from "../../state/reducers";
-import { TranslationTodoResult } from "../../types/general";
+import { TaskStatus } from "../../types/constants";
+import { TranslationRequestResult, TranslationTodoResult } from "../../types/general";
 import { getTaskStatus, getTaskType } from "../../utils/conversion";
 import { getDisplayName } from "../../utils/helper";
 import { defaultLocale } from "../../utils/i18n";
@@ -25,6 +27,8 @@ const TaskResults = (): ReactElement => {
   const taskSearch = useSelector((state: RootState) => state.translation.taskSearch);
   const { request: searchRequest, searchDone } = taskSearch;
 
+  const [showResults, setShowResults] = useState<string>("requests");
+
   const fetchMoreResults = async () => {
     if (next) {
       const taskResponse = await fetch(next);
@@ -40,20 +44,15 @@ const TaskResults = (): ReactElement => {
             setTranslationTaskResults({
               results: [
                 ...results,
-                ...moreResults
-                  .filter((result) => {
-                    const { request: resultRequest } = result;
-                    return searchRequest.length === 0 || searchRequest === resultRequest;
-                  })
-                  .map((result) => {
-                    return {
-                      ...result,
-                      created: moment(result.created_at).toDate(),
-                      updated: moment(result.updated_at).toDate(),
-                      taskType: getTaskType(result.category, result.item_type),
-                      taskStatus: getTaskStatus(result.status),
-                    };
-                  }),
+                ...moreResults.map((result) => {
+                  return {
+                    ...result,
+                    created: moment(result.created_at).toDate(),
+                    updated: moment(result.updated_at).toDate(),
+                    taskType: getTaskType(result.category, result.item_type),
+                    taskStatus: getTaskStatus(result.status),
+                  };
+                }),
               ],
               count,
               next: nextBatch,
@@ -64,30 +63,170 @@ const TaskResults = (): ReactElement => {
     }
   };
 
+  const updateSearchRequestOption = (request: string) => {
+    dispatch(setTranslationTaskSearch({ ...taskSearch, request }));
+    setShowResults("tasks");
+  };
+
+  const requestResults = useMemo(
+    () =>
+      results.reduce((acc: TranslationRequestResult[], result) => {
+        const { id: taskId, target, taskType, taskStatus } = result;
+        const taskResult = { id: taskId, target, taskType, taskStatus };
+
+        const requestResult = acc.find((r) => r.id === result.requestId);
+        if (!requestResult) {
+          // Create the request data
+          const { requestId, request, language, moderator, updated_at, updated } = result;
+          const newRequestResult = {
+            id: requestId,
+            request,
+            language,
+            tasks: [taskResult],
+            moderator,
+            updated_at,
+            updated,
+          };
+          return [...acc, newRequestResult];
+        }
+
+        // Add the task to the existing request data
+        requestResult.tasks = [...requestResult.tasks, taskResult];
+        return acc;
+      }, []),
+    [results]
+  );
+
+  const filteredRequestResults = useMemo(
+    () =>
+      requestResults.filter((result) => {
+        const { request: resultRequest } = result;
+        return searchRequest.length === 0 || searchRequest === resultRequest;
+      }),
+    [requestResults, searchRequest]
+  );
+
+  const filteredTaskResults = useMemo(
+    () =>
+      results.filter((result) => {
+        const { request: resultRequest } = result;
+        return searchRequest.length === 0 || searchRequest === resultRequest;
+      }),
+    [results, searchRequest]
+  );
+
   return (
     <div className={`formSection ${styles.taskResults}`}>
-      {results.length > 0 && (
-        <h2>{`${i18n.t("translation.taskResults.found")} ${results.length} / ${count} ${i18n.t("translation.taskResults.tasks")}`}</h2>
+      {showResults === "requests" && filteredRequestResults.length > 0 && (
+        <h2>{`${i18n.t("translation.requestResults.found")} ${filteredRequestResults.length} / ${requestResults.length} ${i18n.t(
+          "translation.requestResults.requests"
+        )}`}</h2>
       )}
 
-      {searchDone && results.length === 0 && <h2>{i18n.t("translation.taskResults.notFound")}</h2>}
+      {showResults === "tasks" && filteredTaskResults.length > 0 && (
+        <h2>{`${i18n.t("translation.taskResults.found")} ${filteredTaskResults.length} / ${count} ${i18n.t("translation.taskResults.tasks")}`}</h2>
+      )}
 
-      {results.length > 0 && (
+      <div className={styles.showResults}>
+        <div>{i18n.t("translation.taskSearch.showResults.show")}</div>
+        <SelectionGroup id="showResults" direction="horizontal">
+          <RadioButton
+            id="showResults_requests"
+            label={i18n.t("translation.taskSearch.showResults.requests")}
+            name="showResult"
+            value="requests"
+            checked={showResults === "requests"}
+            onChange={() => setShowResults("requests")}
+          />
+          <RadioButton
+            id="showResults_tasks"
+            label={i18n.t("translation.taskSearch.showResults.tasks")}
+            name="showResult"
+            value="tasks"
+            checked={showResults === "tasks"}
+            onChange={() => setShowResults("tasks")}
+          />
+        </SelectionGroup>
+      </div>
+
+      {searchDone && showResults === "requests" && filteredRequestResults.length === 0 && <h2>{i18n.t("translation.requestResults.notFound")}</h2>}
+
+      {showResults === "requests" && filteredRequestResults.length > 0 && (
+        <div className={`gridLayoutContainer ${styles.results}`}>
+          <div className={`${styles.gridColumn1} ${styles.gridHeader}`}>{i18n.t("translation.requestResults.translationRequest")}</div>
+          <div className={`${styles.gridColumn2} ${styles.gridHeader}`}>{i18n.t("translation.requestResults.moderator")}</div>
+          <div className={`${styles.gridColumn3} ${styles.gridHeader}`}>{i18n.t("translation.requestResults.type")}</div>
+          <div className={`${styles.gridColumn4} ${styles.gridHeader}`}>{i18n.t("translation.requestResults.status")}</div>
+          {filteredRequestResults
+            .sort((a: TranslationRequestResult, b: TranslationRequestResult) => b.updated.getTime() - a.updated.getTime())
+            .map((result) => {
+              const { id: requestId, request: resultRequest, moderator, tasks } = result;
+              const counts = tasks.reduce(
+                (acc: { [key: string]: number }, task) => {
+                  acc[task.taskStatus] += 1;
+                  return acc;
+                },
+                { [TaskStatus.Open]: 0, [TaskStatus.InProgress]: 0, [TaskStatus.Closed]: 0 }
+              );
+              const completed = (100 * counts[TaskStatus.Closed]) / tasks.length;
+
+              return (
+                <Fragment key={`requestresult_${requestId}`}>
+                  <div className={`${styles.gridColumn1} ${styles.gridContent} ${styles.gridButton}`}>
+                    <Button
+                      variant="supplementary"
+                      size="small"
+                      iconLeft={<IconPen aria-hidden />}
+                      onClick={() => updateSearchRequestOption(resultRequest)}
+                    >
+                      {resultRequest}
+                    </Button>
+                  </div>
+                  <div className={`${styles.gridColumn2} ${styles.gridContent}`}>
+                    {moderator ? `${moderator.first_name} ${moderator.last_name}`.trim() : ""}
+                  </div>
+                  <div className={`${styles.gridColumn3} ${styles.gridContent}`}>
+                    {/* <TaskStatusLabel prefix="translation" status={taskStatus} includeIcons /> */}
+                  </div>
+                  <div className={`${styles.gridColumn4} ${styles.gridContent}`}>
+                    <div className={styles.progressBar}>
+                      <LinearProgress variant="determinate" value={completed} />
+                    </div>
+                    <div className={styles.counts}>
+                      <span className={styles.count}>{`${completed.toFixed()}%`}</span>
+                      <span className={styles.label}>completed</span>
+                      <span className={styles.count}>{counts[TaskStatus.Open]}</span>
+                      <span className={styles.label}>new</span>
+                      <span className={styles.count}>{counts[TaskStatus.InProgress]}</span>
+                      <span className={styles.label}>draft</span>
+                      <span className={styles.count}>{counts[TaskStatus.Closed]}</span>
+                      <span className={styles.label}>done</span>
+                    </div>
+                  </div>
+                </Fragment>
+              );
+            })}
+        </div>
+      )}
+
+      {searchDone && showResults === "tasks" && filteredTaskResults.length === 0 && <h2>{i18n.t("translation.taskResults.notFound")}</h2>}
+
+      {showResults === "tasks" && filteredTaskResults.length > 0 && (
         <div className={`gridLayoutContainer ${styles.results}`}>
           <div className={`${styles.gridColumn1} ${styles.gridHeader}`}>{i18n.t("translation.taskResults.translationTask")}</div>
           <div className={`${styles.gridColumn2} ${styles.gridHeader}`}>{i18n.t("translation.taskResults.request")}</div>
           <div className={`${styles.gridColumn3} ${styles.gridHeader}`}>{i18n.t("translation.taskResults.moderator")}</div>
           <div className={`${styles.gridColumn4} ${styles.gridHeader}`}>{i18n.t("translation.taskResults.status")}</div>
-          {results
+          {filteredTaskResults
             .sort((a: TranslationTodoResult, b: TranslationTodoResult) => b.updated.getTime() - a.updated.getTime())
             .map((result) => {
-              const { id, request: resultRequest, target, moderator, taskStatus } = result;
+              const { id: taskId, request: resultRequest, target, moderator, taskStatus } = result;
               const { id: targetId, name } = target || {};
 
               return (
-                <Fragment key={`taskresult_${id}`}>
+                <Fragment key={`taskresult_${taskId}`}>
                   <div className={`${styles.gridColumn1} ${styles.gridContent} ${styles.gridButton}`}>
-                    <Link href={`/translation/task/${id}`}>
+                    <Link href={`/translation/task/${taskId}`}>
                       <Button variant="supplementary" size="small" iconLeft={<IconPen aria-hidden />}>
                         {`${getDisplayName(router.locale || defaultLocale, name, undefined, i18n.t("translation.taskResults.empty"))}${
                           targetId ? ` (${targetId})` : ""

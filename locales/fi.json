@@ -443,7 +443,22 @@
       },
       "request": {
         "label": "Request"
+      },
+      "showResults": {
+        "show": "View",
+        "requests": "Translation requests",
+        "tasks": "Individual tasks"
       }
+    },
+    "requestResults": {
+      "found": "Found",
+      "requests": "requests",
+      "notFound": "Requests not found",
+      "translationRequest": "Request",
+      "moderator": "From",
+      "type": "Type",
+      "status": "Status",
+      "empty": "(No name)"
     },
     "taskResults": {
       "found": "Found",

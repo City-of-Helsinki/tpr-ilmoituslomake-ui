@@ -23,7 +23,7 @@ const TaskSearch = (): ReactElement => {
 
   const convertOptions = (options: string[]): OptionType[] => options.map((option) => ({ id: option, label: option }));
 
-  // const convertValue = (value: string | undefined): OptionType | undefined => requestOptions.find((t) => t.id === value);
+  const convertValue = (value: string | undefined): OptionType | undefined => requestOptions.find((t) => t.id === value);
 
   const updateSearchText = (evt: ChangeEvent<HTMLInputElement>) => {
     dispatch(setTranslationTaskSearch({ ...taskSearch, [evt.target.name]: evt.target.value }));
@@ -46,20 +46,15 @@ const TaskSearch = (): ReactElement => {
 
         dispatch(
           setTranslationTaskResults({
-            results: results
-              .filter((result) => {
-                const { request: resultRequest } = result;
-                return searchRequest.length === 0 || searchRequest === resultRequest;
-              })
-              .map((result) => {
-                return {
-                  ...result,
-                  created: moment(result.created_at).toDate(),
-                  updated: moment(result.updated_at).toDate(),
-                  taskType: getTaskType(result.category, result.item_type),
-                  taskStatus: getTaskStatus(result.status),
-                };
-              }),
+            results: results.map((result) => {
+              return {
+                ...result,
+                created: moment(result.created_at).toDate(),
+                updated: moment(result.updated_at).toDate(),
+                taskType: getTaskType(result.category, result.item_type),
+                taskStatus: getTaskStatus(result.status),
+              };
+            }),
             count,
             next,
           })
@@ -106,7 +101,7 @@ const TaskSearch = (): ReactElement => {
           id="request"
           className={styles.gridInputRequest}
           options={requestOptions}
-          // value={convertValue(searchRequest)}
+          value={convertValue(searchRequest)}
           onChange={updateSearchRequestOption}
           label={i18n.t("translation.taskSearch.request.label")}
           selectedItemRemoveButtonAriaLabel={i18n.t("translation.button.remove")}

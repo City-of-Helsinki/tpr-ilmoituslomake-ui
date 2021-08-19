@@ -160,6 +160,35 @@ export interface TranslationTaskSearch {
   searchDone: boolean;
 }
 
+export interface TranslationRequestResult {
+  id: number;
+  request: string;
+  language: {
+    from: string;
+    to: string;
+  };
+  tasks: {
+    id: number;
+    target: {
+      id: number;
+      name: {
+        fi: string;
+        sv: string;
+        en: string;
+      };
+    };
+    taskType: TaskType;
+    taskStatus: TaskStatus;
+  }[];
+  moderator: {
+    first_name: string;
+    last_name: string;
+    email: string;
+  };
+  updated_at: string;
+  updated: Date;
+}
+
 export interface TranslationTodoResult {
   id: number;
   requestId: number;

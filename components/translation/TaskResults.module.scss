@@ -1,6 +1,17 @@
 @import "~hds-design-tokens/lib/all.scss";
 
 .taskResults {
+  .showResults {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-end;
+    margin-bottom: $spacing-layout-s;
+
+    fieldset {
+      margin-left: $spacing-s;
+    }
+  }
+
   .gridColumn1 {
     grid-column: 1 / 1;
   }
@@ -41,6 +52,21 @@
       &:nth-child(8n + 3),
       &:nth-child(8n + 4) {
         background-color: $color-silver-light;
+      }
+    }
+
+    .progressBar {
+      margin-bottom: $spacing-xs;
+    }
+
+    .counts {
+      .count {
+        font-weight: 700;
+        margin-right: $spacing-3-xs;
+      }
+
+      .label {
+        margin-right: $spacing-xs;
       }
     }
   }
