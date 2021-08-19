@@ -160,6 +160,20 @@ export interface TranslationTaskSearch {
   searchDone: boolean;
 }
 
+export interface TranslationRequestResultTask {
+  id: number;
+  target: {
+    id: number;
+    name: {
+      fi: string;
+      sv: string;
+      en: string;
+    };
+  };
+  taskType: TaskType;
+  taskStatus: TaskStatus;
+}
+
 export interface TranslationRequestResult {
   id: number;
   request: string;
@@ -167,19 +181,7 @@ export interface TranslationRequestResult {
     from: string;
     to: string;
   };
-  tasks: {
-    id: number;
-    target: {
-      id: number;
-      name: {
-        fi: string;
-        sv: string;
-        en: string;
-      };
-    };
-    taskType: TaskType;
-    taskStatus: TaskStatus;
-  }[];
+  tasks: TranslationRequestResultTask[];
   moderator: {
     first_name: string;
     last_name: string;

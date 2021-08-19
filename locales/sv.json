@@ -444,6 +444,12 @@
       "request": {
         "label": "Request"
       },
+      "showStatus": {
+        "show": "View",
+        "all": "All",
+        "active": "Active",
+        "submitted": "Submitted"
+      },
       "showResults": {
         "show": "View",
         "requests": "Translation requests",
@@ -458,7 +464,13 @@
       "moderator": "From",
       "type": "Type",
       "status": "Status",
-      "empty": "(No name)"
+      "empty": "(No name)",
+      "counts": {
+        "completed": "completed",
+        "new": "new",
+        "draft": "draft",
+        "done": "done"
+      }
     },
     "taskResults": {
       "found": "Found",
