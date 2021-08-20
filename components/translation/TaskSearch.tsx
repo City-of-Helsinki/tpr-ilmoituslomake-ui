@@ -1,4 +1,4 @@
-import React, { Dispatch, ChangeEvent, ReactElement, useEffect } from "react";
+import React, { Dispatch, ChangeEvent, ReactElement, useEffect, useMemo } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useRouter } from "next/router";
 import { useI18n } from "next-localization";
@@ -19,9 +19,16 @@ const TaskSearch = (): ReactElement => {
   const router = useRouter();
 
   const taskSearch = useSelector((state: RootState) => state.translation.taskSearch);
-  const { placeName, request: searchRequest, requestOptions } = taskSearch;
+  const { placeName, request: searchRequest } = taskSearch;
+  const taskResults = useSelector((state: RootState) => state.translation.taskResults);
+  const { results: allResults } = taskResults;
 
   const convertOptions = (options: string[]): OptionType[] => options.map((option) => ({ id: option, label: option }));
+
+  const requestOptions = useMemo(
+    () => [{ id: "", label: "" }, ...convertOptions(allResults.map((result) => result.request).filter((v, i, a) => a.indexOf(v) === i))],
+    [allResults]
+  );
 
   const convertValue = (value: string | undefined): OptionType | undefined => requestOptions.find((t) => t.id === value);
 
@@ -60,16 +67,7 @@ const TaskSearch = (): ReactElement => {
           })
         );
 
-        dispatch(
-          setTranslationTaskSearch({
-            ...taskSearch,
-            requestOptions: [
-              { id: "", label: "" },
-              ...convertOptions(results.map((result) => result.request).filter((v, i, a) => a.indexOf(v) === i)),
-            ],
-            searchDone: true,
-          })
-        );
+        dispatch(setTranslationTaskSearch({ ...taskSearch, searchDone: true }));
       } else {
         dispatch(setTranslationTaskResults({ results: [], count: 0 }));
 

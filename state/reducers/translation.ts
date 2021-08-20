@@ -17,9 +17,6 @@ const initialState: TranslationState = {
   taskSearch: {
     placeName: "",
     request: "",
-    requestOptions: [],
-    taskStatus: "",
-    groupByRequest: false,
     searchDone: false,
   },
   taskResults: {

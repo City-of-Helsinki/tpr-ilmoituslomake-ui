@@ -154,9 +154,6 @@ export interface NotificationPlaceResults {
 export interface TranslationTaskSearch {
   placeName: string;
   request: string;
-  requestOptions: OptionType[];
-  taskStatus: string;
-  groupByRequest: boolean;
   searchDone: boolean;
 }
 
