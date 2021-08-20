@@ -28,14 +28,14 @@ const TaskHeader = ({ prefix, buttonsPrefix, backHref, isTranslated }: TaskHeade
 
   const translationExtra = useSelector((state: RootState) => state.translation.translationExtra);
   const {
-    request,
-    language: { from: translateFrom, to: translateTo },
-    message,
-    created_at,
-    taskType,
-    taskStatus,
-    translator: { name: translatorName },
-    moderator: { fullName: moderatorName },
+    translationRequest: {
+      formattedRequest,
+      language: { from: translateFrom, to: translateTo },
+      message,
+      translator: { name: translatorName },
+      moderator: { fullName: moderatorName },
+    },
+    translationTask: { created_at, taskType, taskStatus },
   } = translationExtra;
 
   return (
@@ -72,7 +72,7 @@ const TaskHeader = ({ prefix, buttonsPrefix, backHref, isTranslated }: TaskHeade
       <div className={styles.lowerRow}>
         <div className={styles.moderator}>
           <div className={styles.bold}>{i18n.t(`${prefix}.taskHeader.request`)}</div>
-          <div>{request}</div>
+          <div>{formattedRequest}</div>
           <div className={styles.bold}>{i18n.t(`${prefix}.taskHeader.moderator`)}</div>
           <div>{moderatorName}</div>
         </div>

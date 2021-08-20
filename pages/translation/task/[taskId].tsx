@@ -3,9 +3,10 @@ import { useSelector } from "react-redux";
 import { GetServerSideProps } from "next";
 import Head from "next/head";
 import { useI18n } from "next-localization";
+import moment from "moment";
 import { initStore } from "../../../state/store";
 import { RootState } from "../../../state/reducers";
-import { CLEAR_STATE, INITIAL_NOTIFICATION, INITIAL_TRANSLATION, TranslationStatus } from "../../../types/constants";
+import { CLEAR_STATE, DATETIME_FORMAT, INITIAL_NOTIFICATION, INITIAL_TRANSLATION, TranslationStatus } from "../../../types/constants";
 import { PhotoSchema, TranslationTodoSchema } from "../../../types/general";
 import { PhotoTranslationStatus } from "../../../types/translation_status";
 import { getTaskStatus, getTaskType } from "../../../utils/conversion";
@@ -25,7 +26,10 @@ const TranslationTask = (): ReactElement => {
   const translatedTaskId = useSelector((state: RootState) => state.translation.translatedTaskId);
   const translationStatus = useSelector((state: RootState) => state.translationStatus.translationStatus);
   const translationExtra = useSelector((state: RootState) => state.translation.translationExtra);
-  const { photosTranslated, taskStatus } = translationExtra;
+  const {
+    photosTranslated,
+    translationTask: { taskStatus },
+  } = translationExtra;
 
   const isTranslated = (statusToCheck: TranslationStatus) => {
     return statusToCheck !== TranslationStatus.Edited;
@@ -148,7 +152,7 @@ export const getServerSideProps: GetServerSideProps = async ({ req, resolvedUrl,
         // taskResult.target.data is the original published notification to be translated
         // taskResult.data is the translated notification
         const { id: targetId, data: targetData } = taskResult.target || { id: 0, data: INITIAL_NOTIFICATION };
-        const translatedTask = taskResult.data || { id: 0, data: INITIAL_TRANSLATION };
+        const translatedTask = !taskResult.data || !taskResult.data.name ? INITIAL_TRANSLATION : taskResult.data;
 
         initialReduxState.translation = {
           ...initialReduxState.translation,
@@ -158,21 +162,26 @@ export const getServerSideProps: GetServerSideProps = async ({ req, resolvedUrl,
           translatedTask,
           translationExtra: {
             ...initialReduxState.translation.translationExtra,
-            requestId: taskResult.requestId,
-            request: taskResult.request,
-            language: taskResult.language,
-            message: taskResult.message,
-            created_at: taskResult.created_at,
-            updated_at: taskResult.updated_at,
-            taskType: getTaskType(taskResult.category, taskResult.item_type),
-            taskStatus: getTaskStatus(taskResult.status),
-            translator: {
-              name: taskResult.translator && taskResult.translator.name ? taskResult.translator.name : "",
-              email: taskResult.translator && taskResult.translator.email ? taskResult.translator.email : "",
+            translationRequest: {
+              requestId: taskResult.requestId,
+              request: taskResult.request,
+              formattedRequest: moment(taskResult.request).format(DATETIME_FORMAT),
+              language: taskResult.language,
+              message: taskResult.message,
+              translator: {
+                name: taskResult.translator && taskResult.translator.name ? taskResult.translator.name : "",
+                email: taskResult.translator && taskResult.translator.email ? taskResult.translator.email : "",
+              },
+              moderator: {
+                fullName: taskResult.moderator ? `${taskResult.moderator.first_name} ${taskResult.moderator.last_name}`.trim() : "",
+                email: taskResult.moderator && taskResult.moderator.email ? taskResult.moderator.email : "",
+              },
             },
-            moderator: {
-              fullName: taskResult.moderator ? `${taskResult.moderator.first_name} ${taskResult.moderator.last_name}`.trim() : "",
-              email: taskResult.moderator && taskResult.moderator.email ? taskResult.moderator.email : "",
+            translationTask: {
+              created_at: taskResult.created_at,
+              updated_at: taskResult.updated_at,
+              taskType: getTaskType(taskResult.category, taskResult.item_type),
+              taskStatus: getTaskStatus(taskResult.status),
             },
             photosSelected: targetData.images.map((photo) => {
               const image = photo || ({ alt_text: {} } as PhotoSchema);

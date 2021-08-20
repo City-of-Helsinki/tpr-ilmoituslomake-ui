@@ -35,9 +35,9 @@ export const getTaskType = (category: string, itemType: string): TaskType => {
     }
   }
   if (taskCategory === TaskCategory.TranslationTask) {
-    if (taskItemType === ItemType.TranslationTaskCreated) {
-      return TaskType.Translation;
-    }
+    // if (taskItemType === ItemType.TranslationTaskCreated) {
+    return TaskType.Translation;
+    // }
   }
   return TaskType.Unknown;
 };
@@ -77,8 +77,8 @@ export const getTaskItemTypeFromType = (taskType: TaskType): ItemType => {
     case TaskType.RemoveTip:
     case TaskType.ModeratorRemove:
       return ItemType.ChangeRequestDelete;
-    case TaskType.Translation:
-      return ItemType.TranslationTaskCreated;
+    // case TaskType.Translation:
+    // return ItemType.TranslationTaskCreated;
     default:
       return ItemType.Unknown;
   }

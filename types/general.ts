@@ -273,24 +273,29 @@ export interface TranslationTodoSchema {
 export interface TranslationExtra {
   photosSelected: Photo[];
   photosTranslated: PhotoTranslation[];
-  requestId: number;
-  request: string;
-  language: {
-    from: string;
-    to: string;
+  translationRequest: {
+    requestId: number;
+    request: string;
+    formattedRequest: string;
+    language: {
+      from: string;
+      to: string;
+    };
+    message: string;
+    translator: {
+      name: string;
+      email: string;
+    };
+    moderator: {
+      fullName: string;
+      email: string;
+    };
   };
-  message: string;
-  created_at: string;
-  updated_at: string;
-  taskType: TaskType;
-  taskStatus: TaskStatus;
-  translator: {
-    name: string;
-    email: string;
-  };
-  moderator: {
-    fullName: string;
-    email: string;
+  translationTask: {
+    created_at: string;
+    updated_at: string;
+    taskType: TaskType;
+    taskStatus: TaskStatus;
   };
 }
 

@@ -23,11 +23,12 @@ const PhotosTranslation = ({ prefix, index }: PhotosTranslationProps): ReactElem
 
   const translationExtra = useSelector((state: RootState) => state.translation.translationExtra);
   const {
-    language: { from: translateFrom, to: translateTo },
     photosSelected,
     photosTranslated,
-    taskType,
-    taskStatus,
+    translationRequest: {
+      language: { from: translateFrom, to: translateTo },
+    },
+    translationTask: { taskType, taskStatus },
   } = translationExtra;
 
   const translationStatus = useSelector((state: RootState) => state.translationStatus.translationStatus);

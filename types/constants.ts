@@ -393,24 +393,29 @@ export const INITIAL_TRANSLATION = {
 export const INITIAL_TRANSLATION_EXTRA = {
   photosSelected: [],
   photosTranslated: [],
-  requestId: 0,
-  request: "",
-  language: {
-    from: "",
-    to: "",
+  translationRequest: {
+    requestId: 0,
+    request: "",
+    formattedRequest: "",
+    language: {
+      from: "",
+      to: "",
+    },
+    message: "",
+    translator: {
+      name: "",
+      email: "",
+    },
+    moderator: {
+      fullName: "",
+      email: "",
+    },
   },
-  message: "",
-  created_at: "",
-  updated_at: "",
-  taskType: TaskType.Unknown,
-  taskStatus: TaskStatus.Unknown,
-  translator: {
-    name: "",
-    email: "",
-  },
-  moderator: {
-    fullName: "",
-    email: "",
+  translationTask: {
+    created_at: "",
+    updated_at: "",
+    taskType: TaskType.Unknown,
+    taskStatus: TaskStatus.Unknown,
   },
 };
 

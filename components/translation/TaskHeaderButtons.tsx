@@ -27,7 +27,10 @@ const TaskHeaderButtons = ({ prefix, backHref, isTranslated }: TaskHeaderButtons
   const translatedTask = useSelector((state: RootState) => state.translation.translatedTask);
 
   const translationExtra = useSelector((state: RootState) => state.translation.translationExtra);
-  const { photosTranslated, taskType, taskStatus } = translationExtra;
+  const {
+    photosTranslated,
+    translationTask: { taskType, taskStatus },
+  } = translationExtra;
 
   const [toast, setToast] = useState<Toast>();
   const [confirmSave, setConfirmSave] = useState(false);

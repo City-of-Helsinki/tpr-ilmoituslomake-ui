@@ -38,9 +38,10 @@ const DescriptionTranslation = ({ prefix }: DescriptionTranslationProps): ReactE
 
   const translationExtra = useSelector((state: RootState) => state.translation.translationExtra);
   const {
-    language: { from: translateFrom, to: translateTo },
-    taskType,
-    taskStatus,
+    translationRequest: {
+      language: { from: translateFrom, to: translateTo },
+    },
+    translationTask: { taskType, taskStatus },
   } = translationExtra;
 
   const translationStatus = useSelector((state: RootState) => state.translationStatus.translationStatus);
