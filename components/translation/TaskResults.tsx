@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useI18n } from "next-localization";
-import { Button, IconPen, RadioButton, SelectionGroup } from "hds-react";
+import { Button, IconPen } from "hds-react";
 import { LinearProgress } from "@material-ui/core";
 import moment from "moment";
 import { TranslationAction } from "../../state/actions/translationTypes";
@@ -15,6 +15,8 @@ import { getTaskStatus, getTaskType } from "../../utils/conversion";
 import { getDisplayName } from "../../utils/helper";
 import { defaultLocale } from "../../utils/i18n";
 import TaskStatusLabel from "../common/TaskStatusLabel";
+import TaskStatusFilter from "./TaskStatusFilter";
+import TaskResultsFilter from "./TaskResultsFilter";
 import styles from "./TaskResults.module.scss";
 
 const TaskResults = (): ReactElement => {
@@ -173,60 +175,10 @@ const TaskResults = (): ReactElement => {
 
       {searchDone && showResults === "tasks" && filteredTaskResults.length === 0 && <h2>{i18n.t("translation.taskResults.notFound")}</h2>}
 
-      <div className={styles.showResults}>
-        <div className={styles.showResults}>
-          <div>{i18n.t("translation.taskSearch.showStatus.show")}</div>
-          <SelectionGroup id="showStatus" direction="horizontal">
-            <RadioButton
-              id="showStatus_all"
-              label={i18n.t("translation.taskSearch.showStatus.all")}
-              name="showStatus"
-              value="all"
-              checked={showStatus === "all"}
-              onChange={() => setShowStatus("all")}
-            />
-            <RadioButton
-              id="showStatus_active"
-              label={i18n.t("translation.taskSearch.showStatus.active")}
-              name="showStatus"
-              value="active"
-              checked={showStatus === "active"}
-              onChange={() => setShowStatus("active")}
-            />
-            <RadioButton
-              id="showStatus_submitted"
-              label={i18n.t("translation.taskSearch.showStatus.submitted")}
-              name="showStatus"
-              value="submitted"
-              checked={showStatus === "submitted"}
-              onChange={() => setShowStatus("submitted")}
-            />
-          </SelectionGroup>
-        </div>
-
+      <div className={styles.resultsFilter}>
+        <TaskStatusFilter showStatus={showStatus} setShowStatus={setShowStatus} />
         <div className="flexSpace" />
-
-        <div className={styles.showResults}>
-          <div>{i18n.t("translation.taskSearch.showResults.show")}</div>
-          <SelectionGroup id="showResults" direction="horizontal">
-            <RadioButton
-              id="showResults_requests"
-              label={i18n.t("translation.taskSearch.showResults.requests")}
-              name="showResult"
-              value="requests"
-              checked={showResults === "requests"}
-              onChange={() => setShowResults("requests")}
-            />
-            <RadioButton
-              id="showResults_tasks"
-              label={i18n.t("translation.taskSearch.showResults.tasks")}
-              name="showResult"
-              value="tasks"
-              checked={showResults === "tasks"}
-              onChange={() => setShowResults("tasks")}
-            />
-          </SelectionGroup>
-        </div>
+        <TaskResultsFilter showResults={showResults} setShowResults={setShowResults} />
       </div>
 
       {showResults === "requests" && filteredRequestResults.length > 0 && (

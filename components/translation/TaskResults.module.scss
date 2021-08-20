@@ -1,15 +1,9 @@
 @import "~hds-design-tokens/lib/all.scss";
 
 .taskResults {
-  .showResults {
+  .resultsFilter {
     display: flex;
     flex-direction: row;
-    align-items: flex-end;
-    margin-bottom: $spacing-xs;
-
-    fieldset {
-      margin-left: $spacing-s;
-    }
   }
 
   .gridColumn1 {
