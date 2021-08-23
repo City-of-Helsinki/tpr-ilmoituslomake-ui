@@ -4,20 +4,21 @@ import { RadioButton, SelectionGroup } from "hds-react";
 import styles from "./TaskStatusFilter.module.scss";
 
 interface TaskStatusFilterProps {
+  prefix: string;
   showStatus: string;
   setShowStatus: Dispatch<SetStateAction<string>>;
 }
 
-const TaskStatusFilter = ({ showStatus, setShowStatus }: TaskStatusFilterProps): ReactElement => {
+const TaskStatusFilter = ({ prefix, showStatus, setShowStatus }: TaskStatusFilterProps): ReactElement => {
   const i18n = useI18n();
 
   return (
     <div className={styles.showStatus}>
-      <div>{i18n.t("translation.taskSearch.showStatus.show")}</div>
+      <div>{i18n.t(`${prefix}.taskSearch.showStatus.show`)}</div>
       <SelectionGroup id="showStatus" direction="horizontal">
         <RadioButton
           id="showStatus_all"
-          label={i18n.t("translation.taskSearch.showStatus.all")}
+          label={i18n.t(`${prefix}.taskSearch.showStatus.all`)}
           name="showStatus"
           value="all"
           checked={showStatus === "all"}
@@ -25,7 +26,7 @@ const TaskStatusFilter = ({ showStatus, setShowStatus }: TaskStatusFilterProps):
         />
         <RadioButton
           id="showStatus_active"
-          label={i18n.t("translation.taskSearch.showStatus.active")}
+          label={i18n.t(`${prefix}.taskSearch.showStatus.active`)}
           name="showStatus"
           value="active"
           checked={showStatus === "active"}
@@ -33,7 +34,7 @@ const TaskStatusFilter = ({ showStatus, setShowStatus }: TaskStatusFilterProps):
         />
         <RadioButton
           id="showStatus_submitted"
-          label={i18n.t("translation.taskSearch.showStatus.submitted")}
+          label={i18n.t(`${prefix}.taskSearch.showStatus.submitted`)}
           name="showStatus"
           value="submitted"
           checked={showStatus === "submitted"}

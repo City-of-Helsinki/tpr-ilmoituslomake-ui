@@ -4,20 +4,21 @@ import { RadioButton, SelectionGroup } from "hds-react";
 import styles from "./TaskResultsFilter.module.scss";
 
 interface TaskResultsFilterProps {
+  prefix: string;
   showResults: string;
   setShowResults: Dispatch<SetStateAction<string>>;
 }
 
-const TaskResultsFilter = ({ showResults, setShowResults }: TaskResultsFilterProps): ReactElement => {
+const TaskResultsFilter = ({ prefix, showResults, setShowResults }: TaskResultsFilterProps): ReactElement => {
   const i18n = useI18n();
 
   return (
     <div className={styles.showResults}>
-      <div>{i18n.t("translation.taskSearch.showResults.show")}</div>
+      <div>{i18n.t(`${prefix}.taskSearch.showResults.show`)}</div>
       <SelectionGroup id="showResults" direction="horizontal">
         <RadioButton
           id="showResults_requests"
-          label={i18n.t("translation.taskSearch.showResults.requests")}
+          label={i18n.t(`${prefix}.taskSearch.showResults.requests`)}
           name="showResult"
           value="requests"
           checked={showResults === "requests"}
@@ -25,7 +26,7 @@ const TaskResultsFilter = ({ showResults, setShowResults }: TaskResultsFilterPro
         />
         <RadioButton
           id="showResults_tasks"
-          label={i18n.t("translation.taskSearch.showResults.tasks")}
+          label={i18n.t(`${prefix}.taskSearch.showResults.tasks`)}
           name="showResult"
           value="tasks"
           checked={showResults === "tasks"}

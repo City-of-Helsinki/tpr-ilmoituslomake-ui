@@ -176,9 +176,9 @@ const TaskResults = (): ReactElement => {
       {searchDone && showResults === "tasks" && filteredTaskResults.length === 0 && <h2>{i18n.t("translation.taskResults.notFound")}</h2>}
 
       <div className={styles.resultsFilter}>
-        <TaskStatusFilter showStatus={showStatus} setShowStatus={setShowStatus} />
+        <TaskStatusFilter prefix="translation" showStatus={showStatus} setShowStatus={setShowStatus} />
         <div className="flexSpace" />
-        <TaskResultsFilter showResults={showResults} setShowResults={setShowResults} />
+        <TaskResultsFilter prefix="translation" showResults={showResults} setShowResults={setShowResults} />
       </div>
 
       {showResults === "requests" && filteredRequestResults.length > 0 && (

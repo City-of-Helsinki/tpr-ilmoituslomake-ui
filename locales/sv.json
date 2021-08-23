@@ -881,6 +881,12 @@
         "request": {
           "label": "Käännöspyyntö"
         },
+        "showStatus": {
+          "show": "Näytä",
+          "all": "Kaikki",
+          "active": "Kesken",
+          "submitted": "Valmis"
+        },
         "showResults": {
           "show": "Näytä",
           "requests": "Käännöspyyntöjä",
