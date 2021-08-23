@@ -444,7 +444,7 @@ export const saveModerationTranslation = async (
       console.log("SENDING", postData);
 
       // Save the translation task
-      const saveResponse = await fetch(`${getOrigin(router)}/api/moderation/translation/save/${translatedTaskId}/`, {
+      const saveResponse = await fetch(`${getOrigin(router)}/api/moderation/translation/save_task/${translatedTaskId}/`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
