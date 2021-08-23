@@ -174,11 +174,16 @@ export interface TranslationRequestResultTask {
 export interface TranslationRequestResult {
   id: number;
   request: string;
+  formattedRequest: string;
   language: {
     from: string;
     to: string;
   };
   tasks: TranslationRequestResultTask[];
+  translator: {
+    name: string;
+    email: string;
+  };
   moderator: {
     first_name: string;
     last_name: string;
@@ -223,6 +228,7 @@ export interface TranslationTodoResult {
   updated: Date;
   taskType: TaskType;
   taskStatus: TaskStatus;
+  formattedRequest: string;
 }
 
 export interface TranslationTodoResults {
@@ -265,6 +271,7 @@ export interface TranslationTodoSchema {
   updated: Date;
   taskType: TaskType;
   taskStatus: TaskStatus;
+  formattedRequest: string;
 }
 
 export interface TranslationExtra {
@@ -450,9 +457,6 @@ export interface ModerationExtra {
 export interface ModerationTranslationRequestTaskSearch {
   placeName: string;
   request: string;
-  requestOptions: OptionType[];
-  taskStatus: string;
-  groupByRequest: boolean;
   searchDone: boolean;
 }
 

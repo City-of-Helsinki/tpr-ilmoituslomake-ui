@@ -22,9 +22,6 @@ const initialState: ModerationTranslationState = {
   requestSearch: {
     placeName: "",
     request: "",
-    requestOptions: [],
-    taskStatus: "",
-    groupByRequest: false,
     searchDone: false,
   },
   requestResults: {
@@ -38,9 +35,6 @@ const initialState: ModerationTranslationState = {
   taskSearch: {
     placeName: "",
     request: "",
-    requestOptions: [],
-    taskStatus: "",
-    groupByRequest: false,
     searchDone: false,
   },
   taskResults: {

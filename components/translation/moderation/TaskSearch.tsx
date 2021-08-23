@@ -1,4 +1,4 @@
-import React, { Dispatch, ChangeEvent, ReactElement, useEffect } from "react";
+import React, { Dispatch, ChangeEvent, ReactElement, SetStateAction, useEffect, useMemo } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useRouter } from "next/router";
 import { useI18n } from "next-localization";
@@ -6,100 +6,48 @@ import { Button, Select, TextInput } from "hds-react";
 import moment from "moment";
 import { ModerationTranslationAction } from "../../../state/actions/moderationTranslationTypes";
 import {
-  setModerationTranslationRequestResults,
-  setModerationTranslationRequestSearch,
-  setModerationTranslationSelectedRequests,
   setModerationTranslationSelectedTasks,
   setModerationTranslationTaskSearch,
   setModerationTranslationTaskResults,
 } from "../../../state/actions/moderationTranslation";
 import { RootState } from "../../../state/reducers";
 import { DATETIME_FORMAT, MAX_LENGTH } from "../../../types/constants";
-import { OptionType, ModerationTranslationRequestResult, ModerationTranslationTaskResult } from "../../../types/general";
+import { OptionType, ModerationTranslationTaskResult } from "../../../types/general";
 import { getTaskStatus, getTaskType } from "../../../utils/conversion";
 import getOrigin from "../../../utils/request";
+import TaskStatusFilter from "../TaskStatusFilter";
 import styles from "./TaskSearch.module.scss";
 
-const TaskSearch = (): ReactElement => {
+interface TaskSearchProps {
+  showStatus: string;
+  setShowStatus: Dispatch<SetStateAction<string>>;
+}
+
+const TaskSearch = ({ showStatus, setShowStatus }: TaskSearchProps): ReactElement => {
   const i18n = useI18n();
   const dispatch = useDispatch<Dispatch<ModerationTranslationAction>>();
   const router = useRouter();
 
-  const requestSearch = useSelector((state: RootState) => state.moderationTranslation.requestSearch);
-  const { placeName, request: searchRequest, requestOptions } = requestSearch;
   const taskSearch = useSelector((state: RootState) => state.moderationTranslation.taskSearch);
+  const { placeName, request: searchRequest } = taskSearch;
+  const taskResults = useSelector((state: RootState) => state.moderationTranslation.taskResults);
+  const { results } = taskResults;
 
   const convertOptions = (options: string[]): OptionType[] => options.map((option) => ({ id: option, label: option }));
+
+  const requestOptions = useMemo(
+    () => [{ id: "", label: "" }, ...convertOptions(results.map((result) => result.formattedRequest).filter((v, i, a) => a.indexOf(v) === i))],
+    [results]
+  );
 
   const convertValue = (value: string | undefined): OptionType | undefined => requestOptions.find((t) => t.id === value);
 
   const updateSearchText = (evt: ChangeEvent<HTMLInputElement>) => {
-    dispatch(setModerationTranslationRequestSearch({ ...requestSearch, [evt.target.name]: evt.target.value }));
     dispatch(setModerationTranslationTaskSearch({ ...taskSearch, [evt.target.name]: evt.target.value }));
   };
 
   const updateSearchRequestOption = (selected: OptionType) => {
-    dispatch(setModerationTranslationRequestSearch({ ...requestSearch, request: selected.id as string }));
     dispatch(setModerationTranslationTaskSearch({ ...taskSearch, request: selected.id as string }));
-  };
-
-  const searchRequests = async () => {
-    const requestResponse = await fetch(`${getOrigin(router)}/api/moderation/translation/request/find/?search=${placeName.trim()}`);
-    // const requestResponse = await fetch(`${getOrigin(router)}/mockapi/moderation/translation/request/find/?search=${placeName.trim()}`);
-    if (requestResponse.ok) {
-      const requestResult = await (requestResponse.json() as Promise<{ count: number; next: string; results: ModerationTranslationRequestResult[] }>);
-
-      console.log("REQUEST RESPONSE", requestResult);
-
-      if (requestResult && requestResult.results && requestResult.results.length > 0) {
-        const { results, count, next } = requestResult;
-
-        dispatch(
-          setModerationTranslationRequestResults({
-            results: results
-              .map((result) => {
-                return {
-                  ...result,
-                  created: moment(result.created_at).toDate(),
-                  updated: moment(result.updated_at).toDate(),
-                  taskType: getTaskType(result.category, result.item_type),
-                  taskStatus: getTaskStatus(result.status),
-                  formattedRequest: moment(result.request).format(DATETIME_FORMAT),
-                };
-              })
-              .filter((result) => {
-                const { formattedRequest } = result;
-                return searchRequest.length === 0 || searchRequest === formattedRequest;
-              }),
-            count,
-            next,
-          })
-        );
-
-        dispatch(
-          setModerationTranslationRequestSearch({
-            ...requestSearch,
-            requestOptions: [
-              { id: "", label: "" },
-              ...convertOptions(results.map((result) => moment(result.request).format(DATETIME_FORMAT)).filter((v, i, a) => a.indexOf(v) === i)),
-            ],
-            searchDone: true,
-          })
-        );
-      } else {
-        dispatch(setModerationTranslationRequestResults({ results: [], count: 0 }));
-
-        dispatch(setModerationTranslationRequestSearch({ ...requestSearch, searchDone: true }));
-      }
-
-      // Clear any previously selected requests
-      dispatch(
-        setModerationTranslationSelectedRequests({
-          selectedIds: [],
-          isAllSelected: false,
-        })
-      );
-    }
   };
 
   const searchTasks = async () => {
@@ -111,40 +59,26 @@ const TaskSearch = (): ReactElement => {
       console.log("TASK RESPONSE", taskResult);
 
       if (taskResult && taskResult.results && taskResult.results.length > 0) {
-        const { results, count, next } = taskResult;
+        const { results: firstResults, count, next: nextBatch } = taskResult;
 
         dispatch(
           setModerationTranslationTaskResults({
-            results: results
-              .map((result) => {
-                return {
-                  ...result,
-                  created: moment(result.created_at).toDate(),
-                  updated: moment(result.updated_at).toDate(),
-                  taskType: getTaskType(result.category, result.item_type),
-                  taskStatus: getTaskStatus(result.status),
-                  formattedRequest: moment(result.request).format(DATETIME_FORMAT),
-                };
-              })
-              .filter((result) => {
-                const { formattedRequest } = result;
-                return searchRequest.length === 0 || searchRequest === formattedRequest;
-              }),
+            results: firstResults.map((result) => {
+              return {
+                ...result,
+                created: moment(result.created_at).toDate(),
+                updated: moment(result.updated_at).toDate(),
+                taskType: getTaskType(result.category, result.item_type),
+                taskStatus: getTaskStatus(result.status),
+                formattedRequest: moment(result.request).format(DATETIME_FORMAT),
+              };
+            }),
             count,
-            next,
+            next: nextBatch,
           })
         );
 
-        dispatch(
-          setModerationTranslationTaskSearch({
-            ...taskSearch,
-            requestOptions: [
-              { id: "", label: "" },
-              ...convertOptions(results.map((result) => moment(result.request).format(DATETIME_FORMAT)).filter((v, i, a) => a.indexOf(v) === i)),
-            ],
-            searchDone: true,
-          })
-        );
+        dispatch(setModerationTranslationTaskSearch({ ...taskSearch, searchDone: true }));
       } else {
         dispatch(setModerationTranslationTaskResults({ results: [], count: 0 }));
 
@@ -161,15 +95,10 @@ const TaskSearch = (): ReactElement => {
     }
   };
 
-  const searchRequestsAndTasks = () => {
-    searchRequests();
-    searchTasks();
-  };
-
   // If specified, search all tasks on first render only, using a workaround utilising useEffect with empty dependency array
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const useMountEffect = (fun: () => void) => useEffect(fun, []);
-  useMountEffect(searchRequestsAndTasks);
+  useMountEffect(searchTasks);
 
   return (
     <div className={`formSection ${styles.taskSearch}`}>
@@ -200,9 +129,11 @@ const TaskSearch = (): ReactElement => {
           />
         )}
         <div className={styles.gridButton}>
-          <Button onClick={searchRequestsAndTasks}>{i18n.t("moderation.button.search")}</Button>
+          <Button onClick={searchTasks}>{i18n.t("moderation.button.search")}</Button>
         </div>
       </div>
+
+      <TaskStatusFilter prefix="moderation.translation" showStatus={showStatus} setShowStatus={setShowStatus} />
     </div>
   );
 };

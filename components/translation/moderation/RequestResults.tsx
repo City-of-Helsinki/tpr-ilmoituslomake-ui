@@ -1,72 +1,114 @@
-import React, { Dispatch, ChangeEvent, ReactElement, Fragment, useMemo } from "react";
+import React, { Dispatch, ChangeEvent, ReactElement, SetStateAction, Fragment, useCallback, useMemo } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import Link from "next/link";
 import { useI18n } from "next-localization";
 import { Button, Checkbox, IconPen } from "hds-react";
-import moment from "moment";
 import { ModerationTranslationAction } from "../../../state/actions/moderationTranslationTypes";
-import { setModerationTranslationRequestResults, setModerationTranslationSelectedRequests } from "../../../state/actions/moderationTranslation";
+import { setModerationTranslationSelectedRequests } from "../../../state/actions/moderationTranslation";
 import { RootState } from "../../../state/reducers";
-import { DATETIME_FORMAT } from "../../../types/constants";
-import { ModerationTranslationRequestResult } from "../../../types/general";
-import { getTaskStatus, getTaskType } from "../../../utils/conversion";
+import { TaskStatus } from "../../../types/constants";
+import { TranslationRequestResult, TranslationRequestResultTask } from "../../../types/general";
 import TaskStatusLabel from "../../common/TaskStatusLabel";
+import TaskResultsFilter from "../TaskResultsFilter";
 import styles from "./RequestResults.module.scss";
 
-const RequestResults = (): ReactElement => {
+interface RequestResultsProps {
+  showStatus: string;
+  showResults: string;
+  setShowResults: Dispatch<SetStateAction<string>>;
+}
+
+const RequestResults = ({ showStatus, showResults, setShowResults }: RequestResultsProps): ReactElement => {
   const i18n = useI18n();
   const dispatch = useDispatch<Dispatch<ModerationTranslationAction>>();
 
-  const requestResults = useSelector((state: RootState) => state.moderationTranslation.requestResults);
-  const { results, count, next } = requestResults;
-  const requestSearch = useSelector((state: RootState) => state.moderationTranslation.requestSearch);
-  const { request: searchRequest, searchDone } = requestSearch;
+  const taskResults = useSelector((state: RootState) => state.moderationTranslation.taskResults);
+  const { results } = taskResults;
+  const taskSearch = useSelector((state: RootState) => state.moderationTranslation.taskSearch);
+  const { request: searchRequest, searchDone } = taskSearch;
   const selectedRequests = useSelector((state: RootState) => state.moderationTranslation.selectedRequests);
-  const { selectedIds: selectedRequestIds, isAllSelected } = selectedRequests;
+  const { selectedIds: selectedRequestIds, isAllSelected: isAllRequestsSelected } = selectedRequests;
 
-  const fetchMoreResults = async () => {
-    if (next) {
-      const requestResponse = await fetch(next);
-      if (requestResponse.ok) {
-        const requestResult = await (requestResponse.json() as Promise<{
-          count: number;
-          next: string;
-          results: ModerationTranslationRequestResult[];
-        }>);
+  const requestResults = useMemo(
+    () =>
+      results.reduce((acc: TranslationRequestResult[], result) => {
+        const { id: taskId, target, taskType, taskStatus } = result;
+        const taskResult = { id: taskId, target, taskType, taskStatus };
 
-        console.log("REQUEST RESPONSE", requestResult);
+        const requestResult = acc.find((r) => r.id === result.requestId);
+        if (!requestResult) {
+          // Create the request data
+          const { requestId, request, formattedRequest, language, translator, moderator, updated_at, updated } = result;
+          const newRequestResult = {
+            id: requestId,
+            request,
+            formattedRequest,
+            language,
+            tasks: [taskResult],
+            translator,
+            moderator,
+            updated_at,
+            updated,
+          };
+          return [...acc, newRequestResult];
+        }
 
-        if (requestResult && requestResult.results && requestResult.results.length > 0) {
-          const { results: moreResults, next: nextBatch } = requestResult;
+        // Add the task to the existing request data
+        requestResult.tasks = [...requestResult.tasks, taskResult];
+        return acc;
+      }, []),
+    [results]
+  );
 
-          dispatch(
-            setModerationTranslationRequestResults({
-              results: [
-                ...results,
-                ...moreResults
-                  .map((result) => {
-                    return {
-                      ...result,
-                      created: moment(result.created_at).toDate(),
-                      updated: moment(result.updated_at).toDate(),
-                      taskType: getTaskType(result.category, result.item_type),
-                      taskStatus: getTaskStatus(result.status),
-                      formattedRequest: moment(result.request).format(DATETIME_FORMAT),
-                    };
-                  })
-                  .filter((result) => {
-                    const { formattedRequest } = result;
-                    return searchRequest.length === 0 || searchRequest === formattedRequest;
-                  }),
-              ],
-              count,
-              next: nextBatch,
-            })
-          );
+  const taskCounts = (tasks: TranslationRequestResultTask[]) => {
+    return tasks.reduce(
+      (acc: { [key: string]: number }, task) => {
+        acc[task.taskStatus] += 1;
+        return acc;
+      },
+      { [TaskStatus.Open]: 0, [TaskStatus.InProgress]: 0, [TaskStatus.Closed]: 0 }
+    );
+  };
+
+  const requestStatus = useCallback((tasks: TranslationRequestResultTask[]) => {
+    const counts = taskCounts(tasks);
+    if (counts[TaskStatus.Open] === tasks.length) {
+      // All the tasks are open, so the request is open
+      return TaskStatus.Open;
+    }
+    if (counts[TaskStatus.Closed] === tasks.length) {
+      // All the tasks are closed, so the request is closed
+      return TaskStatus.Closed;
+    }
+    // There is a mixed status, so the request is in progress
+    return TaskStatus.InProgress;
+  }, []);
+
+  const filterStatus = useCallback(
+    (taskStatus: TaskStatus) => {
+      switch (showStatus) {
+        case "active": {
+          return taskStatus === TaskStatus.Open || taskStatus === TaskStatus.InProgress;
+        }
+        case "submitted": {
+          return taskStatus === TaskStatus.Closed;
+        }
+        default: {
+          return true;
         }
       }
-    }
-  };
+    },
+    [showStatus]
+  );
+
+  const filteredRequestResults = useMemo(
+    () =>
+      requestResults.filter((result) => {
+        const { formattedRequest, tasks } = result;
+        return (searchRequest.length === 0 || searchRequest === formattedRequest) && filterStatus(requestStatus(tasks));
+      }),
+    [requestResults, searchRequest, filterStatus, requestStatus]
+  );
 
   const updateSelectedRequests = (evt: ChangeEvent<HTMLInputElement>) => {
     const requestId = evt.target.value.replace("request_", "");
@@ -74,7 +116,7 @@ const RequestResults = (): ReactElement => {
     dispatch(
       setModerationTranslationSelectedRequests({
         selectedIds: newSelectedRequestIds,
-        isAllSelected: newSelectedRequestIds.length === results.length,
+        isAllSelected: newSelectedRequestIds.length === filteredRequestResults.length,
       })
     );
   };
@@ -82,8 +124,8 @@ const RequestResults = (): ReactElement => {
   const selectAllRequests = () => {
     dispatch(
       setModerationTranslationSelectedRequests({
-        selectedIds: !isAllSelected ? results.map((result) => String(result.id)) : [],
-        isAllSelected: !isAllSelected,
+        selectedIds: !isAllRequestsSelected ? filteredRequestResults.map((result) => String(result.id)) : [],
+        isAllSelected: !isAllRequestsSelected,
       })
     );
   };
@@ -92,44 +134,36 @@ const RequestResults = (): ReactElement => {
     // TODO
   };
 
-  // The results array includes duplicate translation requests, so reduce them to get the distinct requests
-  const resultsReduced = useMemo(
-    () =>
-      results.reduce((acc: ModerationTranslationRequestResult[], result) => {
-        const resultExists = acc.some((r) => r.id === result.id);
-        return !resultExists ? [...acc, result] : acc;
-      }, []),
-    [results]
-  );
-
   return (
     <div className={`formSection ${styles.requestResults}`}>
-      {resultsReduced.length > 0 && (
-        <h2 className="moderation">{`${i18n.t("moderation.translation.requestResults.found")} ${resultsReduced.length} / ${count} ${i18n.t(
-          "moderation.translation.requestResults.requests"
-        )}`}</h2>
+      {filteredRequestResults.length > 0 && (
+        <h2 className="moderation">{`${i18n.t("moderation.translation.requestResults.found")} ${filteredRequestResults.length} / ${
+          requestResults.length
+        } ${i18n.t("moderation.translation.requestResults.requests")}`}</h2>
       )}
 
-      {resultsReduced.length > 0 && (
+      {searchDone && filteredRequestResults.length === 0 && (
+        <h2 className="moderation">{i18n.t("moderation.translation.requestResults.notFound")}</h2>
+      )}
+
+      {filteredRequestResults.length > 0 && (
         <div className={styles.optionsRow}>
           <Checkbox
             id="selectAllRequests"
             label={i18n.t("moderation.translation.requestResults.selectAll")}
-            checked={isAllSelected}
+            checked={isAllRequestsSelected}
             onChange={selectAllRequests}
           />
-
           <div className="flexSpace" />
-
+          <TaskResultsFilter prefix="moderation.translation" showResults={showResults} setShowResults={setShowResults} />
+          <div className="flexSpace" />
           <Button variant="secondary" onClick={cancelTranslationRequest}>
             {i18n.t("moderation.button.cancelTranslationRequest")}
           </Button>
         </div>
       )}
 
-      {searchDone && resultsReduced.length === 0 && <h2>{i18n.t("moderation.translation.requestResults.notFound")}</h2>}
-
-      {resultsReduced.length > 0 && (
+      {filteredRequestResults.length > 0 && (
         <div className={`gridLayoutContainer ${styles.results}`}>
           <div className={`${styles.gridColumn1} ${styles.gridHeader}`}>{i18n.t("moderation.translation.requestResults.translationRequest")}</div>
           <div className={`${styles.gridColumn2} ${styles.gridHeader}`}>{i18n.t("moderation.translation.requestResults.translator")}</div>
@@ -137,11 +171,13 @@ const RequestResults = (): ReactElement => {
           <div className={`${styles.gridColumn4} ${styles.gridHeader}`}>{i18n.t("moderation.translation.requestResults.translationTasks")}</div>
           <div className={`${styles.gridColumn5} ${styles.gridHeader}`}>{i18n.t("moderation.translation.requestResults.status")}</div>
 
-          {resultsReduced
-            .sort((a: ModerationTranslationRequestResult, b: ModerationTranslationRequestResult) => b.updated.getTime() - a.updated.getTime())
+          {filteredRequestResults
+            // .sort((a: ModerationTranslationRequestResult, b: ModerationTranslationRequestResult) => b.updated.getTime() - a.updated.getTime())
+            .sort((a: TranslationRequestResult, b: TranslationRequestResult) => b.updated.getTime() - a.updated.getTime())
             .map((result) => {
-              const { id: requestId, formattedRequest, language, tasks, translator, taskStatus } = result;
+              const { id: requestId, formattedRequest, language, tasks, translator } = result;
               const { from: translateFrom, to: translateTo } = language;
+              const status = requestStatus(tasks);
 
               return (
                 <Fragment key={`requestresult_${requestId}`}>
@@ -165,21 +201,13 @@ const RequestResults = (): ReactElement => {
                   <div className={`${styles.gridColumn3} ${styles.gridContent}`}>{`${translateFrom.toUpperCase()}-${translateTo.toUpperCase()}`}</div>
                   <div className={`${styles.gridColumn4} ${styles.gridContent}`}>{tasks.length}</div>
                   <div className={`${styles.gridColumn5} ${styles.gridContent}`}>
-                    <TaskStatusLabel prefix="moderation.translation" status={taskStatus} includeIcons />
+                    <TaskStatusLabel prefix="moderation.translation" status={status} includeIcons />
                   </div>
                 </Fragment>
               );
             })}
         </div>
       )}
-
-      <div className={styles.nextResults}>
-        {next && (
-          <Button variant="secondary" onClick={fetchMoreResults}>
-            {i18n.t("moderation.button.showMore")}
-          </Button>
-        )}
-      </div>
     </div>
   );
 };

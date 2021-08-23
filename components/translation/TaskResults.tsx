@@ -9,7 +9,7 @@ import moment from "moment";
 import { TranslationAction } from "../../state/actions/translationTypes";
 import { setTranslationTaskResults, setTranslationTaskSearch } from "../../state/actions/translation";
 import { RootState } from "../../state/reducers";
-import { TaskStatus } from "../../types/constants";
+import { DATETIME_FORMAT, TaskStatus } from "../../types/constants";
 import { TranslationRequestResult, TranslationRequestResultTask, TranslationTodoResult } from "../../types/general";
 import { getTaskStatus, getTaskType } from "../../utils/conversion";
 import { getDisplayName } from "../../utils/helper";
@@ -54,6 +54,7 @@ const TaskResults = (): ReactElement => {
                     updated: moment(result.updated_at).toDate(),
                     taskType: getTaskType(result.category, result.item_type),
                     taskStatus: getTaskStatus(result.status),
+                    formattedRequest: moment(result.request).format(DATETIME_FORMAT),
                   };
                 }),
               ],
@@ -80,12 +81,14 @@ const TaskResults = (): ReactElement => {
         const requestResult = acc.find((r) => r.id === result.requestId);
         if (!requestResult) {
           // Create the request data
-          const { requestId, request, language, moderator, updated_at, updated } = result;
+          const { requestId, request, formattedRequest, language, translator, moderator, updated_at, updated } = result;
           const newRequestResult = {
             id: requestId,
             request,
+            formattedRequest,
             language,
             tasks: [taskResult],
+            translator,
             moderator,
             updated_at,
             updated,
