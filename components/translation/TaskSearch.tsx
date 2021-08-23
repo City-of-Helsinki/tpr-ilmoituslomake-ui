@@ -7,7 +7,7 @@ import moment from "moment";
 import { TranslationAction } from "../../state/actions/translationTypes";
 import { setTranslationTaskResults, setTranslationTaskSearch } from "../../state/actions/translation";
 import { RootState } from "../../state/reducers";
-import { MAX_LENGTH } from "../../types/constants";
+import { DATETIME_FORMAT, MAX_LENGTH } from "../../types/constants";
 import { OptionType, TranslationTodoResult } from "../../types/general";
 import { getTaskStatus, getTaskType } from "../../utils/conversion";
 import getOrigin from "../../utils/request";
@@ -60,6 +60,7 @@ const TaskSearch = (): ReactElement => {
                 updated: moment(result.updated_at).toDate(),
                 taskType: getTaskType(result.category, result.item_type),
                 taskStatus: getTaskStatus(result.status),
+                formattedRequest: moment(result.request).format(DATETIME_FORMAT),
               };
             }),
             count,

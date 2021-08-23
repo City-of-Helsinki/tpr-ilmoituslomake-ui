@@ -1,4 +1,4 @@
-import React, { ReactElement } from "react";
+import React, { ReactElement, useState } from "react";
 import { GetServerSideProps } from "next";
 import Head from "next/head";
 import { useI18n } from "next-localization";
@@ -10,10 +10,15 @@ import Layout from "../../components/common/Layout";
 import Header from "../../components/common/Header";
 import Intro from "../../components/translation/Intro";
 import TaskSearch from "../../components/translation/TaskSearch";
+import RequestResults from "../../components/translation/RequestResults";
 import TaskResults from "../../components/translation/TaskResults";
+import MoreResultsButton from "../../components/translation/MoreResultsButton";
 
 const TranslationRequest = (): ReactElement => {
   const i18n = useI18n();
+
+  const [showStatus, setShowStatus] = useState<string>("all");
+  const [showResults, setShowResults] = useState<string>("requests");
 
   return (
     <Layout>
@@ -24,7 +29,13 @@ const TranslationRequest = (): ReactElement => {
       <main id="content">
         <Intro />
         <TaskSearch />
-        <TaskResults />
+        {showResults === "requests" && (
+          <RequestResults showStatus={showStatus} showResults={showResults} setShowStatus={setShowStatus} setShowResults={setShowResults} />
+        )}
+        {showResults === "tasks" && (
+          <TaskResults showStatus={showStatus} showResults={showResults} setShowStatus={setShowStatus} setShowResults={setShowResults} />
+        )}
+        <MoreResultsButton />
       </main>
     </Layout>
   );
