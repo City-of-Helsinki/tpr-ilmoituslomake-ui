@@ -12,6 +12,7 @@ import { PhotoTranslationStatus } from "../../../types/translation_status";
 import { getTaskStatus, getTaskType } from "../../../utils/conversion";
 import i18nLoader from "../../../utils/i18n";
 import { checkUser, redirectToLogin, redirectToNotAuthorized } from "../../../utils/serverside";
+import saveTranslation from "../../../utils/translation";
 import Layout from "../../../components/common/Layout";
 import Header from "../../../components/common/Header";
 import Collapsible from "../../../components/translation/Collapsible";
@@ -75,6 +76,7 @@ const TranslationTask = (): ReactElement => {
             prefix="translation"
             backHref="/translation/request"
             isTranslated={isBasicSectionTranslated() && isAllPhotoSectionsTranslated()}
+            saveTranslation={saveTranslation}
           />
           <h2 className="translation">{i18n.t("translation.task.title")}</h2>
 
@@ -109,6 +111,7 @@ const TranslationTask = (): ReactElement => {
             prefix="translation"
             backHref="/translation/request"
             isTranslated={isBasicSectionTranslated() && isAllPhotoSectionsTranslated()}
+            saveTranslation={saveTranslation}
           />
         </main>
       )}

@@ -1,12 +1,13 @@
-import React, { ReactElement, useState } from "react";
+import React, { Dispatch, ReactElement, SetStateAction, useState } from "react";
 import { useSelector } from "react-redux";
 import Link from "next/link";
-import { useRouter } from "next/router";
+import { NextRouter, useRouter } from "next/router";
 import { useI18n } from "next-localization";
 import { Button, IconArrowRight } from "hds-react";
 import { RootState } from "../../state/reducers";
 import { TaskStatus, TaskType, Toast } from "../../types/constants";
-import { saveTranslation } from "../../utils/translation";
+import { PhotoTranslation, User } from "../../types/general";
+import { TranslationSchema } from "../../types/translation_schema";
 import ModalConfirmation from "../common/ModalConfirmation";
 import ToastNotification from "../common/ToastNotification";
 import styles from "./TaskHeaderButtons.module.scss";
@@ -15,9 +16,18 @@ interface TaskHeaderButtonsProps {
   prefix: string;
   backHref: string;
   isTranslated?: boolean;
+  saveTranslation: (
+    currentUser: User | undefined,
+    translatedTaskId: number,
+    translatedTask: TranslationSchema,
+    translatedPhotos: PhotoTranslation[],
+    draft: boolean,
+    router: NextRouter,
+    setToast: Dispatch<SetStateAction<Toast | undefined>>
+  ) => void;
 }
 
-const TaskHeaderButtons = ({ prefix, backHref, isTranslated }: TaskHeaderButtonsProps): ReactElement => {
+const TaskHeaderButtons = ({ prefix, backHref, isTranslated, saveTranslation }: TaskHeaderButtonsProps): ReactElement => {
   const i18n = useI18n();
   const router = useRouter();
 

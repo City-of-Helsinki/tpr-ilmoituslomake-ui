@@ -342,11 +342,9 @@ export const INITIAL_NOTIFICATION_VALIDATION = {
 
 export const INITIAL_TRANSLATION = {
   language: "",
-  organization: {},
   name: {
     lang: "",
   },
-  location: [0, 0],
   description: {
     short: {
       lang: "",
@@ -355,39 +353,10 @@ export const INITIAL_TRANSLATION = {
       lang: "",
     },
   },
-  address: {
-    fi: {
-      street: "",
-      postal_code: "",
-      post_office: "",
-      neighborhood_id: "",
-      neighborhood: "",
-    },
-    sv: {
-      street: "",
-      postal_code: "",
-      post_office: "",
-      neighborhood_id: "",
-      neighborhood: "",
-    },
-  },
-  phone: "",
-  email: "",
   website: {
     lang: "",
   },
   images: [],
-  opening_times: {},
-  ontology_ids: [],
-  matko_ids: [],
-  extra_keywords: [],
-  comments: "",
-  notifier: {
-    notifier_type: "",
-    full_name: "",
-    email: "",
-    phone: "",
-  },
 };
 
 export const INITIAL_TRANSLATION_EXTRA = {

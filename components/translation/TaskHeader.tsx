@@ -1,10 +1,12 @@
-import React, { ReactElement } from "react";
+import React, { Dispatch, ReactElement, SetStateAction } from "react";
 import { useSelector } from "react-redux";
-import { useRouter } from "next/router";
+import { NextRouter, useRouter } from "next/router";
 import { useI18n } from "next-localization";
 import moment from "moment";
 import { RootState } from "../../state/reducers";
-import { DATETIME_FORMAT, TaskType } from "../../types/constants";
+import { DATETIME_FORMAT, TaskType, Toast } from "../../types/constants";
+import { PhotoTranslation, User } from "../../types/general";
+import { TranslationSchema } from "../../types/translation_schema";
 import { getDisplayName } from "../../utils/helper";
 import { defaultLocale } from "../../utils/i18n";
 import TaskStatusLabel from "../common/TaskStatusLabel";
@@ -16,9 +18,18 @@ interface TaskHeaderProps {
   buttonsPrefix?: string;
   backHref: string;
   isTranslated?: boolean;
+  saveTranslation: (
+    currentUser: User | undefined,
+    translatedTaskId: number,
+    translatedTask: TranslationSchema,
+    translatedPhotos: PhotoTranslation[],
+    draft: boolean,
+    router: NextRouter,
+    setToast: Dispatch<SetStateAction<Toast | undefined>>
+  ) => void;
 }
 
-const TaskHeader = ({ prefix, buttonsPrefix, backHref, isTranslated }: TaskHeaderProps): ReactElement => {
+const TaskHeader = ({ prefix, buttonsPrefix, backHref, isTranslated, saveTranslation }: TaskHeaderProps): ReactElement => {
   const i18n = useI18n();
   const router = useRouter();
 
@@ -45,7 +56,7 @@ const TaskHeader = ({ prefix, buttonsPrefix, backHref, isTranslated }: TaskHeade
         {selectedTaskId ? ` (${selectedTaskId})` : ""}
       </h1>
 
-      <TaskHeaderButtons prefix={buttonsPrefix ?? prefix} backHref={backHref} isTranslated={isTranslated} />
+      <TaskHeaderButtons prefix={buttonsPrefix ?? prefix} backHref={backHref} isTranslated={isTranslated} saveTranslation={saveTranslation} />
 
       <div className={styles.upperRow}>
         <div>

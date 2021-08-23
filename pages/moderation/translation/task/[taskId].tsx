@@ -11,6 +11,7 @@ import { PhotoSchema, TranslationTodoSchema } from "../../../../types/general";
 import { PhotoTranslationStatus } from "../../../../types/translation_status";
 import { getTaskStatus, getTaskType } from "../../../../utils/conversion";
 import i18nLoader from "../../../../utils/i18n";
+import { saveModerationTranslation } from "../../../../utils/moderation";
 import { checkUser, getOriginServerSide, redirectToLogin, redirectToNotAuthorized } from "../../../../utils/serverside";
 import Layout from "../../../../components/common/Layout";
 import ModerationHeader from "../../../../components/moderation/ModerationHeader";
@@ -76,6 +77,7 @@ const ModerationTranslationTaskDetail = (): ReactElement => {
             buttonsPrefix="moderation"
             backHref="/moderation/translation"
             isTranslated={isBasicSectionTranslated() && isAllPhotoSectionsTranslated()}
+            saveTranslation={saveModerationTranslation}
           />
           <h2 className="translation">{i18n.t("moderation.translation.task.title")}</h2>
 
@@ -110,6 +112,7 @@ const ModerationTranslationTaskDetail = (): ReactElement => {
             prefix="moderation"
             backHref="/moderation/translation"
             isTranslated={isBasicSectionTranslated() && isAllPhotoSectionsTranslated()}
+            saveTranslation={saveModerationTranslation}
           />
         </main>
       )}

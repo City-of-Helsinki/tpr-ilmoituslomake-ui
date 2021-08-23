@@ -3,8 +3,9 @@ import { NextRouter } from "next/router";
 import Cookies from "js-cookie";
 import { ModerationTranslationAction } from "../state/actions/moderationTranslationTypes";
 import { ItemType, Toast } from "../types/constants";
-import { ChangeRequestSchema, ModerationExtra, ModerationTranslationRequest, Photo, User } from "../types/general";
+import { ChangeRequestSchema, ModerationExtra, ModerationTranslationRequest, Photo, PhotoTranslation, User } from "../types/general";
 import { NotificationSchema } from "../types/notification_schema";
+import { TranslationSchema } from "../types/translation_schema";
 import { isModerationTranslationRequestPageValid } from "./moderationValidation";
 import getOrigin from "./request";
 
@@ -399,6 +400,76 @@ export const cancelModerationTranslationRequest = async (
 
         const saveResult = await cancelResponse.text();
         console.log("CANCEL FAILED", saveResult);
+      }
+    } else if (!valid) {
+      setToast(Toast.ValidationFailed);
+    } else {
+      setToast(Toast.NotAuthenticated);
+    }
+  } catch (err) {
+    console.log("ERROR", err);
+    setToast(Toast.SaveFailed);
+  }
+};
+
+export const saveModerationTranslation = async (
+  currentUser: User | undefined,
+  translatedTaskId: number,
+  translatedTask: TranslationSchema,
+  translatedPhotos: PhotoTranslation[],
+  draft: boolean,
+  router: NextRouter,
+  setToast: Dispatch<SetStateAction<Toast | undefined>>
+): Promise<void> => {
+  try {
+    // TODO - fix validation
+    // const valid = validateTranslationData(translatedTask);
+    const valid = true;
+
+    if (currentUser?.authenticated && valid) {
+      // Send the Cross Site Request Forgery token, otherwise the backend returns the error "CSRF Failed: CSRF token missing or incorrect."
+      const csrftoken = Cookies.get("csrftoken");
+
+      const postData = {
+        draft,
+        data: {
+          ...translatedTask,
+          images: translatedPhotos.map((photo, index) => {
+            const { uuid, altText: alt_text, source } = photo;
+            return { index, uuid, alt_text, source };
+          }),
+        },
+      };
+
+      console.log("SENDING", postData);
+
+      // Save the translation task
+      const saveResponse = await fetch(`${getOrigin(router)}/api/moderation/translation/save/${translatedTaskId}/`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          "X-CSRFToken": csrftoken as string,
+        },
+        mode: "same-origin",
+        body: JSON.stringify(postData),
+      });
+      if (saveResponse.ok) {
+        const saveResult = await saveResponse.json();
+        console.log("SAVE RESPONSE", saveResult);
+
+        if (saveResult.id) {
+          // Reload the current page to update the page statuses
+          // router.reload();
+          router.push(`/moderation/translation/task/${translatedTaskId}`);
+          setToast(Toast.SaveSucceeded);
+        } else {
+          setToast(Toast.SaveFailed);
+        }
+      } else {
+        setToast(Toast.SaveFailed);
+
+        const saveResult = await saveResponse.text();
+        console.log("SAVE FAILED", saveResult);
       }
     } else if (!valid) {
       setToast(Toast.ValidationFailed);
