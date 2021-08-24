@@ -19,6 +19,7 @@ import {
   NotificationPlaceSearch,
   TranslationExtra,
   TranslationTaskSearch,
+  TranslationTaskValidation,
   TranslationTodoResults,
   User,
 } from "../../types/general";
@@ -58,6 +59,7 @@ export interface TranslationState {
   translatedTaskId: number;
   translatedTask: TranslationSchema;
   translationExtra: TranslationExtra;
+  taskValidation: TranslationTaskValidation;
 }
 
 export interface TranslationStatusState {

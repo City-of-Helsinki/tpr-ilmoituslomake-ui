@@ -8,6 +8,7 @@ import { setTranslationPhoto } from "../../state/actions/translation";
 import { setTranslationPhotoAltTextStatus, setTranslationPhotoStatus } from "../../state/actions/translationStatus";
 import { RootState } from "../../state/reducers";
 import { TranslationStatus } from "../../types/constants";
+import { isTranslationTaskPhotoFieldValid } from "../../utils/translationValidation";
 import PhotoPreviewTranslation from "./PhotoPreviewTranslation";
 import TranslationSection from "./TranslationSection";
 
@@ -31,6 +32,9 @@ const PhotosTranslation = ({ prefix, index }: PhotosTranslationProps): ReactElem
     translationTask: { taskType, taskStatus },
   } = translationExtra;
 
+  const taskValidation = useSelector((state: RootState) => state.translation.taskValidation);
+  const { photos: photosValid } = taskValidation;
+
   const translationStatus = useSelector((state: RootState) => state.translationStatus.translationStatus);
   const { photos: photosStatus } = translationStatus;
 
@@ -46,6 +50,13 @@ const PhotosTranslation = ({ prefix, index }: PhotosTranslationProps): ReactElem
     dispatch(
       setTranslationPhoto(index, { ...photosTranslated[index], altText: { ...photosTranslated[index].altText, [evt.target.name]: evt.target.value } })
     );
+  };
+
+  const validatePhoto = (evt: ChangeEvent<HTMLInputElement>) => {
+    dispatch(
+      setTranslationPhoto(index, { ...photosTranslated[index], [evt.target.name]: (photosTranslated[index][evt.target.name] as string).trim() })
+    );
+    isTranslationTaskPhotoFieldValid(prefix, index, evt.target.name, evt.target.name, translationExtra, dispatch);
   };
 
   const updatePhotoTranslationStatus = (photoField: string, status: TranslationStatus) => {
@@ -99,7 +110,15 @@ const PhotosTranslation = ({ prefix, index }: PhotosTranslationProps): ReactElem
             tooltipText={i18n.t(`${prefix}.photos.source.tooltipText`)}
             modifyButtonLabel={i18n.t(`${prefix}.photos.source.label`)}
             changeCallback={(evt: ChangeEvent<HTMLInputElement>) => updatePhoto(evt)}
+            blurCallback={validatePhoto}
             statusCallback={(fieldName, status) => updatePhotoTranslationStatus(fieldName, status)}
+            invalid={!photosValid[index].source.valid}
+            errorText={
+              !photosValid[index].source.valid
+                ? i18n.t(photosValid[index].source.message as string).replace("$fieldName", i18n.t(`${prefix}.photos.source.label`))
+                : ""
+            }
+            required
             TranslationComponent={<TextInput id={`source_${index}`} label={i18n.t(`${prefix}.photos.source.label`)} name="source" />}
           />
         </div>

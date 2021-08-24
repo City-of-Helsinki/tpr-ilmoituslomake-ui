@@ -25,11 +25,14 @@ interface TranslationSectionProps {
   modifyButtonHidden?: boolean;
   actionButtonHidden?: boolean;
   forceDisabled?: boolean;
+  invalid?: boolean;
+  errorText?: string;
+  required?: boolean;
   changeCallback:
     | ((evt: ChangeEvent<HTMLInputElement>) => void)
     | ((evt: ChangeEvent<HTMLTextAreaElement>) => void)
     | ((selected: OptionType[]) => void);
-  blurCallback?: (evt: FocusEvent<HTMLInputElement>) => void;
+  blurCallback?: ((evt: FocusEvent<HTMLInputElement>) => void) | ((evt: FocusEvent<HTMLTextAreaElement>) => void);
   statusCallback: (fieldName: string, status: TranslationStatus) => void;
   TranslationComponent: ReactElement;
   isSelectionGroupWrapper?: boolean;
@@ -56,6 +59,9 @@ const TranslationSection = ({
   modifyButtonHidden,
   actionButtonHidden,
   forceDisabled,
+  invalid,
+  errorText,
+  required,
   changeCallback,
   blurCallback,
   statusCallback,
@@ -107,6 +113,10 @@ const TranslationSection = ({
             tooltipText: translationStatus === TranslationStatus.Edited ? tooltipText : undefined,
             disabled: translationStatus === TranslationStatus.Done || taskStatus === TaskStatus.Closed || forceDisabled,
             radiobuttonname: isSelectionGroupWrapper ? `${id}_Translated` : undefined,
+            invalid,
+            errorText,
+            required,
+            "aria-required": required,
           })}
         </ModifyButton>
 
@@ -138,6 +148,9 @@ TranslationSection.defaultProps = {
   modifyButtonHidden: false,
   actionButtonHidden: false,
   forceDisabled: false,
+  invalid: false,
+  errorText: undefined,
+  required: false,
   blurCallback: undefined,
   isSelectionGroupWrapper: false,
 };

@@ -6,8 +6,17 @@ import {
   SET_TRANSLATION_SHORT_DESCRIPTION,
   SET_TRANSLATION_LONG_DESCRIPTION,
   SET_TRANSLATION_PHOTO,
+  SET_TRANSLATION_TASK_VALIDATION,
+  SET_TRANSLATION_TASK_PHOTO_VALIDATION,
 } from "../../types/constants";
-import { KeyValueString, PhotoTranslation, TranslationTaskSearch, TranslationTodoResults } from "../../types/general";
+import {
+  KeyValueString,
+  KeyValueValidation,
+  PhotoTranslation,
+  TranslationTaskPhotoValidation,
+  TranslationTaskSearch,
+  TranslationTodoResults,
+} from "../../types/general";
 
 interface SetTranslationTaskSearchAction extends AnyAction {
   type: typeof SET_TRANSLATION_TASK_SEARCH;
@@ -39,10 +48,22 @@ interface SetTranslationPhotoAction extends AnyAction {
   payload: { index: number; value: PhotoTranslation };
 }
 
+interface SetTranslationTaskValidationAction extends AnyAction {
+  type: typeof SET_TRANSLATION_TASK_VALIDATION;
+  payload: KeyValueValidation;
+}
+
+interface SetTranslationTaskPhotoValidationAction extends AnyAction {
+  type: typeof SET_TRANSLATION_TASK_PHOTO_VALIDATION;
+  payload: { index: number; value: TranslationTaskPhotoValidation | KeyValueValidation };
+}
+
 export type TranslationAction =
   | SetTranslationTaskSearchAction
   | SetTranslationTaskResultsAction
   | SetTranslationNameAction
   | SetTranslationShortDescriptionAction
   | SetTranslationLongDescriptionAction
-  | SetTranslationPhotoAction;
+  | SetTranslationPhotoAction
+  | SetTranslationTaskValidationAction
+  | SetTranslationTaskPhotoValidationAction;

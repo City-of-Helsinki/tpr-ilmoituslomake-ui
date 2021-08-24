@@ -1,6 +1,7 @@
 import { AnyAction } from "redux";
 import { TranslationState } from "./types";
 import {
+  INITIAL_NOTIFICATION,
   INITIAL_TRANSLATION,
   INITIAL_TRANSLATION_EXTRA,
   SET_TRANSLATION_TASK_RESULTS,
@@ -9,9 +10,10 @@ import {
   SET_TRANSLATION_SHORT_DESCRIPTION,
   SET_TRANSLATION_LONG_DESCRIPTION,
   SET_TRANSLATION_PHOTO,
-  INITIAL_NOTIFICATION,
+  SET_TRANSLATION_TASK_VALIDATION,
+  SET_TRANSLATION_TASK_PHOTO_VALIDATION,
 } from "../../types/constants";
-import { PhotoTranslation } from "../../types/general";
+import { PhotoTranslation, TranslationTaskPhotoValidation } from "../../types/general";
 
 const initialState: TranslationState = {
   taskSearch: {
@@ -28,6 +30,12 @@ const initialState: TranslationState = {
   translatedTaskId: 0,
   translatedTask: { ...INITIAL_TRANSLATION, location: [0, 0] },
   translationExtra: INITIAL_TRANSLATION_EXTRA,
+  taskValidation: {
+    name: { valid: true },
+    descriptionShort: { valid: true },
+    descriptionLong: { valid: true },
+    photos: [],
+  },
 };
 
 const translation = (state = initialState, action: AnyAction): TranslationState => {
@@ -98,6 +106,34 @@ const translation = (state = initialState, action: AnyAction): TranslationState 
       return {
         ...state,
         translationExtra: { ...state.translationExtra, photosTranslated },
+      };
+    }
+
+    case SET_TRANSLATION_TASK_VALIDATION: {
+      console.log("SET_TRANSLATION_TASK_VALIDATION", action.payload);
+      return {
+        ...state,
+        taskValidation: { ...state.taskValidation, ...action.payload },
+      };
+    }
+
+    case SET_TRANSLATION_TASK_PHOTO_VALIDATION: {
+      console.log("SET_TRANSLATION_TASK_PHOTO_VALIDATION", action.payload);
+
+      // Combine the field validation with the existing photo validation in the array
+      const photos = [
+        ...state.taskValidation.photos.reduce(
+          (acc: TranslationTaskPhotoValidation[], photoValid, index) => [
+            ...acc,
+            action.payload.index === index ? { ...photoValid, ...action.payload.value } : photoValid,
+          ],
+          []
+        ),
+      ];
+
+      return {
+        ...state,
+        taskValidation: { ...state.taskValidation, photos },
       };
     }
 

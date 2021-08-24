@@ -39,10 +39,17 @@ const RequestDetail = (): ReactElement => {
   };
 
   const validateRequestTranslatorDetail = (evt: ChangeEvent<HTMLInputElement>) => {
+    dispatch(
+      setModerationTranslationRequest({
+        ...requestDetail,
+        translator: { ...requestDetail.translator, [evt.target.name]: (translator[evt.target.name] as string).trim() },
+      })
+    );
     isModerationTranslationRequestFieldValid(evt.target.name, evt.target.id, requestDetail, dispatch);
   };
 
   const validateRequestMessageDetail = (evt: ChangeEvent<HTMLTextAreaElement>) => {
+    dispatch(setModerationTranslationRequest({ ...requestDetail, [evt.target.name]: message.trim() }));
     isModerationTranslationRequestFieldValid(evt.target.name, evt.target.id, requestDetail, dispatch);
   };
 

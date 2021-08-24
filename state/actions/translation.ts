@@ -5,8 +5,17 @@ import {
   SET_TRANSLATION_SHORT_DESCRIPTION,
   SET_TRANSLATION_LONG_DESCRIPTION,
   SET_TRANSLATION_PHOTO,
+  SET_TRANSLATION_TASK_VALIDATION,
+  SET_TRANSLATION_TASK_PHOTO_VALIDATION,
 } from "../../types/constants";
-import { KeyValueString, PhotoTranslation, TranslationTaskSearch, TranslationTodoResults } from "../../types/general";
+import {
+  KeyValueString,
+  KeyValueValidation,
+  PhotoTranslation,
+  TranslationTaskPhotoValidation,
+  TranslationTaskSearch,
+  TranslationTodoResults,
+} from "../../types/general";
 import { TranslationAction } from "./translationTypes";
 
 export const setTranslationTaskSearch = (taskSearch: TranslationTaskSearch): TranslationAction => ({
@@ -36,5 +45,15 @@ export const setTranslationLongDescription = (keyValue: KeyValueString): Transla
 
 export const setTranslationPhoto = (index: number, value: PhotoTranslation): TranslationAction => ({
   type: SET_TRANSLATION_PHOTO,
+  payload: { index, value },
+});
+
+export const setTranslationTaskValidation = (validation: KeyValueValidation): TranslationAction => ({
+  type: SET_TRANSLATION_TASK_VALIDATION,
+  payload: validation,
+});
+
+export const setTranslationTaskPhotoValidation = (index: number, value: TranslationTaskPhotoValidation | KeyValueValidation): TranslationAction => ({
+  type: SET_TRANSLATION_TASK_PHOTO_VALIDATION,
   payload: { index, value },
 });

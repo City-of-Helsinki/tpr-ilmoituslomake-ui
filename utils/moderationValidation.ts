@@ -2,17 +2,17 @@ import { Dispatch } from "react";
 import { string } from "yup";
 import { setModerationTranslationRequestValidation } from "../state/actions/moderationTranslation";
 import { ModerationTranslationAction } from "../state/actions/moderationTranslationTypes";
-import { ModerationTranslationRequest } from "../types/general";
+import { ModerationTranslationRequest, Validation } from "../types/general";
 import { isValid } from "./validation";
 
 export const isModerationTranslationRequestFieldValid = (
-  translatorField: string,
-  translatorValidationField: string,
+  translationRequestField: string,
+  translationValidationField: string,
   requestDetail: ModerationTranslationRequest,
   dispatch: Dispatch<ModerationTranslationAction>
 ): boolean => {
-  let result;
-  switch (translatorField) {
+  let result: Validation;
+  switch (translationRequestField) {
     case "selectedPlaces": {
       const valid = requestDetail.selectedPlaces.length > 0;
       result = !valid ? { valid, message: "moderation.message.fieldRequired" } : { valid, message: undefined };
@@ -20,12 +20,12 @@ export const isModerationTranslationRequestFieldValid = (
     }
     case "name": {
       const schema = string().required("moderation.message.fieldRequired");
-      result = isValid(schema, requestDetail.translator[translatorField] as string);
+      result = isValid(schema, requestDetail.translator[translationRequestField] as string);
       break;
     }
     case "email": {
       const schema = string().required("moderation.message.fieldRequired").email("moderation.message.fieldFormat");
-      result = isValid(schema, requestDetail.translator[translatorField] as string);
+      result = isValid(schema, requestDetail.translator[translationRequestField] as string);
       break;
     }
     case "language": {
@@ -35,10 +35,10 @@ export const isModerationTranslationRequestFieldValid = (
     }
     default: {
       const schema = string().required("moderation.message.fieldRequired");
-      result = isValid(schema, requestDetail[translatorField] as string);
+      result = isValid(schema, requestDetail[translationRequestField] as string);
     }
   }
-  dispatch(setModerationTranslationRequestValidation({ [translatorValidationField]: result }));
+  dispatch(setModerationTranslationRequestValidation({ [translationValidationField]: result }));
   return result.valid;
 };
 

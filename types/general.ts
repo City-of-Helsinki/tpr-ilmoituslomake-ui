@@ -303,6 +303,18 @@ export interface TranslationExtra {
   };
 }
 
+export interface TranslationTaskPhotoValidation {
+  altText: Validation;
+  source: Validation;
+}
+
+export interface TranslationTaskValidation {
+  name: Validation;
+  descriptionShort: Validation;
+  descriptionLong: Validation;
+  photos: TranslationTaskPhotoValidation[];
+}
+
 export interface ChangeRequestSchema {
   target: number;
   item_type: string;

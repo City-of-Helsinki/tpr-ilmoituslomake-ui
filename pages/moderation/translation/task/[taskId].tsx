@@ -217,6 +217,17 @@ export const getServerSideProps: GetServerSideProps = async ({ req, resolvedUrl,
               };
             }),
           },
+          taskValidation: {
+            name: { valid: true },
+            descriptionShort: { valid: true },
+            descriptionLong: { valid: true },
+            photos: translatedTask.images.map(() => {
+              return {
+                altText: { valid: true },
+                source: { valid: true },
+              };
+            }),
+          },
         };
 
         initialReduxState.translationStatus = {

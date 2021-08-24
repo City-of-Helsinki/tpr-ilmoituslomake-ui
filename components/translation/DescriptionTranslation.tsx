@@ -13,6 +13,7 @@ import {
 import { RootState } from "../../state/reducers";
 import { TranslationStatus } from "../../types/constants";
 import TranslationSection from "./TranslationSection";
+import { isTranslationTaskFieldValid } from "../../utils/translationValidation";
 
 interface DescriptionTranslationProps {
   prefix: string;
@@ -44,6 +45,9 @@ const DescriptionTranslation = ({ prefix }: DescriptionTranslationProps): ReactE
     translationTask: { taskType, taskStatus },
   } = translationExtra;
 
+  const taskValidation = useSelector((state: RootState) => state.translation.taskValidation);
+  const { name: nameValid, descriptionShort: shortDescValid, descriptionLong: longDescValid } = taskValidation;
+
   const translationStatus = useSelector((state: RootState) => state.translationStatus.translationStatus);
   const {
     name: placeNameStatus,
@@ -64,6 +68,22 @@ const DescriptionTranslation = ({ prefix }: DescriptionTranslationProps): ReactE
 
   const updateLongDescription = (evt: ChangeEvent<HTMLTextAreaElement>) => {
     dispatch(setTranslationLongDescription({ [evt.target.name]: evt.target.value }));
+  };
+
+  // Functions for validating values and storing the results in redux state
+  const validateName = (evt: ChangeEvent<HTMLInputElement>) => {
+    dispatch(setTranslationName({ [evt.target.name]: (placeNameTranslated[evt.target.name] as string).trim() }));
+    isTranslationTaskFieldValid(prefix, "name", "name", translatedTask, dispatch);
+  };
+
+  const validateShortDescription = (evt: ChangeEvent<HTMLTextAreaElement>) => {
+    dispatch(setTranslationShortDescription({ [evt.target.name]: (shortDescTranslated[evt.target.name] as string).trim() }));
+    isTranslationTaskFieldValid(prefix, "short", "descriptionShort", translatedTask, dispatch);
+  };
+
+  const validateLongDescription = (evt: ChangeEvent<HTMLTextAreaElement>) => {
+    dispatch(setTranslationLongDescription({ [evt.target.name]: (longDescTranslated[evt.target.name] as string).trim() }));
+    isTranslationTaskFieldValid(prefix, "long", "descriptionLong", translatedTask, dispatch);
   };
 
   // Functions for updating status values in redux state
@@ -95,7 +115,13 @@ const DescriptionTranslation = ({ prefix }: DescriptionTranslationProps): ReactE
           taskStatus={taskStatus}
           modifyButtonLabel={i18n.t(`${prefix}.description.placeName.label`)}
           changeCallback={updateName}
+          blurCallback={validateName}
           statusCallback={updateNameStatus}
+          invalid={!nameValid.valid}
+          errorText={
+            !nameValid.valid ? i18n.t(nameValid.message as string).replace("$fieldName", i18n.t(`${prefix}.description.placeName.label`)) : ""
+          }
+          required
           TranslationComponent={<TextInput id={`placeName_${toOption}`} label={i18n.t(`${prefix}.description.placeName.label`)} name={toOption} />}
         />
       </div>
@@ -118,7 +144,15 @@ const DescriptionTranslation = ({ prefix }: DescriptionTranslationProps): ReactE
           tooltipText={i18n.t(`${prefix}.description.shortDescription.tooltipText`)}
           modifyButtonLabel={i18n.t(`${prefix}.description.shortDescription.label`)}
           changeCallback={updateShortDescription}
+          blurCallback={validateShortDescription}
           statusCallback={updateShortDescriptionStatus}
+          invalid={!shortDescValid.valid}
+          errorText={
+            !shortDescValid.valid
+              ? i18n.t(shortDescValid.message as string).replace("$fieldName", i18n.t(`${prefix}.description.shortDescription.label`))
+              : ""
+          }
+          required
           TranslationComponent={
             <TextArea id={`shortDescription_${toOption}`} rows={3} label={i18n.t(`${prefix}.description.shortDescription.label`)} name={toOption} />
           }
@@ -143,7 +177,15 @@ const DescriptionTranslation = ({ prefix }: DescriptionTranslationProps): ReactE
           tooltipText={i18n.t(`${prefix}.description.longDescription.tooltipText`)}
           modifyButtonLabel={i18n.t(`${prefix}.description.longDescription.label`)}
           changeCallback={updateLongDescription}
+          blurCallback={validateLongDescription}
           statusCallback={updateLongDescriptionStatus}
+          invalid={!longDescValid.valid}
+          errorText={
+            !longDescValid.valid
+              ? i18n.t(longDescValid.message as string).replace("$fieldName", i18n.t(`${prefix}.description.longDescription.label`))
+              : ""
+          }
+          required
           TranslationComponent={
             <TextArea id={`longDescription_${toOption}`} rows={6} label={i18n.t(`${prefix}.description.longDescription.label`)} name={toOption} />
           }
