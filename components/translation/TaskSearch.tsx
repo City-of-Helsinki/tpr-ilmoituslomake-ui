@@ -21,13 +21,13 @@ const TaskSearch = (): ReactElement => {
   const taskSearch = useSelector((state: RootState) => state.translation.taskSearch);
   const { placeName, request: searchRequest } = taskSearch;
   const taskResults = useSelector((state: RootState) => state.translation.taskResults);
-  const { results: allResults } = taskResults;
+  const { results } = taskResults;
 
   const convertOptions = (options: string[]): OptionType[] => options.map((option) => ({ id: option, label: option }));
 
   const requestOptions = useMemo(
-    () => [{ id: "", label: "" }, ...convertOptions(allResults.map((result) => result.request).filter((v, i, a) => a.indexOf(v) === i))],
-    [allResults]
+    () => [{ id: "", label: "" }, ...convertOptions(results.map((result) => result.formattedRequest).filter((v, i, a) => a.indexOf(v) === i))],
+    [results]
   );
 
   const convertValue = (value: string | undefined): OptionType | undefined => requestOptions.find((t) => t.id === value);
@@ -41,19 +41,19 @@ const TaskSearch = (): ReactElement => {
   };
 
   const searchTasks = async () => {
-    // const taskResponse = await fetch(`${getOrigin(router)}/api/translation/todos/find/?search=${placeName.trim()}`);
-    const taskResponse = await fetch(`${getOrigin(router)}/mockapi/translation/todos/find/?search=${placeName.trim()}`);
+    const taskResponse = await fetch(`${getOrigin(router)}/api/translation/todos/find/?search=${placeName.trim()}`);
+    // const taskResponse = await fetch(`${getOrigin(router)}/mockapi/translation/todos/find/?search=${placeName.trim()}`);
     if (taskResponse.ok) {
       const taskResult = await (taskResponse.json() as Promise<{ count: number; next: string; results: TranslationTodoResult[] }>);
 
       console.log("TASK RESPONSE", taskResult);
 
       if (taskResult && taskResult.results && taskResult.results.length > 0) {
-        const { results, count, next } = taskResult;
+        const { results: firstResults, count, next: nextBatch } = taskResult;
 
         dispatch(
           setTranslationTaskResults({
-            results: results.map((result) => {
+            results: firstResults.map((result) => {
               return {
                 ...result,
                 created: moment(result.created_at).toDate(),
@@ -64,7 +64,7 @@ const TaskSearch = (): ReactElement => {
               };
             }),
             count,
-            next,
+            next: nextBatch,
           })
         );
 

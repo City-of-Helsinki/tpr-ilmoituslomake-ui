@@ -109,8 +109,8 @@ const RequestResults = ({ showStatus, showResults, setShowStatus, setShowResults
   const filteredRequestResults = useMemo(
     () =>
       requestResults.filter((result) => {
-        const { request: resultRequest, tasks } = result;
-        return (searchRequest.length === 0 || searchRequest === resultRequest) && filterStatus(requestStatus(tasks));
+        const { formattedRequest, tasks } = result;
+        return (searchRequest.length === 0 || searchRequest === formattedRequest) && filterStatus(requestStatus(tasks));
       }),
     [requestResults, searchRequest, filterStatus, requestStatus]
   );
@@ -141,7 +141,7 @@ const RequestResults = ({ showStatus, showResults, setShowStatus, setShowResults
           {filteredRequestResults
             .sort((a: TranslationRequestResult, b: TranslationRequestResult) => b.updated.getTime() - a.updated.getTime())
             .map((result) => {
-              const { id: requestId, request: resultRequest, moderator, tasks } = result;
+              const { id: requestId, formattedRequest, moderator, tasks } = result;
               const status = requestStatus(tasks);
               const counts = taskCounts(tasks);
               const completed = (100 * counts[TaskStatus.Closed]) / tasks.length;
@@ -153,9 +153,9 @@ const RequestResults = ({ showStatus, showResults, setShowStatus, setShowResults
                       variant="supplementary"
                       size="small"
                       iconLeft={<IconPen aria-hidden />}
-                      onClick={() => updateSearchRequestOption(resultRequest)}
+                      onClick={() => updateSearchRequestOption(formattedRequest)}
                     >
-                      {resultRequest}
+                      {formattedRequest}
                     </Button>
                   </div>
                   <div className={`${styles.gridColumn2} ${styles.gridContent}`}>

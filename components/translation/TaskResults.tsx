@@ -50,8 +50,8 @@ const TaskResults = ({ showStatus, showResults, setShowStatus, setShowResults }:
   const filteredTaskResults = useMemo(
     () =>
       results.filter((result) => {
-        const { request: resultRequest, taskStatus } = result;
-        return (searchRequest.length === 0 || searchRequest === resultRequest) && filterStatus(taskStatus);
+        const { formattedRequest, taskStatus } = result;
+        return (searchRequest.length === 0 || searchRequest === formattedRequest) && filterStatus(taskStatus);
       }),
     [results, searchRequest, filterStatus]
   );
@@ -80,7 +80,7 @@ const TaskResults = ({ showStatus, showResults, setShowStatus, setShowResults }:
           {filteredTaskResults
             .sort((a: TranslationTodoResult, b: TranslationTodoResult) => b.updated.getTime() - a.updated.getTime())
             .map((result) => {
-              const { id: taskId, request: resultRequest, target, moderator, taskStatus } = result;
+              const { id: taskId, formattedRequest, target, moderator, taskStatus } = result;
               const { id: targetId, name } = target || {};
 
               return (
@@ -94,7 +94,7 @@ const TaskResults = ({ showStatus, showResults, setShowStatus, setShowResults }:
                       </Button>
                     </Link>
                   </div>
-                  <div className={`${styles.gridColumn2} ${styles.gridContent}`}>{resultRequest}</div>
+                  <div className={`${styles.gridColumn2} ${styles.gridContent}`}>{formattedRequest}</div>
                   <div className={`${styles.gridColumn3} ${styles.gridContent}`}>
                     {moderator ? `${moderator.first_name} ${moderator.last_name}`.trim() : ""}
                   </div>
