@@ -1,4 +1,4 @@
-import React, { ReactElement } from "react";
+import React, { ReactElement, useEffect, useRef } from "react";
 import { useSelector } from "react-redux";
 import { GetServerSideProps } from "next";
 import Head from "next/head";
@@ -32,6 +32,15 @@ const TranslationTask = (): ReactElement => {
     translationTask: { taskStatus },
   } = translationExtra;
 
+  const pageValid = useSelector((state: RootState) => state.translation.taskPageValid);
+  const ref = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (ref.current) {
+      ref.current.scrollIntoView();
+    }
+  }, [pageValid]);
+
   const isTranslated = (statusToCheck: TranslationStatus) => {
     return statusToCheck !== TranslationStatus.Edited;
   };
@@ -58,12 +67,6 @@ const TranslationTask = (): ReactElement => {
     return photoTranslated.every((tra) => tra);
   };
 
-  const isAllPhotoSectionsTranslated = () => {
-    const translated = photosTranslated.map((photo, index) => isPhotoSectionTranslated(index));
-
-    return translated.every((tra) => tra);
-  };
-
   return (
     <Layout>
       <Head>
@@ -72,12 +75,9 @@ const TranslationTask = (): ReactElement => {
       <Header includeLanguageSelector={false} homePagePath="/translation/request" />
       {translatedTaskId > 0 && (
         <main id="content">
-          <TaskHeader
-            prefix="translation"
-            backHref="/translation/request"
-            isTranslated={isBasicSectionTranslated() && isAllPhotoSectionsTranslated()}
-            saveTranslation={saveTranslation}
-          />
+          <div ref={ref}>
+            <TaskHeader prefix="translation" backHref="/translation/request" saveTranslation={saveTranslation} />
+          </div>
           <h2 className="translation">{i18n.t("translation.task.title")}</h2>
 
           <Collapsible
@@ -107,12 +107,7 @@ const TranslationTask = (): ReactElement => {
             );
           })}
 
-          <TaskHeaderButtons
-            prefix="translation"
-            backHref="/translation/request"
-            isTranslated={isBasicSectionTranslated() && isAllPhotoSectionsTranslated()}
-            saveTranslation={saveTranslation}
-          />
+          <TaskHeaderButtons prefix="translation" backHref="/translation/request" saveTranslation={saveTranslation} />
         </main>
       )}
     </Layout>

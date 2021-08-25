@@ -1,34 +1,37 @@
 import { Dispatch, SetStateAction } from "react";
 import { NextRouter } from "next/router";
 import Cookies from "js-cookie";
+import { TranslationAction } from "../state/actions/translationTypes";
 import { Toast } from "../types/constants";
-import { PhotoTranslation, User } from "../types/general";
+import { TranslationExtra, User } from "../types/general";
 import { TranslationSchema } from "../types/translation_schema";
 import getOrigin from "./request";
+import { isTranslationTaskPageValid } from "./translationValidation";
 
 export const saveTranslation = async (
   currentUser: User | undefined,
   translatedTaskId: number,
   translatedTask: TranslationSchema,
-  translatedPhotos: PhotoTranslation[],
+  translationExtra: TranslationExtra,
   draft: boolean,
   router: NextRouter,
+  dispatchValidation: Dispatch<TranslationAction>,
   setToast: Dispatch<SetStateAction<Toast | undefined>>
 ): Promise<void> => {
   try {
-    // TODO - fix validation
-    // const valid = validateTranslationData(translatedTask);
-    const valid = true;
+    const valid = isTranslationTaskPageValid("translation", translatedTask, translationExtra, dispatchValidation);
 
     if (currentUser?.authenticated && valid) {
       // Send the Cross Site Request Forgery token, otherwise the backend returns the error "CSRF Failed: CSRF token missing or incorrect."
       const csrftoken = Cookies.get("csrftoken");
 
+      const { photosTranslated } = translationExtra;
+
       const postData = {
         draft,
         data: {
           ...translatedTask,
-          images: translatedPhotos.map((photo, index) => {
+          images: photosTranslated.map((photo, index) => {
             const { uuid, altText: alt_text, source } = photo;
             return { index, uuid, alt_text, source };
           }),

@@ -5,6 +5,7 @@ import {
   SET_TRANSLATION_SHORT_DESCRIPTION,
   SET_TRANSLATION_LONG_DESCRIPTION,
   SET_TRANSLATION_PHOTO,
+  SET_TRANSLATION_TASK_PAGE_VALID,
   SET_TRANSLATION_TASK_VALIDATION,
   SET_TRANSLATION_TASK_PHOTO_VALIDATION,
 } from "../../types/constants";
@@ -46,6 +47,11 @@ export const setTranslationLongDescription = (keyValue: KeyValueString): Transla
 export const setTranslationPhoto = (index: number, value: PhotoTranslation): TranslationAction => ({
   type: SET_TRANSLATION_PHOTO,
   payload: { index, value },
+});
+
+export const setTranslationTaskPageValid = (valid: boolean): TranslationAction => ({
+  type: SET_TRANSLATION_TASK_PAGE_VALID,
+  payload: valid,
 });
 
 export const setTranslationTaskValidation = (validation: KeyValueValidation): TranslationAction => ({

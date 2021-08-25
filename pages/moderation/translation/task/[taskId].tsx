@@ -1,4 +1,4 @@
-import React, { ReactElement } from "react";
+import React, { ReactElement, useEffect, useRef } from "react";
 import { useSelector } from "react-redux";
 import { GetServerSideProps } from "next";
 import Head from "next/head";
@@ -32,6 +32,15 @@ const ModerationTranslationTaskDetail = (): ReactElement => {
     translationTask: { taskStatus },
   } = translationExtra;
 
+  const pageValid = useSelector((state: RootState) => state.translation.taskPageValid);
+  const ref = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (ref.current) {
+      ref.current.scrollIntoView();
+    }
+  }, [pageValid]);
+
   const isTranslated = (statusToCheck: TranslationStatus) => {
     return statusToCheck !== TranslationStatus.Edited;
   };
@@ -58,12 +67,6 @@ const ModerationTranslationTaskDetail = (): ReactElement => {
     return photoTranslated.every((tra) => tra);
   };
 
-  const isAllPhotoSectionsTranslated = () => {
-    const translated = photosTranslated.map((photo, index) => isPhotoSectionTranslated(index));
-
-    return translated.every((tra) => tra);
-  };
-
   return (
     <Layout>
       <Head>
@@ -72,13 +75,14 @@ const ModerationTranslationTaskDetail = (): ReactElement => {
       <ModerationHeader currentPage={4} />
       {translatedTaskId > 0 && (
         <main id="content">
-          <TaskHeader
-            prefix="moderation.translation"
-            buttonsPrefix="moderation"
-            backHref="/moderation/translation"
-            isTranslated={isBasicSectionTranslated() && isAllPhotoSectionsTranslated()}
-            saveTranslation={saveModerationTranslation}
-          />
+          <div ref={ref}>
+            <TaskHeader
+              prefix="moderation.translation"
+              buttonsPrefix="moderation"
+              backHref="/moderation/translation"
+              saveTranslation={saveModerationTranslation}
+            />
+          </div>
           <h2 className="translation">{i18n.t("moderation.translation.task.title")}</h2>
 
           <Collapsible
@@ -108,12 +112,7 @@ const ModerationTranslationTaskDetail = (): ReactElement => {
             );
           })}
 
-          <TaskHeaderButtons
-            prefix="moderation"
-            backHref="/moderation/translation"
-            isTranslated={isBasicSectionTranslated() && isAllPhotoSectionsTranslated()}
-            saveTranslation={saveModerationTranslation}
-          />
+          <TaskHeaderButtons prefix="moderation" backHref="/moderation/translation" saveTranslation={saveModerationTranslation} />
         </main>
       )}
     </Layout>

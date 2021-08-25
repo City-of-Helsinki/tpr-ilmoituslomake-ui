@@ -59,6 +59,7 @@ export interface TranslationState {
   translatedTaskId: number;
   translatedTask: TranslationSchema;
   translationExtra: TranslationExtra;
+  taskPageValid: boolean;
   taskValidation: TranslationTaskValidation;
 }
 

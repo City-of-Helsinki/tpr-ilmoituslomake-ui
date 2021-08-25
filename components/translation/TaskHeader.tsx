@@ -3,13 +3,15 @@ import { useSelector } from "react-redux";
 import { NextRouter, useRouter } from "next/router";
 import { useI18n } from "next-localization";
 import moment from "moment";
+import { TranslationAction } from "../../state/actions/translationTypes";
 import { RootState } from "../../state/reducers";
 import { DATETIME_FORMAT, TaskType, Toast } from "../../types/constants";
-import { PhotoTranslation, User } from "../../types/general";
+import { TranslationExtra, User } from "../../types/general";
 import { TranslationSchema } from "../../types/translation_schema";
 import { getDisplayName } from "../../utils/helper";
 import { defaultLocale } from "../../utils/i18n";
 import TaskStatusLabel from "../common/TaskStatusLabel";
+import ValidationSummary from "../common/ValidationSummary";
 import TaskHeaderButtons from "./TaskHeaderButtons";
 import styles from "./TaskHeader.module.scss";
 
@@ -17,22 +19,23 @@ interface TaskHeaderProps {
   prefix: string;
   buttonsPrefix?: string;
   backHref: string;
-  isTranslated?: boolean;
   saveTranslation: (
     currentUser: User | undefined,
     translatedTaskId: number,
     translatedTask: TranslationSchema,
-    translatedPhotos: PhotoTranslation[],
+    translationExtra: TranslationExtra,
     draft: boolean,
     router: NextRouter,
+    dispatchValidation: Dispatch<TranslationAction>,
     setToast: Dispatch<SetStateAction<Toast | undefined>>
   ) => void;
 }
 
-const TaskHeader = ({ prefix, buttonsPrefix, backHref, isTranslated, saveTranslation }: TaskHeaderProps): ReactElement => {
+const TaskHeader = ({ prefix, buttonsPrefix, backHref, saveTranslation }: TaskHeaderProps): ReactElement => {
   const i18n = useI18n();
   const router = useRouter();
 
+  const pageValid = useSelector((state: RootState) => state.translation.taskPageValid);
   const selectedTaskId = useSelector((state: RootState) => state.translation.selectedTaskId);
   const selectedTask = useSelector((state: RootState) => state.translation.selectedTask);
   const { name: placeNameSelected } = selectedTask;
@@ -56,7 +59,9 @@ const TaskHeader = ({ prefix, buttonsPrefix, backHref, isTranslated, saveTransla
         {selectedTaskId ? ` (${selectedTaskId})` : ""}
       </h1>
 
-      <TaskHeaderButtons prefix={buttonsPrefix ?? prefix} backHref={backHref} isTranslated={isTranslated} saveTranslation={saveTranslation} />
+      <div className={styles.validationSummary}>{!pageValid && <ValidationSummary prefix={buttonsPrefix ?? prefix} />}</div>
+
+      <TaskHeaderButtons prefix={buttonsPrefix ?? prefix} backHref={backHref} saveTranslation={saveTranslation} />
 
       <div className={styles.upperRow}>
         <div>
@@ -99,7 +104,6 @@ const TaskHeader = ({ prefix, buttonsPrefix, backHref, isTranslated, saveTransla
 
 TaskHeader.defaultProps = {
   buttonsPrefix: undefined,
-  isTranslated: false,
 };
 
 export default TaskHeader;

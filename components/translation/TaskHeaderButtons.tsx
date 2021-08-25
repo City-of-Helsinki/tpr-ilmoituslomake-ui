@@ -1,13 +1,16 @@
 import React, { Dispatch, ReactElement, SetStateAction, useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Link from "next/link";
 import { NextRouter, useRouter } from "next/router";
 import { useI18n } from "next-localization";
 import { Button, IconArrowRight } from "hds-react";
+import { setTranslationTaskPageValid } from "../../state/actions/translation";
+import { TranslationAction } from "../../state/actions/translationTypes";
 import { RootState } from "../../state/reducers";
 import { TaskStatus, TaskType, Toast } from "../../types/constants";
-import { PhotoTranslation, User } from "../../types/general";
+import { TranslationExtra, User } from "../../types/general";
 import { TranslationSchema } from "../../types/translation_schema";
+import { isTranslationTaskPageValid } from "../../utils/translationValidation";
 import ModalConfirmation from "../common/ModalConfirmation";
 import ToastNotification from "../common/ToastNotification";
 import styles from "./TaskHeaderButtons.module.scss";
@@ -15,20 +18,21 @@ import styles from "./TaskHeaderButtons.module.scss";
 interface TaskHeaderButtonsProps {
   prefix: string;
   backHref: string;
-  isTranslated?: boolean;
   saveTranslation: (
     currentUser: User | undefined,
     translatedTaskId: number,
     translatedTask: TranslationSchema,
-    translatedPhotos: PhotoTranslation[],
+    translationExtra: TranslationExtra,
     draft: boolean,
     router: NextRouter,
+    dispatchValidation: Dispatch<TranslationAction>,
     setToast: Dispatch<SetStateAction<Toast | undefined>>
   ) => void;
 }
 
-const TaskHeaderButtons = ({ prefix, backHref, isTranslated, saveTranslation }: TaskHeaderButtonsProps): ReactElement => {
+const TaskHeaderButtons = ({ prefix, backHref, saveTranslation }: TaskHeaderButtonsProps): ReactElement => {
   const i18n = useI18n();
+  const dispatchValidation = useDispatch<Dispatch<TranslationAction>>();
   const router = useRouter();
 
   const currentUser = useSelector((state: RootState) => state.general.user);
@@ -38,7 +42,6 @@ const TaskHeaderButtons = ({ prefix, backHref, isTranslated, saveTranslation }: 
 
   const translationExtra = useSelector((state: RootState) => state.translation.translationExtra);
   const {
-    photosTranslated,
     translationTask: { taskType, taskStatus },
   } = translationExtra;
 
@@ -66,7 +69,15 @@ const TaskHeaderButtons = ({ prefix, backHref, isTranslated, saveTranslation }: 
     closeSaveConfirmation();
     closeSaveDraftConfirmation();
 
-    saveTranslation(currentUser, translatedTaskId, translatedTask, photosTranslated, draft, router, setToast);
+    if (isTranslationTaskPageValid(prefix, translatedTask, translationExtra, dispatchValidation)) {
+      // The page is valid, so save the task
+      saveTranslation(currentUser, translatedTaskId, translatedTask, translationExtra, draft, router, dispatchValidation, setToast);
+      dispatchValidation(setTranslationTaskPageValid(true));
+    } else {
+      // The page is not valid, but set the page to valid then invalid to force the page to show the general validation message
+      dispatchValidation(setTranslationTaskPageValid(true));
+      dispatchValidation(setTranslationTaskPageValid(false));
+    }
   };
 
   return (
@@ -82,11 +93,7 @@ const TaskHeaderButtons = ({ prefix, backHref, isTranslated, saveTranslation }: 
           <Button variant="secondary" onClick={openSaveDraftConfirmation} disabled={taskStatus === TaskStatus.Closed}>
             {i18n.t(`${prefix}.button.saveDraft`)}
           </Button>
-          <Button
-            iconRight={<IconArrowRight aria-hidden />}
-            onClick={openSaveConfirmation}
-            disabled={!isTranslated || taskStatus === TaskStatus.Closed}
-          >
+          <Button iconRight={<IconArrowRight aria-hidden />} onClick={openSaveConfirmation} disabled={taskStatus === TaskStatus.Closed}>
             {i18n.t(`${prefix}.button.sendTranslation`)}
           </Button>
         </div>
@@ -119,10 +126,6 @@ const TaskHeaderButtons = ({ prefix, backHref, isTranslated, saveTranslation }: 
       {toast && <ToastNotification prefix={prefix} toast={toast} setToast={setToast} />}
     </div>
   );
-};
-
-TaskHeaderButtons.defaultProps = {
-  isTranslated: false,
 };
 
 export default TaskHeaderButtons;

@@ -2,11 +2,21 @@ import { Dispatch, SetStateAction } from "react";
 import { NextRouter } from "next/router";
 import Cookies from "js-cookie";
 import { ModerationTranslationAction } from "../state/actions/moderationTranslationTypes";
+import { TranslationAction } from "../state/actions/translationTypes";
 import { ItemType, Toast } from "../types/constants";
-import { ChangeRequestSchema, ModerationExtra, ModerationTranslationRequest, Photo, PhotoTranslation, User } from "../types/general";
+import {
+  ChangeRequestSchema,
+  ModerationExtra,
+  ModerationTranslationRequest,
+  Photo,
+  PhotoTranslation,
+  TranslationExtra,
+  User,
+} from "../types/general";
 import { NotificationSchema } from "../types/notification_schema";
 import { TranslationSchema } from "../types/translation_schema";
 import { isModerationTranslationRequestPageValid } from "./moderationValidation";
+import { isTranslationTaskPageValid } from "./translationValidation";
 import getOrigin from "./request";
 
 export const approveModeration = async (
@@ -416,25 +426,26 @@ export const saveModerationTranslation = async (
   currentUser: User | undefined,
   translatedTaskId: number,
   translatedTask: TranslationSchema,
-  translatedPhotos: PhotoTranslation[],
+  translationExtra: TranslationExtra,
   draft: boolean,
   router: NextRouter,
+  dispatchValidation: Dispatch<TranslationAction>,
   setToast: Dispatch<SetStateAction<Toast | undefined>>
 ): Promise<void> => {
   try {
-    // TODO - fix validation
-    // const valid = validateTranslationData(translatedTask);
-    const valid = true;
+    const valid = isTranslationTaskPageValid("moderation", translatedTask, translationExtra, dispatchValidation);
 
     if (currentUser?.authenticated && valid) {
       // Send the Cross Site Request Forgery token, otherwise the backend returns the error "CSRF Failed: CSRF token missing or incorrect."
       const csrftoken = Cookies.get("csrftoken");
 
+      const { photosTranslated } = translationExtra;
+
       const postData = {
         draft,
         data: {
           ...translatedTask,
-          images: translatedPhotos.map((photo, index) => {
+          images: photosTranslated.map((photo, index) => {
             const { uuid, altText: alt_text, source } = photo;
             return { index, uuid, alt_text, source };
           }),

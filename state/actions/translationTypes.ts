@@ -6,6 +6,7 @@ import {
   SET_TRANSLATION_SHORT_DESCRIPTION,
   SET_TRANSLATION_LONG_DESCRIPTION,
   SET_TRANSLATION_PHOTO,
+  SET_TRANSLATION_TASK_PAGE_VALID,
   SET_TRANSLATION_TASK_VALIDATION,
   SET_TRANSLATION_TASK_PHOTO_VALIDATION,
 } from "../../types/constants";
@@ -48,6 +49,11 @@ interface SetTranslationPhotoAction extends AnyAction {
   payload: { index: number; value: PhotoTranslation };
 }
 
+interface SetTranslationTaskPageValidAction extends AnyAction {
+  type: typeof SET_TRANSLATION_TASK_PAGE_VALID;
+  payload: boolean;
+}
+
 interface SetTranslationTaskValidationAction extends AnyAction {
   type: typeof SET_TRANSLATION_TASK_VALIDATION;
   payload: KeyValueValidation;
@@ -65,5 +71,6 @@ export type TranslationAction =
   | SetTranslationShortDescriptionAction
   | SetTranslationLongDescriptionAction
   | SetTranslationPhotoAction
+  | SetTranslationTaskPageValidAction
   | SetTranslationTaskValidationAction
   | SetTranslationTaskPhotoValidationAction;
