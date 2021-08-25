@@ -1,12 +1,9 @@
 import React, { ChangeEvent, FocusEvent, ReactElement, cloneElement } from "react";
 import { TaskStatus, TaskType, TranslationStatus } from "../../types/constants";
 import { OptionType } from "../../types/general";
-import ActionButton from "./ActionButton";
-import ModifyButton from "./ModifyButton";
 
 interface TranslationSectionProps {
   id: string;
-  prefix: string;
   fieldName: string;
   translateFrom: string;
   translateTo: string;
@@ -21,9 +18,6 @@ interface TranslationSectionProps {
   tooltipButtonLabel?: string;
   tooltipLabel?: string;
   tooltipText?: string;
-  modifyButtonLabel: string;
-  modifyButtonHidden?: boolean;
-  actionButtonHidden?: boolean;
   forceDisabled?: boolean;
   invalid?: boolean;
   errorText?: string;
@@ -40,7 +34,6 @@ interface TranslationSectionProps {
 
 const TranslationSection = ({
   id,
-  prefix,
   fieldName,
   translateFrom,
   translateTo,
@@ -55,9 +48,6 @@ const TranslationSection = ({
   tooltipButtonLabel,
   tooltipLabel,
   tooltipText,
-  modifyButtonLabel,
-  modifyButtonHidden,
-  actionButtonHidden,
   forceDisabled,
   invalid,
   errorText,
@@ -90,45 +80,24 @@ const TranslationSection = ({
           radiobuttonname: isSelectionGroupWrapper ? `${id}_Selected` : undefined,
         })}
 
-        <ModifyButton
-          className="gridColumn2"
-          prefix={prefix}
-          label={modifyButtonLabel}
-          fieldName={fieldName}
-          translationStatus={translationStatus}
-          taskStatus={taskStatus}
-          modifyCallback={statusCallback}
-          hidden={modifyButtonHidden}
-        >
-          {cloneElement(TranslationComponent, {
-            id: `${id}_Translated`,
-            className: "gridColumn2 disabledTextColor",
-            label: `${translateTo.toUpperCase()}: ${label}`,
-            value: translatedValue,
-            onChange: changeCallback,
-            onBlur: blurCallback,
-            helperText: translationStatus === TranslationStatus.Edited ? helperText : undefined,
-            tooltipButtonLabel: translationStatus === TranslationStatus.Edited ? tooltipButtonLabel : undefined,
-            tooltipLabel: translationStatus === TranslationStatus.Edited ? tooltipLabel : undefined,
-            tooltipText: translationStatus === TranslationStatus.Edited ? tooltipText : undefined,
-            disabled: translationStatus === TranslationStatus.Done || taskStatus === TaskStatus.Closed || forceDisabled,
-            radiobuttonname: isSelectionGroupWrapper ? `${id}_Translated` : undefined,
-            invalid,
-            errorText,
-            required,
-            "aria-required": required,
-          })}
-        </ModifyButton>
-
-        <ActionButton
-          className="gridColumn3"
-          prefix={prefix}
-          fieldName={fieldName}
-          translationStatus={translationStatus}
-          taskStatus={taskStatus}
-          actionCallback={statusCallback}
-          hidden={actionButtonHidden}
-        />
+        {cloneElement(TranslationComponent, {
+          id: `${id}_Translated`,
+          className: "gridColumn2 disabledTextColor",
+          label: `${translateTo.toUpperCase()}: ${label}`,
+          value: translatedValue,
+          onChange: changeCallback,
+          onBlur: blurCallback,
+          helperText: translationStatus === TranslationStatus.Edited ? helperText : undefined,
+          tooltipButtonLabel: translationStatus === TranslationStatus.Edited ? tooltipButtonLabel : undefined,
+          tooltipLabel: translationStatus === TranslationStatus.Edited ? tooltipLabel : undefined,
+          tooltipText: translationStatus === TranslationStatus.Edited ? tooltipText : undefined,
+          disabled: translationStatus === TranslationStatus.Done || taskStatus === TaskStatus.Closed || forceDisabled,
+          radiobuttonname: isSelectionGroupWrapper ? `${id}_Translated` : undefined,
+          invalid,
+          errorText,
+          required,
+          "aria-required": required,
+        })}
       </>
     );
   }
@@ -145,8 +114,6 @@ TranslationSection.defaultProps = {
   tooltipButtonLabel: undefined,
   tooltipLabel: undefined,
   tooltipText: undefined,
-  modifyButtonHidden: false,
-  actionButtonHidden: false,
   forceDisabled: false,
   invalid: false,
   errorText: undefined,

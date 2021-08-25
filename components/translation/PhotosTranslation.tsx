@@ -75,7 +75,6 @@ const PhotosTranslation = ({ prefix, index }: PhotosTranslationProps): ReactElem
         <div className="gridLayoutContainer translation">
           <TranslationSection
             id={`altText_${toOption}`}
-            prefix={prefix}
             fieldName={toOption}
             translateFrom={translateFrom}
             translateTo={translateTo}
@@ -88,7 +87,6 @@ const PhotosTranslation = ({ prefix, index }: PhotosTranslationProps): ReactElem
             tooltipButtonLabel={i18n.t(`${prefix}.button.openHelp`)}
             tooltipLabel={i18n.t(`${prefix}.photos.altText.tooltipLabel`)}
             tooltipText={i18n.t(`${prefix}.photos.altText.tooltipText`)}
-            modifyButtonLabel={i18n.t(`${prefix}.photos.altText.label`)}
             changeCallback={(evt: ChangeEvent<HTMLTextAreaElement>) => updatePhotoAltText(evt)}
             statusCallback={(language, status) => updatePhotoAltTextStatus(language, status)}
             TranslationComponent={<TextArea id={`altText_${toOption}`} rows={3} label={i18n.t(`${prefix}.photos.altText.label`)} name={toOption} />}
@@ -96,7 +94,6 @@ const PhotosTranslation = ({ prefix, index }: PhotosTranslationProps): ReactElem
 
           <TranslationSection
             id={`source_${index}`}
-            prefix={prefix}
             fieldName="source"
             translateFrom={translateFrom}
             translateTo={translateTo}
@@ -108,7 +105,6 @@ const PhotosTranslation = ({ prefix, index }: PhotosTranslationProps): ReactElem
             tooltipButtonLabel={i18n.t(`${prefix}.button.openHelp`)}
             tooltipLabel={i18n.t(`${prefix}.photos.source.tooltipLabel`)}
             tooltipText={i18n.t(`${prefix}.photos.source.tooltipText`)}
-            modifyButtonLabel={i18n.t(`${prefix}.photos.source.label`)}
             changeCallback={(evt: ChangeEvent<HTMLInputElement>) => updatePhoto(evt)}
             blurCallback={validatePhoto}
             statusCallback={(fieldName, status) => updatePhotoTranslationStatus(fieldName, status)}
