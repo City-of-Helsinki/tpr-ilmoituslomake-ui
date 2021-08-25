@@ -4,8 +4,13 @@
   display: flex;
   flex-direction: row;
 
-  div {
-    padding: $spacing-2-xs $spacing-l $spacing-2-xs 0;
+  .statusItem {
+    flex-grow: 1;
+    padding: 0 $spacing-l;
+
+    > div {
+      padding: $spacing-2-xs 0;
+    }
   }
 }
 

@@ -6,6 +6,7 @@ import { Button, IconAlertCircleFill, IconCrossCircleFill, IconInfoCircle } from
 import { setModerationTranslationRequest } from "../../../state/actions/moderationTranslation";
 import { ModerationTranslationAction } from "../../../state/actions/moderationTranslationTypes";
 import { RootState } from "../../../state/reducers";
+import { TaskStatus } from "../../../types/constants";
 import { ModerationTranslationRequest } from "../../../types/general";
 import { getDisplayName } from "../../../utils/helper";
 import { defaultLocale } from "../../../utils/i18n";
@@ -17,7 +18,7 @@ const RequestPlaces = (): ReactElement => {
   const router = useRouter();
 
   const requestDetail = useSelector((state: RootState) => state.moderationTranslation.requestDetail);
-  const { selectedPlaces } = requestDetail;
+  const { selectedPlaces, taskStatus } = requestDetail;
 
   const requestValidation = useSelector((state: RootState) => state.moderationTranslation.requestValidation);
   const { selectedPlaces: selectedPlacesValid } = requestValidation;
@@ -48,6 +49,7 @@ const RequestPlaces = (): ReactElement => {
                 size="small"
                 aria-label={i18n.t("moderation.button.collapse")}
                 onClick={() => removePlaceFromSelection(placeId)}
+                disabled={taskStatus === TaskStatus.Closed}
               >
                 <IconCrossCircleFill aria-hidden />
               </Button>

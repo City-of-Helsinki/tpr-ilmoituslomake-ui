@@ -2,6 +2,7 @@ import React, { ReactElement } from "react";
 import { useSelector } from "react-redux";
 import { useI18n } from "next-localization";
 import { RootState } from "../../../state/reducers";
+import TaskStatusLabel from "../../common/TaskStatusLabel";
 import styles from "./RequestStatus.module.scss";
 
 const RequestStatus = (): ReactElement => {
@@ -15,11 +16,13 @@ const RequestStatus = (): ReactElement => {
       <h2 className="moderation">{i18n.t("moderation.translation.request.status")}</h2>
 
       <div className={styles.statusRow}>
-        <div>
+        <div className={styles.statusItem}>
           <div className={styles.bold}>{i18n.t("moderation.translation.request.request")}</div>
-          <div>{i18n.t(`moderation.translation.request.taskStatus.${taskStatus}`)}</div>
+          <div>
+            <TaskStatusLabel prefix="moderation.translation" status={taskStatus} includeIcons />
+          </div>
         </div>
-        <div>
+        <div className={styles.statusItem}>
           <div className={styles.bold}>{i18n.t("moderation.translation.request.translationTasks")}</div>
           <div>{selectedPlaces.length}</div>
         </div>

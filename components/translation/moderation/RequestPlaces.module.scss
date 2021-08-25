@@ -3,6 +3,7 @@
 .placeContainer {
   display: flex;
   flex-direction: column;
+  padding: 0 $spacing-l;
 
   .placeItem {
     display: flex;
@@ -23,6 +24,11 @@
 
       &:hover {
         color: $color-black;
+      }
+
+      &:disabled {
+        color: $color-black-40;
+        background-color: $color-black-10;
       }
     }
   }

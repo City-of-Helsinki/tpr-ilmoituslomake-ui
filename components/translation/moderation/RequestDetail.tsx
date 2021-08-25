@@ -5,14 +5,16 @@ import { RadioButton, SelectionGroup, TextArea, TextInput } from "hds-react";
 import { ModerationTranslationAction } from "../../../state/actions/moderationTranslationTypes";
 import { setModerationTranslationRequest } from "../../../state/actions/moderationTranslation";
 import { RootState } from "../../../state/reducers";
+import { TaskStatus } from "../../../types/constants";
 import { isModerationTranslationRequestFieldValid } from "../../../utils/moderationValidation";
+import styles from "./RequestDetail.module.scss";
 
 const RequestDetail = (): ReactElement => {
   const i18n = useI18n();
   const dispatch = useDispatch<Dispatch<ModerationTranslationAction>>();
 
   const requestDetail = useSelector((state: RootState) => state.moderationTranslation.requestDetail);
-  const { language, translator, message } = requestDetail;
+  const { language, translator, message, taskStatus } = requestDetail;
   const { from: translateFrom, to: translateTo } = language;
   const { name: translatorName, email: translatorEmail } = translator;
   const translationLanguage = translateFrom && translateTo ? `${translateFrom}-${translateTo}` : "";
@@ -57,7 +59,7 @@ const RequestDetail = (): ReactElement => {
     <div className="formSection">
       <h2 className="moderation">{i18n.t("moderation.translation.request.translationDetails")}</h2>
 
-      <div>
+      <div className={styles.requestDetail}>
         <TextInput
           id="translatorName"
           className="formInput"
@@ -74,6 +76,7 @@ const RequestDetail = (): ReactElement => {
           }
           required
           aria-required
+          disabled={taskStatus === TaskStatus.Closed}
         />
 
         <TextInput
@@ -92,6 +95,7 @@ const RequestDetail = (): ReactElement => {
           }
           required
           aria-required
+          disabled={taskStatus === TaskStatus.Closed}
         />
 
         <SelectionGroup
@@ -106,6 +110,7 @@ const RequestDetail = (): ReactElement => {
           }
           required
           aria-required
+          disabled={taskStatus === TaskStatus.Closed}
         >
           <RadioButton
             id="translationLanguage_en_zh"
@@ -133,6 +138,7 @@ const RequestDetail = (): ReactElement => {
           }
           required
           aria-required
+          disabled={taskStatus === TaskStatus.Closed}
         />
       </div>
     </div>
