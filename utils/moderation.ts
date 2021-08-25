@@ -324,8 +324,6 @@ export const saveModerationTranslationRequest = async (
 
       const postData = {
         ...(requestId > 0 && { id: requestId }),
-        // request,
-        // draft,
         targets: selectedPlaces.map((place) => place.id),
         language,
         message,
@@ -335,7 +333,7 @@ export const saveModerationTranslationRequest = async (
       console.log("SENDING", postData);
 
       // Save the translation request
-      const saveResponse = await fetch(`${getOrigin(router)}/api/moderation_translation/save_request/`, {
+      const saveResponse = await fetch(`${getOrigin(router)}/api/moderation/translation/save_request/`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -387,24 +385,20 @@ export const cancelModerationTranslationRequest = async (
       const csrftoken = Cookies.get("csrftoken");
 
       // Cancel the translation request
-      const cancelResponse = await fetch(`${getOrigin(router)}/api/moderation_translation/cancel_request/${requestId}/`, {
+      const cancelResponse = await fetch(`${getOrigin(router)}/api/moderation/translation/cancel_request/${requestId}/`, {
         method: "DELETE",
         headers: {
           "X-CSRFToken": csrftoken as string,
         },
       });
       if (cancelResponse.ok) {
-        const cancelResult = await cancelResponse.json();
+        const cancelResult = await cancelResponse.text();
         console.log("CANCEL RESPONSE", cancelResult);
 
-        if (cancelResult.id) {
-          // Reload the current page to update the page statuses
-          // router.reload();
-          router.push(`/moderation/translation/request/${requestId}`);
-          setToast(Toast.SaveSucceeded);
-        } else {
-          setToast(Toast.SaveFailed);
-        }
+        // Reload the current page to update the page statuses
+        // router.reload();
+        router.push(`/moderation/translation/request/${requestId}`);
+        setToast(Toast.DeleteSucceeded);
       } else {
         setToast(Toast.SaveFailed);
 
