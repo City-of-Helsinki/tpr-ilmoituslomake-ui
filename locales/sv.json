@@ -385,6 +385,7 @@
       "done": "Done",
       "openHelp": "Open help",
       "save": "Save",
+      "send": "Send",
       "back": "Back"
     },
     "message": {
@@ -402,7 +403,7 @@
       },
       "saveSucceeded": {
         "title": "Submitted successfully!",
-        "message": "Thanks for your submission! The information will be reviewed before publication."
+        "message": "Thanks for your submission!"
       },
       "close": "Close message",
       "fieldRequired": "$fieldName is mandatory information",

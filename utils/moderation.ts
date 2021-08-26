@@ -398,7 +398,7 @@ export const cancelModerationTranslationRequest = async (
         // Reload the current page to update the page statuses
         // router.reload();
         router.push(`/moderation/translation/request/${requestId}`);
-        setToast(Toast.DeleteSucceeded);
+        setToast(Toast.RejectSucceeded);
       } else {
         setToast(Toast.SaveFailed);
 

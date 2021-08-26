@@ -105,7 +105,7 @@ const TaskHeaderButtons = ({ prefix, backHref, saveTranslation }: TaskHeaderButt
           titleKey={`${prefix}.button.sendTranslation`}
           messageKey={`${prefix}.confirmation.sendTranslation`}
           cancelKey={`${prefix}.button.back`}
-          confirmKey={`${prefix}.button.save`}
+          confirmKey={`${prefix}.button.send`}
           closeCallback={closeSaveConfirmation}
           confirmCallback={() => saveTask(false)}
         />

@@ -7,7 +7,7 @@ import moment from "moment";
 import { initStore } from "../../../../state/store";
 import { RootState } from "../../../../state/reducers";
 import { CLEAR_STATE, DATETIME_FORMAT, INITIAL_NOTIFICATION, INITIAL_TRANSLATION, TranslationStatus } from "../../../../types/constants";
-import { PhotoSchema, TranslationTodoSchema } from "../../../../types/general";
+import { PhotoSchema, PhotoTranslation, TranslationTodoSchema } from "../../../../types/general";
 import { PhotoTranslationStatus } from "../../../../types/translation_status";
 import { getTaskStatus, getTaskType } from "../../../../utils/conversion";
 import i18nLoader from "../../../../utils/i18n";
@@ -204,23 +204,24 @@ export const getServerSideProps: GetServerSideProps = async ({ req, resolvedUrl,
                 preview: image.url ?? "",
               };
             }),
-            photosTranslated: translatedTask.images.map((photo) => {
-              const image = photo || ({ alt_text: {} } as PhotoSchema);
+            photosTranslated: targetData.images.map((photo) => {
+              const translatedImage = translatedTask.images.find((i) => i.uuid === photo.uuid);
+              const image = translatedImage || ({ alt_text: {} } as PhotoSchema);
 
               return {
-                uuid: image.uuid ?? "",
+                uuid: photo.uuid ?? "",
                 altText: {
                   lang: image.alt_text.lang ?? "",
                 },
                 source: image.source ?? "",
-              };
+              } as PhotoTranslation;
             }),
           },
           taskValidation: {
             name: { valid: true },
             descriptionShort: { valid: true },
             descriptionLong: { valid: true },
-            photos: translatedTask.images.map(() => {
+            photos: targetData.images.map(() => {
               return {
                 altText: { valid: true },
                 source: { valid: true },
@@ -233,7 +234,7 @@ export const getServerSideProps: GetServerSideProps = async ({ req, resolvedUrl,
           ...initialReduxState.translationStatus,
           translationStatus: {
             ...initialReduxState.translationStatus.translationStatus,
-            photos: translatedTask.images.map(() => {
+            photos: targetData.images.map(() => {
               return {
                 altText: {
                   lang: TranslationStatus.Unknown,
