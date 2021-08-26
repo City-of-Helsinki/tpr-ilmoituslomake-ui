@@ -5,7 +5,7 @@ import { RadioButton, SelectionGroup, TextArea, TextInput } from "hds-react";
 import { ModerationTranslationAction } from "../../../state/actions/moderationTranslationTypes";
 import { setModerationTranslationRequest } from "../../../state/actions/moderationTranslation";
 import { RootState } from "../../../state/reducers";
-import { TaskStatus } from "../../../types/constants";
+import { TaskStatus, TRANSLATION_OPTIONS } from "../../../types/constants";
 import { isModerationTranslationRequestFieldValid } from "../../../utils/moderationValidation";
 import styles from "./RequestDetail.module.scss";
 
@@ -112,14 +112,17 @@ const RequestDetail = (): ReactElement => {
           aria-required
           disabled={taskStatus === TaskStatus.Closed}
         >
-          <RadioButton
-            id="translationLanguage_en_zh"
-            label="EN-ZH"
-            name="language"
-            value="en-zh"
-            checked={translationLanguage === "en-zh"}
-            onChange={updateRequestLanguage}
-          />
+          {TRANSLATION_OPTIONS.map((option) => (
+            <RadioButton
+              id={`translationLanguage_${option.from}_${option.to}`}
+              key={`translationLanguage_${option.from}_${option.to}`}
+              label={`${option.from.toUpperCase()}-${option.to.toUpperCase()}`}
+              name="language"
+              value={`${option.from}-${option.to}`}
+              checked={translationLanguage === `${option.from}-${option.to}`}
+              onChange={updateRequestLanguage}
+            />
+          ))}
         </SelectionGroup>
 
         <TextArea

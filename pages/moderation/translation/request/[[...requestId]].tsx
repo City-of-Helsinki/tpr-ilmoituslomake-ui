@@ -6,7 +6,7 @@ import { useI18n } from "next-localization";
 import moment from "moment";
 import { RootState } from "../../../../state/reducers";
 import { initStore } from "../../../../state/store";
-import { CLEAR_STATE, DATETIME_FORMAT, TaskStatus, TaskType } from "../../../../types/constants";
+import { CLEAR_STATE, DATETIME_FORMAT, TaskStatus, TaskType, TRANSLATION_OPTIONS } from "../../../../types/constants";
 import { ModerationPlaceResult, ModerationTranslationRequest, ModerationTranslationRequestResult } from "../../../../types/general";
 import { INITIAL_NOTIFICATION } from "../../../../types/initial";
 import { getTaskStatus, getTaskType } from "../../../../utils/conversion";
@@ -166,8 +166,8 @@ export const getServerSideProps: GetServerSideProps = async ({ req, resolvedUrl,
             ...initialReduxState.moderationTranslation.requestDetail,
             selectedPlaces,
             language: {
-              from: "en",
-              to: "zh",
+              from: TRANSLATION_OPTIONS[0].from,
+              to: TRANSLATION_OPTIONS[0].to,
             },
             taskType: TaskType.Translation,
             taskStatus: TaskStatus.Open,
