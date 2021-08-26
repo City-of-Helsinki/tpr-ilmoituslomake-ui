@@ -1,8 +1,9 @@
 import React, { Dispatch, ChangeEvent, ReactElement, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import Link from "next/link";
 import { useRouter } from "next/router";
 import { useI18n } from "next-localization";
-import { Button, Checkbox, Combobox, Select, SelectionGroup, TextInput } from "hds-react";
+import { Button, Checkbox, Combobox, IconPlus, Select, SelectionGroup, TextInput } from "hds-react";
 import moment from "moment";
 import { ModerationTranslationAction } from "../../../state/actions/moderationTranslationTypes";
 import {
@@ -123,32 +124,14 @@ const PlaceSearch = (): ReactElement => {
     dispatch(clearModerationTranslationPlaceSearch());
   };
 
-  /*
-  const makeNewPlaceChangeRequest = () => {
-    // Make a new moderation task for the new place by making a change request
-    const newPlaceChangeRequest = {
-      target: 0,
-      item_type: ItemType.ChangeRequestAdd,
-      user_place_name: "",
-      user_comments: i18n.t("moderation.taskHeader.moderatorChangeRequest"),
-      user_details: currentUser ? `${currentUser.first_name} ${currentUser.last_name}`.trim() : "",
-    };
-    saveModerationChangeRequest(newPlaceChangeRequest, router, setToast);
-  };
-  */
-
   return (
     <div className={`formSection ${styles.placeSearch}`}>
       <div className={styles.header}>
         <h1 className="moderation">{i18n.t("moderation.placeSearch.title")}</h1>
         <div className="flexSpace" />
-        <div>
-          {/*
-          <Button className={styles.primary} iconLeft={<IconPlus aria-hidden />} onClick={makeNewPlaceChangeRequest}>
-            {i18n.t("moderation.button.addNewPlace")}
-          </Button>
-          */}
-        </div>
+        <Link href="/moderation/translation/request">
+          <Button iconLeft={<IconPlus aria-hidden />}>{i18n.t("moderation.button.requestNewTranslation")}</Button>
+        </Link>
       </div>
 
       <div className="gridLayoutContainer">

@@ -69,8 +69,8 @@ const TaskHeaderButtons = ({ prefix, backHref, saveTranslation }: TaskHeaderButt
     closeSaveConfirmation();
     closeSaveDraftConfirmation();
 
-    if (isTranslationTaskPageValid(prefix, translatedTask, translationExtra, dispatchValidation)) {
-      // The page is valid, so save the task
+    if (draft || isTranslationTaskPageValid(prefix, translatedTask, translationExtra, dispatchValidation)) {
+      // The page is valid, or this is a draft, so save the task
       saveTranslation(currentUser, translatedTaskId, translatedTask, translationExtra, draft, router, dispatchValidation, setToast);
       dispatchValidation(setTranslationTaskPageValid(true));
     } else {

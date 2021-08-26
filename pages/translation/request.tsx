@@ -17,7 +17,7 @@ import MoreResultsButton from "../../components/translation/MoreResultsButton";
 const TranslationRequest = (): ReactElement => {
   const i18n = useI18n();
 
-  const [showStatus, setShowStatus] = useState<string>("all");
+  const [showStatus, setShowStatus] = useState<string>("active");
   const [showResults, setShowResults] = useState<string>("requests");
 
   return (

@@ -1,13 +1,21 @@
 @import "~hds-design-tokens/lib/all.scss";
 
 .requestResults {
+  .headerRow {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    align-items: center;
+    margin-top: $spacing-xs;
+  }
+
   .optionsRow {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: flex-end;
     align-items: center;
-    margin-bottom: $spacing-xs;
   }
 
   .gridColumn1 {

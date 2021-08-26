@@ -1,13 +1,17 @@
-import React, { Dispatch, ChangeEvent, ReactElement, SetStateAction, Fragment, useCallback, useMemo } from "react";
+import React, { Dispatch, ChangeEvent, ReactElement, SetStateAction, Fragment, useCallback, useMemo, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import Link from "next/link";
+import { useRouter } from "next/router";
 import { useI18n } from "next-localization";
 import { Button, Checkbox, IconPen } from "hds-react";
 import { ModerationTranslationAction } from "../../../state/actions/moderationTranslationTypes";
 import { setModerationTranslationSelectedRequests } from "../../../state/actions/moderationTranslation";
 import { RootState } from "../../../state/reducers";
-import { TaskStatus } from "../../../types/constants";
+import { TaskStatus, Toast } from "../../../types/constants";
 import { TranslationRequestResult, TranslationRequestResultTask } from "../../../types/general";
+import { cancelMultipleModerationTranslationRequests } from "../../../utils/moderation";
+import ModalConfirmation from "../../common/ModalConfirmation";
+import ToastNotification from "../../common/ToastNotification";
 import TaskStatusLabel from "../../common/TaskStatusLabel";
 import TaskResultsFilter from "../TaskResultsFilter";
 import styles from "./RequestResults.module.scss";
@@ -21,6 +25,9 @@ interface RequestResultsProps {
 const RequestResults = ({ showStatus, showResults, setShowResults }: RequestResultsProps): ReactElement => {
   const i18n = useI18n();
   const dispatch = useDispatch<Dispatch<ModerationTranslationAction>>();
+  const router = useRouter();
+
+  const currentUser = useSelector((state: RootState) => state.general.user);
 
   const taskResults = useSelector((state: RootState) => state.moderationTranslation.taskResults);
   const { results } = taskResults;
@@ -28,6 +35,17 @@ const RequestResults = ({ showStatus, showResults, setShowResults }: RequestResu
   const { request: searchRequest, searchDone } = taskSearch;
   const selectedRequests = useSelector((state: RootState) => state.moderationTranslation.selectedRequests);
   const { selectedIds: selectedRequestIds, isAllSelected: isAllRequestsSelected } = selectedRequests;
+
+  const [toast, setToast] = useState<Toast>();
+  const [confirmCancel, setConfirmCancel] = useState(false);
+
+  const openCancelConfirmation = () => {
+    setConfirmCancel(true);
+  };
+
+  const closeCancelConfirmation = () => {
+    setConfirmCancel(false);
+  };
 
   const requestResults = useMemo(
     () =>
@@ -130,20 +148,34 @@ const RequestResults = ({ showStatus, showResults, setShowResults }: RequestResu
     );
   };
 
-  const cancelTranslationRequest = () => {
-    // TODO
+  const cancelRequest = () => {
+    closeCancelConfirmation();
+
+    const requestIds = selectedRequestIds.map((id) => Number(id));
+    if (requestIds.length > 0) {
+      cancelMultipleModerationTranslationRequests(currentUser, requestIds, router, setToast);
+    }
   };
 
   return (
     <div className={`formSection ${styles.requestResults}`}>
       {filteredRequestResults.length > 0 && (
-        <h2 className="moderation">{`${i18n.t("moderation.translation.requestResults.found")} ${filteredRequestResults.length} / ${
-          requestResults.length
-        } ${i18n.t("moderation.translation.requestResults.requests")}`}</h2>
+        <div className={styles.headerRow}>
+          <h2 className="moderation">{`${i18n.t("moderation.translation.requestResults.found")} ${filteredRequestResults.length} / ${
+            requestResults.length
+          } ${i18n.t("moderation.translation.requestResults.requests")}`}</h2>
+          <div className="flexSpace" />
+          <Button variant="secondary" onClick={openCancelConfirmation}>
+            {i18n.t("moderation.button.cancelTranslationRequests")}
+          </Button>
+        </div>
       )}
 
       {searchDone && filteredRequestResults.length === 0 && (
-        <h2 className="moderation">{i18n.t("moderation.translation.requestResults.notFound")}</h2>
+        <div className={styles.headerRow}>
+          <h2 className="moderation">{i18n.t("moderation.translation.requestResults.notFound")}</h2>
+          <div className="flexSpace" />
+        </div>
       )}
 
       {filteredRequestResults.length > 0 && (
@@ -156,10 +188,6 @@ const RequestResults = ({ showStatus, showResults, setShowResults }: RequestResu
           />
           <div className="flexSpace" />
           <TaskResultsFilter prefix="moderation.translation" showResults={showResults} setShowResults={setShowResults} />
-          <div className="flexSpace" />
-          <Button variant="secondary" onClick={cancelTranslationRequest}>
-            {i18n.t("moderation.button.cancelTranslationRequest")}
-          </Button>
         </div>
       )}
 
@@ -172,7 +200,6 @@ const RequestResults = ({ showStatus, showResults, setShowResults }: RequestResu
           <div className={`${styles.gridColumn5} ${styles.gridHeader}`}>{i18n.t("moderation.translation.requestResults.status")}</div>
 
           {filteredRequestResults
-            // .sort((a: ModerationTranslationRequestResult, b: ModerationTranslationRequestResult) => b.updated.getTime() - a.updated.getTime())
             .sort((a: TranslationRequestResult, b: TranslationRequestResult) => b.updated.getTime() - a.updated.getTime())
             .map((result) => {
               const { id: requestId, formattedRequest, language, tasks, translator } = result;
@@ -208,6 +235,20 @@ const RequestResults = ({ showStatus, showResults, setShowResults }: RequestResu
             })}
         </div>
       )}
+
+      {confirmCancel && (
+        <ModalConfirmation
+          open={confirmCancel}
+          titleKey="moderation.button.cancelTranslationRequests"
+          messageKey="moderation.confirmation.cancelTranslationRequests"
+          cancelKey="moderation.button.back"
+          confirmKey="moderation.button.cancel2"
+          closeCallback={closeCancelConfirmation}
+          confirmCallback={() => cancelRequest()}
+        />
+      )}
+
+      {toast && <ToastNotification prefix="moderation" toast={toast} setToast={setToast} />}
     </div>
   );
 };

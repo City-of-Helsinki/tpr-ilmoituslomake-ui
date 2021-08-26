@@ -394,8 +394,66 @@ export const cancelModerationTranslationRequest = async (
       } else {
         setToast(Toast.SaveFailed);
 
-        const saveResult = await cancelResponse.text();
-        console.log("CANCEL FAILED", saveResult);
+        const cancelResult = await cancelResponse.text();
+        console.log("CANCEL FAILED", cancelResult);
+      }
+    } else if (!valid) {
+      setToast(Toast.ValidationFailed);
+    } else {
+      setToast(Toast.NotAuthenticated);
+    }
+  } catch (err) {
+    console.log("ERROR", err);
+    setToast(Toast.SaveFailed);
+  }
+};
+
+export const cancelMultipleModerationTranslationRequests = async (
+  currentUser: User | undefined,
+  requestIds: number[],
+  router: NextRouter,
+  setToast: Dispatch<SetStateAction<Toast | undefined>>
+): Promise<void> => {
+  try {
+    const valid = requestIds.length > 0;
+
+    if (currentUser?.authenticated && valid) {
+      // Send the Cross Site Request Forgery token, otherwise the backend returns the error "CSRF Failed: CSRF token missing or incorrect."
+      const csrftoken = Cookies.get("csrftoken");
+
+      // Cancel the translation requests
+      const cancelResponses = await Promise.all(
+        requestIds.map(async (requestId) => {
+          const cancelResponse = await fetch(`${getOrigin(router)}/api/moderation/translation/cancel_request/${requestId}/`, {
+            method: "DELETE",
+            headers: {
+              "X-CSRFToken": csrftoken as string,
+            },
+          });
+
+          if (cancelResponse.ok) {
+            const cancelResult = await cancelResponse.text();
+            console.log("CANCEL RESPONSE", cancelResult);
+            return true;
+          }
+
+          const cancelResult = await cancelResponse.text();
+          console.log("CANCEL FAILED", cancelResult);
+          return false;
+        })
+      );
+
+      const cancelMultipleResult = cancelResponses.reduce((acc: boolean, result) => acc && result, true);
+      if (cancelMultipleResult) {
+        console.log("CANCEL MULTIPLE SUCCEEDED", cancelMultipleResult);
+
+        // Reload the current page to update the page statuses
+        router.reload();
+        // router.push(`/moderation/translation`);
+        setToast(Toast.RejectSucceeded);
+      } else {
+        setToast(Toast.SaveFailed);
+        console.log("CANCEL MULTIPLE FAILED", cancelMultipleResult);
       }
     } else if (!valid) {
       setToast(Toast.ValidationFailed);

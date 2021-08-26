@@ -79,19 +79,23 @@ const TaskResults = ({ showStatus, showResults, setShowResults }: TaskResultsPro
     );
   };
 
-  const cancelTranslationTask = () => {
-    // TODO
-  };
-
   return (
     <div className={`formSection ${styles.taskResults}`}>
       {filteredTaskResults.length > 0 && (
-        <h2 className="moderation">{`${i18n.t("moderation.translation.taskResults.found")} ${filteredTaskResults.length} / ${count} ${i18n.t(
-          "moderation.translation.taskResults.tasks"
-        )}`}</h2>
+        <div className={styles.headerRow}>
+          <h2 className="moderation">{`${i18n.t("moderation.translation.taskResults.found")} ${filteredTaskResults.length} / ${count} ${i18n.t(
+            "moderation.translation.taskResults.tasks"
+          )}`}</h2>
+          <div className="flexSpace" />
+        </div>
       )}
 
-      {searchDone && filteredTaskResults.length === 0 && <h2 className="moderation">{i18n.t("moderation.translation.taskResults.notFound")}</h2>}
+      {searchDone && filteredTaskResults.length === 0 && (
+        <div className={styles.headerRow}>
+          <h2 className="moderation">{i18n.t("moderation.translation.taskResults.notFound")}</h2>
+          <div className="flexSpace" />
+        </div>
+      )}
 
       {filteredTaskResults.length > 0 && (
         <div className={styles.optionsRow}>
@@ -103,10 +107,6 @@ const TaskResults = ({ showStatus, showResults, setShowResults }: TaskResultsPro
           />
           <div className="flexSpace" />
           <TaskResultsFilter prefix="moderation.translation" showResults={showResults} setShowResults={setShowResults} />
-          <div className="flexSpace" />
-          <Button variant="secondary" onClick={cancelTranslationTask}>
-            {i18n.t("moderation.button.cancelTranslationTask")}
-          </Button>
         </div>
       )}
 

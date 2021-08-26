@@ -80,7 +80,7 @@ const RequestButtons = (): ReactElement => {
             </Button>
           )}
           <Button iconRight={<IconArrowRight aria-hidden />} onClick={openSaveConfirmation} disabled={taskStatus === TaskStatus.Closed}>
-            {i18n.t("moderation.button.saveTranslationRequest")}
+            {i18n.t("moderation.button.sendTranslationRequest")}
           </Button>
         </div>
       )}
@@ -88,10 +88,10 @@ const RequestButtons = (): ReactElement => {
       {confirmSave && (
         <ModalConfirmation
           open={confirmSave}
-          titleKey="moderation.button.saveTranslationRequest"
-          messageKey="moderation.confirmation.saveTranslationRequest"
+          titleKey="moderation.button.sendTranslationRequest"
+          messageKey="moderation.confirmation.sendTranslationRequest"
           cancelKey="moderation.button.back"
-          confirmKey="moderation.button.save"
+          confirmKey="moderation.button.send"
           closeCallback={closeSaveConfirmation}
           confirmCallback={() => saveRequest()}
         />
