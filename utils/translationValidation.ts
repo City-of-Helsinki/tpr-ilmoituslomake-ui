@@ -6,13 +6,7 @@ import { TranslationExtra, Validation } from "../types/general";
 import { TranslationSchema } from "../types/translation_schema";
 import { isValid } from "./validation";
 
-export const isTranslationTaskFieldValid = (
-  prefix: string,
-  translationTaskField: string,
-  translationValidationField: string,
-  translatedTask: TranslationSchema,
-  dispatch: Dispatch<TranslationAction>
-): boolean => {
+export const validateTranslationTaskField = (prefix: string, translationTaskField: string, translatedTask: TranslationSchema): Validation => {
   let result: Validation;
   switch (translationTaskField) {
     case "name": {
@@ -30,8 +24,31 @@ export const isTranslationTaskFieldValid = (
       result = { valid: false, message: undefined };
     }
   }
+  return result;
+};
+
+export const isTranslationTaskFieldValid = (
+  prefix: string,
+  translationTaskField: string,
+  translationValidationField: string,
+  translatedTask: TranslationSchema,
+  dispatch: Dispatch<TranslationAction>
+): boolean => {
+  const result = validateTranslationTaskField(prefix, translationTaskField, translatedTask);
   dispatch(setTranslationTaskValidation({ [translationValidationField]: result }));
   return result.valid;
+};
+
+export const validateTranslationTaskPhotoField = (
+  prefix: string,
+  index: number,
+  translationTaskPhotoField: string,
+  translationExtra: TranslationExtra
+): Validation => {
+  const { photosTranslated } = translationExtra;
+  const photo = photosTranslated[index];
+  const schema = string().required(`${prefix}.message.fieldRequired`);
+  return isValid(schema, photo[translationTaskPhotoField] as string);
 };
 
 export const isTranslationTaskPhotoFieldValid = (
@@ -42,12 +59,23 @@ export const isTranslationTaskPhotoFieldValid = (
   translationExtra: TranslationExtra,
   dispatch: Dispatch<TranslationAction>
 ): boolean => {
-  const { photosTranslated } = translationExtra;
-  const photo = photosTranslated[index];
-  const schema = string().required(`${prefix}.message.fieldRequired`);
-  const result = isValid(schema, photo[translationTaskPhotoField] as string);
+  const result = validateTranslationTaskPhotoField(prefix, index, translationTaskPhotoField, translationExtra);
   dispatch(setTranslationTaskPhotoValidation(index, { [translationValidationPhotoField]: result }));
   return result.valid;
+};
+
+export const validateTranslationTaskDetails = (prefix: string, translatedTask: TranslationSchema): boolean => {
+  const inputValid = [
+    validateTranslationTaskField(prefix, "name", translatedTask),
+    validateTranslationTaskField(prefix, "short", translatedTask),
+    validateTranslationTaskField(prefix, "long", translatedTask),
+  ];
+  return inputValid.every((v) => v.valid);
+};
+
+export const validateTranslationTaskPhoto = (prefix: string, index: number, translationExtra: TranslationExtra): boolean => {
+  const photoValid = [validateTranslationTaskPhotoField(prefix, index, "source", translationExtra)];
+  return photoValid.every((v) => v.valid);
 };
 
 export const isTranslationTaskPageValid = (

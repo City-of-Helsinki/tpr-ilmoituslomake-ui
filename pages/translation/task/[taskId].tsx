@@ -13,6 +13,7 @@ import { getTaskStatus, getTaskType } from "../../../utils/conversion";
 import i18nLoader from "../../../utils/i18n";
 import { checkUser, getOriginServerSide, redirectToLogin, redirectToNotAuthorized } from "../../../utils/serverside";
 import saveTranslation from "../../../utils/translation";
+import { validateTranslationTaskDetails, validateTranslationTaskPhoto } from "../../../utils/translationValidation";
 import Layout from "../../../components/common/Layout";
 import Header from "../../../components/common/Header";
 import Collapsible from "../../../components/translation/Collapsible";
@@ -25,7 +26,7 @@ const TranslationTask = (): ReactElement => {
   const i18n = useI18n();
 
   const translatedTaskId = useSelector((state: RootState) => state.translation.translatedTaskId);
-  const translationStatus = useSelector((state: RootState) => state.translationStatus.translationStatus);
+  const translatedTask = useSelector((state: RootState) => state.translation.translatedTask);
   const translationExtra = useSelector((state: RootState) => state.translation.translationExtra);
   const {
     photosTranslated,
@@ -41,30 +42,12 @@ const TranslationTask = (): ReactElement => {
     }
   }, [pageValid]);
 
-  const isTranslated = (statusToCheck: TranslationStatus) => {
-    return statusToCheck !== TranslationStatus.Edited;
-  };
-
   const isBasicSectionTranslated = () => {
-    const option = "lang";
-
-    // Basic
-    const translated = [
-      isTranslated(translationStatus.name[option]),
-      isTranslated(translationStatus.description.short[option]),
-      isTranslated(translationStatus.description.long[option]),
-    ];
-
-    return translated.every((tra) => tra);
+    return validateTranslationTaskDetails("translation", translatedTask);
   };
 
   const isPhotoSectionTranslated = (index: number) => {
-    const option = "lang";
-
-    // Photos
-    const photoTranslated = [isTranslated(translationStatus.photos[index].altText[option]), isTranslated(translationStatus.photos[index].source)];
-
-    return photoTranslated.every((tra) => tra);
+    return validateTranslationTaskPhoto("translation", index, translationExtra);
   };
 
   return (
