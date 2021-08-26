@@ -4,15 +4,7 @@ import Cookies from "js-cookie";
 import { ModerationTranslationAction } from "../state/actions/moderationTranslationTypes";
 import { TranslationAction } from "../state/actions/translationTypes";
 import { ItemType, Toast } from "../types/constants";
-import {
-  ChangeRequestSchema,
-  ModerationExtra,
-  ModerationTranslationRequest,
-  Photo,
-  PhotoTranslation,
-  TranslationExtra,
-  User,
-} from "../types/general";
+import { ChangeRequestSchema, ModerationExtra, ModerationTranslationRequest, Photo, TranslationExtra, User } from "../types/general";
 import { NotificationSchema } from "../types/notification_schema";
 import { TranslationSchema } from "../types/translation_schema";
 import { isModerationTranslationRequestPageValid } from "./moderationValidation";

@@ -1,15 +1,13 @@
 import React, { ChangeEvent, FocusEvent, ReactElement, cloneElement } from "react";
-import { TaskStatus, TaskType, TranslationStatus } from "../../types/constants";
+import { TaskStatus, TaskType } from "../../types/constants";
 import { OptionType } from "../../types/general";
 
 interface TranslationSectionProps {
   id: string;
-  fieldName: string;
   translateFrom: string;
   translateTo: string;
   selectedValue?: string | OptionType[];
   translatedValue?: string | OptionType[];
-  translationStatus: TranslationStatus;
   taskType: TaskType;
   taskStatus: TaskStatus;
   selectedHeaderText?: string;
@@ -27,19 +25,16 @@ interface TranslationSectionProps {
     | ((evt: ChangeEvent<HTMLTextAreaElement>) => void)
     | ((selected: OptionType[]) => void);
   blurCallback?: ((evt: FocusEvent<HTMLInputElement>) => void) | ((evt: FocusEvent<HTMLTextAreaElement>) => void);
-  statusCallback: (fieldName: string, status: TranslationStatus) => void;
   TranslationComponent: ReactElement;
   isSelectionGroupWrapper?: boolean;
 }
 
 const TranslationSection = ({
   id,
-  fieldName,
   translateFrom,
   translateTo,
   selectedValue,
   translatedValue,
-  translationStatus,
   taskType,
   taskStatus,
   selectedHeaderText,
@@ -54,16 +49,10 @@ const TranslationSection = ({
   required,
   changeCallback,
   blurCallback,
-  statusCallback,
   TranslationComponent,
   isSelectionGroupWrapper,
 }: TranslationSectionProps): ReactElement => {
   if (taskType === TaskType.Translation) {
-    // Enable translated fields to be edited by default
-    if (translationStatus === TranslationStatus.Unknown) {
-      statusCallback(fieldName, TranslationStatus.Edited);
-    }
-
     const { label } = TranslationComponent.props;
 
     return (
@@ -87,11 +76,11 @@ const TranslationSection = ({
           value: translatedValue,
           onChange: changeCallback,
           onBlur: blurCallback,
-          helperText: translationStatus === TranslationStatus.Edited ? helperText : undefined,
-          tooltipButtonLabel: translationStatus === TranslationStatus.Edited ? tooltipButtonLabel : undefined,
-          tooltipLabel: translationStatus === TranslationStatus.Edited ? tooltipLabel : undefined,
-          tooltipText: translationStatus === TranslationStatus.Edited ? tooltipText : undefined,
-          disabled: translationStatus === TranslationStatus.Done || taskStatus === TaskStatus.Closed || forceDisabled,
+          helperText,
+          tooltipButtonLabel,
+          tooltipLabel,
+          tooltipText,
+          disabled: taskStatus === TaskStatus.Closed || forceDisabled,
           radiobuttonname: isSelectionGroupWrapper ? `${id}_Translated` : undefined,
           invalid,
           errorText,

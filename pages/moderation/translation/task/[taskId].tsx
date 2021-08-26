@@ -6,9 +6,8 @@ import { useI18n } from "next-localization";
 import moment from "moment";
 import { initStore } from "../../../../state/store";
 import { RootState } from "../../../../state/reducers";
-import { CLEAR_STATE, DATETIME_FORMAT, INITIAL_NOTIFICATION, INITIAL_TRANSLATION, TranslationStatus } from "../../../../types/constants";
+import { CLEAR_STATE, DATETIME_FORMAT, INITIAL_NOTIFICATION, INITIAL_TRANSLATION } from "../../../../types/constants";
 import { PhotoSchema, PhotoTranslation, TranslationTodoSchema } from "../../../../types/general";
-import { PhotoTranslationStatus } from "../../../../types/translation_status";
 import { getTaskStatus, getTaskType } from "../../../../utils/conversion";
 import i18nLoader from "../../../../utils/i18n";
 import { saveModerationTranslation } from "../../../../utils/moderation";
@@ -209,21 +208,6 @@ export const getServerSideProps: GetServerSideProps = async ({ req, resolvedUrl,
                 altText: { valid: true },
                 source: { valid: true },
               };
-            }),
-          },
-        };
-
-        initialReduxState.translationStatus = {
-          ...initialReduxState.translationStatus,
-          translationStatus: {
-            ...initialReduxState.translationStatus.translationStatus,
-            photos: targetData.images.map(() => {
-              return {
-                altText: {
-                  lang: TranslationStatus.Unknown,
-                },
-                source: TranslationStatus.Unknown,
-              } as PhotoTranslationStatus;
             }),
           },
         };

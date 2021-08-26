@@ -22,12 +22,6 @@ export enum ModerationStatus {
   Rejected = "rejected",
 }
 
-export enum TranslationStatus {
-  Unknown = "unknown",
-  Edited = "edited",
-  Done = "done",
-}
-
 export enum TaskCategory {
   Unknown = "unknown",
   ChangeRequest = "change_request",
@@ -159,12 +153,6 @@ export const SET_TRANSLATION_PHOTO = "SET_TRANSLATION_PHOTO";
 export const SET_TRANSLATION_TASK_PAGE_VALID = "SET_TRANSLATION_TASK_PAGE_VALID";
 export const SET_TRANSLATION_TASK_VALIDATION = "SET_TRANSLATION_TASK_VALIDATION";
 export const SET_TRANSLATION_TASK_PHOTO_VALIDATION = "SET_TRANSLATION_TASK_PHOTO_VALIDATION";
-
-export const SET_TRANSLATION_NAME_STATUS = "SET_TRANSLATION_NAME_STATUS";
-export const SET_TRANSLATION_SHORT_DESCRIPTION_STATUS = "SET_TRANSLATION_SHORT_DESCRIPTION_STATUS";
-export const SET_TRANSLATION_LONG_DESCRIPTION_STATUS = "SET_TRANSLATION_LONG_DESCRIPTION_STATUS";
-export const SET_TRANSLATION_PHOTO_STATUS = "SET_TRANSLATION_PHOTO_STATUS";
-export const SET_TRANSLATION_PHOTO_ALT_TEXT_STATUS = "SET_TRANSLATION_PHOTO_ALT_TEXT_STATUS";
 
 export const SET_MODERATION_PLACE_SEARCH = "SET_MODERATION_PLACE_SEARCH";
 export const CLEAR_MODERATION_PLACE_SEARCH = "CLEAR_MODERATION_PLACE_SEARCH";
@@ -389,21 +377,6 @@ export const INITIAL_TRANSLATION_EXTRA = {
     taskType: TaskType.Unknown,
     taskStatus: TaskStatus.Unknown,
   },
-};
-
-export const INITIAL_TRANSLATION_STATUS = {
-  name: {
-    lang: TranslationStatus.Unknown,
-  },
-  description: {
-    short: {
-      lang: TranslationStatus.Unknown,
-    },
-    long: {
-      lang: TranslationStatus.Unknown,
-    },
-  },
-  photos: [],
 };
 
 export const INITIAL_MODERATION_EXTRA = {

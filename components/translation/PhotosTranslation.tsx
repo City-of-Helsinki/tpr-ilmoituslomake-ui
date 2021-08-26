@@ -3,11 +3,8 @@ import { useSelector, useDispatch } from "react-redux";
 import { useI18n } from "next-localization";
 import { TextArea, TextInput } from "hds-react";
 import { TranslationAction } from "../../state/actions/translationTypes";
-import { TranslationStatusAction } from "../../state/actions/translationStatusTypes";
 import { setTranslationPhoto } from "../../state/actions/translation";
-import { setTranslationPhotoAltTextStatus, setTranslationPhotoStatus } from "../../state/actions/translationStatus";
 import { RootState } from "../../state/reducers";
-import { TranslationStatus } from "../../types/constants";
 import { isTranslationTaskPhotoFieldValid } from "../../utils/translationValidation";
 import PhotoPreviewTranslation from "./PhotoPreviewTranslation";
 import TranslationSection from "./TranslationSection";
@@ -20,7 +17,6 @@ interface PhotosTranslationProps {
 const PhotosTranslation = ({ prefix, index }: PhotosTranslationProps): ReactElement => {
   const i18n = useI18n();
   const dispatch = useDispatch<Dispatch<TranslationAction>>();
-  const dispatchStatus = useDispatch<Dispatch<TranslationStatusAction>>();
 
   const translationExtra = useSelector((state: RootState) => state.translation.translationExtra);
   const {
@@ -34,9 +30,6 @@ const PhotosTranslation = ({ prefix, index }: PhotosTranslationProps): ReactElem
 
   const taskValidation = useSelector((state: RootState) => state.translation.taskValidation);
   const { photos: photosValid } = taskValidation;
-
-  const translationStatus = useSelector((state: RootState) => state.translationStatus.translationStatus);
-  const { photos: photosStatus } = translationStatus;
 
   const fromOption = "en";
   const toOption = "lang";
@@ -59,14 +52,6 @@ const PhotosTranslation = ({ prefix, index }: PhotosTranslationProps): ReactElem
     isTranslationTaskPhotoFieldValid(prefix, index, evt.target.name, evt.target.name, translationExtra, dispatch);
   };
 
-  const updatePhotoTranslationStatus = (photoField: string, status: TranslationStatus) => {
-    dispatchStatus(setTranslationPhotoStatus(index, { [photoField]: status }));
-  };
-
-  const updatePhotoAltTextStatus = (language: string, status: TranslationStatus) => {
-    dispatchStatus(setTranslationPhotoAltTextStatus(index, { [language]: status }));
-  };
-
   return (
     <div>
       <div className="formSection">
@@ -75,12 +60,10 @@ const PhotosTranslation = ({ prefix, index }: PhotosTranslationProps): ReactElem
         <div className="gridLayoutContainer translation">
           <TranslationSection
             id={`altText_${toOption}`}
-            fieldName={toOption}
             translateFrom={translateFrom}
             translateTo={translateTo}
             selectedValue={photosSelected[index] && (photosSelected[index].altText[fromOption] as string)}
             translatedValue={photosTranslated[index] && (photosTranslated[index].altText[toOption] as string)}
-            translationStatus={photosStatus[index].altText[toOption]}
             taskType={taskType}
             taskStatus={taskStatus}
             helperText={i18n.t(`${prefix}.photos.altText.helperText`)}
@@ -88,18 +71,15 @@ const PhotosTranslation = ({ prefix, index }: PhotosTranslationProps): ReactElem
             tooltipLabel={i18n.t(`${prefix}.photos.altText.tooltipLabel`)}
             tooltipText={i18n.t(`${prefix}.photos.altText.tooltipText`)}
             changeCallback={(evt: ChangeEvent<HTMLTextAreaElement>) => updatePhotoAltText(evt)}
-            statusCallback={(language, status) => updatePhotoAltTextStatus(language, status)}
             TranslationComponent={<TextArea id={`altText_${toOption}`} rows={3} label={i18n.t(`${prefix}.photos.altText.label`)} name={toOption} />}
           />
 
           <TranslationSection
             id={`source_${index}`}
-            fieldName="source"
             translateFrom={translateFrom}
             translateTo={translateTo}
             selectedValue={photosSelected[index] && photosSelected[index].source}
             translatedValue={photosTranslated[index] && photosTranslated[index].source}
-            translationStatus={photosStatus[index].source}
             taskType={taskType}
             taskStatus={taskStatus}
             tooltipButtonLabel={i18n.t(`${prefix}.button.openHelp`)}
@@ -107,7 +87,6 @@ const PhotosTranslation = ({ prefix, index }: PhotosTranslationProps): ReactElem
             tooltipText={i18n.t(`${prefix}.photos.source.tooltipText`)}
             changeCallback={(evt: ChangeEvent<HTMLInputElement>) => updatePhoto(evt)}
             blurCallback={validatePhoto}
-            statusCallback={(fieldName, status) => updatePhotoTranslationStatus(fieldName, status)}
             invalid={!photosValid[index].source.valid}
             errorText={
               !photosValid[index].source.valid

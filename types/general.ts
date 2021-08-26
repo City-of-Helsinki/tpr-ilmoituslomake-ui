@@ -1,4 +1,4 @@
-import { ModerationStatus, TaskStatus, TaskType, TranslationStatus } from "./constants";
+import { ModerationStatus, TaskStatus, TaskType } from "./constants";
 import { NotificationSchema } from "./notification_schema";
 import { TranslationSchema } from "./translation_schema";
 
@@ -31,10 +31,6 @@ export interface KeyValueValidation {
 
 export interface KeyValueStatus {
   [key: string]: ModerationStatus;
-}
-
-export interface KeyValueTranslationStatus {
-  [key: string]: TranslationStatus;
 }
 
 export type OptionType = {

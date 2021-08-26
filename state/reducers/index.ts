@@ -6,7 +6,6 @@ import moderation from "./moderation";
 import moderationStatus from "./moderationStatus";
 import moderationTranslation from "./moderationTranslation";
 import translation from "./translation";
-import translationStatus from "./translationStatus";
 import { CLEAR_STATE } from "../../types/constants";
 
 const appReducer = combineReducers({
@@ -16,7 +15,6 @@ const appReducer = combineReducers({
   moderation,
   moderationStatus,
   translation,
-  translationStatus,
   moderationTranslation,
 });
 

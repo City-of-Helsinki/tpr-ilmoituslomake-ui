@@ -3,15 +3,8 @@ import { useSelector, useDispatch } from "react-redux";
 import { useI18n } from "next-localization";
 import { TextInput, TextArea } from "hds-react";
 import { TranslationAction } from "../../state/actions/translationTypes";
-import { TranslationStatusAction } from "../../state/actions/translationStatusTypes";
 import { setTranslationName, setTranslationShortDescription, setTranslationLongDescription } from "../../state/actions/translation";
-import {
-  setTranslationNameStatus,
-  setTranslationShortDescriptionStatus,
-  setTranslationLongDescriptionStatus,
-} from "../../state/actions/translationStatus";
 import { RootState } from "../../state/reducers";
-import { TranslationStatus } from "../../types/constants";
 import TranslationSection from "./TranslationSection";
 import { isTranslationTaskFieldValid } from "../../utils/translationValidation";
 
@@ -22,7 +15,6 @@ interface DescriptionTranslationProps {
 const DescriptionTranslation = ({ prefix }: DescriptionTranslationProps): ReactElement => {
   const i18n = useI18n();
   const dispatch = useDispatch<Dispatch<TranslationAction>>();
-  const dispatchStatus = useDispatch<Dispatch<TranslationStatusAction>>();
 
   // Fetch values from redux state
   const selectedTask = useSelector((state: RootState) => state.translation.selectedTask);
@@ -47,12 +39,6 @@ const DescriptionTranslation = ({ prefix }: DescriptionTranslationProps): ReactE
 
   const taskValidation = useSelector((state: RootState) => state.translation.taskValidation);
   const { name: nameValid, descriptionShort: shortDescValid, descriptionLong: longDescValid } = taskValidation;
-
-  const translationStatus = useSelector((state: RootState) => state.translationStatus.translationStatus);
-  const {
-    name: placeNameStatus,
-    description: { short: shortDescStatus, long: longDescStatus },
-  } = translationStatus;
 
   const fromOption = "en";
   const toOption = "lang";
@@ -86,35 +72,19 @@ const DescriptionTranslation = ({ prefix }: DescriptionTranslationProps): ReactE
     isTranslationTaskFieldValid(prefix, "long", "descriptionLong", translatedTask, dispatch);
   };
 
-  // Functions for updating status values in redux state
-  const updateNameStatus = (language: string, status: TranslationStatus) => {
-    dispatchStatus(setTranslationNameStatus({ [language]: status }));
-  };
-
-  const updateShortDescriptionStatus = (language: string, status: TranslationStatus) => {
-    dispatchStatus(setTranslationShortDescriptionStatus({ [language]: status }));
-  };
-
-  const updateLongDescriptionStatus = (language: string, status: TranslationStatus) => {
-    dispatchStatus(setTranslationLongDescriptionStatus({ [language]: status }));
-  };
-
   return (
     <div className="formSection">
       <div className="gridLayoutContainer translation">
         <TranslationSection
           id={`placeName_${toOption}`}
-          fieldName={toOption}
           translateFrom={translateFrom}
           translateTo={translateTo}
           selectedValue={placeNameSelected[fromOption] as string}
           translatedValue={placeNameTranslated[toOption] as string}
-          translationStatus={placeNameStatus[toOption]}
           taskType={taskType}
           taskStatus={taskStatus}
           changeCallback={updateName}
           blurCallback={validateName}
-          statusCallback={updateNameStatus}
           invalid={!nameValid.valid}
           errorText={
             !nameValid.valid ? i18n.t(nameValid.message as string).replace("$fieldName", i18n.t(`${prefix}.description.placeName.label`)) : ""
@@ -127,12 +97,10 @@ const DescriptionTranslation = ({ prefix }: DescriptionTranslationProps): ReactE
       <div className="gridLayoutContainer translation">
         <TranslationSection
           id={`shortDescription_${toOption}`}
-          fieldName={toOption}
           translateFrom={translateFrom}
           translateTo={translateTo}
           selectedValue={shortDescSelected[fromOption] as string}
           translatedValue={shortDescTranslated[toOption] as string}
-          translationStatus={shortDescStatus[toOption]}
           taskType={taskType}
           taskStatus={taskStatus}
           helperText={i18n.t(`${prefix}.description.shortDescription.helperText`)}
@@ -141,7 +109,6 @@ const DescriptionTranslation = ({ prefix }: DescriptionTranslationProps): ReactE
           tooltipText={i18n.t(`${prefix}.description.shortDescription.tooltipText`)}
           changeCallback={updateShortDescription}
           blurCallback={validateShortDescription}
-          statusCallback={updateShortDescriptionStatus}
           invalid={!shortDescValid.valid}
           errorText={
             !shortDescValid.valid
@@ -158,12 +125,10 @@ const DescriptionTranslation = ({ prefix }: DescriptionTranslationProps): ReactE
       <div className="gridLayoutContainer translation">
         <TranslationSection
           id={`longDescription_${toOption}`}
-          fieldName={toOption}
           translateFrom={translateFrom}
           translateTo={translateTo}
           selectedValue={longDescSelected[fromOption] as string}
           translatedValue={longDescTranslated[toOption] as string}
-          translationStatus={longDescStatus[toOption]}
           taskType={taskType}
           taskStatus={taskStatus}
           helperText={`${i18n.t(`${prefix}.description.longDescription.helperText`)}`}
@@ -172,7 +137,6 @@ const DescriptionTranslation = ({ prefix }: DescriptionTranslationProps): ReactE
           tooltipText={i18n.t(`${prefix}.description.longDescription.tooltipText`)}
           changeCallback={updateLongDescription}
           blurCallback={validateLongDescription}
-          statusCallback={updateLongDescriptionStatus}
           invalid={!longDescValid.valid}
           errorText={
             !longDescValid.valid
