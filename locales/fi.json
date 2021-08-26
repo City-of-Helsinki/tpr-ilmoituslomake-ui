@@ -4,7 +4,8 @@
       "title": "Kaupunkialusta",
       "titleAlt": "Helsingin kaupunki: Kaupunkialusta",
       "skipToContent": "Siirry sivun pääsisältöön",
-      "openMenu": "Avaa valikko",
+      "openMenu": "Valikko",
+      "selectLanguage": "Valitse kieli",
       "login": "Kirjaudu sisään",
       "logout": "Kirjaudu ulos"
     },
