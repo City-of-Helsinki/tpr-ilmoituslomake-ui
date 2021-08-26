@@ -1,9 +1,6 @@
 import { AnyAction } from "redux";
 import { TranslationState } from "./types";
 import {
-  INITIAL_NOTIFICATION,
-  INITIAL_TRANSLATION,
-  INITIAL_TRANSLATION_EXTRA,
   SET_TRANSLATION_TASK_RESULTS,
   SET_TRANSLATION_TASK_SEARCH,
   SET_TRANSLATION_NAME,
@@ -15,6 +12,7 @@ import {
   SET_TRANSLATION_TASK_PHOTO_VALIDATION,
 } from "../../types/constants";
 import { PhotoTranslation, TranslationTaskPhotoValidation } from "../../types/general";
+import { INITIAL_NOTIFICATION, INITIAL_TRANSLATION, INITIAL_TRANSLATION_EXTRA } from "../../types/initial";
 
 const initialState: TranslationState = {
   taskSearch: {

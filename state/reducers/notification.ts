@@ -3,8 +3,6 @@ import { LatLngExpression } from "leaflet";
 import { NotificationState } from "./types";
 import {
   ItemType,
-  INITIAL_NOTIFICATION,
-  INITIAL_NOTIFICATION_EXTRA,
   // MAX_PAGE,
   MAX_PHOTOS,
   MAP_INITIAL_CENTER,
@@ -34,6 +32,7 @@ import {
   SET_SENT_NOTIFICATION,
 } from "../../types/constants";
 import { Photo } from "../../types/general";
+import { INITIAL_NOTIFICATION, INITIAL_NOTIFICATION_EXTRA } from "../../types/initial";
 
 const initialState: NotificationState = {
   page: 1,

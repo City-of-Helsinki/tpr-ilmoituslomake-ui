@@ -18,9 +18,9 @@ import {
   SET_NOTIFICATION_PHOTO_ALT_TEXT_VALIDATION,
   REMOVE_NOTIFICATION_PHOTO_VALIDATION,
   SET_NOTIFICATION_TIP_VALIDATION,
-  INITIAL_NOTIFICATION_VALIDATION,
 } from "../../types/constants";
 import { PhotoValidation } from "../../types/notification_validation";
+import { INITIAL_NOTIFICATION_VALIDATION } from "../../types/initial";
 
 const initialState: NotificationValidationState = {
   pageValid: true,

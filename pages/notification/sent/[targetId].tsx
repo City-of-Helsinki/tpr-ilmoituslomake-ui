@@ -9,7 +9,8 @@ import { Button, IconCheckCircleFill, IconInfoCircle, IconLinkExternal, IconPhot
 import { Dialog } from "@material-ui/core";
 import { RootState } from "../../../state/reducers";
 import { initStore } from "../../../state/store";
-import { CLEAR_STATE, INITIAL_NOTIFICATION } from "../../../types/constants";
+import { CLEAR_STATE } from "../../../types/constants";
+import { INITIAL_NOTIFICATION } from "../../../types/initial";
 import { NotificationSchema } from "../../../types/notification_schema";
 import i18nLoader, { defaultLocale } from "../../../utils/i18n";
 import { checkUser, getOriginServerSide, getPreviousInputLanguages, getTags } from "../../../utils/serverside";

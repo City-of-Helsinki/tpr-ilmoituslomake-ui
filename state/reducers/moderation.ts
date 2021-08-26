@@ -21,10 +21,9 @@ import {
   SET_MODERATION_LINK,
   SET_MODERATION_PHOTO,
   REMOVE_MODERATION_PHOTO,
-  INITIAL_NOTIFICATION,
-  INITIAL_MODERATION_EXTRA,
 } from "../../types/constants";
 import { Photo } from "../../types/general";
+import { INITIAL_MODERATION_EXTRA, INITIAL_NOTIFICATION } from "../../types/initial";
 
 const initialState: ModerationState = {
   placeSearch: {
