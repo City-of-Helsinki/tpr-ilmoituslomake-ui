@@ -73,10 +73,13 @@ const Header = ({ includeLanguageSelector, homePagePath, children }: HeaderProps
         </Navigation.User>
 
         {includeLanguageSelector && (
-          <Navigation.LanguageSelector label={(router.locale || defaultLocale).toUpperCase()}>
-            <Navigation.Item href="#" label="Suomeksi" onClick={() => changeLanguage("fi")} />
-            <Navigation.Item href="#" label="På svenska" onClick={() => changeLanguage("sv")} />
-            <Navigation.Item href="#" label="In English" onClick={() => changeLanguage("en")} />
+          <Navigation.LanguageSelector
+            label={(router.locale || defaultLocale).toUpperCase()}
+            buttonAriaLabel={i18n.t("common.header.selectLanguage")}
+          >
+            <Navigation.Item href="#" lang="fi" label="Suomeksi" onClick={() => changeLanguage("fi")} />
+            <Navigation.Item href="#" lang="sv" label="På svenska" onClick={() => changeLanguage("sv")} />
+            <Navigation.Item href="#" lang="en" label="In English" onClick={() => changeLanguage("en")} />
           </Navigation.LanguageSelector>
         )}
       </Navigation.Actions>
