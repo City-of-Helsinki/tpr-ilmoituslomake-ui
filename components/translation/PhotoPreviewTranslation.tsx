@@ -19,11 +19,10 @@ const PhotoPreviewTranslation = ({ index }: PhotoPreviewTranslationProps): React
   if (taskType === TaskType.Translation) {
     return (
       <div className="gridLayoutContainer translation">
-        <div className={`gridColumn1 ${styles.imagePreview}`}>
+        <div className={`${styles.gridSelected} ${styles.imagePreview}`}>
           <img src={previewTranslated} alt="" />
         </div>
-        <div className={`gridColumn2 ${styles.imagePreview}`} />
-        <div className="gridColumn3" />
+        <div className={`${styles.gridTranslated} ${styles.imagePreview}`} />
       </div>
     );
   }

@@ -14,6 +14,7 @@
   .upperRow {
     display: flex;
     flex-direction: row;
+    flex-wrap: wrap;
     border: solid $color-fog-light $spacing-2-xs;
     border-bottom: 0;
 
@@ -26,6 +27,7 @@
   .lowerRow {
     display: flex;
     flex-direction: row;
+    flex-wrap: wrap;
 
     div {
       flex-grow: 1;

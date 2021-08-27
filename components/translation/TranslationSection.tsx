@@ -1,6 +1,7 @@
 import React, { ChangeEvent, FocusEvent, ReactElement, cloneElement } from "react";
 import { TaskStatus, TaskType } from "../../types/constants";
 import { OptionType } from "../../types/general";
+import styles from "./TranslationSection.module.scss";
 
 interface TranslationSectionProps {
   id: string;
@@ -62,7 +63,7 @@ const TranslationSection = ({
 
         {cloneElement(TranslationComponent, {
           id: `${id}_Selected`,
-          className: "gridColumn1 disabledTextColor",
+          className: `${styles.gridSelected} disabledTextColor`,
           label: `${translateFrom.toUpperCase()}: ${label}`,
           value: selectedValue,
           disabled: true,
@@ -71,7 +72,7 @@ const TranslationSection = ({
 
         {cloneElement(TranslationComponent, {
           id: `${id}_Translated`,
-          className: "gridColumn2 disabledTextColor",
+          className: `${styles.gridTranslated} disabledTextColor`,
           label: `${translateTo.toUpperCase()}: ${label}`,
           value: translatedValue,
           onChange: changeCallback,

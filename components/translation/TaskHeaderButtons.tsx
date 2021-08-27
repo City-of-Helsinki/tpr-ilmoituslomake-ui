@@ -84,18 +84,22 @@ const TaskHeaderButtons = ({ prefix, backHref, saveTranslation }: TaskHeaderButt
     <div className={styles.taskHeaderButtons}>
       {taskType === TaskType.Translation && (
         <div className={styles.buttonRow}>
-          <Link href={backHref}>
-            <Button variant="secondary" className={styles.returnButton}>
-              {i18n.t(`${prefix}.button.returnToRequests`)}
-            </Button>
-          </Link>
+          <div className={styles.flexButton}>
+            <Link href={backHref}>
+              <Button variant="secondary">{i18n.t(`${prefix}.button.returnToRequests`)}</Button>
+            </Link>
+          </div>
           <div className="flexSpace" />
-          <Button variant="secondary" onClick={openSaveDraftConfirmation} disabled={taskStatus === TaskStatus.Closed}>
-            {i18n.t(`${prefix}.button.saveDraft`)}
-          </Button>
-          <Button iconRight={<IconArrowRight aria-hidden />} onClick={openSaveConfirmation} disabled={taskStatus === TaskStatus.Closed}>
-            {i18n.t(`${prefix}.button.sendTranslation`)}
-          </Button>
+          <div className={styles.flexButton}>
+            <Button variant="secondary" onClick={openSaveDraftConfirmation} disabled={taskStatus === TaskStatus.Closed}>
+              {i18n.t(`${prefix}.button.saveDraft`)}
+            </Button>
+          </div>
+          <div className={`${styles.flexButton} ${styles.sendButton}`}>
+            <Button iconRight={<IconArrowRight aria-hidden />} onClick={openSaveConfirmation} disabled={taskStatus === TaskStatus.Closed}>
+              {i18n.t(`${prefix}.button.sendTranslation`)}
+            </Button>
+          </div>
         </div>
       )}
 
