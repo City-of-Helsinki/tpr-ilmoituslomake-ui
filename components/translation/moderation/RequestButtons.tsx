@@ -68,20 +68,24 @@ const RequestButtons = (): ReactElement => {
     <div className={styles.requestHeaderButtons}>
       {taskType === TaskType.Translation && (
         <div className={styles.buttonRow}>
-          <Link href="/moderation/translation">
-            <Button variant="secondary" className={styles.returnButton}>
-              {i18n.t("moderation.button.close")}
-            </Button>
-          </Link>
+          <div className={styles.flexButton}>
+            <Link href="/moderation/translation">
+              <Button variant="secondary">{i18n.t("moderation.button.close")}</Button>
+            </Link>
+          </div>
           <div className="flexSpace" />
           {requestId > 0 && (
-            <Button variant="secondary" onClick={openCancelConfirmation} disabled={taskStatus === TaskStatus.Closed}>
-              {i18n.t("moderation.button.cancelTranslationRequest")}
-            </Button>
+            <div className={styles.flexButton}>
+              <Button variant="secondary" onClick={openCancelConfirmation} disabled={taskStatus === TaskStatus.Closed}>
+                {i18n.t("moderation.button.cancelTranslationRequest")}
+              </Button>
+            </div>
           )}
-          <Button iconRight={<IconArrowRight aria-hidden />} onClick={openSaveConfirmation} disabled={taskStatus === TaskStatus.Closed}>
-            {i18n.t("moderation.button.sendTranslationRequest")}
-          </Button>
+          <div className={`${styles.flexButton} ${styles.sendButton}`}>
+            <Button iconRight={<IconArrowRight aria-hidden />} onClick={openSaveConfirmation} disabled={taskStatus === TaskStatus.Closed}>
+              {i18n.t("moderation.button.sendTranslationRequest")}
+            </Button>
+          </div>
         </div>
       )}
 
