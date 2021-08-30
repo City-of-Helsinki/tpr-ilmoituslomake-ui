@@ -65,7 +65,7 @@ const RequestResults = ({ showStatus, showResults, setShowStatus, setShowResults
     [results]
   );
 
-  const taskCounts = (tasks: TranslationRequestResultTask[]) => {
+  const taskCounts = useCallback((tasks: TranslationRequestResultTask[]) => {
     return tasks.reduce(
       (acc: { [key: string]: number }, task) => {
         acc[task.taskStatus] += 1;
@@ -73,21 +73,24 @@ const RequestResults = ({ showStatus, showResults, setShowStatus, setShowResults
       },
       { [TaskStatus.Open]: 0, [TaskStatus.InProgress]: 0, [TaskStatus.Closed]: 0 }
     );
-  };
-
-  const requestStatus = useCallback((tasks: TranslationRequestResultTask[]) => {
-    const counts = taskCounts(tasks);
-    if (counts[TaskStatus.Open] === tasks.length) {
-      // All the tasks are open, so the request is open
-      return TaskStatus.Open;
-    }
-    if (counts[TaskStatus.Closed] === tasks.length) {
-      // All the tasks are closed, so the request is closed
-      return TaskStatus.Closed;
-    }
-    // There is a mixed status, so the request is in progress
-    return TaskStatus.InProgress;
   }, []);
+
+  const requestStatus = useCallback(
+    (tasks: TranslationRequestResultTask[]) => {
+      const counts = taskCounts(tasks);
+      if (counts[TaskStatus.Open] === tasks.length) {
+        // All the tasks are open, so the request is open
+        return TaskStatus.Open;
+      }
+      if (counts[TaskStatus.Closed] === tasks.length) {
+        // All the tasks are closed, so the request is closed
+        return TaskStatus.Closed;
+      }
+      // There is a mixed status, so the request is in progress
+      return TaskStatus.InProgress;
+    },
+    [taskCounts]
+  );
 
   const filterStatus = useCallback(
     (taskStatus: TaskStatus) => {

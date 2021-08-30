@@ -17,3 +17,14 @@
 .bold {
   font-weight: 700;
 }
+
+.counts {
+  .count {
+    font-weight: 700;
+    margin-right: $spacing-3-xs;
+  }
+
+  .label {
+    margin-right: $spacing-xs;
+  }
+}

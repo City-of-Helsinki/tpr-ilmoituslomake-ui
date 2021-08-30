@@ -13,8 +13,8 @@ export const isModerationTranslationRequestFieldValid = (
 ): boolean => {
   let result: Validation;
   switch (translationRequestField) {
-    case "selectedPlaces": {
-      const valid = requestDetail.selectedPlaces.length > 0;
+    case "tasks": {
+      const valid = requestDetail.tasks.length > 0;
       result = !valid ? { valid, message: "moderation.message.fieldRequired" } : { valid, message: undefined };
       break;
     }
@@ -49,7 +49,7 @@ export const isModerationTranslationRequestPageValid = (
   // Check whether all data on the page is valid
   // Everything needs to be validated, so make sure lazy evaluation is not used
   const inputValid = [
-    isModerationTranslationRequestFieldValid("selectedPlaces", "selectedPlaces", requestDetail, dispatch),
+    isModerationTranslationRequestFieldValid("tasks", "tasks", requestDetail, dispatch),
     isModerationTranslationRequestFieldValid("name", "translatorName", requestDetail, dispatch),
     isModerationTranslationRequestFieldValid("email", "translatorEmail", requestDetail, dispatch),
     isModerationTranslationRequestFieldValid("language", "language", requestDetail, dispatch),

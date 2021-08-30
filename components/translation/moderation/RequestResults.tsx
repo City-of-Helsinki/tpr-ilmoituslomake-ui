@@ -78,7 +78,7 @@ const RequestResults = ({ showStatus, showResults, setShowResults }: RequestResu
     [results]
   );
 
-  const taskCounts = (tasks: TranslationRequestResultTask[]) => {
+  const taskCounts = useCallback((tasks: TranslationRequestResultTask[]) => {
     return tasks.reduce(
       (acc: { [key: string]: number }, task) => {
         acc[task.taskStatus] += 1;
@@ -86,21 +86,24 @@ const RequestResults = ({ showStatus, showResults, setShowResults }: RequestResu
       },
       { [TaskStatus.Open]: 0, [TaskStatus.InProgress]: 0, [TaskStatus.Closed]: 0 }
     );
-  };
-
-  const requestStatus = useCallback((tasks: TranslationRequestResultTask[]) => {
-    const counts = taskCounts(tasks);
-    if (counts[TaskStatus.Open] === tasks.length) {
-      // All the tasks are open, so the request is open
-      return TaskStatus.Open;
-    }
-    if (counts[TaskStatus.Closed] === tasks.length) {
-      // All the tasks are closed, so the request is closed
-      return TaskStatus.Closed;
-    }
-    // There is a mixed status, so the request is in progress
-    return TaskStatus.InProgress;
   }, []);
+
+  const requestStatus = useCallback(
+    (tasks: TranslationRequestResultTask[]) => {
+      const counts = taskCounts(tasks);
+      if (counts[TaskStatus.Open] === tasks.length) {
+        // All the tasks are open, so the request is open
+        return TaskStatus.Open;
+      }
+      if (counts[TaskStatus.Closed] === tasks.length) {
+        // All the tasks are closed, so the request is closed
+        return TaskStatus.Closed;
+      }
+      // There is a mixed status, so the request is in progress
+      return TaskStatus.InProgress;
+    },
+    [taskCounts]
+  );
 
   const filterStatus = useCallback(
     (taskStatus: TaskStatus) => {
@@ -205,6 +208,7 @@ const RequestResults = ({ showStatus, showResults, setShowResults }: RequestResu
               const { id: requestId, formattedRequest, language, tasks, translator } = result;
               const { from: translateFrom, to: translateTo } = language;
               const status = requestStatus(tasks);
+              const counts = taskCounts(tasks);
 
               return (
                 <Fragment key={`requestresult_${requestId}`}>
@@ -226,7 +230,12 @@ const RequestResults = ({ showStatus, showResults, setShowResults }: RequestResu
                   </div>
                   <div className={`${styles.gridColumn2} ${styles.gridContent}`}>{translator.name}</div>
                   <div className={`${styles.gridColumn3} ${styles.gridContent}`}>{`${translateFrom.toUpperCase()}-${translateTo.toUpperCase()}`}</div>
-                  <div className={`${styles.gridColumn4} ${styles.gridContent}`}>{tasks.length}</div>
+                  <div className={`${styles.gridColumn4} ${styles.gridContent}`}>
+                    <div className={styles.counts}>
+                      <span className={styles.count}>{`${counts[TaskStatus.Closed]} / ${tasks.length}`}</span>
+                      <span className={styles.label}>{i18n.t("moderation.translation.requestResults.counts.done")}</span>
+                    </div>
+                  </div>
                   <div className={`${styles.gridColumn5} ${styles.gridContent}`}>
                     <TaskStatusLabel prefix="moderation.translation" status={status} includeIcons />
                   </div>

@@ -1,4 +1,4 @@
-import React, { Dispatch, ChangeEvent, ReactElement } from "react";
+import React, { Dispatch, ChangeEvent, ReactElement, useMemo } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useI18n } from "next-localization";
 import { RadioButton, SelectionGroup, TextArea, TextInput } from "hds-react";
@@ -6,18 +6,24 @@ import { ModerationTranslationAction } from "../../../state/actions/moderationTr
 import { setModerationTranslationRequest } from "../../../state/actions/moderationTranslation";
 import { RootState } from "../../../state/reducers";
 import { TaskStatus, TRANSLATION_OPTIONS } from "../../../types/constants";
+import { ModerationTranslationRequestResultTask } from "../../../types/general";
 import { isModerationTranslationRequestFieldValid } from "../../../utils/moderationValidation";
 import styles from "./RequestDetail.module.scss";
 
-const RequestDetail = (): ReactElement => {
+interface RequestDetailProps {
+  requestStatus: (tasks: ModerationTranslationRequestResultTask[]) => TaskStatus;
+}
+
+const RequestDetail = ({ requestStatus }: RequestDetailProps): ReactElement => {
   const i18n = useI18n();
   const dispatch = useDispatch<Dispatch<ModerationTranslationAction>>();
 
   const requestDetail = useSelector((state: RootState) => state.moderationTranslation.requestDetail);
-  const { language, translator, message, taskStatus } = requestDetail;
+  const { language, translator, message, tasks } = requestDetail;
   const { from: translateFrom, to: translateTo } = language;
   const { name: translatorName, email: translatorEmail } = translator;
   const translationLanguage = translateFrom && translateTo ? `${translateFrom}-${translateTo}` : "";
+  const taskStatus = useMemo(() => requestStatus(tasks), [requestStatus, tasks]);
 
   const requestValidation = useSelector((state: RootState) => state.moderationTranslation.requestValidation);
   const {

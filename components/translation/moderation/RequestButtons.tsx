@@ -1,4 +1,4 @@
-import React, { Dispatch, ReactElement, useState } from "react";
+import React, { Dispatch, ReactElement, useMemo, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import Link from "next/link";
 import { useRouter } from "next/router";
@@ -8,13 +8,18 @@ import { setModerationTranslationRequestPageValid } from "../../../state/actions
 import { ModerationTranslationAction } from "../../../state/actions/moderationTranslationTypes";
 import { RootState } from "../../../state/reducers";
 import { TaskStatus, TaskType, Toast } from "../../../types/constants";
+import { ModerationTranslationRequestResultTask } from "../../../types/general";
 import { cancelModerationTranslationRequest, saveModerationTranslationRequest } from "../../../utils/moderation";
 import { isModerationTranslationRequestPageValid } from "../../../utils/moderationValidation";
 import ModalConfirmation from "../../common/ModalConfirmation";
 import ToastNotification from "../../common/ToastNotification";
 import styles from "./RequestButtons.module.scss";
 
-const RequestButtons = (): ReactElement => {
+interface RequestButtonsProps {
+  requestStatus: (tasks: ModerationTranslationRequestResultTask[]) => TaskStatus;
+}
+
+const RequestButtons = ({ requestStatus }: RequestButtonsProps): ReactElement => {
   const i18n = useI18n();
   const dispatchValidation = useDispatch<Dispatch<ModerationTranslationAction>>();
   const router = useRouter();
@@ -22,7 +27,8 @@ const RequestButtons = (): ReactElement => {
   const currentUser = useSelector((state: RootState) => state.general.user);
 
   const requestDetail = useSelector((state: RootState) => state.moderationTranslation.requestDetail);
-  const { requestId, taskType, taskStatus } = requestDetail;
+  const { id: requestId, taskType, tasks } = requestDetail;
+  const taskStatus = useMemo(() => requestStatus(tasks), [requestStatus, tasks]);
 
   const [toast, setToast] = useState<Toast>();
   const [confirmSave, setConfirmSave] = useState(false);
@@ -116,10 +122,6 @@ const RequestButtons = (): ReactElement => {
       {toast && <ToastNotification prefix="moderation" toast={toast} setToast={setToast} />}
     </div>
   );
-};
-
-RequestButtons.defaultProps = {
-  isTranslated: false,
 };
 
 export default RequestButtons;

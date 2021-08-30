@@ -147,6 +147,15 @@ export interface NotificationPlaceResults {
   next?: string;
 }
 
+export interface NotificationTargetIdName {
+  id: number;
+  name: {
+    fi: string;
+    sv: string;
+    en: string;
+  };
+}
+
 export interface TranslationTaskSearch {
   placeName: string;
   request: string;
@@ -155,14 +164,7 @@ export interface TranslationTaskSearch {
 
 export interface TranslationRequestResultTask {
   id: number;
-  target: {
-    id: number;
-    name: {
-      fi: string;
-      sv: string;
-      en: string;
-    };
-  };
+  target: NotificationTargetIdName;
   taskType: TaskType;
   taskStatus: TaskStatus;
 }
@@ -198,14 +200,7 @@ export interface TranslationTodoResult {
     to: string;
   };
   message: string;
-  target: {
-    id: number;
-    name: {
-      fi: string;
-      sv: string;
-      en: string;
-    };
-  };
+  target: NotificationTargetIdName;
   category: string;
   item_type: string;
   status: string;
@@ -364,22 +359,8 @@ export interface ModerationTaskSearch {
 
 export interface ModerationTodoResult {
   id: number;
-  target: {
-    id: number;
-    name: {
-      fi: string;
-      sv: string;
-      en: string;
-    };
-  };
-  notification_target: {
-    id: number;
-    name: {
-      fi: string;
-      sv: string;
-      en: string;
-    };
-  };
+  target: NotificationTargetIdName;
+  notification_target: NotificationTargetIdName;
   category: string;
   item_type: string;
   status: string;
@@ -478,18 +459,12 @@ export interface ModerationTranslationRequestResult {
   message: string;
   tasks: {
     id: number;
-    target: {
-      id: number;
-      name: {
-        fi: string;
-        sv: string;
-        en: string;
-      };
-    };
+    target: NotificationTargetIdName;
+    status: string;
+    taskStatus: TaskStatus;
   }[];
   category: string;
   item_type: string;
-  status: string;
   translator: {
     name: string;
     email: string;
@@ -504,7 +479,6 @@ export interface ModerationTranslationRequestResult {
   created: Date;
   updated: Date;
   taskType: TaskType;
-  taskStatus: TaskStatus;
   formattedRequest: string;
 }
 
@@ -523,14 +497,7 @@ export interface ModerationTranslationTaskResult {
     to: string;
   };
   message: string;
-  target: {
-    id: number;
-    name: {
-      fi: string;
-      sv: string;
-      en: string;
-    };
-  };
+  target: NotificationTargetIdName;
   category: string;
   item_type: string;
   status: string;
@@ -563,17 +530,17 @@ export interface ModerationTranslationSelectedItems {
   isAllSelected: boolean;
 }
 
+export interface ModerationTranslationRequestResultTask {
+  id: number;
+  target: NotificationTargetIdName;
+  status: string;
+  taskStatus: TaskStatus;
+}
+
 export interface ModerationTranslationRequest {
-  requestId: number;
+  id: number;
   request: string;
-  selectedPlaces: {
-    id: number;
-    name: {
-      fi: string;
-      sv: string;
-      en: string;
-    };
-  }[];
+  tasks: ModerationTranslationRequestResultTask[];
   language: {
     from: string;
     to: string;
@@ -585,12 +552,11 @@ export interface ModerationTranslationRequest {
     [key: string]: unknown;
   };
   taskType: TaskType;
-  taskStatus: TaskStatus;
   [key: string]: unknown;
 }
 
 export interface ModerationTranslationRequestValidation {
-  selectedPlaces: Validation;
+  tasks: Validation;
   language: Validation;
   message: Validation;
   translatorName: Validation;

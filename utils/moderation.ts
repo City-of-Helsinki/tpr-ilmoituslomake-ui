@@ -312,11 +312,11 @@ export const saveModerationTranslationRequest = async (
       // Send the Cross Site Request Forgery token, otherwise the backend returns the error "CSRF Failed: CSRF token missing or incorrect."
       const csrftoken = Cookies.get("csrftoken");
 
-      const { requestId, selectedPlaces, language, message, translator } = requestDetail;
+      const { id: requestId, tasks, language, message, translator } = requestDetail;
 
       const postData = {
         ...(requestId > 0 && { id: requestId }),
-        targets: selectedPlaces.map((place) => place.id),
+        targets: tasks.map((task) => task.target.id),
         language,
         message,
         translator,

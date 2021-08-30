@@ -909,7 +909,10 @@
         "languagePair": "Kielipari",
         "translationTasks": "Tehtäviä",
         "status": "Tila",
-        "empty": "(Ei nimeä)"
+        "empty": "(Ei nimeä)",
+        "counts": {
+          "done": "valmiina"
+        }
       },
       "taskResults": {
         "found": "Löytyi",

@@ -1,7 +1,6 @@
 import { AnyAction } from "redux";
 import { ModerationTranslationState } from "./types";
 import {
-  TaskStatus,
   TaskType,
   SET_MODERATION_TRANSLATION_REQUEST_SEARCH,
   SET_MODERATION_TRANSLATION_REQUEST_RESULTS,
@@ -64,9 +63,9 @@ const initialState: ModerationTranslationState = {
     isAllSelected: false,
   },
   requestDetail: {
-    requestId: 0,
+    id: 0,
     request: "",
-    selectedPlaces: [],
+    tasks: [],
     language: {
       from: "",
       to: "",
@@ -77,11 +76,10 @@ const initialState: ModerationTranslationState = {
       email: "",
     },
     taskType: TaskType.Unknown,
-    taskStatus: TaskStatus.Unknown,
   },
   requestPageValid: true,
   requestValidation: {
-    selectedPlaces: { valid: true },
+    tasks: { valid: true },
     language: { valid: true },
     message: { valid: true },
     translatorName: { valid: true },

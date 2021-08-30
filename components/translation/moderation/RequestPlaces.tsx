@@ -7,7 +7,7 @@ import { setModerationTranslationRequest } from "../../../state/actions/moderati
 import { ModerationTranslationAction } from "../../../state/actions/moderationTranslationTypes";
 import { RootState } from "../../../state/reducers";
 import { TaskStatus } from "../../../types/constants";
-import { ModerationTranslationRequest } from "../../../types/general";
+import { ModerationTranslationRequestResultTask } from "../../../types/general";
 import { getDisplayName } from "../../../utils/helper";
 import { defaultLocale } from "../../../utils/i18n";
 import styles from "./RequestPlaces.module.scss";
@@ -18,16 +18,17 @@ const RequestPlaces = (): ReactElement => {
   const router = useRouter();
 
   const requestDetail = useSelector((state: RootState) => state.moderationTranslation.requestDetail);
-  const { selectedPlaces, taskStatus } = requestDetail;
+  const { tasks: requestTasks } = requestDetail;
 
   const requestValidation = useSelector((state: RootState) => state.moderationTranslation.requestValidation);
-  const { selectedPlaces: selectedPlacesValid } = requestValidation;
+  const { tasks: requestTasksValid } = requestValidation;
 
-  const removePlaceFromSelection = (placeId: number) => {
-    const newSelectedPlaces = selectedPlaces.reduce((acc: ModerationTranslationRequest["selectedPlaces"], place) => {
-      return place.id === placeId ? acc : [...acc, place];
+  const removePlaceFromSelection = (targetId: number) => {
+    const newRequestTasks = requestTasks.reduce((acc: ModerationTranslationRequestResultTask[], task) => {
+      const { target } = task;
+      return target.id === targetId ? acc : [...acc, task];
     }, []);
-    dispatch(setModerationTranslationRequest({ ...requestDetail, selectedPlaces: newSelectedPlaces }));
+    dispatch(setModerationTranslationRequest({ ...requestDetail, tasks: newRequestTasks }));
   };
 
   return (
@@ -37,8 +38,9 @@ const RequestPlaces = (): ReactElement => {
       <div className={styles.placeContainer}>
         <h3 className="moderation">{`${i18n.t("moderation.translation.request.placesToTranslate")} *`}</h3>
 
-        {selectedPlaces.map((place) => {
-          const { id: placeId, name } = place;
+        {requestTasks.map((task) => {
+          const { target, taskStatus } = task;
+          const { id: placeId, name } = target;
           const key = `requestplace_${placeId}`;
 
           return (
@@ -57,10 +59,10 @@ const RequestPlaces = (): ReactElement => {
           );
         })}
 
-        {selectedPlaces.length === 0 && (
-          <div className={`${styles.selectPlacesMessage} ${!selectedPlacesValid.valid ? styles.error : ""}`}>
-            {!selectedPlacesValid.valid && <IconAlertCircleFill className={styles.icon} aria-hidden />}
-            {selectedPlacesValid.valid && <IconInfoCircle className={styles.icon} aria-hidden />}
+        {requestTasks.length === 0 && (
+          <div className={`${styles.selectPlacesMessage} ${!requestTasksValid.valid ? styles.error : ""}`}>
+            {!requestTasksValid.valid && <IconAlertCircleFill className={styles.icon} aria-hidden />}
+            {requestTasksValid.valid && <IconInfoCircle className={styles.icon} aria-hidden />}
             {i18n.t("moderation.translation.request.selectPlaces")}
           </div>
         )}

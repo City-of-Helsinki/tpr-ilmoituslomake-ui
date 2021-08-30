@@ -1,4 +1,4 @@
-import React, { ReactElement, useEffect, useRef } from "react";
+import React, { ReactElement, useCallback, useEffect, useRef } from "react";
 import { useSelector } from "react-redux";
 import { GetServerSideProps } from "next";
 import Head from "next/head";
@@ -7,7 +7,7 @@ import moment from "moment";
 import { RootState } from "../../../../state/reducers";
 import { initStore } from "../../../../state/store";
 import { CLEAR_STATE, DATETIME_FORMAT, TaskStatus, TaskType, TRANSLATION_OPTIONS } from "../../../../types/constants";
-import { ModerationPlaceResult, ModerationTranslationRequest, ModerationTranslationRequestResult } from "../../../../types/general";
+import { ModerationPlaceResult, ModerationTranslationRequestResult, ModerationTranslationRequestResultTask } from "../../../../types/general";
 import { INITIAL_NOTIFICATION } from "../../../../types/initial";
 import { getTaskStatus, getTaskType } from "../../../../utils/conversion";
 import i18nLoader from "../../../../utils/i18n";
@@ -28,7 +28,7 @@ const ModerationTranslationRequestDetail = (): ReactElement => {
   const ref = useRef<HTMLHeadingElement>(null);
 
   const requestDetail = useSelector((state: RootState) => state.moderationTranslation.requestDetail);
-  const { requestId, request, selectedPlaces } = requestDetail;
+  const { id: requestId, request, tasks: requestTasks } = requestDetail;
   const formattedRequest = moment(request).format(DATETIME_FORMAT);
 
   useEffect(() => {
@@ -36,6 +36,33 @@ const ModerationTranslationRequestDetail = (): ReactElement => {
       ref.current.scrollIntoView();
     }
   }, [pageValid]);
+
+  const taskCounts = useCallback((tasks: ModerationTranslationRequestResultTask[]) => {
+    return tasks.reduce(
+      (acc: { [key: string]: number }, task) => {
+        acc[task.taskStatus] += 1;
+        return acc;
+      },
+      { [TaskStatus.Open]: 0, [TaskStatus.InProgress]: 0, [TaskStatus.Closed]: 0 }
+    );
+  }, []);
+
+  const requestStatus = useCallback(
+    (tasks: ModerationTranslationRequestResultTask[]) => {
+      const counts = taskCounts(tasks);
+      if (counts[TaskStatus.Open] === tasks.length) {
+        // All the tasks are open, so the request is open
+        return TaskStatus.Open;
+      }
+      if (counts[TaskStatus.Closed] === tasks.length) {
+        // All the tasks are closed, so the request is closed
+        return TaskStatus.Closed;
+      }
+      // There is a mixed status, so the request is in progress
+      return TaskStatus.InProgress;
+    },
+    [taskCounts]
+  );
 
   return (
     <Layout>
@@ -46,7 +73,7 @@ const ModerationTranslationRequestDetail = (): ReactElement => {
       <div>
         <h1 ref={ref} className="moderation">
           {requestId > 0
-            ? `${formattedRequest} ${i18n.t("moderation.translation.request.title")} (${selectedPlaces.length})`
+            ? `${formattedRequest} ${i18n.t("moderation.translation.request.title")} (${requestTasks.length})`
             : i18n.t("moderation.translation.request.titleNew")}
         </h1>
       </div>
@@ -55,10 +82,10 @@ const ModerationTranslationRequestDetail = (): ReactElement => {
         {!pageValid && <ValidationSummary prefix="moderation" />}
 
         <div>
-          {requestId > 0 && <RequestStatus />}
+          {requestId > 0 && <RequestStatus taskCounts={taskCounts} requestStatus={requestStatus} />}
           <RequestPlaces />
-          <RequestDetail />
-          <RequestButtons />
+          <RequestDetail requestStatus={requestStatus} />
+          <RequestButtons requestStatus={requestStatus} />
         </div>
       </main>
     </Layout>
@@ -102,19 +129,20 @@ export const getServerSideProps: GetServerSideProps = async ({ req, resolvedUrl,
 
       try {
         const { tasks } = requestResult;
-        const selectedPlaces = tasks.map((task) => task.target);
+        const requestTasks = tasks.map((task) => {
+          return { ...task, taskStatus: getTaskStatus(task.status) };
+        });
 
         initialReduxState.moderationTranslation = {
           ...initialReduxState.moderationTranslation,
           requestDetail: {
-            requestId: requestResult.id,
+            id: requestResult.id,
             request: requestResult.request,
-            selectedPlaces,
+            tasks: requestTasks,
             language: requestResult.language,
             message: requestResult.message,
             translator: requestResult.translator,
             taskType: getTaskType(requestResult.category, requestResult.item_type),
-            taskStatus: getTaskStatus(requestResult.status),
           },
         };
       } catch (err) {
@@ -152,25 +180,27 @@ export const getServerSideProps: GetServerSideProps = async ({ req, resolvedUrl,
         })
       );
 
-      const selectedPlaces = placeResponses.reduce((acc: ModerationTranslationRequest["selectedPlaces"], placeResponse) => {
+      const requestTasks = placeResponses.reduce((acc: ModerationTranslationRequestResultTask[], placeResponse) => {
         if (placeResponse) {
-          return [...acc, { id: Number(placeResponse.id), name: placeResponse.data.name }];
+          return [
+            ...acc,
+            { id: 0, target: { id: Number(placeResponse.id), name: placeResponse.data.name }, status: TaskStatus.Open, taskStatus: TaskStatus.Open },
+          ];
         }
         return acc;
       }, []);
 
-      if (selectedPlaces.length > 0) {
+      if (requestTasks.length > 0) {
         initialReduxState.moderationTranslation = {
           ...initialReduxState.moderationTranslation,
           requestDetail: {
             ...initialReduxState.moderationTranslation.requestDetail,
-            selectedPlaces,
+            tasks: requestTasks,
             language: {
               from: TRANSLATION_OPTIONS[0].from,
               to: TRANSLATION_OPTIONS[0].to,
             },
             taskType: TaskType.Translation,
-            taskStatus: TaskStatus.Open,
           },
         };
       }
