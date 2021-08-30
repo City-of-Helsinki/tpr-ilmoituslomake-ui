@@ -53,10 +53,7 @@ export const checkUser = async (req: IncomingMessage): Promise<User | undefined>
   }
 
   // Valid user
-  // return { authenticated: true, ...user };
-
-  // TEST - is_translator - FOR DEVELOPMENT USE ONLY
-  return { authenticated: true, is_translator: true, ...user };
+  return { authenticated: true, ...user };
 };
 
 export const getTags = async (): Promise<TagOption[]> => {
