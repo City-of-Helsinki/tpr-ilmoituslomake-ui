@@ -450,7 +450,7 @@
         "show": "View",
         "all": "All",
         "active": "Active",
-        "submitted": "Submitted"
+        "submitted": "Sent"
       },
       "showResults": {
         "show": "View",
@@ -478,7 +478,7 @@
       "found": "Found",
       "tasks": "tasks",
       "notFound": "Tasks not found",
-      "translationTask": "Translation task",
+      "translationTask": "Task",
       "request": "Request",
       "moderator": "From",
       "status": "Status",

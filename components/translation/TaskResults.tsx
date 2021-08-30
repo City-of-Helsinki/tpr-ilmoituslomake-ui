@@ -72,10 +72,18 @@ const TaskResults = ({ showStatus, showResults, setShowStatus, setShowResults }:
 
       {filteredTaskResults.length > 0 && (
         <div className={`gridLayoutContainer ${styles.results}`}>
-          <div className={`${styles.gridColumn1} ${styles.gridHeader}`}>{i18n.t("translation.taskResults.translationTask")}</div>
-          <div className={`${styles.gridColumn2} ${styles.gridHeader}`}>{i18n.t("translation.taskResults.request")}</div>
-          <div className={`${styles.gridColumn3} ${styles.gridHeader}`}>{i18n.t("translation.taskResults.moderator")}</div>
-          <div className={`${styles.gridColumn4} ${styles.gridHeader}`}>{i18n.t("translation.taskResults.status")}</div>
+          <div className={`${styles.gridColumn1} ${styles.gridHeader}`}>
+            <div className={styles.flexItem}>{i18n.t("translation.taskResults.translationTask")}</div>
+          </div>
+          <div className={`${styles.gridColumn2} ${styles.gridHeader}`}>
+            <div className={styles.flexItem}>{i18n.t("translation.taskResults.request")}</div>
+          </div>
+          <div className={`${styles.gridColumn3} ${styles.gridHeader}`}>
+            <div className={styles.flexItem}>{i18n.t("translation.taskResults.moderator")}</div>
+          </div>
+          <div className={`${styles.gridColumn4} ${styles.gridHeader}`}>
+            <div className={styles.flexItem}>{i18n.t("translation.taskResults.status")}</div>
+          </div>
 
           {filteredTaskResults
             .sort((a: TranslationTodoResult, b: TranslationTodoResult) => b.updated.getTime() - a.updated.getTime())
@@ -86,20 +94,34 @@ const TaskResults = ({ showStatus, showResults, setShowStatus, setShowResults }:
               return (
                 <Fragment key={`taskresult_${taskId}`}>
                   <div className={`${styles.gridColumn1} ${styles.gridContent} ${styles.gridButton}`}>
-                    <Link href={`/translation/task/${taskId}`}>
-                      <Button variant="supplementary" size="small" iconLeft={<IconPen aria-hidden />}>
-                        {`${getDisplayName(router.locale || defaultLocale, name, undefined, i18n.t("translation.taskResults.empty"))}${
-                          targetId ? ` (${targetId})` : ""
-                        }`}
-                      </Button>
-                    </Link>
+                    <div className={styles.flexItem}>
+                      <span className={styles.mobileOnly}>{`${i18n.t("translation.taskResults.translationTask")}: `}</span>
+                      <Link href={`/translation/task/${taskId}`}>
+                        <Button variant="supplementary" size="small" iconLeft={<IconPen aria-hidden />}>
+                          {`${getDisplayName(router.locale || defaultLocale, name, undefined, i18n.t("translation.taskResults.empty"))}${
+                            targetId ? ` (${targetId})` : ""
+                          }`}
+                        </Button>
+                      </Link>
+                    </div>
                   </div>
-                  <div className={`${styles.gridColumn2} ${styles.gridContent}`}>{formattedRequest}</div>
+                  <div className={`${styles.gridColumn2} ${styles.gridContent}`}>
+                    <div className={styles.flexItem}>
+                      <span className={styles.mobileOnly}>{`${i18n.t("translation.taskResults.request")}: `}</span>
+                      {formattedRequest}
+                    </div>
+                  </div>
                   <div className={`${styles.gridColumn3} ${styles.gridContent}`}>
-                    {moderator ? `${moderator.first_name} ${moderator.last_name}`.trim() : ""}
+                    <div className={styles.flexItem}>
+                      <span className={styles.mobileOnly}>{`${i18n.t("translation.taskResults.moderator")}: `}</span>
+                      {moderator ? `${moderator.first_name} ${moderator.last_name}`.trim() : ""}
+                    </div>
                   </div>
                   <div className={`${styles.gridColumn4} ${styles.gridContent}`}>
-                    <TaskStatusLabel prefix="translation" status={taskStatus} includeIcons />
+                    <div className={styles.flexItem}>
+                      <span className={styles.mobileOnly}>{`${i18n.t("translation.taskResults.status")}: `}</span>
+                      <TaskStatusLabel prefix="translation" status={taskStatus} includeIcons />
+                    </div>
                   </div>
                 </Fragment>
               );

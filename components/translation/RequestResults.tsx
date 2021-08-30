@@ -136,10 +136,18 @@ const RequestResults = ({ showStatus, showResults, setShowStatus, setShowResults
 
       {filteredRequestResults.length > 0 && (
         <div className={`gridLayoutContainer ${styles.results}`}>
-          <div className={`${styles.gridColumn1} ${styles.gridHeader}`}>{i18n.t("translation.requestResults.translationRequest")}</div>
-          <div className={`${styles.gridColumn2} ${styles.gridHeader}`}>{i18n.t("translation.requestResults.moderator")}</div>
-          <div className={`${styles.gridColumn3} ${styles.gridHeader}`}>{i18n.t("translation.requestResults.type")}</div>
-          <div className={`${styles.gridColumn4} ${styles.gridHeader}`}>{i18n.t("translation.requestResults.status")}</div>
+          <div className={`${styles.gridColumn1} ${styles.gridHeader}`}>
+            <div className={styles.flexItem}>{i18n.t("translation.requestResults.translationRequest")}</div>
+          </div>
+          <div className={`${styles.gridColumn2} ${styles.gridHeader}`}>
+            <div className={styles.flexItem}>{i18n.t("translation.requestResults.moderator")}</div>
+          </div>
+          <div className={`${styles.gridColumn3} ${styles.gridHeader}`}>
+            <div className={styles.flexItem}>{i18n.t("translation.requestResults.type")}</div>
+          </div>
+          <div className={`${styles.gridColumn4} ${styles.gridHeader}`}>
+            <div className={styles.flexItem}>{i18n.t("translation.requestResults.status")}</div>
+          </div>
 
           {filteredRequestResults
             .sort((a: TranslationRequestResult, b: TranslationRequestResult) => b.updated.getTime() - a.updated.getTime())
@@ -152,34 +160,52 @@ const RequestResults = ({ showStatus, showResults, setShowStatus, setShowResults
               return (
                 <Fragment key={`requestresult_${requestId}`}>
                   <div className={`${styles.gridColumn1} ${styles.gridContent} ${styles.gridButton}`}>
-                    <Button
-                      variant="supplementary"
-                      size="small"
-                      iconLeft={<IconPen aria-hidden />}
-                      onClick={() => updateSearchRequestOption(formattedRequest)}
-                    >
-                      {formattedRequest}
-                    </Button>
+                    <div className={styles.flexItem}>
+                      <span className={styles.mobileOnly}>{`${i18n.t("translation.requestResults.translationRequest")}: `}</span>
+                      <Button
+                        variant="supplementary"
+                        size="small"
+                        iconLeft={<IconPen aria-hidden />}
+                        onClick={() => updateSearchRequestOption(formattedRequest)}
+                      >
+                        {formattedRequest}
+                      </Button>
+                    </div>
                   </div>
                   <div className={`${styles.gridColumn2} ${styles.gridContent}`}>
-                    {moderator ? `${moderator.first_name} ${moderator.last_name}`.trim() : ""}
+                    <div className={styles.flexItem}>
+                      <span className={styles.mobileOnly}>{`${i18n.t("translation.requestResults.moderator")}: `}</span>
+                      {moderator ? `${moderator.first_name} ${moderator.last_name}`.trim() : ""}
+                    </div>
                   </div>
                   <div className={`${styles.gridColumn3} ${styles.gridContent}`}>
-                    <TaskStatusLabel prefix="translation" status={status} includeIcons />
+                    <div className={styles.flexItem}>
+                      <span className={styles.mobileOnly}>{`${i18n.t("translation.requestResults.type")}: `}</span>
+                      <TaskStatusLabel prefix="translation" status={status} includeIcons />
+                    </div>
                   </div>
                   <div className={`${styles.gridColumn4} ${styles.gridContent}`}>
+                    <span className={styles.mobileOnly}>{`${i18n.t("translation.requestResults.status")}: `}</span>
                     <div className={styles.progressBar}>
                       <LinearProgress variant="determinate" value={completed} />
                     </div>
                     <div className={styles.counts}>
-                      <span className={styles.count}>{`${completed.toFixed()}%`}</span>
-                      <span className={styles.label}>{i18n.t("translation.requestResults.counts.completed")}</span>
-                      <span className={styles.count}>{counts[TaskStatus.Open]}</span>
-                      <span className={styles.label}>{i18n.t("translation.requestResults.counts.new")}</span>
-                      <span className={styles.count}>{counts[TaskStatus.InProgress]}</span>
-                      <span className={styles.label}>{i18n.t("translation.requestResults.counts.draft")}</span>
-                      <span className={styles.count}>{counts[TaskStatus.Closed]}</span>
-                      <span className={styles.label}>{i18n.t("translation.requestResults.counts.done")}</span>
+                      <div>
+                        <span className={styles.count}>{`${completed.toFixed()}%`}</span>
+                        <span className={styles.label}>{i18n.t("translation.requestResults.counts.completed")}</span>
+                      </div>
+                      <div>
+                        <span className={styles.count}>{counts[TaskStatus.Open]}</span>
+                        <span className={styles.label}>{i18n.t("translation.requestResults.counts.new")}</span>
+                      </div>
+                      <div>
+                        <span className={styles.count}>{counts[TaskStatus.InProgress]}</span>
+                        <span className={styles.label}>{i18n.t("translation.requestResults.counts.draft")}</span>
+                      </div>
+                      <div>
+                        <span className={styles.count}>{counts[TaskStatus.Closed]}</span>
+                        <span className={styles.label}>{i18n.t("translation.requestResults.counts.done")}</span>
+                      </div>
                     </div>
                   </div>
                 </Fragment>
