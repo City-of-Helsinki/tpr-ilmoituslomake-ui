@@ -217,10 +217,14 @@ const PlaceSearch = (): ReactElement => {
         />
 
         <div className={`${styles.gridColumn1} ${styles.searchButtons}`}>
-          <Button onClick={searchPlaces}>{i18n.t("moderation.button.search")}</Button>
-          <Button variant="secondary" onClick={clearPlaceSearch}>
-            {i18n.t("moderation.button.clear")}
-          </Button>
+          <div className={styles.flexButton}>
+            <Button onClick={searchPlaces}>{i18n.t("moderation.button.search")}</Button>
+          </div>
+          <div className={styles.flexButton}>
+            <Button variant="secondary" onClick={clearPlaceSearch}>
+              {i18n.t("moderation.button.clear")}
+            </Button>
+          </div>
         </div>
       </div>
 

@@ -100,10 +100,18 @@ const PlaceResults = (): ReactElement => {
 
       {results.length > 0 && (
         <div className={`gridLayoutContainer ${styles.results}`}>
-          <div className={`${styles.gridColumn1} ${styles.gridHeader} moderation`}>{i18n.t("moderation.placeResults.nameId")}</div>
-          <div className={`${styles.gridColumn2} ${styles.gridHeader} moderation`}>{i18n.t("moderation.placeResults.address")}</div>
-          <div className={`${styles.gridColumn3} ${styles.gridHeader} moderation`}>{i18n.t("moderation.placeResults.modifiedLast")}</div>
-          <div className={`${styles.gridColumn4} ${styles.gridHeader} moderation`}>{i18n.t("moderation.placeResults.publishPermission")}</div>
+          <div className={`${styles.gridColumn1} ${styles.gridHeader} moderation`}>
+            <div className={styles.flexItem}>{i18n.t("moderation.placeResults.nameId")}</div>
+          </div>
+          <div className={`${styles.gridColumn2} ${styles.gridHeader} moderation`}>
+            <div className={styles.flexItem}>{i18n.t("moderation.placeResults.address")}</div>
+          </div>
+          <div className={`${styles.gridColumn3} ${styles.gridHeader} moderation`}>
+            <div className={styles.flexItem}>{i18n.t("moderation.placeResults.modifiedLast")}</div>
+          </div>
+          <div className={`${styles.gridColumn4} ${styles.gridHeader} moderation`}>
+            <div className={styles.flexItem}>{i18n.t("moderation.placeResults.publishPermission")}</div>
+          </div>
           {results
             .sort((a: ModerationPlaceResult, b: ModerationPlaceResult) => b.updated.getTime() - a.updated.getTime())
             .map((result) => {
@@ -118,8 +126,8 @@ const PlaceResults = (): ReactElement => {
 
               return (
                 <Fragment key={`placeresult_${targetId}`}>
-                  <div className={`${styles.gridColumn1} ${styles.gridContent} ${styles.gridButton}`}>
-                    <div className={styles.checkboxLink}>
+                  <div className={`${styles.gridColumn1} ${styles.gridContent}`}>
+                    <div className={styles.flexItem}>
                       <Checkbox
                         id={`placecheckbox_${targetId}`}
                         value={`place_${targetId}`}
@@ -135,17 +143,28 @@ const PlaceResults = (): ReactElement => {
                     </div>
                   </div>
                   <div className={`${styles.gridColumn2} ${styles.gridContent}`}>
-                    {router.locale !== "sv"
-                      ? `${streetFi}${streetFi.length > 0 ? "," : ""} ${postalCodeFi} ${postOfficeFi} ${
-                          neighborhoodFi.length > 0 ? `(${neighborhoodFi})` : ""
-                        }`
-                      : `${streetSv}${streetSv.length > 0 ? "," : ""} ${postalCodeSv} ${postOfficeSv} ${
-                          neighborhoodFi.length > 0 ? `(${neighborhoodSv})` : ""
-                        }`}
+                    <div className={styles.flexItem}>
+                      <span className={styles.mobileOnly}>{`${i18n.t("moderation.placeResults.address")}: `}</span>
+                      {router.locale !== "sv"
+                        ? `${streetFi}${streetFi.length > 0 ? "," : ""} ${postalCodeFi} ${postOfficeFi} ${
+                            neighborhoodFi.length > 0 ? `(${neighborhoodFi})` : ""
+                          }`
+                        : `${streetSv}${streetSv.length > 0 ? "," : ""} ${postalCodeSv} ${postOfficeSv} ${
+                            neighborhoodFi.length > 0 ? `(${neighborhoodSv})` : ""
+                          }`}
+                    </div>
                   </div>
-                  <div className={`${styles.gridColumn3} ${styles.gridContent}`}>{moment(updated).format(DATETIME_FORMAT)}</div>
+                  <div className={`${styles.gridColumn3} ${styles.gridContent}`}>
+                    <div className={styles.flexItem}>
+                      <span className={styles.mobileOnly}>{`${i18n.t("moderation.placeResults.modifiedLast")}: `}</span>
+                      {moment(updated).format(DATETIME_FORMAT)}
+                    </div>
+                  </div>
                   <div className={`${styles.gridColumn4} ${styles.gridContent}`}>
-                    {published ? i18n.t("moderation.placeSearch.publishPermission.yes") : i18n.t("moderation.placeSearch.publishPermission.no")}
+                    <div className={styles.flexItem}>
+                      <span className={styles.mobileOnly}>{`${i18n.t("moderation.placeResults.publishPermission")}: `}</span>
+                      {published ? i18n.t("moderation.placeSearch.publishPermission.yes") : i18n.t("moderation.placeSearch.publishPermission.no")}
+                    </div>
                   </div>
                 </Fragment>
               );

@@ -1,4 +1,5 @@
 @import "~hds-design-tokens/lib/all.scss";
+@import "../../../styles/mixins";
 
 .placeResults {
   .optionsRow {
@@ -11,19 +12,35 @@
   }
 
   .gridColumn1 {
-    grid-column: 1 / 1;
+    grid-column: 1 / span 2;
+
+    @include media(xs, s) {
+      grid-column: 1 / 1;
+    }
   }
 
   .gridColumn2 {
-    grid-column: 2 / 2;
+    grid-column: 3 / span 2;
+
+    @include media(xs, s) {
+      grid-column: 1 / 1;
+    }
   }
 
   .gridColumn3 {
-    grid-column: 3 / 3;
+    grid-column: 5 / 5;
+
+    @include media(xs, s) {
+      grid-column: 1 / 1;
+    }
   }
 
   .gridColumn4 {
-    grid-column: 4 / 4;
+    grid-column: 6 / 6;
+
+    @include media(xs, s) {
+      grid-column: 1 / 1;
+    }
   }
 
   .results {
@@ -35,14 +52,18 @@
       font-weight: 700;
       background-color: $color-fog-light;
       padding: $spacing-xs;
-      margin: $spacing-s 0;
+      margin-top: $spacing-s;
+
+      @include media(xs, s) {
+        display: none;
+      }
     }
 
     .gridContent {
       padding: $spacing-xs;
 
-      &.gridButton {
-        padding: 0;
+      @include media(xs, s) {
+        padding-top: 0;
       }
 
       &:nth-child(8n + 1),
@@ -51,9 +72,17 @@
       &:nth-child(8n + 4) {
         background-color: $color-silver-light;
       }
+
+      .mobileOnly {
+        margin-right: $spacing-xs;
+
+        @include media(m, l, xl) {
+          display: none;
+        }
+      }
     }
 
-    .checkboxLink {
+    .flexItem {
       display: flex;
       flex-direction: row;
       align-items: center;
