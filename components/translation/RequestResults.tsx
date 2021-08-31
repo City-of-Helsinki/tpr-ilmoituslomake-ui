@@ -164,7 +164,6 @@ const RequestResults = ({ showStatus, showResults, setShowStatus, setShowResults
                 <Fragment key={`requestresult_${requestId}`}>
                   <div className={`${styles.gridColumn1} ${styles.gridContent}`}>
                     <div className={styles.flexItem}>
-                      <span className={styles.mobileOnly}>{`${i18n.t("translation.requestResults.translationRequest")}: `}</span>
                       <Button
                         variant="supplementary"
                         size="small"

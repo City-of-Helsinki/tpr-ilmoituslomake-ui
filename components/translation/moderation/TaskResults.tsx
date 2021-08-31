@@ -142,7 +142,6 @@ const TaskResults = ({ showStatus, showResults, setShowResults }: TaskResultsPro
                 <Fragment key={`taskresult_${taskId}`}>
                   <div className={`${styles.gridColumn1} ${styles.gridContent}`}>
                     <div className={styles.flexItem}>
-                      <span className={styles.mobileOnly}>{`${i18n.t("moderation.translation.taskResults.translationTask")}: `}</span>
                       <Checkbox
                         id={`taskcheckbox_${taskId}`}
                         value={`task_${taskId}`}

@@ -98,7 +98,6 @@ const TaskResults = ({ showStatus, showResults, setShowStatus, setShowResults }:
                 <Fragment key={`taskresult_${taskId}`}>
                   <div className={`${styles.gridColumn1} ${styles.gridContent} ${styles.gridButton}`}>
                     <div className={styles.flexItem}>
-                      <span className={styles.mobileOnly}>{`${i18n.t("translation.taskResults.translationTask")}: `}</span>
                       <Link href={`/translation/task/${taskId}`}>
                         <Button variant="supplementary" size="small" iconLeft={<IconPen aria-hidden />}>
                           {`${getDisplayName(router.locale || defaultLocale, name, undefined, i18n.t("translation.taskResults.empty"))}${

@@ -227,7 +227,6 @@ const RequestResults = ({ showStatus, showResults, setShowResults }: RequestResu
                 <Fragment key={`requestresult_${requestId}`}>
                   <div className={`${styles.gridColumn1} ${styles.gridContent}`}>
                     <div className={styles.flexItem}>
-                      <span className={styles.mobileOnly}>{`${i18n.t("moderation.translation.requestResults.translationRequest")}: `}</span>
                       <Checkbox
                         id={`requestcheckbox_${requestId}`}
                         value={`request_${requestId}`}
