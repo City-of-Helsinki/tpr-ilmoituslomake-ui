@@ -1,5 +1,6 @@
 import React, { Dispatch, ChangeEvent, ReactElement, SetStateAction, useEffect, useMemo } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import dynamic from "next/dynamic";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useI18n } from "next-localization";
@@ -16,8 +17,10 @@ import { DATETIME_FORMAT, MAX_LENGTH } from "../../../types/constants";
 import { OptionType, ModerationTranslationTaskResult } from "../../../types/general";
 import { getTaskStatus, getTaskType } from "../../../utils/conversion";
 import getOrigin from "../../../utils/request";
-import TaskStatusFilter from "../TaskStatusFilter";
 import styles from "./TaskSearch.module.scss";
+
+// Note: The task filter has an attribute that uses a media query which does not work when server-side rendering
+const DynamicTaskStatusFilter = dynamic(() => import("../TaskStatusFilter"), { ssr: false });
 
 interface TaskSearchProps {
   showStatus: string;
@@ -138,7 +141,7 @@ const TaskSearch = ({ showStatus, setShowStatus }: TaskSearchProps): ReactElemen
         </div>
       </div>
 
-      <TaskStatusFilter prefix="moderation.translation" showStatus={showStatus} setShowStatus={setShowStatus} />
+      <DynamicTaskStatusFilter prefix="moderation.translation" showStatus={showStatus} setShowStatus={setShowStatus} isHorizontalWhenXS />
     </div>
   );
 };

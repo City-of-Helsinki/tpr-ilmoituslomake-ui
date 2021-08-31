@@ -4,6 +4,7 @@
   .header {
     display: flex;
     flex-direction: row;
+    flex-wrap: wrap;
     align-items: center;
     margin: $spacing-s 0;
   }
@@ -16,7 +17,7 @@
     }
 
     .gridInputRequest {
-      grid-column: span 2;
+      grid-column: span 3;
     }
 
     .gridButton {

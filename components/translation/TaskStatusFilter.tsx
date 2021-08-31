@@ -1,21 +1,26 @@
 import React, { Dispatch, ReactElement, SetStateAction } from "react";
 import { useI18n } from "next-localization";
 import { RadioButton, SelectionGroup } from "hds-react";
+import { useMediaQuery } from "react-responsive";
 import styles from "./TaskStatusFilter.module.scss";
 
 interface TaskStatusFilterProps {
   prefix: string;
   showStatus: string;
   setShowStatus: Dispatch<SetStateAction<string>>;
+  isHorizontalWhenXS?: boolean;
 }
 
-const TaskStatusFilter = ({ prefix, showStatus, setShowStatus }: TaskStatusFilterProps): ReactElement => {
+const TaskStatusFilter = ({ prefix, showStatus, setShowStatus, isHorizontalWhenXS }: TaskStatusFilterProps): ReactElement => {
   const i18n = useI18n();
+
+  // Note: this only works for client-side rendering
+  const isScreenSizeXS = useMediaQuery({ query: `only screen and (max-width: ${styles.max_breakpoint_xs})` });
 
   return (
     <div className={styles.showStatus}>
-      <div>{i18n.t(`${prefix}.taskSearch.showStatus.show`)}</div>
-      <SelectionGroup id="showStatus" direction="horizontal">
+      <div className={styles.showResultsLabel}>{i18n.t(`${prefix}.taskSearch.showStatus.show`)}</div>
+      <SelectionGroup id="showStatus" direction={isHorizontalWhenXS && isScreenSizeXS ? "vertical" : "horizontal"}>
         <RadioButton
           id="showStatus_all"
           label={i18n.t(`${prefix}.taskSearch.showStatus.all`)}
@@ -43,6 +48,10 @@ const TaskStatusFilter = ({ prefix, showStatus, setShowStatus }: TaskStatusFilte
       </SelectionGroup>
     </div>
   );
+};
+
+TaskStatusFilter.defaultProps = {
+  isHorizontalWhenXS: false,
 };
 
 export default TaskStatusFilter;

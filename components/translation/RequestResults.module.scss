@@ -52,10 +52,6 @@
       margin-top: $spacing-s;
 
       @include media(xs, s) {
-        padding-top: 0;
-      }
-
-      @include media(xs, s) {
         display: none;
       }
     }
@@ -91,7 +87,6 @@
     }
 
     .progressBar {
-      display: block;
       margin-bottom: $spacing-xs;
     }
 

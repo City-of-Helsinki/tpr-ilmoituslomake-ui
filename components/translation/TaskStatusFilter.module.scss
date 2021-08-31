@@ -1,10 +1,15 @@
 @import "~hds-design-tokens/lib/all.scss";
+@import "../../styles/mixins";
 
 .showStatus {
   display: flex;
   flex-direction: row;
-  align-items: flex-end;
+  align-items: flex-start;
   margin-bottom: $spacing-xs;
+
+  .showResultsLabel {
+    margin-top: $spacing-s;
+  }
 
   fieldset {
     margin-left: $spacing-s;

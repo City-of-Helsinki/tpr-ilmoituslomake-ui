@@ -1,5 +1,6 @@
 import React, { Dispatch, ReactElement, SetStateAction, Fragment, useCallback, useMemo } from "react";
 import { useSelector } from "react-redux";
+import dynamic from "next/dynamic";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useI18n } from "next-localization";
@@ -10,9 +11,11 @@ import { TranslationTodoResult } from "../../types/general";
 import { getDisplayName } from "../../utils/helper";
 import { defaultLocale } from "../../utils/i18n";
 import TaskStatusLabel from "../common/TaskStatusLabel";
-import TaskStatusFilter from "./TaskStatusFilter";
-import TaskResultsFilter from "./TaskResultsFilter";
 import styles from "./TaskResults.module.scss";
+
+// Note: The task filter has an attribute that uses a media query which does not work when server-side rendering
+const DynamicTaskStatusFilter = dynamic(() => import("./TaskStatusFilter"), { ssr: false });
+const DynamicTaskResultsFilter = dynamic(() => import("./TaskResultsFilter"), { ssr: false });
 
 interface TaskResultsProps {
   showStatus: string;
@@ -65,9 +68,9 @@ const TaskResults = ({ showStatus, showResults, setShowStatus, setShowResults }:
       {searchDone && filteredTaskResults.length === 0 && <h2>{i18n.t("translation.taskResults.notFound")}</h2>}
 
       <div className={styles.resultsFilter}>
-        <TaskStatusFilter prefix="translation" showStatus={showStatus} setShowStatus={setShowStatus} />
+        <DynamicTaskStatusFilter prefix="translation" showStatus={showStatus} setShowStatus={setShowStatus} />
         <div className="flexSpace" />
-        <TaskResultsFilter prefix="translation" showResults={showResults} setShowResults={setShowResults} />
+        <DynamicTaskResultsFilter prefix="translation" showResults={showResults} setShowResults={setShowResults} />
       </div>
 
       {filteredTaskResults.length > 0 && (

@@ -58,7 +58,7 @@ const MoreResultsButton = (): ReactElement => {
 
   return (
     <div>
-      {!next && (
+      {next && (
         <Button variant="secondary" onClick={fetchMoreResults}>
           {i18n.t("moderation.button.showMore")}
         </Button>

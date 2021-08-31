@@ -1,5 +1,6 @@
 import React, { Dispatch, ChangeEvent, ReactElement, SetStateAction, Fragment, useCallback, useMemo, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import dynamic from "next/dynamic";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useI18n } from "next-localization";
@@ -13,8 +14,10 @@ import { cancelMultipleModerationTranslationRequests } from "../../../utils/mode
 import ModalConfirmation from "../../common/ModalConfirmation";
 import ToastNotification from "../../common/ToastNotification";
 import TaskStatusLabel from "../../common/TaskStatusLabel";
-import TaskResultsFilter from "../TaskResultsFilter";
 import styles from "./RequestResults.module.scss";
+
+// Note: The task filter has an attribute that uses a media query which does not work when server-side rendering
+const DynamicTaskResultsFilter = dynamic(() => import("../TaskResultsFilter"), { ssr: false });
 
 interface RequestResultsProps {
   showStatus: string;
@@ -190,17 +193,27 @@ const RequestResults = ({ showStatus, showResults, setShowResults }: RequestResu
             onChange={selectAllRequests}
           />
           <div className="flexSpace" />
-          <TaskResultsFilter prefix="moderation.translation" showResults={showResults} setShowResults={setShowResults} />
+          <DynamicTaskResultsFilter prefix="moderation.translation" showResults={showResults} setShowResults={setShowResults} isHorizontalWhenXS />
         </div>
       )}
 
       {filteredRequestResults.length > 0 && (
         <div className={`gridLayoutContainer ${styles.results}`}>
-          <div className={`${styles.gridColumn1} ${styles.gridHeader}`}>{i18n.t("moderation.translation.requestResults.translationRequest")}</div>
-          <div className={`${styles.gridColumn2} ${styles.gridHeader}`}>{i18n.t("moderation.translation.requestResults.translator")}</div>
-          <div className={`${styles.gridColumn3} ${styles.gridHeader}`}>{i18n.t("moderation.translation.requestResults.languagePair")}</div>
-          <div className={`${styles.gridColumn4} ${styles.gridHeader}`}>{i18n.t("moderation.translation.requestResults.translationTasks")}</div>
-          <div className={`${styles.gridColumn5} ${styles.gridHeader}`}>{i18n.t("moderation.translation.requestResults.status")}</div>
+          <div className={`${styles.gridColumn1} ${styles.gridHeader}`}>
+            <div className={styles.flexItem}>{i18n.t("moderation.translation.requestResults.translationRequest")}</div>
+          </div>
+          <div className={`${styles.gridColumn2} ${styles.gridHeader}`}>
+            <div className={styles.flexItem}>{i18n.t("moderation.translation.requestResults.translator")}</div>
+          </div>
+          <div className={`${styles.gridColumn3} ${styles.gridHeader}`}>
+            <div className={styles.flexItem}>{i18n.t("moderation.translation.requestResults.languagePair")}</div>
+          </div>
+          <div className={`${styles.gridColumn4} ${styles.gridHeader}`}>
+            <div className={styles.flexItem}>{i18n.t("moderation.translation.requestResults.translationTasks")}</div>
+          </div>
+          <div className={`${styles.gridColumn5} ${styles.gridHeader}`}>
+            <div className={styles.flexItem}>{i18n.t("moderation.translation.requestResults.status")}</div>
+          </div>
 
           {filteredRequestResults
             .sort((a: TranslationRequestResult, b: TranslationRequestResult) => b.updated.getTime() - a.updated.getTime())
@@ -212,8 +225,9 @@ const RequestResults = ({ showStatus, showResults, setShowResults }: RequestResu
 
               return (
                 <Fragment key={`requestresult_${requestId}`}>
-                  <div className={`${styles.gridColumn1} ${styles.gridContent} ${styles.gridButton}`}>
-                    <div className={styles.checkboxLink}>
+                  <div className={`${styles.gridColumn1} ${styles.gridContent}`}>
+                    <div className={styles.flexItem}>
+                      <span className={styles.mobileOnly}>{`${i18n.t("moderation.translation.requestResults.translationRequest")}: `}</span>
                       <Checkbox
                         id={`requestcheckbox_${requestId}`}
                         value={`request_${requestId}`}
@@ -228,16 +242,32 @@ const RequestResults = ({ showStatus, showResults, setShowResults }: RequestResu
                       </Link>
                     </div>
                   </div>
-                  <div className={`${styles.gridColumn2} ${styles.gridContent}`}>{translator.name}</div>
-                  <div className={`${styles.gridColumn3} ${styles.gridContent}`}>{`${translateFrom.toUpperCase()}-${translateTo.toUpperCase()}`}</div>
+                  <div className={`${styles.gridColumn2} ${styles.gridContent}`}>
+                    <div className={styles.flexItem}>
+                      <span className={styles.mobileOnly}>{`${i18n.t("moderation.translation.requestResults.translator")}: `}</span>
+                      {translator.name}
+                    </div>
+                  </div>
+                  <div className={`${styles.gridColumn3} ${styles.gridContent}`}>
+                    <div className={styles.flexItem}>
+                      <span className={styles.mobileOnly}>{`${i18n.t("moderation.translation.requestResults.languagePair")}: `}</span>
+                      {`${translateFrom.toUpperCase()}-${translateTo.toUpperCase()}`}
+                    </div>
+                  </div>
                   <div className={`${styles.gridColumn4} ${styles.gridContent}`}>
-                    <div className={styles.counts}>
-                      <span className={styles.count}>{`${counts[TaskStatus.Closed]} / ${tasks.length}`}</span>
-                      <span className={styles.label}>{i18n.t("moderation.translation.requestResults.counts.done")}</span>
+                    <div className={styles.flexItem}>
+                      <span className={styles.mobileOnly}>{`${i18n.t("moderation.translation.requestResults.translationTasks")}: `}</span>
+                      <div className={styles.counts}>
+                        <span className={styles.count}>{`${counts[TaskStatus.Closed]} / ${tasks.length}`}</span>
+                        <span className={styles.label}>{i18n.t("moderation.translation.requestResults.counts.done")}</span>
+                      </div>
                     </div>
                   </div>
                   <div className={`${styles.gridColumn5} ${styles.gridContent}`}>
-                    <TaskStatusLabel prefix="moderation.translation" status={status} includeIcons />
+                    <div className={styles.flexItem}>
+                      <span className={styles.mobileOnly}>{`${i18n.t("moderation.translation.requestResults.status")}: `}</span>
+                      <TaskStatusLabel prefix="moderation.translation" status={status} includeIcons />
+                    </div>
                   </div>
                 </Fragment>
               );

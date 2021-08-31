@@ -1,5 +1,6 @@
 import React, { Dispatch, ChangeEvent, ReactElement, SetStateAction, Fragment, useCallback, useMemo } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import dynamic from "next/dynamic";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useI18n } from "next-localization";
@@ -12,8 +13,10 @@ import { ModerationTranslationTaskResult } from "../../../types/general";
 import { getDisplayName } from "../../../utils/helper";
 import { defaultLocale } from "../../../utils/i18n";
 import TaskStatusLabel from "../../common/TaskStatusLabel";
-import TaskResultsFilter from "../TaskResultsFilter";
 import styles from "./TaskResults.module.scss";
+
+// Note: The task filter has an attribute that uses a media query which does not work when server-side rendering
+const DynamicTaskResultsFilter = dynamic(() => import("../TaskResultsFilter"), { ssr: false });
 
 interface TaskResultsProps {
   showStatus: string;
@@ -106,17 +109,27 @@ const TaskResults = ({ showStatus, showResults, setShowResults }: TaskResultsPro
             onChange={selectAllTasks}
           />
           <div className="flexSpace" />
-          <TaskResultsFilter prefix="moderation.translation" showResults={showResults} setShowResults={setShowResults} />
+          <DynamicTaskResultsFilter prefix="moderation.translation" showResults={showResults} setShowResults={setShowResults} isHorizontalWhenXS />
         </div>
       )}
 
       {filteredTaskResults.length > 0 && (
         <div className={`gridLayoutContainer ${styles.results}`}>
-          <div className={`${styles.gridColumn1} ${styles.gridHeader}`}>{i18n.t("moderation.translation.taskResults.translationTask")}</div>
-          <div className={`${styles.gridColumn2} ${styles.gridHeader}`}>{i18n.t("moderation.translation.taskResults.request")}</div>
-          <div className={`${styles.gridColumn3} ${styles.gridHeader}`}>{i18n.t("moderation.translation.taskResults.languagePair")}</div>
-          <div className={`${styles.gridColumn4} ${styles.gridHeader}`}>{i18n.t("moderation.translation.taskResults.translator")}</div>
-          <div className={`${styles.gridColumn5} ${styles.gridHeader}`}>{i18n.t("moderation.translation.taskResults.status")}</div>
+          <div className={`${styles.gridColumn1} ${styles.gridHeader}`}>
+            <div className={styles.flexItem}>{i18n.t("moderation.translation.taskResults.translationTask")}</div>
+          </div>
+          <div className={`${styles.gridColumn2} ${styles.gridHeader}`}>
+            <div className={styles.flexItem}>{i18n.t("moderation.translation.taskResults.request")}</div>
+          </div>
+          <div className={`${styles.gridColumn3} ${styles.gridHeader}`}>
+            <div className={styles.flexItem}>{i18n.t("moderation.translation.taskResults.languagePair")}</div>
+          </div>
+          <div className={`${styles.gridColumn4} ${styles.gridHeader}`}>
+            <div className={styles.flexItem}>{i18n.t("moderation.translation.taskResults.translator")}</div>
+          </div>
+          <div className={`${styles.gridColumn5} ${styles.gridHeader}`}>
+            <div className={styles.flexItem}>{i18n.t("moderation.translation.taskResults.status")}</div>
+          </div>
 
           {filteredTaskResults
             .sort((a: ModerationTranslationTaskResult, b: ModerationTranslationTaskResult) => b.updated.getTime() - a.updated.getTime())
@@ -127,8 +140,9 @@ const TaskResults = ({ showStatus, showResults, setShowResults }: TaskResultsPro
 
               return (
                 <Fragment key={`taskresult_${taskId}`}>
-                  <div className={`${styles.gridColumn1} ${styles.gridContent} ${styles.gridButton}`}>
-                    <div className={styles.checkboxLink}>
+                  <div className={`${styles.gridColumn1} ${styles.gridContent}`}>
+                    <div className={styles.flexItem}>
+                      <span className={styles.mobileOnly}>{`${i18n.t("moderation.translation.taskResults.translationTask")}: `}</span>
                       <Checkbox
                         id={`taskcheckbox_${taskId}`}
                         value={`task_${taskId}`}
@@ -145,11 +159,29 @@ const TaskResults = ({ showStatus, showResults, setShowResults }: TaskResultsPro
                       </Link>
                     </div>
                   </div>
-                  <div className={`${styles.gridColumn2} ${styles.gridContent}`}>{formattedRequest}</div>
-                  <div className={`${styles.gridColumn3} ${styles.gridContent}`}>{`${translateFrom.toUpperCase()}-${translateTo.toUpperCase()}`}</div>
-                  <div className={`${styles.gridColumn4} ${styles.gridContent}`}>{translator.name}</div>
+                  <div className={`${styles.gridColumn2} ${styles.gridContent}`}>
+                    <div className={styles.flexItem}>
+                      <span className={styles.mobileOnly}>{`${i18n.t("moderation.translation.taskResults.request")}: `}</span>
+                      {formattedRequest}
+                    </div>
+                  </div>
+                  <div className={`${styles.gridColumn3} ${styles.gridContent}`}>
+                    <div className={styles.flexItem}>
+                      <span className={styles.mobileOnly}>{`${i18n.t("moderation.translation.taskResults.languagePair")}: `}</span>
+                      {`${translateFrom.toUpperCase()}-${translateTo.toUpperCase()}`}
+                    </div>
+                  </div>
+                  <div className={`${styles.gridColumn4} ${styles.gridContent}`}>
+                    <div className={styles.flexItem}>
+                      <span className={styles.mobileOnly}>{`${i18n.t("moderation.translation.taskResults.translator")}: `}</span>
+                      {translator.name}
+                    </div>
+                  </div>
                   <div className={`${styles.gridColumn5} ${styles.gridContent}`}>
-                    <TaskStatusLabel prefix="moderation.translation" status={taskStatus} includeIcons />
+                    <div className={styles.flexItem}>
+                      <span className={styles.mobileOnly}>{`${i18n.t("moderation.translation.taskResults.status")}: `}</span>
+                      <TaskStatusLabel prefix="moderation.translation" status={taskStatus} includeIcons />
+                    </div>
                   </div>
                 </Fragment>
               );

@@ -1,5 +1,6 @@
 import React, { Dispatch, ReactElement, SetStateAction, Fragment, useCallback, useMemo } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import dynamic from "next/dynamic";
 import { useI18n } from "next-localization";
 import { Button, IconPen } from "hds-react";
 import { LinearProgress } from "@material-ui/core";
@@ -9,9 +10,11 @@ import { RootState } from "../../state/reducers";
 import { TaskStatus } from "../../types/constants";
 import { TranslationRequestResult, TranslationRequestResultTask } from "../../types/general";
 import TaskStatusLabel from "../common/TaskStatusLabel";
-import TaskStatusFilter from "./TaskStatusFilter";
-import TaskResultsFilter from "./TaskResultsFilter";
 import styles from "./RequestResults.module.scss";
+
+// Note: The task filter has an attribute that uses a media query which does not work when server-side rendering
+const DynamicTaskStatusFilter = dynamic(() => import("./TaskStatusFilter"), { ssr: false });
+const DynamicTaskResultsFilter = dynamic(() => import("./TaskResultsFilter"), { ssr: false });
 
 interface RequestResultsProps {
   showStatus: string;
@@ -129,9 +132,9 @@ const RequestResults = ({ showStatus, showResults, setShowStatus, setShowResults
       {searchDone && filteredRequestResults.length === 0 && <h2>{i18n.t("translation.requestResults.notFound")}</h2>}
 
       <div className={styles.resultsFilter}>
-        <TaskStatusFilter prefix="translation" showStatus={showStatus} setShowStatus={setShowStatus} />
+        <DynamicTaskStatusFilter prefix="translation" showStatus={showStatus} setShowStatus={setShowStatus} />
         <div className="flexSpace" />
-        <TaskResultsFilter prefix="translation" showResults={showResults} setShowResults={setShowResults} />
+        <DynamicTaskResultsFilter prefix="translation" showResults={showResults} setShowResults={setShowResults} />
       </div>
 
       {filteredRequestResults.length > 0 && (
@@ -159,7 +162,7 @@ const RequestResults = ({ showStatus, showResults, setShowStatus, setShowResults
 
               return (
                 <Fragment key={`requestresult_${requestId}`}>
-                  <div className={`${styles.gridColumn1} ${styles.gridContent} ${styles.gridButton}`}>
+                  <div className={`${styles.gridColumn1} ${styles.gridContent}`}>
                     <div className={styles.flexItem}>
                       <span className={styles.mobileOnly}>{`${i18n.t("translation.requestResults.translationRequest")}: `}</span>
                       <Button
