@@ -3,7 +3,7 @@ import { GetServerSideProps } from "next";
 import Head from "next/head";
 import Link from "next/link";
 import { useI18n } from "next-localization";
-import { Button, IconAngleRight, IconPenLine, IconPlusCircle, IconSearch, IconStar, Koros } from "hds-react";
+import { Button, IconPenLine, IconPlusCircle, IconSearch, IconStar, Koros, Link as HdsLink } from "hds-react";
 import { initStore } from "../state/store";
 import { ACCESSIBILITY_URL, CLEAR_STATE, TERMS_URL } from "../types/constants";
 import i18nLoader from "../utils/i18n";
@@ -38,12 +38,34 @@ const Main = (): ReactElement => {
 
         <div className={styles.infoTextBox}>{i18n.t("notification.index.message")}</div>
         <div className={styles.infoLinkContainer}>
-          <Button variant="supplementary" size="small" iconRight={<IconAngleRight aria-hidden />} onClick={openTermsOfUse}>
-            {i18n.t("notification.index.terms")}
-          </Button>
-          <Button variant="supplementary" size="small" iconRight={<IconAngleRight aria-hidden />} onClick={openAccessibilityInfo}>
-            {i18n.t("notification.index.accessibility")}
-          </Button>
+          <div>
+            <HdsLink
+              href="#"
+              size="M"
+              openInNewTab
+              openInNewTabAriaLabel={i18n.t("common.opensInANewTab")}
+              external
+              openInExternalDomainAriaLabel={i18n.t("common.opensExternal")}
+              disableVisitedStyles
+              onClick={openTermsOfUse}
+            >
+              {i18n.t("notification.index.terms")}
+            </HdsLink>
+          </div>
+          <div>
+            <HdsLink
+              href="#"
+              size="M"
+              openInNewTab
+              openInNewTabAriaLabel={i18n.t("common.opensInANewTab")}
+              external
+              openInExternalDomainAriaLabel={i18n.t("common.opensExternal")}
+              disableVisitedStyles
+              onClick={openAccessibilityInfo}
+            >
+              {i18n.t("notification.index.accessibility")}
+            </HdsLink>
+          </div>
         </div>
 
         <h2>{i18n.t("notification.index.notify")}</h2>

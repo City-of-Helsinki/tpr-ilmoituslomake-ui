@@ -26,7 +26,8 @@
       "sv": "ruotsiksi",
       "en": "englanniksi"
     },
-    "opensInANewTab": "(aukeaa uuteen välilehteen)",
+    "opensInANewTab": "Avautuu uudessa välilehdessä.",
+    "opensExternal": "Siirtyy toiseen sivustoon.",
     "notAuthorized": "Sinulla ei ole lupaa tarkastella pyydettyä sivua",
     "todo": "TODO - TEXT HERE"
   },

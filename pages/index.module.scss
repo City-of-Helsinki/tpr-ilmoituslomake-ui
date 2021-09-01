@@ -24,7 +24,11 @@
   }
 
   .infoLinkContainer {
-    text-align: center;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-bottom: $spacing-layout-l;
   }
 
   h2 {

@@ -1,7 +1,7 @@
 import React, { Dispatch, ChangeEvent, ReactElement, useRef } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useI18n } from "next-localization";
-import { TextInput, Button, IconUpload, IconLink, TextArea, SelectionGroup, RadioButton, IconLinkExternal } from "hds-react";
+import { Button, IconLink, IconUpload, Link as HdsLink, RadioButton, SelectionGroup, TextArea, TextInput } from "hds-react";
 import { v4 as uuidv4 } from "uuid";
 import { NotificationAction } from "../../state/actions/notificationTypes";
 import { NotificationValidationAction } from "../../state/actions/notificationValidationTypes";
@@ -289,16 +289,20 @@ const Photos = (): ReactElement => {
                     onChange={(evt) => updatePhoto(index, evt)}
                   />
                 </SelectionGroup>
-                <Button
-                  variant="supplementary"
-                  size="small"
-                  className={styles.creativeCommonsLink}
-                  iconRight={<IconLinkExternal aria-hidden />}
-                  onClick={openCreativeCommons}
-                >
-                  {i18n.t("notification.photos.permission.creativeCommons2")}
-                  <span className="screenReaderOnly"> {i18n.t("common.opensInANewTab")}</span>
-                </Button>
+                <div className={styles.creativeCommonsLink}>
+                  <HdsLink
+                    href="#"
+                    size="M"
+                    openInNewTab
+                    openInNewTabAriaLabel={i18n.t("common.opensInANewTab")}
+                    external
+                    openInExternalDomainAriaLabel={i18n.t("common.opensExternal")}
+                    disableVisitedStyles
+                    onClick={openCreativeCommons}
+                  >
+                    {i18n.t("notification.photos.permission.creativeCommons2")}
+                  </HdsLink>
+                </div>
 
                 <TextInput
                   id={`source_${index}`}
