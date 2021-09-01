@@ -34,12 +34,19 @@ const Intro = (): ReactElement => {
       <div className={styles.intro}>
         <h1 className="moderation">{i18n.t("moderation.intro.title")}</h1>
         <div className="formInput">{i18n.t("common.todo")}</div>
-        <Link href="/moderation/place">
-          <Button className={styles.primary}>{i18n.t("moderation.button.allPlaces")}</Button>
-        </Link>
-        <Button className={styles.primary} iconLeft={<IconPlus aria-hidden />} onClick={makeNewPlaceChangeRequest}>
-          {i18n.t("moderation.button.addNewPlace")}
-        </Button>
+
+        <div className={styles.buttonRow}>
+          <div className={styles.flexButton}>
+            <Link href="/moderation/place">
+              <Button className={styles.primary}>{i18n.t("moderation.button.allPlaces")}</Button>
+            </Link>
+          </div>
+          <div className={styles.flexButton}>
+            <Button className={styles.primary} iconLeft={<IconPlus aria-hidden />} onClick={makeNewPlaceChangeRequest}>
+              {i18n.t("moderation.button.addNewPlace")}
+            </Button>
+          </div>
+        </div>
       </div>
       <Koros className={styles.wave} type="basic" flipHorizontal />
 

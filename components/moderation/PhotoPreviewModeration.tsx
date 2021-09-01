@@ -21,7 +21,7 @@ const PhotoPreviewModeration = ({ index }: PhotoPreviewModerationProps): ReactEl
   if (taskType === TaskType.RemoveTip || taskType === TaskType.ModeratorRemove || taskType === TaskType.PlaceInfo) {
     return (
       <div className="gridLayoutContainer moderation">
-        <div className={`gridColumn1 ${styles.imagePreview}`}>
+        <div className={`${styles.gridSelected} ${styles.imagePreview}`}>
           <img src={photoStatus !== ModerationStatus.Edited ? previewSelected : previewModified} alt="" />
         </div>
       </div>
@@ -38,13 +38,13 @@ const PhotoPreviewModeration = ({ index }: PhotoPreviewModerationProps): ReactEl
   ) {
     return (
       <div className="gridLayoutContainer moderation">
-        <div className={`gridColumn1 ${styles.imagePreview}`}>
+        <div className={`${styles.gridSelected} ${styles.imagePreview}`}>
           <img src={previewSelected} alt="" />
         </div>
-        <div className={`gridColumn2 ${styles.imagePreview}`}>
+        <div className={`${styles.gridModified} ${styles.imagePreview}`}>
           <img src={previewModified} alt="" />
         </div>
-        <div className="gridColumn3" />
+        <div className={styles.gridActionButton} />
       </div>
     );
   }

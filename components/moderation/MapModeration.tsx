@@ -119,14 +119,14 @@ const MapModeration = ({ setMapsReady }: MapModerationProps): ReactElement => {
       <div className="formSection">
         <div className="gridLayoutContainer moderation">
           {locationStatus !== ModerationStatus.Edited && (
-            <h4 className="gridColumn1 moderation">{`${i18n.t("moderation.map.title")}${i18n.t("moderation.task.selected")}`}</h4>
+            <h4 className={`${styles.gridSelected} moderation`}>{`${i18n.t("moderation.map.title")}${i18n.t("moderation.task.selected")}`}</h4>
           )}
           {locationStatus === ModerationStatus.Edited && (
-            <h4 className="gridColumn1 moderation">{`${i18n.t("moderation.map.title")}${i18n.t("moderation.task.modified")}`}</h4>
+            <h4 className={`${styles.gridSelected} moderation`}>{`${i18n.t("moderation.map.title")}${i18n.t("moderation.task.modified")}`}</h4>
           )}
 
           <MapWrapper
-            className={`gridColumn1 ${styles.map}`}
+            className={`${styles.gridSelected} ${styles.map}`}
             initialCenter={initialCenter as [number, number]}
             initialZoom={locationStatus !== ModerationStatus.Edited ? initialSelectedZoom : initialModifiedZoom}
             location={locationStatus !== ModerationStatus.Edited ? locationSelected : locationModified}
@@ -150,11 +150,11 @@ const MapModeration = ({ setMapsReady }: MapModerationProps): ReactElement => {
     return (
       <div className="formSection">
         <div className="gridLayoutContainer moderation">
-          <h4 className="gridColumn1 moderation">{`${i18n.t("moderation.map.title")}${i18n.t("moderation.task.selected")}`}</h4>
-          <h4 className="gridColumn2 moderation">{`${i18n.t("moderation.map.title")}${i18n.t("moderation.task.modified")}`}</h4>
+          <h4 className={`${styles.gridSelected} moderation`}>{`${i18n.t("moderation.map.title")}${i18n.t("moderation.task.selected")}`}</h4>
+          <h4 className={`${styles.gridModified} moderation`}>{`${i18n.t("moderation.map.title")}${i18n.t("moderation.task.modified")}`}</h4>
 
           <MapWrapper
-            className={`gridColumn1 ${styles.map}`}
+            className={`${styles.gridSelected} ${styles.map}`}
             initialCenter={initialCenter as [number, number]}
             initialZoom={initialSelectedZoom}
             location={locationSelected}
@@ -163,7 +163,7 @@ const MapModeration = ({ setMapsReady }: MapModerationProps): ReactElement => {
           />
 
           <ModifyButton
-            className="gridColumn2"
+            className={styles.gridModified}
             label={i18n.t("moderation.map.title")}
             fieldName="location"
             moderationStatus={initialLocationStatus || locationStatus}
@@ -171,7 +171,7 @@ const MapModeration = ({ setMapsReady }: MapModerationProps): ReactElement => {
             modifyCallback={updateLocationStatus}
           >
             <MapWrapper
-              className={`gridColumn2 ${styles.map}`}
+              className={`${styles.gridModified} ${styles.map}`}
               initialCenter={initialCenter as [number, number]}
               initialZoom={initialModifiedZoom}
               location={locationModified}
@@ -183,7 +183,7 @@ const MapModeration = ({ setMapsReady }: MapModerationProps): ReactElement => {
             />
           </ModifyButton>
           <ActionButton
-            className="gridColumn3"
+            className={styles.gridActionButton}
             fieldName="location"
             moderationStatus={locationStatus}
             taskStatus={taskStatus}

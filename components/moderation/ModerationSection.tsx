@@ -3,6 +3,7 @@ import { ModerationStatus, TaskStatus, TaskType } from "../../types/constants";
 import { OptionType } from "../../types/general";
 import ActionButton from "./ActionButton";
 import ModifyButton from "./ModifyButton";
+import styles from "./ModerationSection.module.scss";
 
 interface ModerationSectionProps {
   id: string;
@@ -61,12 +62,16 @@ const ModerationSection = ({
   if (taskType === TaskType.RemoveTip || taskType === TaskType.ModeratorRemove || taskType === TaskType.PlaceInfo) {
     return (
       <>
-        {selectedHeaderText && moderationStatus !== ModerationStatus.Edited && <h4 className="gridColumn1 moderation">{selectedHeaderText}</h4>}
-        {modifiedHeaderText && moderationStatus === ModerationStatus.Edited && <h4 className="gridColumn1 moderation">{modifiedHeaderText}</h4>}
+        {selectedHeaderText && moderationStatus !== ModerationStatus.Edited && (
+          <h4 className={`${styles.gridSelected} moderation`}>{selectedHeaderText}</h4>
+        )}
+        {modifiedHeaderText && moderationStatus === ModerationStatus.Edited && (
+          <h4 className={`${styles.gridSelected} moderation`}>{modifiedHeaderText}</h4>
+        )}
 
         {cloneElement(ModerationComponent, {
           id: moderationStatus !== ModerationStatus.Edited ? `${id}_Selected` : `${id}_Modified`,
-          className: "gridColumn1 disabledTextColor",
+          className: `${styles.gridSelected} disabledTextColor`,
           value: moderationStatus !== ModerationStatus.Edited ? selectedValue : modifiedValue,
           onChange: moderationStatus === ModerationStatus.Edited ? changeCallback : undefined,
           onBlur: moderationStatus === ModerationStatus.Edited ? blurCallback : undefined,
@@ -109,19 +114,19 @@ const ModerationSection = ({
 
     return (
       <>
-        {selectedHeaderText && <h4 className="gridColumn1 moderation">{selectedHeaderText}</h4>}
-        {modifiedHeaderText && <h4 className="gridColumn2 moderation">{modifiedHeaderText}</h4>}
+        {selectedHeaderText && <h4 className={`${styles.gridSelected} moderation`}>{selectedHeaderText}</h4>}
+        {modifiedHeaderText && <h4 className={`${styles.gridModified} moderation`}>{modifiedHeaderText}</h4>}
 
         {cloneElement(ModerationComponent, {
           id: `${id}_Selected`,
-          className: "gridColumn1 disabledTextColor",
+          className: `${styles.gridSelected} disabledTextColor`,
           value: selectedValue,
           disabled: true,
           radiobuttonname: isSelectionGroupWrapper ? `${id}_Selected` : undefined,
         })}
 
         <ModifyButton
-          className="gridColumn2"
+          className={styles.gridModified}
           label={modifyButtonLabel}
           fieldName={fieldName}
           moderationStatus={moderationStatus}
@@ -131,7 +136,7 @@ const ModerationSection = ({
         >
           {cloneElement(ModerationComponent, {
             id: `${id}_Modified`,
-            className: "gridColumn2 disabledTextColor",
+            className: `${styles.gridModified} disabledTextColor`,
             value: modifiedValue,
             onChange: changeCallback,
             onBlur: blurCallback,
@@ -149,7 +154,7 @@ const ModerationSection = ({
         </ModifyButton>
 
         <ActionButton
-          className="gridColumn3"
+          className={styles.gridActionButton}
           fieldName={fieldName}
           moderationStatus={moderationStatus}
           taskStatus={taskStatus}

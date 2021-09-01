@@ -3,17 +3,23 @@
 .action {
   margin-top: $spacing-layout-xs;
 
-  button {
-    margin-right: $spacing-s;
+  .buttonRow {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
 
-    &.approveSecondary {
-      color: $color-success;
-      border-color: $color-success;
-    }
+    button {
+      margin-left: $spacing-s;
 
-    &.rejectSecondary {
-      color: $color-error;
-      border-color: $color-error;
+      &.approveSecondary {
+        color: $color-success;
+        border-color: $color-success;
+      }
+
+      &.rejectSecondary {
+        color: $color-error;
+        border-color: $color-error;
+      }
     }
   }
 }

@@ -167,19 +167,6 @@ textarea {
   padding: $spacing-xs;
 }
 
-// Note: these column definitions are only used for moderation task components
-.gridColumn1 {
-  grid-column: 1 / span 2;
-}
-
-.gridColumn2 {
-  grid-column: 3 / span 2;
-}
-
-.gridColumn3 {
-  grid-column: 5 / 5;
-}
-
 .languageSection {
   border: solid $color-copper-light 0;
   border-left-width: $spacing-2-xs;

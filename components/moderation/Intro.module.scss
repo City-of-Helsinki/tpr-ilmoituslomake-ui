@@ -4,15 +4,22 @@
   background-color: $color-copper-light;
   padding: $spacing-m;
 
-  button {
-    margin-right: $spacing-s;
+  .buttonRow {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
 
-    &.primary {
-      background-color: $color-bus;
-    }
+    .flexButton {
+      margin-right: $spacing-s;
+      margin-bottom: $spacing-s;
 
-    &.secondary {
-      background-color: $color-white;
+      .primary {
+        background-color: $color-bus;
+      }
+
+      .secondary {
+        background-color: $color-white;
+      }
     }
   }
 }

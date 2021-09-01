@@ -11,6 +11,7 @@ import { RootState } from "../../state/reducers";
 import { ModerationStatus, TaskStatus } from "../../types/constants";
 import { searchModerationAddress } from "../../utils/addressModeration";
 import ModerationSection from "./ModerationSection";
+import styles from "./LocationModeration.module.scss";
 
 const LocationModeration = (): ReactElement => {
   const i18n = useI18n();
@@ -207,8 +208,8 @@ const LocationModeration = (): ReactElement => {
 
       {addressFiStatus === ModerationStatus.Edited && (
         <div className="gridLayoutContainer moderation">
-          <div className="gridColumn1" />
-          <div className="gridColumn2">
+          <div className={styles.gridSelected} />
+          <div className={styles.gridModified}>
             <Button
               variant="secondary"
               onClick={() => searchModerationAddress(router, streetFiModified, postOfficeFiModified, dispatch)}
@@ -217,7 +218,7 @@ const LocationModeration = (): ReactElement => {
               {i18n.t("moderation.map.geocode")}
             </Button>
           </div>
-          <div className="gridColumn3" />
+          <div className={styles.gridActionButton} />
         </div>
       )}
 
@@ -339,8 +340,8 @@ const LocationModeration = (): ReactElement => {
 
       {addressSvStatus === ModerationStatus.Edited && (
         <div className="gridLayoutContainer moderation">
-          <div className="gridColumn1" />
-          <div className="gridColumn2">
+          <div className={styles.gridSelected} />
+          <div className={styles.gridModified}>
             <Button
               variant="secondary"
               onClick={() => searchModerationAddress(router, streetSvModified, postOfficeSvModified, dispatch)}
@@ -349,7 +350,7 @@ const LocationModeration = (): ReactElement => {
               {i18n.t("moderation.map.geocode")}
             </Button>
           </div>
-          <div className="gridColumn3" />
+          <div className={styles.gridActionButton} />
         </div>
       )}
     </div>

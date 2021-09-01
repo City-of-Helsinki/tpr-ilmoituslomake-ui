@@ -58,8 +58,8 @@ const TranslationSection = ({
 
     return (
       <>
-        {selectedHeaderText && <h4 className="gridColumn1 translation">{selectedHeaderText}</h4>}
-        {translatedHeaderText && <h4 className="gridColumn2 translation">{translatedHeaderText}</h4>}
+        {selectedHeaderText && <h4 className={`${styles.gridSelected} translation`}>{selectedHeaderText}</h4>}
+        {translatedHeaderText && <h4 className={`${styles.gridTranslated} translation`}>{translatedHeaderText}</h4>}
 
         {cloneElement(TranslationComponent, {
           id: `${id}_Selected`,

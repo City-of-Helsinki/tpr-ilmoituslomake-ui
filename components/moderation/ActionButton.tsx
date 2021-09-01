@@ -19,7 +19,7 @@ const ActionButton = ({ className, fieldName, moderationStatus, taskStatus, acti
   return (
     <div className={`${styles.action} ${className}`}>
       {moderationStatus === ModerationStatus.Edited && !hidden && (
-        <div>
+        <div className={styles.buttonRow}>
           <Button
             className={taskStatus !== TaskStatus.Closed ? styles.approveSecondary : ""}
             variant="secondary"
@@ -43,26 +43,30 @@ const ActionButton = ({ className, fieldName, moderationStatus, taskStatus, acti
         </div>
       )}
       {moderationStatus === ModerationStatus.Approved && !hidden && (
-        <Button
-          className={styles.approve}
-          iconLeft={<IconCheck aria-hidden />}
-          variant="success"
-          onClick={() => actionCallback(fieldName, ModerationStatus.Edited)}
-          disabled={taskStatus === TaskStatus.Closed}
-        >
-          {i18n.t("moderation.button.approved")}
-        </Button>
+        <div className={styles.buttonRow}>
+          <Button
+            className={styles.approve}
+            iconLeft={<IconCheck aria-hidden />}
+            variant="success"
+            onClick={() => actionCallback(fieldName, ModerationStatus.Edited)}
+            disabled={taskStatus === TaskStatus.Closed}
+          >
+            {i18n.t("moderation.button.approved")}
+          </Button>
+        </div>
       )}
       {moderationStatus === ModerationStatus.Rejected && !hidden && (
-        <Button
-          className={styles.reject}
-          iconLeft={<IconCross aria-hidden />}
-          variant="danger"
-          onClick={() => actionCallback(fieldName, ModerationStatus.Edited)}
-          disabled={taskStatus === TaskStatus.Closed}
-        >
-          {i18n.t("moderation.button.rejected")}
-        </Button>
+        <div className={styles.buttonRow}>
+          <Button
+            className={styles.reject}
+            iconLeft={<IconCross aria-hidden />}
+            variant="danger"
+            onClick={() => actionCallback(fieldName, ModerationStatus.Edited)}
+            disabled={taskStatus === TaskStatus.Closed}
+          >
+            {i18n.t("moderation.button.rejected")}
+          </Button>
+        </div>
       )}
     </div>
   );

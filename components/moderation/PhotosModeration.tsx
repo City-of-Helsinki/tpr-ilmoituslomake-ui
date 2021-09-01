@@ -162,7 +162,7 @@ const PhotosModeration = (): ReactElement => {
               pageStatus === ModerationStatus.Edited) && (
               <div className="gridLayoutContainer moderation">
                 {(taskType === TaskType.NewPlace || taskType === TaskType.PlaceChange) && (
-                  <div className="gridColumn1">
+                  <div className={styles.gridSelected}>
                     {!modifiedImage && (
                       <HdsNotification size="small" type="alert">
                         {i18n.t(`moderation.photos.removed`)}
@@ -178,8 +178,8 @@ const PhotosModeration = (): ReactElement => {
                     taskType === TaskType.AddTip ||
                     taskType === TaskType.ModeratorChange ||
                     taskType === TaskType.ModeratorAdd
-                      ? "gridColumn2"
-                      : "gridColumn1"
+                      ? styles.gridModified
+                      : styles.gridSelected
                   }
                 >
                   {isNewImage && sourceTypeModified === PhotoSourceType.Device && (
@@ -196,7 +196,7 @@ const PhotosModeration = (): ReactElement => {
                     </Button>
                   )}
                 </div>
-                <div className="gridColumn3" />
+                <div className={styles.gridActionButton} />
               </div>
             )}
 
@@ -298,7 +298,7 @@ const PhotosModeration = (): ReactElement => {
         pageStatus === ModerationStatus.Edited) &&
         taskStatus !== TaskStatus.Closed && (
           <div className={`gridLayoutContainer moderation ${styles.addNewContainer}`}>
-            <div className="gridColumn1">
+            <div className={styles.gridSelected}>
               <Button
                 variant="secondary"
                 className={styles.gridButton}

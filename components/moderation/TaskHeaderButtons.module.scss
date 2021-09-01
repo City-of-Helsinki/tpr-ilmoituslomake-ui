@@ -1,19 +1,20 @@
 @import "~hds-design-tokens/lib/all.scss";
 
 .taskHeaderButtons {
-  button {
-    margin-left: $spacing-s;
-
-    &.returnButton {
-      margin-left: 0;
-    }
-  }
-
   .buttonRow {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: flex-end;
     margin-bottom: $spacing-xs;
+
+    .flexButton {
+      margin-left: $spacing-s;
+      margin-bottom: $spacing-s;
+    }
+
+    .returnButton {
+      margin-left: 0;
+    }
   }
 }
