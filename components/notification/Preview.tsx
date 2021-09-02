@@ -15,9 +15,10 @@ interface PreviewProps {
   className?: string;
   titleKey?: string;
   includeNotifier?: boolean;
+  isPlaceInfo?: boolean;
 }
 
-const Preview = ({ className, titleKey, includeNotifier }: PreviewProps): ReactElement => {
+const Preview = ({ className, titleKey, includeNotifier, isPlaceInfo }: PreviewProps): ReactElement => {
   const i18n = useI18n();
   const router = useRouter();
 
@@ -50,16 +51,20 @@ const Preview = ({ className, titleKey, includeNotifier }: PreviewProps): ReactE
 
   return (
     <div className={`gridLayoutContainer ${styles.preview} ${className}`}>
-      {titleKey && <h3 className={styles.title}>{i18n.t(titleKey)}</h3>}
+      {titleKey && isPlaceInfo && <h2 className={styles.title}>{i18n.t(titleKey)}</h2>}
+      {titleKey && !isPlaceInfo && <h3 className={styles.title}>{i18n.t(titleKey)}</h3>}
       {!titleKey && <div />}
 
-      <h4 className={`${styles.gridHeading} ${styles.gridHeader}`}>{i18n.t("notification.preview.heading")}</h4>
-      <h4 className={`${styles.gridPlaceInfo} ${styles.gridHeader}`}>{i18n.t("notification.preview.placeInfo")}</h4>
+      {isPlaceInfo && <h3 className={`${styles.gridHeading} ${styles.gridHeader}`}>{i18n.t("notification.preview.heading")}</h3>}
+      {isPlaceInfo && <h3 className={`${styles.gridPlaceInfo} ${styles.gridHeader}`}>{i18n.t("notification.preview.placeInfo")}</h3>}
+      {!isPlaceInfo && <h4 className={`${styles.gridHeading} ${styles.gridHeader}`}>{i18n.t("notification.preview.heading")}</h4>}
+      {!isPlaceInfo && <h4 className={`${styles.gridPlaceInfo} ${styles.gridHeader}`}>{i18n.t("notification.preview.placeInfo")}</h4>}
       <div className={styles.headerLine}>
         <hr />
       </div>
 
-      <h4 className={`${styles.gridHeading} ${styles.gridSubHeader}`}>{i18n.t("notification.main.basic")}</h4>
+      {isPlaceInfo && <h3 className={`${styles.gridHeading} ${styles.gridSubHeader}`}>{i18n.t("notification.main.basic")}</h3>}
+      {!isPlaceInfo && <h4 className={`${styles.gridHeading} ${styles.gridSubHeader}`}>{i18n.t("notification.main.basic")}</h4>}
       <div className={`${styles.gridPlaceInfo} ${styles.gridSubHeader}`} />
       <div className={`${styles.gridHeading} ${styles.gridContent}`}>{i18n.t("notification.description.placeName.label")}</div>
       <div className={`${styles.gridPlaceInfo} ${styles.gridContent}`}>
@@ -117,7 +122,8 @@ const Preview = ({ className, titleKey, includeNotifier }: PreviewProps): ReactE
         </>
       )}
 
-      <h4 className={`${styles.gridHeading} ${styles.gridSubHeader}`}>{i18n.t("notification.main.contact")}</h4>
+      {isPlaceInfo && <h3 className={`${styles.gridHeading} ${styles.gridSubHeader}`}>{i18n.t("notification.main.contact")}</h3>}
+      {!isPlaceInfo && <h4 className={`${styles.gridHeading} ${styles.gridSubHeader}`}>{i18n.t("notification.main.contact")}</h4>}
       <div className={`${styles.gridPlaceInfo} ${styles.gridSubHeader}`} />
       <div className={`${styles.gridHeading} ${styles.gridContent}`}>{i18n.t("notification.location.title")}</div>
       <div className={`${styles.gridPlaceInfo} ${styles.gridContent}`}>
@@ -156,7 +162,8 @@ const Preview = ({ className, titleKey, includeNotifier }: PreviewProps): ReactE
 
       {photos.length > 0 && (
         <>
-          <h4 className={`${styles.gridHeading} ${styles.gridSubHeader}`}>{i18n.t("notification.main.photos")}</h4>
+          {isPlaceInfo && <h3 className={`${styles.gridHeading} ${styles.gridSubHeader}`}>{i18n.t("notification.main.photos")}</h3>}
+          {!isPlaceInfo && <h4 className={`${styles.gridHeading} ${styles.gridSubHeader}`}>{i18n.t("notification.main.photos")}</h4>}
           <div className={`${styles.gridPlaceInfo} ${styles.gridSubHeader}`} />
           {photos.map(({ altText, permission, source, preview }, index) => {
             const key = `photo_${index}`;
@@ -199,6 +206,7 @@ Preview.defaultProps = {
   className: undefined,
   titleKey: undefined,
   includeNotifier: false,
+  isPlaceInfo: false,
 };
 
 export default Preview;

@@ -36,6 +36,7 @@
 
   .gridHeader {
     padding: $spacing-xs;
+    margin: 0;
 
     @include media(xs, s) {
       display: none;
@@ -52,6 +53,7 @@
 
   .gridSubHeader {
     padding: $spacing-xs;
+    margin: 0;
   }
 
   .gridContent {

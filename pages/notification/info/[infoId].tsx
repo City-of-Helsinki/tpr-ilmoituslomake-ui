@@ -40,7 +40,7 @@ const Info = (): ReactElement => {
           {!currentUser?.authenticated && <div className={styles.noticeLoggedOut}>{i18n.t("notification.placeSearch.noticeLoggedOut")}</div>}
 
           <InfoFooter />
-          <Preview titleKey="notification.preview.placeInfo" />
+          <Preview titleKey="notification.preview.placeInfo" isPlaceInfo />
           <InfoFooter />
         </main>
       )}
