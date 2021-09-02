@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useI18n } from "next-localization";
-import { Button, Checkbox, IconPen } from "hds-react";
+import { Button, Checkbox, Link as HdsLink } from "hds-react";
 import moment from "moment";
 import { ModerationTranslationAction } from "../../../state/actions/moderationTranslationTypes";
 import { setModerationTranslationPlaceResults, setModerationTranslationSelectedPlaces } from "../../../state/actions/moderationTranslation";
@@ -136,9 +136,9 @@ const PlaceResults = (): ReactElement => {
                       />
 
                       <Link href={`/moderation/place/${targetId}`}>
-                        <Button variant="supplementary" size="small" iconLeft={<IconPen aria-hidden />}>
+                        <HdsLink href="#" size="M" disableVisitedStyles>
                           {`${getDisplayName(router.locale || defaultLocale, name)}${targetId ? ` (${targetId})` : ""}`}
-                        </Button>
+                        </HdsLink>
                       </Link>
                     </div>
                   </div>

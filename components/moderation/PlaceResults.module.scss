@@ -55,6 +55,10 @@
 
       @include media(xs, s) {
         padding-top: 0;
+
+        &.gridColumn1 {
+          padding-top: $spacing-xs;
+        }
       }
 
       &:nth-child(8n + 1),

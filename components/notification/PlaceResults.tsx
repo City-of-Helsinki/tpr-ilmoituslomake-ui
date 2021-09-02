@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useI18n } from "next-localization";
-import { Button, IconAngleRight, IconLocation, IconStarFill } from "hds-react";
+import { Button, IconLocation, IconStarFill, Link as HdsLink } from "hds-react";
 import moment from "moment";
 import { NotificationAction } from "../../state/actions/notificationTypes";
 import { setNotificationPlaceResults } from "../../state/actions/notification";
@@ -111,11 +111,13 @@ const PlaceResults = (): ReactElement => {
               return (
                 <Fragment key={`placeresult_${id}`}>
                   <div className={`${styles.gridContent} ${styles.firstColumn} ${styles.gridButton}`}>
-                    <Link href={`/notification/info/${id}`}>
-                      <Button variant="supplementary" size="small" iconRight={<IconAngleRight aria-hidden />}>
-                        {getDisplayName(router.locale || defaultLocale, name)}
-                      </Button>
-                    </Link>
+                    <div className={styles.nameContainer}>
+                      <Link href={`/notification/info/${id}`}>
+                        <HdsLink href="#" size="M" disableVisitedStyles>
+                          {getDisplayName(router.locale || defaultLocale, name)}
+                        </HdsLink>
+                      </Link>
+                    </div>
                   </div>
                   <div className={`${styles.gridContent} ${styles.middleColumn} ${showOwnPlaces ? styles.ownPlaces : ""}`}>
                     <div className={styles.addressContainer}>

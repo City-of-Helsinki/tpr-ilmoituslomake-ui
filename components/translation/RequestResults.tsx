@@ -2,7 +2,7 @@ import React, { Dispatch, ReactElement, SetStateAction, Fragment, useCallback, u
 import { useSelector, useDispatch } from "react-redux";
 import dynamic from "next/dynamic";
 import { useI18n } from "next-localization";
-import { Button, IconPen } from "hds-react";
+import { Link as HdsLink } from "hds-react";
 import { LinearProgress } from "@material-ui/core";
 import { TranslationAction } from "../../state/actions/translationTypes";
 import { setTranslationTaskSearch } from "../../state/actions/translation";
@@ -164,14 +164,9 @@ const RequestResults = ({ showStatus, showResults, setShowStatus, setShowResults
                 <Fragment key={`requestresult_${requestId}`}>
                   <div className={`${styles.gridColumn1} ${styles.gridContent}`}>
                     <div className={styles.flexItem}>
-                      <Button
-                        variant="supplementary"
-                        size="small"
-                        iconLeft={<IconPen aria-hidden />}
-                        onClick={() => updateSearchRequestOption(formattedRequest)}
-                      >
+                      <HdsLink href="#" size="M" disableVisitedStyles onClick={() => updateSearchRequestOption(formattedRequest)}>
                         {formattedRequest}
-                      </Button>
+                      </HdsLink>
                     </div>
                   </div>
                   <div className={`${styles.gridColumn2} ${styles.gridContent}`}>

@@ -2,7 +2,7 @@ import React, { ReactElement, Fragment, useEffect, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useI18n } from "next-localization";
-import { Button, IconPen } from "hds-react";
+import { Button, Link as HdsLink } from "hds-react";
 import moment from "moment";
 import { DATETIME_FORMAT, TaskType } from "../../types/constants";
 import { ModerationTodoResult } from "../../types/general";
@@ -78,9 +78,9 @@ const NewTasks = (): ReactElement => {
                 <div className={`${styles.gridColumn1} ${styles.gridContent}`}>
                   <div className={styles.flexItem}>
                     <Link href={`/moderation/task/${id}`}>
-                      <Button variant="supplementary" size="small" iconLeft={<IconPen aria-hidden />}>
+                      <HdsLink href="#" size="M" disableVisitedStyles>
                         {`${getDisplayName(router.locale || defaultLocale, name, user_place_name)}${targetId ? ` (${targetId})` : ""}`}
-                      </Button>
+                      </HdsLink>
                     </Link>
                   </div>
                 </div>

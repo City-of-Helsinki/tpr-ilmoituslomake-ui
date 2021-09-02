@@ -4,7 +4,7 @@ import dynamic from "next/dynamic";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useI18n } from "next-localization";
-import { Button, Checkbox, IconPen } from "hds-react";
+import { Checkbox, Link as HdsLink } from "hds-react";
 import { ModerationTranslationAction } from "../../../state/actions/moderationTranslationTypes";
 import { setModerationTranslationSelectedTasks } from "../../../state/actions/moderationTranslation";
 import { RootState } from "../../../state/reducers";
@@ -150,11 +150,11 @@ const TaskResults = ({ showStatus, showResults, setShowResults }: TaskResultsPro
                       />
 
                       <Link href={`/moderation/translation/task/${taskId}`}>
-                        <Button variant="supplementary" size="small" iconLeft={<IconPen aria-hidden />}>
+                        <HdsLink href="#" size="M" disableVisitedStyles>
                           {`${getDisplayName(router.locale || defaultLocale, name, undefined, i18n.t("moderation.translation.taskResults.empty"))}${
                             targetId ? ` (${targetId})` : ""
                           }`}
-                        </Button>
+                        </HdsLink>
                       </Link>
                     </div>
                   </div>

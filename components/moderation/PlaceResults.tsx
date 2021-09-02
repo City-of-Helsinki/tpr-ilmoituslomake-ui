@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useI18n } from "next-localization";
-import { Button, IconPen } from "hds-react";
+import { Button, Link as HdsLink } from "hds-react";
 import moment from "moment";
 import { ModerationAction } from "../../state/actions/moderationTypes";
 import { setModerationPlaceResults } from "../../state/actions/moderation";
@@ -98,9 +98,9 @@ const PlaceResults = (): ReactElement => {
                   <div className={`${styles.gridColumn1} ${styles.gridContent}`}>
                     <div className={styles.flexItem}>
                       <Link href={`/moderation/place/${targetId}`}>
-                        <Button variant="supplementary" size="small" iconLeft={<IconPen aria-hidden />}>
+                        <HdsLink href="#" size="M" disableVisitedStyles>
                           {`${getDisplayName(router.locale || defaultLocale, name)}${targetId ? ` (${targetId})` : ""}`}
-                        </Button>
+                        </HdsLink>
                       </Link>
                     </div>
                   </div>

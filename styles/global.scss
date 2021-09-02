@@ -112,6 +112,10 @@ textarea {
   height: auto !important;
 }
 
+input[type="checkbox"] {
+  background-color: $color-white;
+}
+
 .disabledTextColor input[disabled],
 .disabledTextColor textarea[disabled],
 .disabledTextColor input[type="checkbox"][disabled] + label {

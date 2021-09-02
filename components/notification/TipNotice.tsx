@@ -2,7 +2,7 @@ import React, { ReactElement } from "react";
 import { useSelector } from "react-redux";
 import Link from "next/link";
 import { useI18n } from "next-localization";
-import { Button, IconAngleRight } from "hds-react";
+import { Link as HdsLink } from "hds-react";
 import { RootState } from "../../state/reducers";
 import styles from "./TipNotice.module.scss";
 
@@ -20,11 +20,13 @@ const TipNotice = ({ selectedPlaceName }: TipNoticeProps): ReactElement => {
     <div className={styles.tipNotice}>
       <div className={styles.heading}>{i18n.t("notification.tip.loginNotice.title")}</div>
       <div className={styles.notice}>{i18n.t("notification.tip.loginNotice.notice")}</div>
-      <Link href={`/notification/${target}`}>
-        <Button variant="supplementary" size="small" iconRight={<IconAngleRight aria-hidden />}>
-          {selectedPlaceName}
-        </Button>
-      </Link>
+      <div className={styles.link}>
+        <Link href={`/notification/${target}`}>
+          <HdsLink href="#" size="M" disableVisitedStyles>
+            {selectedPlaceName}
+          </HdsLink>
+        </Link>
+      </div>
     </div>
   );
 };

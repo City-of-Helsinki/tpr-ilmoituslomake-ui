@@ -92,6 +92,12 @@
         margin: 0px $spacing-2-xs;
       }
 
+      .nameContainer {
+        display: flex;
+        flex-direction: row;
+        margin: $spacing-xs;
+      }
+
       .addressContainer {
         display: flex;
         flex-direction: row;
