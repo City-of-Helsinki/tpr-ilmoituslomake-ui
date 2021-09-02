@@ -12,6 +12,7 @@ import i18nLoader from "../../utils/i18n";
 import { checkUser, getOriginServerSide } from "../../utils/serverside";
 import Layout from "../../components/common/Layout";
 import Header from "../../components/common/Header";
+import TipHeader from "../../components/notification/TipHeader";
 import NotificationNotice from "../../components/common/NotificationNotice";
 import TipPlace from "../../components/notification/TipPlace";
 import TipDetails from "../../components/notification/TipDetails";
@@ -43,10 +44,8 @@ const Tip = (): ReactElement => {
         <title>{i18n.t("notification.title.tip")}</title>
       </Head>
       <Header />
-      <div className={styles.header}>
-        <h1 ref={ref}>{target > 0 ? i18n.t("notification.tip.title") : i18n.t("notification.tip.titleNew")}</h1>
-      </div>
       <main id="content" className={`narrowSection ${styles.content}`}>
+        <TipHeader headerRef={ref} />
         <NotificationNotice messageKey="notification.mandatory" />
         {!pageValid && <ValidationSummary prefix="notification" />}
         <div className={`formSection ${styles.tipInfo}`}>
