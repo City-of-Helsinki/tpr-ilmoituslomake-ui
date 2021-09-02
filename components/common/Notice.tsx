@@ -17,6 +17,7 @@ const Notice = ({ className, icon, titleKey, messageKey, button, focusOnTitle }:
 
   useEffect(() => {
     if (focusOnTitle && ref.current) {
+      window.scrollTo(0, 0);
       ref.current.scrollIntoView();
       ref.current.focus();
     }

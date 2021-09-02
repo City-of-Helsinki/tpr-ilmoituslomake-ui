@@ -13,6 +13,7 @@ const ValidationSummary = ({ prefix }: ValidationSummaryProps): ReactElement => 
 
   useEffect(() => {
     if (ref.current) {
+      window.scrollTo(0, 0);
       ref.current.scrollIntoView();
       ref.current.focus();
     }

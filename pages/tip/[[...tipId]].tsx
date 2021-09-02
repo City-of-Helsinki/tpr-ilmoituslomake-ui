@@ -34,6 +34,7 @@ const Tip = (): ReactElement => {
 
   useEffect(() => {
     if (ref.current) {
+      window.scrollTo(0, 0);
       ref.current.scrollIntoView();
     }
   }, [pageValid]);
