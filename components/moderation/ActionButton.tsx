@@ -5,6 +5,7 @@ import { ModerationStatus, TaskStatus } from "../../types/constants";
 import styles from "./ActionButton.module.scss";
 
 interface ActionButtonProps {
+  id?: string;
   className?: string;
   fieldName: string;
   moderationStatus: ModerationStatus;
@@ -13,11 +14,11 @@ interface ActionButtonProps {
   hidden?: boolean;
 }
 
-const ActionButton = ({ className, fieldName, moderationStatus, taskStatus, actionCallback, hidden }: ActionButtonProps): ReactElement => {
+const ActionButton = ({ id, className, fieldName, moderationStatus, taskStatus, actionCallback, hidden }: ActionButtonProps): ReactElement => {
   const i18n = useI18n();
 
   return (
-    <div className={`${styles.action} ${className}`}>
+    <div id={id} className={`${styles.action} ${className}`}>
       {moderationStatus === ModerationStatus.Edited && !hidden && (
         <div className={styles.buttonRow}>
           <Button
@@ -73,6 +74,7 @@ const ActionButton = ({ className, fieldName, moderationStatus, taskStatus, acti
 };
 
 ActionButton.defaultProps = {
+  id: undefined,
   className: "",
   hidden: false,
 };

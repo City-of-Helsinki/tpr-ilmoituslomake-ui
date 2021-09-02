@@ -2,6 +2,7 @@ import React, { Dispatch, ReactElement, useCallback, useEffect, useState } from 
 import { useSelector, useDispatch } from "react-redux";
 import dynamic from "next/dynamic";
 import { useI18n } from "next-localization";
+import { Button, IconPlaybackNext } from "hds-react";
 import { ModerationAction } from "../../state/actions/moderationTypes";
 import { ModerationStatusAction } from "../../state/actions/moderationStatusTypes";
 import { setModerationLocation } from "../../state/actions/moderation";
@@ -115,6 +116,10 @@ const MapModeration = ({ setMapsReady }: MapModerationProps): ReactElement => {
   }, [taskType, map1Ready, map2Ready, setMapsReady, initialLocationStatus, setInitialLocationStatus, updateLocationStatus]);
 
   if (taskType === TaskType.RemoveTip || taskType === TaskType.ModeratorRemove || taskType === TaskType.PlaceInfo) {
+    const skipMap = () => {
+      window.location.href = "#contact";
+    };
+
     return (
       <div className="formSection">
         <div className="gridLayoutContainer moderation">
@@ -124,6 +129,18 @@ const MapModeration = ({ setMapsReady }: MapModerationProps): ReactElement => {
           {locationStatus === ModerationStatus.Edited && (
             <h4 className={`${styles.gridSelected} moderation`}>{`${i18n.t("moderation.map.title")}${i18n.t("moderation.task.modified")}`}</h4>
           )}
+
+          <div className={styles.gridSelected}>
+            <Button
+              variant="supplementary"
+              size="small"
+              className="visibleOnFocusOnly"
+              iconRight={<IconPlaybackNext aria-hidden />}
+              onClick={skipMap}
+            >
+              {i18n.t("moderation.map.skipMap")}
+            </Button>
+          </div>
 
           <MapWrapper
             className={`${styles.gridSelected} ${styles.map}`}
@@ -147,11 +164,27 @@ const MapModeration = ({ setMapsReady }: MapModerationProps): ReactElement => {
     taskType === TaskType.ModeratorChange ||
     taskType === TaskType.ModeratorAdd
   ) {
+    const skipMap = () => {
+      window.location.href = "#mapaction";
+    };
+
     return (
       <div className="formSection">
         <div className="gridLayoutContainer moderation">
           <h4 className={`${styles.gridSelected} moderation`}>{`${i18n.t("moderation.map.title")}${i18n.t("moderation.task.selected")}`}</h4>
           <h4 className={`${styles.gridModified} moderation`}>{`${i18n.t("moderation.map.title")}${i18n.t("moderation.task.modified")}`}</h4>
+
+          <div className={styles.gridSelected}>
+            <Button
+              variant="supplementary"
+              size="small"
+              className="visibleOnFocusOnly"
+              iconRight={<IconPlaybackNext aria-hidden />}
+              onClick={skipMap}
+            >
+              {i18n.t("moderation.map.skipMap")}
+            </Button>
+          </div>
 
           <MapWrapper
             className={`${styles.gridSelected} ${styles.map}`}
@@ -183,6 +216,7 @@ const MapModeration = ({ setMapsReady }: MapModerationProps): ReactElement => {
             />
           </ModifyButton>
           <ActionButton
+            id="mapaction"
             className={styles.gridActionButton}
             fieldName="location"
             moderationStatus={locationStatus}

@@ -36,7 +36,7 @@ const ContactModeration = (): ReactElement => {
   };
 
   return (
-    <div className="formSection">
+    <div id="contact" className="formSection">
       <div className="gridLayoutContainer moderation">
         <ModerationSection
           id="phone"

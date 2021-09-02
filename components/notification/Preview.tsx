@@ -3,6 +3,7 @@ import { useSelector } from "react-redux";
 import dynamic from "next/dynamic";
 import { useRouter } from "next/router";
 import { useI18n } from "next-localization";
+import { Button, IconPlaybackNext } from "hds-react";
 import { RootState } from "../../state/reducers";
 import { NotifierType, PhotoPermission, LANGUAGE_OPTIONS, MAP_INITIAL_CENTER, MAP_INITIAL_ZOOM } from "../../types/constants";
 import { defaultLocale } from "../../utils/i18n";
@@ -42,6 +43,10 @@ const Preview = ({ className, titleKey, includeNotifier }: PreviewProps): ReactE
 
   const initialCenter = MAP_INITIAL_CENTER;
   const initialZoom = MAP_INITIAL_ZOOM;
+
+  const skipMap = () => {
+    window.location.href = "#contact";
+  };
 
   return (
     <div className={`gridLayoutContainer ${styles.preview} ${className}`}>
@@ -122,6 +127,9 @@ const Preview = ({ className, titleKey, includeNotifier }: PreviewProps): ReactE
       </div>
       <div className={`${styles.gridHeading} ${styles.gridContent}`}>{i18n.t("notification.map.title")}</div>
       <div className={`${styles.gridPlaceInfo} ${styles.gridContent}`}>
+        <Button variant="supplementary" size="small" className="visibleOnFocusOnly" iconRight={<IconPlaybackNext aria-hidden />} onClick={skipMap}>
+          {i18n.t("notification.map.skipMap")}
+        </Button>
         <MapWrapper
           className={styles.map}
           initialCenter={initialCenter as [number, number]}
@@ -131,7 +139,9 @@ const Preview = ({ className, titleKey, includeNotifier }: PreviewProps): ReactE
         />
       </div>
 
-      <div className={`${styles.gridHeading} ${styles.gridContent}`}>{i18n.t("notification.contact.phone.label")}</div>
+      <div className={`${styles.gridHeading} ${styles.gridContent}`} id="contact">
+        {i18n.t("notification.contact.phone.label")}
+      </div>
       <div className={`${styles.gridPlaceInfo} ${styles.gridContent}`}>{phone}</div>
       <div className={`${styles.gridHeading} ${styles.gridContent}`}>{i18n.t("notification.contact.email.label")}</div>
       <div className={`${styles.gridPlaceInfo} ${styles.gridContent}`}>{email}</div>
