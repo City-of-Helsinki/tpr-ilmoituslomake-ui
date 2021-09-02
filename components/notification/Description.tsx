@@ -1,7 +1,6 @@
 import React, { Dispatch, ChangeEvent, ReactElement } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import dynamic from "next/dynamic";
-import { useRouter } from "next/router";
 import { useI18n } from "next-localization";
 import { TextInput, TextArea } from "hds-react";
 import { NotificationAction } from "../../state/actions/notificationTypes";
@@ -19,7 +18,6 @@ const Description = (): ReactElement => {
   const i18n = useI18n();
   const dispatch = useDispatch<Dispatch<NotificationAction>>();
   const dispatchValidation = useDispatch<Dispatch<NotificationValidationAction>>();
-  const router = useRouter();
 
   // Fetch values from redux state
   const notification = useSelector((state: RootState) => state.notification.notification);
@@ -94,8 +92,8 @@ const Description = (): ReactElement => {
               onBlur={validateName}
               invalid={!nameValid[option].valid}
               errorText={!nameValid[option].valid ? i18n.t(nameValid[option].message as string).replace("$fieldName", label) : ""}
-              required={router.locale === option}
-              aria-required={router.locale === option}
+              required
+              aria-required
             />
           ) : null;
         })}
@@ -123,8 +121,8 @@ const Description = (): ReactElement => {
               tooltipText={i18n.t("notification.description.shortDescription.tooltipText")}
               invalid={!shortDescValid[option].valid}
               errorText={!shortDescValid[option].valid ? i18n.t(shortDescValid[option].message as string).replace("$fieldName", label) : ""}
-              required={router.locale === option}
-              aria-required={router.locale === option}
+              required
+              aria-required
             />
           ) : null;
         })}
@@ -152,8 +150,8 @@ const Description = (): ReactElement => {
               tooltipText={i18n.t("notification.description.longDescription.tooltipText")}
               invalid={!longDescValid[option].valid}
               errorText={!longDescValid[option].valid ? i18n.t(longDescValid[option].message as string).replace("$fieldName", label) : ""}
-              required={router.locale === option}
-              aria-required={router.locale === option}
+              required
+              aria-required
             />
           ) : null;
         })}
