@@ -89,13 +89,22 @@ const NotificationHeader = ({ headerRef }: NotificationHeaderProps): ReactElemen
             </h1>
             <Stepper classes={{ root: styles.stepper }} activeStep={currentPage - 1} alternativeLabel>
               <Step>
-                <StepLabel>{i18n.t("notification.page.basic")}</StepLabel>
+                <StepLabel>
+                  {i18n.t("notification.page.basic")}
+                  {currentPage > 1 && <span className="screenReaderOnly"> {i18n.t("notification.page.completed")}</span>}
+                </StepLabel>
               </Step>
               <Step>
-                <StepLabel>{i18n.t("notification.page.contact")}</StepLabel>
+                <StepLabel>
+                  {i18n.t("notification.page.contact")}
+                  {currentPage > 2 && <span className="screenReaderOnly"> {i18n.t("notification.page.completed")}</span>}
+                </StepLabel>
               </Step>
               <Step>
-                <StepLabel>{i18n.t("notification.page.photos")}</StepLabel>
+                <StepLabel>
+                  {i18n.t("notification.page.photos")}
+                  {currentPage > 3 && <span className="screenReaderOnly"> {i18n.t("notification.page.completed")}</span>}
+                </StepLabel>
               </Step>
               <Step>
                 <StepLabel>{i18n.t("notification.page.send")}</StepLabel>

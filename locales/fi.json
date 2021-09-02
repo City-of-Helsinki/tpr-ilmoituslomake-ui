@@ -71,7 +71,8 @@
       "contact": "Yhteystiedot",
       "photos": "Kuvat",
       "send": "Lähetä",
-      "info": "Tiedot"
+      "info": "Tiedot",
+      "completed": "Suoritettu"
     },
     "main": {
       "basic": "Kohteen perustiedot",

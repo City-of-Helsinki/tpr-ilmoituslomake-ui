@@ -71,7 +71,8 @@
       "contact": "Contact",
       "photos": "Photos",
       "send": "Send",
-      "info": "Information"
+      "info": "Information",
+      "completed": "Completed"
     },
     "main": {
       "basic": "Basic information",

@@ -71,7 +71,8 @@
       "contact": "Kontaktuppgifter",
       "photos": "Foton",
       "send": "Sänd",
-      "info": "Information"
+      "info": "Information",
+      "completed": "Avslutad"
     },
     "main": {
       "basic": "Basuppgifter om stället",
