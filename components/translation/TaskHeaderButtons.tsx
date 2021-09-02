@@ -18,6 +18,7 @@ import styles from "./TaskHeaderButtons.module.scss";
 interface TaskHeaderButtonsProps {
   prefix: string;
   backHref: string;
+  isModeration: boolean;
   saveTranslation: (
     currentUser: User | undefined,
     translatedTaskId: number,
@@ -30,7 +31,7 @@ interface TaskHeaderButtonsProps {
   ) => void;
 }
 
-const TaskHeaderButtons = ({ prefix, backHref, saveTranslation }: TaskHeaderButtonsProps): ReactElement => {
+const TaskHeaderButtons = ({ prefix, backHref, isModeration, saveTranslation }: TaskHeaderButtonsProps): ReactElement => {
   const i18n = useI18n();
   const dispatchValidation = useDispatch<Dispatch<TranslationAction>>();
   const router = useRouter();
@@ -46,8 +47,17 @@ const TaskHeaderButtons = ({ prefix, backHref, saveTranslation }: TaskHeaderButt
   } = translationExtra;
 
   const [toast, setToast] = useState<Toast>();
+  const [confirmSend, setConfirmSend] = useState(false);
   const [confirmSave, setConfirmSave] = useState(false);
   const [confirmSaveDraft, setConfirmSaveDraft] = useState(false);
+
+  const openSendConfirmation = () => {
+    setConfirmSend(true);
+  };
+
+  const closeSendConfirmation = () => {
+    setConfirmSend(false);
+  };
 
   const openSaveConfirmation = () => {
     setConfirmSave(true);
@@ -66,6 +76,7 @@ const TaskHeaderButtons = ({ prefix, backHref, saveTranslation }: TaskHeaderButt
   };
 
   const saveTask = (draft: boolean) => {
+    closeSendConfirmation();
     closeSaveConfirmation();
     closeSaveDraftConfirmation();
 
@@ -95,21 +106,42 @@ const TaskHeaderButtons = ({ prefix, backHref, saveTranslation }: TaskHeaderButt
               {i18n.t(`${prefix}.button.saveDraft`)}
             </Button>
           </div>
-          <div className={`${styles.flexButton} ${styles.sendButton}`}>
-            <Button iconRight={<IconArrowRight aria-hidden />} onClick={openSaveConfirmation} disabled={taskStatus === TaskStatus.Closed}>
-              {i18n.t(`${prefix}.button.sendTranslation`)}
-            </Button>
-          </div>
+          {!isModeration && (
+            <div className={`${styles.flexButton} ${styles.sendButton}`}>
+              <Button iconRight={<IconArrowRight aria-hidden />} onClick={openSendConfirmation} disabled={taskStatus === TaskStatus.Closed}>
+                {i18n.t(`${prefix}.button.sendTranslation`)}
+              </Button>
+            </div>
+          )}
+          {isModeration && (
+            <div className={`${styles.flexButton} ${styles.saveButton}`}>
+              <Button iconRight={<IconArrowRight aria-hidden />} onClick={openSaveConfirmation} disabled={taskStatus === TaskStatus.Closed}>
+                {i18n.t(`${prefix}.button.saveTranslation`)}
+              </Button>
+            </div>
+          )}
         </div>
+      )}
+
+      {confirmSend && (
+        <ModalConfirmation
+          open={confirmSend}
+          titleKey={`${prefix}.button.sendTranslation`}
+          messageKey={`${prefix}.confirmation.sendTranslation`}
+          cancelKey={`${prefix}.button.back`}
+          confirmKey={`${prefix}.button.send`}
+          closeCallback={closeSendConfirmation}
+          confirmCallback={() => saveTask(false)}
+        />
       )}
 
       {confirmSave && (
         <ModalConfirmation
           open={confirmSave}
-          titleKey={`${prefix}.button.sendTranslation`}
-          messageKey={`${prefix}.confirmation.sendTranslation`}
+          titleKey={`${prefix}.button.saveTranslation`}
+          messageKey={`${prefix}.confirmation.saveTranslation`}
           cancelKey={`${prefix}.button.back`}
-          confirmKey={`${prefix}.button.send`}
+          confirmKey={`${prefix}.button.save`}
           closeCallback={closeSaveConfirmation}
           confirmCallback={() => saveTask(false)}
         />

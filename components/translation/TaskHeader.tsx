@@ -19,6 +19,7 @@ interface TaskHeaderProps {
   prefix: string;
   buttonsPrefix?: string;
   backHref: string;
+  isModeration: boolean;
   saveTranslation: (
     currentUser: User | undefined,
     translatedTaskId: number,
@@ -31,7 +32,7 @@ interface TaskHeaderProps {
   ) => void;
 }
 
-const TaskHeader = ({ prefix, buttonsPrefix, backHref, saveTranslation }: TaskHeaderProps): ReactElement => {
+const TaskHeader = ({ prefix, buttonsPrefix, backHref, isModeration, saveTranslation }: TaskHeaderProps): ReactElement => {
   const i18n = useI18n();
   const router = useRouter();
 
@@ -61,7 +62,7 @@ const TaskHeader = ({ prefix, buttonsPrefix, backHref, saveTranslation }: TaskHe
 
       <div className={styles.validationSummary}>{!pageValid && <ValidationSummary prefix={buttonsPrefix ?? prefix} />}</div>
 
-      <TaskHeaderButtons prefix={buttonsPrefix ?? prefix} backHref={backHref} saveTranslation={saveTranslation} />
+      <TaskHeaderButtons prefix={buttonsPrefix ?? prefix} backHref={backHref} isModeration={isModeration} saveTranslation={saveTranslation} />
 
       <div className={styles.upperRow}>
         <div>

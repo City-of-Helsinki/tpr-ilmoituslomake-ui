@@ -618,7 +618,7 @@
       "requestSelectedTranslation": "Pyydä käännös valituille",
       "returnToRequests": "Palaa pyyntöihin",
       "saveDraft": "Tallenna luonnos",
-      "sendTranslation": "Lähetä käännös",
+      "saveTranslation": "Tallenna käännös",
       "done": "Valmis"
     },
     "message": {
@@ -666,7 +666,7 @@
       "cancelTranslationRequest": "Oletko varma, että haluat peruuttaa käännöspyynnön?",
       "cancelTranslationRequests": "Oletko varma, että haluat peruuttaa valitut käännöspyynnöt?",
       "saveDraft": "Oletko varma, että haluat tallentaa?",
-      "sendTranslation": "Oletko varma, että haluat lähettää käännöksen?"
+      "saveTranslation": "Oletko varma, että haluat tallentaa käännöksen?"
     },
     "contact": {
       "title": "Muut yhteystiedot",

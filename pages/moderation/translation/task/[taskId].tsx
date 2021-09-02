@@ -64,6 +64,7 @@ const ModerationTranslationTaskDetail = (): ReactElement => {
               prefix="moderation.translation"
               buttonsPrefix="moderation"
               backHref="/moderation/translation"
+              isModeration
               saveTranslation={saveModerationTranslation}
             />
           </div>
@@ -96,7 +97,7 @@ const ModerationTranslationTaskDetail = (): ReactElement => {
             );
           })}
 
-          <TaskHeaderButtons prefix="moderation" backHref="/moderation/translation" saveTranslation={saveModerationTranslation} />
+          <TaskHeaderButtons prefix="moderation" backHref="/moderation/translation" isModeration saveTranslation={saveModerationTranslation} />
         </main>
       )}
     </Layout>

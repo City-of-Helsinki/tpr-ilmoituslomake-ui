@@ -60,7 +60,7 @@ const TranslationTask = (): ReactElement => {
       {translatedTaskId > 0 && (
         <main id="content">
           <div ref={ref}>
-            <TaskHeader prefix="translation" backHref="/translation/request" saveTranslation={saveTranslation} />
+            <TaskHeader prefix="translation" backHref="/translation/request" isModeration={false} saveTranslation={saveTranslation} />
           </div>
           <h2 className="translation">{i18n.t("translation.task.title")}</h2>
 
@@ -91,7 +91,7 @@ const TranslationTask = (): ReactElement => {
             );
           })}
 
-          <TaskHeaderButtons prefix="translation" backHref="/translation/request" saveTranslation={saveTranslation} />
+          <TaskHeaderButtons prefix="translation" backHref="/translation/request" isModeration={false} saveTranslation={saveTranslation} />
         </main>
       )}
     </Layout>
