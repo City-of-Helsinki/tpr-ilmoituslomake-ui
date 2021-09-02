@@ -52,7 +52,7 @@ const NotificationDetail = (): ReactElement => {
   return (
     <Layout>
       <Head>
-        <title>{i18n.t("notification.title")}</title>
+        <title>{i18n.t("notification.title.form")}</title>
       </Head>
       {currentPage < SENT_INFO_PAGE && <NotificationHeader headerRef={ref} />}
       {currentPage === SENT_INFO_PAGE && <Header />}

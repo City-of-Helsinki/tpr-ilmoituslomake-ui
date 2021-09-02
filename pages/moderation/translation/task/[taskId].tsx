@@ -53,7 +53,7 @@ const ModerationTranslationTaskDetail = (): ReactElement => {
   return (
     <Layout>
       <Head>
-        <title>{i18n.t("moderation.title")}</title>
+        <title>{i18n.t("moderation.title.translationTask")}</title>
       </Head>
       <ModerationHeader currentPage={4} />
       {translatedTaskId > 0 && (

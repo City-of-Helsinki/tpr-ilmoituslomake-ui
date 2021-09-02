@@ -99,7 +99,7 @@ const ModerationTaskDetail = (): ReactElement => {
   return (
     <Layout>
       <Head>
-        <title>{i18n.t("moderation.title")}</title>
+        <title>{i18n.t("moderation.title.taskInfo")}</title>
       </Head>
       <ModerationHeader currentPage={3} />
       {modifiedTaskId > 0 && (

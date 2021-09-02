@@ -20,7 +20,7 @@ const ModerationFront = (): ReactElement => {
   return (
     <Layout>
       <Head>
-        <title>{i18n.t("moderation.title")}</title>
+        <title>{i18n.t("moderation.title.front")}</title>
       </Head>
       <ModerationHeader currentPage={1} />
       <main id="content">

@@ -32,7 +32,14 @@
     "todo": "TODO - TEXT HERE"
   },
   "notification": {
-    "title": "Stadsplattform",
+    "title": {
+      "index": "Stadsplattform - Hem",
+      "notauthorized": "Stadsplattform - Inte tillåtet",
+      "search": "Stadsplattform - Sök",
+      "form": "Stadsplattform - Avisering",
+      "info": "Stadsplattform - Information",
+      "tip": "Stadsplattform - Tips"
+    },
     "headerNew": "Lägg till ett nytt ställe",
     "headerModify": "Redigera",
     "navigationHeader": "Process",
@@ -375,7 +382,10 @@
     }
   },
   "translation": {
-    "title": "Translations",
+    "title": {
+      "request": "Translation requests",
+      "task": "Translation task"
+    },
     "button": {
       "search": "Search",
       "showMore": "Show more",
@@ -537,7 +547,17 @@
     }
   },
   "moderation": {
-    "title": "Moderointi",
+    "title": {
+      "front": "Moderointi - Etusivu",
+      "place": "Moderointi - Kohteet",
+      "placeInfo": "Moderointi - Kohde",
+      "task": "Moderointi - Tehtävät",
+      "taskInfo": "Moderointi - Tehtävä",
+      "translation": "Moderointi - Käännökset",
+      "translationRequest": "Moderointi - Käännöspyyntö",
+      "translationTask": "Moderointi - Käännöstehtävä",
+      "organisation": "Moderointi - Organisaatiot"
+    },
     "mandatory": "Pakolliset tiedot on merkitty tähdellä *",
     "page": {
       "front": "Etusivu",

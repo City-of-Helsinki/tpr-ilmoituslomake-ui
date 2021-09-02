@@ -37,7 +37,7 @@ const ModerationPlaceDetail = (): ReactElement => {
   return (
     <Layout>
       <Head>
-        <title>{i18n.t("moderation.title")}</title>
+        <title>{i18n.t("moderation.title.placeInfo")}</title>
       </Head>
       <ModerationHeader currentPage={2} />
       {selectedTaskId > 0 && (

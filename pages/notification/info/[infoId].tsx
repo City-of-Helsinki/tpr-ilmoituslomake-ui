@@ -30,7 +30,7 @@ const Info = (): ReactElement => {
   return (
     <Layout>
       <Head>
-        <title>{i18n.t("notification.title")}</title>
+        <title>{i18n.t("notification.title.info")}</title>
       </Head>
       <Header />
       {notificationId > 0 && (

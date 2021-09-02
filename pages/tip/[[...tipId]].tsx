@@ -40,7 +40,7 @@ const Tip = (): ReactElement => {
   return (
     <Layout>
       <Head>
-        <title>{i18n.t("notification.title")}</title>
+        <title>{i18n.t("notification.title.tip")}</title>
       </Head>
       <Header />
       <div className={styles.header}>

@@ -67,7 +67,7 @@ const ModerationTranslationRequestDetail = (): ReactElement => {
   return (
     <Layout>
       <Head>
-        <title>{i18n.t("moderation.title")}</title>
+        <title>{i18n.t("moderation.title.translationRequest")}</title>
       </Head>
       <ModerationHeader currentPage={4} />
       <div>

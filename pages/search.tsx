@@ -19,7 +19,7 @@ const NotificationSearch = (): ReactElement => {
   return (
     <Layout>
       <Head>
-        <title>{i18n.t("notification.title")}</title>
+        <title>{i18n.t("notification.title.search")}</title>
       </Head>
       <Header />
       <main id="content">

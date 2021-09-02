@@ -53,7 +53,7 @@ const TranslationTask = (): ReactElement => {
   return (
     <Layout>
       <Head>
-        <title>{i18n.t("translation.title")}</title>
+        <title>{i18n.t("translation.title.task")}</title>
       </Head>
       <Header includeLanguageSelector={false} homePagePath="/translation/request" />
       {translatedTaskId > 0 && (

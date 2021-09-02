@@ -17,7 +17,7 @@ const ModerationPlace = (): ReactElement => {
   return (
     <Layout>
       <Head>
-        <title>{i18n.t("moderation.title")}</title>
+        <title>{i18n.t("moderation.title.place")}</title>
       </Head>
       <ModerationHeader currentPage={2} />
       <main id="content">

@@ -42,7 +42,7 @@ const NotificationSent = (): ReactElement => {
   return (
     <Layout>
       <Head>
-        <title>{i18n.t("notification.title")}</title>
+        <title>{i18n.t("notification.title.form")}</title>
       </Head>
       <Header />
       {notificationId > 0 && (
