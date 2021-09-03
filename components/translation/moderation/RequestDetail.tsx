@@ -1,12 +1,12 @@
 import React, { Dispatch, ChangeEvent, ReactElement, useMemo } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useI18n } from "next-localization";
-import { RadioButton, SelectionGroup, TextArea, TextInput } from "hds-react";
+import { Select, TextArea, TextInput } from "hds-react";
 import { ModerationTranslationAction } from "../../../state/actions/moderationTranslationTypes";
 import { setModerationTranslationRequest } from "../../../state/actions/moderationTranslation";
 import { RootState } from "../../../state/reducers";
 import { TaskStatus, TRANSLATION_OPTIONS } from "../../../types/constants";
-import { ModerationTranslationRequestResultTask } from "../../../types/general";
+import { ModerationTranslationRequestResultTask, OptionType } from "../../../types/general";
 import { isModerationTranslationRequestFieldValid } from "../../../utils/moderationValidation";
 import styles from "./RequestDetail.module.scss";
 
@@ -33,13 +33,19 @@ const RequestDetail = ({ requestStatus }: RequestDetailProps): ReactElement => {
     message: messageValid,
   } = requestValidation;
 
+  const languageOptions = TRANSLATION_OPTIONS.map((option) => {
+    return { id: `${option.from}-${option.to}`, label: `${option.from.toUpperCase()}-${option.to.toUpperCase()}` };
+  });
+
+  const convertValueWithId = (value: string | undefined): OptionType | undefined => languageOptions.find((l) => l.id === value);
+
   const updateRequestTranslatorDetail = (evt: ChangeEvent<HTMLInputElement>) => {
     dispatch(setModerationTranslationRequest({ ...requestDetail, translator: { ...requestDetail.translator, [evt.target.name]: evt.target.value } }));
   };
 
-  const updateRequestLanguage = (evt: ChangeEvent<HTMLInputElement>) => {
-    const languageParts = evt.target.value.split("-");
-    dispatch(setModerationTranslationRequest({ ...requestDetail, [evt.target.name]: { from: languageParts[0], to: languageParts[1] } }));
+  const updateRequestLanguage = (selected: OptionType) => {
+    const languageParts = (selected.id as string).split("-");
+    dispatch(setModerationTranslationRequest({ ...requestDetail, language: { from: languageParts[0], to: languageParts[1] } }));
   };
 
   const updateRequestMessage = (evt: ChangeEvent<HTMLTextAreaElement>) => {
@@ -104,12 +110,17 @@ const RequestDetail = ({ requestStatus }: RequestDetailProps): ReactElement => {
           disabled={taskStatus === TaskStatus.Closed}
         />
 
-        <SelectionGroup
+        <Select
           id="translationLanguage"
-          direction="horizontal"
           className="formInput"
+          options={languageOptions}
+          value={convertValueWithId(translationLanguage)}
+          onChange={updateRequestLanguage}
           label={i18n.t("moderation.translation.request.translationLanguage.label")}
-          errorText={
+          selectedItemRemoveButtonAriaLabel={i18n.t("moderation.button.remove")}
+          clearButtonAriaLabel={i18n.t("moderation.button.clearAllSelections")}
+          invalid={!languageValid.valid}
+          error={
             !languageValid.valid
               ? i18n.t(languageValid.message as string).replace("$fieldName", i18n.t("moderation.translation.request.translationLanguage.label"))
               : ""
@@ -117,19 +128,7 @@ const RequestDetail = ({ requestStatus }: RequestDetailProps): ReactElement => {
           required
           aria-required
           disabled={taskStatus === TaskStatus.Closed}
-        >
-          {TRANSLATION_OPTIONS.map((option) => (
-            <RadioButton
-              id={`translationLanguage_${option.from}_${option.to}`}
-              key={`translationLanguage_${option.from}_${option.to}`}
-              label={`${option.from.toUpperCase()}-${option.to.toUpperCase()}`}
-              name="language"
-              value={`${option.from}-${option.to}`}
-              checked={translationLanguage === `${option.from}-${option.to}`}
-              onChange={updateRequestLanguage}
-            />
-          ))}
-        </SelectionGroup>
+        />
 
         <TextArea
           id="message"
