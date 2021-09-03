@@ -62,7 +62,7 @@ const NotificationDetail = (): ReactElement => {
         <main id="content" className={`narrowSection ${styles.content}`}>
           <h2 tabIndex={-1}>{`${currentPage} ${i18n.t("notification.main.basic")}`}</h2>
           <NotificationNotice messageKey="notification.mandatory" />
-          {!pageValid && <ValidationSummary prefix="notification" />}
+          {!pageValid && <ValidationSummary prefix="notification" pageValid={pageValid} />}
           <Description />
           <Tags />
           <Notifier />
@@ -73,7 +73,7 @@ const NotificationDetail = (): ReactElement => {
         <main id="content" className={`narrowSection ${styles.content}`}>
           <h2 tabIndex={-1}>{`${currentPage} ${i18n.t("notification.main.contact")}`}</h2>
           <NotificationNotice messageKey="notification.mandatory" />
-          {!pageValid && <ValidationSummary prefix="notification" />}
+          {!pageValid && <ValidationSummary prefix="notification" pageValid={pageValid} />}
           <Location />
           <Map />
           <Contact />
@@ -85,7 +85,7 @@ const NotificationDetail = (): ReactElement => {
         <main id="content" className={`narrowSection ${styles.content}`}>
           <h2 tabIndex={-1}>{`${currentPage} ${i18n.t("notification.main.photos")}`}</h2>
           <NotificationNotice messageKey="notification.photos.notice" />
-          {!pageValid && <ValidationSummary prefix="notification" />}
+          {!pageValid && <ValidationSummary prefix="notification" pageValid={pageValid} />}
           <Photos />
           <NotificationFooterNav />
         </main>

@@ -48,7 +48,7 @@ const Tip = (): ReactElement => {
       <main id="content" className={`narrowSection ${styles.content}`}>
         <TipHeader headerRef={ref} />
         <NotificationNotice messageKey="notification.mandatory" />
-        {!pageValid && <ValidationSummary prefix="notification" />}
+        {!pageValid && <ValidationSummary prefix="notification" pageValid={pageValid} />}
         <div className={`formSection ${styles.tipInfo}`}>
           {target > 0 && <DynamicTipType />}
           <TipPlace />

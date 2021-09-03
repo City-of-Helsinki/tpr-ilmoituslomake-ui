@@ -80,7 +80,7 @@ const ModerationTranslationRequestDetail = (): ReactElement => {
       </div>
       <main id="content">
         <NotificationNotice messageKey="moderation.mandatory" />
-        {!pageValid && <ValidationSummary prefix="moderation" />}
+        {!pageValid && <ValidationSummary prefix="moderation" pageValid={pageValid} />}
 
         <div>
           {requestId > 0 && <RequestStatus taskCounts={taskCounts} requestStatus={requestStatus} />}

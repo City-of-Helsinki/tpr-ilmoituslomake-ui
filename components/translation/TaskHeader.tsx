@@ -60,7 +60,7 @@ const TaskHeader = ({ prefix, buttonsPrefix, backHref, isModeration, saveTransla
         {selectedTaskId ? ` (${selectedTaskId})` : ""}
       </h1>
 
-      <div className={styles.validationSummary}>{!pageValid && <ValidationSummary prefix={buttonsPrefix ?? prefix} />}</div>
+      <div className={styles.validationSummary}>{!pageValid && <ValidationSummary prefix={buttonsPrefix ?? prefix} pageValid={pageValid} />}</div>
 
       <TaskHeaderButtons prefix={buttonsPrefix ?? prefix} backHref={backHref} isModeration={isModeration} saveTranslation={saveTranslation} />
 

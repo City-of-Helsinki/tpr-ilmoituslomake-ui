@@ -5,9 +5,10 @@ import styles from "./ValidationSummary.module.scss";
 
 interface ValidationSummaryProps {
   prefix: string;
+  pageValid: boolean;
 }
 
-const ValidationSummary = ({ prefix }: ValidationSummaryProps): ReactElement => {
+const ValidationSummary = ({ prefix, pageValid }: ValidationSummaryProps): ReactElement => {
   const i18n = useI18n();
   const ref = useRef<HTMLDivElement>(null);
 
@@ -17,7 +18,7 @@ const ValidationSummary = ({ prefix }: ValidationSummaryProps): ReactElement => 
       ref.current.scrollIntoView();
       ref.current.focus();
     }
-  });
+  }, [pageValid]);
 
   return (
     <div className={styles.validationSummary} ref={ref} tabIndex={-1}>
