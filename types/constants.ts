@@ -71,7 +71,12 @@ export enum Toast {
 export const LANGUAGE_OPTIONS = ["fi", "sv", "en"];
 export const TRANSLATION_OPTIONS = [
   { from: "en", to: "zh" },
-  // { from: "en", to: "ru" },
+  { from: "en", to: "ru" },
+  { from: "en", to: "de" },
+  { from: "en", to: "ja" },
+  { from: "en", to: "fr" },
+  { from: "en", to: "es" },
+  { from: "en", to: "it" },
 ];
 export const MAX_PAGE = 4;
 export const SENT_INFO_PAGE = 5;
