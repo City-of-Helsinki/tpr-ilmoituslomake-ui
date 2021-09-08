@@ -388,6 +388,7 @@ export interface ModerationTodoSchema {
   id: number;
   target: {
     id: number;
+    published: boolean;
     data: NotificationSchema;
     user: User;
     created_at: string;

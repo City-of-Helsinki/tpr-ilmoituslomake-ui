@@ -186,6 +186,7 @@ export const getServerSideProps: GetServerSideProps = async ({ req, resolvedUrl,
         // taskResult.notification_target.data is the new or modified notification with proxied image urls (for new images only)
         const {
           id: targetId,
+          published,
           data: targetData,
           user: lastUpdatedUser,
           updated_at: lastUpdatedTime,
@@ -213,7 +214,7 @@ export const getServerSideProps: GetServerSideProps = async ({ req, resolvedUrl,
           modifiedTask,
           moderationExtra: {
             ...initialReduxState.moderation.moderationExtra,
-            published: false,
+            published: published ?? false,
             created_at: taskResult.created_at,
             updated_at: taskResult.updated_at,
             taskType: getTaskType(taskResult.category, taskResult.item_type),
