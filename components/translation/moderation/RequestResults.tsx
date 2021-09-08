@@ -279,8 +279,8 @@ const RequestResults = ({ showStatus, showResults, setShowResults }: RequestResu
           open={confirmCancel}
           titleKey="moderation.button.cancelTranslationRequests"
           messageKey="moderation.confirmation.cancelTranslationRequests"
-          cancelKey="moderation.button.back"
-          confirmKey="moderation.button.cancel2"
+          cancelKey="moderation.button.no"
+          confirmKey="moderation.button.yes"
           closeCallback={closeCancelConfirmation}
           confirmCallback={() => cancelRequest()}
         />

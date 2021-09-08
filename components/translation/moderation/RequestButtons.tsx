@@ -100,8 +100,8 @@ const RequestButtons = ({ requestStatus }: RequestButtonsProps): ReactElement =>
           open={confirmSave}
           titleKey="moderation.button.sendTranslationRequest"
           messageKey="moderation.confirmation.sendTranslationRequest"
-          cancelKey="moderation.button.back"
-          confirmKey="moderation.button.send"
+          cancelKey="moderation.button.no"
+          confirmKey="moderation.button.yes"
           closeCallback={closeSaveConfirmation}
           confirmCallback={() => saveRequest()}
         />
@@ -112,8 +112,8 @@ const RequestButtons = ({ requestStatus }: RequestButtonsProps): ReactElement =>
           open={confirmCancel}
           titleKey="moderation.button.cancelTranslationRequest"
           messageKey="moderation.confirmation.cancelTranslationRequest"
-          cancelKey="moderation.button.back"
-          confirmKey="moderation.button.cancel2"
+          cancelKey="moderation.button.no"
+          confirmKey="moderation.button.yes"
           closeCallback={closeCancelConfirmation}
           confirmCallback={() => cancelRequest()}
         />

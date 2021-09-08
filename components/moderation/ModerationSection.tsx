@@ -19,7 +19,7 @@ interface ModerationSectionProps {
   tooltipButtonLabel?: string;
   tooltipLabel?: string;
   tooltipText?: string;
-  modifyButtonLabel: string;
+  modifyButtonLabel?: string;
   modifyButtonHidden?: boolean;
   actionButtonHidden?: boolean;
   bypassModifiedFieldCheck?: boolean;
@@ -177,6 +177,7 @@ ModerationSection.defaultProps = {
   tooltipButtonLabel: undefined,
   tooltipLabel: undefined,
   tooltipText: undefined,
+  modifyButtonLabel: undefined,
   modifyButtonHidden: false,
   actionButtonHidden: false,
   bypassModifiedFieldCheck: false,

@@ -128,8 +128,8 @@ const TaskHeaderButtons = ({ prefix, backHref, isModeration, saveTranslation }: 
           open={confirmSend}
           titleKey={`${prefix}.button.sendTranslation`}
           messageKey={`${prefix}.confirmation.sendTranslation`}
-          cancelKey={`${prefix}.button.back`}
-          confirmKey={`${prefix}.button.send`}
+          cancelKey={`${prefix}.button.no`}
+          confirmKey={`${prefix}.button.yes`}
           closeCallback={closeSendConfirmation}
           confirmCallback={() => saveTask(false)}
         />
@@ -140,8 +140,8 @@ const TaskHeaderButtons = ({ prefix, backHref, isModeration, saveTranslation }: 
           open={confirmSave}
           titleKey={`${prefix}.button.saveTranslation`}
           messageKey={`${prefix}.confirmation.saveTranslation`}
-          cancelKey={`${prefix}.button.back`}
-          confirmKey={`${prefix}.button.save`}
+          cancelKey={`${prefix}.button.no`}
+          confirmKey={`${prefix}.button.yes`}
           closeCallback={closeSaveConfirmation}
           confirmCallback={() => saveTask(false)}
         />
@@ -152,8 +152,8 @@ const TaskHeaderButtons = ({ prefix, backHref, isModeration, saveTranslation }: 
           open={confirmSaveDraft}
           titleKey={`${prefix}.button.saveDraft`}
           messageKey={`${prefix}.confirmation.saveDraft`}
-          cancelKey={`${prefix}.button.back`}
-          confirmKey={`${prefix}.button.save`}
+          cancelKey={`${prefix}.button.no`}
+          confirmKey={`${prefix}.button.yes`}
           closeCallback={closeSaveDraftConfirmation}
           confirmCallback={() => saveTask(true)}
         />

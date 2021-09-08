@@ -6,7 +6,7 @@ import styles from "./ModifyButton.module.scss";
 
 interface ModifyButtonProps {
   className?: string;
-  label: string;
+  label?: string;
   fieldName: string;
   moderationStatus: ModerationStatus;
   taskStatus: TaskStatus;
@@ -35,7 +35,7 @@ const ModifyButton = ({
           variant="secondary"
           onClick={() => modifyCallback(fieldName, ModerationStatus.Edited)}
           disabled={taskStatus === TaskStatus.Closed}
-        >{`${i18n.t("moderation.button.modify")} ${label.toLowerCase()}`}</Button>
+        >{`${i18n.t("moderation.button.modify")} ${label ? label.toLowerCase() : ""}`}</Button>
       )}
       {moderationStatus === ModerationStatus.Edited && children}
       {(moderationStatus === ModerationStatus.Approved || moderationStatus === ModerationStatus.Rejected) && (
@@ -60,6 +60,7 @@ const ModifyButton = ({
 
 ModifyButton.defaultProps = {
   className: "",
+  label: undefined,
   hidden: false,
 };
 

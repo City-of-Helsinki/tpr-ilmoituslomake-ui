@@ -51,7 +51,7 @@ const LinksModeration = (): ReactElement => {
             selectedHeaderText={index === 0 ? `${i18n.t("moderation.links.website.label")}${i18n.t("moderation.task.selected")}` : undefined}
             modifiedHeaderText={index === 0 ? `${i18n.t("moderation.links.website.label")}${i18n.t("moderation.task.modified")}` : undefined}
             helperText={i18n.t("moderation.links.website.helperText")}
-            modifyButtonLabel={`${i18n.t("moderation.links.website.label")} ${i18n.t(`common.inLanguage.${option}`)}`}
+            modifyButtonLabel={i18n.t(`common.inLanguage.${option}`)}
             changeCallback={updateWebsite}
             statusCallback={updateWebsiteStatus}
             ModerationComponent={

@@ -101,7 +101,7 @@ const LocationModeration = (): ReactElement => {
           taskStatus={taskStatus}
           selectedHeaderText={`${i18n.t("moderation.location.address")} ${i18n.t("common.inLanguage.fi")}${i18n.t("moderation.task.selected")}`}
           modifiedHeaderText={`${i18n.t("moderation.location.address")} ${i18n.t("common.inLanguage.fi")}${i18n.t("moderation.task.modified")}`}
-          modifyButtonLabel={`${i18n.t("moderation.location.address")} ${i18n.t("common.inLanguage.fi")}`}
+          modifyButtonLabel={i18n.t("common.inLanguage.fi")}
           changeCallback={(evt: ChangeEvent<HTMLInputElement>) => updateAddress("fi", evt)}
           statusCallback={updateAddressStatus}
           ModerationComponent={
@@ -121,7 +121,7 @@ const LocationModeration = (): ReactElement => {
           moderationStatus={addressFiStatus}
           taskType={taskType}
           taskStatus={taskStatus}
-          modifyButtonLabel={`${i18n.t("moderation.location.address")} ${i18n.t("common.inLanguage.fi")}`}
+          modifyButtonLabel={i18n.t("common.inLanguage.fi")}
           modifyButtonHidden
           actionButtonHidden
           bypassModifiedFieldCheck
@@ -144,7 +144,7 @@ const LocationModeration = (): ReactElement => {
           moderationStatus={addressFiStatus}
           taskType={taskType}
           taskStatus={taskStatus}
-          modifyButtonLabel={`${i18n.t("moderation.location.address")} ${i18n.t("common.inLanguage.fi")}`}
+          modifyButtonLabel={i18n.t("common.inLanguage.fi")}
           modifyButtonHidden
           actionButtonHidden
           bypassModifiedFieldCheck
@@ -167,7 +167,7 @@ const LocationModeration = (): ReactElement => {
           moderationStatus={addressFiStatus}
           taskType={taskType}
           taskStatus={taskStatus}
-          modifyButtonLabel={`${i18n.t("moderation.location.address")} ${i18n.t("common.inLanguage.fi")}`}
+          modifyButtonLabel={i18n.t("common.inLanguage.fi")}
           modifyButtonHidden
           actionButtonHidden
           bypassModifiedFieldCheck
@@ -190,7 +190,7 @@ const LocationModeration = (): ReactElement => {
           moderationStatus={addressFiStatus}
           taskType={taskType}
           taskStatus={taskStatus}
-          modifyButtonLabel={`${i18n.t("moderation.location.address")} ${i18n.t("common.inLanguage.fi")}`}
+          modifyButtonLabel={i18n.t("common.inLanguage.fi")}
           modifyButtonHidden
           actionButtonHidden
           bypassModifiedFieldCheck
@@ -233,7 +233,7 @@ const LocationModeration = (): ReactElement => {
           taskStatus={taskStatus}
           selectedHeaderText={`${i18n.t("moderation.location.address")} ${i18n.t("common.inLanguage.sv")}${i18n.t("moderation.task.selected")}`}
           modifiedHeaderText={`${i18n.t("moderation.location.address")} ${i18n.t("common.inLanguage.sv")}${i18n.t("moderation.task.modified")}`}
-          modifyButtonLabel={`${i18n.t("moderation.location.address")} ${i18n.t("common.inLanguage.sv")}`}
+          modifyButtonLabel={i18n.t("common.inLanguage.sv")}
           changeCallback={(evt: ChangeEvent<HTMLInputElement>) => updateAddress("sv", evt)}
           statusCallback={updateAddressStatus}
           ModerationComponent={
@@ -253,7 +253,7 @@ const LocationModeration = (): ReactElement => {
           moderationStatus={addressSvStatus}
           taskType={taskType}
           taskStatus={taskStatus}
-          modifyButtonLabel={`${i18n.t("moderation.location.address")} ${i18n.t("common.inLanguage.sv")}`}
+          modifyButtonLabel={i18n.t("common.inLanguage.sv")}
           modifyButtonHidden
           actionButtonHidden
           bypassModifiedFieldCheck
@@ -276,7 +276,7 @@ const LocationModeration = (): ReactElement => {
           moderationStatus={addressSvStatus}
           taskType={taskType}
           taskStatus={taskStatus}
-          modifyButtonLabel={`${i18n.t("moderation.location.address")} ${i18n.t("common.inLanguage.sv")}`}
+          modifyButtonLabel={i18n.t("common.inLanguage.sv")}
           modifyButtonHidden
           actionButtonHidden
           bypassModifiedFieldCheck
@@ -299,7 +299,7 @@ const LocationModeration = (): ReactElement => {
           moderationStatus={addressSvStatus}
           taskType={taskType}
           taskStatus={taskStatus}
-          modifyButtonLabel={`${i18n.t("moderation.location.address")} ${i18n.t("common.inLanguage.sv")}`}
+          modifyButtonLabel={i18n.t("common.inLanguage.sv")}
           modifyButtonHidden
           actionButtonHidden
           bypassModifiedFieldCheck
@@ -322,7 +322,7 @@ const LocationModeration = (): ReactElement => {
           moderationStatus={addressSvStatus}
           taskType={taskType}
           taskStatus={taskStatus}
-          modifyButtonLabel={`${i18n.t("moderation.location.address")} ${i18n.t("common.inLanguage.sv")}`}
+          modifyButtonLabel={i18n.t("common.inLanguage.sv")}
           modifyButtonHidden
           actionButtonHidden
           bypassModifiedFieldCheck

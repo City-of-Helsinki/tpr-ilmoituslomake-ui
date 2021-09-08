@@ -461,8 +461,8 @@ const TaskHeaderButtons = ({ isModerated }: TaskHeaderButtonsProps): ReactElemen
           open={confirmApproval}
           titleKey="moderation.button.approveChangeRequest"
           messageKey="moderation.confirmation.approveChangeRequest"
-          cancelKey="moderation.button.back"
-          confirmKey="moderation.button.approve"
+          cancelKey="moderation.button.no"
+          confirmKey="moderation.button.yes"
           closeCallback={closeApprovalConfirmation}
           confirmCallback={approveTask}
         />
@@ -473,8 +473,8 @@ const TaskHeaderButtons = ({ isModerated }: TaskHeaderButtonsProps): ReactElemen
           open={confirmRejection}
           titleKey="moderation.button.rejectChangeRequest"
           messageKey="moderation.confirmation.rejectChangeRequest"
-          cancelKey="moderation.button.back"
-          confirmKey="moderation.button.reject"
+          cancelKey="moderation.button.no"
+          confirmKey="moderation.button.yes"
           closeCallback={closeRejectionConfirmation}
           confirmCallback={rejectTask}
         />
@@ -485,8 +485,8 @@ const TaskHeaderButtons = ({ isModerated }: TaskHeaderButtonsProps): ReactElemen
           open={confirmSave}
           titleKey="moderation.button.savePlace"
           messageKey="moderation.confirmation.savePlace"
-          cancelKey="moderation.button.back"
-          confirmKey="moderation.button.save"
+          cancelKey="moderation.button.no"
+          confirmKey="moderation.button.yes"
           closeCallback={closeSaveConfirmation}
           confirmCallback={approveTask}
         />
@@ -497,8 +497,8 @@ const TaskHeaderButtons = ({ isModerated }: TaskHeaderButtonsProps): ReactElemen
           open={confirmDeletion}
           titleKey="moderation.button.removePlace"
           messageKey="moderation.confirmation.removePlace"
-          cancelKey="moderation.button.back"
-          confirmKey="moderation.button.remove"
+          cancelKey="moderation.button.no"
+          confirmKey="moderation.button.yes"
           closeCallback={closeDeletionConfirmation}
           confirmCallback={removePlace}
         />
@@ -509,8 +509,8 @@ const TaskHeaderButtons = ({ isModerated }: TaskHeaderButtonsProps): ReactElemen
           open={confirmAddCancellation}
           titleKey="moderation.button.cancelAdd"
           messageKey="moderation.confirmation.cancelAdd"
-          cancelKey="moderation.button.back"
-          confirmKey="moderation.button.cancelAdd"
+          cancelKey="moderation.button.no"
+          confirmKey="moderation.button.yes"
           closeCallback={closeAddCancellationConfirmation}
           confirmCallback={rejectTask}
         />
@@ -521,8 +521,8 @@ const TaskHeaderButtons = ({ isModerated }: TaskHeaderButtonsProps): ReactElemen
           open={confirmChangeCancellation}
           titleKey="moderation.button.cancelChange"
           messageKey="moderation.confirmation.cancelChange"
-          cancelKey="moderation.button.back"
-          confirmKey="moderation.button.cancelChange"
+          cancelKey="moderation.button.no"
+          confirmKey="moderation.button.yes"
           closeCallback={closeChangeCancellationConfirmation}
           confirmCallback={rejectTask}
         />
@@ -533,8 +533,8 @@ const TaskHeaderButtons = ({ isModerated }: TaskHeaderButtonsProps): ReactElemen
           open={confirmDeleteCancellation}
           titleKey="moderation.button.cancelRemove"
           messageKey="moderation.confirmation.cancelRemove"
-          cancelKey="moderation.button.back"
-          confirmKey="moderation.button.cancelRemove"
+          cancelKey="moderation.button.no"
+          confirmKey="moderation.button.yes"
           closeCallback={closeDeleteCancellationConfirmation}
           confirmCallback={rejectTask}
         />

@@ -82,7 +82,7 @@ const DescriptionModeration = (): ReactElement => {
             taskStatus={taskStatus}
             selectedHeaderText={index === 0 ? `${i18n.t("moderation.description.placeName.title")}${i18n.t("moderation.task.selected")}` : undefined}
             modifiedHeaderText={index === 0 ? `${i18n.t("moderation.description.placeName.title")}${i18n.t("moderation.task.modified")}` : undefined}
-            modifyButtonLabel={`${i18n.t("moderation.description.placeName.label")} ${i18n.t(`common.inLanguage.${option}`)}`}
+            modifyButtonLabel={i18n.t(`common.inLanguage.${option}`)}
             changeCallback={updateName}
             statusCallback={updateNameStatus}
             ModerationComponent={
@@ -117,7 +117,7 @@ const DescriptionModeration = (): ReactElement => {
             tooltipButtonLabel={i18n.t("moderation.button.openHelp")}
             tooltipLabel={i18n.t("moderation.description.shortDescription.tooltipLabel")}
             tooltipText={i18n.t("moderation.description.shortDescription.tooltipText")}
-            modifyButtonLabel={`${i18n.t("moderation.description.shortDescription.label")} ${i18n.t(`common.inLanguage.${option}`)}`}
+            modifyButtonLabel={i18n.t(`common.inLanguage.${option}`)}
             changeCallback={updateShortDescription}
             statusCallback={updateShortDescriptionStatus}
             ModerationComponent={
@@ -153,7 +153,7 @@ const DescriptionModeration = (): ReactElement => {
             tooltipButtonLabel={i18n.t("moderation.button.openHelp")}
             tooltipLabel={i18n.t("moderation.description.longDescription.tooltipLabel")}
             tooltipText={i18n.t("moderation.description.longDescription.tooltipText")}
-            modifyButtonLabel={`${i18n.t("moderation.description.longDescription.label")} ${i18n.t(`common.inLanguage.${option}`)}`}
+            modifyButtonLabel={i18n.t(`common.inLanguage.${option}`)}
             changeCallback={updateLongDescription}
             statusCallback={updateLongDescriptionStatus}
             ModerationComponent={

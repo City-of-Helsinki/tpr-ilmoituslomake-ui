@@ -85,7 +85,6 @@ const TagsModeration = (): ReactElement => {
           taskStatus={taskStatus}
           selectedHeaderText={`${i18n.t("moderation.tags.title")}${i18n.t("moderation.task.selected")}`}
           modifiedHeaderText={`${i18n.t("moderation.tags.title")}${i18n.t("moderation.task.modified")}`}
-          modifyButtonLabel={i18n.t("moderation.tags.title")}
           changeCallback={updateTags}
           statusCallback={updateTagStatus}
           ModerationComponent={
@@ -111,7 +110,6 @@ const TagsModeration = (): ReactElement => {
           taskType={taskType}
           taskStatus={taskStatus}
           helperText={i18n.t("moderation.tags.extraKeywords.helperText")}
-          modifyButtonLabel={i18n.t("moderation.tags.extraKeywords.label")}
           changeCallback={updateExtraKeywords}
           statusCallback={updateExtraKeywordsStatus}
           ModerationComponent={<TextInput id="extraKeywordsText" label={i18n.t("moderation.tags.extraKeywords.label")} name="extraKeywordsText" />}
@@ -125,7 +123,6 @@ const TagsModeration = (): ReactElement => {
           moderationStatus={matkoTagsStatus}
           taskType={taskType}
           taskStatus={taskStatus}
-          modifyButtonLabel={i18n.t("moderation.tags.matko")}
           changeCallback={updateMatkoTags}
           statusCallback={updateMatkoTagStatus}
           ModerationComponent={

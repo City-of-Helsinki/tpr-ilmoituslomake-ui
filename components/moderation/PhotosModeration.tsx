@@ -218,7 +218,7 @@ const PhotosModeration = (): ReactElement => {
                     tooltipButtonLabel={i18n.t("moderation.button.openHelp")}
                     tooltipLabel={i18n.t("moderation.photos.altText.tooltipLabel")}
                     tooltipText={i18n.t("moderation.photos.altText.tooltipText")}
-                    modifyButtonLabel={`${i18n.t("moderation.photos.altText.label")} ${i18n.t(`common.inLanguage.${option}`)}`}
+                    modifyButtonLabel={i18n.t(`common.inLanguage.${option}`)}
                     modifyButtonHidden={!modifiedImage}
                     actionButtonHidden={!modifiedImage}
                     bypassModifiedFieldCheck={!modifiedImage}
@@ -246,7 +246,6 @@ const PhotosModeration = (): ReactElement => {
                 moderationStatus={photosStatus[index].permission}
                 taskType={taskType}
                 taskStatus={taskStatus}
-                modifyButtonLabel={i18n.t("moderation.photos.permission.label")}
                 modifyButtonHidden={!modifiedImage}
                 actionButtonHidden={!modifiedImage}
                 bypassModifiedFieldCheck={!modifiedImage}
@@ -275,7 +274,6 @@ const PhotosModeration = (): ReactElement => {
                 tooltipButtonLabel={i18n.t("moderation.button.openHelp")}
                 tooltipLabel={i18n.t("moderation.photos.source.tooltipLabel")}
                 tooltipText={i18n.t("moderation.photos.source.tooltipText")}
-                modifyButtonLabel={i18n.t("moderation.photos.source.label")}
                 modifyButtonHidden={!modifiedImage}
                 actionButtonHidden={!modifiedImage}
                 bypassModifiedFieldCheck={!modifiedImage}

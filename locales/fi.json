@@ -399,7 +399,9 @@
       "openHelp": "Open help",
       "save": "Save",
       "send": "Send",
-      "back": "Back"
+      "back": "Back",
+      "yes": "Yes",
+      "no": "No"
     },
     "message": {
       "notAuthenticated": {
@@ -587,15 +589,17 @@
       "cancel2": "Peruuta",
       "close": "Sulje",
       "back": "Peru",
+      "yes": "Kyllä",
+      "no": "Ei",
       "returnToSearch": "Palaa hakuun",
       "openHelp": "Avaa ohje",
       "showMore": "Näytä lisää",
       "addNewPlace": "Lisää uusi kohde",
       "allPlaces": "Kaikki kohteet",
-      "showAllRequests": "Näytä kaikki tehtävät",
+      "showAllRequests": "Kaikki ilmoitukset",
       "requestTranslation": "Pyydä käännös",
-      "approveChangeRequest": "Hyväksy muutospyyntö",
-      "rejectChangeRequest": "Hylkää muutospyyntö",
+      "approveChangeRequest": "Hyväksy pyyntö",
+      "rejectChangeRequest": "Hylkää pyyntö",
       "cancelAdd": "Peruuta lisäys",
       "cancelChange": "Peruuta muutos",
       "cancelRemove": "Peruuta poisto",
@@ -603,7 +607,7 @@
       "savePlace": "Tallenna kohde",
       "removePlace": "Poista kohde",
       "saveIncomplete": "Tallenna keskeneräisenä",
-      "saveInformation": "Tallenna tiedot",
+      "saveInformation": "Tallenna",
       "clearAllSelections": "Poista kaikki valinnat",
       "save": "Tallenna",
       "send": "Lähetä",
@@ -655,8 +659,8 @@
       "fieldOther": "Tarkista tieto"
     },
     "confirmation": {
-      "approveChangeRequest": "Oletko varma, että haluat tallentaa ja hyväksyä muutospyynnön?",
-      "rejectChangeRequest": "Oletko varma, että haluat hylätä muutospyynnön?",
+      "approveChangeRequest": "Oletko varma, että haluat tallentaa pyynnön?",
+      "rejectChangeRequest": "Oletko varma, että haluat hylätä pyynnön?",
       "savePlace": "Oletko varma, että haluat tallentaa kohteen?",
       "removePlace": "Oletko varma, että haluat poistaa kohteen?",
       "cancelAdd": "Oletko varma, että haluat peruuttaa lisäyksen?",
@@ -736,7 +740,7 @@
       "skipMap": "Ohita kartta"
     },
     "newTasks": {
-      "title": "Uudet moderointitehtävät"
+      "title": "Uudet ilmoitukset"
     },
     "organisationNotice": {
       "title": "Organisaatiohallinta",
@@ -852,12 +856,12 @@
       "notRepresentative": "Ei ole kohteen edustaja",
       "messageFromNotifier": "Viesti ilmoittajalta",
       "moderatorChangeRequest": "Moderoijan muutospyyntö",
-      "moderatorChangeMaker": "Moderoijan muutospyynön tekijä",
+      "moderatorChangeMaker": "Muokkaaja",
       "addPlaceName": "Uuden kohteen nimi",
       "addPlaceTip": "Vinkki"
     },
     "taskSearch": {
-      "title": "Moderointitehtävät",
+      "title": "Ilmoitukset",
       "placeName": {
         "label": "Kohteen nimi"
       },
@@ -883,14 +887,14 @@
       "closed": "Valmis"
     },
     "taskType": {
-      "placeChange": "Muutos kohteeseen",
+      "placeChange": "Muutos",
       "newPlace": "Uusi kohde",
       "changeTip": "Vinkki (muutos)",
       "addTip": "Vinkki (uusi)",
       "removeTip": "Vinkki (poisto)",
-      "moderatorChange": "Moderoijan muutos",
-      "moderatorAdd": "Moderoijan lisäys",
-      "moderatorRemove": "Moderoijan poisto",
+      "moderatorChange": "Muutos (moderoija)",
+      "moderatorAdd": "Uusi kohde (moderoija)",
+      "moderatorRemove": "Poisto (moderoija)",
       "placeInfo": "Kohdetiedot"
     },
     "translationNotice": {

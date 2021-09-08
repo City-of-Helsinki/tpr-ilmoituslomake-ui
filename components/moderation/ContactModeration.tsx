@@ -49,7 +49,6 @@ const ContactModeration = (): ReactElement => {
           selectedHeaderText={`${i18n.t("moderation.contact.title")}${i18n.t("moderation.task.selected")}`}
           modifiedHeaderText={`${i18n.t("moderation.contact.title")}${i18n.t("moderation.task.modified")}`}
           helperText={i18n.t("moderation.contact.phone.helperText")}
-          modifyButtonLabel={i18n.t("moderation.contact.phone.label")}
           changeCallback={updateContact}
           statusCallback={updateContactStatus}
           ModerationComponent={<TextInput id="phone" label={i18n.t("moderation.contact.phone.label")} name="phone" />}
@@ -63,7 +62,6 @@ const ContactModeration = (): ReactElement => {
           moderationStatus={emailStatus}
           taskType={taskType}
           taskStatus={taskStatus}
-          modifyButtonLabel={i18n.t("moderation.contact.email.label")}
           changeCallback={updateContact}
           statusCallback={updateContactStatus}
           ModerationComponent={<TextInput id="email" label={i18n.t("moderation.contact.email.label")} name="email" />}
