@@ -37,7 +37,9 @@ const RequestDetail = ({ requestStatus }: RequestDetailProps): ReactElement => {
     return { id: option.uuid, label: `${option.first_name} ${option.last_name}` };
   });
 
-  const convertValueWithId = (value: string | undefined): OptionType | undefined => languageOptions.find((l) => l.id === value);
+  const convertValueWithLanguageId = (value: string | undefined): OptionType | undefined => languageOptions.find((l) => l.id === value);
+
+  const convertValueWithTranslatorId = (value: string | undefined): OptionType | undefined => translatorOptions.find((l) => l.id === value);
 
   const updateRequestTranslator = (selected: OptionType) => {
     dispatch(setModerationTranslationRequest({ ...requestDetail, translator: selected.id as string }));
@@ -66,7 +68,7 @@ const RequestDetail = ({ requestStatus }: RequestDetailProps): ReactElement => {
           id="translator"
           className="formInput"
           options={translatorOptions}
-          value={convertValueWithId(translator)}
+          value={convertValueWithTranslatorId(translator)}
           onChange={updateRequestTranslator}
           label={i18n.t("moderation.translation.request.translator.label")}
           selectedItemRemoveButtonAriaLabel={i18n.t("moderation.button.remove")}
@@ -86,7 +88,7 @@ const RequestDetail = ({ requestStatus }: RequestDetailProps): ReactElement => {
           id="translationLanguage"
           className="formInput"
           options={languageOptions}
-          value={convertValueWithId(translationLanguage)}
+          value={convertValueWithLanguageId(translationLanguage)}
           onChange={updateRequestLanguage}
           label={i18n.t("moderation.translation.request.translationLanguage.label")}
           selectedItemRemoveButtonAriaLabel={i18n.t("moderation.button.remove")}
