@@ -7,7 +7,7 @@ import moment from "moment";
 import { RootState } from "../../../../state/reducers";
 import { initStore } from "../../../../state/store";
 import { CLEAR_STATE, DATETIME_FORMAT, TaskStatus, TaskType, TRANSLATION_OPTIONS } from "../../../../types/constants";
-import { ModerationPlaceResult, ModerationTranslationRequestResult, ModerationTranslationRequestResultTask } from "../../../../types/general";
+import { ModerationPlaceResult, ModerationTranslationRequestResult, ModerationTranslationRequestResultTask, User } from "../../../../types/general";
 import { INITIAL_NOTIFICATION } from "../../../../types/initial";
 import { getTaskStatus, getTaskType } from "../../../../utils/conversion";
 import i18nLoader from "../../../../utils/i18n";
@@ -205,6 +205,23 @@ export const getServerSideProps: GetServerSideProps = async ({ req, resolvedUrl,
           },
         };
       }
+    }
+  }
+
+  const translatorsResponse = await fetch(`${getOriginServerSide()}/api/moderation/translation/translators/`, {
+    headers: { cookie: req.headers.cookie as string },
+  });
+
+  if (translatorsResponse.ok) {
+    const translatorsResult = await (translatorsResponse.json() as Promise<{ results: User[] }>);
+
+    try {
+      initialReduxState.moderationTranslation = {
+        ...initialReduxState.moderationTranslation,
+        translators: translatorsResult.results,
+      };
+    } catch (err) {
+      console.log("ERROR", err);
     }
   }
 

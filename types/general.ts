@@ -10,6 +10,7 @@ export interface User {
   is_staff: boolean;
   is_translator: boolean;
   email: string;
+  uuid: string;
 }
 
 export interface KeyValueString {
@@ -466,10 +467,13 @@ export interface ModerationTranslationRequestResult {
   }[];
   category: string;
   item_type: string;
+  /*
   translator: {
     name: string;
     email: string;
   };
+  */
+  translator: string;
   moderator: {
     first_name: string;
     last_name: string;
@@ -547,19 +551,21 @@ export interface ModerationTranslationRequest {
     to: string;
   };
   message: string;
+  /*
   translator: {
     name: string;
     email: string;
     [key: string]: unknown;
   };
+  */
+  translator: string;
   taskType: TaskType;
   [key: string]: unknown;
 }
 
 export interface ModerationTranslationRequestValidation {
   tasks: Validation;
+  translator: Validation;
   language: Validation;
   message: Validation;
-  translatorName: Validation;
-  translatorEmail: Validation;
 }

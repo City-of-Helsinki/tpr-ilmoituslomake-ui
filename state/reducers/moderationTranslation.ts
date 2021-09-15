@@ -71,19 +71,22 @@ const initialState: ModerationTranslationState = {
       to: "",
     },
     message: "",
+    /*
     translator: {
       name: "",
       email: "",
     },
+    */
+    translator: "",
     taskType: TaskType.Unknown,
   },
+  translators: [],
   requestPageValid: true,
   requestValidation: {
     tasks: { valid: true },
+    translator: { valid: true },
     language: { valid: true },
     message: { valid: true },
-    translatorName: { valid: true },
-    translatorEmail: { valid: true },
   },
 };
 

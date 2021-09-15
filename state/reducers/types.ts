@@ -90,6 +90,7 @@ export interface ModerationTranslationState {
   placeResults: ModerationPlaceResults;
   selectedPlaces: ModerationTranslationSelectedItems;
   requestDetail: ModerationTranslationRequest;
+  translators: User[];
   requestPageValid: boolean;
   requestValidation: ModerationTranslationRequestValidation;
 }

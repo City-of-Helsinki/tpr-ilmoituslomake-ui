@@ -18,16 +18,6 @@ export const isModerationTranslationRequestFieldValid = (
       result = !valid ? { valid, message: "moderation.message.fieldRequired" } : { valid, message: undefined };
       break;
     }
-    case "name": {
-      const schema = string().required("moderation.message.fieldRequired");
-      result = isValid(schema, requestDetail.translator[translationRequestField] as string);
-      break;
-    }
-    case "email": {
-      const schema = string().required("moderation.message.fieldRequired").email("moderation.message.fieldFormat");
-      result = isValid(schema, requestDetail.translator[translationRequestField] as string);
-      break;
-    }
     case "language": {
       const schema = string().required("moderation.message.fieldRequired");
       result = isValid(schema, requestDetail.language.from) && isValid(schema, requestDetail.language.to);
@@ -50,8 +40,7 @@ export const isModerationTranslationRequestPageValid = (
   // Everything needs to be validated, so make sure lazy evaluation is not used
   const inputValid = [
     isModerationTranslationRequestFieldValid("tasks", "tasks", requestDetail, dispatch),
-    isModerationTranslationRequestFieldValid("name", "translatorName", requestDetail, dispatch),
-    isModerationTranslationRequestFieldValid("email", "translatorEmail", requestDetail, dispatch),
+    isModerationTranslationRequestFieldValid("translator", "translator", requestDetail, dispatch),
     isModerationTranslationRequestFieldValid("language", "language", requestDetail, dispatch),
     isModerationTranslationRequestFieldValid("message", "message", requestDetail, dispatch),
   ];

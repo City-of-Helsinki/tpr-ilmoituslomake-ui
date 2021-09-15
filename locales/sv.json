@@ -990,11 +990,8 @@
         "placesToTranslate": "Käännettävät kohteet",
         "selectPlaces": "Valitse kohteet Käännökset-sivulla",
         "translationDetails": "Käännöstiedot",
-        "translatorName": {
-          "label": "Kääntäjän nimi"
-        },
-        "translatorEmail": {
-          "label": "Kääntäjän sähköpostiosoite"
+        "translator": {
+          "label": "Kääntäjä"
         },
         "translationLanguage": {
           "label": "Käännöskielet"
