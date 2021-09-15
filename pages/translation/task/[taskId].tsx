@@ -151,7 +151,7 @@ export const getServerSideProps: GetServerSideProps = async ({ req, resolvedUrl,
               language: taskResult.language,
               message: taskResult.message,
               translator: {
-                name: taskResult.translator && taskResult.translator.name ? taskResult.translator.name : "",
+                fullName: taskResult.translator ? `${taskResult.translator.first_name} ${taskResult.translator.last_name}`.trim() : "",
                 email: taskResult.translator && taskResult.translator.email ? taskResult.translator.email : "",
               },
               moderator: {

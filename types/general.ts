@@ -179,15 +179,8 @@ export interface TranslationRequestResult {
     to: string;
   };
   tasks: TranslationRequestResultTask[];
-  translator: {
-    name: string;
-    email: string;
-  };
-  moderator: {
-    first_name: string;
-    last_name: string;
-    email: string;
-  };
+  translator: User;
+  moderator: User;
   updated_at: string;
   updated: Date;
 }
@@ -205,15 +198,8 @@ export interface TranslationTodoResult {
   category: string;
   item_type: string;
   status: string;
-  translator: {
-    name: string;
-    email: string;
-  };
-  moderator: {
-    first_name: string;
-    last_name: string;
-    email: string;
-  };
+  translator: User;
+  moderator: User;
   created_at: string;
   updated_at: string;
   created: Date;
@@ -248,15 +234,8 @@ export interface TranslationTodoSchema {
   item_type: string;
   status: string;
   data: TranslationSchema;
-  translator: {
-    name: string;
-    email: string;
-  };
-  moderator: {
-    first_name: string;
-    last_name: string;
-    email: string;
-  };
+  translator: User;
+  moderator: User;
   created_at: string;
   updated_at: string;
   created: Date;
@@ -279,7 +258,7 @@ export interface TranslationExtra {
     };
     message: string;
     translator: {
-      name: string;
+      fullName: string;
       email: string;
     };
     moderator: {
@@ -467,18 +446,8 @@ export interface ModerationTranslationRequestResult {
   }[];
   category: string;
   item_type: string;
-  /*
-  translator: {
-    name: string;
-    email: string;
-  };
-  */
-  translator: string;
-  moderator: {
-    first_name: string;
-    last_name: string;
-    email: string;
-  };
+  translator: User;
+  moderator: User;
   created_at: string;
   updated_at: string;
   created: Date;
@@ -506,15 +475,8 @@ export interface ModerationTranslationTaskResult {
   category: string;
   item_type: string;
   status: string;
-  translator: {
-    name: string;
-    email: string;
-  };
-  moderator: {
-    first_name: string;
-    last_name: string;
-    email: string;
-  };
+  translator: User;
+  moderator: User;
   created_at: string;
   updated_at: string;
   created: Date;
@@ -551,13 +513,6 @@ export interface ModerationTranslationRequest {
     to: string;
   };
   message: string;
-  /*
-  translator: {
-    name: string;
-    email: string;
-    [key: string]: unknown;
-  };
-  */
   translator: string;
   taskType: TaskType;
   [key: string]: unknown;

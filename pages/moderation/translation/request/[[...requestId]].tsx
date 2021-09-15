@@ -117,6 +117,24 @@ export const getServerSideProps: GetServerSideProps = async ({ req, resolvedUrl,
   // Initialise the task type for use by the translation request buttons
   initialReduxState.moderationTranslation.requestDetail.taskType = TaskType.Translation;
 
+  const translatorsResponse = await fetch(`${getOriginServerSide()}/api/moderation/translation/translators/`, {
+    headers: { cookie: req.headers.cookie as string },
+  });
+
+  // Fetch the translator users for use in the request dropdown
+  if (translatorsResponse.ok) {
+    const translatorsResult = await (translatorsResponse.json() as Promise<{ results: User[] }>);
+
+    try {
+      initialReduxState.moderationTranslation = {
+        ...initialReduxState.moderationTranslation,
+        translators: translatorsResult.results,
+      };
+    } catch (err) {
+      console.log("ERROR", err);
+    }
+  }
+
   // Try to fetch the request details for the specified id
   if (params) {
     const { requestId } = params;
@@ -142,7 +160,7 @@ export const getServerSideProps: GetServerSideProps = async ({ req, resolvedUrl,
             tasks: requestTasks,
             language: requestResult.language,
             message: requestResult.message,
-            translator: requestResult.translator,
+            translator: requestResult.translator ? requestResult.translator.uuid : "",
             taskType: getTaskType(requestResult.category, requestResult.item_type),
           },
         };
@@ -197,6 +215,8 @@ export const getServerSideProps: GetServerSideProps = async ({ req, resolvedUrl,
           requestDetail: {
             ...initialReduxState.moderationTranslation.requestDetail,
             tasks: requestTasks,
+            translator:
+              initialReduxState.moderationTranslation.translators.length > 0 ? initialReduxState.moderationTranslation.translators[0].uuid : "",
             language: {
               from: TRANSLATION_OPTIONS[0].from,
               to: TRANSLATION_OPTIONS[0].to,
@@ -205,23 +225,6 @@ export const getServerSideProps: GetServerSideProps = async ({ req, resolvedUrl,
           },
         };
       }
-    }
-  }
-
-  const translatorsResponse = await fetch(`${getOriginServerSide()}/api/moderation/translation/translators/`, {
-    headers: { cookie: req.headers.cookie as string },
-  });
-
-  if (translatorsResponse.ok) {
-    const translatorsResult = await (translatorsResponse.json() as Promise<{ results: User[] }>);
-
-    try {
-      initialReduxState.moderationTranslation = {
-        ...initialReduxState.moderationTranslation,
-        translators: translatorsResult.results,
-      };
-    } catch (err) {
-      console.log("ERROR", err);
     }
   }
 

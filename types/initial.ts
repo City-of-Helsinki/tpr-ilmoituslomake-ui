@@ -167,7 +167,7 @@ export const INITIAL_TRANSLATION_EXTRA: TranslationExtra = {
     },
     message: "",
     translator: {
-      name: "",
+      fullName: "",
       email: "",
     },
     moderator: {

@@ -47,7 +47,7 @@ const TaskHeader = ({ prefix, buttonsPrefix, backHref, isModeration, saveTransla
       formattedRequest,
       language: { from: translateFrom, to: translateTo },
       message,
-      translator: { name: translatorName },
+      translator: { fullName: translatorName },
       moderator: { fullName: moderatorName },
     },
     translationTask: { created_at, taskType, taskStatus },
