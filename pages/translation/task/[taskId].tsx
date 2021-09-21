@@ -135,13 +135,14 @@ export const getServerSideProps: GetServerSideProps = async ({ req, resolvedUrl,
         // taskResult.data is the translated notification
         const { id: targetId, data: targetData } = taskResult.target || { id: 0, data: INITIAL_NOTIFICATION };
         const translatedTask = !taskResult.data || !taskResult.data.name ? INITIAL_TRANSLATION : taskResult.data;
+        const language = taskResult.language ? taskResult.language.to : "";
 
         initialReduxState.translation = {
           ...initialReduxState.translation,
           selectedTaskId: targetId,
           selectedTask: targetData,
           translatedTaskId: taskResult.id,
-          translatedTask,
+          translatedTask: { ...translatedTask, language },
           translationExtra: {
             ...initialReduxState.translation.translationExtra,
             translationRequest: {

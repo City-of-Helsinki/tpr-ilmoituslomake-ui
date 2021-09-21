@@ -479,7 +479,7 @@ export const saveModerationTranslation = async (
   try {
     const valid = isTranslationTaskPageValid("moderation", translatedTask, translationExtra, dispatchValidation);
 
-    if (currentUser?.authenticated && valid) {
+    if (currentUser?.authenticated && (draft || valid)) {
       // Send the Cross Site Request Forgery token, otherwise the backend returns the error "CSRF Failed: CSRF token missing or incorrect."
       const csrftoken = Cookies.get("csrftoken");
 
