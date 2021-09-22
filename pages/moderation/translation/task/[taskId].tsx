@@ -77,7 +77,7 @@ const ModerationTranslationTaskDetail = (): ReactElement => {
             taskStatus={taskStatus}
             isTranslated={isBasicSectionTranslated()}
           >
-            <DescriptionTranslation prefix="moderation" />
+            <DescriptionTranslation prefix="moderation.translation" buttonsPrefix="moderation" />
           </Collapsible>
 
           {photosTranslated.map((translatedImage, index) => {
@@ -92,7 +92,7 @@ const ModerationTranslationTaskDetail = (): ReactElement => {
                 taskStatus={taskStatus}
                 isTranslated={isPhotoSectionTranslated(index)}
               >
-                <PhotosTranslation prefix="moderation" index={index} />
+                <PhotosTranslation prefix="moderation.translation" buttonsPrefix="moderation" index={index} />
               </Collapsible>
             );
           })}

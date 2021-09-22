@@ -11,10 +11,11 @@ import TranslationSection from "./TranslationSection";
 
 interface PhotosTranslationProps {
   prefix: string;
+  buttonsPrefix?: string;
   index: number;
 }
 
-const PhotosTranslation = ({ prefix, index }: PhotosTranslationProps): ReactElement => {
+const PhotosTranslation = ({ prefix, buttonsPrefix, index }: PhotosTranslationProps): ReactElement => {
   const i18n = useI18n();
   const dispatch = useDispatch<Dispatch<TranslationAction>>();
 
@@ -49,7 +50,7 @@ const PhotosTranslation = ({ prefix, index }: PhotosTranslationProps): ReactElem
     dispatch(
       setTranslationPhoto(index, { ...photosTranslated[index], [evt.target.name]: (photosTranslated[index][evt.target.name] as string).trim() })
     );
-    isTranslationTaskPhotoFieldValid(prefix, index, evt.target.name, evt.target.name, translationExtra, dispatch);
+    isTranslationTaskPhotoFieldValid(buttonsPrefix ?? prefix, index, evt.target.name, evt.target.name, translationExtra, dispatch);
   };
 
   return (
@@ -67,7 +68,7 @@ const PhotosTranslation = ({ prefix, index }: PhotosTranslationProps): ReactElem
             taskType={taskType}
             taskStatus={taskStatus}
             helperText={i18n.t(`${prefix}.photos.altText.helperText`)}
-            tooltipButtonLabel={i18n.t(`${prefix}.button.openHelp`)}
+            tooltipButtonLabel={i18n.t(`${buttonsPrefix ?? prefix}.button.openHelp`)}
             tooltipLabel={i18n.t(`${prefix}.photos.altText.tooltipLabel`)}
             tooltipText={i18n.t(`${prefix}.photos.altText.tooltipText`)}
             changeCallback={(evt: ChangeEvent<HTMLTextAreaElement>) => updatePhotoAltText(evt)}
@@ -82,7 +83,7 @@ const PhotosTranslation = ({ prefix, index }: PhotosTranslationProps): ReactElem
             translatedValue={photosTranslated[index] && photosTranslated[index].source}
             taskType={taskType}
             taskStatus={taskStatus}
-            tooltipButtonLabel={i18n.t(`${prefix}.button.openHelp`)}
+            tooltipButtonLabel={i18n.t(`${buttonsPrefix ?? prefix}.button.openHelp`)}
             tooltipLabel={i18n.t(`${prefix}.photos.source.tooltipLabel`)}
             tooltipText={i18n.t(`${prefix}.photos.source.tooltipText`)}
             changeCallback={(evt: ChangeEvent<HTMLInputElement>) => updatePhoto(evt)}
@@ -100,6 +101,10 @@ const PhotosTranslation = ({ prefix, index }: PhotosTranslationProps): ReactElem
       </div>
     </div>
   );
+};
+
+PhotosTranslation.defaultProps = {
+  buttonsPrefix: undefined,
 };
 
 export default PhotosTranslation;

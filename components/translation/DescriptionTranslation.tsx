@@ -10,9 +10,10 @@ import { isTranslationTaskFieldValid } from "../../utils/translationValidation";
 
 interface DescriptionTranslationProps {
   prefix: string;
+  buttonsPrefix?: string;
 }
 
-const DescriptionTranslation = ({ prefix }: DescriptionTranslationProps): ReactElement => {
+const DescriptionTranslation = ({ prefix, buttonsPrefix }: DescriptionTranslationProps): ReactElement => {
   const i18n = useI18n();
   const dispatch = useDispatch<Dispatch<TranslationAction>>();
 
@@ -59,17 +60,17 @@ const DescriptionTranslation = ({ prefix }: DescriptionTranslationProps): ReactE
   // Functions for validating values and storing the results in redux state
   const validateName = (evt: ChangeEvent<HTMLInputElement>) => {
     dispatch(setTranslationName({ [evt.target.name]: (placeNameTranslated[evt.target.name] as string).trim() }));
-    isTranslationTaskFieldValid(prefix, "name", "name", translatedTask, dispatch);
+    isTranslationTaskFieldValid(buttonsPrefix ?? prefix, "name", "name", translatedTask, dispatch);
   };
 
   const validateShortDescription = (evt: ChangeEvent<HTMLTextAreaElement>) => {
     dispatch(setTranslationShortDescription({ [evt.target.name]: (shortDescTranslated[evt.target.name] as string).trim() }));
-    isTranslationTaskFieldValid(prefix, "short", "descriptionShort", translatedTask, dispatch);
+    isTranslationTaskFieldValid(buttonsPrefix ?? prefix, "short", "descriptionShort", translatedTask, dispatch);
   };
 
   const validateLongDescription = (evt: ChangeEvent<HTMLTextAreaElement>) => {
     dispatch(setTranslationLongDescription({ [evt.target.name]: (longDescTranslated[evt.target.name] as string).trim() }));
-    isTranslationTaskFieldValid(prefix, "long", "descriptionLong", translatedTask, dispatch);
+    isTranslationTaskFieldValid(buttonsPrefix ?? prefix, "long", "descriptionLong", translatedTask, dispatch);
   };
 
   return (
@@ -104,7 +105,7 @@ const DescriptionTranslation = ({ prefix }: DescriptionTranslationProps): ReactE
           taskType={taskType}
           taskStatus={taskStatus}
           helperText={i18n.t(`${prefix}.description.shortDescription.helperText`)}
-          tooltipButtonLabel={i18n.t(`${prefix}.button.openHelp`)}
+          tooltipButtonLabel={i18n.t(`${buttonsPrefix ?? prefix}.button.openHelp`)}
           tooltipLabel={i18n.t(`${prefix}.description.shortDescription.tooltipLabel`)}
           tooltipText={i18n.t(`${prefix}.description.shortDescription.tooltipText`)}
           changeCallback={updateShortDescription}
@@ -132,7 +133,7 @@ const DescriptionTranslation = ({ prefix }: DescriptionTranslationProps): ReactE
           taskType={taskType}
           taskStatus={taskStatus}
           helperText={`${i18n.t(`${prefix}.description.longDescription.helperText`)}`}
-          tooltipButtonLabel={i18n.t(`${prefix}.button.openHelp`)}
+          tooltipButtonLabel={i18n.t(`${buttonsPrefix ?? prefix}.button.openHelp`)}
           tooltipLabel={i18n.t(`${prefix}.description.longDescription.tooltipLabel`)}
           tooltipText={i18n.t(`${prefix}.description.longDescription.tooltipText`)}
           changeCallback={updateLongDescription}
@@ -151,6 +152,10 @@ const DescriptionTranslation = ({ prefix }: DescriptionTranslationProps): ReactE
       </div>
     </div>
   );
+};
+
+DescriptionTranslation.defaultProps = {
+  buttonsPrefix: undefined,
 };
 
 export default DescriptionTranslation;

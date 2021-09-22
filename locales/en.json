@@ -521,14 +521,14 @@
       "shortDescription": {
         "title": "Short description",
         "label": "Short description",
-        "helperText": "Note that the text must not be written in ‘we’ format. Length max. 150 characters",
+        "helperText": "Note that the text must not be written in ‘we’ format",
         "tooltipLabel": "Improve findability",
         "tooltipText": "A shorter description makes the location easier to find by a search engine."
       },
       "longDescription": {
         "title": "Detailed description",
         "label": "Detailed description",
-        "helperText": "You can also add information about opening hours here. Note that the text must not be written in ‘we’ format. Length 120 - 4000 characters",
+        "helperText": "You can also add information about opening hours here. Note that the text must not be written in ‘we’ format",
         "tooltipLabel": "More detailed description",
         "tooltipText": "If you prefer, you can include a short description here and complete it later as needed."
       }
@@ -544,7 +544,7 @@
       },
       "altText": {
         "label": "Short description of photo (alt-text)",
-        "helperText": "Write a short description of the photo. Max length 125 characters",
+        "helperText": "Write a short description of the photo",
         "tooltipLabel": "Use of descriptive text",
         "tooltipText": "A description (alt text) is used to describe the information contained in an image to a search engine or to people who, for whatever reason, cannot see the image itself. This could be due to visual impairment, the images having not been uploaded, or the viewer has chosen not to load them.."
       },
@@ -980,6 +980,39 @@
         "request": "Käännöspyyntö",
         "moderator": "Moderoija",
         "messageFromModerator": "Viesti"
+      },
+      "description": {
+        "placeName": {
+          "title": "Nimi",
+          "label": "Kohteen nimi"
+        },
+        "shortDescription": {
+          "title": "Lyhyt kuvaus",
+          "label": "Kohteen lyhyt kuvaus",
+          "helperText": "Huomioi, että teksti ei saa olla me-muodossa",
+          "tooltipLabel": "Paranna löydettävyyttä",
+          "tooltipText": "Lyhyen kuvauksen avulla toimipaikka löytyy paremmin hakukoneella."
+        },
+        "longDescription": {
+          "title": "Pitkä kuvaus",
+          "label": "Kohteen pitkä kuvaus",
+          "helperText": "Lisää tähän myös tietoa aukiolojoista. Huomioi, että teksti ei saa olla me-muodossa",
+          "tooltipLabel": "Laajempi kuvaus",
+          "tooltipText": "Voit halutessasi sisällyttää tähän lyhyen kuvauksen ja täydentää kuvausta tarpeesi mukaan."
+        }
+      },
+      "photos": {
+        "altText": {
+          "label": "Kuvan lyhyt kuvailu (alt-teksti)",
+          "helperText": "Kirjoita tiivis ja mahdollisimman lyhyt kuvailu kuvasta",
+          "tooltipLabel": "Kuvailutekstin käyttö",
+          "tooltipText": "Kuvailun (alt-teksti) avulla kerrotaan kuvan sisältämä tieto hakukoneelle tai niille henkilöille, jotka eivät jostain syystä näe itse kuvaa. Syynä voi olla näkövamma tai se, että kuvat eivät ole latautuneet, tai henkilö ei ole halunnut ladata niitä."
+        },
+        "source": {
+          "label": "Kuvalähde",
+          "tooltipLabel": "Kuvalähde",
+          "tooltipText": "Valokuvaaja tai muu kuvan omistaja, esim. organisaatio."
+        }
       },
       "taskStatus": {
         "open": "Aloittamatta",
