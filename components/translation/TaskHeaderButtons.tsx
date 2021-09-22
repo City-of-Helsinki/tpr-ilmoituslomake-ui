@@ -97,7 +97,7 @@ const TaskHeaderButtons = ({ prefix, backHref, isModeration, saveTranslation }: 
         <div className={styles.buttonRow}>
           <div className={styles.flexButton}>
             <Link href={backHref}>
-              <Button variant="secondary">{i18n.t(`${prefix}.button.returnToRequests`)}</Button>
+              <Button variant="secondary">{i18n.t(`${prefix}.button.back`)}</Button>
             </Link>
           </div>
           <div className="flexSpace" />
