@@ -500,8 +500,15 @@
     },
     "taskStatus": {
       "open": "Not started",
-      "inProgress": "Draft",
-      "closed": "Done"
+      "inProgress": "Active",
+      "closed": "Sent"
+    },
+    "collapsible": {
+      "taskStatus": {
+        "open": "Not started",
+        "inProgress": "In progress",
+        "closed": "Ready"
+      }
     },
     "taskType": {
       "translation": "Translation task"
@@ -885,6 +892,13 @@
       "open": "Uusi",
       "inProgress": "Kesken",
       "closed": "Valmis"
+    },
+    "collapsible": {
+      "taskStatus": {
+        "open": "Aloittamatta",
+        "inProgress": "Kesken",
+        "closed": "Valmis"
+      }
     },
     "taskType": {
       "placeChange": "Muutos",
