@@ -102,6 +102,9 @@ const TranslationTask = (): ReactElement => {
 export const getServerSideProps: GetServerSideProps = async ({ req, resolvedUrl, params, locales }) => {
   const lngDict = await i18nLoader(locales, false, true);
 
+  // Force the translation app to use English
+  const forceLocale = "en";
+
   const reduxStore = initStore();
   reduxStore.dispatch({ type: CLEAR_STATE });
   const initialReduxState = reduxStore.getState();
@@ -219,6 +222,7 @@ export const getServerSideProps: GetServerSideProps = async ({ req, resolvedUrl,
     props: {
       initialReduxState,
       lngDict,
+      forceLocale,
     },
   };
 };

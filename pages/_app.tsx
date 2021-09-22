@@ -10,8 +10,10 @@ import "../styles/global.scss";
 
 const App = ({ Component, pageProps }: AppProps): ReactElement => {
   // This function is called when doing both server-side and client-side rendering
+  // The forceLocale value is used by the translation app to force it to use English
   const router = useRouter();
-  const { lngDict, initialReduxState, ...rest } = pageProps;
+  const { lngDict, forceLocale, initialReduxState, ...rest } = pageProps;
+  router.locale = forceLocale;
   const locale = router.locale || router.defaultLocale || defaultLocale;
 
   const store = useStore(initialReduxState);
