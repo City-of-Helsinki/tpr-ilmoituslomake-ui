@@ -18,12 +18,13 @@ const ToastNotification = ({ prefix, toast, setToast }: NoticeProps): ReactEleme
 
   return toast ? (
     <HdsNotification
-      position="top-right"
+      position="top-center"
       label={i18n.t(`${prefix}.message.${toast}.title`)}
       type={toast === Toast.SaveSucceeded || toast === Toast.RejectSucceeded || toast === Toast.DeleteSucceeded ? "success" : "error"}
       closeButtonLabelText={i18n.t(`${prefix}.message.close`)}
       onClose={cleanupToast}
       autoClose
+      autoCloseDuration={15000}
       dismissible
     >
       {i18n.t(`${prefix}.message.${toast}.message`)}
