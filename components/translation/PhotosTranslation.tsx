@@ -5,7 +5,7 @@ import { TextArea, TextInput } from "hds-react";
 import { TranslationAction } from "../../state/actions/translationTypes";
 import { setTranslationPhoto } from "../../state/actions/translation";
 import { RootState } from "../../state/reducers";
-import { isTranslationTaskPhotoFieldValid } from "../../utils/translationValidation";
+import { isTranslationTaskPhotoAltTextValid, isTranslationTaskPhotoFieldValid } from "../../utils/translationValidation";
 import PhotoPreviewTranslation from "./PhotoPreviewTranslation";
 import TranslationSection from "./TranslationSection";
 
@@ -53,6 +53,16 @@ const PhotosTranslation = ({ prefix, buttonsPrefix, index }: PhotosTranslationPr
     isTranslationTaskPhotoFieldValid(buttonsPrefix ?? prefix, index, evt.target.name, evt.target.name, translationExtra, dispatch);
   };
 
+  const validatePhotoAltText = (evt: ChangeEvent<HTMLInputElement>) => {
+    dispatch(
+      setTranslationPhoto(index, {
+        ...photosTranslated[index],
+        altText: { ...photosTranslated[index].altText, [evt.target.name]: (photosTranslated[index].altText[evt.target.name] as string).trim() },
+      })
+    );
+    isTranslationTaskPhotoAltTextValid(index, "altText", dispatch);
+  };
+
   return (
     <div>
       <div className="formSection">
@@ -72,6 +82,7 @@ const PhotosTranslation = ({ prefix, buttonsPrefix, index }: PhotosTranslationPr
             tooltipLabel={i18n.t(`${prefix}.photos.altText.tooltipLabel`)}
             tooltipText={i18n.t(`${prefix}.photos.altText.tooltipText`)}
             changeCallback={(evt: ChangeEvent<HTMLTextAreaElement>) => updatePhotoAltText(evt)}
+            blurCallback={validatePhotoAltText}
             TranslationComponent={<TextArea id={`altText_${toOption}`} rows={3} label={i18n.t(`${prefix}.photos.altText.label`)} name={toOption} />}
           />
 

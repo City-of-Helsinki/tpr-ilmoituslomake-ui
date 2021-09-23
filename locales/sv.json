@@ -433,7 +433,11 @@
     },
     "confirmation": {
       "saveDraft": "Are you sure that you want to save?",
-      "sendTranslation": "Are you sure that you want to send the translation?"
+      "sendTranslation": "Are you sure that you want to send the translation?",
+      "unsavedChanges": {
+        "title": "Unsaved changes",
+        "message": "There are unsaved changes, do you want to continue?"
+      }
     },
     "intro": {
       "title": "Welcome!"
@@ -677,7 +681,11 @@
       "cancelTranslationRequest": "Oletko varma, että haluat peruuttaa käännöspyynnön?",
       "cancelTranslationRequests": "Oletko varma, että haluat peruuttaa valitut käännöspyynnöt?",
       "saveDraft": "Oletko varma, että haluat tallentaa?",
-      "saveTranslation": "Oletko varma, että haluat tallentaa käännöksen?"
+      "saveTranslation": "Oletko varma, että haluat tallentaa käännöksen?",
+      "unsavedChanges": {
+        "title": "Tallentamattomia muutoksia",
+        "message": "On tallentamattomia muutoksia, haluatko jatkaa?"
+      }
     },
     "contact": {
       "title": "Muut yhteystiedot",

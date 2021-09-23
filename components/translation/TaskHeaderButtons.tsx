@@ -10,7 +10,7 @@ import { RootState } from "../../state/reducers";
 import { TaskStatus, TaskType, Toast } from "../../types/constants";
 import { TranslationExtra, User } from "../../types/general";
 import { TranslationSchema } from "../../types/translation_schema";
-import { isTranslationTaskPageValid } from "../../utils/translationValidation";
+import { isTranslationTaskPageChanged, isTranslationTaskPageValid } from "../../utils/translationValidation";
 import ModalConfirmation from "../common/ModalConfirmation";
 import ToastNotification from "../common/ToastNotification";
 import styles from "./TaskHeaderButtons.module.scss";
@@ -40,6 +40,7 @@ const TaskHeaderButtons = ({ prefix, backHref, isModeration, saveTranslation }: 
 
   const translatedTaskId = useSelector((state: RootState) => state.translation.translatedTaskId);
   const translatedTask = useSelector((state: RootState) => state.translation.translatedTask);
+  const taskValidation = useSelector((state: RootState) => state.translation.taskValidation);
 
   const translationExtra = useSelector((state: RootState) => state.translation.translationExtra);
   const {
@@ -50,6 +51,7 @@ const TaskHeaderButtons = ({ prefix, backHref, isModeration, saveTranslation }: 
   const [confirmSend, setConfirmSend] = useState(false);
   const [confirmSave, setConfirmSave] = useState(false);
   const [confirmSaveDraft, setConfirmSaveDraft] = useState(false);
+  const [confirmUnsavedChanges, setConfirmUnsavedChanges] = useState(false);
 
   const openSendConfirmation = () => {
     setConfirmSend(true);
@@ -75,6 +77,14 @@ const TaskHeaderButtons = ({ prefix, backHref, isModeration, saveTranslation }: 
     setConfirmSaveDraft(false);
   };
 
+  const openUnsavedChangesConfirmation = () => {
+    setConfirmUnsavedChanges(true);
+  };
+
+  const closeUnsavedChangesConfirmation = () => {
+    setConfirmUnsavedChanges(false);
+  };
+
   const saveTask = (draft: boolean) => {
     closeSendConfirmation();
     closeSaveConfirmation();
@@ -91,14 +101,27 @@ const TaskHeaderButtons = ({ prefix, backHref, isModeration, saveTranslation }: 
     }
   };
 
+  const goBackToList = () => {
+    router.push(backHref);
+  };
+
+  const checkUnsavedChanges = () => {
+    const changes = isTranslationTaskPageChanged(translationExtra, taskValidation);
+    if (changes) {
+      openUnsavedChangesConfirmation();
+    } else {
+      goBackToList();
+    }
+  };
+
   return (
     <div className={styles.taskHeaderButtons}>
       {taskType === TaskType.Translation && (
         <div className={styles.buttonRow}>
           <div className={styles.flexButton}>
-            <Link href={backHref}>
-              <Button variant="secondary">{i18n.t(`${prefix}.button.back`)}</Button>
-            </Link>
+            <Button variant="secondary" onClick={checkUnsavedChanges}>
+              {i18n.t(`${prefix}.button.back`)}
+            </Button>
           </div>
           <div className="flexSpace" />
           <div className={styles.flexButton}>
@@ -156,6 +179,18 @@ const TaskHeaderButtons = ({ prefix, backHref, isModeration, saveTranslation }: 
           confirmKey={`${prefix}.button.yes`}
           closeCallback={closeSaveDraftConfirmation}
           confirmCallback={() => saveTask(true)}
+        />
+      )}
+
+      {confirmUnsavedChanges && (
+        <ModalConfirmation
+          open={confirmUnsavedChanges}
+          titleKey={`${prefix}.confirmation.unsavedChanges.title`}
+          messageKey={`${prefix}.confirmation.unsavedChanges.message`}
+          cancelKey={`${prefix}.button.no`}
+          confirmKey={`${prefix}.button.yes`}
+          closeCallback={closeUnsavedChangesConfirmation}
+          confirmCallback={goBackToList}
         />
       )}
 

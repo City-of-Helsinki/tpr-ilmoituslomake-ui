@@ -24,6 +24,7 @@ export interface KeyValueBoolean {
 export interface Validation {
   valid: boolean;
   message?: string;
+  changed?: boolean;
 }
 
 export interface KeyValueValidation {

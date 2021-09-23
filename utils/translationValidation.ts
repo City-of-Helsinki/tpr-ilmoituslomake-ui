@@ -2,7 +2,7 @@ import { Dispatch } from "react";
 import { string } from "yup";
 import { setTranslationTaskPhotoValidation, setTranslationTaskValidation } from "../state/actions/translation";
 import { TranslationAction } from "../state/actions/translationTypes";
-import { TranslationExtra, Validation } from "../types/general";
+import { TranslationExtra, TranslationTaskValidation, Validation } from "../types/general";
 import { TranslationSchema } from "../types/translation_schema";
 import { isValid } from "./validation";
 
@@ -24,7 +24,7 @@ export const validateTranslationTaskField = (prefix: string, translationTaskFiel
       result = { valid: false, message: undefined };
     }
   }
-  return result;
+  return { ...result, changed: true };
 };
 
 export const isTranslationTaskFieldValid = (
@@ -48,7 +48,8 @@ export const validateTranslationTaskPhotoField = (
   const { photosTranslated } = translationExtra;
   const photo = photosTranslated[index];
   const schema = string().required(`${prefix}.message.fieldRequired`);
-  return isValid(schema, photo[translationTaskPhotoField] as string);
+  const result = isValid(schema, photo[translationTaskPhotoField] as string);
+  return { ...result, changed: true };
 };
 
 export const isTranslationTaskPhotoFieldValid = (
@@ -60,6 +61,17 @@ export const isTranslationTaskPhotoFieldValid = (
   dispatch: Dispatch<TranslationAction>
 ): boolean => {
   const result = validateTranslationTaskPhotoField(prefix, index, translationTaskPhotoField, translationExtra);
+  dispatch(setTranslationTaskPhotoValidation(index, { [translationValidationPhotoField]: result }));
+  return result.valid;
+};
+
+export const isTranslationTaskPhotoAltTextValid = (
+  index: number,
+  translationValidationPhotoField: string,
+  dispatch: Dispatch<TranslationAction>
+): boolean => {
+  // No validation needed
+  const result = { valid: true, message: undefined, changed: true };
   dispatch(setTranslationTaskPhotoValidation(index, { [translationValidationPhotoField]: result }));
   return result.valid;
 };
@@ -100,4 +112,21 @@ export const isTranslationTaskPageValid = (
   });
 
   return inputValid.every((valid) => valid) && photosValid.every((valid) => valid);
+};
+
+export const isTranslationTaskPageChanged = (translationExtra: TranslationExtra, taskValidation: TranslationTaskValidation): boolean => {
+  const { photosTranslated } = translationExtra;
+
+  // Check whether any data on the page has changed
+  const inputChanged = [taskValidation.name.changed, taskValidation.descriptionShort.changed, taskValidation.descriptionLong.changed];
+  console.log("inputChanged", inputChanged);
+
+  const photosChanged = photosTranslated.map((photo, index) => {
+    const photoChanged = [taskValidation.photos[index].altText.changed, taskValidation.photos[index].source.changed];
+    console.log("photoChanged", photoChanged);
+    return photoChanged.some((changed) => changed);
+  });
+  console.log("photosChanged", photosChanged);
+
+  return inputChanged.some((changed) => changed) || photosChanged.some((changed) => changed);
 };
