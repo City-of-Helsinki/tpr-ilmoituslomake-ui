@@ -1,7 +1,7 @@
 import { Dispatch } from "react";
 import Ajv from "ajv";
 import addFormats from "ajv-formats";
-import { string, number } from "yup";
+import { string, number, ValidationError } from "yup";
 import StringSchema from "yup/lib/string";
 import NumberSchema from "yup/lib/number";
 import { NotificationValidationAction } from "../state/actions/notificationValidationTypes";
@@ -26,6 +26,7 @@ import {
   MIN_LENGTH_LONG_DESC,
   MAX_LENGTH_LONG_DESC,
   MAX_LENGTH_PHOTO_DESC,
+  MAX_LENGTH_BUSINESSID,
   MAX_PHOTO_BYTES,
   PhotoSourceType,
   ItemType,
@@ -42,8 +43,9 @@ export const isValid = (schema: StringSchema<string | undefined> | NumberSchema<
     const validationResult = schema.validateSync(fieldValueTrimmed);
     valid = validationResult === fieldValueTrimmed;
     message = !valid ? "notification.message.fieldOther" : undefined;
-  } catch (err) {
+  } catch (e) {
     valid = false;
+    const err = e as ValidationError;
     if (err && err.errors && err.errors.length > 0) {
       [message] = err.errors;
     } else {
@@ -206,9 +208,14 @@ export const isContactFieldValid = (
   notification: NotificationSchema,
   dispatch: Dispatch<NotificationValidationAction>
 ): boolean => {
-  const { phone, email } = notification;
+  const { businessid, phone, email } = notification;
   let result;
   switch (contactField) {
+    case "businessid": {
+      const schema = string().max(MAX_LENGTH_BUSINESSID, "notification.message.fieldTooLong");
+      result = isValid(schema, businessid as string);
+      break;
+    }
     case "phone": {
       const schema = phoneSchema();
       result = isValid(schema, phone);
@@ -358,6 +365,7 @@ export const isPageValid = (
               // isWholeAddressValid("fi", notification, notificationExtra, dispatch),
             ];
       const inputValid2 = [
+        isContactFieldValid("businessid", notification, dispatch),
         isContactFieldValid("phone", notification, dispatch),
         isContactFieldValid("email", notification, dispatch),
         isLocationValid(notification, dispatch),

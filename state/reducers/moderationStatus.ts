@@ -127,6 +127,7 @@ const moderationStatus = (state = initialState, action: AnyAction): ModerationSt
         ...state,
         moderationStatus: {
           ...state.moderationStatus,
+          businessid: action.payload.businessid ?? state.moderationStatus.businessid,
           phone: action.payload.phone ?? state.moderationStatus.phone,
           email: action.payload.email ?? state.moderationStatus.email,
         },

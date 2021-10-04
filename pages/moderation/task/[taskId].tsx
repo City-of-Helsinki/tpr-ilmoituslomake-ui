@@ -69,6 +69,7 @@ const ModerationTaskDetail = (): ReactElement => {
           isModerated(moderationStatus.address.sv.post_office),
           isModerated(moderationStatus.address.sv.neighborhood_id),
           isModerated(moderationStatus.address.sv.neighborhood),
+          isModerated(moderationStatus.businessid),
           isModerated(moderationStatus.phone),
           isModerated(moderationStatus.email),
         ];

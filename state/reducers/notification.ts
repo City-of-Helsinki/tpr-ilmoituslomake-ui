@@ -235,6 +235,7 @@ const notification = (state = initialState, action: AnyAction): NotificationStat
         ...state,
         notification: {
           ...state.notification,
+          businessid: action.payload.businessid ?? state.notification.businessid,
           phone: action.payload.phone ?? state.notification.phone,
           email: action.payload.email ?? state.notification.email,
         },

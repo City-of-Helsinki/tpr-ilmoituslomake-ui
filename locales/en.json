@@ -163,6 +163,10 @@
     },
     "contact": {
       "title": "Other contact information",
+      "businessid": {
+        "label": "Company's business ID",
+        "helperText": "Correct business ID format: 1234567-1"
+      },
       "phone": {
         "label": "Phone number",
         "helperText": "Correct phone number formats: 0501234567 or +358501234567"
@@ -689,6 +693,10 @@
     },
     "contact": {
       "title": "Muut yhteystiedot",
+      "businessid": {
+        "label": "Yrityksen Y-tunnus",
+        "helperText": "Y-tunnuksen muoto on esim. 1234567-1"
+      },
       "phone": {
         "label": "Kohteen puhelinnumero",
         "helperText": "Puhelinnumeron muoto on esim. 0501234567 tai +358501234567"

@@ -51,6 +51,7 @@ export interface ModerationStatusSchema {
       neighborhood: ModerationStatus;
     };
   };
+  businessid: ModerationStatus;
   phone: ModerationStatus;
   email: ModerationStatus;
   website: {

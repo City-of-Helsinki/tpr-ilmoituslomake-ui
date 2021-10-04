@@ -163,6 +163,10 @@
     },
     "contact": {
       "title": "Andra kontaktuppgifter",
+      "businessid": {
+        "label": "Företags FO-nummer",
+        "helperText": "FO-nummer skall t.ex. ha formen 1234567-1"
+      },
       "phone": {
         "label": "Telefonnummer",
         "helperText": "Telefonnummer skall t.ex. ha formen 0501234567 eller +358501234567"
@@ -689,6 +693,10 @@
     },
     "contact": {
       "title": "Muut yhteystiedot",
+      "businessid": {
+        "label": "Yrityksen Y-tunnus",
+        "helperText": "Y-tunnuksen muoto on esim. 1234567-1"
+      },
       "phone": {
         "label": "Kohteen puhelinnumero",
         "helperText": "Puhelinnumeron muoto on esim. 0501234567 tai +358501234567"

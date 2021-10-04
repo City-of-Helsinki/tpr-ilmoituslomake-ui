@@ -141,6 +141,7 @@ const notificationValidation = (state = initialState, action: AnyAction): Notifi
         ...state,
         notificationValidation: {
           ...state.notificationValidation,
+          businessid: action.payload.businessid ?? state.notificationValidation.businessid,
           phone: action.payload.phone ?? state.notificationValidation.phone,
           email: action.payload.email ?? state.notificationValidation.email,
         },

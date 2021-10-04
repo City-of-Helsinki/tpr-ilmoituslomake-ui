@@ -33,6 +33,7 @@ const Preview = ({ className, titleKey, includeNotifier, isPlaceInfo }: PreviewP
       sv: { street: streetSv, postal_code: postalCodeSv, post_office: postOfficeSv, neighborhood: neighborhoodSv },
     },
     location,
+    businessid,
     phone,
     email,
     website,
@@ -146,8 +147,10 @@ const Preview = ({ className, titleKey, includeNotifier, isPlaceInfo }: PreviewP
       </div>
 
       <div className={`${styles.gridHeading} ${styles.gridContent}`} id="contact">
-        {i18n.t("notification.contact.phone.label")}
+        {i18n.t("notification.contact.businessid.label")}
       </div>
+      <div className={`${styles.gridPlaceInfo} ${styles.gridContent}`}>{businessid}</div>
+      <div className={`${styles.gridHeading} ${styles.gridContent}`}>{i18n.t("notification.contact.phone.label")}</div>
       <div className={`${styles.gridPlaceInfo} ${styles.gridContent}`}>{phone}</div>
       <div className={`${styles.gridHeading} ${styles.gridContent}`}>{i18n.t("notification.contact.email.label")}</div>
       <div className={`${styles.gridPlaceInfo} ${styles.gridContent}`}>{email}</div>

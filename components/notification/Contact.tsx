@@ -6,7 +6,7 @@ import { NotificationAction } from "../../state/actions/notificationTypes";
 import { NotificationValidationAction } from "../../state/actions/notificationValidationTypes";
 import { setNotificationContact } from "../../state/actions/notification";
 import { RootState } from "../../state/reducers";
-import { MAX_LENGTH_EMAIL, MAX_LENGTH_PHONE } from "../../types/constants";
+import { MAX_LENGTH_BUSINESSID, MAX_LENGTH_EMAIL, MAX_LENGTH_PHONE } from "../../types/constants";
 import { isContactFieldValid } from "../../utils/validation";
 import styles from "./Contact.module.scss";
 
@@ -16,23 +16,58 @@ const Contact = (): ReactElement => {
   const dispatchValidation = useDispatch<Dispatch<NotificationValidationAction>>();
 
   const notification = useSelector((state: RootState) => state.notification.notification);
-  const { phone, email } = notification;
+  const { businessid, phone, email } = notification;
 
   const notificationValidation = useSelector((state: RootState) => state.notificationValidation.notificationValidation);
-  const { email: emailValid, phone: phoneValid } = notificationValidation;
+  const { businessid: businessidValid, phone: phoneValid, email: emailValid } = notificationValidation;
 
   const updateContact = (evt: ChangeEvent<HTMLInputElement>) => {
     dispatch(setNotificationContact({ [evt.target.name]: evt.target.value }));
   };
 
   const validateContact = (evt: ChangeEvent<HTMLInputElement>) => {
-    dispatch(setNotificationContact({ [evt.target.name]: evt.target.name === "email" ? email.trim() : phone.trim() }));
+    let targetValue = "";
+    switch (evt.target.name) {
+      case "businessid": {
+        targetValue = businessid ? businessid.trim() : "";
+        break;
+      }
+      case "email": {
+        targetValue = email.trim();
+        break;
+      }
+      case "phone": {
+        targetValue = phone.trim();
+        break;
+      }
+      default: {
+        targetValue = "";
+      }
+    }
+    dispatch(setNotificationContact({ [evt.target.name]: targetValue }));
     isContactFieldValid(evt.target.name, notification, dispatchValidation);
   };
 
   return (
     <div id="contact" className={`formSection ${styles.contact}`}>
       <h3>{i18n.t("notification.contact.title")}</h3>
+      <TextInput
+        id="businessid"
+        className="formInput"
+        label={i18n.t("notification.contact.businessid.label")}
+        helperText={i18n.t("notification.contact.businessid.helperText")}
+        name="businessid"
+        value={businessid}
+        maxLength={MAX_LENGTH_BUSINESSID}
+        onChange={updateContact}
+        onBlur={validateContact}
+        invalid={!businessidValid.valid}
+        errorText={
+          !businessidValid.valid
+            ? i18n.t(businessidValid.message as string).replace("$fieldName", i18n.t("notification.contact.businessid.label"))
+            : ""
+        }
+      />
       <TextInput
         id="phone"
         className="formInput"

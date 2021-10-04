@@ -16,16 +16,16 @@ const ContactModeration = (): ReactElement => {
   const dispatchStatus = useDispatch<Dispatch<ModerationStatusAction>>();
 
   const selectedTask = useSelector((state: RootState) => state.moderation.selectedTask);
-  const { phone: phoneSelected, email: emailSelected } = selectedTask;
+  const { businessid: businessidSelected, phone: phoneSelected, email: emailSelected } = selectedTask;
 
   const modifiedTask = useSelector((state: RootState) => state.moderation.modifiedTask);
-  const { phone: phoneModified, email: emailModified } = modifiedTask;
+  const { businessid: businessidModified, phone: phoneModified, email: emailModified } = modifiedTask;
 
   const moderationExtra = useSelector((state: RootState) => state.moderation.moderationExtra);
   const { taskType, taskStatus } = moderationExtra;
 
   const moderationStatus = useSelector((state: RootState) => state.moderationStatus.moderationStatus);
-  const { phone: phoneStatus, email: emailStatus } = moderationStatus;
+  const { businessid: businessidStatus, phone: phoneStatus, email: emailStatus } = moderationStatus;
 
   const updateContact = (evt: ChangeEvent<HTMLInputElement>) => {
     dispatch(setModerationContact({ [evt.target.name]: evt.target.value }));
@@ -39,6 +39,22 @@ const ContactModeration = (): ReactElement => {
     <div id="contact" className="formSection">
       <div className="gridLayoutContainer moderation">
         <ModerationSection
+          id="businessid"
+          fieldName="businessid"
+          selectedValue={businessidSelected}
+          modifiedValue={businessidModified}
+          moderationStatus={businessidStatus}
+          taskType={taskType}
+          taskStatus={taskStatus}
+          selectedHeaderText={`${i18n.t("moderation.contact.title")}${i18n.t("moderation.task.selected")}`}
+          modifiedHeaderText={`${i18n.t("moderation.contact.title")}${i18n.t("moderation.task.modified")}`}
+          helperText={i18n.t("moderation.contact.businessid.helperText")}
+          changeCallback={updateContact}
+          statusCallback={updateContactStatus}
+          ModerationComponent={<TextInput id="businessid" label={i18n.t("moderation.contact.businessid.label")} name="businessid" />}
+        />
+
+        <ModerationSection
           id="phone"
           fieldName="phone"
           selectedValue={phoneSelected}
@@ -46,8 +62,6 @@ const ContactModeration = (): ReactElement => {
           moderationStatus={phoneStatus}
           taskType={taskType}
           taskStatus={taskStatus}
-          selectedHeaderText={`${i18n.t("moderation.contact.title")}${i18n.t("moderation.task.selected")}`}
-          modifiedHeaderText={`${i18n.t("moderation.contact.title")}${i18n.t("moderation.task.modified")}`}
           helperText={i18n.t("moderation.contact.phone.helperText")}
           changeCallback={updateContact}
           statusCallback={updateContactStatus}

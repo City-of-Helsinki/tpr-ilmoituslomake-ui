@@ -54,6 +54,7 @@ export interface NotificationValidationSchema {
     };
   };
   wholeAddress: Validation;
+  businessid: Validation;
   phone: Validation;
   email: Validation;
   website: {

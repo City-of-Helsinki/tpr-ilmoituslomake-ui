@@ -89,6 +89,7 @@ export const MAX_LENGTH_EMAIL = 254;
 export const MAX_LENGTH_PHONE = 20;
 export const MAX_LENGTH_URL = 2000;
 export const MAX_LENGTH_POSTAL_CODE = 5;
+export const MAX_LENGTH_BUSINESSID = 9;
 export const MAX_PHOTOS = 3;
 export const MAX_PHOTO_BYTES = 4000000;
 export const DATETIME_FORMAT = "D.M.YYYY H:mm";

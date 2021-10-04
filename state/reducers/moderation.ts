@@ -210,6 +210,7 @@ const moderation = (state = initialState, action: AnyAction): ModerationState =>
         ...state,
         modifiedTask: {
           ...state.modifiedTask,
+          businessid: action.payload.businessid ?? state.modifiedTask.businessid,
           phone: action.payload.phone ?? state.modifiedTask.phone,
           email: action.payload.email ?? state.modifiedTask.email,
         },

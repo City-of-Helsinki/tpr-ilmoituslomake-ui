@@ -42,6 +42,7 @@ export const INITIAL_NOTIFICATION: NotificationSchema = {
       neighborhood: "",
     },
   },
+  businessid: "",
   phone: "",
   email: "",
   website: {
@@ -116,6 +117,7 @@ export const INITIAL_NOTIFICATION_VALIDATION: NotificationValidationSchema = {
     },
   },
   wholeAddress: { valid: true },
+  businessid: { valid: true },
   phone: { valid: true },
   email: { valid: true },
   website: {
@@ -245,6 +247,7 @@ const getInitialModerationStatus = (moderationStatus: ModerationStatus): Moderat
         neighborhood: moderationStatus,
       },
     },
+    businessid: moderationStatus,
     phone: moderationStatus,
     email: moderationStatus,
     website: {

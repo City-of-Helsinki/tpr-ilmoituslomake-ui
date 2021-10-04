@@ -53,6 +53,7 @@ export interface NotificationSchema {
     };
     [k: string]: unknown;
   };
+  businessid?: string;
   phone: string;
   email: string;
   website: {

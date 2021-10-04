@@ -45,6 +45,7 @@ export const setModerationStatus = (photos: Photo[] = [], dispatch: Dispatch<Mod
     })
   );
   dispatch(setModerationLocationStatus(newStatus));
+  dispatch(setModerationContactStatus({ businessid: newStatus }));
   dispatch(setModerationContactStatus({ phone: newStatus }));
   dispatch(setModerationContactStatus({ email: newStatus }));
 

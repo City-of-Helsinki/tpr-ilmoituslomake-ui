@@ -193,6 +193,7 @@ const TaskHeaderButtons = ({ isModerated }: TaskHeaderButtonsProps): ReactElemen
                 ),
               },
             },
+            businessid: getApprovedValue(moderationStatus.businessid, selectedTask.businessid as string, modifiedTask.businessid as string),
             phone: getApprovedValue(moderationStatus.phone, selectedTask.phone, modifiedTask.phone),
             email: getApprovedValue(moderationStatus.email, selectedTask.email, modifiedTask.email),
             website: {
