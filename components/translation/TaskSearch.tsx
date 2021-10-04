@@ -42,7 +42,6 @@ const TaskSearch = (): ReactElement => {
 
   const searchTasks = async () => {
     const taskResponse = await fetch(`${getOrigin(router)}/api/translation/todos/find/?search=${placeName.trim()}`);
-    // const taskResponse = await fetch(`${getOrigin(router)}/mockapi/translation/todos/find/?search=${placeName.trim()}`);
     if (taskResponse.ok) {
       const taskResult = await (taskResponse.json() as Promise<{ count: number; next: string; results: TranslationTodoResult[] }>);
 

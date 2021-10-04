@@ -130,7 +130,6 @@ export const getServerSideProps: GetServerSideProps = async ({ req, resolvedUrl,
   if (params) {
     const { taskId } = params;
     const taskResponse = await fetch(`${getOriginServerSide()}/api/moderation/translation/task/${taskId}/`, {
-      // const taskResponse = await fetch(`http://localhost/mockapi/moderation/translation/task/${taskId}/`, {
       headers: { cookie: req.headers.cookie as string },
     });
 

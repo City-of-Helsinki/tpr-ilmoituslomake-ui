@@ -56,7 +56,6 @@ const TaskSearch = ({ showStatus, setShowStatus }: TaskSearchProps): ReactElemen
 
   const searchTasks = async () => {
     const taskResponse = await fetch(`${getOrigin(router)}/api/moderation/translation/task/find/?search=${placeName.trim()}`);
-    // const taskResponse = await fetch(`${getOrigin(router)}/mockapi/moderation/translation/task/find/?search=${placeName.trim()}`);
     if (taskResponse.ok) {
       const taskResult = await (taskResponse.json() as Promise<{ count: number; next: string; results: ModerationTranslationTaskResult[] }>);
 
