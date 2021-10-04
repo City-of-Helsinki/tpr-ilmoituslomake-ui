@@ -60,17 +60,17 @@ const DescriptionTranslation = ({ prefix, buttonsPrefix }: DescriptionTranslatio
   // Functions for validating values and storing the results in redux state
   const validateName = (evt: ChangeEvent<HTMLInputElement>) => {
     dispatch(setTranslationName({ [evt.target.name]: (placeNameTranslated[evt.target.name] as string).trim() }));
-    isTranslationTaskFieldValid(buttonsPrefix ?? prefix, "name", "name", translatedTask, dispatch);
+    isTranslationTaskFieldValid(buttonsPrefix ?? prefix, "name", "name", selectedTask, translatedTask, translationExtra, dispatch);
   };
 
   const validateShortDescription = (evt: ChangeEvent<HTMLTextAreaElement>) => {
     dispatch(setTranslationShortDescription({ [evt.target.name]: (shortDescTranslated[evt.target.name] as string).trim() }));
-    isTranslationTaskFieldValid(buttonsPrefix ?? prefix, "short", "descriptionShort", translatedTask, dispatch);
+    isTranslationTaskFieldValid(buttonsPrefix ?? prefix, "short", "descriptionShort", selectedTask, translatedTask, translationExtra, dispatch);
   };
 
   const validateLongDescription = (evt: ChangeEvent<HTMLTextAreaElement>) => {
     dispatch(setTranslationLongDescription({ [evt.target.name]: (longDescTranslated[evt.target.name] as string).trim() }));
-    isTranslationTaskFieldValid(buttonsPrefix ?? prefix, "long", "descriptionLong", translatedTask, dispatch);
+    isTranslationTaskFieldValid(buttonsPrefix ?? prefix, "long", "descriptionLong", selectedTask, translatedTask, translationExtra, dispatch);
   };
 
   return (

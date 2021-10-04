@@ -7,6 +7,7 @@ import { TranslationAction } from "../../state/actions/translationTypes";
 import { RootState } from "../../state/reducers";
 import { DATETIME_FORMAT, TaskType, Toast } from "../../types/constants";
 import { TranslationExtra, User } from "../../types/general";
+import { NotificationSchema } from "../../types/notification_schema";
 import { TranslationSchema } from "../../types/translation_schema";
 import { getDisplayName } from "../../utils/helper";
 import { defaultLocale } from "../../utils/i18n";
@@ -23,6 +24,7 @@ interface TaskHeaderProps {
   saveTranslation: (
     currentUser: User | undefined,
     translatedTaskId: number,
+    selectedTask: NotificationSchema,
     translatedTask: TranslationSchema,
     translationExtra: TranslationExtra,
     draft: boolean,

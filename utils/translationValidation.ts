@@ -3,27 +3,47 @@ import { string } from "yup";
 import { setTranslationTaskPhotoValidation, setTranslationTaskValidation } from "../state/actions/translation";
 import { TranslationAction } from "../state/actions/translationTypes";
 import { TranslationExtra, TranslationTaskValidation, Validation } from "../types/general";
+import { NotificationSchema } from "../types/notification_schema";
 import { TranslationSchema } from "../types/translation_schema";
 import { isValid } from "./validation";
 
-export const validateTranslationTaskField = (prefix: string, translationTaskField: string, translatedTask: TranslationSchema): Validation => {
-  let result: Validation;
+export const validateTranslationTaskField = (
+  prefix: string,
+  translationTaskField: string,
+  selectedTask: NotificationSchema,
+  translatedTask: TranslationSchema,
+  translationExtra: TranslationExtra
+): Validation => {
+  const {
+    translationRequest: {
+      language: { from: translateFrom },
+    },
+  } = translationExtra;
+  let selectedResult: Validation;
+  let translatedResult: Validation;
+
   switch (translationTaskField) {
     case "name": {
       const schema = string().required(`${prefix}.message.fieldRequired`);
-      result = isValid(schema, translatedTask[translationTaskField].lang);
+      selectedResult = isValid(schema, selectedTask[translationTaskField][translateFrom] as string);
+      translatedResult = isValid(schema, translatedTask[translationTaskField].lang);
       break;
     }
     case "short":
     case "long": {
       const schema = string().required(`${prefix}.message.fieldRequired`);
-      result = isValid(schema, translatedTask.description[translationTaskField].lang);
+      selectedResult = isValid(schema, selectedTask.description[translationTaskField][translateFrom] as string);
+      translatedResult = isValid(schema, translatedTask.description[translationTaskField].lang);
       break;
     }
     default: {
-      result = { valid: false, message: undefined };
+      selectedResult = { valid: false, message: undefined };
+      translatedResult = { valid: false, message: undefined };
     }
   }
+
+  // Only need to validate the translated value if the original value is valid, so not empty
+  const result = selectedResult.valid ? translatedResult : { valid: true, message: undefined };
   return { ...result, changed: true };
 };
 
@@ -31,10 +51,12 @@ export const isTranslationTaskFieldValid = (
   prefix: string,
   translationTaskField: string,
   translationValidationField: string,
+  selectedTask: NotificationSchema,
   translatedTask: TranslationSchema,
+  translationExtra: TranslationExtra,
   dispatch: Dispatch<TranslationAction>
 ): boolean => {
-  const result = validateTranslationTaskField(prefix, translationTaskField, translatedTask);
+  const result = validateTranslationTaskField(prefix, translationTaskField, selectedTask, translatedTask, translationExtra);
   dispatch(setTranslationTaskValidation({ [translationValidationField]: result }));
   return result.valid;
 };
@@ -45,10 +67,16 @@ export const validateTranslationTaskPhotoField = (
   translationTaskPhotoField: string,
   translationExtra: TranslationExtra
 ): Validation => {
-  const { photosTranslated } = translationExtra;
-  const photo = photosTranslated[index];
+  const { photosSelected, photosTranslated } = translationExtra;
+  const photoSelected = photosSelected[index];
+  const photoTranslated = photosTranslated[index];
+
   const schema = string().required(`${prefix}.message.fieldRequired`);
-  const result = isValid(schema, photo[translationTaskPhotoField] as string);
+  const selectedResult = isValid(schema, photoSelected[translationTaskPhotoField] as string);
+  const translatedResult = isValid(schema, photoTranslated[translationTaskPhotoField] as string);
+
+  // Only need to validate the translated value if the original value is valid, so not empty
+  const result = selectedResult.valid ? translatedResult : { valid: true, message: undefined };
   return { ...result, changed: true };
 };
 
@@ -76,11 +104,16 @@ export const isTranslationTaskPhotoAltTextValid = (
   return result.valid;
 };
 
-export const validateTranslationTaskDetails = (prefix: string, translatedTask: TranslationSchema): boolean => {
+export const validateTranslationTaskDetails = (
+  prefix: string,
+  selectedTask: NotificationSchema,
+  translatedTask: TranslationSchema,
+  translationExtra: TranslationExtra
+): boolean => {
   const inputValid = [
-    validateTranslationTaskField(prefix, "name", translatedTask),
-    validateTranslationTaskField(prefix, "short", translatedTask),
-    validateTranslationTaskField(prefix, "long", translatedTask),
+    validateTranslationTaskField(prefix, "name", selectedTask, translatedTask, translationExtra),
+    validateTranslationTaskField(prefix, "short", selectedTask, translatedTask, translationExtra),
+    validateTranslationTaskField(prefix, "long", selectedTask, translatedTask, translationExtra),
   ];
   return inputValid.every((v) => v.valid);
 };
@@ -92,6 +125,7 @@ export const validateTranslationTaskPhoto = (prefix: string, index: number, tran
 
 export const isTranslationTaskPageValid = (
   prefix: string,
+  selectedTask: NotificationSchema,
   translatedTask: TranslationSchema,
   translationExtra: TranslationExtra,
   dispatch: Dispatch<TranslationAction>
@@ -101,9 +135,9 @@ export const isTranslationTaskPageValid = (
   // Check whether all data on the page is valid
   // Everything needs to be validated, so make sure lazy evaluation is not used
   const inputValid = [
-    isTranslationTaskFieldValid(prefix, "name", "name", translatedTask, dispatch),
-    isTranslationTaskFieldValid(prefix, "short", "descriptionShort", translatedTask, dispatch),
-    isTranslationTaskFieldValid(prefix, "long", "descriptionLong", translatedTask, dispatch),
+    isTranslationTaskFieldValid(prefix, "name", "name", selectedTask, translatedTask, translationExtra, dispatch),
+    isTranslationTaskFieldValid(prefix, "short", "descriptionShort", selectedTask, translatedTask, translationExtra, dispatch),
+    isTranslationTaskFieldValid(prefix, "long", "descriptionLong", selectedTask, translatedTask, translationExtra, dispatch),
   ];
 
   const photosValid = photosTranslated.map((photo, index) => {

@@ -26,6 +26,7 @@ const TranslationTask = (): ReactElement => {
   const i18n = useI18n();
 
   const translatedTaskId = useSelector((state: RootState) => state.translation.translatedTaskId);
+  const selectedTask = useSelector((state: RootState) => state.translation.selectedTask);
   const translatedTask = useSelector((state: RootState) => state.translation.translatedTask);
   const translationExtra = useSelector((state: RootState) => state.translation.translationExtra);
   const {
@@ -44,7 +45,7 @@ const TranslationTask = (): ReactElement => {
   }, [pageValid]);
 
   const isBasicSectionTranslated = () => {
-    return validateTranslationTaskDetails("translation", translatedTask);
+    return validateTranslationTaskDetails("translation", selectedTask, translatedTask, translationExtra);
   };
 
   const isPhotoSectionTranslated = (index: number) => {

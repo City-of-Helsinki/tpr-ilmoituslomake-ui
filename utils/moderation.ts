@@ -469,6 +469,7 @@ export const cancelMultipleModerationTranslationRequests = async (
 export const saveModerationTranslation = async (
   currentUser: User | undefined,
   translatedTaskId: number,
+  selectedTask: NotificationSchema,
   translatedTask: TranslationSchema,
   translationExtra: TranslationExtra,
   draft: boolean,
@@ -477,7 +478,7 @@ export const saveModerationTranslation = async (
   setToast: Dispatch<SetStateAction<Toast | undefined>>
 ): Promise<void> => {
   try {
-    const valid = isTranslationTaskPageValid("moderation", translatedTask, translationExtra, dispatchValidation);
+    const valid = isTranslationTaskPageValid("moderation", selectedTask, translatedTask, translationExtra, dispatchValidation);
 
     if (currentUser?.authenticated && (draft || valid)) {
       // Send the Cross Site Request Forgery token, otherwise the backend returns the error "CSRF Failed: CSRF token missing or incorrect."

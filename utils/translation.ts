@@ -4,6 +4,7 @@ import Cookies from "js-cookie";
 import { TranslationAction } from "../state/actions/translationTypes";
 import { Toast } from "../types/constants";
 import { TranslationExtra, User } from "../types/general";
+import { NotificationSchema } from "../types/notification_schema";
 import { TranslationSchema } from "../types/translation_schema";
 import getOrigin from "./request";
 import { isTranslationTaskPageValid } from "./translationValidation";
@@ -11,6 +12,7 @@ import { isTranslationTaskPageValid } from "./translationValidation";
 export const saveTranslation = async (
   currentUser: User | undefined,
   translatedTaskId: number,
+  selectedTask: NotificationSchema,
   translatedTask: TranslationSchema,
   translationExtra: TranslationExtra,
   draft: boolean,
@@ -19,7 +21,7 @@ export const saveTranslation = async (
   setToast: Dispatch<SetStateAction<Toast | undefined>>
 ): Promise<void> => {
   try {
-    const valid = isTranslationTaskPageValid("translation", translatedTask, translationExtra, dispatchValidation);
+    const valid = isTranslationTaskPageValid("translation", selectedTask, translatedTask, translationExtra, dispatchValidation);
 
     if (currentUser?.authenticated && (draft || valid)) {
       // Send the Cross Site Request Forgery token, otherwise the backend returns the error "CSRF Failed: CSRF token missing or incorrect."

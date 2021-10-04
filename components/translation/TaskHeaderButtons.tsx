@@ -1,6 +1,5 @@
 import React, { Dispatch, ReactElement, SetStateAction, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import Link from "next/link";
 import { NextRouter, useRouter } from "next/router";
 import { useI18n } from "next-localization";
 import { Button, IconArrowRight } from "hds-react";
@@ -9,6 +8,7 @@ import { TranslationAction } from "../../state/actions/translationTypes";
 import { RootState } from "../../state/reducers";
 import { TaskStatus, TaskType, Toast } from "../../types/constants";
 import { TranslationExtra, User } from "../../types/general";
+import { NotificationSchema } from "../../types/notification_schema";
 import { TranslationSchema } from "../../types/translation_schema";
 import { isTranslationTaskPageChanged, isTranslationTaskPageValid } from "../../utils/translationValidation";
 import ModalConfirmation from "../common/ModalConfirmation";
@@ -22,6 +22,7 @@ interface TaskHeaderButtonsProps {
   saveTranslation: (
     currentUser: User | undefined,
     translatedTaskId: number,
+    selectedTask: NotificationSchema,
     translatedTask: TranslationSchema,
     translationExtra: TranslationExtra,
     draft: boolean,
@@ -39,6 +40,7 @@ const TaskHeaderButtons = ({ prefix, backHref, isModeration, saveTranslation }: 
   const currentUser = useSelector((state: RootState) => state.general.user);
 
   const translatedTaskId = useSelector((state: RootState) => state.translation.translatedTaskId);
+  const selectedTask = useSelector((state: RootState) => state.translation.selectedTask);
   const translatedTask = useSelector((state: RootState) => state.translation.translatedTask);
   const taskValidation = useSelector((state: RootState) => state.translation.taskValidation);
 
@@ -90,9 +92,9 @@ const TaskHeaderButtons = ({ prefix, backHref, isModeration, saveTranslation }: 
     closeSaveConfirmation();
     closeSaveDraftConfirmation();
 
-    if (draft || isTranslationTaskPageValid(prefix, translatedTask, translationExtra, dispatchValidation)) {
+    if (draft || isTranslationTaskPageValid(prefix, selectedTask, translatedTask, translationExtra, dispatchValidation)) {
       // The page is valid, or this is a draft, so save the task
-      saveTranslation(currentUser, translatedTaskId, translatedTask, translationExtra, draft, router, dispatchValidation, setToast);
+      saveTranslation(currentUser, translatedTaskId, selectedTask, translatedTask, translationExtra, draft, router, dispatchValidation, setToast);
       dispatchValidation(setTranslationTaskPageValid(true));
     } else {
       // The page is not valid, but set the page to valid then invalid to force the page to show the general validation message
