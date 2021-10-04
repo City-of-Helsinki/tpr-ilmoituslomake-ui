@@ -191,7 +191,7 @@ const Preview = ({ className, titleKey, includeNotifier, isPlaceInfo }: PreviewP
                 </div>
                 <div className={`${styles.gridHeading} ${styles.gridContent}`}>{i18n.t("notification.photos.permission.label")}</div>
                 <div className={`${styles.gridPlaceInfo} ${styles.gridContent}`}>
-                  {permission === PhotoPermission.MyHelsinki && i18n.t("notification.photos.permission.myHelsinki")}
+                  {permission === PhotoPermission.LocationOnly && i18n.t("notification.photos.permission.locationOnly")}
                   {permission === PhotoPermission.CreativeCommons && i18n.t("notification.photos.permission.creativeCommons1")}
                 </div>
                 <div className={`${styles.gridHeading} ${styles.gridContent}`}>{i18n.t("notification.photos.source.label")}</div>

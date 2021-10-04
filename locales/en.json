@@ -281,11 +281,9 @@
         "title": "User rights",
         "notice": "NOTE! You must hold the rights to the images you upload. By uploading the image, you grant Helsinki Marketing the right to distribute it further in an MyHelsinki Open API. You must select one of the image permissions below. See the terms of use for more details.",
         "label": "Photo user rights",
-        "myHelsinki": "The image may only be used in connection with the location, e.g. on the MyHelsinki.fi website. The image can also be shared as open data to third parties via the MyHelsinki Open API. Use or transfer of the image for other purposes is prohibited. When using an image, it is essential to mention the source and producer of the image.",
-        "myHelsinki2": "MyHelsinki",
+        "locationOnly": "The image may only be used in connection with the location, e.g. on the MyHelsinki.fi website. The image can also be shared as open data to third parties via the MyHelsinki Open API. Use or transfer of the image for other purposes is prohibited. When using an image, it is essential to mention the source and producer of the image.",
         "creativeCommons1": "Image courtesy of Creative Commons BY 4.0. license. When using an image, it is essential to mention the source and producer of the image.",
-        "creativeCommons2": "Creative Commons BY 4.0.-license",
-        "creativeCommons3": "Creative Commons"
+        "creativeCommons2": "Creative Commons BY 4.0.-license"
       },
       "source": {
         "label": "Image source",
@@ -787,7 +785,7 @@
       "permission": {
         "title": "Käyttöoikeudet",
         "label": "Kuvan käyttöoikeudet",
-        "myHelsinki": "Kuvaa saa käyttää ainoastaan ko. kohteen yhteydessä esim. MyHelsinki.fi-sivustolla. Kuvaa voidaan jakaa myös avoimena datana kolmansille osapuolille MyHelsinki-avoimen rajapinnan kautta. Kuvan käyttö tai siirto muihin tarkoituksiin on kielletty. Kuvaa käytettäessä on ehdottomasti mainittava kuvan lähde ja kuvaaja.",
+        "locationOnly": "Kuvaa saa käyttää ainoastaan ko. kohteen yhteydessä esim. MyHelsinki.fi-sivustolla. Kuvaa voidaan jakaa myös avoimena datana kolmansille osapuolille MyHelsinki-avoimen rajapinnan kautta. Kuvan käyttö tai siirto muihin tarkoituksiin on kielletty. Kuvaa käytettäessä on ehdottomasti mainittava kuvan lähde ja kuvaaja.",
         "creativeCommons": "Kuvaa saa jakaa Creative Commons BY 4.0.-lisenssillä. Kuvaa käytettäessä on ehdottomasti mainittava kuvan lähde ja kuvaaja."
       },
       "source": {

@@ -9,8 +9,8 @@ export enum PhotoSourceType {
 }
 
 export enum PhotoPermission {
-  MyHelsinki = "myHelsinki",
-  CreativeCommons = "creativeCommons",
+  LocationOnly = "Location only",
+  CreativeCommons = "Creative Commons BY 4.0",
 }
 
 export enum ModerationStatus {

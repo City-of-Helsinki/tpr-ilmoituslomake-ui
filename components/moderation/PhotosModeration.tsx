@@ -51,7 +51,7 @@ const PhotosModeration = (): ReactElement => {
           sv: "",
           en: "",
         },
-        permission: PhotoPermission.MyHelsinki,
+        permission: PhotoPermission.LocationOnly,
         source: "",
         new: true,
       })
@@ -256,8 +256,8 @@ const PhotosModeration = (): ReactElement => {
                     id={`permission_${index}`}
                     horizontal={false}
                     label={i18n.t("moderation.photos.permission.label")}
-                    radioButtonLabels={[i18n.t("moderation.photos.permission.myHelsinki"), i18n.t("moderation.photos.permission.creativeCommons")]}
-                    radioButtonValues={[PhotoPermission.MyHelsinki, PhotoPermission.CreativeCommons]}
+                    radioButtonLabels={[i18n.t("moderation.photos.permission.locationOnly"), i18n.t("moderation.photos.permission.creativeCommons")]}
+                    radioButtonValues={[PhotoPermission.LocationOnly, PhotoPermission.CreativeCommons]}
                   />
                 }
                 isSelectionGroupWrapper

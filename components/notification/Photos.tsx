@@ -273,11 +273,11 @@ const Photos = (): ReactElement => {
                   aria-required
                 >
                   <RadioButton
-                    id={`permission_myHelsinki_${index}`}
-                    label={i18n.t("notification.photos.permission.myHelsinki")}
+                    id={`permission_locationOnly_${index}`}
+                    label={i18n.t("notification.photos.permission.locationOnly")}
                     name={`permission_${index}`}
-                    value={PhotoPermission.MyHelsinki}
-                    checked={permission === PhotoPermission.MyHelsinki}
+                    value={PhotoPermission.LocationOnly}
+                    checked={permission === PhotoPermission.LocationOnly}
                     onChange={(evt) => updatePhoto(index, evt)}
                   />
                   <RadioButton
