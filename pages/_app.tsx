@@ -13,7 +13,9 @@ const App = ({ Component, pageProps }: AppProps): ReactElement => {
   // The forceLocale value is used by the translation app to force it to use English
   const router = useRouter();
   const { lngDict, forceLocale, initialReduxState, ...rest } = pageProps;
-  router.locale = forceLocale;
+  if (forceLocale) {
+    router.locale = forceLocale;
+  }
   const locale = router.locale || router.defaultLocale || defaultLocale;
 
   const store = useStore(initialReduxState);
