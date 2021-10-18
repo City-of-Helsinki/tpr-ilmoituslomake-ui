@@ -93,7 +93,7 @@ export const MAX_LENGTH_BUSINESSID = 9;
 export const MAX_PHOTOS = 3;
 export const MAX_PHOTO_BYTES = 4000000;
 export const DATETIME_FORMAT = "D.M.YYYY H:mm";
-export const TERMS_URL = "https://www.myhelsinki.fi/fi/myhelsinki-places-palvelun-käyttöehdot/";
+export const TERMS_URL = "https://kaupunkialustana.hel.fi/kayttoehdot/";
 export const ACCESSIBILITY_URL = "https://www.myhelsinki.fi/fi/saavutettavuusseloste/";
 export const CONTACT_URL = "https://hel.fi/helsinki/fi/kaupunki-ja-hallinto/osallistu-ja-vaikuta/ota-yhteytta/ota-yhteytta/";
 
