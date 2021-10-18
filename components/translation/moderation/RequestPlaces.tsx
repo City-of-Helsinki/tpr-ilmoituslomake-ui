@@ -10,6 +10,7 @@ import { TaskStatus } from "../../../types/constants";
 import { ModerationTranslationRequestResultTask } from "../../../types/general";
 import { getDisplayName } from "../../../utils/helper";
 import { defaultLocale } from "../../../utils/i18n";
+import { isModerationTranslationRequestFieldValid } from "../../../utils/moderationValidation";
 import styles from "./RequestPlaces.module.scss";
 
 const RequestPlaces = (): ReactElement => {
@@ -29,6 +30,7 @@ const RequestPlaces = (): ReactElement => {
       return target.id === targetId ? acc : [...acc, task];
     }, []);
     dispatch(setModerationTranslationRequest({ ...requestDetail, tasks: newRequestTasks }));
+    isModerationTranslationRequestFieldValid("tasks", "tasks", requestDetail, dispatch);
   };
 
   return (

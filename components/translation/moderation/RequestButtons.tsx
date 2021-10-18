@@ -1,6 +1,5 @@
 import React, { Dispatch, ReactElement, useMemo, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import Link from "next/link";
 import { useRouter } from "next/router";
 import { useI18n } from "next-localization";
 import { Button, IconArrowRight } from "hds-react";
@@ -10,7 +9,7 @@ import { RootState } from "../../../state/reducers";
 import { TaskStatus, TaskType, Toast } from "../../../types/constants";
 import { ModerationTranslationRequestResultTask } from "../../../types/general";
 import { cancelModerationTranslationRequest, saveModerationTranslationRequest } from "../../../utils/moderation";
-import { isModerationTranslationRequestPageValid } from "../../../utils/moderationValidation";
+import { isModerationTranslationRequestPageChanged, isModerationTranslationRequestPageValid } from "../../../utils/moderationValidation";
 import ModalConfirmation from "../../common/ModalConfirmation";
 import ToastNotification from "../../common/ToastNotification";
 import styles from "./RequestButtons.module.scss";
@@ -25,6 +24,7 @@ const RequestButtons = ({ requestStatus }: RequestButtonsProps): ReactElement =>
   const router = useRouter();
 
   const currentUser = useSelector((state: RootState) => state.general.user);
+  const requestValidation = useSelector((state: RootState) => state.moderationTranslation.requestValidation);
 
   const requestDetail = useSelector((state: RootState) => state.moderationTranslation.requestDetail);
   const { id: requestId, taskType, tasks } = requestDetail;
@@ -33,6 +33,7 @@ const RequestButtons = ({ requestStatus }: RequestButtonsProps): ReactElement =>
   const [toast, setToast] = useState<Toast>();
   const [confirmSave, setConfirmSave] = useState(false);
   const [confirmCancel, setConfirmCancel] = useState(false);
+  const [confirmUnsavedChanges, setConfirmUnsavedChanges] = useState(false);
 
   const openSaveConfirmation = () => {
     setConfirmSave(true);
@@ -48,6 +49,14 @@ const RequestButtons = ({ requestStatus }: RequestButtonsProps): ReactElement =>
 
   const closeCancelConfirmation = () => {
     setConfirmCancel(false);
+  };
+
+  const openUnsavedChangesConfirmation = () => {
+    setConfirmUnsavedChanges(true);
+  };
+
+  const closeUnsavedChangesConfirmation = () => {
+    setConfirmUnsavedChanges(false);
   };
 
   const saveRequest = () => {
@@ -70,14 +79,27 @@ const RequestButtons = ({ requestStatus }: RequestButtonsProps): ReactElement =>
     cancelModerationTranslationRequest(currentUser, requestId, router, setToast);
   };
 
+  const goBackToList = () => {
+    router.push("/moderation/translation");
+  };
+
+  const checkUnsavedChanges = () => {
+    const changes = isModerationTranslationRequestPageChanged(requestValidation);
+    if (changes) {
+      openUnsavedChangesConfirmation();
+    } else {
+      goBackToList();
+    }
+  };
+
   return (
     <div className={styles.requestHeaderButtons}>
       {taskType === TaskType.Translation && (
         <div className={styles.buttonRow}>
           <div className={styles.flexButton}>
-            <Link href="/moderation/translation">
-              <Button variant="secondary">{i18n.t("moderation.button.close")}</Button>
-            </Link>
+            <Button variant="secondary" onClick={checkUnsavedChanges}>
+              {i18n.t("moderation.button.close")}
+            </Button>
           </div>
           <div className="flexSpace" />
           {requestId > 0 && (
@@ -116,6 +138,18 @@ const RequestButtons = ({ requestStatus }: RequestButtonsProps): ReactElement =>
           confirmKey="moderation.button.yes"
           closeCallback={closeCancelConfirmation}
           confirmCallback={() => cancelRequest()}
+        />
+      )}
+
+      {confirmUnsavedChanges && (
+        <ModalConfirmation
+          open={confirmUnsavedChanges}
+          titleKey="moderation.confirmation.unsavedChanges.title"
+          messageKey="moderation.confirmation.unsavedChanges.message"
+          cancelKey="moderation.button.no"
+          confirmKey="moderation.button.yes"
+          closeCallback={closeUnsavedChangesConfirmation}
+          confirmCallback={goBackToList}
         />
       )}
 

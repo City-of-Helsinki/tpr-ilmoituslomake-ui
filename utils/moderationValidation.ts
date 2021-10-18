@@ -2,15 +2,15 @@ import { Dispatch } from "react";
 import { string } from "yup";
 import { setModerationTranslationRequestValidation } from "../state/actions/moderationTranslation";
 import { ModerationTranslationAction } from "../state/actions/moderationTranslationTypes";
-import { ModerationTranslationRequest, Validation } from "../types/general";
+import { ModerationTranslationRequest, ModerationTranslationRequestValidation, Validation } from "../types/general";
 import { isValid } from "./validation";
 
-export const isModerationTranslationRequestFieldValid = (
+export const validateModerationTranslationRequestField = (
   translationRequestField: string,
   translationValidationField: string,
   requestDetail: ModerationTranslationRequest,
   dispatch: Dispatch<ModerationTranslationAction>
-): boolean => {
+): Validation => {
   let result: Validation;
   switch (translationRequestField) {
     case "tasks": {
@@ -29,6 +29,17 @@ export const isModerationTranslationRequestFieldValid = (
     }
   }
   dispatch(setModerationTranslationRequestValidation({ [translationValidationField]: result }));
+  return { ...result, changed: true };
+};
+
+export const isModerationTranslationRequestFieldValid = (
+  translationRequestField: string,
+  translationValidationField: string,
+  requestDetail: ModerationTranslationRequest,
+  dispatch: Dispatch<ModerationTranslationAction>
+): boolean => {
+  const result = validateModerationTranslationRequestField(translationRequestField, translationValidationField, requestDetail, dispatch);
+  dispatch(setModerationTranslationRequestValidation({ [translationValidationField]: result }));
   return result.valid;
 };
 
@@ -45,4 +56,15 @@ export const isModerationTranslationRequestPageValid = (
     isModerationTranslationRequestFieldValid("message", "message", requestDetail, dispatch),
   ];
   return inputValid.every((valid) => valid);
+};
+
+export const isModerationTranslationRequestPageChanged = (requestValidation: ModerationTranslationRequestValidation): boolean => {
+  // Check whether any data on the page has changed
+  const inputChanged = [
+    requestValidation.tasks.changed,
+    requestValidation.translator.changed,
+    requestValidation.language.changed,
+    requestValidation.message.changed,
+  ];
+  return inputChanged.some((changed) => changed);
 };

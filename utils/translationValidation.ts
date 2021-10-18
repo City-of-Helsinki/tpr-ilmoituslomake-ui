@@ -153,14 +153,10 @@ export const isTranslationTaskPageChanged = (translationExtra: TranslationExtra,
 
   // Check whether any data on the page has changed
   const inputChanged = [taskValidation.name.changed, taskValidation.descriptionShort.changed, taskValidation.descriptionLong.changed];
-  console.log("inputChanged", inputChanged);
-
   const photosChanged = photosTranslated.map((photo, index) => {
     const photoChanged = [taskValidation.photos[index].altText.changed, taskValidation.photos[index].source.changed];
-    console.log("photoChanged", photoChanged);
     return photoChanged.some((changed) => changed);
   });
-  console.log("photosChanged", photosChanged);
 
   return inputChanged.some((changed) => changed) || photosChanged.some((changed) => changed);
 };

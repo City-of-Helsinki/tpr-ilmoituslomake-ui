@@ -54,7 +54,15 @@ const RequestDetail = ({ requestStatus }: RequestDetailProps): ReactElement => {
     dispatch(setModerationTranslationRequest({ ...requestDetail, [evt.target.name]: evt.target.value }));
   };
 
-  const validateRequestMessageDetail = (evt: ChangeEvent<HTMLTextAreaElement>) => {
+  const validateRequestTranslator = () => {
+    isModerationTranslationRequestFieldValid("translator", "translator", requestDetail, dispatch);
+  };
+
+  const validateRequestTranslationLanguage = () => {
+    isModerationTranslationRequestFieldValid("language", "language", requestDetail, dispatch);
+  };
+
+  const validateRequestMessage = (evt: ChangeEvent<HTMLTextAreaElement>) => {
     dispatch(setModerationTranslationRequest({ ...requestDetail, [evt.target.name]: message.trim() }));
     isModerationTranslationRequestFieldValid(evt.target.name, evt.target.id, requestDetail, dispatch);
   };
@@ -70,6 +78,7 @@ const RequestDetail = ({ requestStatus }: RequestDetailProps): ReactElement => {
           options={translatorOptions}
           value={convertValueWithTranslatorId(translator)}
           onChange={updateRequestTranslator}
+          onBlur={validateRequestTranslator}
           label={i18n.t("moderation.translation.request.translator.label")}
           selectedItemRemoveButtonAriaLabel={i18n.t("moderation.button.remove")}
           clearButtonAriaLabel={i18n.t("moderation.button.clearAllSelections")}
@@ -90,6 +99,7 @@ const RequestDetail = ({ requestStatus }: RequestDetailProps): ReactElement => {
           options={languageOptions}
           value={convertValueWithLanguageId(translationLanguage)}
           onChange={updateRequestLanguage}
+          onBlur={validateRequestTranslationLanguage}
           label={i18n.t("moderation.translation.request.translationLanguage.label")}
           selectedItemRemoveButtonAriaLabel={i18n.t("moderation.button.remove")}
           clearButtonAriaLabel={i18n.t("moderation.button.clearAllSelections")}
@@ -111,7 +121,7 @@ const RequestDetail = ({ requestStatus }: RequestDetailProps): ReactElement => {
           name="message"
           value={message}
           onChange={updateRequestMessage}
-          onBlur={validateRequestMessageDetail}
+          onBlur={validateRequestMessage}
           invalid={!messageValid.valid}
           errorText={
             !messageValid.valid
