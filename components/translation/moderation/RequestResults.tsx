@@ -134,13 +134,23 @@ const RequestResults = ({ showStatus, showResults, setShowResults }: RequestResu
     [requestResults, searchRequest, filterStatus, requestStatus]
   );
 
+  const selectableRequestResults = useMemo(
+    () =>
+      filteredRequestResults.filter((result) => {
+        const { tasks } = result;
+        const status = requestStatus(tasks);
+        return status !== TaskStatus.InProgress && status !== TaskStatus.Closed;
+      }),
+    [filteredRequestResults, requestStatus]
+  );
+
   const updateSelectedRequests = (evt: ChangeEvent<HTMLInputElement>) => {
     const requestId = evt.target.value.replace("request_", "");
     const newSelectedRequestIds = evt.target.checked ? [...selectedRequestIds, requestId] : selectedRequestIds.filter((id) => id !== requestId);
     dispatch(
       setModerationTranslationSelectedRequests({
         selectedIds: newSelectedRequestIds,
-        isAllSelected: newSelectedRequestIds.length === filteredRequestResults.length,
+        isAllSelected: newSelectedRequestIds.length === selectableRequestResults.length,
       })
     );
   };
@@ -148,7 +158,7 @@ const RequestResults = ({ showStatus, showResults, setShowResults }: RequestResu
   const selectAllRequests = () => {
     dispatch(
       setModerationTranslationSelectedRequests({
-        selectedIds: !isAllRequestsSelected ? filteredRequestResults.map((result) => String(result.id)) : [],
+        selectedIds: !isAllRequestsSelected ? selectableRequestResults.map((result) => String(result.id)) : [],
         isAllSelected: !isAllRequestsSelected,
       })
     );
@@ -232,6 +242,7 @@ const RequestResults = ({ showStatus, showResults, setShowResults }: RequestResu
                         value={`request_${requestId}`}
                         checked={selectedRequestIds.includes(String(requestId))}
                         onChange={updateSelectedRequests}
+                        disabled={status === TaskStatus.InProgress || status === TaskStatus.Closed}
                       />
 
                       <Link href={`/moderation/translation/request/${requestId}`}>

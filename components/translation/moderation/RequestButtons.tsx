@@ -104,7 +104,11 @@ const RequestButtons = ({ requestStatus }: RequestButtonsProps): ReactElement =>
           <div className="flexSpace" />
           {requestId > 0 && (
             <div className={styles.flexButton}>
-              <Button variant="secondary" onClick={openCancelConfirmation} disabled={taskStatus === TaskStatus.Closed}>
+              <Button
+                variant="secondary"
+                onClick={openCancelConfirmation}
+                disabled={taskStatus === TaskStatus.InProgress || taskStatus === TaskStatus.Closed}
+              >
                 {i18n.t("moderation.button.cancelTranslationRequest")}
               </Button>
             </div>

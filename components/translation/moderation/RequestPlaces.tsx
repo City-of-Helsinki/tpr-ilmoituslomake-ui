@@ -53,7 +53,7 @@ const RequestPlaces = (): ReactElement => {
                 size="small"
                 aria-label={i18n.t("moderation.button.collapse")}
                 onClick={() => removePlaceFromSelection(placeId)}
-                disabled={taskStatus === TaskStatus.Closed}
+                disabled={taskStatus === TaskStatus.InProgress || taskStatus === TaskStatus.Closed}
               >
                 <IconCrossCircleFill aria-hidden />
               </Button>
