@@ -75,6 +75,7 @@ export interface NotificationSchema {
       en: string;
       [k: string]: unknown;
     };
+    media_id?: string;
     [k: string]: unknown;
   }[];
   opening_times: {

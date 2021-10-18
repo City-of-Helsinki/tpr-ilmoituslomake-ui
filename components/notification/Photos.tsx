@@ -56,6 +56,7 @@ const Photos = (): ReactElement => {
         },
         permission: undefined,
         source: "",
+        mediaId: "",
         new: true,
       })
     );

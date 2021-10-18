@@ -9,6 +9,7 @@ import { ItemType, ModerationStatus, TaskStatus, TaskType, Toast } from "../../t
 import { approveModeration, deleteModeration, saveModerationChangeRequest, rejectModeration } from "../../utils/moderation";
 import ModalConfirmation from "../common/ModalConfirmation";
 import ToastNotification from "../common/ToastNotification";
+import { Photo } from "../../types/general";
 import styles from "./TaskHeaderButtons.module.scss";
 
 interface TaskHeaderButtonsProps {
@@ -212,7 +213,7 @@ const TaskHeaderButtons = ({ isModerated }: TaskHeaderButtonsProps): ReactElemen
     // The moderation approval for new images needs both the original url and the proxied preview url
     // Filter out photos that the user has removed
     // After checking, filter out any invalid images, so those with an empty url
-    const approvedPhotos =
+    const approvedPhotos: Photo[] =
       taskType === TaskType.NewPlace ||
       taskType === TaskType.PlaceChange ||
       taskType === TaskType.ChangeTip ||
@@ -224,7 +225,7 @@ const TaskHeaderButtons = ({ isModerated }: TaskHeaderButtonsProps): ReactElemen
               const photoSelected = photosSelected[index];
               const photoModified = photosModified[index];
               const photoStatus = photosStatus[index];
-              const { sourceType, new: isNewImage } = photoModified;
+              const { sourceType, mediaId, new: isNewImage } = photoModified;
               const isPhotoToBeApproved = photosModified.some((photo) => photo.uuid === uuid);
 
               return isPhotoToBeApproved
@@ -240,6 +241,7 @@ const TaskHeaderButtons = ({ isModerated }: TaskHeaderButtonsProps): ReactElemen
                     },
                     permission: getApprovedValue(photoStatus.permission, photoSelected.permission as string, photoModified.permission as string),
                     source: getApprovedValue(photoStatus.source, photoSelected.source, photoModified.source),
+                    mediaId,
                     new: isNewImage,
                     base64: getApprovedValue(photoStatus.url, photoSelected.base64 as string, photoModified.base64 as string),
                     preview: getApprovedValue(photoStatus.url, photoSelected.preview as string, photoModified.preview as string),
@@ -256,6 +258,7 @@ const TaskHeaderButtons = ({ isModerated }: TaskHeaderButtonsProps): ReactElemen
                     },
                     permission: "",
                     source: "",
+                    mediaId: "",
                     new: isNewImage,
                     base64: "",
                     preview: "",
@@ -265,7 +268,7 @@ const TaskHeaderButtons = ({ isModerated }: TaskHeaderButtonsProps): ReactElemen
         : photosUuids
             .map((uuid, index) => {
               const photoModified = photosModified[index];
-              const { sourceType, new: isNewImage } = photoModified;
+              const { sourceType, mediaId, new: isNewImage } = photoModified;
               const isPhotoToBeApproved = photosModified.some((photo) => photo.uuid === uuid);
 
               return isPhotoToBeApproved
@@ -281,6 +284,7 @@ const TaskHeaderButtons = ({ isModerated }: TaskHeaderButtonsProps): ReactElemen
                     },
                     permission: photoModified.permission,
                     source: photoModified.source,
+                    mediaId,
                     new: isNewImage,
                     base64: photoModified.base64,
                     preview: photoModified.preview,
@@ -297,6 +301,7 @@ const TaskHeaderButtons = ({ isModerated }: TaskHeaderButtonsProps): ReactElemen
                     },
                     permission: "",
                     source: "",
+                    mediaId: "",
                     new: isNewImage,
                     base64: "",
                     preview: "",

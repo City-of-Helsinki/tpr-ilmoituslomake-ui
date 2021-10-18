@@ -36,8 +36,8 @@ export const saveNotification = async (
         data: {
           ...notification,
           images: photos.map((photo, index) => {
-            const { uuid, sourceType: source_type, url, altText: alt_text, permission, source } = photo;
-            return { index, uuid, source_type, url, alt_text, permission, source };
+            const { uuid, sourceType: source_type, url, altText: alt_text, permission, source, mediaId: media_id } = photo;
+            return { index, uuid, source_type, url, alt_text, permission, source, media_id };
           }),
         },
         images: photos.map((photo, index) => {
@@ -84,6 +84,7 @@ export const saveNotification = async (
                 },
                 permission: image.permission,
                 source: image.source,
+                mediaId: image.media_id ?? "",
                 base64: "",
                 preview: image.url,
               };

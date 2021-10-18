@@ -57,8 +57,8 @@ export const approveModeration = async (
         data: {
           ...approvedTask,
           images: approvedPhotos.map((photo, index) => {
-            const { uuid, sourceType: source_type, url, altText: alt_text, permission, source } = photo;
-            return { index, uuid, source_type, url, alt_text, permission, source };
+            const { uuid, sourceType: source_type, url, altText: alt_text, permission, source, mediaId: media_id } = photo;
+            return { index, uuid, source_type, url, alt_text, permission, source, media_id };
           }),
         },
         images: approvedPhotos.map((photo, index) => {

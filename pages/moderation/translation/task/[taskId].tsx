@@ -186,6 +186,7 @@ export const getServerSideProps: GetServerSideProps = async ({ req, resolvedUrl,
                 },
                 permission: image.permission ?? "",
                 source: image.source ?? "",
+                mediaId: image.media_id ?? "",
                 base64: "",
                 preview: image.url ?? "",
               };

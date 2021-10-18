@@ -52,6 +52,7 @@ export interface PhotoSchema {
   };
   permission: string;
   source: string;
+  media_id: string;
   [key: string]: unknown;
 }
 
@@ -67,6 +68,7 @@ export interface Photo {
   };
   permission?: string;
   source: string;
+  mediaId: string;
   new?: boolean;
   base64?: string;
   preview?: string;

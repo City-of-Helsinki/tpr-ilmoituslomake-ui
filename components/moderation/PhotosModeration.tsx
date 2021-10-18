@@ -53,6 +53,7 @@ const PhotosModeration = (): ReactElement => {
         },
         permission: PhotoPermission.LocationOnly,
         source: "",
+        mediaId: "",
         new: true,
       })
     );
