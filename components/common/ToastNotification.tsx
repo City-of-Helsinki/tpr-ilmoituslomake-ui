@@ -18,7 +18,7 @@ const ToastNotification = ({ prefix, toast, setToast }: NoticeProps): ReactEleme
 
   return toast ? (
     <HdsNotification
-      position="top-center"
+      position="top-right"
       label={i18n.t(`${prefix}.message.${toast}.title`)}
       type={toast === Toast.SaveSucceeded || toast === Toast.RejectSucceeded || toast === Toast.DeleteSucceeded ? "success" : "error"}
       closeButtonLabelText={i18n.t(`${prefix}.message.close`)}
