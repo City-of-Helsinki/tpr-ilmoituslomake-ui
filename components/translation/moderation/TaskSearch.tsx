@@ -1,10 +1,9 @@
 import React, { Dispatch, ChangeEvent, ReactElement, SetStateAction, useEffect, useMemo } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import dynamic from "next/dynamic";
-import Link from "next/link";
 import { useRouter } from "next/router";
 import { useI18n } from "next-localization";
-import { Button, IconPlus, Select, TextInput } from "hds-react";
+import { Button, Select, TextInput } from "hds-react";
 import moment from "moment";
 import { ModerationTranslationAction } from "../../../state/actions/moderationTranslationTypes";
 import {
@@ -107,10 +106,6 @@ const TaskSearch = ({ showStatus, setShowStatus }: TaskSearchProps): ReactElemen
     <div className={`formSection ${styles.taskSearch}`}>
       <div className={styles.header}>
         <h1 className="moderation">{i18n.t("moderation.translation.taskSearch.title")}</h1>
-        <div className="flexSpace" />
-        <Link href="/moderation/translation/request">
-          <Button iconLeft={<IconPlus aria-hidden />}>{i18n.t("moderation.button.requestNewTranslation")}</Button>
-        </Link>
       </div>
 
       <div className={`gridLayoutContainer ${styles.search}`}>
