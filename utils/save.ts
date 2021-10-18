@@ -7,6 +7,8 @@ import { setPage, setSentNotification } from "../state/actions/notification";
 import { ItemType, Toast, SENT_INFO_PAGE } from "../types/constants";
 import { ChangeRequestSchema, NotificationExtra, User } from "../types/general";
 import { NotificationSchema } from "../types/notification_schema";
+import { getDisplayName } from "./helper";
+import { defaultLocale } from "./i18n";
 import getOrigin from "./request";
 import validateNotificationData, { isTipPageValid } from "./validation";
 
@@ -168,5 +170,62 @@ export const saveTip = async (
   } catch (err) {
     console.log("ERROR", err);
     setToast(Toast.SaveFailed);
+  }
+};
+
+export const getOpeningTimesLink = async (notificationId: number, notification: NotificationSchema, router: NextRouter): Promise<void> => {
+  try {
+    // Send the Cross Site Request Forgery token, otherwise the backend returns the error "CSRF Failed: CSRF token missing or incorrect."
+    const csrftoken = Cookies.get("csrftoken");
+
+    const { name } = notification;
+    const displayName = getDisplayName(router.locale || defaultLocale, name);
+
+    // TODO - check what data is required
+    const postData = {
+      name: displayName,
+      // description: "string",
+      // address: "string",
+      // resource_type: "unit",
+      // children: [],
+      // parents: [],
+      // organization: "string",
+      origins: [
+        {
+          data_source: {
+            id: "kaupunkialusta",
+          },
+          origin_id: notificationId,
+        },
+      ],
+      /*
+      extra_data: {
+        property1: null,
+        property2: null,
+      },
+      */
+      // is_public: true,
+      // timezone: "string",
+    };
+
+    console.log("SENDING", postData);
+
+    const openingTimesResponse = await fetch(`${getOrigin(router)}/api/openingtimes/createlink/${notificationId}/`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "X-CSRFToken": csrftoken as string,
+      },
+      body: JSON.stringify(postData),
+    });
+    if (openingTimesResponse.ok) {
+      const openingTimesResult = await openingTimesResponse.json();
+      console.log("RESPONSE", openingTimesResult);
+    } else {
+      const openingTimesResult = await openingTimesResponse.text();
+      console.log("FAILED", openingTimesResult);
+    }
+  } catch (err) {
+    console.log("ERROR", err);
   }
 };

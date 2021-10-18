@@ -1,9 +1,11 @@
 import React, { ReactElement } from "react";
 import { useSelector } from "react-redux";
 import Link from "next/link";
+import { useRouter } from "next/router";
 import { useI18n } from "next-localization";
-import { Button } from "hds-react";
+import { Button, IconLinkExternal } from "hds-react";
 import { RootState } from "../../state/reducers";
+import { getOpeningTimesLink } from "../../utils/save";
 import styles from "./InfoFooter.module.scss";
 
 interface InfoFooterProps {
@@ -12,9 +14,16 @@ interface InfoFooterProps {
 
 const InfoFooter = ({ isEditingAllowed }: InfoFooterProps): ReactElement => {
   const i18n = useI18n();
+  const router = useRouter();
 
   const currentUser = useSelector((state: RootState) => state.general.user);
   const notificationId = useSelector((state: RootState) => state.notification.notificationId);
+  const notification = useSelector((state: RootState) => state.notification.notification);
+
+  const openExternalOpeningTimesApp = () => {
+    // TODO - get link, window.open into new tab
+    getOpeningTimesLink(notificationId, notification, router);
+  };
 
   return (
     <div className={styles.footer}>
@@ -32,16 +41,14 @@ const InfoFooter = ({ isEditingAllowed }: InfoFooterProps): ReactElement => {
           </Link>
         </div>
       )}
-      {/* NOTE: temporarily removed until external opening times application is ready
       {isEditingAllowed && (
         <div className={styles.flexButton}>
-          <Button variant="secondary" iconRight={<IconLinkExternal aria-hidden />}>
+          <Button variant="secondary" iconRight={<IconLinkExternal aria-hidden />} onClick={openExternalOpeningTimesApp}>
             {i18n.t("notification.button.modifyOpeningTimes")}
             <span className="screenReaderOnly"> {i18n.t("common.opensInANewTab")}</span>
           </Button>
         </div>
       )}
-      */}
       {isEditingAllowed && (
         <div className={styles.flexButton}>
           <Link href={`/tip/${notificationId}`}>
