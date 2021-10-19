@@ -178,18 +178,26 @@ export const getOpeningTimesLink = async (notificationId: number, notification: 
     // Send the Cross Site Request Forgery token, otherwise the backend returns the error "CSRF Failed: CSRF token missing or incorrect."
     const csrftoken = Cookies.get("csrftoken");
 
-    const { name } = notification;
+    const {
+      name,
+      description: {
+        short: { fi: shortDescFi },
+      },
+      address: {
+        fi: { street, postal_code, post_office },
+      },
+    } = notification;
     const displayName = getDisplayName(router.locale || defaultLocale, name);
 
     // TODO - check what data is required
     const postData = {
       name: displayName,
-      // description: "string",
-      // address: "string",
-      // resource_type: "unit",
-      // children: [],
-      // parents: [],
-      // organization: "string",
+      description: shortDescFi,
+      address: `${street}, ${postal_code} ${post_office}`,
+      resource_type: "unit",
+      // children: null,
+      // parents: null,
+      // organization: null,
       origins: [
         {
           data_source: {
@@ -198,14 +206,9 @@ export const getOpeningTimesLink = async (notificationId: number, notification: 
           origin_id: notificationId,
         },
       ],
-      /*
-      extra_data: {
-        property1: null,
-        property2: null,
-      },
-      */
-      // is_public: true,
-      // timezone: "string",
+      // extra_data: null,
+      is_public: true,
+      timezone: "Europe/Helsinki",
     };
 
     console.log("SENDING", postData);
