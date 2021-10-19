@@ -184,12 +184,12 @@ export const getOpeningTimesLink = async (notificationId: number, notification: 
     // TODO - check what data is required
     const postData = {
       name: displayName,
-      // description: "string",
-      // address: "string",
-      // resource_type: "unit",
+      description: "string",
+      address: "string",
+      resource_type: "unit",
       // children: [],
       // parents: [],
-      // organization: "string",
+      organization: "string",
       origins: [
         {
           data_source: {
@@ -205,7 +205,7 @@ export const getOpeningTimesLink = async (notificationId: number, notification: 
       },
       */
       // is_public: true,
-      // timezone: "string",
+      timezone: "string",
     };
 
     console.log("SENDING", postData);
