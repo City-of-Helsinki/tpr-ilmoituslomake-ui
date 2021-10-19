@@ -6,7 +6,7 @@ import { useI18n } from "next-localization";
 import i18nLoader from "../../../utils/i18n";
 import { initStore } from "../../../state/store";
 import { RootState } from "../../../state/reducers";
-import { ModerationStatus, CLEAR_STATE, LANGUAGE_OPTIONS } from "../../../types/constants";
+import { ModerationStatus, CLEAR_STATE, LANGUAGE_OPTIONS, Toast } from "../../../types/constants";
 import { ModerationTodoSchema, PhotoSchema } from "../../../types/general";
 import { INITIAL_MODERATION_STATUS_EDITED, INITIAL_NOTIFICATION } from "../../../types/initial";
 import { PhotoStatus } from "../../../types/moderation_status";
@@ -36,6 +36,8 @@ const ModerationTaskDetail = (): ReactElement => {
 
   // The maps only initialise properly when not hidden, so use a flag to only collapse the container after the maps are ready
   const [mapsReady, setMapsReady] = useState<boolean>(false);
+
+  const [toast, setToast] = useState<Toast>();
 
   const isModerated = (statusToCheck: ModerationStatus) => {
     return statusToCheck !== ModerationStatus.Edited;
@@ -105,7 +107,7 @@ const ModerationTaskDetail = (): ReactElement => {
       <ModerationHeader currentPage={3} />
       {modifiedTaskId > 0 && (
         <main id="content">
-          <TaskHeader isModerated={isSectionModerated(1) && isSectionModerated(2) && isSectionModerated(3)} />
+          <TaskHeader isModerated={isSectionModerated(1) && isSectionModerated(2) && isSectionModerated(3)} toast={toast} setToast={setToast} />
           <h2 className="moderation">{i18n.t("moderation.task.title")}</h2>
           <Collapsible
             section={1}
@@ -139,7 +141,7 @@ const ModerationTaskDetail = (): ReactElement => {
           >
             <PhotosModeration />
           </Collapsible>
-          <TaskHeaderButtons isModerated={isSectionModerated(1) && isSectionModerated(2) && isSectionModerated(3)} />
+          <TaskHeaderButtons isModerated={isSectionModerated(1) && isSectionModerated(2) && isSectionModerated(3)} setToast={setToast} />
         </main>
       )}
     </Layout>

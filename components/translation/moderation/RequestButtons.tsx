@@ -1,4 +1,4 @@
-import React, { Dispatch, ReactElement, useMemo, useState } from "react";
+import React, { Dispatch, ReactElement, SetStateAction, useMemo, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useRouter } from "next/router";
 import { useI18n } from "next-localization";
@@ -11,14 +11,14 @@ import { ModerationTranslationRequestResultTask } from "../../../types/general";
 import { cancelModerationTranslationRequest, saveModerationTranslationRequest } from "../../../utils/moderation";
 import { isModerationTranslationRequestPageChanged, isModerationTranslationRequestPageValid } from "../../../utils/moderationValidation";
 import ModalConfirmation from "../../common/ModalConfirmation";
-import ToastNotification from "../../common/ToastNotification";
 import styles from "./RequestButtons.module.scss";
 
 interface RequestButtonsProps {
   requestStatus: (tasks: ModerationTranslationRequestResultTask[]) => TaskStatus;
+  setToast: Dispatch<SetStateAction<Toast | undefined>>;
 }
 
-const RequestButtons = ({ requestStatus }: RequestButtonsProps): ReactElement => {
+const RequestButtons = ({ requestStatus, setToast }: RequestButtonsProps): ReactElement => {
   const i18n = useI18n();
   const dispatchValidation = useDispatch<Dispatch<ModerationTranslationAction>>();
   const router = useRouter();
@@ -30,7 +30,6 @@ const RequestButtons = ({ requestStatus }: RequestButtonsProps): ReactElement =>
   const { id: requestId, taskType, tasks } = requestDetail;
   const taskStatus = useMemo(() => requestStatus(tasks), [requestStatus, tasks]);
 
-  const [toast, setToast] = useState<Toast>();
   const [confirmSave, setConfirmSave] = useState(false);
   const [confirmCancel, setConfirmCancel] = useState(false);
   const [confirmUnsavedChanges, setConfirmUnsavedChanges] = useState(false);
@@ -156,8 +155,6 @@ const RequestButtons = ({ requestStatus }: RequestButtonsProps): ReactElement =>
           confirmCallback={goBackToList}
         />
       )}
-
-      {toast && <ToastNotification prefix="moderation" toast={toast} setToast={setToast} />}
     </div>
   );
 };

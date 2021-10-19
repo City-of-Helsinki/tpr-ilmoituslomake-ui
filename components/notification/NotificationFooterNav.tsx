@@ -1,19 +1,18 @@
-import React, { ReactElement, useState } from "react";
+import React, { Dispatch, ReactElement, SetStateAction } from "react";
 import { useI18n } from "next-localization";
 import { Toast } from "../../types/constants";
-import ToastNotification from "../common/ToastNotification";
 import NotificationFooter from "./NotificationFooter";
 
-const NotificationFooterNav = (): ReactElement => {
-  const i18n = useI18n();
+interface NotificationFooterNavProps {
+  setToast: Dispatch<SetStateAction<Toast | undefined>>;
+}
 
-  const [toast, setToast] = useState<Toast>();
+const NotificationFooterNav = ({ setToast }: NotificationFooterNavProps): ReactElement => {
+  const i18n = useI18n();
 
   return (
     <nav aria-label={i18n.t("notification.navigationFooter")}>
       <NotificationFooter setToast={setToast} />
-
-      {toast && <ToastNotification prefix="notification" toast={toast} setToast={setToast} />}
     </nav>
   );
 };

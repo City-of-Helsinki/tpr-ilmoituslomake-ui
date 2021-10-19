@@ -1,4 +1,4 @@
-import React, { ReactElement, useCallback, useEffect, useRef } from "react";
+import React, { ReactElement, useCallback, useEffect, useRef, useState } from "react";
 import { useSelector } from "react-redux";
 import { GetServerSideProps } from "next";
 import Head from "next/head";
@@ -6,7 +6,7 @@ import { useI18n } from "next-localization";
 import moment from "moment";
 import { RootState } from "../../../../state/reducers";
 import { initStore } from "../../../../state/store";
-import { CLEAR_STATE, DATETIME_FORMAT, TaskStatus, TaskType, TRANSLATION_OPTIONS } from "../../../../types/constants";
+import { CLEAR_STATE, DATETIME_FORMAT, TaskStatus, TaskType, Toast, TRANSLATION_OPTIONS } from "../../../../types/constants";
 import { ModerationPlaceResult, ModerationTranslationRequestResult, ModerationTranslationRequestResultTask, User } from "../../../../types/general";
 import { INITIAL_NOTIFICATION } from "../../../../types/initial";
 import { getTaskStatus, getTaskType } from "../../../../utils/conversion";
@@ -19,6 +19,7 @@ import RequestStatus from "../../../../components/translation/moderation/Request
 import RequestPlaces from "../../../../components/translation/moderation/RequestPlaces";
 import RequestDetail from "../../../../components/translation/moderation/RequestDetail";
 import NotificationNotice from "../../../../components/common/NotificationNotice";
+import ToastNotification from "../../../../components/common/ToastNotification";
 import ValidationSummary from "../../../../components/common/ValidationSummary";
 
 const ModerationTranslationRequestDetail = (): ReactElement => {
@@ -30,6 +31,8 @@ const ModerationTranslationRequestDetail = (): ReactElement => {
   const requestDetail = useSelector((state: RootState) => state.moderationTranslation.requestDetail);
   const { id: requestId, request, tasks: requestTasks } = requestDetail;
   const formattedRequest = moment(request).format(DATETIME_FORMAT);
+
+  const [toast, setToast] = useState<Toast>();
 
   useEffect(() => {
     if (ref.current) {
@@ -79,6 +82,7 @@ const ModerationTranslationRequestDetail = (): ReactElement => {
         </h1>
       </div>
       <main id="content">
+        {toast && <ToastNotification prefix="moderation" toast={toast} setToast={setToast} />}
         <NotificationNotice messageKey="moderation.mandatory" />
         {!pageValid && <ValidationSummary prefix="moderation" pageValid={pageValid} />}
 
@@ -86,7 +90,7 @@ const ModerationTranslationRequestDetail = (): ReactElement => {
           {requestId > 0 && <RequestStatus taskCounts={taskCounts} requestStatus={requestStatus} />}
           <RequestPlaces />
           <RequestDetail requestStatus={requestStatus} />
-          <RequestButtons requestStatus={requestStatus} />
+          <RequestButtons requestStatus={requestStatus} setToast={setToast} />
         </div>
       </main>
     </Layout>

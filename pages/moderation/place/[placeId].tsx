@@ -6,7 +6,7 @@ import { useI18n } from "next-localization";
 import i18nLoader from "../../../utils/i18n";
 import { initStore } from "../../../state/store";
 import { RootState } from "../../../state/reducers";
-import { ModerationStatus, TaskStatus, TaskType, CLEAR_STATE } from "../../../types/constants";
+import { ModerationStatus, TaskStatus, TaskType, CLEAR_STATE, Toast } from "../../../types/constants";
 import { ModerationPlaceResult } from "../../../types/general";
 import { INITIAL_NOTIFICATION } from "../../../types/initial";
 import { PhotoStatus } from "../../../types/moderation_status";
@@ -34,6 +34,8 @@ const ModerationPlaceDetail = (): ReactElement => {
   // The maps only initialise properly when not hidden, so use a flag to only collapse the container after the maps are ready
   const [mapsReady, setMapsReady] = useState<boolean>(false);
 
+  const [toast, setToast] = useState<Toast>();
+
   return (
     <Layout>
       <Head>
@@ -42,7 +44,7 @@ const ModerationPlaceDetail = (): ReactElement => {
       <ModerationHeader currentPage={2} />
       {selectedTaskId > 0 && (
         <main id="content">
-          <TaskHeader />
+          <TaskHeader toast={toast} setToast={setToast} />
           <h2 className="moderation">{i18n.t("moderation.task.title")}</h2>
           <Collapsible section={1} title={i18n.t("moderation.task.basic")} taskType={taskType} taskStatus={taskStatus}>
             <DescriptionModeration />
@@ -57,7 +59,7 @@ const ModerationPlaceDetail = (): ReactElement => {
           <Collapsible section={3} title={i18n.t("moderation.task.photos")} taskType={taskType} taskStatus={taskStatus}>
             <PhotosModeration />
           </Collapsible>
-          <TaskHeaderButtons />
+          <TaskHeaderButtons setToast={setToast} />
         </main>
       )}
     </Layout>

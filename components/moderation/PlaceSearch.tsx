@@ -145,6 +145,8 @@ const PlaceSearch = (): ReactElement => {
         </div>
       </div>
 
+      {toast && <ToastNotification prefix="moderation" toast={toast} setToast={setToast} />}
+
       <div className="gridLayoutContainer">
         <TextInput
           id="placeName"
@@ -238,8 +240,6 @@ const PlaceSearch = (): ReactElement => {
           </div>
         </div>
       </div>
-
-      {toast && <ToastNotification prefix="moderation" toast={toast} setToast={setToast} />}
     </div>
   );
 };

@@ -12,6 +12,7 @@ import { TranslationSchema } from "../../types/translation_schema";
 import { getDisplayName } from "../../utils/helper";
 import { defaultLocale } from "../../utils/i18n";
 import TaskStatusLabel from "../common/TaskStatusLabel";
+import ToastNotification from "../common/ToastNotification";
 import ValidationSummary from "../common/ValidationSummary";
 import TaskHeaderButtons from "./TaskHeaderButtons";
 import styles from "./TaskHeader.module.scss";
@@ -32,9 +33,11 @@ interface TaskHeaderProps {
     dispatchValidation: Dispatch<TranslationAction>,
     setToast: Dispatch<SetStateAction<Toast | undefined>>
   ) => void;
+  toast?: Toast;
+  setToast: Dispatch<SetStateAction<Toast | undefined>>;
 }
 
-const TaskHeader = ({ prefix, buttonsPrefix, backHref, isModeration, saveTranslation }: TaskHeaderProps): ReactElement => {
+const TaskHeader = ({ prefix, buttonsPrefix, backHref, isModeration, saveTranslation, toast, setToast }: TaskHeaderProps): ReactElement => {
   const i18n = useI18n();
   const router = useRouter();
 
@@ -62,9 +65,17 @@ const TaskHeader = ({ prefix, buttonsPrefix, backHref, isModeration, saveTransla
         {selectedTaskId ? ` (${selectedTaskId})` : ""}
       </h1>
 
+      {toast && <ToastNotification prefix={buttonsPrefix ?? prefix} toast={toast} setToast={setToast} />}
+
       <div className={styles.validationSummary}>{!pageValid && <ValidationSummary prefix={buttonsPrefix ?? prefix} pageValid={pageValid} />}</div>
 
-      <TaskHeaderButtons prefix={buttonsPrefix ?? prefix} backHref={backHref} isModeration={isModeration} saveTranslation={saveTranslation} />
+      <TaskHeaderButtons
+        prefix={buttonsPrefix ?? prefix}
+        backHref={backHref}
+        isModeration={isModeration}
+        saveTranslation={saveTranslation}
+        setToast={setToast}
+      />
 
       <div className={styles.upperRow}>
         <div>
@@ -107,6 +118,7 @@ const TaskHeader = ({ prefix, buttonsPrefix, backHref, isModeration, saveTransla
 
 TaskHeader.defaultProps = {
   buttonsPrefix: undefined,
+  toast: undefined,
 };
 
 export default TaskHeader;

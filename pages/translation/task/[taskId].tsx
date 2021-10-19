@@ -1,4 +1,4 @@
-import React, { ReactElement, useEffect, useRef } from "react";
+import React, { ReactElement, useEffect, useRef, useState } from "react";
 import { useSelector } from "react-redux";
 import { GetServerSideProps } from "next";
 import Head from "next/head";
@@ -6,7 +6,7 @@ import { useI18n } from "next-localization";
 import moment from "moment";
 import { initStore } from "../../../state/store";
 import { RootState } from "../../../state/reducers";
-import { CLEAR_STATE, DATETIME_FORMAT } from "../../../types/constants";
+import { CLEAR_STATE, DATETIME_FORMAT, Toast } from "../../../types/constants";
 import { PhotoSchema, PhotoTranslation, TranslationTodoSchema } from "../../../types/general";
 import { INITIAL_NOTIFICATION, INITIAL_TRANSLATION } from "../../../types/initial";
 import { getTaskStatus, getTaskType } from "../../../utils/conversion";
@@ -37,6 +37,8 @@ const TranslationTask = (): ReactElement => {
   const pageValid = useSelector((state: RootState) => state.translation.taskPageValid);
   const ref = useRef<HTMLDivElement>(null);
 
+  const [toast, setToast] = useState<Toast>();
+
   useEffect(() => {
     if (ref.current) {
       window.scrollTo(0, 0);
@@ -61,7 +63,14 @@ const TranslationTask = (): ReactElement => {
       {translatedTaskId > 0 && (
         <main id="content">
           <div ref={ref}>
-            <TaskHeader prefix="translation" backHref="/translation/request" isModeration={false} saveTranslation={saveTranslation} />
+            <TaskHeader
+              prefix="translation"
+              backHref="/translation/request"
+              isModeration={false}
+              saveTranslation={saveTranslation}
+              toast={toast}
+              setToast={setToast}
+            />
           </div>
           <h2 className="translation">{i18n.t("translation.task.title")}</h2>
 
@@ -92,7 +101,13 @@ const TranslationTask = (): ReactElement => {
             );
           })}
 
-          <TaskHeaderButtons prefix="translation" backHref="/translation/request" isModeration={false} saveTranslation={saveTranslation} />
+          <TaskHeaderButtons
+            prefix="translation"
+            backHref="/translation/request"
+            isModeration={false}
+            saveTranslation={saveTranslation}
+            setToast={setToast}
+          />
         </main>
       )}
     </Layout>

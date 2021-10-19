@@ -1,4 +1,4 @@
-import React, { ReactElement, useState } from "react";
+import React, { Dispatch, ReactElement, SetStateAction, useState } from "react";
 import { useSelector } from "react-redux";
 import Link from "next/link";
 import { useRouter } from "next/router";
@@ -8,15 +8,15 @@ import { RootState } from "../../state/reducers";
 import { ItemType, ModerationStatus, TaskStatus, TaskType, Toast } from "../../types/constants";
 import { approveModeration, deleteModeration, saveModerationChangeRequest, rejectModeration } from "../../utils/moderation";
 import ModalConfirmation from "../common/ModalConfirmation";
-import ToastNotification from "../common/ToastNotification";
 import { Photo } from "../../types/general";
 import styles from "./TaskHeaderButtons.module.scss";
 
 interface TaskHeaderButtonsProps {
   isModerated?: boolean;
+  setToast: Dispatch<SetStateAction<Toast | undefined>>;
 }
 
-const TaskHeaderButtons = ({ isModerated }: TaskHeaderButtonsProps): ReactElement => {
+const TaskHeaderButtons = ({ isModerated, setToast }: TaskHeaderButtonsProps): ReactElement => {
   const i18n = useI18n();
   const router = useRouter();
 
@@ -32,7 +32,6 @@ const TaskHeaderButtons = ({ isModerated }: TaskHeaderButtonsProps): ReactElemen
   const moderationStatus = useSelector((state: RootState) => state.moderationStatus.moderationStatus);
   const { photos: photosStatus } = moderationStatus;
 
-  const [toast, setToast] = useState<Toast>();
   const [confirmApproval, setConfirmApproval] = useState(false);
   const [confirmRejection, setConfirmRejection] = useState(false);
   const [confirmSave, setConfirmSave] = useState(false);
@@ -545,8 +544,6 @@ const TaskHeaderButtons = ({ isModerated }: TaskHeaderButtonsProps): ReactElemen
           confirmCallback={rejectTask}
         />
       )}
-
-      {toast && <ToastNotification prefix="moderation" toast={toast} setToast={setToast} />}
     </div>
   );
 };

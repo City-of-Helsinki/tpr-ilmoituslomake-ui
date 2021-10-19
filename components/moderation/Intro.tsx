@@ -35,6 +35,8 @@ const Intro = (): ReactElement => {
         <h1 className="moderation">{i18n.t("moderation.intro.title")}</h1>
         <div className="formInput">{i18n.t("common.todo")}</div>
 
+        {toast && <ToastNotification prefix="moderation" toast={toast} setToast={setToast} />}
+
         <div className={styles.buttonRow}>
           <div className={styles.flexButton}>
             <Link href="/moderation/place">
@@ -49,8 +51,6 @@ const Intro = (): ReactElement => {
         </div>
       </div>
       <Koros className={styles.wave} type="basic" flipHorizontal />
-
-      {toast && <ToastNotification prefix="moderation" toast={toast} setToast={setToast} />}
     </div>
   );
 };

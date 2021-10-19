@@ -1,4 +1,4 @@
-import React, { Dispatch, ChangeEvent, ReactElement, useState } from "react";
+import React, { Dispatch, ChangeEvent, ReactElement } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useRouter } from "next/router";
 import { useI18n } from "next-localization";
@@ -11,12 +11,10 @@ import {
   setModerationTranslationPlaceResults,
 } from "../../../state/actions/moderationTranslation";
 import { RootState } from "../../../state/reducers";
-import { Toast } from "../../../types/constants";
 import { MatkoTagOption, ModerationPlaceResult, OptionType, TagOption } from "../../../types/general";
 import { sortByOptionLabel } from "../../../utils/helper";
 import { defaultLocale } from "../../../utils/i18n";
 import getOrigin from "../../../utils/request";
-import ToastNotification from "../../common/ToastNotification";
 import styles from "./PlaceSearch.module.scss";
 
 const PlaceSearch = (): ReactElement => {
@@ -29,8 +27,6 @@ const PlaceSearch = (): ReactElement => {
 
   const moderationExtra = useSelector((state: RootState) => state.moderation.moderationExtra);
   const { tagOptions = [], matkoTagOptions = [] } = moderationExtra;
-
-  const [toast, setToast] = useState<Toast>();
 
   const languageOptions = [
     { id: "", label: "" },
@@ -222,8 +218,6 @@ const PlaceSearch = (): ReactElement => {
           </div>
         </div>
       </div>
-
-      {toast && <ToastNotification prefix="moderation" toast={toast} setToast={setToast} />}
     </div>
   );
 };

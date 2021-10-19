@@ -12,7 +12,6 @@ import { NotificationSchema } from "../../types/notification_schema";
 import { TranslationSchema } from "../../types/translation_schema";
 import { isTranslationTaskPageChanged, isTranslationTaskPageValid } from "../../utils/translationValidation";
 import ModalConfirmation from "../common/ModalConfirmation";
-import ToastNotification from "../common/ToastNotification";
 import styles from "./TaskHeaderButtons.module.scss";
 
 interface TaskHeaderButtonsProps {
@@ -30,9 +29,10 @@ interface TaskHeaderButtonsProps {
     dispatchValidation: Dispatch<TranslationAction>,
     setToast: Dispatch<SetStateAction<Toast | undefined>>
   ) => void;
+  setToast: Dispatch<SetStateAction<Toast | undefined>>;
 }
 
-const TaskHeaderButtons = ({ prefix, backHref, isModeration, saveTranslation }: TaskHeaderButtonsProps): ReactElement => {
+const TaskHeaderButtons = ({ prefix, backHref, isModeration, saveTranslation, setToast }: TaskHeaderButtonsProps): ReactElement => {
   const i18n = useI18n();
   const dispatchValidation = useDispatch<Dispatch<TranslationAction>>();
   const router = useRouter();
@@ -49,7 +49,6 @@ const TaskHeaderButtons = ({ prefix, backHref, isModeration, saveTranslation }: 
     translationTask: { taskType, taskStatus },
   } = translationExtra;
 
-  const [toast, setToast] = useState<Toast>();
   const [confirmSend, setConfirmSend] = useState(false);
   const [confirmSave, setConfirmSave] = useState(false);
   const [confirmSaveDraft, setConfirmSaveDraft] = useState(false);
@@ -195,8 +194,6 @@ const TaskHeaderButtons = ({ prefix, backHref, isModeration, saveTranslation }: 
           confirmCallback={goBackToList}
         />
       )}
-
-      {toast && <ToastNotification prefix={prefix} toast={toast} setToast={setToast} />}
     </div>
   );
 };

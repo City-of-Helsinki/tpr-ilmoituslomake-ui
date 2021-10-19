@@ -187,6 +187,8 @@ const RequestResults = ({ showStatus, showResults, setShowResults }: RequestResu
         </div>
       )}
 
+      {toast && <ToastNotification prefix="moderation" toast={toast} setToast={setToast} />}
+
       {searchDone && filteredRequestResults.length === 0 && (
         <div className={styles.headerRow}>
           <h2 className="moderation">{i18n.t("moderation.translation.requestResults.notFound")}</h2>
@@ -296,8 +298,6 @@ const RequestResults = ({ showStatus, showResults, setShowResults }: RequestResu
           confirmCallback={() => cancelRequest()}
         />
       )}
-
-      {toast && <ToastNotification prefix="moderation" toast={toast} setToast={setToast} />}
     </div>
   );
 };

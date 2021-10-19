@@ -1,4 +1,4 @@
-import React, { Dispatch, ReactElement, useState } from "react";
+import React, { Dispatch, ReactElement, SetStateAction } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import Link from "next/link";
 import { useRouter } from "next/router";
@@ -10,17 +10,18 @@ import { RootState } from "../../state/reducers";
 import { Toast } from "../../types/constants";
 import { saveTip } from "../../utils/save";
 import { isTipPageValid } from "../../utils/validation";
-import ToastNotification from "../common/ToastNotification";
 import styles from "./TipFooter.module.scss";
 
-const TipFooter = (): ReactElement => {
+interface TipFooterProps {
+  setToast: Dispatch<SetStateAction<Toast | undefined>>;
+}
+
+const TipFooter = ({ setToast }: TipFooterProps): ReactElement => {
   const i18n = useI18n();
   const dispatchValidation = useDispatch<Dispatch<NotificationValidationAction>>();
   const router = useRouter();
 
   const tip = useSelector((state: RootState) => state.notification.tip);
-
-  const [toast, setToast] = useState<Toast>();
 
   const sendTip = () => {
     if (isTipPageValid(tip, dispatchValidation)) {
@@ -45,8 +46,6 @@ const TipFooter = (): ReactElement => {
           <Button variant="secondary">{i18n.t("notification.button.close")}</Button>
         </Link>
       </div>
-
-      {toast && <ToastNotification prefix="notification" toast={toast} setToast={setToast} />}
     </div>
   );
 };

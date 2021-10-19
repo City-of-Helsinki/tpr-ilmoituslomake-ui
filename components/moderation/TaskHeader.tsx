@@ -1,22 +1,25 @@
-import React, { ReactElement } from "react";
+import React, { Dispatch, ReactElement, SetStateAction } from "react";
 import { useSelector } from "react-redux";
 import { useRouter } from "next/router";
 import { useI18n } from "next-localization";
 import { IconCheck, IconCross } from "hds-react";
 import moment from "moment";
 import { RootState } from "../../state/reducers";
-import { DATETIME_FORMAT, NotifierType, TaskType } from "../../types/constants";
+import { DATETIME_FORMAT, NotifierType, TaskType, Toast } from "../../types/constants";
 import { getDisplayName } from "../../utils/helper";
 import { defaultLocale } from "../../utils/i18n";
 import TaskStatusLabel from "../common/TaskStatusLabel";
+import ToastNotification from "../common/ToastNotification";
 import TaskHeaderButtons from "./TaskHeaderButtons";
 import styles from "./TaskHeader.module.scss";
 
 interface TaskHeaderProps {
   isModerated?: boolean;
+  toast?: Toast;
+  setToast: Dispatch<SetStateAction<Toast | undefined>>;
 }
 
-const TaskHeader = ({ isModerated }: TaskHeaderProps): ReactElement => {
+const TaskHeader = ({ isModerated, toast, setToast }: TaskHeaderProps): ReactElement => {
   const i18n = useI18n();
   const router = useRouter();
 
@@ -47,7 +50,9 @@ const TaskHeader = ({ isModerated }: TaskHeaderProps): ReactElement => {
         {selectedTaskId ? ` (${selectedTaskId})` : ""}
       </h1>
 
-      <TaskHeaderButtons isModerated={isModerated} />
+      {toast && <ToastNotification prefix="moderation" toast={toast} setToast={setToast} />}
+
+      <TaskHeaderButtons isModerated={isModerated} setToast={setToast} />
 
       <div className={styles.upperRow}>
         <div>
@@ -153,6 +158,7 @@ const TaskHeader = ({ isModerated }: TaskHeaderProps): ReactElement => {
 
 TaskHeader.defaultProps = {
   isModerated: false,
+  toast: undefined,
 };
 
 export default TaskHeader;

@@ -1,4 +1,4 @@
-import React, { ReactElement, useEffect, useRef } from "react";
+import React, { ReactElement, useEffect, useRef, useState } from "react";
 import { useSelector } from "react-redux";
 import { GetServerSideProps } from "next";
 import Head from "next/head";
@@ -6,7 +6,7 @@ import { useI18n } from "next-localization";
 import { IconCheckCircleFill } from "hds-react";
 import { RootState } from "../../state/reducers";
 import { initStore } from "../../state/store";
-import { NotifierType, CLEAR_STATE, SENT_INFO_PAGE } from "../../types/constants";
+import { NotifierType, CLEAR_STATE, SENT_INFO_PAGE, Toast } from "../../types/constants";
 import { INITIAL_NOTIFICATION, INITIAL_NOTIFICATION_EXTRA } from "../../types/initial";
 import { NotificationSchema } from "../../types/notification_schema";
 import { PhotoValidation } from "../../types/notification_validation";
@@ -32,6 +32,7 @@ import Preview from "../../components/notification/Preview";
 import SentInfoHeader from "../../components/notification/SentInfoHeader";
 import Tags from "../../components/notification/Tags";
 import Terms from "../../components/notification/Terms";
+import ToastNotification from "../../components/common/ToastNotification";
 import ValidationSummary from "../../components/common/ValidationSummary";
 import styles from "./[[...targetId]].module.scss";
 
@@ -41,6 +42,8 @@ const NotificationDetail = (): ReactElement => {
   const currentPage = useSelector((state: RootState) => state.notification.page);
   const pageValid = useSelector((state: RootState) => state.notificationValidation.pageValid);
   const ref = useRef<HTMLHeadingElement>(null);
+
+  const [toast, setToast] = useState<Toast>();
 
   useEffect(() => {
     if (ref.current) {
@@ -61,38 +64,42 @@ const NotificationDetail = (): ReactElement => {
       {currentPage === 1 && (
         <main id="content" className={`narrowSection ${styles.content}`}>
           <h2 tabIndex={-1}>{`${currentPage} ${i18n.t("notification.main.basic")}`}</h2>
+          {toast && <ToastNotification prefix="notification" toast={toast} setToast={setToast} />}
           <NotificationNotice messageKey="notification.mandatory" />
           {!pageValid && <ValidationSummary prefix="notification" pageValid={pageValid} />}
           <Description />
           <Tags />
           <Notifier />
-          <NotificationFooterNav />
+          <NotificationFooterNav setToast={setToast} />
         </main>
       )}
       {currentPage === 2 && (
         <main id="content" className={`narrowSection ${styles.content}`}>
           <h2 tabIndex={-1}>{`${currentPage} ${i18n.t("notification.main.contact")}`}</h2>
+          {toast && <ToastNotification prefix="notification" toast={toast} setToast={setToast} />}
           <NotificationNotice messageKey="notification.mandatory" />
           {!pageValid && <ValidationSummary prefix="notification" pageValid={pageValid} />}
           <Location />
           <Map />
           <Contact />
           <Links />
-          <NotificationFooterNav />
+          <NotificationFooterNav setToast={setToast} />
         </main>
       )}
       {currentPage === 3 && (
         <main id="content" className={`narrowSection ${styles.content}`}>
           <h2 tabIndex={-1}>{`${currentPage} ${i18n.t("notification.main.photos")}`}</h2>
+          {toast && <ToastNotification prefix="notification" toast={toast} setToast={setToast} />}
           <NotificationNotice messageKey="notification.photos.notice" />
           {!pageValid && <ValidationSummary prefix="notification" pageValid={pageValid} />}
           <Photos />
-          <NotificationFooterNav />
+          <NotificationFooterNav setToast={setToast} />
         </main>
       )}
       {currentPage === 4 && (
         <main id="content" className={`narrowSection ${styles.content}`}>
           <h2 tabIndex={-1}>{`${currentPage} ${i18n.t("notification.main.send")}`}</h2>
+          {toast && <ToastNotification prefix="notification" toast={toast} setToast={setToast} />}
           <NotificationNotice messageKey="notification.comments.notice" />
           {/* NOTE: temporarily removed until external opening times application is ready
           <Opening />
@@ -100,9 +107,9 @@ const NotificationDetail = (): ReactElement => {
           <Comments />
           <Terms />
           <h3>{i18n.t("notification.preview.title")}</h3>
-          <NotificationFooterNav />
+          <NotificationFooterNav setToast={setToast} />
           <Preview includeNotifier />
-          <NotificationFooterNav />
+          <NotificationFooterNav setToast={setToast} />
         </main>
       )}
 

@@ -1,4 +1,4 @@
-import React, { ReactElement, useEffect, useRef } from "react";
+import React, { ReactElement, useEffect, useRef, useState } from "react";
 import { useSelector } from "react-redux";
 import { GetServerSideProps } from "next";
 import dynamic from "next/dynamic";
@@ -6,7 +6,7 @@ import Head from "next/head";
 import { useI18n } from "next-localization";
 import { RootState } from "../../state/reducers";
 import { initStore } from "../../state/store";
-import { ItemType, CLEAR_STATE } from "../../types/constants";
+import { ItemType, CLEAR_STATE, Toast } from "../../types/constants";
 import { NotificationSchema } from "../../types/notification_schema";
 import i18nLoader from "../../utils/i18n";
 import { checkUser, getOriginServerSide } from "../../utils/serverside";
@@ -17,6 +17,7 @@ import NotificationNotice from "../../components/common/NotificationNotice";
 import TipPlace from "../../components/notification/TipPlace";
 import TipDetails from "../../components/notification/TipDetails";
 import TipFooter from "../../components/notification/TipFooter";
+import ToastNotification from "../../components/common/ToastNotification";
 import ValidationSummary from "../../components/common/ValidationSummary";
 import styles from "./[[...tipId]].module.scss";
 
@@ -31,6 +32,8 @@ const Tip = (): ReactElement => {
 
   const tip = useSelector((state: RootState) => state.notification.tip);
   const { target } = tip;
+
+  const [toast, setToast] = useState<Toast>();
 
   useEffect(() => {
     if (ref.current) {
@@ -47,6 +50,7 @@ const Tip = (): ReactElement => {
       <Header />
       <main id="content" className={`narrowSection ${styles.content}`}>
         <TipHeader headerRef={ref} />
+        {toast && <ToastNotification prefix="notification" toast={toast} setToast={setToast} />}
         <NotificationNotice messageKey="notification.mandatory" />
         {!pageValid && <ValidationSummary prefix="notification" pageValid={pageValid} />}
         <div className={`formSection ${styles.tipInfo}`}>
@@ -54,7 +58,7 @@ const Tip = (): ReactElement => {
           <TipPlace />
           <TipDetails />
         </div>
-        <TipFooter />
+        <TipFooter setToast={setToast} />
       </main>
     </Layout>
   );
