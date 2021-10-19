@@ -191,7 +191,7 @@ const Photos = (): ReactElement => {
               <>
                 <TextInput
                   id={`url_${index}`}
-                  className="formInput"
+                  className="formInput disabledTextColor"
                   label={i18n.t("notification.photos.url.labelLink")}
                   name="url"
                   value={url}

@@ -87,7 +87,7 @@ const TipPlace = (): ReactElement => {
           <div className={styles.placeName}>
             <TextInput
               id="placeName"
-              className="formInput"
+              className="formInput disabledTextColor"
               name="placeName"
               value={selectedPlace}
               maxLength={MAX_LENGTH}

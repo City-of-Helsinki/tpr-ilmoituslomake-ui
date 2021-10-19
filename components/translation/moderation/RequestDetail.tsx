@@ -74,7 +74,7 @@ const RequestDetail = ({ requestStatus }: RequestDetailProps): ReactElement => {
       <div className={styles.requestDetail}>
         <Select
           id="translator"
-          className="formInput"
+          className="formInput disabledTextColor"
           options={translatorOptions}
           value={convertValueWithTranslatorId(translator)}
           onChange={updateRequestTranslator}
@@ -95,7 +95,7 @@ const RequestDetail = ({ requestStatus }: RequestDetailProps): ReactElement => {
 
         <Select
           id="translationLanguage"
-          className="formInput"
+          className="formInput disabledTextColor"
           options={languageOptions}
           value={convertValueWithLanguageId(translationLanguage)}
           onChange={updateRequestLanguage}
@@ -116,7 +116,7 @@ const RequestDetail = ({ requestStatus }: RequestDetailProps): ReactElement => {
 
         <TextArea
           id="message"
-          className="formInput"
+          className="formInput disabledTextColor"
           label={i18n.t("moderation.translation.request.message.label")}
           name="message"
           value={message}
