@@ -41,7 +41,9 @@ const Collapsible = ({ prefix, section, title, taskStatus, isTranslated, forceEx
         <div className={styles.status}>
           <TaskStatusLabel
             prefix={`${prefix}.collapsible`}
-            status={isTranslated || taskStatus === TaskStatus.Closed ? TaskStatus.Closed : TaskStatus.InProgress}
+            status={
+              isTranslated || taskStatus === TaskStatus.Closed || taskStatus === TaskStatus.Cancelled ? TaskStatus.Closed : TaskStatus.InProgress
+            }
             includeIcons
           />
         </div>

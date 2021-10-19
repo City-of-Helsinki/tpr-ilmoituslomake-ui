@@ -43,6 +43,7 @@ export enum TaskStatus {
   Open = "open",
   InProgress = "in_progress",
   Closed = "closed",
+  Cancelled = "cancelled",
 }
 
 export enum TaskType {

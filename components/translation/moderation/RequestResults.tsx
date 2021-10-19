@@ -87,7 +87,7 @@ const RequestResults = ({ showStatus, showResults, setShowResults }: RequestResu
         acc[task.taskStatus] += 1;
         return acc;
       },
-      { [TaskStatus.Open]: 0, [TaskStatus.InProgress]: 0, [TaskStatus.Closed]: 0 }
+      { [TaskStatus.Open]: 0, [TaskStatus.InProgress]: 0, [TaskStatus.Closed]: 0, [TaskStatus.Cancelled]: 0 }
     );
   }, []);
 
@@ -98,8 +98,8 @@ const RequestResults = ({ showStatus, showResults, setShowResults }: RequestResu
         // All the tasks are open, so the request is open
         return TaskStatus.Open;
       }
-      if (counts[TaskStatus.Closed] === tasks.length) {
-        // All the tasks are closed, so the request is closed
+      if (counts[TaskStatus.Closed] + counts[TaskStatus.Cancelled] === tasks.length) {
+        // All the tasks are closed or cancelled, so the request is closed
         return TaskStatus.Closed;
       }
       // There is a mixed status, so the request is in progress
@@ -115,7 +115,7 @@ const RequestResults = ({ showStatus, showResults, setShowResults }: RequestResu
           return taskStatus === TaskStatus.Open || taskStatus === TaskStatus.InProgress;
         }
         case "submitted": {
-          return taskStatus === TaskStatus.Closed;
+          return taskStatus === TaskStatus.Closed || taskStatus === TaskStatus.Cancelled;
         }
         default: {
           return true;
@@ -270,7 +270,7 @@ const RequestResults = ({ showStatus, showResults, setShowResults }: RequestResu
                     <div className={styles.flexItem}>
                       <span className={styles.mobileOnly}>{`${i18n.t("moderation.translation.requestResults.translationTasks")}: `}</span>
                       <div className={styles.counts}>
-                        <span className={styles.count}>{`${counts[TaskStatus.Closed]} / ${tasks.length}`}</span>
+                        <span className={styles.count}>{`${counts[TaskStatus.Closed] + counts[TaskStatus.Cancelled]} / ${tasks.length}`}</span>
                         <span className={styles.label}>{i18n.t("moderation.translation.requestResults.counts.done")}</span>
                       </div>
                     </div>

@@ -149,7 +149,7 @@ const MapModeration = ({ setMapsReady }: MapModerationProps): ReactElement => {
             location={locationStatus !== ModerationStatus.Edited ? locationSelected : locationModified}
             setLocation={locationStatus === ModerationStatus.Edited ? updateLocation : undefined}
             setMapReady={setMap1Ready}
-            draggableMarker={locationStatus === ModerationStatus.Edited && taskStatus !== TaskStatus.Closed}
+            draggableMarker={locationStatus === ModerationStatus.Edited && taskStatus !== TaskStatus.Closed && taskStatus !== TaskStatus.Cancelled}
           />
         </div>
       </div>
@@ -211,7 +211,10 @@ const MapModeration = ({ setMapsReady }: MapModerationProps): ReactElement => {
               setLocation={updateLocation}
               setMapReady={setMap2Ready}
               draggableMarker={
-                locationStatus !== ModerationStatus.Approved && locationStatus !== ModerationStatus.Rejected && taskStatus !== TaskStatus.Closed
+                locationStatus !== ModerationStatus.Approved &&
+                locationStatus !== ModerationStatus.Rejected &&
+                taskStatus !== TaskStatus.Closed &&
+                taskStatus !== TaskStatus.Cancelled
               }
             />
           </ModifyButton>

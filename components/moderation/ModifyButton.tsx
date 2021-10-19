@@ -34,7 +34,7 @@ const ModifyButton = ({
           className={styles.gridButton}
           variant="secondary"
           onClick={() => modifyCallback(fieldName, ModerationStatus.Edited)}
-          disabled={taskStatus === TaskStatus.Closed}
+          disabled={taskStatus === TaskStatus.Closed || taskStatus === TaskStatus.Cancelled}
         >{`${i18n.t("moderation.button.modify")} ${label ? label.toLowerCase() : ""}`}</Button>
       )}
       {moderationStatus === ModerationStatus.Edited && children}
@@ -47,7 +47,7 @@ const ModifyButton = ({
               size="small"
               iconLeft={<IconPen aria-hidden />}
               onClick={() => modifyCallback(fieldName, ModerationStatus.Edited)}
-              disabled={taskStatus === TaskStatus.Closed}
+              disabled={taskStatus === TaskStatus.Closed || taskStatus === TaskStatus.Cancelled}
             >
               {i18n.t("moderation.button.modify")}
             </Button>

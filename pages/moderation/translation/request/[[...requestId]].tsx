@@ -47,7 +47,7 @@ const ModerationTranslationRequestDetail = (): ReactElement => {
         acc[task.taskStatus] += 1;
         return acc;
       },
-      { [TaskStatus.Open]: 0, [TaskStatus.InProgress]: 0, [TaskStatus.Closed]: 0 }
+      { [TaskStatus.Open]: 0, [TaskStatus.InProgress]: 0, [TaskStatus.Closed]: 0, [TaskStatus.Cancelled]: 0 }
     );
   }, []);
 
@@ -58,8 +58,8 @@ const ModerationTranslationRequestDetail = (): ReactElement => {
         // All the tasks are open, so the request is open
         return TaskStatus.Open;
       }
-      if (counts[TaskStatus.Closed] === tasks.length) {
-        // All the tasks are closed, so the request is closed
+      if (counts[TaskStatus.Closed] + counts[TaskStatus.Cancelled] === tasks.length) {
+        // All the tasks are closed or cancelled, so the request is closed
         return TaskStatus.Closed;
       }
       // There is a mixed status, so the request is in progress

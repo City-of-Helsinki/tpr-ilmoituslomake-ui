@@ -106,14 +106,18 @@ const RequestButtons = ({ requestStatus, setToast }: RequestButtonsProps): React
               <Button
                 variant="secondary"
                 onClick={openCancelConfirmation}
-                disabled={taskStatus === TaskStatus.InProgress || taskStatus === TaskStatus.Closed}
+                disabled={taskStatus === TaskStatus.InProgress || taskStatus === TaskStatus.Closed || taskStatus === TaskStatus.Cancelled}
               >
                 {i18n.t("moderation.button.cancelTranslationRequest")}
               </Button>
             </div>
           )}
           <div className={`${styles.flexButton} ${styles.sendButton}`}>
-            <Button iconRight={<IconArrowRight aria-hidden />} onClick={openSaveConfirmation} disabled={taskStatus === TaskStatus.Closed}>
+            <Button
+              iconRight={<IconArrowRight aria-hidden />}
+              onClick={openSaveConfirmation}
+              disabled={taskStatus === TaskStatus.Closed || taskStatus === TaskStatus.Cancelled}
+            >
               {i18n.t("moderation.button.sendTranslationRequest")}
             </Button>
           </div>

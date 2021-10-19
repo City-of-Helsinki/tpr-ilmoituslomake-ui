@@ -192,7 +192,11 @@ const PhotosModeration = (): ReactElement => {
                     </>
                   )}
                   {modifiedImage && (
-                    <Button variant="secondary" onClick={() => removePhoto(index)} disabled={taskStatus === TaskStatus.Closed}>
+                    <Button
+                      variant="secondary"
+                      onClick={() => removePhoto(index)}
+                      disabled={taskStatus === TaskStatus.Closed || taskStatus === TaskStatus.Cancelled}
+                    >
                       {i18n.t("moderation.photos.remove")}
                     </Button>
                   )}
@@ -295,7 +299,8 @@ const PhotosModeration = (): ReactElement => {
         taskType === TaskType.ModeratorChange ||
         taskType === TaskType.ModeratorAdd ||
         pageStatus === ModerationStatus.Edited) &&
-        taskStatus !== TaskStatus.Closed && (
+        taskStatus !== TaskStatus.Closed &&
+        taskStatus !== TaskStatus.Cancelled && (
           <div className={`gridLayoutContainer moderation ${styles.addNewContainer}`}>
             <div className={styles.gridSelected}>
               <Button

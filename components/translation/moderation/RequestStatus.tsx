@@ -36,7 +36,7 @@ const RequestStatus = ({ taskCounts, requestStatus }: RequestStatusProps): React
         <div className={styles.statusItem}>
           <div className={styles.bold}>{i18n.t("moderation.translation.request.translationTasks")}</div>
           <div className={styles.counts}>
-            <span className={styles.count}>{`${counts[TaskStatus.Closed]} / ${requestTasks.length}`}</span>
+            <span className={styles.count}>{`${counts[TaskStatus.Closed] + counts[TaskStatus.Cancelled]} / ${requestTasks.length}`}</span>
             <span className={styles.label}>{i18n.t("moderation.translation.requestResults.counts.done")}</span>
           </div>
         </div>

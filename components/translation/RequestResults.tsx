@@ -74,7 +74,7 @@ const RequestResults = ({ showStatus, showResults, setShowStatus, setShowResults
         acc[task.taskStatus] += 1;
         return acc;
       },
-      { [TaskStatus.Open]: 0, [TaskStatus.InProgress]: 0, [TaskStatus.Closed]: 0 }
+      { [TaskStatus.Open]: 0, [TaskStatus.InProgress]: 0, [TaskStatus.Closed]: 0, [TaskStatus.Cancelled]: 0 }
     );
   }, []);
 
@@ -85,8 +85,8 @@ const RequestResults = ({ showStatus, showResults, setShowStatus, setShowResults
         // All the tasks are open, so the request is open
         return TaskStatus.Open;
       }
-      if (counts[TaskStatus.Closed] === tasks.length) {
-        // All the tasks are closed, so the request is closed
+      if (counts[TaskStatus.Closed] + counts[TaskStatus.Cancelled] === tasks.length) {
+        // All the tasks are closed or cancelled, so the request is closed
         return TaskStatus.Closed;
       }
       // There is a mixed status, so the request is in progress
@@ -102,7 +102,7 @@ const RequestResults = ({ showStatus, showResults, setShowStatus, setShowResults
           return taskStatus === TaskStatus.Open || taskStatus === TaskStatus.InProgress;
         }
         case "submitted": {
-          return taskStatus === TaskStatus.Closed;
+          return taskStatus === TaskStatus.Closed || taskStatus === TaskStatus.Cancelled;
         }
         default: {
           return true;
@@ -158,7 +158,7 @@ const RequestResults = ({ showStatus, showResults, setShowStatus, setShowResults
               const { id: requestId, formattedRequest, moderator, tasks } = result;
               const status = requestStatus(tasks);
               const counts = taskCounts(tasks);
-              const completed = (100 * counts[TaskStatus.Closed]) / tasks.length;
+              const completed = (100 * (counts[TaskStatus.Closed] + counts[TaskStatus.Cancelled])) / tasks.length;
 
               return (
                 <Fragment key={`requestresult_${requestId}`}>
@@ -200,7 +200,7 @@ const RequestResults = ({ showStatus, showResults, setShowStatus, setShowResults
                         <span className={styles.label}>{i18n.t("translation.requestResults.counts.draft")}</span>
                       </div>
                       <div>
-                        <span className={styles.count}>{counts[TaskStatus.Closed]}</span>
+                        <span className={styles.count}>{counts[TaskStatus.Closed] + counts[TaskStatus.Cancelled]}</span>
                         <span className={styles.label}>{i18n.t("translation.requestResults.counts.done")}</span>
                       </div>
                     </div>

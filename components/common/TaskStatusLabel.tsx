@@ -26,6 +26,9 @@ const TaskStatusLabel = ({ prefix, status, includeIcons }: TaskStatusLabelProps)
         </StatusLabel>
       );
     }
+    case TaskStatus.Cancelled: {
+      return <StatusLabel type="success">{i18n.t(`${prefix}.taskStatus.cancelled`)}</StatusLabel>;
+    }
     default: {
       return null;
     }

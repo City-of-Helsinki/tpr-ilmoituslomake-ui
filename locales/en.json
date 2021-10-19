@@ -507,7 +507,8 @@
     "taskStatus": {
       "open": "Not started",
       "inProgress": "Active",
-      "closed": "Sent"
+      "closed": "Sent",
+      "cancelled": "Cancelled"
     },
     "collapsible": {
       "taskStatus": {
@@ -905,7 +906,8 @@
     "taskStatus": {
       "open": "Uusi",
       "inProgress": "Kesken",
-      "closed": "Valmis"
+      "closed": "Valmis",
+      "cancelled": "Peruttu"
     },
     "collapsible": {
       "taskStatus": {
@@ -1031,7 +1033,8 @@
       "taskStatus": {
         "open": "Aloittamatta",
         "inProgress": "Kesken",
-        "closed": "Valmis"
+        "closed": "Valmis",
+        "cancelled": "Peruttu"
       },
       "taskType": {
         "translation": "Käännöspyyntö"
@@ -1043,7 +1046,8 @@
         "taskStatus": {
           "open": "Aloittamatta",
           "in_progress": "Kesken",
-          "closed": "Valmis"
+          "closed": "Valmis",
+          "cancelled": "Peruttu"
         },
         "request": "Pyyntö",
         "translationTasks": "Tehtäviä",

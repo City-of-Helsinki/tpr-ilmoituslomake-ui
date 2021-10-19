@@ -126,20 +126,32 @@ const TaskHeaderButtons = ({ prefix, backHref, isModeration, saveTranslation, se
           </div>
           <div className="flexSpace" />
           <div className={styles.flexButton}>
-            <Button variant="secondary" onClick={openSaveDraftConfirmation} disabled={taskStatus === TaskStatus.Closed}>
+            <Button
+              variant="secondary"
+              onClick={openSaveDraftConfirmation}
+              disabled={taskStatus === TaskStatus.Closed || taskStatus === TaskStatus.Cancelled}
+            >
               {i18n.t(`${prefix}.button.saveDraft`)}
             </Button>
           </div>
           {!isModeration && (
             <div className={`${styles.flexButton} ${styles.sendButton}`}>
-              <Button iconRight={<IconArrowRight aria-hidden />} onClick={openSendConfirmation} disabled={taskStatus === TaskStatus.Closed}>
+              <Button
+                iconRight={<IconArrowRight aria-hidden />}
+                onClick={openSendConfirmation}
+                disabled={taskStatus === TaskStatus.Closed || taskStatus === TaskStatus.Cancelled}
+              >
                 {i18n.t(`${prefix}.button.sendTranslation`)}
               </Button>
             </div>
           )}
           {isModeration && (
             <div className={`${styles.flexButton} ${styles.saveButton}`}>
-              <Button iconRight={<IconArrowRight aria-hidden />} onClick={openSaveConfirmation} disabled={taskStatus === TaskStatus.Closed}>
+              <Button
+                iconRight={<IconArrowRight aria-hidden />}
+                onClick={openSaveConfirmation}
+                disabled={taskStatus === TaskStatus.Closed || taskStatus === TaskStatus.Cancelled}
+              >
                 {i18n.t(`${prefix}.button.saveTranslation`)}
               </Button>
             </div>

@@ -330,12 +330,12 @@ const TaskHeaderButtons = ({ isModerated, setToast }: TaskHeaderButtonsProps): R
       {(taskType === TaskType.NewPlace || taskType === TaskType.PlaceChange) && (
         <div className={styles.buttonRow}>
           <div className="flexSpace" />
-          {taskStatus === TaskStatus.Closed && selectedTaskId > 0 && (
+          {(taskStatus === TaskStatus.Closed || taskStatus === TaskStatus.Cancelled) && selectedTaskId > 0 && (
             <div className={styles.flexButton}>
               <Button
                 variant="secondary"
                 onClick={() => makePlaceInfoChangeRequest(ItemType.ChangeRequestChange)}
-                disabled={taskStatus !== TaskStatus.Closed}
+                disabled={taskStatus !== TaskStatus.Closed && taskStatus !== TaskStatus.Cancelled}
               >
                 {i18n.t("moderation.button.openForModifying")}
               </Button>
@@ -347,7 +347,7 @@ const TaskHeaderButtons = ({ isModerated, setToast }: TaskHeaderButtonsProps): R
               variant="secondary"
               iconRight={<IconArrowUndo aria-hidden />}
               onClick={openRejectionConfirmation}
-              disabled={taskStatus === TaskStatus.Closed}
+              disabled={taskStatus === TaskStatus.Closed || taskStatus === TaskStatus.Cancelled}
             >
               {i18n.t("moderation.button.rejectChangeRequest")}
             </Button>
@@ -356,7 +356,7 @@ const TaskHeaderButtons = ({ isModerated, setToast }: TaskHeaderButtonsProps): R
             <Button
               iconRight={<IconArrowRight aria-hidden />}
               onClick={openApprovalConfirmation}
-              disabled={!isModerated || taskStatus === TaskStatus.Closed}
+              disabled={!isModerated || taskStatus === TaskStatus.Closed || taskStatus === TaskStatus.Cancelled}
             >
               {i18n.t("moderation.button.saveInformation")}
             </Button>
@@ -370,12 +370,12 @@ const TaskHeaderButtons = ({ isModerated, setToast }: TaskHeaderButtonsProps): R
         taskType === TaskType.ModeratorAdd) && (
         <div className={styles.buttonRow}>
           <div className="flexSpace" />
-          {taskStatus === TaskStatus.Closed && selectedTaskId > 0 && (
+          {(taskStatus === TaskStatus.Closed || taskStatus === TaskStatus.Cancelled) && selectedTaskId > 0 && (
             <div className={styles.flexButton}>
               <Button
                 variant="secondary"
                 onClick={() => makePlaceInfoChangeRequest(ItemType.ChangeRequestChange)}
-                disabled={taskStatus !== TaskStatus.Closed}
+                disabled={taskStatus !== TaskStatus.Closed && taskStatus !== TaskStatus.Cancelled}
               >
                 {i18n.t("moderation.button.openForModifying")}
               </Button>
@@ -391,7 +391,7 @@ const TaskHeaderButtons = ({ isModerated, setToast }: TaskHeaderButtonsProps): R
                   ? openChangeCancellationConfirmation
                   : openAddCancellationConfirmation
               }
-              disabled={taskStatus === TaskStatus.Closed}
+              disabled={taskStatus === TaskStatus.Closed || taskStatus === TaskStatus.Cancelled}
             >
               {taskType === TaskType.ChangeTip || taskType === TaskType.ModeratorChange
                 ? i18n.t("moderation.button.cancelChange")
@@ -402,7 +402,7 @@ const TaskHeaderButtons = ({ isModerated, setToast }: TaskHeaderButtonsProps): R
             <Button
               iconRight={<IconArrowRight aria-hidden />}
               onClick={openSaveConfirmation}
-              disabled={!isModerated || taskStatus === TaskStatus.Closed}
+              disabled={!isModerated || taskStatus === TaskStatus.Closed || taskStatus === TaskStatus.Cancelled}
             >
               {i18n.t("moderation.button.saveInformation")}
             </Button>
@@ -418,13 +418,17 @@ const TaskHeaderButtons = ({ isModerated, setToast }: TaskHeaderButtonsProps): R
               variant="secondary"
               iconRight={<IconArrowUndo aria-hidden />}
               onClick={openDeleteCancellationConfirmation}
-              disabled={taskStatus === TaskStatus.Closed}
+              disabled={taskStatus === TaskStatus.Closed || taskStatus === TaskStatus.Cancelled}
             >
               {i18n.t("moderation.button.cancelRemove")}
             </Button>
           </div>
           <div className={styles.flexButton}>
-            <Button iconRight={<IconTrash aria-hidden />} onClick={openDeletionConfirmation} disabled={taskStatus === TaskStatus.Closed}>
+            <Button
+              iconRight={<IconTrash aria-hidden />}
+              onClick={openDeletionConfirmation}
+              disabled={taskStatus === TaskStatus.Closed || taskStatus === TaskStatus.Cancelled}
+            >
               {i18n.t("moderation.button.removePlace")}
             </Button>
           </div>
@@ -443,7 +447,7 @@ const TaskHeaderButtons = ({ isModerated, setToast }: TaskHeaderButtonsProps): R
             <Button
               variant="secondary"
               onClick={() => makePlaceInfoChangeRequest(ItemType.ChangeRequestChange)}
-              disabled={taskStatus === TaskStatus.Closed}
+              disabled={taskStatus === TaskStatus.Closed || taskStatus === TaskStatus.Cancelled}
             >
               {i18n.t("moderation.button.openForModifying")}
             </Button>
@@ -453,7 +457,7 @@ const TaskHeaderButtons = ({ isModerated, setToast }: TaskHeaderButtonsProps): R
               variant="secondary"
               iconRight={<IconTrash aria-hidden />}
               onClick={() => makePlaceInfoChangeRequest(ItemType.ChangeRequestDelete)}
-              disabled={taskStatus === TaskStatus.Closed}
+              disabled={taskStatus === TaskStatus.Closed || taskStatus === TaskStatus.Cancelled}
             >
               {i18n.t("moderation.button.removePlace")}
             </Button>
