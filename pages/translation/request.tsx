@@ -5,7 +5,7 @@ import { useI18n } from "next-localization";
 import { initStore } from "../../state/store";
 import { CLEAR_STATE } from "../../types/constants";
 import i18nLoader from "../../utils/i18n";
-import { checkUser, redirectToLogin, redirectToNotAuthorized } from "../../utils/serverside";
+import { checkUser, redirectToEnglish, redirectToLogin, redirectToNotAuthorized } from "../../utils/serverside";
 import Layout from "../../components/common/Layout";
 import Header from "../../components/common/Header";
 import Intro from "../../components/translation/Intro";
@@ -42,11 +42,8 @@ const TranslationRequest = (): ReactElement => {
 };
 
 // Server-side rendering
-export const getServerSideProps: GetServerSideProps = async ({ req, resolvedUrl, locales }) => {
+export const getServerSideProps: GetServerSideProps = async ({ req, resolvedUrl, locale, locales }) => {
   const lngDict = await i18nLoader(locales, false, true);
-
-  // Force the translation app to use English
-  const forceLocale = "en";
 
   const reduxStore = initStore();
   reduxStore.dispatch({ type: CLEAR_STATE });
@@ -65,11 +62,15 @@ export const getServerSideProps: GetServerSideProps = async ({ req, resolvedUrl,
     initialReduxState.general.user = user;
   }
 
+  // Force the translation app to use English
+  if (locale !== "en") {
+    return redirectToEnglish(resolvedUrl);
+  }
+
   return {
     props: {
       initialReduxState,
       lngDict,
-      forceLocale,
     },
   };
 };

@@ -11,7 +11,7 @@ import { PhotoSchema, PhotoTranslation, TranslationTodoSchema } from "../../../t
 import { INITIAL_NOTIFICATION, INITIAL_TRANSLATION } from "../../../types/initial";
 import { getTaskStatus, getTaskType } from "../../../utils/conversion";
 import i18nLoader from "../../../utils/i18n";
-import { checkUser, getOriginServerSide, redirectToLogin, redirectToNotAuthorized } from "../../../utils/serverside";
+import { checkUser, getOriginServerSide, redirectToEnglish, redirectToLogin, redirectToNotAuthorized } from "../../../utils/serverside";
 import saveTranslation from "../../../utils/translation";
 import { validateTranslationTaskDetails, validateTranslationTaskPhoto } from "../../../utils/translationValidation";
 import Layout from "../../../components/common/Layout";
@@ -115,11 +115,8 @@ const TranslationTask = (): ReactElement => {
 };
 
 // Server-side rendering
-export const getServerSideProps: GetServerSideProps = async ({ req, resolvedUrl, params, locales }) => {
+export const getServerSideProps: GetServerSideProps = async ({ req, resolvedUrl, params, locale, locales }) => {
   const lngDict = await i18nLoader(locales, false, true);
-
-  // Force the translation app to use English
-  const forceLocale = "en";
 
   const reduxStore = initStore();
   reduxStore.dispatch({ type: CLEAR_STATE });
@@ -136,6 +133,11 @@ export const getServerSideProps: GetServerSideProps = async ({ req, resolvedUrl,
   }
   if (user && user.authenticated) {
     initialReduxState.general.user = user;
+  }
+
+  // Force the translation app to use English
+  if (locale !== "en") {
+    return redirectToEnglish(resolvedUrl);
   }
 
   // Try to fetch the task details for the specified id
@@ -238,7 +240,6 @@ export const getServerSideProps: GetServerSideProps = async ({ req, resolvedUrl,
     props: {
       initialReduxState,
       lngDict,
-      forceLocale,
     },
   };
 };

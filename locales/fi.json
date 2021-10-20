@@ -29,6 +29,7 @@
     "opensInANewTab": "Avautuu uudessa välilehdessä.",
     "opensExternal": "Siirtyy toiseen sivustoon.",
     "notAuthorized": "Sinulla ei ole lupaa tarkastella pyydettyä sivua",
+    "redirecting": "Ohjataan oikealle sivulle...",
     "todo": "TODO - TEXT HERE"
   },
   "notification": {

@@ -11,28 +11,29 @@ export const getOriginServerSide = (): string => {
   return "http://localhost:8008";
 };
 
-export const redirectToLogin = (resolvedUrl: string): { redirect: Redirect } => {
+const getRedirectObject = (url: string): { redirect: Redirect } => {
   // The server-side needs to redirect the client-side, so don't use getOriginServerSide here
   // The base path is needed to make sure the login page redirects work correctly in the server environment
   return {
     redirect: {
-      destination: `${process.env.BASE_PATH}/helauth/login/?next=${process.env.BASE_PATH}${resolvedUrl}`,
+      destination: `${process.env.BASE_PATH}${url}`,
       permanent: false,
       basePath: false,
     },
   };
 };
 
+export const redirectToLogin = (resolvedUrl: string): { redirect: Redirect } => {
+  return getRedirectObject(`/helauth/login/?next=${process.env.BASE_PATH}${resolvedUrl}`);
+};
+
 export const redirectToNotAuthorized = (): { redirect: Redirect } => {
-  // The server-side needs to redirect the client-side, so don't use getOriginServerSide here
-  // The base path is needed to make sure the login page redirects work correctly in the server environment
-  return {
-    redirect: {
-      destination: `${process.env.BASE_PATH}/notauthorized/`,
-      permanent: false,
-      basePath: false,
-    },
-  };
+  return getRedirectObject("/notauthorized/");
+};
+
+export const redirectToEnglish = (resolvedUrl: string): { redirect: Redirect } => {
+  // This function is used by the translation app to force it to use English
+  return getRedirectObject(`/en${resolvedUrl}`);
 };
 
 export const checkUser = async (req: IncomingMessage): Promise<User | undefined> => {

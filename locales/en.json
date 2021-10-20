@@ -29,6 +29,7 @@
     "opensInANewTab": "Opens in a new tab.",
     "opensExternal": "Moves to another site.",
     "notAuthorized": "You are not authorized to view the requested page",
+    "redirecting": "Redirecting to correct page...",
     "todo": "TODO - TEXT HERE"
   },
   "notification": {
