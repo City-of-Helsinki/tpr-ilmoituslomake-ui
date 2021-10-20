@@ -31,6 +31,10 @@ export const redirectToNotAuthorized = (): { redirect: Redirect } => {
   return getRedirectObject("/notauthorized/");
 };
 
+export const redirectToModeration = (): { redirect: Redirect } => {
+  return getRedirectObject("/moderation/front/");
+};
+
 export const redirectToEnglish = (resolvedUrl: string): { redirect: Redirect } => {
   // This function is used by the translation app to force it to use English
   return getRedirectObject(`/en${resolvedUrl}`);

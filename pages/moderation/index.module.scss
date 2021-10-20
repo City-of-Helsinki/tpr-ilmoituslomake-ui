@@ -1,0 +1,17 @@
+@import "~hds-design-tokens/lib/all.scss";
+
+.content {
+  .korosTextBox {
+    text-align: center;
+    background-color: $color-suomenlinna-light;
+    padding: $spacing-xl $spacing-xl 0;
+
+    h1 {
+      margin-bottom: 0;
+    }
+  }
+
+  .koros {
+    fill: $color-suomenlinna-light;
+  }
+}
