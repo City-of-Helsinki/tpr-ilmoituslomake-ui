@@ -49,7 +49,7 @@ export const setModerationMatkoTagStatus = (status: ModerationStatus): Moderatio
   payload: status,
 });
 
-export const setModerationExtraKeywordsStatus = (status: ModerationStatus): ModerationStatusAction => ({
+export const setModerationExtraKeywordsStatus = (status: KeyValueStatus): ModerationStatusAction => ({
   type: SET_MODERATION_EXTRA_KEYWORDS_STATUS,
   payload: status,
 });

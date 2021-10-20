@@ -25,7 +25,6 @@ export const setModerationStatus = (photos: Photo[] = [], dispatch: Dispatch<Mod
 
   dispatch(setModerationTagStatus(newStatus));
   dispatch(setModerationMatkoTagStatus(newStatus));
-  dispatch(setModerationExtraKeywordsStatus(newStatus));
   dispatch(
     setModerationAddressStatus("fi", {
       street: newStatus,
@@ -53,6 +52,7 @@ export const setModerationStatus = (photos: Photo[] = [], dispatch: Dispatch<Mod
     dispatch(setModerationNameStatus({ [language]: newStatus }));
     dispatch(setModerationShortDescriptionStatus({ [language]: newStatus }));
     dispatch(setModerationLongDescriptionStatus({ [language]: newStatus }));
+    dispatch(setModerationExtraKeywordsStatus({ [language]: newStatus }));
     dispatch(setModerationLinkStatus({ [language]: newStatus }));
   });
 

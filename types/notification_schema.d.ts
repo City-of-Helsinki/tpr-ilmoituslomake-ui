@@ -83,7 +83,12 @@ export interface NotificationSchema {
   };
   ontology_ids: number[];
   matko_ids: number[];
-  extra_keywords: string[];
+  extra_keywords: {
+    fi: string[];
+    sv: string[];
+    en: string[];
+    [k: string]: unknown;
+  };
   comments: string;
   notifier: {
     notifier_type: string;

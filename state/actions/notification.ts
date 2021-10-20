@@ -88,9 +88,9 @@ export const setNotificationTagOptions = (options: TagOption[]): NotificationAct
   payload: options,
 });
 
-export const setNotificationExtraKeywords = (value: string): NotificationAction => ({
+export const setNotificationExtraKeywords = (language: string, value: string): NotificationAction => ({
   type: SET_NOTIFICATION_EXTRA_KEYWORDS,
-  payload: value,
+  payload: { language, value },
 });
 
 export const setNotificationNotifier = (keyValue: KeyValueString): NotificationAction => ({

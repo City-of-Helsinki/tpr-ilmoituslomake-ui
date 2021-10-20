@@ -65,7 +65,12 @@ export interface NotificationValidationSchema {
   };
   ontology_ids: Validation;
   matko_ids: Validation;
-  extra_keywords: Validation;
+  extra_keywords: {
+    fi: Validation;
+    sv: Validation;
+    en: Validation;
+    [key: string]: Validation;
+  };
   comments?: Validation;
   notifier: {
     notifier_type: Validation;

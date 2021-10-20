@@ -187,7 +187,11 @@ export const getServerSideProps: GetServerSideProps = async ({ req, resolvedUrl,
           notificationExtra: {
             ...initialReduxState.notification.notificationExtra,
             inputLanguages: getPreviousInputLanguages(locale || defaultLocale, targetResult.data.name),
-            extraKeywordsText: extra_keywords.join(", "),
+            extraKeywordsText: {
+              fi: extra_keywords.fi.join(", "),
+              sv: extra_keywords.sv.join(", "),
+              en: extra_keywords.en.join(", "),
+            },
             addressOriginal: dataToUse.address || INITIAL_NOTIFICATION_EXTRA.addressOriginal,
             photos: images.map((image) => {
               return {

@@ -203,7 +203,11 @@ const TaskHeaderButtons = ({ isModerated, setToast }: TaskHeaderButtonsProps): R
             },
             images: [],
             ontology_ids: moderationStatus.ontology_ids === ModerationStatus.Approved ? modifiedTask.ontology_ids : selectedTask.ontology_ids,
-            extra_keywords: moderationStatus.extra_keywords === ModerationStatus.Approved ? modifiedTask.extra_keywords : selectedTask.extra_keywords,
+            extra_keywords: {
+              fi: moderationStatus.extra_keywords.fi === ModerationStatus.Approved ? modifiedTask.extra_keywords.fi : selectedTask.extra_keywords.fi,
+              sv: moderationStatus.extra_keywords.sv === ModerationStatus.Approved ? modifiedTask.extra_keywords.sv : selectedTask.extra_keywords.sv,
+              en: moderationStatus.extra_keywords.en === ModerationStatus.Approved ? modifiedTask.extra_keywords.en : selectedTask.extra_keywords.en,
+            },
           }
         : modifiedTask;
 

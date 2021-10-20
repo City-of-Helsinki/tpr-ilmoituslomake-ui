@@ -115,7 +115,12 @@ export interface NotificationExtra {
   inputLanguages: string[];
   photos: Photo[];
   tagOptions: TagOption[];
-  extraKeywordsText: string;
+  extraKeywordsText: {
+    fi: string;
+    sv: string;
+    en: string;
+    [key: string]: unknown;
+  };
   locationOriginal: [number, number];
   addressOriginal: {
     fi: {
@@ -407,8 +412,18 @@ export interface ModerationExtra {
   photosModified: Photo[];
   tagOptions: TagOption[];
   matkoTagOptions: MatkoTagOption[];
-  extraKeywordsTextSelected: string;
-  extraKeywordsTextModified: string;
+  extraKeywordsTextSelected: {
+    fi: string;
+    sv: string;
+    en: string;
+    [key: string]: unknown;
+  };
+  extraKeywordsTextModified: {
+    fi: string;
+    sv: string;
+    en: string;
+    [key: string]: unknown;
+  };
   published: boolean;
   created_at: string;
   updated_at: string;

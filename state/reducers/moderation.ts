@@ -172,12 +172,21 @@ const moderation = (state = initialState, action: AnyAction): ModerationState =>
         ...state,
         modifiedTask: {
           ...state.modifiedTask,
-          extra_keywords: action.payload
-            .split(",")
-            .map((extra: string) => extra.trim())
-            .filter((extra: string) => extra.length > 0),
+          extra_keywords: {
+            ...state.modifiedTask.extra_keywords,
+            [action.payload.language]: action.payload.value
+              .split(",")
+              .map((extra: string) => extra.trim())
+              .filter((extra: string) => extra.length > 0),
+          },
         },
-        moderationExtra: { ...state.moderationExtra, extraKeywordsTextModified: action.payload },
+        moderationExtra: {
+          ...state.moderationExtra,
+          extraKeywordsTextModified: {
+            ...state.moderationExtra.extraKeywordsTextModified,
+            [action.payload.language]: action.payload.value,
+          },
+        },
       };
     }
 

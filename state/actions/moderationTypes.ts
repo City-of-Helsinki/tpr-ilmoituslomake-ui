@@ -83,7 +83,7 @@ interface SetModerationMatkoTagAction extends AnyAction {
 
 interface SetModerationExtraKeywordsAction extends AnyAction {
   type: typeof SET_MODERATION_EXTRA_KEYWORDS;
-  payload: string;
+  payload: { language: string; value: string };
 }
 
 interface SetModerationTagOptionsAction extends AnyAction {

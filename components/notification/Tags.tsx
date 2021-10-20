@@ -38,7 +38,7 @@ const Tags = (): ReactElement => {
   };
 
   const updateExtraKeywordsText = (evt: ChangeEvent<HTMLInputElement>) => {
-    dispatch(setNotificationExtraKeywords(evt.target.value));
+    dispatch(setNotificationExtraKeywords(router.locale || defaultLocale, evt.target.value));
   };
 
   const validateTags = () => {
@@ -74,7 +74,7 @@ const Tags = (): ReactElement => {
         label={i18n.t("notification.tags.extraKeywords.label")}
         helperText={i18n.t("notification.tags.extraKeywords.helperText")}
         name="extraKeywordsText"
-        value={extraKeywordsText}
+        value={extraKeywordsText[router.locale || defaultLocale] as string}
         maxLength={MAX_LENGTH}
         onChange={updateExtraKeywordsText}
       />

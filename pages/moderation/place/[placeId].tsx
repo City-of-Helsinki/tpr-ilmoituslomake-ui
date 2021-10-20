@@ -127,8 +127,16 @@ export const getServerSideProps: GetServerSideProps = async ({ req, resolvedUrl,
               fullName: lastUpdatedUser ? `${lastUpdatedUser.first_name} ${lastUpdatedUser.last_name}`.trim() : "",
               updated_at: lastUpdatedTime || "",
             },
-            extraKeywordsTextSelected: placeData.extra_keywords.join(", "),
-            extraKeywordsTextModified: placeData.extra_keywords.join(", "),
+            extraKeywordsTextSelected: {
+              fi: placeData.extra_keywords.fi.join(", "),
+              sv: placeData.extra_keywords.sv.join(", "),
+              en: placeData.extra_keywords.en.join(", "),
+            },
+            extraKeywordsTextModified: {
+              fi: placeData.extra_keywords.fi.join(", "),
+              sv: placeData.extra_keywords.sv.join(", "),
+              en: placeData.extra_keywords.en.join(", "),
+            },
             photosUuids: placeResult.data.images.map((image) => image.uuid ?? ""),
             photosSelected: placeResult.data.images.map((image) => {
               return {

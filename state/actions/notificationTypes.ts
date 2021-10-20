@@ -90,7 +90,7 @@ interface SetNotificationTagOptionsAction extends AnyAction {
 
 interface SetNotificationExtraKeywordsAction extends AnyAction {
   type: typeof SET_NOTIFICATION_EXTRA_KEYWORDS;
-  payload: string;
+  payload: { language: string; value: string };
 }
 
 interface SetNotificationNotifierAction extends AnyAction {

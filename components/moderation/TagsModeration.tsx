@@ -8,7 +8,7 @@ import { ModerationStatusAction } from "../../state/actions/moderationStatusType
 import { setModerationExtraKeywords, setModerationMatkoTag, setModerationTag } from "../../state/actions/moderation";
 import { setModerationExtraKeywordsStatus, setModerationMatkoTagStatus, setModerationTagStatus } from "../../state/actions/moderationStatus";
 import { RootState } from "../../state/reducers";
-import { ModerationStatus } from "../../types/constants";
+import { LANGUAGE_OPTIONS, ModerationStatus } from "../../types/constants";
 import { MatkoTagOption, OptionType, TagOption } from "../../types/general";
 import { sortByOptionLabel } from "../../utils/helper";
 import { defaultLocale } from "../../utils/i18n";
@@ -57,7 +57,7 @@ const TagsModeration = (): ReactElement => {
   };
 
   const updateExtraKeywords = (evt: ChangeEvent<HTMLInputElement>) => {
-    dispatch(setModerationExtraKeywords(evt.target.value));
+    dispatch(setModerationExtraKeywords(evt.target.name, evt.target.value));
   };
 
   const updateTagStatus = (language: string, status: ModerationStatus) => {
@@ -69,7 +69,7 @@ const TagsModeration = (): ReactElement => {
   };
 
   const updateExtraKeywordsStatus = (language: string, status: ModerationStatus) => {
-    dispatchStatus(setModerationExtraKeywordsStatus(status));
+    dispatchStatus(setModerationExtraKeywordsStatus({ [language]: status }));
   };
 
   return (
@@ -100,21 +100,34 @@ const TagsModeration = (): ReactElement => {
             />
           }
         />
+      </div>
 
-        <ModerationSection
-          id="extraKeywordsText"
-          fieldName="extraKeywordsText"
-          selectedValue={extraKeywordsTextSelected}
-          modifiedValue={extraKeywordsTextModified}
-          moderationStatus={extraKeywordsStatus}
-          taskType={taskType}
-          taskStatus={taskStatus}
-          helperText={i18n.t("moderation.tags.extraKeywords.helperText")}
-          changeCallback={updateExtraKeywords}
-          statusCallback={updateExtraKeywordsStatus}
-          ModerationComponent={<TextInput id="extraKeywordsText" label={i18n.t("moderation.tags.extraKeywords.label")} name="extraKeywordsText" />}
-        />
+      <div className="languageSection gridLayoutContainer moderation">
+        {LANGUAGE_OPTIONS.map((option) => (
+          <ModerationSection
+            id={`extraKeywordsText_${option}`}
+            key={`extraKeywordsText_${option}`}
+            fieldName={option}
+            selectedValue={extraKeywordsTextSelected[option] as string}
+            modifiedValue={extraKeywordsTextModified[option] as string}
+            moderationStatus={extraKeywordsStatus[option]}
+            taskType={taskType}
+            taskStatus={taskStatus}
+            helperText={i18n.t("moderation.tags.extraKeywords.helperText")}
+            changeCallback={updateExtraKeywords}
+            statusCallback={updateExtraKeywordsStatus}
+            ModerationComponent={
+              <TextInput
+                id={`extraKeywordsText_${option}`}
+                label={`${i18n.t("moderation.tags.extraKeywords.label")} ${i18n.t(`common.inLanguage.${option}`)}`}
+                name={option}
+              />
+            }
+          />
+        ))}
+      </div>
 
+      <div className="gridLayoutContainer moderation">
         <ModerationSection
           id="matkoTag"
           fieldName="matkoTagModified"

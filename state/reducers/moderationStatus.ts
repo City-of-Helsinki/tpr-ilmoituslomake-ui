@@ -91,7 +91,7 @@ const moderationStatus = (state = initialState, action: AnyAction): ModerationSt
       console.log("SET_MODERATION_EXTRA_KEYWORDS_STATUS", action.payload);
       return {
         ...state,
-        moderationStatus: { ...state.moderationStatus, extra_keywords: action.payload },
+        moderationStatus: { ...state.moderationStatus, extra_keywords: { ...state.moderationStatus.extra_keywords, ...action.payload } },
       };
     }
 

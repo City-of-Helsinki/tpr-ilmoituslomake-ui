@@ -62,6 +62,11 @@ export interface ModerationStatusSchema {
   };
   ontology_ids: ModerationStatus;
   matko_ids: ModerationStatus;
-  extra_keywords: ModerationStatus;
+  extra_keywords: {
+    fi: ModerationStatus;
+    sv: ModerationStatus;
+    en: ModerationStatus;
+    [key: string]: ModerationStatus;
+  };
   photos: PhotoStatus[];
 }

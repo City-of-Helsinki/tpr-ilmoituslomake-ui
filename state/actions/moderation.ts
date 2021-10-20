@@ -91,9 +91,9 @@ export const setModerationMatkoTagOptions = (options: MatkoTagOption[]): Moderat
   payload: options,
 });
 
-export const setModerationExtraKeywords = (value: string): ModerationAction => ({
+export const setModerationExtraKeywords = (language: string, value: string): ModerationAction => ({
   type: SET_MODERATION_EXTRA_KEYWORDS,
-  payload: value,
+  payload: { language, value },
 });
 
 export const setModerationAddress = (language: string, value: KeyValueString): ModerationAction => ({

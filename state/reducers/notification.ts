@@ -173,12 +173,21 @@ const notification = (state = initialState, action: AnyAction): NotificationStat
         ...state,
         notification: {
           ...state.notification,
-          extra_keywords: action.payload
-            .split(",")
-            .map((extra: string) => extra.trim())
-            .filter((extra: string) => extra.length > 0),
+          extra_keywords: {
+            ...state.notification.extra_keywords,
+            [action.payload.language]: action.payload.value
+              .split(",")
+              .map((extra: string) => extra.trim())
+              .filter((extra: string) => extra.length > 0),
+          },
         },
-        notificationExtra: { ...state.notificationExtra, extraKeywordsText: action.payload },
+        notificationExtra: {
+          ...state.notificationExtra,
+          extraKeywordsText: {
+            ...state.notificationExtra.extraKeywordsText,
+            [action.payload.language]: action.payload.value,
+          },
+        },
       };
     }
 

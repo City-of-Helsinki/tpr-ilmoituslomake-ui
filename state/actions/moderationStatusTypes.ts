@@ -51,7 +51,7 @@ interface SetModerationMatkoTagStatusAction extends AnyAction {
 
 interface SetModerationExtraKeywordsStatusAction extends AnyAction {
   type: typeof SET_MODERATION_EXTRA_KEYWORDS_STATUS;
-  payload: ModerationStatus;
+  payload: KeyValueStatus;
 }
 
 interface SetModerationAddressStatusAction extends AnyAction {

@@ -101,7 +101,7 @@ const Preview = ({ className, titleKey, includeNotifier, isPlaceInfo }: PreviewP
       </div>
       <div className={`${styles.gridHeading} ${styles.gridContent}`}>{i18n.t("notification.tags.extra")}</div>
       <div className={`${styles.gridPlaceInfo} ${styles.gridContent}`}>
-        {extra_keywords.map((extraKeyword, index) => {
+        {(extra_keywords[router.locale || defaultLocale] as string[]).map((extraKeyword, index) => {
           const key = `extraKeyword_${index}`;
           return <div key={key}>{extraKeyword}</div>;
         })}

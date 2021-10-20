@@ -54,7 +54,11 @@ export const INITIAL_NOTIFICATION: NotificationSchema = {
   opening_times: {},
   ontology_ids: [],
   matko_ids: [],
-  extra_keywords: [],
+  extra_keywords: {
+    fi: [],
+    sv: [],
+    en: [],
+  },
   comments: "",
   notifier: {
     notifier_type: "",
@@ -68,7 +72,11 @@ export const INITIAL_NOTIFICATION_EXTRA: NotificationExtra = {
   inputLanguages: [defaultLocale],
   photos: [],
   tagOptions: [],
-  extraKeywordsText: "",
+  extraKeywordsText: {
+    fi: "",
+    sv: "",
+    en: "",
+  },
   locationOriginal: [0, 0],
   addressOriginal: {
     fi: {
@@ -127,7 +135,11 @@ export const INITIAL_NOTIFICATION_VALIDATION: NotificationValidationSchema = {
   },
   ontology_ids: { valid: true },
   matko_ids: { valid: true },
-  extra_keywords: { valid: true },
+  extra_keywords: {
+    fi: { valid: true },
+    sv: { valid: true },
+    en: { valid: true },
+  },
   notifier: {
     notifier_type: { valid: true },
     full_name: { valid: true },
@@ -191,8 +203,16 @@ export const INITIAL_MODERATION_EXTRA: ModerationExtra = {
   photosModified: [],
   tagOptions: [],
   matkoTagOptions: [],
-  extraKeywordsTextSelected: "",
-  extraKeywordsTextModified: "",
+  extraKeywordsTextSelected: {
+    fi: "",
+    sv: "",
+    en: "",
+  },
+  extraKeywordsTextModified: {
+    fi: "",
+    sv: "",
+    en: "",
+  },
   published: false,
   created_at: "",
   updated_at: "",
@@ -257,7 +277,11 @@ const getInitialModerationStatus = (moderationStatus: ModerationStatus): Moderat
     },
     ontology_ids: moderationStatus,
     matko_ids: moderationStatus,
-    extra_keywords: moderationStatus,
+    extra_keywords: {
+      fi: moderationStatus,
+      sv: moderationStatus,
+      en: moderationStatus,
+    },
     photos: [],
   };
 };
