@@ -9,8 +9,10 @@ const Intro = (): ReactElement => {
   return (
     <div className="formSection">
       <div className={styles.intro}>
-        <h1>{i18n.t("translation.intro.title")}</h1>
-        <div className="formInput">{i18n.t("common.todo")}</div>
+        <h1 className="translation">{i18n.t("translation.intro.title")}</h1>
+        <div className="formInput">{i18n.t("translation.intro.info1")}</div>
+        <div className="formInput">{i18n.t("translation.intro.info2")}</div>
+        <div className="formInput">{i18n.t("translation.intro.info3")}</div>
       </div>
       <Koros className={styles.wave} type="basic" flipHorizontal />
     </div>

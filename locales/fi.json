@@ -443,7 +443,10 @@
       }
     },
     "intro": {
-      "title": "Welcome!"
+      "title": "Welcome to the Kaupunkialusta Translation Application.",
+      "info1": "This application was set up for managing selected translations in the Kaupunkialusta (City Platform) service. The application is owned by City of Helsinki. Please see full instructions here: (coming later)",
+      "info2": "The translations are managed and completed through translation requests sent by Kaupunkialusta moderators. Each request can contain one or more individual translation tasks.",
+      "info3": "If you have any questions about the tasks or using the application, please contact: (coming later)."
     },
     "task": {
       "title": "Translations",
@@ -726,7 +729,12 @@
       }
     },
     "intro": {
-      "title": "Tervetuloa moderoimaan!"
+      "title": "Tervetuloa Kaupunkialustan moderointisovellukseen.",
+      "info1": "Kohteiden tiedot täytetään",
+      "link": "ilmoituslomakkeeseen",
+      "info2": ", josta ne tulevat moderoitavaksi tähän moderointisovellukseen ilmoituksien muodossa. Täällä moderoija käsittelee tiedot ja tekee julkaisun. Julkaisun jälkeen kohteen tiedot tallentuvat Kaupunkialustan tietokantaan.",
+      "info3": "Moderoijalla on mahdollisuus myös luoda uusi kohde sekä muokata kohteen tietoja ilman ilmoituslomakkeen kautta tulevaa ilmoitusta. Moderointisovelluksessa voi muokata tietoja seuraavilla kielillä: suomi, ruotsi ja englanti. Muiden kielten käännöksistä voi tehdä moderointisovelluksen kautta käännöspyynnön, jonka kääntäjä näkee ja käsittelee käännössovelluksessa.",
+      "guide": "Moderointisovelluksen ohje: (tulossa myöhemmin)"
     },
     "links": {
       "website": {

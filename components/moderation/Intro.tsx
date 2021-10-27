@@ -3,10 +3,11 @@ import { useSelector } from "react-redux";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useI18n } from "next-localization";
-import { Button, IconPlus, Koros } from "hds-react";
+import { Button, IconPlus, Koros, Link as HdsLink } from "hds-react";
 import { RootState } from "../../state/reducers";
 import { ItemType, Toast } from "../../types/constants";
 import { saveModerationChangeRequest } from "../../utils/moderation";
+import getOrigin from "../../utils/request";
 import ToastNotification from "../common/ToastNotification";
 import styles from "./Intro.module.scss";
 
@@ -29,11 +30,32 @@ const Intro = (): ReactElement => {
     saveModerationChangeRequest(newPlaceChangeRequest, router, setToast);
   };
 
+  const openNotification = () => {
+    window.open(`${getOrigin(router)}/`, "_blank");
+  };
+
   return (
     <div className="formSection">
       <div className={styles.intro}>
-        <h1 className="moderation">{i18n.t("moderation.intro.title")}</h1>
-        <div className="formInput">{i18n.t("common.todo")}</div>
+        <h1 className={`moderation ${styles.title}`}>{i18n.t("moderation.intro.title")}</h1>
+        <div className="formInput">
+          {i18n.t("moderation.intro.info1")}
+          <HdsLink
+            href="#"
+            size="M"
+            openInNewTab
+            openInNewTabAriaLabel={i18n.t("common.opensInANewTab")}
+            external
+            openInExternalDomainAriaLabel={i18n.t("common.opensExternal")}
+            disableVisitedStyles
+            onClick={openNotification}
+          >
+            {i18n.t("moderation.intro.link")}
+          </HdsLink>
+          {i18n.t("moderation.intro.info2")}
+        </div>
+        <div className="formInput">{i18n.t("moderation.intro.info3")}</div>
+        <div className="formInput">{i18n.t("moderation.intro.guide")}</div>
 
         {toast && <ToastNotification prefix="moderation" toast={toast} setToast={setToast} />}
 

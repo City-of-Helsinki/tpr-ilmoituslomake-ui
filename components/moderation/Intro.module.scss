@@ -4,6 +4,11 @@
   background-color: $color-copper-light;
   padding: $spacing-m;
 
+  .title {
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+  }
+
   .buttonRow {
     display: flex;
     flex-direction: row;
