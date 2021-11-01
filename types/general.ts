@@ -165,6 +165,22 @@ export interface NotificationTargetIdName {
   };
 }
 
+export interface OpeningTime {
+  date: string;
+  times: [
+    {
+      name: string;
+      description: string;
+      start_time: string;
+      end_time: string;
+      end_time_on_next_day: boolean;
+      resource_state: string;
+      full_day: boolean;
+      periods: number[];
+    }
+  ];
+}
+
 export interface TranslationTaskSearch {
   placeName: string;
   request: string;

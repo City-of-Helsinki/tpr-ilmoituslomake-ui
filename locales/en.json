@@ -258,7 +258,13 @@
     "opening": {
       "title": "Opening hours",
       "notice": "Opening hours will be submitted after sending the form.",
-      "temporaryNotice": "Opening hours may change frequently due to the exceptional circumstances caused by the Corona pandemic. For now, we recommend updating your opening hours on your own website or social media channels. Please tell customers in the detailed description section where they can check the location’s current opening hours. Please do not put links in the detailed description, links to websites and social media can be added in the next step."
+      "temporaryNotice": "Opening hours may change frequently due to the exceptional circumstances caused by the Corona pandemic. For now, we recommend updating your opening hours on your own website or social media channels. Please tell customers in the detailed description section where they can check the location’s current opening hours. Please do not put links in the detailed description, links to websites and social media can be added in the next step.",
+      "times": {
+        "date": "Date",
+        "opens": "Opens",
+        "closes": "Closes",
+        "status": "Status"
+      }
     },
     "photos": {
       "title": "Photos",

@@ -258,7 +258,13 @@
     "opening": {
       "title": "Aukioloajat",
       "notice": "Aukioloajat ilmoitetaan lähetyksen jälkeen.",
-      "temporaryNotice": "Aukioloajat saattavat muuttua usein koronapandemian aiheuttamien poikkeusolojen vuoksi. Suosittelemme toistaiseksi aukioloaikojen päivittämistä omilla verkkosivullanne tai sosiaalisen median kanavissa. Kerrothan asiakkaille Pitkä kuvaus -kohdassa, mistä ajankohtaiset aukioloajat voi tarkistaa. Ethän laita pitkään kuvaukseen linkkejä, linkit verkkosivuille ja someen lisätään seuraavassa vaiheessa."
+      "temporaryNotice": "Aukioloajat saattavat muuttua usein koronapandemian aiheuttamien poikkeusolojen vuoksi. Suosittelemme toistaiseksi aukioloaikojen päivittämistä omilla verkkosivullanne tai sosiaalisen median kanavissa. Kerrothan asiakkaille Pitkä kuvaus -kohdassa, mistä ajankohtaiset aukioloajat voi tarkistaa. Ethän laita pitkään kuvaukseen linkkejä, linkit verkkosivuille ja someen lisätään seuraavassa vaiheessa.",
+      "times": {
+        "date": "Päivämäärä",
+        "opens": "Aukeaa",
+        "closes": "Sulkeutuu",
+        "status": "Tila"
+      }
     },
     "photos": {
       "title": "Kuvat",

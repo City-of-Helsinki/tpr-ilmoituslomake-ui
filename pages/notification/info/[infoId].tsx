@@ -15,6 +15,7 @@ import { checkUser, getOriginServerSide, getPreviousInputLanguages, getTags } fr
 import Layout from "../../../components/common/Layout";
 import Header from "../../../components/common/Header";
 import Preview from "../../../components/notification/Preview";
+import OpeningTimesInfo from "../../../components/notification/OpeningTimesInfo";
 import InfoFooter from "../../../components/notification/InfoFooter";
 import styles from "./[infoId].module.scss";
 
@@ -41,6 +42,7 @@ const Info = (): ReactElement => {
 
           <InfoFooter />
           <Preview titleKey="notification.preview.placeInfo" isPlaceInfo />
+          <OpeningTimesInfo />
           <InfoFooter />
         </main>
       )}
