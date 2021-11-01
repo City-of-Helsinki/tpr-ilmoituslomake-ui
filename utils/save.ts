@@ -7,6 +7,8 @@ import { setPage, setSentNotification } from "../state/actions/notification";
 import { ItemType, Toast, SENT_INFO_PAGE } from "../types/constants";
 import { ChangeRequestSchema, NotificationExtra, User } from "../types/general";
 import { NotificationSchema } from "../types/notification_schema";
+// import { getDisplayName } from "./helper";
+// import { defaultLocale } from "./i18n";
 import getOrigin from "./request";
 import validateNotificationData, { isTipPageValid } from "./validation";
 
@@ -168,5 +170,83 @@ export const saveTip = async (
   } catch (err) {
     console.log("ERROR", err);
     setToast(Toast.SaveFailed);
+  }
+};
+
+export const getOpeningTimesLink = async (notificationId: number, notification: NotificationSchema, router: NextRouter): Promise<void> => {
+  try {
+    // Send the Cross Site Request Forgery token, otherwise the backend returns the error "CSRF Failed: CSRF token missing or incorrect."
+    const csrftoken = Cookies.get("csrftoken");
+
+    const {
+      name: { fi: nameFi, sv: nameSv, en: nameEn },
+      description: {
+        short: { fi: shortDescFi, sv: shortDescSv, en: shortDescEn },
+      },
+      address: {
+        fi: { street: streetFi, postal_code: postalCodeFi, post_office: postOfficeFi },
+        sv: { street: streetSv, postal_code: postalCodeSv, post_office: postOfficeSv },
+      },
+    } = notification;
+    // const displayName = getDisplayName(router.locale || defaultLocale, name);
+
+    // TODO check what data is required
+    const postData = {
+      /*
+      name: displayName,
+      description: shortDescFi,
+      address: `${streetFi}, ${postalCodeFi} ${postOfficeFi}`,
+      */
+      name: {
+        fi: nameFi,
+        sv: nameSv,
+        en: nameEn,
+      },
+      description: {
+        fi: shortDescFi,
+        sv: shortDescSv,
+        en: shortDescEn,
+      },
+      address: {
+        fi: `${streetFi}, ${postalCodeFi} ${postOfficeFi}`,
+        sv: `${streetSv}, ${postalCodeSv} ${postOfficeSv}`,
+        en: `${streetFi}, ${postalCodeFi} ${postOfficeFi}`,
+      },
+      resource_type: "unit",
+      // children: null,
+      // parents: null,
+      // organization: null,
+      origins: [
+        {
+          data_source: {
+            id: "kaupunkialusta",
+          },
+          origin_id: notificationId,
+        },
+      ],
+      // extra_data: null,
+      is_public: true,
+      timezone: "Europe/Helsinki",
+    };
+
+    console.log("SENDING", postData);
+
+    const openingTimesResponse = await fetch(`${getOrigin(router)}/api/openingtimes/createlink/${notificationId}/`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "X-CSRFToken": csrftoken as string,
+      },
+      body: JSON.stringify(postData),
+    });
+    if (openingTimesResponse.ok) {
+      const openingTimesResult = await openingTimesResponse.json();
+      console.log("RESPONSE", openingTimesResult);
+    } else {
+      const openingTimesResult = await openingTimesResponse.text();
+      console.log("FAILED", openingTimesResult);
+    }
+  } catch (err) {
+    console.log("ERROR", err);
   }
 };
