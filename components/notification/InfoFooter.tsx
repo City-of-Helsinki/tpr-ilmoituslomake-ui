@@ -20,9 +20,15 @@ const InfoFooter = ({ isEditingAllowed }: InfoFooterProps): ReactElement => {
   const notificationId = useSelector((state: RootState) => state.notification.notificationId);
   const notification = useSelector((state: RootState) => state.notification.notification);
 
-  const openExternalOpeningTimesApp = () => {
-    // TODO - get link, window.open into new tab
-    getOpeningTimesLink(notificationId, notification, router);
+  const openExternalOpeningTimesApp = async () => {
+    const openingTimeUrl = await getOpeningTimesLink(notificationId, notification, router);
+    if (openingTimeUrl) {
+      // Trim any quotes and check if it's a valid url
+      const url = openingTimeUrl.replace(/"/g, "");
+      if (url.indexOf("http") === 0) {
+        window.open(url, "_blank");
+      }
+    }
   };
 
   return (

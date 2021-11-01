@@ -173,7 +173,11 @@ export const saveTip = async (
   }
 };
 
-export const getOpeningTimesLink = async (notificationId: number, notification: NotificationSchema, router: NextRouter): Promise<void> => {
+export const getOpeningTimesLink = async (
+  notificationId: number,
+  notification: NotificationSchema,
+  router: NextRouter
+): Promise<string | undefined> => {
   try {
     // Send the Cross Site Request Forgery token, otherwise the backend returns the error "CSRF Failed: CSRF token missing or incorrect."
     const csrftoken = Cookies.get("csrftoken");
@@ -239,14 +243,16 @@ export const getOpeningTimesLink = async (notificationId: number, notification: 
       },
       body: JSON.stringify(postData),
     });
+
+    const openingTimesResult = await openingTimesResponse.text();
     if (openingTimesResponse.ok) {
-      const openingTimesResult = await openingTimesResponse.json();
       console.log("RESPONSE", openingTimesResult);
     } else {
-      const openingTimesResult = await openingTimesResponse.text();
       console.log("FAILED", openingTimesResult);
     }
+    return openingTimesResult;
   } catch (err) {
     console.log("ERROR", err);
+    return undefined;
   }
 };
