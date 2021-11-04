@@ -142,10 +142,6 @@ const Photos = (): ReactElement => {
     }
   };
 
-  const openCreativeCommons = () => {
-    window.open("https://creativecommons.org/licenses/by/4.0/", "_blank");
-  };
-
   return (
     <div className={`formSection ${styles.photos}`}>
       {photos.map(({ new: isNewImage, sourceType, url, altText, permission, source, preview }, index) => {
@@ -292,14 +288,13 @@ const Photos = (): ReactElement => {
                 </SelectionGroup>
                 <div className={styles.creativeCommonsLink}>
                   <HdsLink
-                    href="#"
+                    href="https://creativecommons.org/licenses/by/4.0/"
                     size="M"
                     openInNewTab
                     openInNewTabAriaLabel={i18n.t("common.opensInANewTab")}
                     external
                     openInExternalDomainAriaLabel={i18n.t("common.opensExternal")}
                     disableVisitedStyles
-                    onClick={openCreativeCommons}
                   >
                     {i18n.t("notification.photos.permission.creativeCommons2")}
                   </HdsLink>
