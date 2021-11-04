@@ -18,10 +18,8 @@ const OpeningTimesInfo = (): ReactElement => {
   const notificationId = useSelector((state: RootState) => state.notification.notificationId);
 
   const getOpeningTimesOnMount = async () => {
-    // TODO - backend part
-    /*
     if (notificationId > 0) {
-      const openingTimesResponse = await fetch(`${getOrigin(router)}/api/opening_times/get/${notificationId}`);
+      const openingTimesResponse = await fetch(`${getOrigin(router)}/api/openingtimes/get/${notificationId}/?start_date=0w&end_date=0w`);
       if (openingTimesResponse.ok) {
         const openingTimesResult = await (openingTimesResponse.json() as Promise<OpeningTime[]>);
 
@@ -30,116 +28,6 @@ const OpeningTimesInfo = (): ReactElement => {
         setOpeningTimes(openingTimesResult || []);
       }
     }
-    */
-
-    // TEST
-    setOpeningTimes([
-      {
-        date: "2021-11-01",
-        times: [
-          {
-            name: "",
-            description: "",
-            start_time: "11:00:00",
-            end_time: "18:00:00",
-            end_time_on_next_day: false,
-            resource_state: "open",
-            full_day: false,
-            periods: [3211],
-          },
-        ],
-      },
-      {
-        date: "2021-11-02",
-        times: [
-          {
-            name: "",
-            description: "",
-            start_time: "11:00:00",
-            end_time: "18:00:00",
-            end_time_on_next_day: false,
-            resource_state: "open",
-            full_day: false,
-            periods: [3211],
-          },
-        ],
-      },
-      {
-        date: "2021-11-03",
-        times: [
-          {
-            name: "",
-            description: "",
-            start_time: "11:00:00",
-            end_time: "18:00:00",
-            end_time_on_next_day: false,
-            resource_state: "open",
-            full_day: false,
-            periods: [3211],
-          },
-        ],
-      },
-      {
-        date: "2021-11-04",
-        times: [
-          {
-            name: "",
-            description: "",
-            start_time: "11:00:00",
-            end_time: "18:00:00",
-            end_time_on_next_day: false,
-            resource_state: "open",
-            full_day: false,
-            periods: [3211],
-          },
-        ],
-      },
-      {
-        date: "2021-11-05",
-        times: [
-          {
-            name: "",
-            description: "",
-            start_time: "11:00:00",
-            end_time: "18:00:00",
-            end_time_on_next_day: false,
-            resource_state: "open",
-            full_day: false,
-            periods: [3211],
-          },
-        ],
-      },
-      {
-        date: "2021-11-06",
-        times: [
-          {
-            name: "",
-            description: "",
-            start_time: "11:00:00",
-            end_time: "16:00:00",
-            end_time_on_next_day: false,
-            resource_state: "open",
-            full_day: false,
-            periods: [3211],
-          },
-        ],
-      },
-      {
-        date: "2021-11-07",
-        times: [
-          {
-            name: "",
-            description: "",
-            start_time: "12:00:00",
-            end_time: "16:00:00",
-            end_time_on_next_day: false,
-            resource_state: "open",
-            full_day: false,
-            periods: [3211],
-          },
-        ],
-      },
-    ]);
   };
 
   // Get the opening times on first render only, using a workaround utilising useEffect with empty dependency array
@@ -147,7 +35,9 @@ const OpeningTimesInfo = (): ReactElement => {
   const useMountEffect = (fun: () => void) => useEffect(fun, []);
   useMountEffect(getOpeningTimesOnMount);
 
-  return (
+  return !openingTimes || openingTimes.length === 0 ? (
+    <></>
+  ) : (
     <div className={`formSection ${styles.openingTimes}`}>
       <h2>{i18n.t("notification.opening.title")}</h2>
 
