@@ -16,14 +16,6 @@ import styles from "./index.module.scss";
 const Main = (): ReactElement => {
   const i18n = useI18n();
 
-  const openTermsOfUse = () => {
-    window.open(TERMS_URL, "_blank");
-  };
-
-  const openAccessibilityInfo = () => {
-    window.open(ACCESSIBILITY_URL, "_blank");
-  };
-
   return (
     <Layout>
       <Head>
@@ -40,28 +32,26 @@ const Main = (): ReactElement => {
         <div className={styles.infoLinkContainer}>
           <div>
             <HdsLink
-              href="#"
+              href={TERMS_URL}
               size="M"
               openInNewTab
               openInNewTabAriaLabel={i18n.t("common.opensInANewTab")}
               external
               openInExternalDomainAriaLabel={i18n.t("common.opensExternal")}
               disableVisitedStyles
-              onClick={openTermsOfUse}
             >
               {i18n.t("notification.index.terms")}
             </HdsLink>
           </div>
           <div>
             <HdsLink
-              href="#"
+              href={ACCESSIBILITY_URL}
               size="M"
               openInNewTab
               openInNewTabAriaLabel={i18n.t("common.opensInANewTab")}
               external
               openInExternalDomainAriaLabel={i18n.t("common.opensExternal")}
               disableVisitedStyles
-              onClick={openAccessibilityInfo}
             >
               {i18n.t("notification.index.accessibility")}
             </HdsLink>

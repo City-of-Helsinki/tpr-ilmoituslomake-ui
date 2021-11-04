@@ -7,7 +7,6 @@ import { Button, IconPlus, Koros, Link as HdsLink } from "hds-react";
 import { RootState } from "../../state/reducers";
 import { ItemType, Toast } from "../../types/constants";
 import { saveModerationChangeRequest } from "../../utils/moderation";
-import getOrigin from "../../utils/request";
 import ToastNotification from "../common/ToastNotification";
 import styles from "./Intro.module.scss";
 
@@ -30,10 +29,6 @@ const Intro = (): ReactElement => {
     saveModerationChangeRequest(newPlaceChangeRequest, router, setToast);
   };
 
-  const openNotification = () => {
-    window.open(`${getOrigin(router)}/`, "_blank");
-  };
-
   return (
     <div className="formSection">
       <div className={styles.intro}>
@@ -41,14 +36,13 @@ const Intro = (): ReactElement => {
         <div className="formInput">
           {i18n.t("moderation.intro.info1")}
           <HdsLink
-            href="#"
+            href={`${router.basePath}/`}
             size="M"
             openInNewTab
             openInNewTabAriaLabel={i18n.t("common.opensInANewTab")}
             external
             openInExternalDomainAriaLabel={i18n.t("common.opensExternal")}
             disableVisitedStyles
-            onClick={openNotification}
           >
             {i18n.t("moderation.intro.link")}
           </HdsLink>
