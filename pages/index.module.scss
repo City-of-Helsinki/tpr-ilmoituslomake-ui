@@ -29,6 +29,10 @@
     flex-wrap: wrap;
     justify-content: center;
     margin-bottom: $spacing-layout-l;
+
+    div {
+      margin: 0 $spacing-s;
+    }
   }
 
   h2 {
