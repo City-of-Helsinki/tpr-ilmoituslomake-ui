@@ -56,8 +56,11 @@
 
     .flexButton {
       button {
-        background-color: $color-white;
         width: 4 * $spacing-4-xl - $spacing-2-xs;
+
+        &:not(:hover) {
+          background-color: $color-white;
+        }
       }
     }
   }
