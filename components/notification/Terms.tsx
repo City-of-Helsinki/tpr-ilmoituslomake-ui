@@ -23,7 +23,7 @@ const Terms = (): ReactElement => {
               openInExternalDomainAriaLabel={i18n.t("common.opensExternal")}
               disableVisitedStyles
             >
-              {i18n.t("notification.index.terms")}
+              {i18n.t("notification.terms.link")}
             </HdsLink>
           </div>
           <div>{i18n.t("notification.terms.text2")}</div>
