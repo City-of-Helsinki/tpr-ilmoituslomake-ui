@@ -19,9 +19,10 @@ const InfoFooter = ({ isEditingAllowed }: InfoFooterProps): ReactElement => {
   const currentUser = useSelector((state: RootState) => state.general.user);
   const notificationId = useSelector((state: RootState) => state.notification.notificationId);
   const notification = useSelector((state: RootState) => state.notification.notification);
+  const openingTimesId = useSelector((state: RootState) => state.notification.openingTimesId);
 
   const openExternalOpeningTimesApp = async () => {
-    const openingTimeUrl = await getOpeningTimesLink(notificationId, notification, router);
+    const openingTimeUrl = await getOpeningTimesLink(notificationId, notification, openingTimesId, router);
     if (openingTimeUrl) {
       // Trim any quotes and check if it's a valid url
       const url = openingTimeUrl.replace(/"/g, "");

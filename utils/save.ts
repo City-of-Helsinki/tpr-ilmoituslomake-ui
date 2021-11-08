@@ -176,6 +176,7 @@ export const saveTip = async (
 export const getOpeningTimesLink = async (
   notificationId: number,
   notification: NotificationSchema,
+  openingTimesId: number,
   router: NextRouter
 ): Promise<string | undefined> => {
   try {
@@ -231,6 +232,7 @@ export const getOpeningTimesLink = async (
       // extra_data: null,
       is_public: true,
       timezone: "Europe/Helsinki",
+      hauki_id: openingTimesId,
     };
 
     console.log("SENDING", postData);

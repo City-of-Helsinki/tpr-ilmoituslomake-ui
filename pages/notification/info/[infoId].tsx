@@ -77,7 +77,7 @@ export const getServerSideProps: GetServerSideProps = async ({ req, params, loca
     });
 
     if (targetResponse.ok) {
-      const targetResult = await (targetResponse.json() as Promise<{ id: number; data: NotificationSchema }>);
+      const targetResult = await (targetResponse.json() as Promise<{ id: number; data: NotificationSchema; hauki_id: number }>);
 
       try {
         // Merge the notification details from the backend, but remove the previous notifier details if present
@@ -118,6 +118,7 @@ export const getServerSideProps: GetServerSideProps = async ({ req, params, loca
               };
             }),
           },
+          openingTimesId: targetResult.hauki_id,
         };
       } catch (err) {
         console.log("ERROR", err);

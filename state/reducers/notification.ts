@@ -57,6 +57,7 @@ const initialState: NotificationState = {
   notificationId: 0,
   notification: { ...INITIAL_NOTIFICATION, location: [0, 0] },
   notificationExtra: { ...INITIAL_NOTIFICATION_EXTRA, locationOriginal: [0, 0] },
+  openingTimesId: 0,
 };
 
 const notification = (state = initialState, action: AnyAction): NotificationState => {

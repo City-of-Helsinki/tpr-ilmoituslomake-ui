@@ -42,6 +42,7 @@ export interface NotificationState {
   notificationId: number;
   notification: NotificationSchema;
   notificationExtra: NotificationExtra;
+  openingTimesId: number;
 }
 
 export interface NotificationValidationState {
