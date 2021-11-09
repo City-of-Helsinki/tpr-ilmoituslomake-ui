@@ -7,10 +7,6 @@ import styles from "./Terms.module.scss";
 const Terms = (): ReactElement => {
   const i18n = useI18n();
 
-  const openTermsOfUse = () => {
-    window.open(TERMS_URL, "_blank");
-  };
-
   return (
     <div className="formSection">
       <div className={styles.terms}>
@@ -19,16 +15,15 @@ const Terms = (): ReactElement => {
           <div>{i18n.t("notification.terms.text1")}</div>
           <div className={styles.creativeCommonsLink}>
             <HdsLink
-              href="#"
+              href={TERMS_URL}
               size="M"
               openInNewTab
               openInNewTabAriaLabel={i18n.t("common.opensInANewTab")}
               external
               openInExternalDomainAriaLabel={i18n.t("common.opensExternal")}
               disableVisitedStyles
-              onClick={openTermsOfUse}
             >
-              {i18n.t("notification.index.terms")}
+              {i18n.t("notification.terms.link")}
             </HdsLink>
           </div>
           <div>{i18n.t("notification.terms.text2")}</div>

@@ -19,11 +19,15 @@
       margin-bottom: $spacing-s;
 
       .primary {
-        background-color: $color-bus;
+        &:not(:hover) {
+          background-color: $color-bus;
+        }
       }
 
       .secondary {
-        background-color: $color-white;
+        &:not(:hover) {
+          background-color: $color-white;
+        }
       }
     }
   }
