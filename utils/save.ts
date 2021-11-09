@@ -213,9 +213,9 @@ export const getOpeningTimesLink = async (
         en: shortDescEn,
       },
       address: {
-        fi: `${streetFi}, ${postalCodeFi} ${postOfficeFi}`,
-        sv: `${streetSv}, ${postalCodeSv} ${postOfficeSv}`,
-        en: `${streetFi}, ${postalCodeFi} ${postOfficeFi}`,
+        fi: streetFi.length > 0 ? `${streetFi}, ${postalCodeFi} ${postOfficeFi}` : "",
+        sv: streetSv.length > 0 ? `${streetSv}, ${postalCodeSv} ${postOfficeSv}` : "",
+        en: streetFi.length > 0 ? `${streetFi}, ${postalCodeFi} ${postOfficeFi}` : "",
       },
       resource_type: "unit",
       // children: null,
