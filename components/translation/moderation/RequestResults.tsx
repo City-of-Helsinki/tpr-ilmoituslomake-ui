@@ -257,7 +257,7 @@ const RequestResults = ({ showStatus, showResults, setShowResults }: RequestResu
                   <div className={`${styles.gridColumn2} ${styles.gridContent}`}>
                     <div className={styles.flexItem}>
                       <span className={styles.mobileOnly}>{`${i18n.t("moderation.translation.requestResults.translator")}: `}</span>
-                      {`${translator.first_name} ${translator.last_name}`}
+                      {translator ? `${translator.first_name} ${translator.last_name}` : ""}
                     </div>
                   </div>
                   <div className={`${styles.gridColumn3} ${styles.gridContent}`}>
