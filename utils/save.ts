@@ -60,7 +60,7 @@ export const saveNotification = async (
         body: JSON.stringify(postData),
       });
       if (createResponse.ok) {
-        const notificationResult = await (createResponse.json() as Promise<{ id: number; data: NotificationSchema }>);
+        const notificationResult = await (createResponse.json() as Promise<{ id: number; data: NotificationSchema; hauki_id: number }>);
         console.log("RESPONSE", notificationResult);
 
         if (notificationResult.id) {
@@ -92,8 +92,9 @@ export const saveNotification = async (
               };
             }),
           } as NotificationExtra;
+          const openingTimesId = notificationResult.hauki_id;
 
-          dispatch(setSentNotification(notificationResult.id, sentNotification, sentNotificationExtra));
+          dispatch(setSentNotification(notificationResult.id, sentNotification, sentNotificationExtra, openingTimesId));
           dispatch(setPage(SENT_INFO_PAGE));
         } else if (setToast) {
           setToast(Toast.SaveFailed);

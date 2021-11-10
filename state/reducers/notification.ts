@@ -306,6 +306,7 @@ const notification = (state = initialState, action: AnyAction): NotificationStat
         notificationId: action.payload.notificationId,
         notification: action.payload.notification,
         notificationExtra: action.payload.notificationExtra,
+        openingTimesId: action.payload.openingTimesId,
       };
     }
 
