@@ -95,8 +95,12 @@ export const MAX_PHOTOS = 3;
 export const MAX_PHOTO_BYTES = 4000000;
 export const DATETIME_FORMAT = "D.M.YYYY H:mm";
 export const TERMS_URL = "https://kaupunkialustana.hel.fi/kayttoehdot/";
-export const ACCESSIBILITY_URL = "https://www.myhelsinki.fi/fi/saavutettavuusseloste/";
-export const CONTACT_URL = "https://hel.fi/helsinki/fi/kaupunki-ja-hallinto/osallistu-ja-vaikuta/ota-yhteytta/ota-yhteytta/";
+export const ACCESSIBILITY_URL = "https://kaupunkialustana.hel.fi/saavutettavuusseloste/";
+export const CONTACT_URL = "https://hel.fi/helsinki/fi/kaupunki-ja-hallinto/osallistu-ja-vaikuta/ota-yhteytta/";
+export const MODERATION_GUIDE_URL =
+  "https://helsinginkaupunki.sharepoint.com/:w:/s/KANSLIAKaupunkialusta/Ebs0twXUrRJHpnJez-e3mTMBm4Q9GrHqeVBZCEskeh9kOA";
+export const TRANSLATION_GUIDE_URL = "https://kaupunkialustana.hel.fi/ilmoituslomake/kaannokset/";
+export const TRANSLATION_CONTACTS = ["henna.niemi@hel.fi", "mirjam.heikkinen@hel.fi"];
 
 export const MAP_TILES_URL = "https://tiles.hel.ninja/styles/hel-osm-bright/{z}/{x}/{y}.png";
 export const MAP_INITIAL_CENTER = [60.166, 24.942];
