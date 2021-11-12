@@ -122,7 +122,7 @@
       },
       "giveTip": {
         "title": "Anna vinkki!",
-        "message": "Mikäli huomasit puuttuvan tiedon, tee palvelus ja ilmoita siitä meille. Voit tehdä ilmoituksen vaivattomasti rekisteröitymättä."
+        "message": "Vinkkaa meille, jos huomaat jonkun kohteen puuttuvan. Voit vinkata uudesta toimipisteestä vaivattomasti rekisteröitymättä"
       },
       "checkPlace": {
         "title": "Mitä tietoja kohteesta löytyy?",
@@ -147,7 +147,7 @@
       "close": "Sulje viesti",
       "fieldRequired": "$fieldName on pakollinen tieto",
       "fieldFormat": "$fieldName on annettava oikeassa muodossa",
-      "fieldFormatUrl": "$fieldName on annettava oikeassa muodossa (esim. https://myhelsinki.fi)",
+      "fieldFormatUrl": "$fieldName on annettava oikeassa muodossa (esim. https://kaupunkialustana.hel.fi)",
       "fieldTooLong": "$fieldName on liian pitkä",
       "fieldTooShort": "$fieldName on liian lyhyt",
       "fieldNotJpeg": "Valitun kuvan formaatti on virheellinen, kuvien tulee olla JPEG-muotoinen",
@@ -204,7 +204,7 @@
       "title": "Kohteen linkit",
       "website": {
         "label": "Verkkosivusto",
-        "helperText": "Linkin muoto on esim. https://myhelsinki.fi",
+        "helperText": "Linkin muoto on esim. https://kaupunkialustana.hel.fi",
         "tooltipLabel": "Linkki lisätietoihin",
         "tooltipText": "Voit lisätä tähän kohteen verkkosivun tai sosiaallisen median tilin osoitteen."
       },
@@ -354,6 +354,8 @@
     "tip": {
       "title": "Vinkkaa virheellisestä tiedosta",
       "titleNew": "Anna vinkki",
+      "info": "Vinkkaa tällä lomakkeella muutoksesta johonkin olemassa olevan kohteen tietoihin.",
+      "infoNew": "Vinkkaa tällä lomakkeella puuttuvasta kohteesta.",
       "placeName": {
         "label": "Hae kohdetta nimellä",
         "helperText": "Kirjoita hakusana sitten valitse alla olevalta listalta"
@@ -426,7 +428,7 @@
       "close": "Close message",
       "fieldRequired": "$fieldName is mandatory information",
       "fieldFormat": "$fieldName must be entered in the right format",
-      "fieldFormatUrl": "$fieldName must be entered in the right format (e.g. https://myhelsinki.fi)",
+      "fieldFormatUrl": "$fieldName must be entered in the right format (e.g. https://kaupunkialustana.hel.fi)",
       "fieldTooLong": "$fieldName is too long",
       "fieldTooShort": "$fieldName is too short",
       "fieldNotJpeg": "The format of the selected image is incorrect, images must be in JPEG format",
@@ -444,9 +446,11 @@
     },
     "intro": {
       "title": "Welcome to the Kaupunkialusta Translation Application.",
-      "info1": "This application was set up for managing selected translations in the Kaupunkialusta (City Platform) service. The application is owned by City of Helsinki. Please see full instructions here: (coming later)",
+      "info1": "This application was set up for managing selected translations in the Kaupunkialusta (City Platform) service. The application is owned by City of Helsinki. Please see full instructions here:",
+      "guide": "Translation application guide",
       "info2": "The translations are managed and completed through translation requests sent by Kaupunkialusta moderators. Each request can contain one or more individual translation tasks.",
-      "info3": "If you have any questions about the tasks or using the application, please contact: (coming later)."
+      "info3": "If you have any questions about the tasks or using the application, please contact:",
+      "or": "or"
     },
     "task": {
       "title": "Translations",
@@ -671,7 +675,7 @@
       "close": "Sulje viesti",
       "fieldRequired": "$fieldName on pakollinen tieto",
       "fieldFormat": "$fieldName on annettava oikeassa muodossa",
-      "fieldFormatUrl": "$fieldName on annettava oikeassa muodossa (esim. https://myhelsinki.fi)",
+      "fieldFormatUrl": "$fieldName on annettava oikeassa muodossa (esim. https://kaupunkialustana.hel.fi)",
       "fieldTooLong": "$fieldName on liian pitkä",
       "fieldTooShort": "$fieldName on liian lyhyt",
       "fieldOther": "Tarkista tieto"
@@ -734,12 +738,12 @@
       "link": "ilmoituslomakkeeseen",
       "info2": ", josta ne tulevat moderoitavaksi tähän moderointisovellukseen ilmoituksien muodossa. Täällä moderoija käsittelee tiedot ja tekee julkaisun. Julkaisun jälkeen kohteen tiedot tallentuvat Kaupunkialustan tietokantaan.",
       "info3": "Moderoijalla on mahdollisuus myös luoda uusi kohde sekä muokata kohteen tietoja ilman ilmoituslomakkeen kautta tulevaa ilmoitusta. Moderointisovelluksessa voi muokata tietoja seuraavilla kielillä: suomi, ruotsi ja englanti. Muiden kielten käännöksistä voi tehdä moderointisovelluksen kautta käännöspyynnön, jonka kääntäjä näkee ja käsittelee käännössovelluksessa.",
-      "guide": "Moderointisovelluksen ohje: (tulossa myöhemmin)"
+      "guide": "Moderointisovelluksen ohje"
     },
     "links": {
       "website": {
         "label": "Verkkosivusto",
-        "helperText": "Linkin muoto on esim. https://myhelsinki.fi",
+        "helperText": "Linkin muoto on esim. https://kaupunkialustana.hel.fi",
         "tooltipLabel": "Linkki lisätietoihin",
         "tooltipText": "Voit lisätä tähän kohteen verkkosivun tai sosiaallisen median tilin osoitteen."
       },
