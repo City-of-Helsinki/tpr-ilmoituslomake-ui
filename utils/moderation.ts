@@ -53,6 +53,7 @@ export const approveModeration = async (
         }
       }
 
+      // Force opening_times to be an empty object for now until the Hauki development is ready
       const postData = {
         data: {
           ...approvedTask,
@@ -60,6 +61,7 @@ export const approveModeration = async (
             const { uuid, sourceType: source_type, url, altText: alt_text, permission, source, mediaId: media_id } = photo;
             return { index, uuid, source_type, url, alt_text, permission, source, media_id };
           }),
+          opening_times: {},
         },
         images: approvedPhotos.map((photo, index) => {
           const { uuid, url, preview, base64 } = photo;
