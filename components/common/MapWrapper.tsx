@@ -1,7 +1,7 @@
 import React, { ReactElement, useRef, useEffect } from "react";
 import { useRouter } from "next/router";
 import { useI18n } from "next-localization";
-import { MapContainer, TileLayer, Marker, useMap, useMapEvents } from "react-leaflet";
+import { MapContainer, TileLayer, Marker, useMap, useMapEvents, ZoomControl } from "react-leaflet";
 import { Marker as LeafletMarker, Icon, LatLngExpression } from "leaflet";
 import { MAP_TILES_URL, MAP_INITIAL_MARKER_ZOOM, MAP_MIN_ZOOM, MAP_MAX_ZOOM } from "../../types/constants";
 import getOrigin from "../../utils/request";
@@ -103,8 +103,17 @@ const MapWrapper = ({
   };
 
   return (
-    <MapContainer className={className} center={center} zoom={initialZoom} minZoom={MAP_MIN_ZOOM} maxZoom={MAP_MAX_ZOOM} whenReady={whenReady}>
+    <MapContainer
+      className={className}
+      zoomControl={false}
+      center={center}
+      zoom={initialZoom}
+      minZoom={MAP_MIN_ZOOM}
+      maxZoom={MAP_MAX_ZOOM}
+      whenReady={whenReady}
+    >
       <CustomMapHandler />
+      <ZoomControl position="topleft" zoomInTitle={i18n.t("common.map.zoomIn")} zoomOutTitle={i18n.t("common.map.zoomOut")} />
       <TileLayer
         url={MAP_TILES_URL}
         attribution={`<a href="https://www.openstreetmap.org/copyright" target="_blank">© ${i18n.t("common.map.osm")}</a>`}

@@ -5,7 +5,8 @@
       "titleAlt": "Helsingfors stad: Stadsplattform",
       "skipToContent": "Till huvudinnehållet",
       "openMenu": "Meny",
-      "selectLanguage": "Andra språk",
+      "selectLanguage": "Valitse kieli, andra språk, select language",
+      "userInfo": "Användar information",
       "login": "Logga in",
       "logout": "Logga ut"
     },
@@ -19,6 +20,8 @@
       "accessibility": "Tillgänglighetsutlåtande"
     },
     "map": {
+      "zoomIn": "Zooma in",
+      "zoomOut": "Zooma ut",
       "osm": "OpenStreetMaps bidragsgivare"
     },
     "inLanguage": {
@@ -80,6 +83,7 @@
       "photos": "Foton",
       "send": "Sänd",
       "info": "Information",
+      "current": "Nuvarande arbetsfas",
       "completed": "Avslutad"
     },
     "main": {

@@ -5,7 +5,8 @@
       "titleAlt": "Helsinki City: City Platform",
       "skipToContent": "Skip to main content",
       "openMenu": "Menu",
-      "selectLanguage": "Select language",
+      "selectLanguage": "Valitse kieli, andra språk, select language",
+      "userInfo": "User information",
       "login": "Login",
       "logout": "Logout"
     },
@@ -19,6 +20,8 @@
       "accessibility": "Accessibility"
     },
     "map": {
+      "zoomIn": "Zoom in",
+      "zoomOut": "Zoom out",
       "osm": "OpenStreetMap contributors"
     },
     "inLanguage": {
@@ -80,6 +83,7 @@
       "photos": "Photos",
       "send": "Send",
       "info": "Information",
+      "current": "Current work phase",
       "completed": "Completed"
     },
     "main": {

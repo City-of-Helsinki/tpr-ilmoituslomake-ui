@@ -5,7 +5,8 @@
       "titleAlt": "Helsingin kaupunki: Kaupunkialusta",
       "skipToContent": "Siirry sivun pääsisältöön",
       "openMenu": "Valikko",
-      "selectLanguage": "Valitse kieli",
+      "selectLanguage": "Valitse kieli, andra språk, select language",
+      "userInfo": "Käyttäjätiedot",
       "login": "Kirjaudu sisään",
       "logout": "Kirjaudu ulos"
     },
@@ -19,6 +20,8 @@
       "accessibility": "Saavutettavuusseloste"
     },
     "map": {
+      "zoomIn": "Lähennä",
+      "zoomOut": "Loitonna",
       "osm": "OpenStreetMapin tekijät"
     },
     "inLanguage": {
@@ -80,6 +83,7 @@
       "photos": "Kuvat",
       "send": "Lähetä",
       "info": "Tiedot",
+      "current": "Nykyinen työvaihe",
       "completed": "Suoritettu"
     },
     "main": {
