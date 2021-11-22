@@ -35,7 +35,7 @@ const InfoFooter = ({ isEditingAllowed }: InfoFooterProps): ReactElement => {
       )}
       {isEditingAllowed && (
         <div className={styles.flexButton}>
-          <OpeningTimesButton buttonTextKey="notification.button.modifyOpeningTimes" />
+          <OpeningTimesButton buttonTextKey="notification.button.modifyOpeningTimes" buttonVariant="secondary" />
         </div>
       )}
       {isEditingAllowed && (

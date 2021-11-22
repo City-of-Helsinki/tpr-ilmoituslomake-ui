@@ -8,9 +8,10 @@ import { getOpeningTimesLink } from "../../utils/save";
 
 interface OpeningTimesButtonProps {
   buttonTextKey: string;
+  buttonVariant: "primary" | "secondary";
 }
 
-const OpeningTimesButton = ({ buttonTextKey }: OpeningTimesButtonProps): ReactElement => {
+const OpeningTimesButton = ({ buttonTextKey, buttonVariant }: OpeningTimesButtonProps): ReactElement => {
   const i18n = useI18n();
   const router = useRouter();
 
@@ -30,7 +31,7 @@ const OpeningTimesButton = ({ buttonTextKey }: OpeningTimesButtonProps): ReactEl
   };
 
   return (
-    <Button variant="secondary" iconRight={<IconLinkExternal aria-hidden />} onClick={openExternalOpeningTimesApp}>
+    <Button variant={buttonVariant} iconRight={<IconLinkExternal aria-hidden />} onClick={openExternalOpeningTimesApp}>
       {i18n.t(buttonTextKey)}
       <span className="screenReaderOnly"> {i18n.t("common.opensInANewTab")}</span>
     </Button>

@@ -3,7 +3,8 @@ import { useSelector } from "react-redux";
 import { GetServerSideProps } from "next";
 import Head from "next/head";
 import { useI18n } from "next-localization";
-import { IconCheckCircleFill, IconClockPlus } from "hds-react";
+import { IconCheckCircleFill, IconClockPlus, Koros, Link as HdsLink } from "hds-react";
+import { Dialog } from "@material-ui/core";
 import { RootState } from "../../state/reducers";
 import { initStore } from "../../state/store";
 import { NotifierType, CLEAR_STATE, SENT_INFO_PAGE, Toast } from "../../types/constants";
@@ -45,6 +46,11 @@ const NotificationDetail = (): ReactElement => {
   const ref = useRef<HTMLHeadingElement>(null);
 
   const [toast, setToast] = useState<Toast>();
+  const [modalOpen, setModalOpen] = useState(true);
+
+  const closeModal = () => {
+    setModalOpen(false);
+  };
 
   useEffect(() => {
     if (ref.current) {
@@ -130,12 +136,35 @@ const NotificationDetail = (): ReactElement => {
             icon={<IconClockPlus size="xl" aria-hidden />}
             titleKey="notification.message.completeOpeningTimes.title"
             messageKey="notification.message.completeOpeningTimes.message"
-            button={<OpeningTimesButton buttonTextKey="notification.button.notifyOpeningTimes" />}
+            button={<OpeningTimesButton buttonTextKey="notification.button.notifyOpeningTimes" buttonVariant="secondary" />}
           />
 
           <InfoFooter isEditingAllowed={false} />
           <Preview titleKey="notification.preview.title" />
           <InfoFooter isEditingAllowed={false} />
+
+          <Dialog open={modalOpen} onClose={closeModal} aria-labelledby="modal-dialog-title" aria-describedby="modal-dialog-description">
+            <div className={styles.dialog}>
+              <h1 id="modal-dialog-title">{i18n.t("notification.message.sentModal.title")}</h1>
+              <div id="modal-dialog-description" className={styles.message}>
+                {i18n.t("notification.message.sentModal.message")}
+              </div>
+              <div>
+                <OpeningTimesButton buttonTextKey="notification.button.continueToOpeningTimes" buttonVariant="primary" />
+              </div>
+              <div className={styles.link}>
+                <HdsLink href="#" size="M" disableVisitedStyles onClick={closeModal}>
+                  {i18n.t("notification.button.noOpeningTimes")}
+                </HdsLink>
+              </div>
+              <div className={styles.link}>
+                <HdsLink href="#" size="M" disableVisitedStyles onClick={closeModal}>
+                  {i18n.t("notification.button.continueLater")}
+                </HdsLink>
+              </div>
+            </div>
+            <Koros className={styles.wave} type="storm" />
+          </Dialog>
         </main>
       )}
     </Layout>
