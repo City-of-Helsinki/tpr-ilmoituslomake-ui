@@ -21,6 +21,9 @@ const Collapsible = ({ section, title, taskType, taskStatus, isModerated, forceE
 
   const toggle = () => {
     setExpanded(!expanded);
+
+    // Force a resize event to make sure maps render properly inside the collapsible container
+    window.dispatchEvent(new Event("resize"));
   };
 
   useEffect(() => {
