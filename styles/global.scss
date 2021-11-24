@@ -240,3 +240,7 @@ button:hover {
 .MuiLinearProgress-colorPrimary {
   background-color: $color-silver !important;
 }
+
+.leaflet-container *:focus {
+  outline: solid $color-bus 2px !important;
+}
