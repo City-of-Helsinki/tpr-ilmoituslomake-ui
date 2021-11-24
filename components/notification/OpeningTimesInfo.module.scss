@@ -3,7 +3,7 @@
 
 .openingTimes {
   .gridColumn1 {
-    grid-column: 1 / span 2;
+    grid-column: 1 / 1;
 
     @include media(xs, s) {
       grid-column: 1 / 1;
@@ -11,23 +11,7 @@
   }
 
   .gridColumn2 {
-    grid-column: 3 / span 2;
-
-    @include media(xs, s) {
-      grid-column: 1 / 1;
-    }
-  }
-
-  .gridColumn3 {
-    grid-column: 5 / 5;
-
-    @include media(xs, s) {
-      grid-column: 1 / 1;
-    }
-  }
-
-  .gridColumn4 {
-    grid-column: 6 / 6;
+    grid-column: 2 / 2;
 
     @include media(xs, s) {
       grid-column: 1 / 1;
@@ -35,53 +19,25 @@
   }
 
   .results {
-    column-gap: 0;
-    row-gap: 0;
-
     .gridHeader {
       font-size: $fontsize-heading-s !important;
       font-weight: 700;
       background-color: $color-fog-light;
       padding: $spacing-xs;
       margin-top: $spacing-s;
-
-      @include media(xs, s) {
-        display: none;
-      }
     }
 
     .gridContent {
       padding: $spacing-xs;
 
-      @include media(xs, s) {
-        padding-top: 0;
-
-        &.gridColumn1 {
-          padding-top: $spacing-xs;
-        }
+      .weekday {
+        font-weight: 700;
+        margin-bottom: $spacing-s;
       }
 
-      &:nth-child(8n + 1),
-      &:nth-child(8n + 2),
-      &:nth-child(8n + 3),
-      &:nth-child(8n + 4) {
+      &:nth-child(2n + 1) {
         background-color: $color-silver-light;
       }
-
-      .mobileOnly {
-        margin-right: $spacing-xs;
-
-        @include media(m, l, xl) {
-          display: none;
-        }
-      }
-    }
-
-    .flexItem {
-      display: flex;
-      flex-direction: row;
-      align-items: center;
-      height: 100%;
     }
   }
 }

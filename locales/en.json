@@ -269,10 +269,26 @@
       "notice": "Opening hours will be submitted after sending the form.",
       "temporaryNotice": "Opening hours may change frequently due to the exceptional circumstances caused by the Corona pandemic. For now, we recommend updating your opening hours on your own website or social media channels. Please tell customers in the detailed description section where they can check the location’s current opening hours. Please do not put links in the detailed description, links to websites and social media can be added in the next step.",
       "times": {
+        "thisWeek": "This week",
+        "nextWeek": "Next week",
+        "noTimes": "No opening hours",
         "date": "Date",
         "opens": "Opens",
         "closes": "Closes",
         "status": "Status"
+      },
+      "resourceState": {
+        "open": "open",
+        "closed": "closed",
+        "undefined": "undefined",
+        "self_service": "self service",
+        "with_key": "with key",
+        "with_reservation": "with reservation",
+        "open_and_reservable": "reservable",
+        "with_key_and_reservation": "with key and reservation",
+        "enter_only": "enter only",
+        "exit_only": "exit only",
+        "weather_permitting": "weather permitting"
       }
     },
     "photos": {
