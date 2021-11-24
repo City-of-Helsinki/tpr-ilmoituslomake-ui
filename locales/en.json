@@ -26,6 +26,15 @@
       "sv": "in Swedish",
       "en": "in English"
     },
+    "weekDay": {
+      "1": "Monday",
+      "2": "Tuesday",
+      "3": "Wednesday",
+      "4": "Thursday",
+      "5": "Friday",
+      "6": "Saturday",
+      "7": "Sunday"
+    },
     "opensInANewTab": "Opens in a new tab.",
     "opensExternal": "Moves to another site.",
     "notAuthorized": "You are not authorized to view the requested page",

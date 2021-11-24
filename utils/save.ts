@@ -194,15 +194,8 @@ export const getOpeningTimesLink = async (
         sv: { street: streetSv, postal_code: postalCodeSv, post_office: postOfficeSv },
       },
     } = notification;
-    // const displayName = getDisplayName(router.locale || defaultLocale, name);
 
-    // TODO check what data is required
     const postData = {
-      /*
-      name: displayName,
-      description: shortDescFi,
-      address: `${streetFi}, ${postalCodeFi} ${postOfficeFi}`,
-      */
       name: {
         fi: nameFi,
         sv: nameSv,
@@ -219,9 +212,6 @@ export const getOpeningTimesLink = async (
         en: streetFi.length > 0 ? `${streetFi}, ${postalCodeFi} ${postOfficeFi}` : "",
       },
       resource_type: "unit",
-      // children: null,
-      // parents: null,
-      // organization: null,
       origins: [
         {
           data_source: {
@@ -230,7 +220,6 @@ export const getOpeningTimesLink = async (
           origin_id: notificationId,
         },
       ],
-      // extra_data: null,
       is_public: true,
       timezone: "Europe/Helsinki",
       hauki_id: openingTimesId,
