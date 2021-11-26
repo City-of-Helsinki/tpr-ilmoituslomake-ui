@@ -130,6 +130,7 @@ const MapModeration = (): ReactElement => {
           </div>
 
           <MapWrapper
+            id="map"
             className={`${styles.gridSelected} ${styles.map}`}
             initialCenter={initialCenter as [number, number]}
             initialZoom={locationStatus !== ModerationStatus.Edited ? initialSelectedZoom : initialModifiedZoom}
@@ -173,6 +174,7 @@ const MapModeration = (): ReactElement => {
           </div>
 
           <MapWrapper
+            id="map1"
             className={`${styles.gridSelected} ${styles.map}`}
             initialCenter={initialCenter as [number, number]}
             initialZoom={initialSelectedZoom}
@@ -189,6 +191,7 @@ const MapModeration = (): ReactElement => {
             modifyCallback={updateLocationStatus}
           >
             <MapWrapper
+              id="map2"
               className={`${styles.gridModified} ${styles.map}`}
               initialCenter={initialCenter as [number, number]}
               initialZoom={initialModifiedZoom}

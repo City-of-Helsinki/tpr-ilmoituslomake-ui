@@ -3,14 +3,14 @@ import { useDispatch, useSelector } from "react-redux";
 import { NextRouter, useRouter } from "next/router";
 import { useI18n } from "next-localization";
 import { Button, IconArrowRight } from "hds-react";
-import { setTranslationTaskPageValid } from "../../state/actions/translation";
+import { setTranslationTaskPageValid, setTranslationTaskValidationSummary } from "../../state/actions/translation";
 import { TranslationAction } from "../../state/actions/translationTypes";
 import { RootState } from "../../state/reducers";
 import { TaskStatus, TaskType, Toast } from "../../types/constants";
 import { TranslationExtra, User } from "../../types/general";
 import { NotificationSchema } from "../../types/notification_schema";
 import { TranslationSchema } from "../../types/translation_schema";
-import { isTranslationTaskPageChanged, isTranslationTaskPageValid } from "../../utils/translationValidation";
+import { getTranslationTaskPageValidationSummary, isTranslationTaskPageChanged, isTranslationTaskPageValid } from "../../utils/translationValidation";
 import ModalConfirmation from "../common/ModalConfirmation";
 import styles from "./TaskHeaderButtons.module.scss";
 
@@ -93,10 +93,14 @@ const TaskHeaderButtons = ({ prefix, backHref, isModeration, saveTranslation, se
 
     if (draft || isTranslationTaskPageValid(prefix, selectedTask, translatedTask, translationExtra, dispatchValidation)) {
       // The page is valid, or this is a draft, so save the task
+      dispatchValidation(setTranslationTaskValidationSummary({}));
       saveTranslation(currentUser, translatedTaskId, selectedTask, translatedTask, translationExtra, draft, router, dispatchValidation, setToast);
       dispatchValidation(setTranslationTaskPageValid(true));
     } else {
       // The page is not valid, but set the page to valid then invalid to force the page to show the general validation message
+      dispatchValidation(
+        setTranslationTaskValidationSummary(getTranslationTaskPageValidationSummary(prefix, selectedTask, translatedTask, translationExtra, i18n))
+      );
       dispatchValidation(setTranslationTaskPageValid(true));
       dispatchValidation(setTranslationTaskPageValid(false));
     }

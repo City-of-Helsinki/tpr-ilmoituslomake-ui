@@ -10,6 +10,7 @@ import {
   SET_TRANSLATION_TASK_PAGE_VALID,
   SET_TRANSLATION_TASK_VALIDATION,
   SET_TRANSLATION_TASK_PHOTO_VALIDATION,
+  SET_TRANSLATION_TASK_VALIDATION_SUMMARY,
 } from "../../types/constants";
 import { PhotoTranslation, TranslationTaskPhotoValidation } from "../../types/general";
 import { INITIAL_NOTIFICATION, INITIAL_TRANSLATION, INITIAL_TRANSLATION_EXTRA } from "../../types/initial";
@@ -36,6 +37,7 @@ const initialState: TranslationState = {
     descriptionLong: { valid: true },
     photos: [],
   },
+  taskValidationSummary: {},
 };
 
 const translation = (state = initialState, action: AnyAction): TranslationState => {
@@ -142,6 +144,14 @@ const translation = (state = initialState, action: AnyAction): TranslationState 
       return {
         ...state,
         taskValidation: { ...state.taskValidation, photos },
+      };
+    }
+
+    case SET_TRANSLATION_TASK_VALIDATION_SUMMARY: {
+      console.log("SET_TRANSLATION_TASK_VALIDATION_SUMMARY", action.payload);
+      return {
+        ...state,
+        taskValidationSummary: action.payload,
       };
     }
 

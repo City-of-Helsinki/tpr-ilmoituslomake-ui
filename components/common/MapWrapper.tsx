@@ -7,6 +7,7 @@ import { MAP_TILES_URL, MAP_INITIAL_MARKER_ZOOM, MAP_MIN_ZOOM, MAP_MAX_ZOOM } fr
 import getOrigin from "../../utils/request";
 
 interface MapWrapperProps {
+  id: string;
   className?: string;
   initialCenter: [number, number];
   initialZoom: number;
@@ -18,6 +19,7 @@ interface MapWrapperProps {
 }
 
 const MapWrapper = ({
+  id,
   className,
   initialCenter,
   initialZoom,
@@ -104,6 +106,7 @@ const MapWrapper = ({
 
   return (
     <MapContainer
+      id={id}
       className={className}
       zoomControl={false}
       center={center}

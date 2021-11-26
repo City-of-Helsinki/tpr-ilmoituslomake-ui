@@ -6,11 +6,11 @@ import { Button, IconArrowLeft, IconArrowRight } from "hds-react";
 import { NotificationAction } from "../../state/actions/notificationTypes";
 import { NotificationValidationAction } from "../../state/actions/notificationValidationTypes";
 import { setPage } from "../../state/actions/notification";
-import { setPageValid } from "../../state/actions/notificationValidation";
+import { setNotificationValidationSummary, setPageValid } from "../../state/actions/notificationValidation";
 import { RootState } from "../../state/reducers";
 import { MAX_PAGE, Toast } from "../../types/constants";
 import { saveNotification } from "../../utils/save";
-import { isPageValid } from "../../utils/validation";
+import { getPageValidationSummary, isPageValid } from "../../utils/validation";
 import styles from "./NotificationFooter.module.scss";
 
 interface NotificationFooterProps {
@@ -37,10 +37,14 @@ const NotificationFooter = ({ smallButtons, setToast }: NotificationFooterProps)
   const nextPage = () => {
     if (isPageValid(currentPage, router.locale, notification, notificationExtra, dispatchValidation)) {
       // The page is valid, so go to the next page
+      dispatchValidation(setNotificationValidationSummary({}));
       dispatch(setPage(currentPage + 1));
       dispatchValidation(setPageValid(true));
     } else {
       // The page is not valid, but set the page to valid then invalid to force the page to show the general validation message
+      dispatchValidation(
+        setNotificationValidationSummary(getPageValidationSummary(currentPage, router.locale, notification, notificationExtra, i18n))
+      );
       dispatchValidation(setPageValid(true));
       dispatchValidation(setPageValid(false));
     }

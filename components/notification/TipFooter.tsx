@@ -5,11 +5,11 @@ import { useRouter } from "next/router";
 import { useI18n } from "next-localization";
 import { Button } from "hds-react";
 import { NotificationValidationAction } from "../../state/actions/notificationValidationTypes";
-import { setPageValid } from "../../state/actions/notificationValidation";
+import { setNotificationTipValidationSummary, setPageValid } from "../../state/actions/notificationValidation";
 import { RootState } from "../../state/reducers";
 import { Toast } from "../../types/constants";
 import { saveTip } from "../../utils/save";
-import { isTipPageValid } from "../../utils/validation";
+import { getTipPageValidationSummary, isTipPageValid } from "../../utils/validation";
 import styles from "./TipFooter.module.scss";
 
 interface TipFooterProps {
@@ -26,10 +26,12 @@ const TipFooter = ({ setToast }: TipFooterProps): ReactElement => {
   const sendTip = () => {
     if (isTipPageValid(tip, dispatchValidation)) {
       // The page is valid, so save the tip
+      dispatchValidation(setNotificationTipValidationSummary({}));
       saveTip(tip, router, dispatchValidation, setToast);
       dispatchValidation(setPageValid(true));
     } else {
       // The page is not valid, but set the page to valid then invalid to force the page to show the general validation message
+      dispatchValidation(setNotificationTipValidationSummary(getTipPageValidationSummary(tip, i18n)));
       dispatchValidation(setPageValid(true));
       dispatchValidation(setPageValid(false));
     }

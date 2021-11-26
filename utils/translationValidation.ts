@@ -1,8 +1,9 @@
 import { Dispatch } from "react";
+import { I18n } from "next-localization";
 import { string } from "yup";
 import { setTranslationTaskPhotoValidation, setTranslationTaskValidation } from "../state/actions/translation";
 import { TranslationAction } from "../state/actions/translationTypes";
-import { TranslationExtra, TranslationTaskValidation, Validation } from "../types/general";
+import { KeyValueValidation, TranslationExtra, TranslationTaskValidation, Validation } from "../types/general";
 import { NotificationSchema } from "../types/notification_schema";
 import { TranslationSchema } from "../types/translation_schema";
 import { isValid } from "./validation";
@@ -121,6 +122,42 @@ export const validateTranslationTaskDetails = (
 export const validateTranslationTaskPhoto = (prefix: string, index: number, translationExtra: TranslationExtra): boolean => {
   const photoValid = [validateTranslationTaskPhotoField(prefix, index, "source", translationExtra)];
   return photoValid.every((v) => v.valid);
+};
+
+export const getTranslationTaskPageValidationSummary = (
+  prefix: string,
+  selectedTask: NotificationSchema,
+  translatedTask: TranslationSchema,
+  translationExtra: TranslationExtra,
+  i18n: I18n<unknown>
+): KeyValueValidation => {
+  const { photosTranslated } = translationExtra;
+
+  // Check whether all data on the page is valid and create a summary of the results
+  // The fieldLabel value is also added to use in the ValidationSummary component
+  return {
+    [`placeName_lang_Translated`]: {
+      ...validateTranslationTaskField(prefix, "name", selectedTask, translatedTask, translationExtra),
+      fieldLabel: i18n.t(`${prefix}.description.placeName.label`),
+    },
+    [`shortDescription_lang_Translated`]: {
+      ...validateTranslationTaskField(prefix, "short", selectedTask, translatedTask, translationExtra),
+      fieldLabel: i18n.t(`${prefix}.description.shortDescription.label`),
+    },
+    [`longDescription_lang_Translated`]: {
+      ...validateTranslationTaskField(prefix, "long", selectedTask, translatedTask, translationExtra),
+      fieldLabel: i18n.t(`${prefix}.description.longDescription.label`),
+    },
+    ...photosTranslated.reduce((acc, photo, index) => {
+      return {
+        ...acc,
+        [`source_${index}_Translated`]: {
+          ...validateTranslationTaskPhotoField(prefix, index, "source", translationExtra),
+          fieldLabel: i18n.t(`${prefix}.photos.source.label`),
+        },
+      };
+    }, {}),
+  };
 };
 
 export const isTranslationTaskPageValid = (
