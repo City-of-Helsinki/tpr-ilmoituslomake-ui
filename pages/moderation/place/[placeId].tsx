@@ -31,9 +31,6 @@ const ModerationPlaceDetail = (): ReactElement => {
   const { taskType, taskStatus } = moderationExtra;
   const selectedTaskId = useSelector((state: RootState) => state.moderation.selectedTaskId);
 
-  // The maps only initialise properly when not hidden, so use a flag to only collapse the container after the maps are ready
-  const [mapsReady, setMapsReady] = useState<boolean>(false);
-
   const [toast, setToast] = useState<Toast>();
 
   return (
@@ -50,9 +47,9 @@ const ModerationPlaceDetail = (): ReactElement => {
             <DescriptionModeration />
             <TagsModeration />
           </Collapsible>
-          <Collapsible section={2} title={i18n.t("moderation.task.contact")} taskType={taskType} taskStatus={taskStatus} forceExpanded={!mapsReady}>
+          <Collapsible section={2} title={i18n.t("moderation.task.contact")} taskType={taskType} taskStatus={taskStatus}>
             <LocationModeration />
-            <MapModeration setMapsReady={setMapsReady} />
+            <MapModeration />
             <ContactModeration />
             <LinksModeration />
           </Collapsible>

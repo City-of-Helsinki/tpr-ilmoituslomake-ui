@@ -5,7 +5,7 @@ import { useRouter } from "next/router";
 import { useI18n } from "next-localization";
 import { Button, IconPlus, Koros, Link as HdsLink } from "hds-react";
 import { RootState } from "../../state/reducers";
-import { ItemType, Toast } from "../../types/constants";
+import { ItemType, MODERATION_GUIDE_URL, Toast } from "../../types/constants";
 import { saveModerationChangeRequest } from "../../utils/moderation";
 import ToastNotification from "../common/ToastNotification";
 import styles from "./Intro.module.scss";
@@ -49,7 +49,19 @@ const Intro = (): ReactElement => {
           {i18n.t("moderation.intro.info2")}
         </div>
         <div className="formInput">{i18n.t("moderation.intro.info3")}</div>
-        <div className="formInput">{i18n.t("moderation.intro.guide")}</div>
+        <div className="formInput">
+          <HdsLink
+            href={MODERATION_GUIDE_URL}
+            size="M"
+            openInNewTab
+            openInNewTabAriaLabel={i18n.t("common.opensInANewTab")}
+            external
+            openInExternalDomainAriaLabel={i18n.t("common.opensExternal")}
+            disableVisitedStyles
+          >
+            {i18n.t("moderation.intro.guide")}
+          </HdsLink>
+        </div>
 
         {toast && <ToastNotification prefix="moderation" toast={toast} setToast={setToast} />}
 

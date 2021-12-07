@@ -22,7 +22,8 @@ export const saveNotification = async (
   setToast?: Dispatch<SetStateAction<Toast | undefined>>
 ): Promise<void> => {
   try {
-    const valid = validateNotificationData(notification);
+    // Validate using an empty opening_times object for now until the Hauki development is ready
+    const valid = validateNotificationData({ ...notification, opening_times: {} });
 
     if (currentUser?.authenticated && valid) {
       // Send the Cross Site Request Forgery token, otherwise the backend returns the error "CSRF Failed: CSRF token missing or incorrect."
@@ -33,6 +34,7 @@ export const saveNotification = async (
       // The notification id is only included if it has a value, and is used for modifying existing notifications
       const { photos } = notificationExtra;
 
+      // Force opening_times to be an empty object for now until the Hauki development is ready
       const postData = {
         ...(notificationId > 0 && { id: notificationId }),
         data: {
@@ -41,6 +43,7 @@ export const saveNotification = async (
             const { uuid, sourceType: source_type, url, altText: alt_text, permission, source, mediaId: media_id } = photo;
             return { index, uuid, source_type, url, alt_text, permission, source, media_id };
           }),
+          opening_times: {},
         },
         images: photos.map((photo, index) => {
           const { uuid, url, base64 } = photo;

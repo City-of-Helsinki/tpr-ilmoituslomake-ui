@@ -138,6 +138,7 @@ const Preview = ({ className, titleKey, includeNotifier, isPlaceInfo }: PreviewP
           {i18n.t("notification.map.skipMap")}
         </Button>
         <MapWrapper
+          id="map"
           className={styles.map}
           initialCenter={initialCenter as [number, number]}
           initialZoom={initialZoom}

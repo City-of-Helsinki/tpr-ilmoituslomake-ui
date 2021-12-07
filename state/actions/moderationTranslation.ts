@@ -12,6 +12,7 @@ import {
   SET_MODERATION_TRANSLATION_REQUEST,
   SET_MODERATION_TRANSLATION_REQUEST_PAGE_VALID,
   SET_MODERATION_TRANSLATION_REQUEST_VALIDATION,
+  SET_MODERATION_TRANSLATION_REQUEST_VALIDATION_SUMMARY,
 } from "../../types/constants";
 import {
   KeyValueValidation,
@@ -87,5 +88,10 @@ export const setModerationTranslationRequestPageValid = (valid: boolean): Modera
 
 export const setModerationTranslationRequestValidation = (validation: KeyValueValidation): ModerationTranslationAction => ({
   type: SET_MODERATION_TRANSLATION_REQUEST_VALIDATION,
+  payload: validation,
+});
+
+export const setModerationTranslationRequestValidationSummary = (validation: KeyValueValidation): ModerationTranslationAction => ({
+  type: SET_MODERATION_TRANSLATION_REQUEST_VALIDATION_SUMMARY,
   payload: validation,
 });

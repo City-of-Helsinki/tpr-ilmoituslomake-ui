@@ -18,6 +18,8 @@ import {
   SET_NOTIFICATION_PHOTO_ALT_TEXT_VALIDATION,
   REMOVE_NOTIFICATION_PHOTO_VALIDATION,
   SET_NOTIFICATION_TIP_VALIDATION,
+  SET_NOTIFICATION_VALIDATION_SUMMARY,
+  SET_NOTIFICATION_TIP_VALIDATION_SUMMARY,
 } from "../../types/constants";
 import { PhotoValidation } from "../../types/notification_validation";
 import { INITIAL_NOTIFICATION_VALIDATION } from "../../types/initial";
@@ -32,6 +34,8 @@ const initialState: NotificationValidationState = {
     user_comments: { valid: true },
     user_details: { valid: true },
   },
+  validationSummary: {},
+  tipValidationSummary: {},
 };
 
 const notificationValidation = (state = initialState, action: AnyAction): NotificationValidationState => {
@@ -218,6 +222,22 @@ const notificationValidation = (state = initialState, action: AnyAction): Notifi
       return {
         ...state,
         tipValidation: { ...state.tipValidation, ...action.payload },
+      };
+    }
+
+    case SET_NOTIFICATION_VALIDATION_SUMMARY: {
+      console.log("SET_NOTIFICATION_VALIDATION_SUMMARY", action.payload);
+      return {
+        ...state,
+        validationSummary: action.payload,
+      };
+    }
+
+    case SET_NOTIFICATION_TIP_VALIDATION_SUMMARY: {
+      console.log("SET_NOTIFICATION_TIP_VALIDATION_SUMMARY", action.payload);
+      return {
+        ...state,
+        tipValidationSummary: action.payload,
       };
     }
 

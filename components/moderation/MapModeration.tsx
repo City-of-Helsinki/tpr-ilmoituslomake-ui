@@ -15,11 +15,7 @@ import styles from "./MapModeration.module.scss";
 
 const MapWrapper = dynamic(() => import("../common/MapWrapper"), { ssr: false });
 
-interface MapModerationProps {
-  setMapsReady?: (ready: boolean) => void;
-}
-
-const MapModeration = ({ setMapsReady }: MapModerationProps): ReactElement => {
+const MapModeration = (): ReactElement => {
   const i18n = useI18n();
   const dispatch = useDispatch<Dispatch<ModerationAction>>();
   const dispatchStatus = useDispatch<Dispatch<ModerationStatusAction>>();
@@ -69,8 +65,6 @@ const MapModeration = ({ setMapsReady }: MapModerationProps): ReactElement => {
     [dispatchStatus]
   );
 
-  // The maps only initialise properly when not hidden, so use flags to only hide the maps after they are ready
-  const [map1Ready, setMap1Ready] = useState<boolean>(false);
   const [map2Ready, setMap2Ready] = useState<boolean>(false);
 
   // Enable the modified location to be edited by default if it is different from the selected location
@@ -100,20 +94,13 @@ const MapModeration = ({ setMapsReady }: MapModerationProps): ReactElement => {
       taskType === TaskType.ModeratorChange ||
       taskType === TaskType.ModeratorAdd
     ) {
-      // Both maps are needed
-      if (setMapsReady) {
-        setMapsReady(map1Ready && map2Ready);
-      }
       if (map2Ready && initialLocationStatus) {
         // Enable the location to be edited by default
         updateLocationStatus("", initialLocationStatus);
         setInitialLocationStatus(undefined);
       }
-    } else if (setMapsReady) {
-      // Only one map is needed
-      setMapsReady(map1Ready);
     }
-  }, [taskType, map1Ready, map2Ready, setMapsReady, initialLocationStatus, setInitialLocationStatus, updateLocationStatus]);
+  }, [taskType, map2Ready, initialLocationStatus, setInitialLocationStatus, updateLocationStatus]);
 
   if (taskType === TaskType.RemoveTip || taskType === TaskType.ModeratorRemove || taskType === TaskType.PlaceInfo) {
     const skipMap = () => {
@@ -143,12 +130,12 @@ const MapModeration = ({ setMapsReady }: MapModerationProps): ReactElement => {
           </div>
 
           <MapWrapper
+            id="map"
             className={`${styles.gridSelected} ${styles.map}`}
             initialCenter={initialCenter as [number, number]}
             initialZoom={locationStatus !== ModerationStatus.Edited ? initialSelectedZoom : initialModifiedZoom}
             location={locationStatus !== ModerationStatus.Edited ? locationSelected : locationModified}
             setLocation={locationStatus === ModerationStatus.Edited ? updateLocation : undefined}
-            setMapReady={setMap1Ready}
             draggableMarker={locationStatus === ModerationStatus.Edited && taskStatus !== TaskStatus.Closed && taskStatus !== TaskStatus.Cancelled}
           />
         </div>
@@ -187,11 +174,11 @@ const MapModeration = ({ setMapsReady }: MapModerationProps): ReactElement => {
           </div>
 
           <MapWrapper
+            id="map1"
             className={`${styles.gridSelected} ${styles.map}`}
             initialCenter={initialCenter as [number, number]}
             initialZoom={initialSelectedZoom}
             location={locationSelected}
-            setMapReady={setMap1Ready}
             draggableMarker={false}
           />
 
@@ -204,6 +191,7 @@ const MapModeration = ({ setMapsReady }: MapModerationProps): ReactElement => {
             modifyCallback={updateLocationStatus}
           >
             <MapWrapper
+              id="map2"
               className={`${styles.gridModified} ${styles.map}`}
               initialCenter={initialCenter as [number, number]}
               initialZoom={initialModifiedZoom}
@@ -232,10 +220,6 @@ const MapModeration = ({ setMapsReady }: MapModerationProps): ReactElement => {
   }
 
   return <></>;
-};
-
-MapModeration.defaultProps = {
-  setMapsReady: undefined,
 };
 
 export default MapModeration;

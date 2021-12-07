@@ -42,6 +42,7 @@ const TaskHeader = ({ prefix, buttonsPrefix, backHref, isModeration, saveTransla
   const router = useRouter();
 
   const pageValid = useSelector((state: RootState) => state.translation.taskPageValid);
+  const taskValidationSummary = useSelector((state: RootState) => state.translation.taskValidationSummary);
   const selectedTaskId = useSelector((state: RootState) => state.translation.selectedTaskId);
   const selectedTask = useSelector((state: RootState) => state.translation.selectedTask);
   const { name: placeNameSelected } = selectedTask;
@@ -67,7 +68,9 @@ const TaskHeader = ({ prefix, buttonsPrefix, backHref, isModeration, saveTransla
 
       {toast && <ToastNotification prefix={buttonsPrefix ?? prefix} toast={toast} setToast={setToast} />}
 
-      <div className={styles.validationSummary}>{!pageValid && <ValidationSummary prefix={buttonsPrefix ?? prefix} pageValid={pageValid} />}</div>
+      <div className={styles.validationSummary}>
+        {!pageValid && <ValidationSummary prefix={buttonsPrefix ?? prefix} pageValid={pageValid} validationSummary={taskValidationSummary} />}
+      </div>
 
       <TaskHeaderButtons
         prefix={buttonsPrefix ?? prefix}

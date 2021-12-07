@@ -25,6 +25,7 @@ export interface Validation {
   valid: boolean;
   message?: string;
   changed?: boolean;
+  fieldLabel?: string; // Only used for validation summary
 }
 
 export interface KeyValueValidation {

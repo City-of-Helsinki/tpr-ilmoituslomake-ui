@@ -43,6 +43,7 @@ const NotificationDetail = (): ReactElement => {
 
   const currentPage = useSelector((state: RootState) => state.notification.page);
   const pageValid = useSelector((state: RootState) => state.notificationValidation.pageValid);
+  const validationSummary = useSelector((state: RootState) => state.notificationValidation.validationSummary);
   const ref = useRef<HTMLHeadingElement>(null);
 
   const [toast, setToast] = useState<Toast>();
@@ -73,7 +74,7 @@ const NotificationDetail = (): ReactElement => {
           <h2 tabIndex={-1}>{`${currentPage} ${i18n.t("notification.main.basic")}`}</h2>
           {toast && <ToastNotification prefix="notification" toast={toast} setToast={setToast} />}
           <NotificationNotice messageKey="notification.mandatory" />
-          {!pageValid && <ValidationSummary prefix="notification" pageValid={pageValid} />}
+          {!pageValid && <ValidationSummary prefix="notification" pageValid={pageValid} validationSummary={validationSummary} />}
           <Description />
           <Tags />
           <Notifier />
@@ -85,7 +86,7 @@ const NotificationDetail = (): ReactElement => {
           <h2 tabIndex={-1}>{`${currentPage} ${i18n.t("notification.main.contact")}`}</h2>
           {toast && <ToastNotification prefix="notification" toast={toast} setToast={setToast} />}
           <NotificationNotice messageKey="notification.mandatory" />
-          {!pageValid && <ValidationSummary prefix="notification" pageValid={pageValid} />}
+          {!pageValid && <ValidationSummary prefix="notification" pageValid={pageValid} validationSummary={validationSummary} />}
           <Location />
           <Map />
           <Contact />
@@ -98,7 +99,7 @@ const NotificationDetail = (): ReactElement => {
           <h2 tabIndex={-1}>{`${currentPage} ${i18n.t("notification.main.photos")}`}</h2>
           {toast && <ToastNotification prefix="notification" toast={toast} setToast={setToast} />}
           <NotificationNotice messageKey="notification.photos.notice" />
-          {!pageValid && <ValidationSummary prefix="notification" pageValid={pageValid} />}
+          {!pageValid && <ValidationSummary prefix="notification" pageValid={pageValid} validationSummary={validationSummary} />}
           <Photos />
           <NotificationFooterNav setToast={setToast} />
         </main>

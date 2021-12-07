@@ -28,6 +28,7 @@ const Tip = (): ReactElement => {
   const i18n = useI18n();
 
   const pageValid = useSelector((state: RootState) => state.notificationValidation.pageValid);
+  const tipValidationSummary = useSelector((state: RootState) => state.notificationValidation.tipValidationSummary);
   const ref = useRef<HTMLHeadingElement>(null);
 
   const tip = useSelector((state: RootState) => state.notification.tip);
@@ -51,8 +52,9 @@ const Tip = (): ReactElement => {
       <main id="content" className={`narrowSection ${styles.content}`}>
         <TipHeader headerRef={ref} />
         {toast && <ToastNotification prefix="notification" toast={toast} setToast={setToast} />}
-        <NotificationNotice messageKey="notification.mandatory" />
-        {!pageValid && <ValidationSummary prefix="notification" pageValid={pageValid} />}
+        {target > 0 && <NotificationNotice messageKey="notification.tip.info" messageKey2="notification.mandatory" />}
+        {target === 0 && <NotificationNotice messageKey="notification.tip.infoNew" messageKey2="notification.mandatory" />}
+        {!pageValid && <ValidationSummary prefix="notification" pageValid={pageValid} validationSummary={tipValidationSummary} />}
         <div className={`formSection ${styles.tipInfo}`}>
           {target > 0 && <DynamicTipType />}
           <TipPlace />
