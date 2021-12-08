@@ -18,9 +18,10 @@ const OpeningTimesButton = ({ buttonTextKey, buttonVariant }: OpeningTimesButton
   const notificationId = useSelector((state: RootState) => state.notification.notificationId);
   const notification = useSelector((state: RootState) => state.notification.notification);
   const openingTimesId = useSelector((state: RootState) => state.notification.openingTimesId);
+  const isNew = useSelector((state: RootState) => state.notification.isNew);
 
   const openExternalOpeningTimesApp = async () => {
-    const openingTimeUrl = await getOpeningTimesLink(notificationId, notification, openingTimesId, router);
+    const openingTimeUrl = await getOpeningTimesLink(notificationId, notification, openingTimesId, isNew, router);
     if (openingTimeUrl) {
       // Trim any quotes and check if it's a valid url
       const url = openingTimeUrl.replace(/"/g, "");

@@ -96,8 +96,9 @@ export const saveNotification = async (
             }),
           } as NotificationExtra;
           const openingTimesId = notificationResult.hauki_id;
+          const isNew = notificationId <= 0;
 
-          dispatch(setSentNotification(notificationResult.id, sentNotification, sentNotificationExtra, openingTimesId));
+          dispatch(setSentNotification(notificationResult.id, sentNotification, sentNotificationExtra, openingTimesId, isNew));
           dispatch(setPage(SENT_INFO_PAGE));
         } else if (setToast) {
           setToast(Toast.SaveFailed);
@@ -181,6 +182,7 @@ export const getOpeningTimesLink = async (
   notificationId: number,
   notification: NotificationSchema,
   openingTimesId: number,
+  isNew: boolean,
   router: NextRouter
 ): Promise<string | undefined> => {
   try {
@@ -226,6 +228,7 @@ export const getOpeningTimesLink = async (
       is_public: true,
       timezone: "Europe/Helsinki",
       hauki_id: openingTimesId,
+      published: !isNew,
     };
 
     console.log("SENDING", postData);

@@ -152,8 +152,9 @@ export const setSentNotification = (
   notificationId: number,
   notification: NotificationSchema,
   notificationExtra: NotificationExtra,
-  openingTimesId: number
+  openingTimesId: number,
+  isNew: boolean
 ): NotificationAction => ({
   type: SET_SENT_NOTIFICATION,
-  payload: { notificationId, notification, notificationExtra, openingTimesId },
+  payload: { notificationId, notification, notificationExtra, openingTimesId, isNew },
 });

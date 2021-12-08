@@ -44,6 +44,7 @@ export interface NotificationState {
   notification: NotificationSchema;
   notificationExtra: NotificationExtra;
   openingTimesId: number;
+  isNew: boolean;
 }
 
 export interface NotificationValidationState {

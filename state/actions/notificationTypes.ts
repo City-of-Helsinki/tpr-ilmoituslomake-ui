@@ -150,7 +150,13 @@ interface SetNotificationTipAction extends AnyAction {
 
 interface SetSentNotificationAction extends AnyAction {
   type: typeof SET_SENT_NOTIFICATION;
-  payload: { notificationId: number; notification: NotificationSchema; notificationExtra: NotificationExtra; openingTimesId: number };
+  payload: {
+    notificationId: number;
+    notification: NotificationSchema;
+    notificationExtra: NotificationExtra;
+    openingTimesId: number;
+    isNew: boolean;
+  };
 }
 
 export type NotificationAction =
