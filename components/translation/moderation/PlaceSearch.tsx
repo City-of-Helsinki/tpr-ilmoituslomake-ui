@@ -77,7 +77,7 @@ const PlaceSearch = (): ReactElement => {
 
   const searchPlaces = async () => {
     const searchObject = {
-      ...(placeName.length > 0 && { search_name__contains: placeName.toLowerCase() }),
+      ...(placeName.length > 0 && { search_name: placeName.toLowerCase() }),
       ...(address.length > 0 && { search_address__contains: address.toLowerCase() }),
       ...(ontologyIds.length > 0 && { data__ontology_ids__contains: ontologyIds }),
       ...(matkoIds.length > 0 && { data__matko_ids__contains: matkoIds }),
