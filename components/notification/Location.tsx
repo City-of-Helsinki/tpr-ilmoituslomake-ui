@@ -118,6 +118,7 @@ const Location = (): ReactElement => {
         <>
           <TextInput
             id="streetAddressFi"
+            lang="fi"
             className="formInput"
             label={i18n.t("notification.location.streetAddress.label")}
             name="street"
@@ -136,6 +137,7 @@ const Location = (): ReactElement => {
           />
           <TextInput
             id="postalCodeFi"
+            lang="fi"
             className="formInput"
             label={i18n.t("notification.location.postalCode.label")}
             name="postal_code"
@@ -154,6 +156,7 @@ const Location = (): ReactElement => {
           />
           <TextInput
             id="postalOfficeFi"
+            lang="fi"
             className="formInput"
             label={i18n.t("notification.location.postalOffice.label")}
             name="post_office"
@@ -176,6 +179,7 @@ const Location = (): ReactElement => {
         <>
           <TextInput
             id="streetAddressSv"
+            lang="sv"
             className="formInput"
             label={i18n.t("notification.location.streetAddress.label")}
             name="street"
@@ -194,6 +198,7 @@ const Location = (): ReactElement => {
           />
           <TextInput
             id="postalCodeSv"
+            lang="sv"
             className="formInput"
             label={i18n.t("notification.location.postalCode.label")}
             name="postal_code"
@@ -212,6 +217,7 @@ const Location = (): ReactElement => {
           />
           <TextInput
             id="postalOfficeSv"
+            lang="sv"
             className="formInput"
             label={i18n.t("notification.location.postalOffice.label")}
             name="post_office"

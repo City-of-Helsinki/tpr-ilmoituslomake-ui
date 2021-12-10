@@ -57,6 +57,7 @@ const LinksModeration = (): ReactElement => {
             ModerationComponent={
               <TextInput
                 id={`website_${option}`}
+                lang={option}
                 label={`${i18n.t("moderation.links.website.label")} ${i18n.t(`common.inLanguage.${option}`)}`}
                 name={option}
               />

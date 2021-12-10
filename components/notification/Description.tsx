@@ -83,6 +83,7 @@ const Description = (): ReactElement => {
             <TextInput
               id={`placeName_${option}`}
               key={`placeName_${option}`}
+              lang={option}
               className="formInput"
               label={label}
               name={option}
@@ -107,6 +108,7 @@ const Description = (): ReactElement => {
             <TextArea
               id={`shortDescription_${option}`}
               key={`shortDescription_${option}`}
+              lang={option}
               className="formInput"
               rows={3}
               label={label}
@@ -136,6 +138,7 @@ const Description = (): ReactElement => {
             <TextArea
               id={`longDescription_${option}`}
               key={`longDescription_${option}`}
+              lang={option}
               className="formInput"
               rows={6}
               label={label}

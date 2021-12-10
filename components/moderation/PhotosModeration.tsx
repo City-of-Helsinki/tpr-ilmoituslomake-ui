@@ -232,6 +232,7 @@ const PhotosModeration = (): ReactElement => {
                     ModerationComponent={
                       <TextArea
                         id={altTextKey}
+                        lang={option}
                         rows={3}
                         label={`${i18n.t("moderation.photos.altText.label")} ${i18n.t(`common.inLanguage.${option}`)}`}
                         name={option}

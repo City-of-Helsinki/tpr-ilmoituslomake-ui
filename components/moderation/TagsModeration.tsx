@@ -119,6 +119,7 @@ const TagsModeration = (): ReactElement => {
             ModerationComponent={
               <TextInput
                 id={`extraKeywordsText_${option}`}
+                lang={option}
                 label={`${i18n.t("moderation.tags.extraKeywords.label")} ${i18n.t(`common.inLanguage.${option}`)}`}
                 name={option}
               />
