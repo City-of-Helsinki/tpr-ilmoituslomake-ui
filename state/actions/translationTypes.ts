@@ -1,4 +1,4 @@
-import { AnyAction } from "redux";
+import type { AnyAction } from "redux";
 import {
   SET_TRANSLATION_TASK_SEARCH,
   SET_TRANSLATION_TASK_RESULTS,

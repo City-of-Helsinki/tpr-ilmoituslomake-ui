@@ -1,4 +1,4 @@
-import { AnyAction } from "redux";
+import type { AnyAction } from "redux";
 import {
   SET_PAGE_VALID,
   SET_NOTIFICATION_INPUT_LANGUAGE_VALIDATION,

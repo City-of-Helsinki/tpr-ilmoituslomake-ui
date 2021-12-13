@@ -1,4 +1,4 @@
-import { AnyAction } from "redux";
+import type { AnyAction } from "redux";
 import { LatLngExpression } from "leaflet";
 import {
   SET_PAGE,
