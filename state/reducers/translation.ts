@@ -1,4 +1,4 @@
-import { AnyAction } from "redux";
+import type { AnyAction } from "redux";
 import { TranslationState } from "./types";
 import {
   SET_TRANSLATION_TASK_RESULTS,

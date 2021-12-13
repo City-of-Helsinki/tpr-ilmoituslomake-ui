@@ -1,5 +1,6 @@
 import { useMemo } from "react";
-import { Store, createStore, applyMiddleware } from "redux";
+import { createStore, applyMiddleware } from "redux";
+import type { Store } from "redux";
 import thunkMiddleware from "redux-thunk";
 import { RootState, rootReducer } from "./reducers";
 

@@ -1,4 +1,4 @@
-import { AnyAction } from "redux";
+import type { AnyAction } from "redux";
 import {
   SET_MODERATION_TRANSLATION_REQUEST_SEARCH,
   SET_MODERATION_TRANSLATION_REQUEST_RESULTS,
