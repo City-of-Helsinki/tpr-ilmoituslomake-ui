@@ -1,4 +1,4 @@
-import React, { ReactElement } from "react";
+import React, { ReactElement, useState } from "react";
 import { GetServerSideProps } from "next";
 import Head from "next/head";
 import { useI18n } from "next-localization";
@@ -14,6 +14,8 @@ import TaskResults from "../../components/moderation/TaskResults";
 const ModerationTask = (): ReactElement => {
   const i18n = useI18n();
 
+  const [showStatus, setShowStatus] = useState<string>("all");
+
   return (
     <Layout>
       <Head>
@@ -21,8 +23,8 @@ const ModerationTask = (): ReactElement => {
       </Head>
       <ModerationHeader currentPage={3} />
       <main id="content">
-        <TaskSearch />
-        <TaskResults />
+        <TaskSearch showStatus={showStatus} setShowStatus={setShowStatus} />
+        <TaskResults showStatus={showStatus} />
       </main>
     </Layout>
   );
