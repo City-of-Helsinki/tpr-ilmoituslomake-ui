@@ -133,7 +133,7 @@ const TaskHeaderButtons = ({ prefix, backHref, isModeration, saveTranslation, se
             <Button
               variant="secondary"
               onClick={openSaveDraftConfirmation}
-              disabled={taskStatus === TaskStatus.Closed || taskStatus === TaskStatus.Cancelled}
+              disabled={taskStatus === TaskStatus.Closed || taskStatus === TaskStatus.Rejected || taskStatus === TaskStatus.Cancelled}
             >
               {i18n.t(`${prefix}.button.saveDraft`)}
             </Button>
@@ -143,7 +143,7 @@ const TaskHeaderButtons = ({ prefix, backHref, isModeration, saveTranslation, se
               <Button
                 iconRight={<IconArrowRight aria-hidden />}
                 onClick={openSendConfirmation}
-                disabled={taskStatus === TaskStatus.Closed || taskStatus === TaskStatus.Cancelled}
+                disabled={taskStatus === TaskStatus.Closed || taskStatus === TaskStatus.Rejected || taskStatus === TaskStatus.Cancelled}
               >
                 {i18n.t(`${prefix}.button.sendTranslation`)}
               </Button>
@@ -154,7 +154,7 @@ const TaskHeaderButtons = ({ prefix, backHref, isModeration, saveTranslation, se
               <Button
                 iconRight={<IconArrowRight aria-hidden />}
                 onClick={openSaveConfirmation}
-                disabled={taskStatus === TaskStatus.Closed || taskStatus === TaskStatus.Cancelled}
+                disabled={taskStatus === TaskStatus.Closed || taskStatus === TaskStatus.Rejected || taskStatus === TaskStatus.Cancelled}
               >
                 {i18n.t(`${prefix}.button.saveTranslation`)}
               </Button>

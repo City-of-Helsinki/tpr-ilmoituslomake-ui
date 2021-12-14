@@ -76,7 +76,11 @@ const ModerationSection = ({
           onChange: moderationStatus === ModerationStatus.Edited ? changeCallback : undefined,
           onBlur: moderationStatus === ModerationStatus.Edited ? blurCallback : undefined,
           disabled:
-            moderationStatus !== ModerationStatus.Edited || taskStatus === TaskStatus.Closed || taskStatus === TaskStatus.Cancelled || forceDisabled,
+            moderationStatus !== ModerationStatus.Edited ||
+            taskStatus === TaskStatus.Closed ||
+            taskStatus === TaskStatus.Rejected ||
+            taskStatus === TaskStatus.Cancelled ||
+            forceDisabled,
           radiobuttonname: isSelectionGroupWrapper ? id : undefined,
         })}
       </>
@@ -149,6 +153,7 @@ const ModerationSection = ({
               moderationStatus === ModerationStatus.Approved ||
               moderationStatus === ModerationStatus.Rejected ||
               taskStatus === TaskStatus.Closed ||
+              taskStatus === TaskStatus.Rejected ||
               taskStatus === TaskStatus.Cancelled ||
               forceDisabled,
             radiobuttonname: isSelectionGroupWrapper ? `${id}_Modified` : undefined,
