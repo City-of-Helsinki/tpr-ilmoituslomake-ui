@@ -38,7 +38,11 @@ const initialState: NotificationValidationState = {
   tipValidationSummary: {},
 };
 
-const notificationValidation = (state = initialState, action: AnyAction): NotificationValidationState => {
+const notificationValidation = (state: NotificationValidationState | undefined, action: AnyAction): NotificationValidationState => {
+  if (!state) {
+    state = initialState;
+  }
+
   switch (action.type) {
     case SET_PAGE_VALID: {
       console.log("SET_PAGE_VALID", action.payload);

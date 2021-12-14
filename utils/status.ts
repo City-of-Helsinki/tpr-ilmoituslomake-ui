@@ -18,7 +18,11 @@ import {
 import { LANGUAGE_OPTIONS, ModerationStatus } from "../types/constants";
 import { Photo } from "../types/general";
 
-export const setModerationStatus = (photos: Photo[] = [], dispatch: Dispatch<ModerationStatusAction>): void => {
+export const setModerationStatus = (photos: Photo[] | undefined, dispatch: Dispatch<ModerationStatusAction>): void => {
+  if (!photos) {
+    photos = [];
+  }
+
   const newStatus = ModerationStatus.Edited;
 
   dispatch(setPageStatus(newStatus));
