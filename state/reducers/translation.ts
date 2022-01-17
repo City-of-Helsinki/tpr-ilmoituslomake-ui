@@ -40,7 +40,11 @@ const initialState: TranslationState = {
   taskValidationSummary: {},
 };
 
-const translation = (state = initialState, action: AnyAction): TranslationState => {
+const translation = (state: TranslationState | undefined, action: AnyAction): TranslationState => {
+  if (!state) {
+    state = initialState;
+  }
+
   switch (action.type) {
     case SET_TRANSLATION_TASK_SEARCH: {
       console.log("SET_TRANSLATION_TASK_SEARCH", action.payload);

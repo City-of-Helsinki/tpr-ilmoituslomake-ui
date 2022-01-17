@@ -92,7 +92,11 @@ const initialState: ModerationTranslationState = {
   requestValidationSummary: {},
 };
 
-const moderationTranslation = (state = initialState, action: AnyAction): ModerationTranslationState => {
+const moderationTranslation = (state: ModerationTranslationState | undefined, action: AnyAction): ModerationTranslationState => {
+  if (!state) {
+    state = initialState;
+  }
+
   switch (action.type) {
     case SET_MODERATION_TRANSLATION_REQUEST_SEARCH: {
       console.log("SET_MODERATION_TRANSLATION_REQUEST_SEARCH", action.payload);

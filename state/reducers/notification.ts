@@ -62,7 +62,11 @@ const initialState: NotificationState = {
   isNew: false,
 };
 
-const notification = (state = initialState, action: AnyAction): NotificationState => {
+const notification = (state: NotificationState | undefined, action: AnyAction): NotificationState => {
+  if (!state) {
+    state = initialState;
+  }
+
   switch (action.type) {
     case SET_PAGE: {
       console.log("SET_PAGE", action.payload);
