@@ -218,7 +218,7 @@ const LocationModeration = (): ReactElement => {
             <Button
               variant="secondary"
               onClick={() => searchModerationAddress(router, streetFiModified, postOfficeFiModified, dispatch)}
-              disabled={taskStatus === TaskStatus.Closed || taskStatus === TaskStatus.Cancelled}
+              disabled={taskStatus === TaskStatus.Closed || taskStatus === TaskStatus.Rejected || taskStatus === TaskStatus.Cancelled}
             >
               {i18n.t("moderation.map.geocode")}
             </Button>
@@ -355,7 +355,7 @@ const LocationModeration = (): ReactElement => {
             <Button
               variant="secondary"
               onClick={() => searchModerationAddress(router, streetSvModified, postOfficeSvModified, dispatch)}
-              disabled={taskStatus === TaskStatus.Closed || taskStatus === TaskStatus.Cancelled}
+              disabled={taskStatus === TaskStatus.Closed || taskStatus === TaskStatus.Rejected || taskStatus === TaskStatus.Cancelled}
             >
               {i18n.t("moderation.map.geocode")}
             </Button>

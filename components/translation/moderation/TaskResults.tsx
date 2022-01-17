@@ -43,7 +43,7 @@ const TaskResults = ({ showStatus, showResults, setShowResults }: TaskResultsPro
           return taskStatus === TaskStatus.Open || taskStatus === TaskStatus.InProgress;
         }
         case "submitted": {
-          return taskStatus === TaskStatus.Closed || taskStatus === TaskStatus.Cancelled;
+          return taskStatus === TaskStatus.Closed || taskStatus === TaskStatus.Rejected || taskStatus === TaskStatus.Cancelled;
         }
         default: {
           return true;

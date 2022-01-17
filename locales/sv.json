@@ -938,6 +938,13 @@
       "taskType": {
         "label": "Tyyppi",
         "all": "Kaikki"
+      },
+      "showStatus": {
+        "show": "Näytä",
+        "all": "Kaikki",
+        "open": "Uusi",
+        "closed": "Valmis",
+        "rejected": "Hylätty"
       }
     },
     "taskResults": {
@@ -955,6 +962,7 @@
       "open": "Uusi",
       "inProgress": "Kesken",
       "closed": "Valmis",
+      "rejected": "Hylätty",
       "cancelled": "Peruttu"
     },
     "collapsible": {

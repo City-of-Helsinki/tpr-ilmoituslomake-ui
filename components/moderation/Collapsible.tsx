@@ -51,7 +51,9 @@ const Collapsible = ({ section, title, taskType, taskStatus, isModerated, forceE
             <TaskStatusLabel
               prefix="moderation"
               status={
-                isModerated || taskStatus === TaskStatus.Closed || taskStatus === TaskStatus.Cancelled ? TaskStatus.Closed : TaskStatus.InProgress
+                isModerated || taskStatus === TaskStatus.Closed || taskStatus === TaskStatus.Rejected || taskStatus === TaskStatus.Cancelled
+                  ? TaskStatus.Closed
+                  : TaskStatus.InProgress
               }
             />
           )}

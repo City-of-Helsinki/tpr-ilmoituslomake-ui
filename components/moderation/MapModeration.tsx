@@ -136,7 +136,12 @@ const MapModeration = (): ReactElement => {
             initialZoom={locationStatus !== ModerationStatus.Edited ? initialSelectedZoom : initialModifiedZoom}
             location={locationStatus !== ModerationStatus.Edited ? locationSelected : locationModified}
             setLocation={locationStatus === ModerationStatus.Edited ? updateLocation : undefined}
-            draggableMarker={locationStatus === ModerationStatus.Edited && taskStatus !== TaskStatus.Closed && taskStatus !== TaskStatus.Cancelled}
+            draggableMarker={
+              locationStatus === ModerationStatus.Edited &&
+              taskStatus !== TaskStatus.Closed &&
+              taskStatus !== TaskStatus.Rejected &&
+              taskStatus !== TaskStatus.Cancelled
+            }
           />
         </div>
       </div>
@@ -202,6 +207,7 @@ const MapModeration = (): ReactElement => {
                 locationStatus !== ModerationStatus.Approved &&
                 locationStatus !== ModerationStatus.Rejected &&
                 taskStatus !== TaskStatus.Closed &&
+                taskStatus !== TaskStatus.Rejected &&
                 taskStatus !== TaskStatus.Cancelled
               }
             />
