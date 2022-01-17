@@ -151,8 +151,11 @@ export const setNotificationTip = (tip: ChangeRequestSchema): NotificationAction
 export const setSentNotification = (
   notificationId: number,
   notification: NotificationSchema,
-  notificationExtra: NotificationExtra
+  notificationExtra: NotificationExtra,
+  openingTimesId: number,
+  openingTimesNotificationId: number,
+  isNew: boolean
 ): NotificationAction => ({
   type: SET_SENT_NOTIFICATION,
-  payload: { notificationId, notification, notificationExtra },
+  payload: { notificationId, notification, notificationExtra, openingTimesId, openingTimesNotificationId, isNew },
 });

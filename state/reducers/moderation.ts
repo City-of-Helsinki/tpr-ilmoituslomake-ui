@@ -56,7 +56,11 @@ const initialState: ModerationState = {
   moderationExtra: INITIAL_MODERATION_EXTRA,
 };
 
-const moderation = (state = initialState, action: AnyAction): ModerationState => {
+const moderation = (state: ModerationState | undefined, action: AnyAction): ModerationState => {
+  if (!state) {
+    state = initialState;
+  }
+
   switch (action.type) {
     case SET_MODERATION_PLACE_SEARCH: {
       console.log("SET_MODERATION_PLACE_SEARCH", action.payload);

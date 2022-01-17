@@ -1,5 +1,6 @@
-import React, { Dispatch, ChangeEvent, ReactElement, useEffect } from "react";
+import React, { Dispatch, ChangeEvent, ReactElement, SetStateAction, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import dynamic from "next/dynamic";
 import { useRouter } from "next/router";
 import { useI18n } from "next-localization";
 import { Button, Select, TextInput } from "hds-react";
@@ -13,12 +14,20 @@ import { getTaskCategoryFromType, getTaskItemTypeFromType, getTaskStatus, getTas
 import getOrigin from "../../utils/request";
 import styles from "./TaskSearch.module.scss";
 
+// Note: The task filter has an attribute that uses a media query which does not work when server-side rendering
+const DynamicTaskStatusFilter = dynamic(() => import("./TaskStatusFilter"), { ssr: false });
+
 type OptionTypeWithEnumId = {
   id: TaskType;
   label: string;
 };
 
-const TaskSearch = (): ReactElement => {
+interface TaskSearchProps {
+  showStatus: string;
+  setShowStatus: Dispatch<SetStateAction<string>>;
+}
+
+const TaskSearch = ({ showStatus, setShowStatus }: TaskSearchProps): ReactElement => {
   const i18n = useI18n();
   const dispatch = useDispatch<Dispatch<ModerationAction>>();
   const router = useRouter();
@@ -118,6 +127,8 @@ const TaskSearch = (): ReactElement => {
           <Button onClick={searchTasks}>{i18n.t("moderation.button.search")}</Button>
         </div>
       </div>
+
+      <DynamicTaskStatusFilter showStatus={showStatus} setShowStatus={setShowStatus} isHorizontalWhenXS />
     </div>
   );
 };

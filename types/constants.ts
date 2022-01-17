@@ -43,6 +43,7 @@ export enum TaskStatus {
   Open = "open",
   InProgress = "in_progress",
   Closed = "closed",
+  Rejected = "rejected",
   Cancelled = "cancelled",
 }
 
@@ -94,6 +95,10 @@ export const MAX_LENGTH_BUSINESSID = 9;
 export const MAX_PHOTOS = 3;
 export const MAX_PHOTO_BYTES = 4000000;
 export const DATETIME_FORMAT = "D.M.YYYY H:mm";
+export const DATE_FORMAT = "D.M.YYYY";
+export const DATE_FORMAT_HAUKI = "YYYY-MM-DD";
+export const TIME_FORMAT = "H:mm";
+export const TIME_FORMAT_HAUKI = "HH:mm:ss";
 export const TERMS_URL = "https://kaupunkialustana.hel.fi/kayttoehdot/";
 export const ACCESSIBILITY_URL = "https://kaupunkialustana.hel.fi/saavutettavuusseloste/";
 export const CONTACT_URL = "https://hel.fi/helsinki/fi/kaupunki-ja-hallinto/osallistu-ja-vaikuta/ota-yhteytta/";

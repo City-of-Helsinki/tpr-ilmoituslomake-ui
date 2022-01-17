@@ -1,4 +1,4 @@
-import React, { Dispatch, ReactElement, Fragment } from "react";
+import React, { Dispatch, ReactElement, Fragment, useCallback, useMemo } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import Link from "next/link";
 import { useRouter } from "next/router";
@@ -8,7 +8,7 @@ import moment from "moment";
 import { ModerationAction } from "../../state/actions/moderationTypes";
 import { setModerationTaskResults } from "../../state/actions/moderation";
 import { RootState } from "../../state/reducers";
-import { DATETIME_FORMAT, TaskType } from "../../types/constants";
+import { DATETIME_FORMAT, TaskStatus, TaskType } from "../../types/constants";
 import { ModerationTodoResult } from "../../types/general";
 import { getTaskStatus, getTaskType } from "../../utils/conversion";
 import { getDisplayName } from "../../utils/helper";
@@ -16,7 +16,11 @@ import { defaultLocale } from "../../utils/i18n";
 import TaskStatusLabel from "../common/TaskStatusLabel";
 import styles from "./TaskResults.module.scss";
 
-const TaskResults = (): ReactElement => {
+interface TaskResultsProps {
+  showStatus: string;
+}
+
+const TaskResults = ({ showStatus }: TaskResultsProps): ReactElement => {
   const i18n = useI18n();
   const dispatch = useDispatch<Dispatch<ModerationAction>>();
   const router = useRouter();
@@ -61,17 +65,46 @@ const TaskResults = (): ReactElement => {
     }
   };
 
+  const filterStatus = useCallback(
+    (taskStatus: TaskStatus) => {
+      switch (showStatus) {
+        case "open": {
+          return taskStatus === TaskStatus.Open;
+        }
+        case "closed": {
+          return taskStatus === TaskStatus.Closed;
+        }
+        case "rejected": {
+          return taskStatus === TaskStatus.Rejected;
+        }
+        default: {
+          return true;
+        }
+      }
+    },
+    [showStatus]
+  );
+
+  const filteredTaskResults = useMemo(
+    () =>
+      results.filter((result) => {
+        const { taskStatus } = result;
+        return filterStatus(taskStatus);
+      }),
+    [results, filterStatus]
+  );
+
   return (
     <div className={`formSection ${styles.taskResults}`}>
-      {results.length > 0 && (
-        <h2 className="moderation">{`${i18n.t("moderation.taskResults.found")} ${results.length} / ${count} ${i18n.t(
+      {filteredTaskResults.length > 0 && (
+        <h2 className="moderation">{`${i18n.t("moderation.taskResults.found")} ${filteredTaskResults.length} / ${count} ${i18n.t(
           "moderation.taskResults.tasks"
         )}`}</h2>
       )}
 
-      {searchDone && results.length === 0 && <h2 className="moderation">{i18n.t("moderation.taskResults.notFound")}</h2>}
+      {searchDone && filteredTaskResults.length === 0 && <h2 className="moderation">{i18n.t("moderation.taskResults.notFound")}</h2>}
 
-      {results.length > 0 && (
+      {filteredTaskResults.length > 0 && (
         <div className={`gridLayoutContainer ${styles.results}`}>
           <div className={`${styles.gridColumn1} ${styles.gridHeader} moderation`}>
             <div className={styles.flexItem}>{i18n.t("moderation.taskResults.nameId")}</div>
@@ -86,7 +119,7 @@ const TaskResults = (): ReactElement => {
             <div className={styles.flexItem}>{i18n.t("moderation.taskResults.status")}</div>
           </div>
 
-          {results
+          {filteredTaskResults
             .sort((a: ModerationTodoResult, b: ModerationTodoResult) => b.created.getTime() - a.created.getTime())
             .map((result) => {
               const { id, target, notification_target, taskType, created, status, user_place_name } = result;

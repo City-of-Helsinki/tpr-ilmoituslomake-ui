@@ -90,7 +90,7 @@ const RequestDetail = ({ requestStatus }: RequestDetailProps): ReactElement => {
           }
           required
           aria-required
-          disabled={taskStatus === TaskStatus.Closed || taskStatus === TaskStatus.Cancelled}
+          disabled={taskStatus === TaskStatus.Closed || taskStatus === TaskStatus.Rejected || taskStatus === TaskStatus.Cancelled}
         />
 
         <Select
@@ -111,7 +111,7 @@ const RequestDetail = ({ requestStatus }: RequestDetailProps): ReactElement => {
           }
           required
           aria-required
-          disabled={taskStatus === TaskStatus.Closed || taskStatus === TaskStatus.Cancelled}
+          disabled={taskStatus === TaskStatus.Closed || taskStatus === TaskStatus.Rejected || taskStatus === TaskStatus.Cancelled}
         />
 
         <TextArea
@@ -130,7 +130,7 @@ const RequestDetail = ({ requestStatus }: RequestDetailProps): ReactElement => {
           }
           required
           aria-required
-          disabled={taskStatus === TaskStatus.Closed || taskStatus === TaskStatus.Cancelled}
+          disabled={taskStatus === TaskStatus.Closed || taskStatus === TaskStatus.Rejected || taskStatus === TaskStatus.Cancelled}
         />
       </div>
     </div>

@@ -22,22 +22,30 @@ const ActionButton = ({ id, className, fieldName, moderationStatus, taskStatus, 
       {moderationStatus === ModerationStatus.Edited && !hidden && (
         <div className={styles.buttonRow}>
           <Button
-            className={taskStatus !== TaskStatus.Closed && taskStatus !== TaskStatus.Cancelled ? styles.approveSecondary : ""}
+            className={
+              taskStatus !== TaskStatus.Closed && taskStatus !== TaskStatus.Rejected && taskStatus !== TaskStatus.Cancelled
+                ? styles.approveSecondary
+                : ""
+            }
             variant="secondary"
             size="small"
             aria-label={i18n.t("moderation.button.approve")}
             onClick={() => actionCallback(fieldName, ModerationStatus.Approved)}
-            disabled={taskStatus === TaskStatus.Closed || taskStatus === TaskStatus.Cancelled}
+            disabled={taskStatus === TaskStatus.Closed || taskStatus === TaskStatus.Rejected || taskStatus === TaskStatus.Cancelled}
           >
             <IconCheck aria-hidden />
           </Button>
           <Button
-            className={taskStatus !== TaskStatus.Closed && taskStatus !== TaskStatus.Cancelled ? styles.rejectSecondary : ""}
+            className={
+              taskStatus !== TaskStatus.Closed && taskStatus !== TaskStatus.Rejected && taskStatus !== TaskStatus.Cancelled
+                ? styles.rejectSecondary
+                : ""
+            }
             variant="secondary"
             size="small"
             aria-label={i18n.t("moderation.button.reject")}
             onClick={() => actionCallback(fieldName, ModerationStatus.Rejected)}
-            disabled={taskStatus === TaskStatus.Closed || taskStatus === TaskStatus.Cancelled}
+            disabled={taskStatus === TaskStatus.Closed || taskStatus === TaskStatus.Rejected || taskStatus === TaskStatus.Cancelled}
           >
             <IconCross aria-hidden />
           </Button>
@@ -50,7 +58,7 @@ const ActionButton = ({ id, className, fieldName, moderationStatus, taskStatus, 
             iconLeft={<IconCheck aria-hidden />}
             variant="success"
             onClick={() => actionCallback(fieldName, ModerationStatus.Edited)}
-            disabled={taskStatus === TaskStatus.Closed || taskStatus === TaskStatus.Cancelled}
+            disabled={taskStatus === TaskStatus.Closed || taskStatus === TaskStatus.Rejected || taskStatus === TaskStatus.Cancelled}
           >
             {i18n.t("moderation.button.approved")}
           </Button>
@@ -63,7 +71,7 @@ const ActionButton = ({ id, className, fieldName, moderationStatus, taskStatus, 
             iconLeft={<IconCross aria-hidden />}
             variant="danger"
             onClick={() => actionCallback(fieldName, ModerationStatus.Edited)}
-            disabled={taskStatus === TaskStatus.Closed || taskStatus === TaskStatus.Cancelled}
+            disabled={taskStatus === TaskStatus.Closed || taskStatus === TaskStatus.Rejected || taskStatus === TaskStatus.Cancelled}
           >
             {i18n.t("moderation.button.rejected")}
           </Button>

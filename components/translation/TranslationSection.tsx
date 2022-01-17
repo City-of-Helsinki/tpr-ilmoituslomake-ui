@@ -81,7 +81,7 @@ const TranslationSection = ({
           tooltipButtonLabel,
           tooltipLabel,
           tooltipText,
-          disabled: taskStatus === TaskStatus.Closed || taskStatus === TaskStatus.Cancelled || forceDisabled,
+          disabled: taskStatus === TaskStatus.Closed || taskStatus === TaskStatus.Rejected || taskStatus === TaskStatus.Cancelled || forceDisabled,
           radiobuttonname: isSelectionGroupWrapper ? `${id}_Translated` : undefined,
           invalid,
           errorText,
