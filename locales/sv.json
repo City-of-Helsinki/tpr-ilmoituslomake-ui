@@ -271,7 +271,7 @@
     "opening": {
       "title": "Öppettider",
       "notice": "Öppettiderna meddelas skilt efter sändning av annan information.",
-      "temporaryNotice": "Öppettiderna kan ändra ofta på grund av de undantagsförhållanden som coronapandemin orsakar. Tills vidare rekommenderar vi att öppettiderna uppdateras på ställets egna hemsidor och sociala kanaler. Berätta gärna i Långa platsbeskrivningen var man kan kolla upp de aktuella öppettiderna. Lägg dock inte till länkar i beskrivningen. Länkar för webbsidor och sociala medier anges i följande fas.",
+      "temporaryNotice": "Tills vidare rekommenderar vi att öppettiderna uppdateras på ställets egna hemsidor och sociala kanaler. Berätta gärna i Långa platsbeskrivningen var man kan kolla upp de aktuella öppettiderna. Lägg dock inte till länkar i beskrivningen. Länkar för webbsidor och sociala medier anges i följande fas.",
       "times": {
         "thisWeek": "Denna vecka",
         "nextWeek": "Nästa vecka",

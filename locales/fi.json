@@ -271,7 +271,7 @@
     "opening": {
       "title": "Aukioloajat",
       "notice": "Aukioloajat ilmoitetaan lähetyksen jälkeen.",
-      "temporaryNotice": "Aukioloajat saattavat muuttua usein koronapandemian aiheuttamien poikkeusolojen vuoksi. Suosittelemme toistaiseksi aukioloaikojen päivittämistä omilla verkkosivullanne tai sosiaalisen median kanavissa. Kerrothan asiakkaille Pitkä kuvaus -kohdassa, mistä ajankohtaiset aukioloajat voi tarkistaa. Ethän laita pitkään kuvaukseen linkkejä, linkit verkkosivuille ja someen lisätään seuraavassa vaiheessa.",
+      "temporaryNotice": "Suosittelemme toistaiseksi aukioloaikojen päivittämistä omilla verkkosivullanne tai sosiaalisen median kanavissa. Kerrothan asiakkaille Pitkä kuvaus -kohdassa, mistä ajankohtaiset aukioloajat voi tarkistaa. Ethän laita pitkään kuvaukseen linkkejä, linkit verkkosivuille ja someen lisätään seuraavassa vaiheessa.",
       "times": {
         "thisWeek": "Tämä viikko",
         "nextWeek": "Ensi viikko",
