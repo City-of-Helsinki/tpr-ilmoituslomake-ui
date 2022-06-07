@@ -71,7 +71,7 @@ const Preview = ({ className, titleKey, includeNotifier, isPlaceInfo }: PreviewP
       <div className={`${styles.gridPlaceInfo} ${styles.gridContent}`}>
         {LANGUAGE_OPTIONS.map((option) =>
           inputLanguages.includes(option) && (placeName[option] as string).length > 0 ? (
-            <div key={`placeName_${option}`}>{`${option.toUpperCase()}: ${placeName[option] as string}`}</div>
+            <div lang={option} key={`placeName_${option}`}>{`${option.toUpperCase()}: ${placeName[option] as string}`}</div>
           ) : null
         )}
       </div>
@@ -79,7 +79,7 @@ const Preview = ({ className, titleKey, includeNotifier, isPlaceInfo }: PreviewP
       <div className={`${styles.gridPlaceInfo} ${styles.gridContent}`}>
         {LANGUAGE_OPTIONS.map((option) =>
           inputLanguages.includes(option) && (shortDesc[option] as string).length > 0 ? (
-            <div key={`shortDesc_${option}`}>{`${option.toUpperCase()}: ${shortDesc[option] as string}`}</div>
+            <div lang={option} key={`shortDesc_${option}`}>{`${option.toUpperCase()}: ${shortDesc[option] as string}`}</div>
           ) : null
         )}
       </div>
@@ -87,7 +87,7 @@ const Preview = ({ className, titleKey, includeNotifier, isPlaceInfo }: PreviewP
       <div className={`${styles.gridPlaceInfo} ${styles.gridContent}`}>
         {LANGUAGE_OPTIONS.map((option) =>
           inputLanguages.includes(option) && (longDesc[option] as string).length > 0 ? (
-            <div key={`longDesc_${option}`}>{`${option.toUpperCase()}: ${longDesc[option] as string}`}</div>
+            <div lang={option} key={`longDesc_${option}`}>{`${option.toUpperCase()}: ${longDesc[option] as string}`}</div>
           ) : null
         )}
       </div>
@@ -138,6 +138,7 @@ const Preview = ({ className, titleKey, includeNotifier, isPlaceInfo }: PreviewP
           {i18n.t("notification.map.skipMap")}
         </Button>
         <MapWrapper
+          id="map"
           className={styles.map}
           initialCenter={initialCenter as [number, number]}
           initialZoom={initialZoom}
@@ -158,7 +159,7 @@ const Preview = ({ className, titleKey, includeNotifier, isPlaceInfo }: PreviewP
       <div className={`${styles.gridPlaceInfo} ${styles.gridContent}`}>
         {LANGUAGE_OPTIONS.map((option) =>
           inputLanguages.includes(option) && (website[option] as string).length > 0 ? (
-            <div key={`website_${option}`}>{`${option.toUpperCase()}: ${website[option] as string}`}</div>
+            <div lang={option} key={`website_${option}`}>{`${option.toUpperCase()}: ${website[option] as string}`}</div>
           ) : null
         )}
       </div>
@@ -185,7 +186,7 @@ const Preview = ({ className, titleKey, includeNotifier, isPlaceInfo }: PreviewP
                   {LANGUAGE_OPTIONS.map((option) => {
                     const key2 = `altText_${index}_${option}`;
                     return inputLanguages.includes(option) && (altText[option] as string).length > 0 ? (
-                      <div key={key2}>{`${option.toUpperCase()}: ${altText[option] as string}`}</div>
+                      <div lang={option} key={key2}>{`${option.toUpperCase()}: ${altText[option] as string}`}</div>
                     ) : null;
                   })}
                 </div>

@@ -10,3 +10,28 @@
     background-color: $color-copper-light;
   }
 }
+
+.dialog {
+  text-align: center;
+  padding: $spacing-m;
+
+  h1 {
+    color: $color-bus;
+  }
+
+  div {
+    margin: $spacing-s;
+
+    &.link {
+      margin-top: $spacing-xl;
+    }
+  }
+
+  .message {
+    margin-bottom: $spacing-l;
+  }
+}
+
+.wave {
+  fill: $color-copper-light;
+}

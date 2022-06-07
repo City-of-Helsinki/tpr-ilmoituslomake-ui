@@ -58,6 +58,7 @@ const Header = ({ includeLanguageSelector, homePagePath, children }: HeaderProps
       <Navigation.Actions>
         <Navigation.User
           label={i18n.t("common.header.login")}
+          buttonAriaLabel={i18n.t("common.header.userInfo")}
           authenticated={currentUser?.authenticated}
           userName={currentUser?.first_name || currentUser?.email}
           onSignIn={signIn}

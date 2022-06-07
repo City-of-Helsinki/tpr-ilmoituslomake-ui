@@ -1,4 +1,4 @@
-import { AnyAction } from "redux";
+import type { AnyAction } from "redux";
 import { ModerationStatusState } from "./types";
 import {
   ModerationStatus,
@@ -25,7 +25,11 @@ const initialState: ModerationStatusState = {
   moderationStatus: INITIAL_MODERATION_STATUS,
 };
 
-const moderationStatus = (state = initialState, action: AnyAction): ModerationStatusState => {
+const moderationStatus = (state: ModerationStatusState | undefined, action: AnyAction): ModerationStatusState => {
+  if (!state) {
+    state = initialState;
+  }
+
   switch (action.type) {
     case SET_PAGE_STATUS: {
       console.log("SET_PAGE_STATUS", action.payload);

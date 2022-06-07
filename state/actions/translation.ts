@@ -8,6 +8,7 @@ import {
   SET_TRANSLATION_TASK_PAGE_VALID,
   SET_TRANSLATION_TASK_VALIDATION,
   SET_TRANSLATION_TASK_PHOTO_VALIDATION,
+  SET_TRANSLATION_TASK_VALIDATION_SUMMARY,
 } from "../../types/constants";
 import {
   KeyValueString,
@@ -62,4 +63,9 @@ export const setTranslationTaskValidation = (validation: KeyValueValidation): Tr
 export const setTranslationTaskPhotoValidation = (index: number, value: TranslationTaskPhotoValidation | KeyValueValidation): TranslationAction => ({
   type: SET_TRANSLATION_TASK_PHOTO_VALIDATION,
   payload: { index, value },
+});
+
+export const setTranslationTaskValidationSummary = (validation: KeyValueValidation): TranslationAction => ({
+  type: SET_TRANSLATION_TASK_VALIDATION_SUMMARY,
+  payload: validation,
 });

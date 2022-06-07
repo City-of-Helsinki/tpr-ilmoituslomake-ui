@@ -1,4 +1,4 @@
-import { AnyAction } from "redux";
+import type { AnyAction } from "redux";
 import {
   SET_TRANSLATION_TASK_SEARCH,
   SET_TRANSLATION_TASK_RESULTS,
@@ -9,6 +9,7 @@ import {
   SET_TRANSLATION_TASK_PAGE_VALID,
   SET_TRANSLATION_TASK_VALIDATION,
   SET_TRANSLATION_TASK_PHOTO_VALIDATION,
+  SET_TRANSLATION_TASK_VALIDATION_SUMMARY,
 } from "../../types/constants";
 import {
   KeyValueString,
@@ -64,6 +65,11 @@ interface SetTranslationTaskPhotoValidationAction extends AnyAction {
   payload: { index: number; value: TranslationTaskPhotoValidation | KeyValueValidation };
 }
 
+interface SetTranslationTaskValidationSummaryAction extends AnyAction {
+  type: typeof SET_TRANSLATION_TASK_VALIDATION_SUMMARY;
+  payload: KeyValueValidation;
+}
+
 export type TranslationAction =
   | SetTranslationTaskSearchAction
   | SetTranslationTaskResultsAction
@@ -73,4 +79,5 @@ export type TranslationAction =
   | SetTranslationPhotoAction
   | SetTranslationTaskPageValidAction
   | SetTranslationTaskValidationAction
-  | SetTranslationTaskPhotoValidationAction;
+  | SetTranslationTaskPhotoValidationAction
+  | SetTranslationTaskValidationSummaryAction;

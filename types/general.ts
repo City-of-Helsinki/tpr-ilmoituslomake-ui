@@ -25,6 +25,7 @@ export interface Validation {
   valid: boolean;
   message?: string;
   changed?: boolean;
+  fieldLabel?: string; // Only used for validation summary
 }
 
 export interface KeyValueValidation {
@@ -163,6 +164,22 @@ export interface NotificationTargetIdName {
     sv: string;
     en: string;
   };
+}
+
+export interface OpeningTime {
+  date: string;
+  times: [
+    {
+      name: string;
+      description: string;
+      start_time: string;
+      end_time: string;
+      end_time_on_next_day: boolean;
+      resource_state: string;
+      full_day: boolean;
+      periods: number[];
+    }
+  ];
 }
 
 export interface TranslationTaskSearch {

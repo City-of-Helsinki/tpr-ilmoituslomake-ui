@@ -88,6 +88,7 @@ const DescriptionModeration = (): ReactElement => {
             ModerationComponent={
               <TextInput
                 id={`placeName_${option}`}
+                lang={option}
                 label={`${i18n.t("moderation.description.placeName.label")} ${i18n.t(`common.inLanguage.${option}`)}`}
                 name={option}
               />
@@ -123,6 +124,7 @@ const DescriptionModeration = (): ReactElement => {
             ModerationComponent={
               <TextArea
                 id={`shortDescription_${option}`}
+                lang={option}
                 rows={3}
                 label={`${i18n.t("moderation.description.shortDescription.label")} ${i18n.t(`common.inLanguage.${option}`)}`}
                 name={option}
@@ -159,6 +161,7 @@ const DescriptionModeration = (): ReactElement => {
             ModerationComponent={
               <TextArea
                 id={`longDescription_${option}`}
+                lang={option}
                 rows={6}
                 label={`${i18n.t("moderation.description.longDescription.label")} ${i18n.t(`common.inLanguage.${option}`)}`}
                 name={option}

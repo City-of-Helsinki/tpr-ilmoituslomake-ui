@@ -15,6 +15,7 @@ import { checkUser, getOriginServerSide, getPreviousInputLanguages, getTags } fr
 import Layout from "../../../components/common/Layout";
 import Header from "../../../components/common/Header";
 import Preview from "../../../components/notification/Preview";
+// import OpeningTimesInfo from "../../../components/notification/OpeningTimesInfo";
 import InfoFooter from "../../../components/notification/InfoFooter";
 import styles from "./[infoId].module.scss";
 
@@ -41,6 +42,9 @@ const Info = (): ReactElement => {
 
           <InfoFooter />
           <Preview titleKey="notification.preview.placeInfo" isPlaceInfo />
+          {/* NOTE: temporarily removed until external opening times application is ready
+          <OpeningTimesInfo />
+          */}
           <InfoFooter />
         </main>
       )}
@@ -75,7 +79,7 @@ export const getServerSideProps: GetServerSideProps = async ({ req, params, loca
     });
 
     if (targetResponse.ok) {
-      const targetResult = await (targetResponse.json() as Promise<{ id: number; data: NotificationSchema }>);
+      const targetResult = await (targetResponse.json() as Promise<{ id: number; data: NotificationSchema; hauki_id: number }>);
 
       try {
         // Merge the notification details from the backend, but remove the previous notifier details if present
@@ -116,6 +120,7 @@ export const getServerSideProps: GetServerSideProps = async ({ req, params, loca
               };
             }),
           },
+          openingTimesId: targetResult.hauki_id,
         };
       } catch (err) {
         console.log("ERROR", err);

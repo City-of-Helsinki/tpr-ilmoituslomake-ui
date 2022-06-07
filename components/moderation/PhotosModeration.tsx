@@ -195,7 +195,7 @@ const PhotosModeration = (): ReactElement => {
                     <Button
                       variant="secondary"
                       onClick={() => removePhoto(index)}
-                      disabled={taskStatus === TaskStatus.Closed || taskStatus === TaskStatus.Cancelled}
+                      disabled={taskStatus === TaskStatus.Closed || taskStatus === TaskStatus.Rejected || taskStatus === TaskStatus.Cancelled}
                     >
                       {i18n.t("moderation.photos.remove")}
                     </Button>
@@ -232,6 +232,7 @@ const PhotosModeration = (): ReactElement => {
                     ModerationComponent={
                       <TextArea
                         id={altTextKey}
+                        lang={option}
                         rows={3}
                         label={`${i18n.t("moderation.photos.altText.label")} ${i18n.t(`common.inLanguage.${option}`)}`}
                         name={option}
@@ -300,6 +301,7 @@ const PhotosModeration = (): ReactElement => {
         taskType === TaskType.ModeratorAdd ||
         pageStatus === ModerationStatus.Edited) &&
         taskStatus !== TaskStatus.Closed &&
+        taskStatus !== TaskStatus.Rejected &&
         taskStatus !== TaskStatus.Cancelled && (
           <div className={`gridLayoutContainer moderation ${styles.addNewContainer}`}>
             <div className={styles.gridSelected}>

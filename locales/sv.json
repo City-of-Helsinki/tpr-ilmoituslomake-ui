@@ -5,7 +5,8 @@
       "titleAlt": "Helsingfors stad: Stadsplattform",
       "skipToContent": "Till huvudinnehållet",
       "openMenu": "Meny",
-      "selectLanguage": "Andra språk",
+      "selectLanguage": "Valitse kieli, ändra språk, select language",
+      "userInfo": "Användar information",
       "login": "Logga in",
       "logout": "Logga ut"
     },
@@ -19,12 +20,23 @@
       "accessibility": "Tillgänglighetsutlåtande"
     },
     "map": {
+      "zoomIn": "Zooma in",
+      "zoomOut": "Zooma ut",
       "osm": "OpenStreetMaps bidragsgivare"
     },
     "inLanguage": {
       "fi": "på finska",
       "sv": "på svenska",
       "en": "på engelska"
+    },
+    "weekDay": {
+      "1": "måndag",
+      "2": "tisdag",
+      "3": "onsdag",
+      "4": "torsdag",
+      "5": "fredag",
+      "6": "lördag",
+      "7": "söndag"
     },
     "opensInANewTab": "Öppnar i ny flik.",
     "opensExternal": "Flyttar till en annan webbplats.",
@@ -80,6 +92,7 @@
       "photos": "Foton",
       "send": "Sänd",
       "info": "Information",
+      "current": "Nuvarande arbetsfas",
       "completed": "Avslutad"
     },
     "main": {
@@ -258,7 +271,29 @@
     "opening": {
       "title": "Öppettider",
       "notice": "Öppettiderna meddelas skilt efter sändning av annan information.",
-      "temporaryNotice": "Öppettiderna kan ändra ofta på grund av de undantagsförhållanden som coronapandemin orsakar. Tills vidare rekommenderar vi att öppettiderna uppdateras på ställets egna hemsidor och sociala kanaler. Berätta gärna i Långa platsbeskrivningen var man kan kolla upp de aktuella öppettiderna. Lägg dock inte till länkar i beskrivningen. Länkar för webbsidor och sociala medier anges i följande fas."
+      "temporaryNotice": "Tills vidare rekommenderar vi att öppettiderna uppdateras på ställets egna hemsidor och sociala kanaler. Berätta gärna i Långa platsbeskrivningen var man kan kolla upp de aktuella öppettiderna. Lägg dock inte till länkar i beskrivningen. Länkar för webbsidor och sociala medier anges i följande fas.",
+      "times": {
+        "thisWeek": "Denna vecka",
+        "nextWeek": "Nästa vecka",
+        "noTimes": "Inga öppetider",
+        "date": "Datum",
+        "opens": "Öppnar",
+        "closes": "Stängs",
+        "status": "Status"
+      },
+      "resourceState": {
+        "open": "öppen",
+        "closed": "stängt",
+        "undefined": "odefinierad",
+        "self_service": "självbetjäning",
+        "with_key": "med nyckel",
+        "with_reservation": "med reservation",
+        "open_and_reservable": "kan reserveras",
+        "with_key_and_reservation": "med nyckel och reservation",
+        "enter_only": "ankomsttid",
+        "exit_only": "avgångstid",
+        "weather_permitting": "om vädret tillåter"
+      }
     },
     "photos": {
       "title": "Foton",
@@ -903,6 +938,13 @@
       "taskType": {
         "label": "Tyyppi",
         "all": "Kaikki"
+      },
+      "showStatus": {
+        "show": "Näytä",
+        "all": "Kaikki",
+        "open": "Uusi",
+        "closed": "Valmis",
+        "rejected": "Hylätty"
       }
     },
     "taskResults": {
@@ -920,6 +962,7 @@
       "open": "Uusi",
       "inProgress": "Kesken",
       "closed": "Valmis",
+      "rejected": "Hylätty",
       "cancelled": "Peruttu"
     },
     "collapsible": {

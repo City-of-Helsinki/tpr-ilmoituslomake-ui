@@ -107,6 +107,7 @@ const LocationModeration = (): ReactElement => {
           ModerationComponent={
             <TextInput
               id="streetAddressFi"
+              lang="fi"
               label={`${i18n.t("moderation.location.streetAddress.label")} ${i18n.t("common.inLanguage.fi")}`}
               name="street"
             />
@@ -130,6 +131,7 @@ const LocationModeration = (): ReactElement => {
           ModerationComponent={
             <TextInput
               id="postalCodeFi"
+              lang="fi"
               label={`${i18n.t("moderation.location.postalCode.label")} ${i18n.t("common.inLanguage.fi")}`}
               name="postal_code"
             />
@@ -153,6 +155,7 @@ const LocationModeration = (): ReactElement => {
           ModerationComponent={
             <TextInput
               id="postalOfficeFi"
+              lang="fi"
               label={`${i18n.t("moderation.location.postalOffice.label")} ${i18n.t("common.inLanguage.fi")}`}
               name="post_office"
             />
@@ -176,6 +179,7 @@ const LocationModeration = (): ReactElement => {
           ModerationComponent={
             <TextInput
               id="neighborhoodIdFi"
+              lang="fi"
               label={`${i18n.t("moderation.location.neighborhoodId.label")} ${i18n.t("common.inLanguage.fi")}`}
               name="neighborhoodId"
             />
@@ -199,6 +203,7 @@ const LocationModeration = (): ReactElement => {
           ModerationComponent={
             <TextInput
               id="neighborhoodFi"
+              lang="fi"
               label={`${i18n.t("moderation.location.neighborhood.label")} ${i18n.t("common.inLanguage.fi")}`}
               name="neighborhood"
             />
@@ -213,7 +218,7 @@ const LocationModeration = (): ReactElement => {
             <Button
               variant="secondary"
               onClick={() => searchModerationAddress(router, streetFiModified, postOfficeFiModified, dispatch)}
-              disabled={taskStatus === TaskStatus.Closed || taskStatus === TaskStatus.Cancelled}
+              disabled={taskStatus === TaskStatus.Closed || taskStatus === TaskStatus.Rejected || taskStatus === TaskStatus.Cancelled}
             >
               {i18n.t("moderation.map.geocode")}
             </Button>
@@ -239,6 +244,7 @@ const LocationModeration = (): ReactElement => {
           ModerationComponent={
             <TextInput
               id="streetAddressSv"
+              lang="sv"
               label={`${i18n.t("moderation.location.streetAddress.label")} ${i18n.t("common.inLanguage.sv")}`}
               name="street"
             />
@@ -262,6 +268,7 @@ const LocationModeration = (): ReactElement => {
           ModerationComponent={
             <TextInput
               id="postalCodeSv"
+              lang="sv"
               label={`${i18n.t("moderation.location.postalCode.label")} ${i18n.t("common.inLanguage.sv")}`}
               name="postal_code"
             />
@@ -285,6 +292,7 @@ const LocationModeration = (): ReactElement => {
           ModerationComponent={
             <TextInput
               id="postalOfficeSv"
+              lang="sv"
               label={`${i18n.t("moderation.location.postalOffice.label")} ${i18n.t("common.inLanguage.sv")}`}
               name="post_office"
             />
@@ -308,6 +316,7 @@ const LocationModeration = (): ReactElement => {
           ModerationComponent={
             <TextInput
               id="neighborhoodIdSv"
+              lang="sv"
               label={`${i18n.t("moderation.location.neighborhoodId.label")} ${i18n.t("common.inLanguage.sv")}`}
               name="neighborhoodId"
             />
@@ -331,6 +340,7 @@ const LocationModeration = (): ReactElement => {
           ModerationComponent={
             <TextInput
               id="neighborhoodSv"
+              lang="sv"
               label={`${i18n.t("moderation.location.neighborhood.label")} ${i18n.t("common.inLanguage.sv")}`}
               name="neighborhood"
             />
@@ -345,7 +355,7 @@ const LocationModeration = (): ReactElement => {
             <Button
               variant="secondary"
               onClick={() => searchModerationAddress(router, streetSvModified, postOfficeSvModified, dispatch)}
-              disabled={taskStatus === TaskStatus.Closed || taskStatus === TaskStatus.Cancelled}
+              disabled={taskStatus === TaskStatus.Closed || taskStatus === TaskStatus.Rejected || taskStatus === TaskStatus.Cancelled}
             >
               {i18n.t("moderation.map.geocode")}
             </Button>

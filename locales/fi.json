@@ -5,7 +5,8 @@
       "titleAlt": "Helsingin kaupunki: Kaupunkialusta",
       "skipToContent": "Siirry sivun pääsisältöön",
       "openMenu": "Valikko",
-      "selectLanguage": "Valitse kieli",
+      "selectLanguage": "Valitse kieli, ändra språk, select language",
+      "userInfo": "Käyttäjätiedot",
       "login": "Kirjaudu sisään",
       "logout": "Kirjaudu ulos"
     },
@@ -19,12 +20,23 @@
       "accessibility": "Saavutettavuusseloste"
     },
     "map": {
+      "zoomIn": "Lähennä",
+      "zoomOut": "Loitonna",
       "osm": "OpenStreetMapin tekijät"
     },
     "inLanguage": {
       "fi": "suomeksi",
       "sv": "ruotsiksi",
       "en": "englanniksi"
+    },
+    "weekDay": {
+      "1": "maanantai",
+      "2": "tiistai",
+      "3": "keskiviikko",
+      "4": "torstai",
+      "5": "perjantai",
+      "6": "lauantai",
+      "7": "sunnuntai"
     },
     "opensInANewTab": "Avautuu uudessa välilehdessä.",
     "opensExternal": "Siirtyy toiseen sivustoon.",
@@ -80,6 +92,7 @@
       "photos": "Kuvat",
       "send": "Lähetä",
       "info": "Tiedot",
+      "current": "Nykyinen työvaihe",
       "completed": "Suoritettu"
     },
     "main": {
@@ -258,7 +271,29 @@
     "opening": {
       "title": "Aukioloajat",
       "notice": "Aukioloajat ilmoitetaan lähetyksen jälkeen.",
-      "temporaryNotice": "Aukioloajat saattavat muuttua usein koronapandemian aiheuttamien poikkeusolojen vuoksi. Suosittelemme toistaiseksi aukioloaikojen päivittämistä omilla verkkosivullanne tai sosiaalisen median kanavissa. Kerrothan asiakkaille Pitkä kuvaus -kohdassa, mistä ajankohtaiset aukioloajat voi tarkistaa. Ethän laita pitkään kuvaukseen linkkejä, linkit verkkosivuille ja someen lisätään seuraavassa vaiheessa."
+      "temporaryNotice": "Suosittelemme toistaiseksi aukioloaikojen päivittämistä omilla verkkosivullanne tai sosiaalisen median kanavissa. Kerrothan asiakkaille Pitkä kuvaus -kohdassa, mistä ajankohtaiset aukioloajat voi tarkistaa. Ethän laita pitkään kuvaukseen linkkejä, linkit verkkosivuille ja someen lisätään seuraavassa vaiheessa.",
+      "times": {
+        "thisWeek": "Tämä viikko",
+        "nextWeek": "Ensi viikko",
+        "noTimes": "Ei aukioloaikoja",
+        "date": "Päivämäärä",
+        "opens": "Aukeaa",
+        "closes": "Sulkeutuu",
+        "status": "Tila"
+      },
+      "resourceState": {
+        "open": "avoinna",
+        "closed": "suljettu",
+        "undefined": "ei määritelty",
+        "self_service": "itsepalvelu",
+        "with_key": "avaimella",
+        "with_reservation": "varauksella",
+        "open_and_reservable": "varattavissa",
+        "with_key_and_reservation": "avaimella ja varauksella",
+        "enter_only": "saapumisaika",
+        "exit_only": "poistumisaika",
+        "weather_permitting": "sään salliessa"
+      }
     },
     "photos": {
       "title": "Kuvat",
@@ -903,6 +938,13 @@
       "taskType": {
         "label": "Tyyppi",
         "all": "Kaikki"
+      },
+      "showStatus": {
+        "show": "Näytä",
+        "all": "Kaikki",
+        "open": "Uusi",
+        "closed": "Valmis",
+        "rejected": "Hylätty"
       }
     },
     "taskResults": {
@@ -920,6 +962,7 @@
       "open": "Uusi",
       "inProgress": "Kesken",
       "closed": "Valmis",
+      "rejected": "Hylätty",
       "cancelled": "Peruttu"
     },
     "collapsible": {

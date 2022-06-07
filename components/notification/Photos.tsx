@@ -229,6 +229,7 @@ const Photos = (): ReactElement => {
                       <TextArea
                         id={`altText_${index}_${option}`}
                         key={key2}
+                        lang={option}
                         className="formInput"
                         rows={3}
                         label={label}

@@ -81,6 +81,7 @@ const Map = (): ReactElement => {
         <div>{i18n.t("notification.map.notice")}</div>
       </div>
       <MapWrapper
+        id="map"
         className={styles.map}
         initialCenter={mapCenter as [number, number]}
         initialZoom={mapZoom}
@@ -93,7 +94,7 @@ const Map = (): ReactElement => {
       {!locationValid.valid && (
         <div className={styles.invalidLocation}>
           <IconAlertCircle aria-hidden />
-          <span>{`${i18n.t("notification.location.locationNotSpecified")}`}</span>
+          <span>{`${i18n.t(locationValid.message as string)}`}</span>
         </div>
       )}
 

@@ -1,4 +1,5 @@
-import { AnyAction, combineReducers } from "redux";
+import { combineReducers } from "redux";
+import type { AnyAction } from "redux";
 import general from "./general";
 import notification from "./notification";
 import notificationValidation from "./notificationValidation";

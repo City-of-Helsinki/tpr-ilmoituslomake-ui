@@ -1,6 +1,7 @@
 import { Dispatch } from "react";
 import Ajv from "ajv";
 import addFormats from "ajv-formats";
+import { I18n } from "next-localization";
 import { string, number, ValidationError } from "yup";
 import StringSchema from "yup/lib/string";
 import NumberSchema from "yup/lib/number";
@@ -32,7 +33,7 @@ import {
   ItemType,
 } from "../types/constants";
 import { NotificationSchema } from "../types/notification_schema";
-import { ChangeRequestSchema, NotificationExtra, Validation } from "../types/general";
+import { ChangeRequestSchema, KeyValueValidation, NotificationExtra, Validation } from "../types/general";
 import notificationSchema from "../schemas/notification_schema.json";
 
 export const isValid = (schema: StringSchema<string | undefined> | NumberSchema<number | undefined>, fieldValue: string | number): Validation => {
@@ -55,23 +56,39 @@ export const isValid = (schema: StringSchema<string | undefined> | NumberSchema<
   return { valid, message };
 };
 
-export const isInputLanguageFieldValid = (notificationExtra: NotificationExtra, dispatch: Dispatch<NotificationValidationAction>): boolean => {
+export const validateInputLanguageField = (notificationExtra: NotificationExtra): Validation => {
   const { inputLanguages } = notificationExtra;
   const valid = inputLanguages.length > 0;
-  if (!valid) {
-    dispatch(setNotificationInputLanguageValidation({ valid, message: "notification.message.fieldLanguage" }));
-  } else {
-    dispatch(setNotificationInputLanguageValidation({ valid, message: undefined }));
-  }
-  return valid;
+  const result = { valid, message: !valid ? "notification.message.fieldLanguage" : undefined };
+  return result;
 };
 
-export const isNameValid = (language: string, notification: NotificationSchema, dispatch: Dispatch<NotificationValidationAction>): boolean => {
+export const isInputLanguageFieldValid = (notificationExtra: NotificationExtra, dispatch: Dispatch<NotificationValidationAction>): boolean => {
+  const result = validateInputLanguageField(notificationExtra);
+  dispatch(setNotificationInputLanguageValidation(result));
+  return result.valid;
+};
+
+export const validateName = (language: string, notification: NotificationSchema): Validation => {
   const { name: placeName } = notification;
   const schema = string().required("notification.message.fieldRequired");
   const result = isValid(schema, placeName[language] as string);
+  return result;
+};
+
+export const isNameValid = (language: string, notification: NotificationSchema, dispatch: Dispatch<NotificationValidationAction>): boolean => {
+  const result = validateName(language, notification);
   dispatch(setNotificationNameValidation({ [language]: result }));
   return result.valid;
+};
+
+export const validateShortDescription = (language: string, notification: NotificationSchema): Validation => {
+  const {
+    description: { short: shortDesc },
+  } = notification;
+  const schema = string().required("notification.message.fieldRequired").max(MAX_LENGTH_SHORT_DESC, "notification.message.fieldTooLong");
+  const result = isValid(schema, shortDesc[language] as string);
+  return result;
 };
 
 export const isShortDescriptionValid = (
@@ -79,20 +96,12 @@ export const isShortDescriptionValid = (
   notification: NotificationSchema,
   dispatch: Dispatch<NotificationValidationAction>
 ): boolean => {
-  const {
-    description: { short: shortDesc },
-  } = notification;
-  const schema = string().required("notification.message.fieldRequired").max(MAX_LENGTH_SHORT_DESC, "notification.message.fieldTooLong");
-  const result = isValid(schema, shortDesc[language] as string);
+  const result = validateShortDescription(language, notification);
   dispatch(setNotificationShortDescriptionValidation({ [language]: result }));
   return result.valid;
 };
 
-export const isLongDescriptionValid = (
-  language: string,
-  notification: NotificationSchema,
-  dispatch: Dispatch<NotificationValidationAction>
-): boolean => {
+export const validateLongDescription = (language: string, notification: NotificationSchema): Validation => {
   const {
     description: { long: longDesc },
   } = notification;
@@ -101,24 +110,35 @@ export const isLongDescriptionValid = (
     .min(MIN_LENGTH_LONG_DESC, "notification.message.fieldTooShort")
     .max(MAX_LENGTH_LONG_DESC, "notification.message.fieldTooLong");
   const result = isValid(schema, longDesc[language] as string);
+  return result;
+};
+
+export const isLongDescriptionValid = (
+  language: string,
+  notification: NotificationSchema,
+  dispatch: Dispatch<NotificationValidationAction>
+): boolean => {
+  const result = validateLongDescription(language, notification);
   dispatch(setNotificationLongDescriptionValidation({ [language]: result }));
   return result.valid;
 };
 
-export const isTagValid = (notification: NotificationSchema, dispatch: Dispatch<NotificationValidationAction>): boolean => {
+export const validateTag = (notification: NotificationSchema): Validation => {
   const { ontology_ids } = notification;
   const valid = ontology_ids.length > 0 && ontology_ids.length <= 5;
-  if (!valid) {
-    dispatch(
-      setNotificationTagValidation({
+  const result = !valid
+    ? {
         valid,
         message: ontology_ids.length === 0 ? "notification.message.fieldRequired" : "notification.message.fieldTooLong",
-      })
-    );
-  } else {
-    dispatch(setNotificationTagValidation({ valid, message: undefined }));
-  }
-  return valid;
+      }
+    : { valid, message: undefined };
+  return result;
+};
+
+export const isTagValid = (notification: NotificationSchema, dispatch: Dispatch<NotificationValidationAction>): boolean => {
+  const result = validateTag(notification);
+  dispatch(setNotificationTagValidation(result));
+  return result.valid;
 };
 
 const phoneSchema = () => string().matches(/^\+?[0-9- ]+$/, { excludeEmptyString: true, message: "notification.message.fieldFormat" });
@@ -126,11 +146,7 @@ const phoneSchema = () => string().matches(/^\+?[0-9- ]+$/, { excludeEmptyString
 const postalCodeSchema = () =>
   string().matches(/^[0-9][0-9][0-9][0-9][0-9]$/, { excludeEmptyString: true, message: "notification.message.fieldFormat" });
 
-export const isNotifierFieldValid = (
-  notifierField: string,
-  notification: NotificationSchema,
-  dispatch: Dispatch<NotificationValidationAction>
-): boolean => {
+export const validateNotifierField = (notifierField: string, notification: NotificationSchema): Validation => {
   const { notifier } = notification;
   let schema;
   switch (notifierField) {
@@ -147,16 +163,20 @@ export const isNotifierFieldValid = (
     }
   }
   const result = isValid(schema, notifier[notifierField] as string);
+  return result;
+};
+
+export const isNotifierFieldValid = (
+  notifierField: string,
+  notification: NotificationSchema,
+  dispatch: Dispatch<NotificationValidationAction>
+): boolean => {
+  const result = validateNotifierField(notifierField, notification);
   dispatch(setNotificationNotifierValidation({ [notifierField]: result }));
   return result.valid;
 };
 
-export const isAddressFieldValid = (
-  language: string,
-  addressField: string,
-  notification: NotificationSchema,
-  dispatch: Dispatch<NotificationValidationAction>
-): boolean => {
+export const validateAddressField = (language: string, addressField: string, notification: NotificationSchema): Validation => {
   const { address } = notification;
   const { fi, sv } = address;
   let schema;
@@ -170,16 +190,21 @@ export const isAddressFieldValid = (
     }
   }
   const result = isValid(schema, language === "sv" ? (sv[addressField] as string) : (fi[addressField] as string));
+  return result;
+};
+
+export const isAddressFieldValid = (
+  language: string,
+  addressField: string,
+  notification: NotificationSchema,
+  dispatch: Dispatch<NotificationValidationAction>
+): boolean => {
+  const result = validateAddressField(language, addressField, notification);
   dispatch(setNotificationAddressValidation(language, { [addressField]: result }));
   return result.valid;
 };
 
-export const isWholeAddressValid = (
-  language: string,
-  notification: NotificationSchema,
-  notificationExtra: NotificationExtra,
-  dispatch: Dispatch<NotificationValidationAction>
-): boolean => {
+export const validateWholeAddress = (language: string, notification: NotificationSchema, notificationExtra: NotificationExtra): Validation => {
   const { address } = notification;
   const { fi, sv } = address;
   const { addressFound } = notificationExtra;
@@ -192,22 +217,35 @@ export const isWholeAddressValid = (
       : fi.street.toLowerCase().startsWith(addressFound.street.toLowerCase())) &&
     (language === "sv" ? sv.postal_code === addressFound.postalCode : fi.postal_code === addressFound.postalCode);
 
-  dispatch(setNotificationWholeAddressValidation({ valid, message: undefined }));
-  return valid;
+  const result = { valid, message: undefined };
+  return result;
+};
+
+export const isWholeAddressValid = (
+  language: string,
+  notification: NotificationSchema,
+  notificationExtra: NotificationExtra,
+  dispatch: Dispatch<NotificationValidationAction>
+): boolean => {
+  const result = validateWholeAddress(language, notification, notificationExtra);
+  dispatch(setNotificationWholeAddressValidation(result));
+  return result.valid;
+};
+
+export const validateLocation = (notification: NotificationSchema): Validation => {
+  const { location } = notification;
+  const valid = location && location.length === 2 && location[0] > 0 && location[1] > 0;
+  const result = { valid, message: !valid ? "notification.location.locationNotSpecified" : undefined };
+  return result;
 };
 
 export const isLocationValid = (notification: NotificationSchema, dispatch: Dispatch<NotificationValidationAction>): boolean => {
-  const { location } = notification;
-  const valid = location && location.length === 2 && location[0] > 0 && location[1] > 0;
-  dispatch(setNotificationLocationValidation({ valid, message: undefined }));
-  return valid;
+  const result = validateLocation(notification);
+  dispatch(setNotificationLocationValidation(result));
+  return result.valid;
 };
 
-export const isContactFieldValid = (
-  contactField: string,
-  notification: NotificationSchema,
-  dispatch: Dispatch<NotificationValidationAction>
-): boolean => {
+export const validateContactField = (contactField: string, notification: NotificationSchema): Validation => {
   const { businessid, phone, email } = notification;
   let result;
   switch (contactField) {
@@ -230,24 +268,33 @@ export const isContactFieldValid = (
       result = { valid: true };
     }
   }
+  return result;
+};
+
+export const isContactFieldValid = (
+  contactField: string,
+  notification: NotificationSchema,
+  dispatch: Dispatch<NotificationValidationAction>
+): boolean => {
+  const result = validateContactField(contactField, notification);
   dispatch(setNotificationContactValidation({ [contactField]: result }));
   return result.valid;
 };
 
-export const isWebsiteValid = (language: string, notification: NotificationSchema, dispatch: Dispatch<NotificationValidationAction>): boolean => {
+export const validateWebsite = (language: string, notification: NotificationSchema): Validation => {
   const { website } = notification;
   const schema = string().url("notification.message.fieldFormatUrl");
   const result = isValid(schema, website[language] as string);
+  return result;
+};
+
+export const isWebsiteValid = (language: string, notification: NotificationSchema, dispatch: Dispatch<NotificationValidationAction>): boolean => {
+  const result = validateWebsite(language, notification);
   dispatch(setNotificationLinkValidation({ [language]: result }));
   return result.valid;
 };
 
-export const isPhotoBase64Valid = (
-  index: number,
-  base64: string,
-  notificationExtra: NotificationExtra,
-  dispatch: Dispatch<NotificationValidationAction>
-): boolean => {
+export const validatePhotoBase64 = (index: number, base64: string, notificationExtra: NotificationExtra): Validation => {
   const { photos } = notificationExtra;
   const photo = photos[index];
   const schema =
@@ -274,16 +321,21 @@ export const isPhotoBase64Valid = (
     }
   }
 
+  return result;
+};
+
+export const isPhotoBase64Valid = (
+  index: number,
+  base64: string,
+  notificationExtra: NotificationExtra,
+  dispatch: Dispatch<NotificationValidationAction>
+): boolean => {
+  const result = validatePhotoBase64(index, base64, notificationExtra);
   dispatch(setNotificationPhotoValidation(index, { base64: result }));
   return result.valid;
 };
 
-export const isPhotoFieldValid = (
-  index: number,
-  photoField: string,
-  notificationExtra: NotificationExtra,
-  dispatch: Dispatch<NotificationValidationAction>
-): boolean => {
+export const validatePhotoField = (index: number, photoField: string, notificationExtra: NotificationExtra): Validation => {
   const { photos } = notificationExtra;
   const photo = photos[index];
   let schema;
@@ -300,8 +352,27 @@ export const isPhotoFieldValid = (
     }
   }
   const result = isValid(schema, photo[photoField] as string);
+  return result;
+};
+
+export const isPhotoFieldValid = (
+  index: number,
+  photoField: string,
+  notificationExtra: NotificationExtra,
+  dispatch: Dispatch<NotificationValidationAction>
+): boolean => {
+  const result = validatePhotoField(index, photoField, notificationExtra);
   dispatch(setNotificationPhotoValidation(index, { [photoField]: result }));
   return result.valid;
+};
+
+export const validatePhotoAltText = (index: number, language: string, notificationExtra: NotificationExtra): Validation => {
+  const { photos } = notificationExtra;
+  const photo = photos[index];
+  const { altText } = photo;
+  const schema = string().max(MAX_LENGTH_PHOTO_DESC, "notification.message.fieldTooLong");
+  const result = isValid(schema, altText[language] as string);
+  return result;
 };
 
 export const isPhotoAltTextValid = (
@@ -310,13 +381,128 @@ export const isPhotoAltTextValid = (
   notificationExtra: NotificationExtra,
   dispatch: Dispatch<NotificationValidationAction>
 ): boolean => {
-  const { photos } = notificationExtra;
-  const photo = photos[index];
-  const { altText } = photo;
-  const schema = string().max(MAX_LENGTH_PHOTO_DESC, "notification.message.fieldTooLong");
-  const result = isValid(schema, altText[language] as string);
+  const result = validatePhotoAltText(index, language, notificationExtra);
   dispatch(setNotificationPhotoAltTextValidation(index, { [language]: result }));
   return result.valid;
+};
+
+export const getPageValidationSummary = (
+  page: number,
+  locale: string | undefined,
+  notification: NotificationSchema,
+  notificationExtra: NotificationExtra,
+  i18n: I18n<unknown>
+): KeyValueValidation => {
+  const { inputLanguages, photos } = notificationExtra;
+
+  // Check whether all data on the specific page is valid and create a summary of the results
+  // The fieldLabel value is also added to use in the ValidationSummary component
+  switch (page) {
+    case 1: {
+      // Basic
+      return {
+        ...inputLanguages.reduce((acc, option) => {
+          return {
+            ...acc,
+            [`placeName_${option}`]: {
+              ...validateName(option, notification),
+              fieldLabel: `${i18n.t("notification.description.placeName.label")} ${i18n.t(`common.inLanguage.${option}`)}`,
+            },
+            [`shortDescription_${option}`]: {
+              ...validateShortDescription(option, notification),
+              fieldLabel: `${i18n.t("notification.description.shortDescription.label")} ${i18n.t(`common.inLanguage.${option}`)}`,
+            },
+            [`longDescription_${option}`]: {
+              ...validateLongDescription(option, notification),
+              fieldLabel: `${i18n.t("notification.description.longDescription.label")} ${i18n.t(`common.inLanguage.${option}`)}`,
+            },
+          };
+        }, {}),
+        inputLanguage: { ...validateInputLanguageField(notificationExtra), fieldLabel: i18n.t("notification.inputLanguage.title") },
+        "tag-input": { ...validateTag(notification), fieldLabel: i18n.t("notification.tags.tagSelection") },
+        notifierType: { ...validateNotifierField("notifier_type", notification), fieldLabel: i18n.t("notification.notifier.notifierType") },
+        fullName: { ...validateNotifierField("full_name", notification), fieldLabel: i18n.t("notification.notifier.fullName.label") },
+        email: { ...validateNotifierField("email", notification), fieldLabel: i18n.t("notification.notifier.email.label") },
+        phone: { ...validateNotifierField("phone", notification), fieldLabel: i18n.t("notification.notifier.phone.label") },
+      };
+    }
+    case 2: {
+      // Contact
+      return {
+        ...(locale === "sv" && {
+          streetAddressSv: { ...validateAddressField("sv", "street", notification), fieldLabel: i18n.t("notification.location.streetAddress.label") },
+          postalCodeSv: { ...validateAddressField("sv", "postal_code", notification), fieldLabel: i18n.t("notification.location.postalCode.label") },
+          postalOfficeSv: {
+            ...validateAddressField("sv", "post_office", notification),
+            fieldLabel: i18n.t("notification.location.postalOffice.label"),
+          },
+        }),
+        ...(locale !== "sv" && {
+          streetAddressFi: { ...validateAddressField("fi", "street", notification), fieldLabel: i18n.t("notification.location.streetAddress.label") },
+          postalCodeFi: { ...validateAddressField("fi", "postal_code", notification), fieldLabel: i18n.t("notification.location.postalCode.label") },
+          postalOfficeFi: {
+            ...validateAddressField("fi", "post_office", notification),
+            fieldLabel: i18n.t("notification.location.postalOffice.label"),
+          },
+        }),
+        businessid: { ...validateContactField("businessid", notification), fieldLabel: i18n.t("notification.contact.businessid.label") },
+        phone: { ...validateContactField("phone", notification), fieldLabel: i18n.t("notification.contact.phone.label") },
+        email: { ...validateContactField("email", notification), fieldLabel: i18n.t("notification.contact.email.label") },
+        map: { ...validateLocation(notification), fieldLabel: i18n.t("notification.location.locationNotSpecified") },
+        ...inputLanguages.reduce((acc, option) => {
+          return {
+            ...acc,
+            [`website_${option}`]: {
+              ...validateWebsite(option, notification),
+              fieldLabel: `${i18n.t("notification.links.website.label")} ${i18n.t(`common.inLanguage.${option}`)}`,
+            },
+          };
+        }, {}),
+      };
+    }
+    case 3: {
+      // Photos
+      return {
+        ...photos.reduce((acc, photo, index) => {
+          const urlValidation = validatePhotoField(index, "url", notificationExtra);
+          const base64Validation = validatePhotoBase64(index, photo.base64 as string, notificationExtra);
+          const photoValidation = !urlValidation.valid ? urlValidation : base64Validation;
+
+          return {
+            ...acc,
+            [`url_${index}`]: {
+              ...photoValidation,
+              fieldLabel:
+                !photo.new || photo.sourceType === PhotoSourceType.Link
+                  ? i18n.t("notification.photos.url.labelLink")
+                  : i18n.t("notification.photos.photo.title"),
+            },
+            [`permission_${index}`]: {
+              ...validatePhotoField(index, "permission", notificationExtra),
+              fieldLabel: i18n.t("notification.photos.permission.label"),
+            },
+            [`source_${index}`]: {
+              ...validatePhotoField(index, "source", notificationExtra),
+              fieldLabel: i18n.t("notification.photos.source.label"),
+            },
+            ...inputLanguages.reduce((acc2, option) => {
+              return {
+                ...acc2,
+                [`altText_${index}_${option}`]: {
+                  ...validatePhotoAltText(index, option, notificationExtra),
+                  fieldLabel: `${i18n.t("notification.photos.altText.label")} ${i18n.t(`common.inLanguage.${option}`)}`,
+                },
+              };
+            }, {}),
+          };
+        }, {}),
+      };
+    }
+    default: {
+      // Send
+      return {};
+    }
+  }
 };
 
 export const isPageValid = (
@@ -394,7 +580,7 @@ export const isPageValid = (
   }
 };
 
-export const isTipFieldValid = (tipField: string, tip: ChangeRequestSchema, dispatch: Dispatch<NotificationValidationAction>): boolean => {
+export const validateTipField = (tipField: string, tip: ChangeRequestSchema): Validation => {
   let schema;
   switch (tipField) {
     case "target": {
@@ -406,8 +592,28 @@ export const isTipFieldValid = (tipField: string, tip: ChangeRequestSchema, disp
     }
   }
   const result = isValid(schema, tip[tipField]);
+  return result;
+};
+
+export const isTipFieldValid = (tipField: string, tip: ChangeRequestSchema, dispatch: Dispatch<NotificationValidationAction>): boolean => {
+  const result = validateTipField(tipField, tip);
   dispatch(setNotificationTipValidation({ [tipField]: result }));
   return result.valid;
+};
+
+export const getTipPageValidationSummary = (tip: ChangeRequestSchema, i18n: I18n<unknown>): KeyValueValidation => {
+  // Check whether all data on the page is valid and create a summary of the results
+  // The fieldLabel value is also added to use in the ValidationSummary component
+  return {
+    ...((tip.item_type === ItemType.ChangeRequestChange || tip.item_type === ItemType.ChangeRequestDelete) && {
+      placeName: { ...validateTipField("target", tip), fieldLabel: i18n.t("notification.tip.placeResults.label") },
+    }),
+    itemType: { ...validateTipField("item_type", tip), fieldLabel: i18n.t("notification.tip.itemType.label") },
+    ...(tip.item_type === ItemType.ChangeRequestAdd && {
+      userPlaceName: { ...validateTipField("user_place_name", tip), fieldLabel: i18n.t("notification.tip.addPlaceName.label") },
+    }),
+    userComments: { ...validateTipField("user_comments", tip), fieldLabel: i18n.t("notification.tip.comments.label") },
+  };
 };
 
 export const isTipPageValid = (tip: ChangeRequestSchema, dispatch: Dispatch<NotificationValidationAction>): boolean => {

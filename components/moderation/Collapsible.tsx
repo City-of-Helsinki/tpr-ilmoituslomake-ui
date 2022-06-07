@@ -21,6 +21,9 @@ const Collapsible = ({ section, title, taskType, taskStatus, isModerated, forceE
 
   const toggle = () => {
     setExpanded(!expanded);
+
+    // Force a resize event to make sure maps render properly inside the collapsible container
+    window.dispatchEvent(new Event("resize"));
   };
 
   useEffect(() => {
@@ -48,7 +51,9 @@ const Collapsible = ({ section, title, taskType, taskStatus, isModerated, forceE
             <TaskStatusLabel
               prefix="moderation"
               status={
-                isModerated || taskStatus === TaskStatus.Closed || taskStatus === TaskStatus.Cancelled ? TaskStatus.Closed : TaskStatus.InProgress
+                isModerated || taskStatus === TaskStatus.Closed || taskStatus === TaskStatus.Rejected || taskStatus === TaskStatus.Cancelled
+                  ? TaskStatus.Closed
+                  : TaskStatus.InProgress
               }
             />
           )}

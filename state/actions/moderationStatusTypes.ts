@@ -1,4 +1,4 @@
-import { AnyAction } from "redux";
+import type { AnyAction } from "redux";
 import {
   ModerationStatus,
   SET_PAGE_STATUS,

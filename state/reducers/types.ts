@@ -3,6 +3,7 @@ import { ModerationStatus } from "../../types/constants";
 import {
   ChangeRequestSchema,
   ChangeRequestValidationSchema,
+  KeyValueValidation,
   ModerationExtra,
   ModerationPlaceResults,
   ModerationPlaceSearch,
@@ -42,12 +43,17 @@ export interface NotificationState {
   notificationId: number;
   notification: NotificationSchema;
   notificationExtra: NotificationExtra;
+  openingTimesId: number;
+  openingTimesNotificationId: number;
+  isNew: boolean;
 }
 
 export interface NotificationValidationState {
   pageValid: boolean;
   notificationValidation: NotificationValidationSchema;
   tipValidation: ChangeRequestValidationSchema;
+  validationSummary: KeyValueValidation;
+  tipValidationSummary: KeyValueValidation;
 }
 
 export interface TranslationState {
@@ -60,6 +66,7 @@ export interface TranslationState {
   translationExtra: TranslationExtra;
   taskPageValid: boolean;
   taskValidation: TranslationTaskValidation;
+  taskValidationSummary: KeyValueValidation;
 }
 
 export interface ModerationState {
@@ -93,4 +100,5 @@ export interface ModerationTranslationState {
   translators: User[];
   requestPageValid: boolean;
   requestValidation: ModerationTranslationRequestValidation;
+  requestValidationSummary: KeyValueValidation;
 }

@@ -1,4 +1,4 @@
-import { AnyAction } from "redux";
+import type { AnyAction } from "redux";
 import {
   SET_PAGE_VALID,
   SET_NOTIFICATION_INPUT_LANGUAGE_VALIDATION,
@@ -16,6 +16,8 @@ import {
   SET_NOTIFICATION_PHOTO_ALT_TEXT_VALIDATION,
   REMOVE_NOTIFICATION_PHOTO_VALIDATION,
   SET_NOTIFICATION_TIP_VALIDATION,
+  SET_NOTIFICATION_VALIDATION_SUMMARY,
+  SET_NOTIFICATION_TIP_VALIDATION_SUMMARY,
 } from "../../types/constants";
 import { KeyValueValidation, Validation } from "../../types/general";
 import { PhotoValidation } from "../../types/notification_validation";
@@ -100,6 +102,16 @@ interface SetNotificationTipValidationAction extends AnyAction {
   payload: KeyValueValidation;
 }
 
+interface SetNotificationValidationSummaryAction extends AnyAction {
+  type: typeof SET_NOTIFICATION_VALIDATION_SUMMARY;
+  payload: KeyValueValidation;
+}
+
+interface SetNotificationTipValidationSummaryAction extends AnyAction {
+  type: typeof SET_NOTIFICATION_TIP_VALIDATION_SUMMARY;
+  payload: KeyValueValidation;
+}
+
 export type NotificationValidationAction =
   | SetPageValidAction
   | SetNotificationInputLanguageValidationAction
@@ -116,4 +128,6 @@ export type NotificationValidationAction =
   | SetNotificationPhotoValidationAction
   | SetNotificationPhotoAltTextValidationAction
   | RemoveNotificationPhotoValidationAction
-  | SetNotificationTipValidationAction;
+  | SetNotificationTipValidationAction
+  | SetNotificationValidationSummaryAction
+  | SetNotificationTipValidationSummaryAction;

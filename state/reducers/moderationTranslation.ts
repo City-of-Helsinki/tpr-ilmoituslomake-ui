@@ -1,4 +1,4 @@
-import { AnyAction } from "redux";
+import type { AnyAction } from "redux";
 import { ModerationTranslationState } from "./types";
 import {
   TaskType,
@@ -15,6 +15,7 @@ import {
   SET_MODERATION_TRANSLATION_REQUEST,
   SET_MODERATION_TRANSLATION_REQUEST_PAGE_VALID,
   SET_MODERATION_TRANSLATION_REQUEST_VALIDATION,
+  SET_MODERATION_TRANSLATION_REQUEST_VALIDATION_SUMMARY,
 } from "../../types/constants";
 
 const initialState: ModerationTranslationState = {
@@ -88,9 +89,14 @@ const initialState: ModerationTranslationState = {
     language: { valid: true },
     message: { valid: true },
   },
+  requestValidationSummary: {},
 };
 
-const moderationTranslation = (state = initialState, action: AnyAction): ModerationTranslationState => {
+const moderationTranslation = (state: ModerationTranslationState | undefined, action: AnyAction): ModerationTranslationState => {
+  if (!state) {
+    state = initialState;
+  }
+
   switch (action.type) {
     case SET_MODERATION_TRANSLATION_REQUEST_SEARCH: {
       console.log("SET_MODERATION_TRANSLATION_REQUEST_SEARCH", action.payload);
@@ -193,6 +199,14 @@ const moderationTranslation = (state = initialState, action: AnyAction): Moderat
       return {
         ...state,
         requestValidation: { ...state.requestValidation, ...action.payload },
+      };
+    }
+
+    case SET_MODERATION_TRANSLATION_REQUEST_VALIDATION_SUMMARY: {
+      console.log("SET_MODERATION_TRANSLATION_REQUEST_VALIDATION_SUMMARY", action.payload);
+      return {
+        ...state,
+        requestValidationSummary: action.payload,
       };
     }
 

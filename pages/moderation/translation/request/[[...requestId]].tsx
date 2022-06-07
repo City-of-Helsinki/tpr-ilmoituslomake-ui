@@ -26,6 +26,7 @@ const ModerationTranslationRequestDetail = (): ReactElement => {
   const i18n = useI18n();
 
   const pageValid = useSelector((state: RootState) => state.moderationTranslation.requestPageValid);
+  const requestValidationSummary = useSelector((state: RootState) => state.moderationTranslation.requestValidationSummary);
   const ref = useRef<HTMLHeadingElement>(null);
 
   const requestDetail = useSelector((state: RootState) => state.moderationTranslation.requestDetail);
@@ -84,7 +85,7 @@ const ModerationTranslationRequestDetail = (): ReactElement => {
       <main id="content">
         {toast && <ToastNotification prefix="moderation" toast={toast} setToast={setToast} />}
         <NotificationNotice messageKey="moderation.mandatory" />
-        {!pageValid && <ValidationSummary prefix="moderation" pageValid={pageValid} />}
+        {!pageValid && <ValidationSummary prefix="moderation" pageValid={pageValid} validationSummary={requestValidationSummary} />}
 
         <div>
           {requestId > 0 && <RequestStatus taskCounts={taskCounts} requestStatus={requestStatus} />}

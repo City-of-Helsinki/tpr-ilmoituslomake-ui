@@ -1,4 +1,4 @@
-import { AnyAction } from "redux";
+import type { AnyAction } from "redux";
 import {
   SET_MODERATION_TRANSLATION_REQUEST_SEARCH,
   SET_MODERATION_TRANSLATION_REQUEST_RESULTS,
@@ -13,6 +13,7 @@ import {
   SET_MODERATION_TRANSLATION_REQUEST,
   SET_MODERATION_TRANSLATION_REQUEST_PAGE_VALID,
   SET_MODERATION_TRANSLATION_REQUEST_VALIDATION,
+  SET_MODERATION_TRANSLATION_REQUEST_VALIDATION_SUMMARY,
 } from "../../types/constants";
 import {
   KeyValueValidation,
@@ -90,6 +91,11 @@ interface SetModerationTranslationRequestValidationAction extends AnyAction {
   payload: KeyValueValidation;
 }
 
+interface SetModerationTranslationRequestValidationSummaryAction extends AnyAction {
+  type: typeof SET_MODERATION_TRANSLATION_REQUEST_VALIDATION_SUMMARY;
+  payload: KeyValueValidation;
+}
+
 export type ModerationTranslationAction =
   | SetModerationTranslationRequestSearchAction
   | SetModerationTranslationRequestResultsAction
@@ -103,4 +109,5 @@ export type ModerationTranslationAction =
   | SetModerationTranslationSelectedPlacesAction
   | SetModerationTranslationRequestAction
   | SetModerationTranslationRequestPageValidAction
-  | SetModerationTranslationRequestValidationAction;
+  | SetModerationTranslationRequestValidationAction
+  | SetModerationTranslationRequestValidationSummaryAction;

@@ -3,13 +3,20 @@ import { useSelector, useDispatch } from "react-redux";
 import { useRouter } from "next/router";
 import { useI18n } from "next-localization";
 import { Button, IconArrowRight } from "hds-react";
-import { setModerationTranslationRequestPageValid } from "../../../state/actions/moderationTranslation";
+import {
+  setModerationTranslationRequestPageValid,
+  setModerationTranslationRequestValidationSummary,
+} from "../../../state/actions/moderationTranslation";
 import { ModerationTranslationAction } from "../../../state/actions/moderationTranslationTypes";
 import { RootState } from "../../../state/reducers";
 import { TaskStatus, TaskType, Toast } from "../../../types/constants";
 import { ModerationTranslationRequestResultTask } from "../../../types/general";
 import { cancelModerationTranslationRequest, saveModerationTranslationRequest } from "../../../utils/moderation";
-import { isModerationTranslationRequestPageChanged, isModerationTranslationRequestPageValid } from "../../../utils/moderationValidation";
+import {
+  getModerationTranslationRequestPageValidationSummary,
+  isModerationTranslationRequestPageChanged,
+  isModerationTranslationRequestPageValid,
+} from "../../../utils/moderationValidation";
 import ModalConfirmation from "../../common/ModalConfirmation";
 import styles from "./RequestButtons.module.scss";
 
@@ -63,10 +70,12 @@ const RequestButtons = ({ requestStatus, setToast }: RequestButtonsProps): React
 
     if (isModerationTranslationRequestPageValid(requestDetail, dispatchValidation)) {
       // The page is valid, so save the request
+      dispatchValidation(setModerationTranslationRequestValidationSummary({}));
       saveModerationTranslationRequest(currentUser, requestDetail, router, dispatchValidation, setToast);
       dispatchValidation(setModerationTranslationRequestPageValid(true));
     } else {
       // The page is not valid, but set the page to valid then invalid to force the page to show the general validation message
+      dispatchValidation(setModerationTranslationRequestValidationSummary(getModerationTranslationRequestPageValidationSummary(requestDetail, i18n)));
       dispatchValidation(setModerationTranslationRequestPageValid(true));
       dispatchValidation(setModerationTranslationRequestPageValid(false));
     }
@@ -106,7 +115,12 @@ const RequestButtons = ({ requestStatus, setToast }: RequestButtonsProps): React
               <Button
                 variant="secondary"
                 onClick={openCancelConfirmation}
-                disabled={taskStatus === TaskStatus.InProgress || taskStatus === TaskStatus.Closed || taskStatus === TaskStatus.Cancelled}
+                disabled={
+                  taskStatus === TaskStatus.InProgress ||
+                  taskStatus === TaskStatus.Closed ||
+                  taskStatus === TaskStatus.Rejected ||
+                  taskStatus === TaskStatus.Cancelled
+                }
               >
                 {i18n.t("moderation.button.cancelTranslationRequest")}
               </Button>
@@ -116,7 +130,7 @@ const RequestButtons = ({ requestStatus, setToast }: RequestButtonsProps): React
             <Button
               iconRight={<IconArrowRight aria-hidden />}
               onClick={openSaveConfirmation}
-              disabled={taskStatus === TaskStatus.Closed || taskStatus === TaskStatus.Cancelled}
+              disabled={taskStatus === TaskStatus.Closed || taskStatus === TaskStatus.Rejected || taskStatus === TaskStatus.Cancelled}
             >
               {i18n.t("moderation.button.sendTranslationRequest")}
             </Button>

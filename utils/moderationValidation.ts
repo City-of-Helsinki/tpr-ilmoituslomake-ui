@@ -1,15 +1,14 @@
 import { Dispatch } from "react";
+import { I18n } from "next-localization";
 import { string } from "yup";
 import { setModerationTranslationRequestValidation } from "../state/actions/moderationTranslation";
 import { ModerationTranslationAction } from "../state/actions/moderationTranslationTypes";
-import { ModerationTranslationRequest, ModerationTranslationRequestValidation, Validation } from "../types/general";
+import { KeyValueValidation, ModerationTranslationRequest, ModerationTranslationRequestValidation, Validation } from "../types/general";
 import { isValid } from "./validation";
 
 export const validateModerationTranslationRequestField = (
   translationRequestField: string,
-  translationValidationField: string,
-  requestDetail: ModerationTranslationRequest,
-  dispatch: Dispatch<ModerationTranslationAction>
+  requestDetail: ModerationTranslationRequest
 ): Validation => {
   let result: Validation;
   switch (translationRequestField) {
@@ -28,7 +27,6 @@ export const validateModerationTranslationRequestField = (
       result = isValid(schema, requestDetail[translationRequestField] as string);
     }
   }
-  dispatch(setModerationTranslationRequestValidation({ [translationValidationField]: result }));
   return { ...result, changed: true };
 };
 
@@ -38,9 +36,32 @@ export const isModerationTranslationRequestFieldValid = (
   requestDetail: ModerationTranslationRequest,
   dispatch: Dispatch<ModerationTranslationAction>
 ): boolean => {
-  const result = validateModerationTranslationRequestField(translationRequestField, translationValidationField, requestDetail, dispatch);
+  const result = validateModerationTranslationRequestField(translationRequestField, requestDetail);
   dispatch(setModerationTranslationRequestValidation({ [translationValidationField]: result }));
   return result.valid;
+};
+
+export const getModerationTranslationRequestPageValidationSummary = (
+  requestDetail: ModerationTranslationRequest,
+  i18n: I18n<unknown>
+): KeyValueValidation => {
+  // Check whether all data on the page is valid and create a summary of the results
+  // The fieldLabel value is also added to use in the ValidationSummary component
+  // NOTE: The 'tasks' field is not included in the summary since the task id list is created on a different page
+  return {
+    translator: {
+      ...validateModerationTranslationRequestField("translator", requestDetail),
+      fieldLabel: i18n.t("moderation.translation.request.translator.label"),
+    },
+    translationLanguage: {
+      ...validateModerationTranslationRequestField("language", requestDetail),
+      fieldLabel: i18n.t("moderation.translation.request.translationLanguage.label"),
+    },
+    message: {
+      ...validateModerationTranslationRequestField("message", requestDetail),
+      fieldLabel: i18n.t("moderation.translation.request.message.label"),
+    },
+  };
 };
 
 export const isModerationTranslationRequestPageValid = (
