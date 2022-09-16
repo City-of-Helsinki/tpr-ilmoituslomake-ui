@@ -36,13 +36,18 @@ export const geocodeModerationAddress = async (
   router: NextRouter,
   street: string,
   postOffice: string,
+  language: string,
   dispatch: Dispatch<ModerationAction>
 ): Promise<void> => {
   // The Helsinki API does not use postal code
-  const input = `${street.trim()} ${postOffice.trim()}`;
-  const language = router.locale === "sv" ? "sv" : "fi";
+  // 16.9.2022 - The Helsinki API seems to have changed and municipality no longer works in the input field
+  // const input = `${street.trim()} ${postOffice.trim()}`;
+  // const language = router.locale === "sv" ? "sv" : "fi";
 
-  const geocodeResponse = await fetch(`${getOrigin(router)}${SEARCH_URL}&type=address&input=${input.trim()}&language=${language}`);
+  // const geocodeResponse = await fetch(`${getOrigin(router)}${SEARCH_URL}&type=address&input=${input.trim()}&language=${language}`);
+  const geocodeResponse = await fetch(
+    `${getOrigin(router)}${SEARCH_URL}&type=address&input=${street.trim()}&municipality=${postOffice.trim()}&language=${language}`
+  );
   if (geocodeResponse.ok) {
     const geocodeResult = await geocodeResponse.json();
 
@@ -68,9 +73,15 @@ export const geocodeModerationAddress = async (
   }
 };
 
-export const searchModerationAddress = (router: NextRouter, street: string, postOffice: string, dispatch: Dispatch<ModerationAction>): void => {
+export const searchModerationAddress = (
+  router: NextRouter,
+  street: string,
+  postOffice: string,
+  language: string,
+  dispatch: Dispatch<ModerationAction>
+): void => {
   if (street.length > 0 && postOffice.length > 0) {
     // The Helsinki API does not use postal code
-    geocodeModerationAddress(router, street, postOffice, dispatch);
+    geocodeModerationAddress(router, street, postOffice, language, dispatch);
   }
 };

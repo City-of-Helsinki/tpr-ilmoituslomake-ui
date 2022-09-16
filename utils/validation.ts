@@ -210,12 +210,13 @@ export const validateWholeAddress = (language: string, notification: Notificatio
   const { addressFound } = notificationExtra;
 
   // Check that the street and postal code match, but not the municipality since it is not language-specific
+  // 16.9.2022 - The Helsinki API seems to have changed and postal codes are no longer returned in the results
   const valid =
     !!addressFound &&
     (language === "sv"
       ? sv.street.toLowerCase().startsWith(addressFound.street.toLowerCase())
-      : fi.street.toLowerCase().startsWith(addressFound.street.toLowerCase())) &&
-    (language === "sv" ? sv.postal_code === addressFound.postalCode : fi.postal_code === addressFound.postalCode);
+      : fi.street.toLowerCase().startsWith(addressFound.street.toLowerCase()));
+  // && (language === "sv" ? sv.postal_code === addressFound.postalCode : fi.postal_code === addressFound.postalCode);
 
   const result = { valid, message: undefined };
   return result;
