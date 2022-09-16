@@ -39,10 +39,14 @@ export const geocodeModerationAddress = async (
   dispatch: Dispatch<ModerationAction>
 ): Promise<void> => {
   // The Helsinki API does not use postal code
-  const input = `${street.trim()} ${postOffice.trim()}`;
   const language = router.locale === "sv" ? "sv" : "fi";
+  // 16.9.2022 - The Helsinki API seems to have changed and municipality no longer works in the input field
+  // const input = `${street.trim()} ${postOffice.trim()}`;
 
-  const geocodeResponse = await fetch(`${getOrigin(router)}${SEARCH_URL}&type=address&input=${input.trim()}&language=${language}`);
+  // const geocodeResponse = await fetch(`${getOrigin(router)}${SEARCH_URL}&type=address&input=${input.trim()}&language=${language}`);
+  const geocodeResponse = await fetch(
+    `${getOrigin(router)}${SEARCH_URL}&type=address&input=${street.trim()}&municipality=${postOffice.trim()}&language=${language}`
+  );
   if (geocodeResponse.ok) {
     const geocodeResult = await geocodeResponse.json();
 
