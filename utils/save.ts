@@ -10,18 +10,22 @@ import { NotificationSchema } from "../types/notification_schema";
 // import { getDisplayName } from "./helper";
 // import { defaultLocale } from "./i18n";
 import getOrigin from "./request";
+import getTrimmedNotification from "./trim";
 import validateNotificationData, { isTipPageValid } from "./validation";
 
 export const saveNotification = async (
   currentUser: User | undefined,
   notificationId: number,
-  notification: NotificationSchema,
+  notificationBeforeTrim: NotificationSchema,
   notificationExtra: NotificationExtra,
   router: NextRouter,
   dispatch: Dispatch<NotificationAction>,
   setToast?: Dispatch<SetStateAction<Toast | undefined>>
 ): Promise<void> => {
   try {
+    // Trim all fields to avoid validation errors due to whitespace
+    const notification = getTrimmedNotification(notificationBeforeTrim);
+
     // Validate using an empty opening_times object for now until the Hauki development is ready
     const valid = validateNotificationData({ ...notification, opening_times: {} });
 
