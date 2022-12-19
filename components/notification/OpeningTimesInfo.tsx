@@ -46,7 +46,7 @@ const OpeningTimesInfo = (): ReactElement => {
         const key = `openingtime_${index}_${rowIndex}`;
 
         return (
-          <div key={key} className={`${styles.resultRow}`}>
+          <div key={key} className={styles.resultRow}>
             {openingTimeRow}
           </div>
         );
@@ -59,7 +59,7 @@ const OpeningTimesInfo = (): ReactElement => {
   ) : (
     <div className={`formSection ${styles.openingTimes}`}>
       <h2>{i18n.t("notification.opening.title")}</h2>
-      <div className={`${styles.results}`}>{renderOpeningTimes(router.locale || defaultLocale)}</div>
+      <div className={styles.results}>{renderOpeningTimes(router.locale || defaultLocale)}</div>
     </div>
   );
 };
