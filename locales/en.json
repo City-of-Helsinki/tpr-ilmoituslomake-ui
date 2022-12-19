@@ -29,14 +29,46 @@
       "sv": "in Swedish",
       "en": "in English"
     },
-    "weekDay": {
-      "1": "Monday",
-      "2": "Tuesday",
-      "3": "Wednesday",
-      "4": "Thursday",
-      "5": "Friday",
-      "6": "Saturday",
-      "7": "Sunday"
+    "openingTimes": {
+      "openingHours": "Opening hours",
+      "closed": "Closed",
+      "everyDay": "Every day",
+      "wholeDay": "The whole day",
+      "datePeriod": "Date period",
+      "notSpecified": "Not specified",
+      "validForNow": "Valid for the time being",
+      "weekDayLong": {
+        "1": "Monday",
+        "2": "Tuesday",
+        "3": "Wednesday",
+        "4": "Thursday",
+        "5": "Friday",
+        "6": "Saturday",
+        "7": "Sunday"
+      },
+      "weekDayShort": {
+        "1": "Mon",
+        "2": "Tue",
+        "3": "Wed",
+        "4": "Thu",
+        "5": "Fri",
+        "6": "Sat",
+        "7": "Sun"
+      },
+      "month": {
+        "1": "January",
+        "2": "February",
+        "3": "March",
+        "4": "April",
+        "5": "May",
+        "6": "June",
+        "7": "July",
+        "8": "August",
+        "9": "September",
+        "10": "October",
+        "11": "November",
+        "12": "December"
+      }
     },
     "opensInANewTab": "Opens in a new tab.",
     "opensExternal": "Moves to another site.",
