@@ -3,9 +3,8 @@ import { useSelector } from "react-redux";
 import { GetServerSideProps } from "next";
 import Head from "next/head";
 import { useI18n } from "next-localization";
-// import { IconCheckCircleFill, IconClockPlus, Koros, Link as HdsLink } from "hds-react";
-import { IconCheckCircleFill } from "hds-react";
-// import { Dialog } from "@material-ui/core";
+import { IconCheckCircleFill, IconClockPlus, Koros, Link as HdsLink } from "hds-react";
+import { Dialog } from "@material-ui/core";
 import { RootState } from "../../state/reducers";
 import { initStore } from "../../state/store";
 import { NotifierType, CLEAR_STATE, SENT_INFO_PAGE, Toast } from "../../types/constants";
@@ -28,8 +27,8 @@ import Location from "../../components/notification/Location";
 import Map from "../../components/notification/Map";
 import NotificationNotice from "../../components/common/NotificationNotice";
 import Notifier from "../../components/notification/Notifier";
-// import Opening from "../../components/notification/Opening";
-// import OpeningTimesButton from "../../components/notification/OpeningTimesButton";
+import Opening from "../../components/notification/Opening";
+import OpeningTimesButton from "../../components/notification/OpeningTimesButton";
 import Photos from "../../components/notification/Photos";
 import Preview from "../../components/notification/Preview";
 import SentInfoHeader from "../../components/notification/SentInfoHeader";
@@ -48,14 +47,11 @@ const NotificationDetail = (): ReactElement => {
   const ref = useRef<HTMLHeadingElement>(null);
 
   const [toast, setToast] = useState<Toast>();
-  // NOTE: temporarily removed until external opening times application is ready
-  /*
   const [modalOpen, setModalOpen] = useState(true);
 
   const closeModal = () => {
     setModalOpen(false);
   };
-  */
 
   useEffect(() => {
     if (ref.current) {
@@ -113,9 +109,7 @@ const NotificationDetail = (): ReactElement => {
           <h2 tabIndex={-1}>{`${currentPage} ${i18n.t("notification.main.send")}`}</h2>
           {toast && <ToastNotification prefix="notification" toast={toast} setToast={setToast} />}
           <NotificationNotice messageKey="notification.comments.notice" />
-          {/* NOTE: temporarily removed until external opening times application is ready
           <Opening />
-          */}
           <Comments />
           <Terms />
           <h3>{i18n.t("notification.preview.title")}</h3>
@@ -136,7 +130,6 @@ const NotificationDetail = (): ReactElement => {
             messageKey="notification.message.saveSucceeded.message"
             focusOnTitle
           />
-          {/* NOTE: temporarily removed until external opening times application is ready
           <Notice
             className={styles.opening}
             icon={<IconClockPlus size="xl" aria-hidden />}
@@ -144,13 +137,11 @@ const NotificationDetail = (): ReactElement => {
             messageKey="notification.message.completeOpeningTimes.message"
             button={<OpeningTimesButton buttonTextKey="notification.button.notifyOpeningTimes" buttonVariant="secondary" />}
           />
-          */}
 
           <InfoFooter isEditingAllowed={false} />
           <Preview titleKey="notification.preview.title" />
           <InfoFooter isEditingAllowed={false} />
 
-          {/* NOTE: temporarily removed until external opening times application is ready
           <Dialog open={modalOpen} onClose={closeModal} aria-labelledby="modal-dialog-title" aria-describedby="modal-dialog-description">
             <div className={styles.dialog}>
               <h1 id="modal-dialog-title">{i18n.t("notification.message.sentModal.title")}</h1>
@@ -173,7 +164,6 @@ const NotificationDetail = (): ReactElement => {
             </div>
             <Koros className={styles.wave} type="storm" />
           </Dialog>
-          */}
         </main>
       )}
     </Layout>

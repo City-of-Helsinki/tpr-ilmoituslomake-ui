@@ -9,7 +9,6 @@ import { setNotificationName, setNotificationShortDescription, setNotificationLo
 import { RootState } from "../../state/reducers";
 import { LANGUAGE_OPTIONS, MAX_LENGTH, MAX_LENGTH_LONG_DESC, MAX_LENGTH_SHORT_DESC } from "../../types/constants";
 import { isNameValid, isShortDescriptionValid, isLongDescriptionValid } from "../../utils/validation";
-import Opening from "./Opening";
 
 // Note: The input language selector has an attribute that uses a media query which does not work when server-side rendering
 const DynamicInputLanguage = dynamic(() => import("./InputLanguage"), { ssr: false });
@@ -159,9 +158,6 @@ const Description = (): ReactElement => {
           ) : null;
         })}
       </div>
-
-      {/* NOTE: temporarily added Opening here with temporary notice until external opening times application is ready */}
-      <Opening temporaryNotice />
     </div>
   );
 };
