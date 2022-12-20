@@ -10,7 +10,7 @@ import { setModerationTaskResults } from "../../state/actions/moderation";
 import { RootState } from "../../state/reducers";
 import { DATETIME_FORMAT, TaskStatus, TaskType } from "../../types/constants";
 import { ModerationTodoResult } from "../../types/general";
-import { getTaskStatus, getTaskType } from "../../utils/conversion";
+import { getTaskItemTypeFromType, getTaskStatus, getTaskType } from "../../utils/conversion";
 import { getDisplayName } from "../../utils/helper";
 import { defaultLocale } from "../../utils/i18n";
 import TaskStatusLabel from "../common/TaskStatusLabel";
@@ -28,7 +28,7 @@ const TaskResults = ({ showStatus }: TaskResultsProps): ReactElement => {
   const taskResults = useSelector((state: RootState) => state.moderation.taskResults);
   const { results, count, next } = taskResults;
   const taskSearch = useSelector((state: RootState) => state.moderation.taskSearch);
-  const { searchDone } = taskSearch;
+  const { searchDone, taskType: searchTaskType } = taskSearch;
 
   const fetchMoreResults = async () => {
     if (next) {
@@ -46,15 +46,20 @@ const TaskResults = ({ showStatus }: TaskResultsProps): ReactElement => {
             setModerationTaskResults({
               results: [
                 ...results,
-                ...moreResults.map((result) => {
-                  return {
-                    ...result,
-                    created: moment(result.created_at).toDate(),
-                    updated: moment(result.updated_at).toDate(),
-                    taskType: getTaskType(result.category, result.item_type),
-                    taskStatus: getTaskStatus(result.status),
-                  };
-                }),
+                ...moreResults
+                  .filter((result) => {
+                    const searchItemType = searchTaskType !== TaskType.Unknown ? getTaskItemTypeFromType(searchTaskType) : "";
+                    return searchItemType.length === 0 || searchItemType === result.item_type;
+                  })
+                  .map((result) => {
+                    return {
+                      ...result,
+                      created: moment(result.created_at).toDate(),
+                      updated: moment(result.updated_at).toDate(),
+                      taskType: getTaskType(result.category, result.item_type),
+                      taskStatus: getTaskStatus(result.status),
+                    };
+                  }),
               ],
               count,
               next: nextBatch,
