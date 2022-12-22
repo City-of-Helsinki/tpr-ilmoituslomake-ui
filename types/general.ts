@@ -166,20 +166,19 @@ export interface NotificationTargetIdName {
   };
 }
 
-export interface OpeningTime {
-  date: string;
-  times: [
-    {
-      name: string;
-      description: string;
-      start_time: string;
-      end_time: string;
-      end_time_on_next_day: boolean;
-      resource_state: string;
-      full_day: boolean;
-      periods: number[];
-    }
-  ];
+export interface OpeningTimeResult {
+  date_periods_as_text: {
+    fi: string;
+    sv: string;
+    en: string;
+    [key: string]: string;
+  };
+}
+
+export interface OpeningTimeResults {
+  results: OpeningTimeResult[];
+  count: number;
+  next?: string;
 }
 
 export interface TranslationTaskSearch {
