@@ -9,9 +9,10 @@ import { getOpeningTimesLink } from "../../utils/save";
 interface OpeningTimesButtonProps {
   buttonTextKey: string;
   buttonVariant: "primary" | "secondary";
+  closeModal?: () => void;
 }
 
-const OpeningTimesButton = ({ buttonTextKey, buttonVariant }: OpeningTimesButtonProps): ReactElement => {
+const OpeningTimesButton = ({ buttonTextKey, buttonVariant, closeModal }: OpeningTimesButtonProps): ReactElement => {
   const i18n = useI18n();
   const router = useRouter();
 
@@ -34,6 +35,10 @@ const OpeningTimesButton = ({ buttonTextKey, buttonVariant }: OpeningTimesButton
       const url = openingTimeUrl.replace(/"/g, "");
       if (url.indexOf("http") === 0) {
         window.open(url, "_blank");
+      }
+
+      if (closeModal) {
+        closeModal();
       }
     }
   };

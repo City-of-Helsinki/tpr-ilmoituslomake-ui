@@ -149,7 +149,7 @@ const NotificationDetail = (): ReactElement => {
                 {i18n.t("notification.message.sentModal.message")}
               </div>
               <div>
-                <OpeningTimesButton buttonTextKey="notification.button.continueToOpeningTimes" buttonVariant="primary" />
+                <OpeningTimesButton buttonTextKey="notification.button.continueToOpeningTimes" buttonVariant="primary" closeModal={closeModal} />
               </div>
               <div className={styles.link}>
                 <HdsLink href="#" size="M" disableVisitedStyles onClick={closeModal}>
