@@ -57,9 +57,6 @@ const initialState: NotificationState = {
   notificationId: 0,
   notification: { ...INITIAL_NOTIFICATION, location: [0, 0] },
   notificationExtra: { ...INITIAL_NOTIFICATION_EXTRA, locationOriginal: [0, 0] },
-  openingTimesId: 0,
-  openingTimesNotificationId: 0,
-  isNew: false,
 };
 
 const notification = (state: NotificationState | undefined, action: AnyAction): NotificationState => {
@@ -312,9 +309,6 @@ const notification = (state: NotificationState | undefined, action: AnyAction): 
         notificationId: action.payload.notificationId,
         notification: action.payload.notification,
         notificationExtra: action.payload.notificationExtra,
-        openingTimesId: action.payload.openingTimesId,
-        openingTimesNotificationId: action.payload.openingTimesNotificationId,
-        isNew: action.payload.isNew,
       };
     }
 

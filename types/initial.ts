@@ -90,6 +90,9 @@ export const INITIAL_NOTIFICATION_EXTRA: NotificationExtra = {
       post_office: "",
     },
   },
+  openingTimesId: 0,
+  openingTimesNotificationId: 0,
+  isNew: false,
 };
 
 export const INITIAL_NOTIFICATION_VALIDATION: NotificationValidationSchema = {

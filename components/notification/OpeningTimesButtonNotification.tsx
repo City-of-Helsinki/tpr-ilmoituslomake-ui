@@ -12,9 +12,9 @@ interface OpeningTimesButtonNotificationProps {
 const OpeningTimesButtonNotification = ({ buttonTextKey, buttonVariant, closeModal }: OpeningTimesButtonNotificationProps): ReactElement => {
   const notificationId = useSelector((state: RootState) => state.notification.notificationId);
   const notification = useSelector((state: RootState) => state.notification.notification);
-  const openingTimesId = useSelector((state: RootState) => state.notification.openingTimesId);
-  const openingTimesNotificationId = useSelector((state: RootState) => state.notification.openingTimesNotificationId);
-  const isNew = useSelector((state: RootState) => state.notification.isNew);
+
+  const notificationExtra = useSelector((state: RootState) => state.notification.notificationExtra);
+  const { openingTimesId, openingTimesNotificationId, isNew } = notificationExtra;
 
   return (
     <OpeningTimesButton

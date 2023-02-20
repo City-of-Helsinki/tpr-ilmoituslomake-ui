@@ -136,6 +136,9 @@ export interface NotificationExtra {
     };
   };
   addressFound?: AddressSearchResult;
+  openingTimesId: number;
+  openingTimesNotificationId: number;
+  isNew: boolean;
 }
 
 export interface NotificationPlaceSearch {

@@ -98,14 +98,12 @@ export const saveNotification = async (
                 preview: image.url,
               };
             }),
+            openingTimesId: notificationResult.hauki_id,
+            openingTimesNotificationId: notificationId <= 0 ? notificationResult.id : notificationId,
+            isNew: notificationId <= 0,
           } as NotificationExtra;
-          const openingTimesId = notificationResult.hauki_id;
-          const isNew = notificationId <= 0;
-          const openingTimesNotificationId = isNew ? notificationResult.id : notificationId;
 
-          dispatch(
-            setSentNotification(notificationResult.id, sentNotification, sentNotificationExtra, openingTimesId, openingTimesNotificationId, isNew)
-          );
+          dispatch(setSentNotification(notificationResult.id, sentNotification, sentNotificationExtra));
           dispatch(setPage(SENT_INFO_PAGE));
         } else if (setToast) {
           setToast(Toast.SaveFailed);
