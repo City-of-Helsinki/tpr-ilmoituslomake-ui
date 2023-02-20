@@ -250,8 +250,8 @@ export const getServerSideProps: GetServerSideProps = async ({ req, resolvedUrl,
                 preview: image.url,
               };
             }),
+            openingTimesId: targetResult.hauki_id,
           },
-          openingTimesId: targetResult.hauki_id,
         };
 
         initialReduxState.notificationValidation = {

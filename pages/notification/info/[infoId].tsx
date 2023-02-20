@@ -117,8 +117,8 @@ export const getServerSideProps: GetServerSideProps = async ({ req, params, loca
                 preview: image.url,
               };
             }),
+            openingTimesId: targetResult.hauki_id,
           },
-          openingTimesId: targetResult.hauki_id,
         };
       } catch (err) {
         console.log("ERROR", err);

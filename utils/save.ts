@@ -184,9 +184,10 @@ export const saveTip = async (
 };
 
 export const getOpeningTimesLink = async (
-  notificationId: number,
+  notificationId: number, // Notification id of the saved form
   notification: NotificationSchema,
-  openingTimesId: number,
+  placeId: number, // Published id if available
+  openingTimesId: number, // Hauki id
   isNew: boolean,
   router: NextRouter
 ): Promise<string | undefined> => {
@@ -222,18 +223,19 @@ export const getOpeningTimesLink = async (
         en: streetFi.length > 0 ? `${streetFi}, ${postalCodeFi} ${postOfficeFi}` : "",
       },
       resource_type: "unit",
-      origins: [
-        {
-          data_source: {
-            id: "kaupunkialusta",
-          },
-          origin_id: notificationId,
-        },
-      ],
+      // origins: [
+      //   {
+      //     data_source: {
+      //       id: "kaupunkialusta",
+      //     },
+      //     origin_id: notificationId,
+      //   },
+      // ],
       is_public: true,
       timezone: "Europe/Helsinki",
       hauki_id: openingTimesId,
       published: !isNew,
+      published_id: placeId,
     };
 
     console.log("SENDING", postData);
