@@ -23,6 +23,7 @@ import DescriptionModeration from "../../../components/moderation/DescriptionMod
 import LinksModeration from "../../../components/moderation/LinksModeration";
 import LocationModeration from "../../../components/moderation/LocationModeration";
 import MapModeration from "../../../components/moderation/MapModeration";
+import OpeningTimesModeration from "../../../components/moderation/OpeningTimesModeration";
 import PhotosModeration from "../../../components/moderation/PhotosModeration";
 import TagsModeration from "../../../components/moderation/TagsModeration";
 
@@ -91,6 +92,10 @@ const ModerationTaskDetail = (): ReactElement => {
 
         return moderated.every((mod) => mod);
       }
+      case 4: {
+        // Opening times
+        return isModerated(moderationStatus.openingTimes);
+      }
       default: {
         return true;
       }
@@ -138,7 +143,19 @@ const ModerationTaskDetail = (): ReactElement => {
           >
             <PhotosModeration />
           </Collapsible>
-          <TaskHeaderButtons isModerated={isSectionModerated(1) && isSectionModerated(2) && isSectionModerated(3)} setToast={setToast} />
+          <Collapsible
+            section={4}
+            title={i18n.t("moderation.task.openingTimes")}
+            taskType={taskType}
+            taskStatus={taskStatus}
+            isModerated={isSectionModerated(4)}
+          >
+            <OpeningTimesModeration />
+          </Collapsible>
+          <TaskHeaderButtons
+            isModerated={isSectionModerated(1) && isSectionModerated(2) && isSectionModerated(3) && isSectionModerated(4)}
+            setToast={setToast}
+          />
         </main>
       )}
     </Layout>
@@ -191,7 +208,7 @@ export const getServerSideProps: GetServerSideProps = async ({ req, resolvedUrl,
           user: lastUpdatedUser,
           updated_at: lastUpdatedTime,
         } = taskResult.target || { id: 0, data: INITIAL_NOTIFICATION };
-        const { data: imageData } = taskResult.notification_target || { id: 0, data: INITIAL_NOTIFICATION };
+        const { id: notificationId, data: imageData, hauki_id: haukiId } = taskResult.notification_target || { id: 0, data: INITIAL_NOTIFICATION };
         const modifiedTask = !taskResult.data || !taskResult.data.name ? targetData : (taskResult.data as NotificationSchema);
 
         // Make a list of all unique image uuids
@@ -230,6 +247,8 @@ export const getServerSideProps: GetServerSideProps = async ({ req, resolvedUrl,
               fullName: lastUpdatedUser ? `${lastUpdatedUser.first_name} ${lastUpdatedUser.last_name}`.trim() : "",
               updated_at: lastUpdatedTime || "",
             },
+            openingTimesId: haukiId,
+            openingTimesNotificationId: notificationId,
             extraKeywordsTextSelected: {
               fi: targetData.extra_keywords.fi.join(", "),
               sv: targetData.extra_keywords.sv.join(", "),

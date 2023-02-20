@@ -69,4 +69,5 @@ export interface ModerationStatusSchema {
     [key: string]: ModerationStatus;
   };
   photos: PhotoStatus[];
+  openingTimes: ModerationStatus;
 }

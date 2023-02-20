@@ -15,6 +15,7 @@ import {
   SET_MODERATION_PHOTO_STATUS,
   SET_MODERATION_PHOTO_ALT_TEXT_STATUS,
   REMOVE_MODERATION_PHOTO_STATUS,
+  SET_MODERATION_OPENING_TIMES_STATUS,
 } from "../../types/constants";
 import { KeyValueStatus } from "../../types/general";
 import { PhotoStatus } from "../../types/moderation_status";
@@ -89,6 +90,11 @@ interface RemoveModerationPhotoStatusAction extends AnyAction {
   payload: number;
 }
 
+interface SetModerationOpeningTimesStatusAction extends AnyAction {
+  type: typeof SET_MODERATION_OPENING_TIMES_STATUS;
+  payload: ModerationStatus;
+}
+
 export type ModerationStatusAction =
   | SetPageStatusAction
   | SetModerationNameStatusAction
@@ -103,4 +109,5 @@ export type ModerationStatusAction =
   | SetModerationLinkStatusAction
   | SetModerationPhotoStatusAction
   | SetModerationPhotoAltTextStatusAction
-  | RemoveModerationPhotoStatusAction;
+  | RemoveModerationPhotoStatusAction
+  | SetModerationOpeningTimesStatusAction;

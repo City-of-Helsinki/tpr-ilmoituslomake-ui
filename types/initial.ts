@@ -232,6 +232,8 @@ export const INITIAL_MODERATION_EXTRA: ModerationExtra = {
     fullName: "",
     updated_at: "",
   },
+  openingTimesId: 0,
+  openingTimesNotificationId: 0,
 };
 
 const getInitialModerationStatus = (moderationStatus: ModerationStatus): ModerationStatusSchema => {
@@ -286,6 +288,7 @@ const getInitialModerationStatus = (moderationStatus: ModerationStatus): Moderat
       en: moderationStatus,
     },
     photos: [],
+    openingTimes: moderationStatus,
   };
 };
 

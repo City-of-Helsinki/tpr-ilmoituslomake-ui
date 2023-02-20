@@ -16,6 +16,7 @@ import {
   SET_MODERATION_PHOTO_STATUS,
   SET_MODERATION_PHOTO_ALT_TEXT_STATUS,
   REMOVE_MODERATION_PHOTO_STATUS,
+  SET_MODERATION_OPENING_TIMES_STATUS,
 } from "../../types/constants";
 import { PhotoStatus } from "../../types/moderation_status";
 import { INITIAL_MODERATION_STATUS } from "../../types/initial";
@@ -199,6 +200,17 @@ const moderationStatus = (state: ModerationStatusState | undefined, action: AnyA
       return {
         ...state,
         moderationStatus: { ...state.moderationStatus, photos },
+      };
+    }
+
+    case SET_MODERATION_OPENING_TIMES_STATUS: {
+      console.log("SET_MODERATION_OPENING_TIMES_STATUS", action.payload);
+      return {
+        ...state,
+        moderationStatus: {
+          ...state.moderationStatus,
+          openingTimes: action.payload,
+        },
       };
     }
 

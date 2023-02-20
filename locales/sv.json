@@ -703,6 +703,7 @@
       "remove": "Poista",
       "toggleMenu": "Vaihdele valikko",
       "selectFromDevice": "Valitse laitteelta",
+      "modifyOpeningTimes": "Muokkaa aukioloaikoja",
       "sendTranslationRequest": "Lähetä käännöspyyntö",
       "cancelTranslationRequest": "Peru käännöspyyntö",
       "cancelTranslationRequests": "Peru valitut pyynnöt",
@@ -844,6 +845,9 @@
     "newTasks": {
       "title": "Uudet ilmoitukset"
     },
+    "openingTimes": {
+      "title": "Aukioloajat"
+    },
     "organisationNotice": {
       "title": "Organisaatiohallinta",
       "manageOrganisation": "Hallinoi organisaatiota"
@@ -938,6 +942,7 @@
       "basic": "Perustiedot",
       "contact": "Yhteystiedot",
       "photos": "Kuvat",
+      "openingTimes": "Aukioloajat",
       "selected": " - tietokannassa",
       "modified": " - muutos"
     },
