@@ -1,0 +1,11 @@
+@import "~hds-design-tokens/lib/all.scss";
+@import "../../styles/mixins";
+
+.openingTimesResults {
+  display: flex;
+  flex-direction: column;
+
+  .resultRow {
+    padding: $spacing-4-xs 0;
+  }
+}

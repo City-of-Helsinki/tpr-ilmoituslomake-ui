@@ -4,9 +4,8 @@ import { useRouter } from "next/router";
 import { useI18n } from "next-localization";
 import { RootState } from "../../state/reducers";
 import { OpeningTimeResult, OpeningTimeResults } from "../../types/general";
-import { parseOpeningTimesText } from "../../utils/helper";
-import { defaultLocale } from "../../utils/i18n";
 import getOrigin from "../../utils/request";
+import OpeningTimesText from "../common/OpeningTimesText";
 import styles from "./OpeningTimesInfo.module.scss";
 
 const OpeningTimesInfo = (): ReactElement => {
@@ -34,32 +33,12 @@ const OpeningTimesInfo = (): ReactElement => {
   const useMountEffect = (fun: () => void) => useEffect(fun, []);
   useMountEffect(getOpeningTimesOnMount);
 
-  const renderOpeningTimes = (locale: string) => {
-    if (!openingTimes) return;
-
-    return openingTimes.map((openingTime, index) => {
-      if (!openingTime.date_periods_as_text) return;
-
-      const openingTimeRows = parseOpeningTimesText(openingTime.date_periods_as_text[locale], i18n, router);
-
-      return openingTimeRows.map((openingTimeRow, rowIndex) => {
-        const key = `openingtime_${index}_${rowIndex}`;
-
-        return (
-          <div key={key} className={styles.resultRow}>
-            {openingTimeRow}
-          </div>
-        );
-      });
-    });
-  };
-
   return !openingTimes || openingTimes.length === 0 ? (
     <></>
   ) : (
     <div className={`formSection ${styles.openingTimes}`}>
       <h2>{i18n.t("notification.opening.title")}</h2>
-      <div className={styles.results}>{renderOpeningTimes(router.locale || defaultLocale)}</div>
+      <OpeningTimesText className={styles.results} openingTimes={openingTimes} />
     </div>
   );
 };

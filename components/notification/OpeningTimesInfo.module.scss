@@ -3,11 +3,6 @@
 
 .openingTimes {
   .results {
-    display: flex;
-    flex-direction: column;
-
-    .resultRow {
-      padding: $spacing-4-xs $spacing-xs;
-    }
+    padding: 0 $spacing-xs;
   }
 }
