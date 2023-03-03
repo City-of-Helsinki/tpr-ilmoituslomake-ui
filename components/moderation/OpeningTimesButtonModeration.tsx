@@ -11,7 +11,6 @@ interface OpeningTimesButtonModerationProps {
 
 const OpeningTimesButtonModeration = ({ buttonTextKey, buttonVariant }: OpeningTimesButtonModerationProps): ReactElement => {
   const selectedTaskId = useSelector((state: RootState) => state.moderation.selectedTaskId);
-  const modifiedTask = useSelector((state: RootState) => state.moderation.modifiedTask);
 
   const moderationExtra = useSelector((state: RootState) => state.moderation.moderationExtra);
   const { openingTimesId, openingTimesNotificationId, published, taskStatus } = moderationExtra;
@@ -21,7 +20,6 @@ const OpeningTimesButtonModeration = ({ buttonTextKey, buttonVariant }: OpeningT
       buttonTextKey={buttonTextKey}
       buttonVariant={buttonVariant}
       notificationId={openingTimesNotificationId}
-      notification={modifiedTask}
       placeId={selectedTaskId}
       openingTimesId={openingTimesId}
       isNew={!published}

@@ -57,7 +57,7 @@ const OpeningTimesModeration = (): ReactElement => {
 
   const getOpeningTimesOnMount = async () => {
     const placeId = String(selectedTaskId);
-    const draftId = `draft-${selectedTaskId}`;
+    const draftId = `ilmoitus-${openingTimesNotificationId}`;
 
     const selectedTimes = (await fetchOpeningTimes(placeId)) || [];
     const modifiedTimes = (await fetchOpeningTimes(draftId)) || [];

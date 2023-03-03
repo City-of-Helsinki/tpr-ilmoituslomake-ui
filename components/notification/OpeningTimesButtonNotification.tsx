@@ -11,7 +11,6 @@ interface OpeningTimesButtonNotificationProps {
 
 const OpeningTimesButtonNotification = ({ buttonTextKey, buttonVariant, closeModal }: OpeningTimesButtonNotificationProps): ReactElement => {
   const notificationId = useSelector((state: RootState) => state.notification.notificationId);
-  const notification = useSelector((state: RootState) => state.notification.notification);
 
   const notificationExtra = useSelector((state: RootState) => state.notification.notificationExtra);
   const { openingTimesId, openingTimesNotificationId, isNew } = notificationExtra;
@@ -22,7 +21,6 @@ const OpeningTimesButtonNotification = ({ buttonTextKey, buttonVariant, closeMod
       buttonVariant={buttonVariant}
       closeModal={closeModal}
       notificationId={notificationId}
-      notification={notification}
       placeId={openingTimesNotificationId}
       openingTimesId={openingTimesId}
       isNew={isNew}

@@ -2,7 +2,6 @@ import React, { ReactElement } from "react";
 import { useRouter } from "next/router";
 import { useI18n } from "next-localization";
 import { Button, IconLinkExternal } from "hds-react";
-import { NotificationSchema } from "../../types/notification_schema";
 import { getOpeningTimesLink } from "../../utils/save";
 
 interface OpeningTimesButtonProps {
@@ -11,7 +10,6 @@ interface OpeningTimesButtonProps {
   disabled?: boolean;
   closeModal?: () => void;
   notificationId: number;
-  notification: NotificationSchema;
   placeId: number;
   openingTimesId: number;
   isNew: boolean;
@@ -23,7 +21,6 @@ const OpeningTimesButton = ({
   disabled,
   closeModal,
   notificationId,
-  notification,
   placeId,
   openingTimesId,
   isNew,
@@ -32,7 +29,7 @@ const OpeningTimesButton = ({
   const router = useRouter();
 
   const openExternalOpeningTimesApp = async () => {
-    const openingTimeUrl = await getOpeningTimesLink(notificationId, notification, placeId, openingTimesId, isNew, router);
+    const openingTimeUrl = await getOpeningTimesLink(notificationId, placeId, openingTimesId, isNew, router);
     if (openingTimeUrl) {
       // Trim any quotes and check if it's a valid url
       const url = openingTimeUrl.replace(/"/g, "");
