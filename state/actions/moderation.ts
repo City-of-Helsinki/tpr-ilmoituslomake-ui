@@ -18,6 +18,7 @@ import {
   SET_MODERATION_LINK,
   SET_MODERATION_PHOTO,
   REMOVE_MODERATION_PHOTO,
+  SET_MODERATION_OPENING_TIMES_ID,
 } from "../../types/constants";
 import { ModerationAction } from "./moderationTypes";
 import {
@@ -124,4 +125,9 @@ export const setModerationPhoto = (index: number, value: Photo): ModerationActio
 export const removeModerationPhoto = (index: number): ModerationAction => ({
   type: REMOVE_MODERATION_PHOTO,
   payload: index,
+});
+
+export const setModerationOpeningTimesId = (openingTimesId: number): ModerationAction => ({
+  type: SET_MODERATION_OPENING_TIMES_ID,
+  payload: openingTimesId,
 });

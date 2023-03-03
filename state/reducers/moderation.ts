@@ -21,6 +21,7 @@ import {
   SET_MODERATION_LINK,
   SET_MODERATION_PHOTO,
   REMOVE_MODERATION_PHOTO,
+  SET_MODERATION_OPENING_TIMES_ID,
 } from "../../types/constants";
 import { Photo } from "../../types/general";
 import { INITIAL_MODERATION_EXTRA, INITIAL_NOTIFICATION } from "../../types/initial";
@@ -275,6 +276,14 @@ const moderation = (state: ModerationState | undefined, action: AnyAction): Mode
       return {
         ...state,
         moderationExtra: { ...state.moderationExtra, photosUuids, photosSelected, photosModified },
+      };
+    }
+
+    case SET_MODERATION_OPENING_TIMES_ID: {
+      console.log("SET_MODERATION_OPENING_TIMES_ID", action.payload);
+      return {
+        ...state,
+        moderationExtra: { ...state.moderationExtra, openingTimesId: action.payload },
       };
     }
 

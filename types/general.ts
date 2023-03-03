@@ -176,6 +176,9 @@ export interface OpeningTimeResult {
     en: string;
     [key: string]: string;
   };
+  resource: {
+    id: number;
+  };
 }
 
 export interface OpeningTimeResults {

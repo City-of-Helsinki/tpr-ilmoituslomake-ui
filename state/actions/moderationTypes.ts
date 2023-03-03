@@ -19,6 +19,7 @@ import {
   SET_MODERATION_LINK,
   SET_MODERATION_PHOTO,
   REMOVE_MODERATION_PHOTO,
+  SET_MODERATION_OPENING_TIMES_ID,
 } from "../../types/constants";
 import {
   KeyValueString,
@@ -126,6 +127,11 @@ interface RemoveModerationPhotoAction extends AnyAction {
   payload: number;
 }
 
+interface SetModerationOpeningTimesId extends AnyAction {
+  type: typeof SET_MODERATION_OPENING_TIMES_ID;
+  payload: number;
+}
+
 export type ModerationAction =
   | SetModerationPlaceSearchAction
   | ClearModerationPlaceSearchAction
@@ -145,4 +151,5 @@ export type ModerationAction =
   | SetModerationContactAction
   | SetModerationLinkAction
   | SetModerationPhotoAction
-  | RemoveModerationPhotoAction;
+  | RemoveModerationPhotoAction
+  | SetModerationOpeningTimesId;

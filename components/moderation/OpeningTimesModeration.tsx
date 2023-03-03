@@ -2,7 +2,9 @@ import React, { Dispatch, ReactElement, useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useRouter } from "next/router";
 import { useI18n } from "next-localization";
+import { ModerationAction } from "../../state/actions/moderationTypes";
 import { ModerationStatusAction } from "../../state/actions/moderationStatusTypes";
+import { setModerationOpeningTimesId } from "../../state/actions/moderation";
 import { setModerationOpeningTimesStatus } from "../../state/actions/moderationStatus";
 import { RootState } from "../../state/reducers";
 import { ModerationStatus, TaskType } from "../../types/constants";
@@ -16,6 +18,7 @@ import styles from "./OpeningTimesModeration.module.scss";
 const OpeningTimesModeration = (): ReactElement => {
   const i18n = useI18n();
   const router = useRouter();
+  const dispatch = useDispatch<Dispatch<ModerationAction>>();
   const dispatchStatus = useDispatch<Dispatch<ModerationStatusAction>>();
 
   const selectedTaskId = useSelector((state: RootState) => state.moderation.selectedTaskId);
@@ -42,6 +45,14 @@ const OpeningTimesModeration = (): ReactElement => {
 
   const updateOpeningTimesStatus = (fieldName: string, status: ModerationStatus) => {
     dispatchStatus(setModerationOpeningTimesStatus(status));
+
+    // Only store the hauki id if approved so that backend knows the status
+    if (status === ModerationStatus.Approved) {
+      const haukiId = openingTimesModified.length > 0 ? openingTimesModified[0].resource.id : 0;
+      dispatch(setModerationOpeningTimesId(haukiId));
+    } else {
+      dispatch(setModerationOpeningTimesId(0));
+    }
   };
 
   const fetchOpeningTimes = async (taskId: string) => {
@@ -85,6 +96,11 @@ const OpeningTimesModeration = (): ReactElement => {
     ) {
       // Enable the opening times to be edited by default
       updateOpeningTimesStatus("", initialStatus);
+    }
+
+    if (initialStatus === ModerationStatus.Approved) {
+      const haukiId = modifiedTimes.length > 0 ? modifiedTimes[0].resource.id : 0;
+      dispatch(setModerationOpeningTimesId(haukiId));
     }
   };
 
