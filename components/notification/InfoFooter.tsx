@@ -4,7 +4,6 @@ import Link from "next/link";
 import { useI18n } from "next-localization";
 import { Button } from "hds-react";
 import { RootState } from "../../state/reducers";
-import OpeningTimesButtonNotification from "./OpeningTimesButtonNotification";
 import styles from "./InfoFooter.module.scss";
 
 interface InfoFooterProps {
@@ -31,11 +30,6 @@ const InfoFooter = ({ isEditingAllowed }: InfoFooterProps): ReactElement => {
           <Link href={`/tip/${notificationId}`}>
             <Button variant="secondary">{i18n.t("notification.button.suggestChange")}</Button>
           </Link>
-        </div>
-      )}
-      {isEditingAllowed && (
-        <div className={styles.flexButton}>
-          <OpeningTimesButtonNotification buttonTextKey="notification.button.modifyOpeningTimes" buttonVariant="secondary" />
         </div>
       )}
       {isEditingAllowed && (
