@@ -8,7 +8,11 @@ import getOrigin from "../../utils/request";
 import OpeningTimesText from "../common/OpeningTimesText";
 import styles from "./OpeningTimesInfo.module.scss";
 
-const OpeningTimesInfo = (): ReactElement => {
+interface OpeningTimesInfoProps {
+  isDraft?: boolean;
+}
+
+const OpeningTimesInfo = ({ isDraft }: OpeningTimesInfoProps): ReactElement => {
   const i18n = useI18n();
   const router = useRouter();
 
@@ -19,6 +23,9 @@ const OpeningTimesInfo = (): ReactElement => {
 
   const getOpeningTimesOnMount = async () => {
     const openingTimesResponse = await fetch(`${getOrigin(router)}/api/openingtimes/get/${notificationId}/`);
+    const openingTimesIdToFetch = isDraft ? `ilmoitus-${notificationId}` : notificationId;
+
+    const openingTimesResponse = await fetch(`${getOrigin(router)}/api/openingtimes/get/${openingTimesIdToFetch}/`);
     if (openingTimesResponse.ok) {
       const openingTimesResults = await (openingTimesResponse.json() as Promise<OpeningTimeResults>);
 

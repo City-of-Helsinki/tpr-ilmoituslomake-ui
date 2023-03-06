@@ -29,6 +29,7 @@ import NotificationNotice from "../../components/common/NotificationNotice";
 import Notifier from "../../components/notification/Notifier";
 import Opening from "../../components/notification/Opening";
 import OpeningTimesButtonNotification from "../../components/notification/OpeningTimesButtonNotification";
+import OpeningTimesInfo from "../../components/notification/OpeningTimesInfo";
 import Photos from "../../components/notification/Photos";
 import Preview from "../../components/notification/Preview";
 import SentInfoHeader from "../../components/notification/SentInfoHeader";
@@ -140,6 +141,7 @@ const NotificationDetail = (): ReactElement => {
 
           <InfoFooter isEditingAllowed={false} />
           <Preview titleKey="notification.preview.title" />
+          <OpeningTimesInfo isDraft />
           <InfoFooter isEditingAllowed={false} />
 
           <Dialog open={modalOpen} onClose={closeModal} aria-labelledby="modal-dialog-title" aria-describedby="modal-dialog-description">
