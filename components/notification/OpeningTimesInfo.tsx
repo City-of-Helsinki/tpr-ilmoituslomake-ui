@@ -9,10 +9,11 @@ import OpeningTimesText from "../common/OpeningTimesText";
 import styles from "./OpeningTimesInfo.module.scss";
 
 interface OpeningTimesInfoProps {
-  isDraft?: boolean;
+  isPlaceInfo?: boolean;
+  openModal?: () => void;
 }
 
-const OpeningTimesInfo = ({ isDraft }: OpeningTimesInfoProps): ReactElement => {
+const OpeningTimesInfo = ({ isPlaceInfo, openModal }: OpeningTimesInfoProps): ReactElement => {
   const i18n = useI18n();
   const router = useRouter();
 
@@ -22,8 +23,7 @@ const OpeningTimesInfo = ({ isDraft }: OpeningTimesInfoProps): ReactElement => {
   // const openingTimesId = useSelector((state: RootState) => state.notification.openingTimesId);
 
   const getOpeningTimesOnMount = async () => {
-    const openingTimesResponse = await fetch(`${getOrigin(router)}/api/openingtimes/get/${notificationId}/`);
-    const openingTimesIdToFetch = isDraft ? `ilmoitus-${notificationId}` : notificationId;
+    const openingTimesIdToFetch = !isPlaceInfo ? `ilmoitus-${notificationId}` : notificationId;
 
     const openingTimesResponse = await fetch(`${getOrigin(router)}/api/openingtimes/get/${openingTimesIdToFetch}/`);
     if (openingTimesResponse.ok) {
@@ -31,7 +31,13 @@ const OpeningTimesInfo = ({ isDraft }: OpeningTimesInfoProps): ReactElement => {
 
       console.log("OPENING TIMES RESPONSE", openingTimesResults);
 
-      setOpeningTimes(openingTimesResults.results || []);
+      const openingTimesResult = openingTimesResults.results || [];
+      setOpeningTimes(openingTimesResult);
+
+      if (openingTimesResult.length === 0 && openModal) {
+        // No opening times yet, so prompt the user to enter them
+        openModal();
+      }
     }
   };
 
@@ -44,10 +50,16 @@ const OpeningTimesInfo = ({ isDraft }: OpeningTimesInfoProps): ReactElement => {
     <></>
   ) : (
     <div className={`formSection ${styles.openingTimes}`}>
-      <h2>{i18n.t("notification.opening.title")}</h2>
+      {isPlaceInfo && <h2>{i18n.t("notification.opening.title")}</h2>}
+      {!isPlaceInfo && <h3>{i18n.t("notification.opening.title")}</h3>}
       <OpeningTimesText className={styles.results} openingTimes={openingTimes} />
     </div>
   );
+};
+
+OpeningTimesInfo.defaultProps = {
+  isPlaceInfo: false,
+  openModal: undefined,
 };
 
 export default OpeningTimesInfo;

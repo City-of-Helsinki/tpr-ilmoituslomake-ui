@@ -48,7 +48,11 @@ const NotificationDetail = (): ReactElement => {
   const ref = useRef<HTMLHeadingElement>(null);
 
   const [toast, setToast] = useState<Toast>();
-  const [modalOpen, setModalOpen] = useState(true);
+  const [modalOpen, setModalOpen] = useState(false);
+
+  const openModal = () => {
+    setModalOpen(true);
+  };
 
   const closeModal = () => {
     setModalOpen(false);
@@ -140,8 +144,8 @@ const NotificationDetail = (): ReactElement => {
           />
 
           <InfoFooter isEditingAllowed={false} />
+          <OpeningTimesInfo openModal={openModal} />
           <Preview titleKey="notification.preview.title" />
-          <OpeningTimesInfo isDraft />
           <InfoFooter isEditingAllowed={false} />
 
           <Dialog open={modalOpen} onClose={closeModal} aria-labelledby="modal-dialog-title" aria-describedby="modal-dialog-description">
@@ -253,6 +257,7 @@ export const getServerSideProps: GetServerSideProps = async ({ req, resolvedUrl,
               };
             }),
             openingTimesId: targetResult.hauki_id,
+            openingTimesNotificationId: targetResult.id,
           },
         };
 
