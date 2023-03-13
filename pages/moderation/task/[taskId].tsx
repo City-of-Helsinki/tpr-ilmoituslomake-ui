@@ -208,7 +208,11 @@ export const getServerSideProps: GetServerSideProps = async ({ req, resolvedUrl,
           user: lastUpdatedUser,
           updated_at: lastUpdatedTime,
         } = taskResult.target || { id: 0, data: INITIAL_NOTIFICATION };
-        const { id: notificationId, data: imageData, hauki_id: haukiId } = taskResult.notification_target || { id: 0, data: INITIAL_NOTIFICATION };
+        const {
+          id: notificationId,
+          data: imageData,
+          hauki_id: haukiId,
+        } = taskResult.notification_target || { id: 0, data: INITIAL_NOTIFICATION, hauki_id: 0 };
         const modifiedTask = !taskResult.data || !taskResult.data.name ? targetData : (taskResult.data as NotificationSchema);
 
         // Make a list of all unique image uuids

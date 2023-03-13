@@ -44,7 +44,12 @@ const OpeningTimesButton = ({
   };
 
   return (
-    <Button variant={buttonVariant} iconRight={<IconLinkExternal aria-hidden />} onClick={openExternalOpeningTimesApp} disabled={disabled}>
+    <Button
+      variant={buttonVariant}
+      iconRight={<IconLinkExternal aria-hidden />}
+      onClick={openExternalOpeningTimesApp}
+      disabled={disabled || notificationId <= 0}
+    >
       {i18n.t(buttonTextKey)}
       <span className="screenReaderOnly"> {i18n.t("common.opensInANewTab")}</span>
     </Button>
