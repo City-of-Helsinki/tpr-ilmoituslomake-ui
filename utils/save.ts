@@ -190,6 +190,11 @@ export const getOpeningTimesLink = async (
   isNew: boolean,
   router: NextRouter
 ): Promise<string | undefined> => {
+  if (notificationId <= 0 && placeId <= 0) {
+    // An opening times link cannot be fetched without a notification id or place id
+    return;
+  }
+
   try {
     // Send the Cross Site Request Forgery token, otherwise the backend returns the error "CSRF Failed: CSRF token missing or incorrect."
     const csrftoken = Cookies.get("csrftoken");

@@ -21,6 +21,7 @@ import DescriptionModeration from "../../../components/moderation/DescriptionMod
 import LinksModeration from "../../../components/moderation/LinksModeration";
 import LocationModeration from "../../../components/moderation/LocationModeration";
 import MapModeration from "../../../components/moderation/MapModeration";
+import OpeningTimesModeration from "../../../components/moderation/OpeningTimesModeration";
 import PhotosModeration from "../../../components/moderation/PhotosModeration";
 import TagsModeration from "../../../components/moderation/TagsModeration";
 
@@ -55,6 +56,9 @@ const ModerationPlaceDetail = (): ReactElement => {
           </Collapsible>
           <Collapsible section={3} title={i18n.t("moderation.task.photos")} taskType={taskType} taskStatus={taskStatus}>
             <PhotosModeration />
+          </Collapsible>
+          <Collapsible section={4} title={i18n.t("moderation.task.openingTimes")} taskType={taskType} taskStatus={taskStatus}>
+            <OpeningTimesModeration />
           </Collapsible>
           <TaskHeaderButtons setToast={setToast} />
         </main>

@@ -47,7 +47,15 @@ const OpeningTimesModeration = (): ReactElement => {
     dispatchStatus(setModerationOpeningTimesStatus(status));
 
     // Only store the hauki id if approved so that backend knows the status
-    if (status === ModerationStatus.Approved) {
+    // Also don't set the hauki id for change requests and moderator edits, since there are no draft opening times in this case
+    if (
+      taskType === TaskType.ChangeTip ||
+      taskType === TaskType.AddTip ||
+      taskType === TaskType.ModeratorChange ||
+      taskType === TaskType.ModeratorAdd
+    ) {
+      dispatch(setModerationOpeningTimesId(0));
+    } else if (status === ModerationStatus.Approved) {
       const haukiId = openingTimesModified.length > 0 ? openingTimesModified[0].resource.id : 0;
       dispatch(setModerationOpeningTimesId(haukiId));
     } else {
@@ -68,7 +76,10 @@ const OpeningTimesModeration = (): ReactElement => {
 
   const getOpeningTimesOnMount = async () => {
     const placeId = String(selectedTaskId);
-    const draftId = `ilmoitus-${openingTimesNotificationId}`;
+    const draftId =
+      taskType === TaskType.ChangeTip || taskType === TaskType.AddTip || taskType === TaskType.ModeratorChange || taskType === TaskType.ModeratorAdd
+        ? `${selectedTaskId}`
+        : `ilmoitus-${openingTimesNotificationId}`;
 
     const selectedTimes = (await fetchOpeningTimes(placeId)) || [];
     const modifiedTimes = (await fetchOpeningTimes(draftId)) || [];
@@ -79,7 +90,7 @@ const OpeningTimesModeration = (): ReactElement => {
     // For tip change requests about new places, enable the opening times to be edited by default
     let initialStatus = openingTimesStatus;
     if (openingTimesStatus === ModerationStatus.Unknown) {
-      if (isOpeningTimesChanged(selectedTimes, modifiedTimes) || taskType === TaskType.AddTip || taskType === TaskType.ModeratorAdd) {
+      if (isOpeningTimesChanged(selectedTimes, modifiedTimes)) {
         initialStatus = ModerationStatus.Edited;
       } else {
         initialStatus = ModerationStatus.Approved;
@@ -109,32 +120,66 @@ const OpeningTimesModeration = (): ReactElement => {
   const useMountEffect = (fun: () => void) => useEffect(fun, []);
   useMountEffect(getOpeningTimesOnMount);
 
-  return (
-    <div className="formSection">
-      <div className="gridLayoutContainer moderation">
-        <h4 className={`${styles.gridSelected} moderation`}>{`${i18n.t("moderation.openingTimes.title")}${i18n.t("moderation.task.selected")}`}</h4>
-        <h4 className={`${styles.gridModified} moderation`}>{`${i18n.t("moderation.openingTimes.title")}${i18n.t("moderation.task.modified")}`}</h4>
+  if (taskType === TaskType.RemoveTip || taskType === TaskType.ModeratorRemove || taskType === TaskType.PlaceInfo) {
+    return (
+      <div className="formSection">
+        <div className="gridLayoutContainer moderation">
+          {openingTimesStatus !== ModerationStatus.Edited && (
+            <h4 className={`${styles.gridSelected} moderation`}>{`${i18n.t("moderation.openingTimes.title")}${i18n.t(
+              "moderation.task.selected"
+            )}`}</h4>
+          )}
+          {openingTimesStatus === ModerationStatus.Edited && (
+            <h4 className={`${styles.gridModified} moderation`}>{`${i18n.t("moderation.openingTimes.title")}${i18n.t(
+              "moderation.task.modified"
+            )}`}</h4>
+          )}
 
-        <div className={styles.gridSelected}>
-          <OpeningTimesText openingTimes={openingTimesSelected} />
-        </div>
-        <div className={styles.gridModified}>
-          <OpeningTimesText openingTimes={openingTimesModified} />
-        </div>
-        <ActionButton
-          className={styles.gridActionButton}
-          fieldName="openingTimes"
-          moderationStatus={openingTimesStatus}
-          taskStatus={taskStatus}
-          actionCallback={updateOpeningTimesStatus}
-        />
-
-        <div className={styles.gridModified}>
-          <OpeningTimesButtonModeration buttonTextKey="moderation.button.modifyOpeningTimes" buttonVariant="secondary" />
+          <div className={styles.gridSelected}>
+            <OpeningTimesText openingTimes={openingTimesSelected} />
+          </div>
         </div>
       </div>
-    </div>
-  );
+    );
+  }
+
+  if (
+    taskType === TaskType.NewPlace ||
+    taskType === TaskType.PlaceChange ||
+    taskType === TaskType.ChangeTip ||
+    taskType === TaskType.AddTip ||
+    taskType === TaskType.ModeratorChange ||
+    taskType === TaskType.ModeratorAdd
+  ) {
+    return (
+      <div className="formSection">
+        <div className="gridLayoutContainer moderation">
+          <h4 className={`${styles.gridSelected} moderation`}>{`${i18n.t("moderation.openingTimes.title")}${i18n.t("moderation.task.selected")}`}</h4>
+          <h4 className={`${styles.gridModified} moderation`}>{`${i18n.t("moderation.openingTimes.title")}${i18n.t("moderation.task.modified")}`}</h4>
+
+          <div className={styles.gridSelected}>
+            <OpeningTimesText openingTimes={openingTimesSelected} />
+          </div>
+          <div className={styles.gridModified}>
+            <OpeningTimesText openingTimes={openingTimesModified} />
+          </div>
+          <ActionButton
+            className={styles.gridActionButton}
+            fieldName="openingTimes"
+            moderationStatus={openingTimesStatus}
+            taskStatus={taskStatus}
+            actionCallback={updateOpeningTimesStatus}
+          />
+
+          <div className={styles.gridModified}>
+            <OpeningTimesButtonModeration buttonTextKey="moderation.button.modifyOpeningTimes" buttonVariant="secondary" />
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  return <></>;
 };
 
 export default OpeningTimesModeration;

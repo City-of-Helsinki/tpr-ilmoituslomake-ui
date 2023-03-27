@@ -21,7 +21,7 @@ const OpeningTimesButtonNotification = ({ buttonTextKey, buttonVariant, closeMod
       buttonVariant={buttonVariant}
       closeModal={closeModal}
       notificationId={notificationId}
-      placeId={openingTimesNotificationId}
+      placeId={isNew ? 0 : openingTimesNotificationId}
       openingTimesId={openingTimesId}
       isNew={isNew}
     />
