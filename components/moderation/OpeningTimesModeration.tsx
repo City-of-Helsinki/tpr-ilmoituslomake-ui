@@ -24,7 +24,7 @@ const OpeningTimesModeration = (): ReactElement => {
   const selectedTaskId = useSelector((state: RootState) => state.moderation.selectedTaskId);
 
   const moderationExtra = useSelector((state: RootState) => state.moderation.moderationExtra);
-  const { taskType, taskStatus, openingTimesId, openingTimesNotificationId } = moderationExtra;
+  const { taskType, taskStatus, openingTimesNotificationId } = moderationExtra;
 
   const moderationStatus = useSelector((state: RootState) => state.moderationStatus.moderationStatus);
   const { openingTimes: openingTimesStatus } = moderationStatus;
@@ -87,7 +87,6 @@ const OpeningTimesModeration = (): ReactElement => {
     setOpeningTimesModified(modifiedTimes);
 
     // Enable the modified opening times to be edited by default if they are different from the selected opening times
-    // For tip change requests about new places, enable the opening times to be edited by default
     let initialStatus = openingTimesStatus;
     if (openingTimesStatus === ModerationStatus.Unknown) {
       if (isOpeningTimesChanged(selectedTimes, modifiedTimes)) {
