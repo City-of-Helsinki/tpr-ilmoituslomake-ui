@@ -42,7 +42,7 @@ const Info = (): ReactElement => {
 
           <InfoFooter />
           <Preview titleKey="notification.preview.placeInfo" isPlaceInfo />
-          <OpeningTimesInfo />
+          <OpeningTimesInfo isPlaceInfo />
           <InfoFooter />
         </main>
       )}
@@ -117,8 +117,9 @@ export const getServerSideProps: GetServerSideProps = async ({ req, params, loca
                 preview: image.url,
               };
             }),
+            openingTimesId: targetResult.hauki_id,
+            openingTimesNotificationId: targetResult.id,
           },
-          openingTimesId: targetResult.hauki_id,
         };
       } catch (err) {
         console.log("ERROR", err);

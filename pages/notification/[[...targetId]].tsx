@@ -28,7 +28,8 @@ import Map from "../../components/notification/Map";
 import NotificationNotice from "../../components/common/NotificationNotice";
 import Notifier from "../../components/notification/Notifier";
 import Opening from "../../components/notification/Opening";
-import OpeningTimesButton from "../../components/notification/OpeningTimesButton";
+import OpeningTimesButtonNotification from "../../components/notification/OpeningTimesButtonNotification";
+import OpeningTimesInfo from "../../components/notification/OpeningTimesInfo";
 import Photos from "../../components/notification/Photos";
 import Preview from "../../components/notification/Preview";
 import SentInfoHeader from "../../components/notification/SentInfoHeader";
@@ -47,7 +48,11 @@ const NotificationDetail = (): ReactElement => {
   const ref = useRef<HTMLHeadingElement>(null);
 
   const [toast, setToast] = useState<Toast>();
-  const [modalOpen, setModalOpen] = useState(true);
+  const [modalOpen, setModalOpen] = useState(false);
+
+  const openModal = () => {
+    setModalOpen(true);
+  };
 
   const closeModal = () => {
     setModalOpen(false);
@@ -135,10 +140,11 @@ const NotificationDetail = (): ReactElement => {
             icon={<IconClockPlus size="xl" aria-hidden />}
             titleKey="notification.message.completeOpeningTimes.title"
             messageKey="notification.message.completeOpeningTimes.message"
-            button={<OpeningTimesButton buttonTextKey="notification.button.notifyOpeningTimes" buttonVariant="secondary" />}
+            button={<OpeningTimesButtonNotification buttonTextKey="notification.button.notifyOpeningTimes" buttonVariant="secondary" />}
           />
 
           <InfoFooter isEditingAllowed={false} />
+          <OpeningTimesInfo openModal={openModal} />
           <Preview titleKey="notification.preview.title" />
           <InfoFooter isEditingAllowed={false} />
 
@@ -149,7 +155,11 @@ const NotificationDetail = (): ReactElement => {
                 {i18n.t("notification.message.sentModal.message")}
               </div>
               <div>
-                <OpeningTimesButton buttonTextKey="notification.button.continueToOpeningTimes" buttonVariant="primary" closeModal={closeModal} />
+                <OpeningTimesButtonNotification
+                  buttonTextKey="notification.button.continueToOpeningTimes"
+                  buttonVariant="primary"
+                  closeModal={closeModal}
+                />
               </div>
               <div className={styles.link}>
                 <HdsLink href="#" size="M" disableVisitedStyles onClick={closeModal}>
@@ -246,8 +256,9 @@ export const getServerSideProps: GetServerSideProps = async ({ req, resolvedUrl,
                 preview: image.url,
               };
             }),
+            openingTimesId: targetResult.hauki_id,
+            openingTimesNotificationId: targetResult.id,
           },
-          openingTimesId: targetResult.hauki_id,
         };
 
         initialReduxState.notificationValidation = {

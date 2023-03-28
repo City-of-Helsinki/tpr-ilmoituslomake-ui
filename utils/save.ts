@@ -98,14 +98,12 @@ export const saveNotification = async (
                 preview: image.url,
               };
             }),
+            openingTimesId: notificationResult.hauki_id,
+            openingTimesNotificationId: notificationId <= 0 ? notificationResult.id : notificationId,
+            isNew: notificationId <= 0,
           } as NotificationExtra;
-          const openingTimesId = notificationResult.hauki_id;
-          const isNew = notificationId <= 0;
-          const openingTimesNotificationId = isNew ? notificationResult.id : notificationId;
 
-          dispatch(
-            setSentNotification(notificationResult.id, sentNotification, sentNotificationExtra, openingTimesId, openingTimesNotificationId, isNew)
-          );
+          dispatch(setSentNotification(notificationResult.id, sentNotification, sentNotificationExtra));
           dispatch(setPage(SENT_INFO_PAGE));
         } else if (setToast) {
           setToast(Toast.SaveFailed);
@@ -186,56 +184,25 @@ export const saveTip = async (
 };
 
 export const getOpeningTimesLink = async (
-  notificationId: number,
-  notification: NotificationSchema,
-  openingTimesId: number,
+  notificationId: number, // Notification id of the saved form
+  placeId: number, // Published id if available
+  openingTimesId: number, // Hauki id
   isNew: boolean,
   router: NextRouter
 ): Promise<string | undefined> => {
+  if (notificationId <= 0 && placeId <= 0) {
+    // An opening times link cannot be fetched without a notification id or place id
+    return;
+  }
+
   try {
     // Send the Cross Site Request Forgery token, otherwise the backend returns the error "CSRF Failed: CSRF token missing or incorrect."
     const csrftoken = Cookies.get("csrftoken");
 
-    const {
-      name: { fi: nameFi, sv: nameSv, en: nameEn },
-      description: {
-        short: { fi: shortDescFi, sv: shortDescSv, en: shortDescEn },
-      },
-      address: {
-        fi: { street: streetFi, postal_code: postalCodeFi, post_office: postOfficeFi },
-        sv: { street: streetSv, postal_code: postalCodeSv, post_office: postOfficeSv },
-      },
-    } = notification;
-
     const postData = {
-      name: {
-        fi: nameFi,
-        sv: nameSv,
-        en: nameEn,
-      },
-      description: {
-        fi: shortDescFi,
-        sv: shortDescSv,
-        en: shortDescEn,
-      },
-      address: {
-        fi: streetFi.length > 0 ? `${streetFi}, ${postalCodeFi} ${postOfficeFi}` : "",
-        sv: streetSv.length > 0 ? `${streetSv}, ${postalCodeSv} ${postOfficeSv}` : "",
-        en: streetFi.length > 0 ? `${streetFi}, ${postalCodeFi} ${postOfficeFi}` : "",
-      },
-      resource_type: "unit",
-      origins: [
-        {
-          data_source: {
-            id: "kaupunkialusta",
-          },
-          origin_id: notificationId,
-        },
-      ],
-      is_public: true,
-      timezone: "Europe/Helsinki",
       hauki_id: openingTimesId,
       published: !isNew,
+      published_id: placeId,
     };
 
     console.log("SENDING", postData);

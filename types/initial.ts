@@ -90,6 +90,9 @@ export const INITIAL_NOTIFICATION_EXTRA: NotificationExtra = {
       post_office: "",
     },
   },
+  openingTimesId: 0,
+  openingTimesNotificationId: 0,
+  isNew: false,
 };
 
 export const INITIAL_NOTIFICATION_VALIDATION: NotificationValidationSchema = {
@@ -229,6 +232,8 @@ export const INITIAL_MODERATION_EXTRA: ModerationExtra = {
     fullName: "",
     updated_at: "",
   },
+  openingTimesId: 0,
+  openingTimesNotificationId: 0,
 };
 
 const getInitialModerationStatus = (moderationStatus: ModerationStatus): ModerationStatusSchema => {
@@ -283,6 +288,7 @@ const getInitialModerationStatus = (moderationStatus: ModerationStatus): Moderat
       en: moderationStatus,
     },
     photos: [],
+    openingTimes: moderationStatus,
   };
 };
 

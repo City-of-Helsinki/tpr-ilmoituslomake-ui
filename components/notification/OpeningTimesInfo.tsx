@@ -4,12 +4,16 @@ import { useRouter } from "next/router";
 import { useI18n } from "next-localization";
 import { RootState } from "../../state/reducers";
 import { OpeningTimeResult, OpeningTimeResults } from "../../types/general";
-import { parseOpeningTimesText } from "../../utils/helper";
-import { defaultLocale } from "../../utils/i18n";
 import getOrigin from "../../utils/request";
+import OpeningTimesText from "../common/OpeningTimesText";
 import styles from "./OpeningTimesInfo.module.scss";
 
-const OpeningTimesInfo = (): ReactElement => {
+interface OpeningTimesInfoProps {
+  isPlaceInfo?: boolean;
+  openModal?: () => void;
+}
+
+const OpeningTimesInfo = ({ isPlaceInfo, openModal }: OpeningTimesInfoProps): ReactElement => {
   const i18n = useI18n();
   const router = useRouter();
 
@@ -19,13 +23,21 @@ const OpeningTimesInfo = (): ReactElement => {
   // const openingTimesId = useSelector((state: RootState) => state.notification.openingTimesId);
 
   const getOpeningTimesOnMount = async () => {
-    const openingTimesResponse = await fetch(`${getOrigin(router)}/api/openingtimes/get/${notificationId}/`);
+    const openingTimesIdToFetch = !isPlaceInfo ? `ilmoitus-${notificationId}` : notificationId;
+
+    const openingTimesResponse = await fetch(`${getOrigin(router)}/api/openingtimes/get/${openingTimesIdToFetch}/`);
     if (openingTimesResponse.ok) {
       const openingTimesResults = await (openingTimesResponse.json() as Promise<OpeningTimeResults>);
 
       console.log("OPENING TIMES RESPONSE", openingTimesResults);
 
-      setOpeningTimes(openingTimesResults.results || []);
+      const openingTimesResult = openingTimesResults.results || [];
+      setOpeningTimes(openingTimesResult);
+
+      if (openingTimesResult.length === 0 && openModal) {
+        // No opening times yet, so prompt the user to enter them
+        openModal();
+      }
     }
   };
 
@@ -34,34 +46,20 @@ const OpeningTimesInfo = (): ReactElement => {
   const useMountEffect = (fun: () => void) => useEffect(fun, []);
   useMountEffect(getOpeningTimesOnMount);
 
-  const renderOpeningTimes = (locale: string) => {
-    if (!openingTimes) return;
-
-    return openingTimes.map((openingTime, index) => {
-      if (!openingTime.date_periods_as_text) return;
-
-      const openingTimeRows = parseOpeningTimesText(openingTime.date_periods_as_text[locale], i18n, router);
-
-      return openingTimeRows.map((openingTimeRow, rowIndex) => {
-        const key = `openingtime_${index}_${rowIndex}`;
-
-        return (
-          <div key={key} className={styles.resultRow}>
-            {openingTimeRow}
-          </div>
-        );
-      });
-    });
-  };
-
   return !openingTimes || openingTimes.length === 0 ? (
     <></>
   ) : (
     <div className={`formSection ${styles.openingTimes}`}>
-      <h2>{i18n.t("notification.opening.title")}</h2>
-      <div className={styles.results}>{renderOpeningTimes(router.locale || defaultLocale)}</div>
+      {isPlaceInfo && <h2>{i18n.t("notification.opening.title")}</h2>}
+      {!isPlaceInfo && <h3>{i18n.t("notification.opening.title")}</h3>}
+      <OpeningTimesText className={styles.results} openingTimes={openingTimes} />
     </div>
   );
+};
+
+OpeningTimesInfo.defaultProps = {
+  isPlaceInfo: false,
+  openModal: undefined,
 };
 
 export default OpeningTimesInfo;

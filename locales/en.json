@@ -108,7 +108,7 @@
       "modifyInformation": "Edit information",
       "suggestChange": "Suggest change",
       "modifyOpeningTimes": "Edit opening times",
-      "notifyOpeningTimes": "Notify about opening times",
+      "notifyOpeningTimes": "Check or edit opening times",
       "notifyClosingDown": "Notify about a location closing down",
       "notifyNewPlace": "Add new location",
       "giveTip": "Give a tip",
@@ -703,6 +703,7 @@
       "remove": "Poista",
       "toggleMenu": "Vaihdele valikko",
       "selectFromDevice": "Valitse laitteelta",
+      "modifyOpeningTimes": "Muokkaa aukioloaikoja",
       "sendTranslationRequest": "Lähetä käännöspyyntö",
       "cancelTranslationRequest": "Peru käännöspyyntö",
       "cancelTranslationRequests": "Peru valitut pyynnöt",
@@ -844,6 +845,9 @@
     "newTasks": {
       "title": "Uudet ilmoitukset"
     },
+    "openingTimes": {
+      "title": "Aukioloajat"
+    },
     "organisationNotice": {
       "title": "Organisaatiohallinta",
       "manageOrganisation": "Hallinoi organisaatiota"
@@ -938,6 +942,7 @@
       "basic": "Perustiedot",
       "contact": "Yhteystiedot",
       "photos": "Kuvat",
+      "openingTimes": "Aukioloajat",
       "selected": " - tietokannassa",
       "modified": " - muutos"
     },

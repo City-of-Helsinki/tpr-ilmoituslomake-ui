@@ -136,6 +136,9 @@ export interface NotificationExtra {
     };
   };
   addressFound?: AddressSearchResult;
+  openingTimesId: number;
+  openingTimesNotificationId: number;
+  isNew: boolean;
 }
 
 export interface NotificationPlaceSearch {
@@ -172,6 +175,9 @@ export interface OpeningTimeResult {
     sv: string;
     en: string;
     [key: string]: string;
+  };
+  resource: {
+    id: number;
   };
 }
 
@@ -401,6 +407,7 @@ export interface ModerationTodoSchema {
   notification_target: {
     id: number;
     data: NotificationSchema;
+    hauki_id: number;
   };
   category: string;
   item_type: string;
@@ -456,6 +463,8 @@ export interface ModerationExtra {
     fullName: string;
     updated_at: string;
   };
+  openingTimesId: number;
+  openingTimesNotificationId: number;
 }
 
 export interface ModerationTranslationRequestTaskSearch {

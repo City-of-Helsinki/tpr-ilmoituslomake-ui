@@ -28,7 +28,7 @@ const TaskHeaderButtons = ({ isModerated, setToast }: TaskHeaderButtonsProps): R
   const modifiedTask = useSelector((state: RootState) => state.moderation.modifiedTask);
 
   const moderationExtra = useSelector((state: RootState) => state.moderation.moderationExtra);
-  const { photosUuids, photosSelected, photosModified, taskType, taskStatus } = moderationExtra;
+  const { photosUuids, photosSelected, photosModified, taskType, taskStatus, openingTimesId } = moderationExtra;
   const moderationStatus = useSelector((state: RootState) => state.moderationStatus.moderationStatus);
   const { photos: photosStatus } = moderationStatus;
 
@@ -312,7 +312,7 @@ const TaskHeaderButtons = ({ isModerated, setToast }: TaskHeaderButtonsProps): R
             })
             .filter((photo) => !!photo.url && photo.url.length > 0);
 
-    approveModeration(currentUser, modifiedTaskId, approvedTask, approvedPhotos, moderationExtra, router, setToast);
+    approveModeration(currentUser, modifiedTaskId, approvedTask, approvedPhotos, openingTimesId, moderationExtra, router, setToast);
   };
 
   const rejectTask = () => {
