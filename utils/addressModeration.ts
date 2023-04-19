@@ -2,7 +2,7 @@ import { Dispatch } from "react";
 import { NextRouter } from "next/router";
 import { ModerationAction } from "../state/actions/moderationTypes";
 import { setModerationAddress, setModerationLocation } from "../state/actions/moderation";
-import getOrigin from "./request";
+// import getOrigin from "./request";
 import { NEIGHBOURHOOD_URL, SEARCH_URL } from "../types/constants";
 
 export const getModerationNeighborhood = async (
@@ -12,7 +12,8 @@ export const getModerationNeighborhood = async (
   dispatch: Dispatch<ModerationAction>
 ): Promise<void> => {
   // Fetch the neighbourhood for these coordinates
-  const neighbourhoodResponse = await fetch(`${getOrigin(router)}${NEIGHBOURHOOD_URL}&lon=${lon}&lat=${lat}`);
+  // const neighbourhoodResponse = await fetch(`${getOrigin(router)}${NEIGHBOURHOOD_URL}&lon=${lon}&lat=${lat}`);
+  const neighbourhoodResponse = await fetch(`${NEIGHBOURHOOD_URL}&lon=${lon}&lat=${lat}`);
   if (neighbourhoodResponse.ok) {
     const neighbourhoodResult = await neighbourhoodResponse.json();
 
@@ -45,9 +46,10 @@ export const geocodeModerationAddress = async (
   // const language = router.locale === "sv" ? "sv" : "fi";
 
   // const geocodeResponse = await fetch(`${getOrigin(router)}${SEARCH_URL}&type=address&input=${input.trim()}&language=${language}`);
-  const geocodeResponse = await fetch(
-    `${getOrigin(router)}${SEARCH_URL}&type=address&input=${street.trim()}&municipality=${postOffice.trim()}&language=${language}`
-  );
+  // const geocodeResponse = await fetch(
+  //   `${getOrigin(router)}${SEARCH_URL}&type=address&input=${street.trim()}&municipality=${postOffice.trim()}&language=${language}`
+  // );
+  const geocodeResponse = await fetch(`${SEARCH_URL}&type=address&input=${street.trim()}&municipality=${postOffice.trim()}&language=${language}`);
   if (geocodeResponse.ok) {
     const geocodeResult = await geocodeResponse.json();
 
