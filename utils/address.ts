@@ -7,12 +7,13 @@ import {
   setNotificationLocation,
   setNotificationOriginalLocation,
 } from "../state/actions/notification";
-import getOrigin from "./request";
+// import getOrigin from "./request";
 import { NEIGHBOURHOOD_URL, SEARCH_URL } from "../types/constants";
 
 export const getNeighborhood = async (router: NextRouter, lon: number, lat: number, dispatch: Dispatch<NotificationAction>): Promise<void> => {
   // Fetch the neighbourhood for these coordinates
-  const neighbourhoodResponse = await fetch(`${getOrigin(router)}${NEIGHBOURHOOD_URL}&lon=${lon}&lat=${lat}`);
+  // const neighbourhoodResponse = await fetch(`${getOrigin(router)}${NEIGHBOURHOOD_URL}&lon=${lon}&lat=${lat}`);
+  const neighbourhoodResponse = await fetch(`${NEIGHBOURHOOD_URL}&lon=${lon}&lat=${lat}`);
   if (neighbourhoodResponse.ok) {
     const neighbourhoodResult = await neighbourhoodResponse.json();
 
@@ -44,9 +45,10 @@ export const geocodeAddress = async (
   const language = router.locale === "sv" ? "sv" : "fi";
 
   // const geocodeResponse = await fetch(`${getOrigin(router)}${SEARCH_URL}&type=address&input=${input.trim()}&language=${language}`);
-  const geocodeResponse = await fetch(
-    `${getOrigin(router)}${SEARCH_URL}&type=address&input=${street.trim()}&municipality=${postOffice.trim()}&language=${language}`
-  );
+  // const geocodeResponse = await fetch(
+  //   `${getOrigin(router)}${SEARCH_URL}&type=address&input=${street.trim()}&municipality=${postOffice.trim()}&language=${language}`
+  // );
+  const geocodeResponse = await fetch(`${SEARCH_URL}&type=address&input=${street.trim()}&municipality=${postOffice.trim()}&language=${language}`);
   if (geocodeResponse.ok) {
     const geocodeResult = await geocodeResponse.json();
 
