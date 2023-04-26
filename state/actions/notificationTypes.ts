@@ -154,9 +154,6 @@ interface SetSentNotificationAction extends AnyAction {
     notificationId: number;
     notification: NotificationSchema;
     notificationExtra: NotificationExtra;
-    openingTimesId: number;
-    openingTimesNotificationId: number;
-    isNew: boolean;
   };
 }
 

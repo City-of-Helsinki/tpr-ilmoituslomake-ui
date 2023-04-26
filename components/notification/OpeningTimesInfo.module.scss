@@ -2,42 +2,7 @@
 @import "../../styles/mixins";
 
 .openingTimes {
-  .gridColumn1 {
-    grid-column: 1 / 1;
-
-    @include media(xs, s) {
-      grid-column: 1 / 1;
-    }
-  }
-
-  .gridColumn2 {
-    grid-column: 2 / 2;
-
-    @include media(xs, s) {
-      grid-column: 1 / 1;
-    }
-  }
-
   .results {
-    .gridHeader {
-      font-size: $fontsize-heading-s !important;
-      font-weight: 700;
-      background-color: $color-fog-light;
-      padding: $spacing-xs;
-      margin-top: $spacing-s;
-    }
-
-    .gridContent {
-      padding: $spacing-xs;
-
-      .weekday {
-        font-weight: 700;
-        margin-bottom: $spacing-s;
-      }
-
-      &:nth-child(2n + 1) {
-        background-color: $color-silver-light;
-      }
-    }
+    padding: 0 $spacing-xs;
   }
 }

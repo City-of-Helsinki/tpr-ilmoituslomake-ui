@@ -15,7 +15,7 @@ import { checkUser, getOriginServerSide, getPreviousInputLanguages, getTags } fr
 import Layout from "../../../components/common/Layout";
 import Header from "../../../components/common/Header";
 import Preview from "../../../components/notification/Preview";
-// import OpeningTimesInfo from "../../../components/notification/OpeningTimesInfo";
+import OpeningTimesInfo from "../../../components/notification/OpeningTimesInfo";
 import InfoFooter from "../../../components/notification/InfoFooter";
 import styles from "./[infoId].module.scss";
 
@@ -42,9 +42,7 @@ const Info = (): ReactElement => {
 
           <InfoFooter />
           <Preview titleKey="notification.preview.placeInfo" isPlaceInfo />
-          {/* NOTE: temporarily removed until external opening times application is ready
-          <OpeningTimesInfo />
-          */}
+          <OpeningTimesInfo isPlaceInfo />
           <InfoFooter />
         </main>
       )}
@@ -119,8 +117,9 @@ export const getServerSideProps: GetServerSideProps = async ({ req, params, loca
                 preview: image.url,
               };
             }),
+            openingTimesId: targetResult.hauki_id,
+            openingTimesNotificationId: targetResult.id,
           },
-          openingTimesId: targetResult.hauki_id,
         };
       } catch (err) {
         console.log("ERROR", err);

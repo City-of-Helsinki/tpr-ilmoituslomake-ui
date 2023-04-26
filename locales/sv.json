@@ -29,14 +29,46 @@
       "sv": "på svenska",
       "en": "på engelska"
     },
-    "weekDay": {
-      "1": "måndag",
-      "2": "tisdag",
-      "3": "onsdag",
-      "4": "torsdag",
-      "5": "fredag",
-      "6": "lördag",
-      "7": "söndag"
+    "openingTimes": {
+      "openingHours": "Öppettider",
+      "closed": "Stängt",
+      "everyDay": "Varje dag",
+      "wholeDay": "Hela dagen",
+      "datePeriod": "Öppethållningsperiod",
+      "notSpecified": "Ej fastställt",
+      "validForNow": "Gäller tills vidare",
+      "weekDayLong": {
+        "1": "Måndag",
+        "2": "Tisdag",
+        "3": "Onsdag",
+        "4": "Torsdag",
+        "5": "Fredag",
+        "6": "Lördag",
+        "7": "Söndag"
+      },
+      "weekDayShort": {
+        "1": "mån",
+        "2": "tis",
+        "3": "ons",
+        "4": "tor",
+        "5": "fre",
+        "6": "lör",
+        "7": "sun"
+      },
+      "month": {
+        "1": "januari",
+        "2": "februari",
+        "3": "mars",
+        "4": "april",
+        "5": "maj",
+        "6": "juni",
+        "7": "juli",
+        "8": "augusti",
+        "9": "september",
+        "10": "oktober",
+        "11": "november",
+        "12": "december"
+      }
     },
     "opensInANewTab": "Öppnar i ny flik.",
     "opensExternal": "Flyttar till en annan webbplats.",
@@ -76,7 +108,7 @@
       "modifyInformation": "Redigera information om stället",
       "suggestChange": "Föreslå förändring",
       "modifyOpeningTimes": "Ändra öppettider",
-      "notifyOpeningTimes": "Meddela öppettider",
+      "notifyOpeningTimes": "Kontrollera eller redigera öppettider",
       "notifyClosingDown": "Meddela att stället har lagt ner",
       "notifyNewPlace": "Lägg till ett nytt ställe",
       "giveTip": "Ge ett tips",
@@ -671,6 +703,7 @@
       "remove": "Poista",
       "toggleMenu": "Vaihdele valikko",
       "selectFromDevice": "Valitse laitteelta",
+      "modifyOpeningTimes": "Muokkaa aukioloaikoja",
       "sendTranslationRequest": "Lähetä käännöspyyntö",
       "cancelTranslationRequest": "Peru käännöspyyntö",
       "cancelTranslationRequests": "Peru valitut pyynnöt",
@@ -812,6 +845,9 @@
     "newTasks": {
       "title": "Uudet ilmoitukset"
     },
+    "openingTimes": {
+      "title": "Aukioloajat"
+    },
     "organisationNotice": {
       "title": "Organisaatiohallinta",
       "manageOrganisation": "Hallinoi organisaatiota"
@@ -906,6 +942,7 @@
       "basic": "Perustiedot",
       "contact": "Yhteystiedot",
       "photos": "Kuvat",
+      "openingTimes": "Aukioloajat",
       "selected": " - tietokannassa",
       "modified": " - muutos"
     },

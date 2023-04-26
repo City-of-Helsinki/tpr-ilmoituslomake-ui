@@ -16,6 +16,7 @@ export const approveModeration = async (
   modifiedTaskId: number,
   approvedTask: NotificationSchema,
   approvedPhotos: Photo[],
+  openingTimesId: number,
   moderationExtra: ModerationExtra,
   router: NextRouter,
   setToast: Dispatch<SetStateAction<Toast | undefined>>
@@ -53,7 +54,8 @@ export const approveModeration = async (
         }
       }
 
-      // Force opening_times to be an empty object for now until the Hauki development is ready
+      // Force opening_times to be an empty object for now
+      // The opening times id is a positive number if approved, or 0 if rejected
       const postData = {
         data: {
           ...approvedTask,
@@ -67,6 +69,7 @@ export const approveModeration = async (
           const { uuid, url, preview, base64 } = photo;
           return { index, uuid, url: photo.new ? url : preview, ...(photo.new && { base64 }) };
         }),
+        hauki_id: openingTimesId,
       };
 
       console.log("SENDING", postData);
