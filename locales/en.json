@@ -193,7 +193,8 @@
       },
       "sentModal": {
         "title": "Almost ready...",
-        "message": "Thank you, the location information has now been submitted for review. Continue by telling when your location is open to the public."
+        "message": "Thank you, the location information has now been submitted for review. Continue by telling when your location is open to the public.",
+        "message2": "Once your company's information has been checked and published, you will be notified by email. The email will also include a link to add accessibility information for your business."
       },
       "close": "Close message",
       "fieldRequired": "$fieldName is mandatory information",

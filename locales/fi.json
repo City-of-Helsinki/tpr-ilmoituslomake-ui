@@ -193,7 +193,8 @@
       },
       "sentModal": {
         "title": "Melkein valmista...",
-        "message": "Kiitos, kohteen tiedot on nyt lähetetty tarkistettavaksi. Jatka kertomalla, milloin kohteesi on avoinna yleisölle."
+        "message": "Kiitos, kohteen tiedot on nyt lähetetty tarkistettavaksi. Jatka kertomalla, milloin kohteesi on avoinna yleisölle.",
+        "message2": "Kun yrityksesi tiedot on tarkastettu ja julkaistu, saat tiedon tästä sähköpostilla. Sähköpostissa on myös linkki, jonka avulla voit lisätä yrityksesi esteettömyystiedot."
       },
       "close": "Sulje viesti",
       "fieldRequired": "$fieldName on pakollinen tieto",

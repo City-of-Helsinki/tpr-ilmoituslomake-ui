@@ -193,7 +193,8 @@
       },
       "sentModal": {
         "title": "Nästan färdigt...",
-        "message": "Tack, informationen om stället har nu skickats vidare för kontroll. Fortsätt med att anmäla när ditt ställe har öppet för allmänheten."
+        "message": "Tack, informationen om stället har nu skickats vidare för kontroll. Fortsätt med att anmäla när ditt ställe har öppet för allmänheten.",
+        "message2": "När ditt företags uppgifter har kontrollerats och publicerad får du ett meddelande om detta per e-post. Det finns också en länk i e-postmeddelandet som låter dig lägga till tillgänglighetsinformation för ditt företag."
       },
       "close": "Stäng meddelandet",
       "fieldRequired": "$fieldName är obligatorisk",
