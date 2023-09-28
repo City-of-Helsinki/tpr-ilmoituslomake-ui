@@ -228,3 +228,71 @@ export const getOpeningTimesLink = async (
     return undefined;
   }
 };
+
+export const getValidAccessibilityId = async (
+  notificationId: number, // Notification id of the saved form
+  placeId: number, // Published id if available
+  isNew: boolean,
+  router: NextRouter
+): Promise<string | undefined> => {
+  if (isNew || (notificationId <= 0 && placeId <= 0)) {
+    // An accessibility id cannot be fetched without a published place id
+    return;
+  }
+
+  try {
+    const validInternalLinkResponse = await fetch(`${getOrigin(router)}/api/accessibility/get_valid_internal_id/${placeId}/`);
+
+    const validInternalLinkResult = await validInternalLinkResponse.text();
+    if (!validInternalLinkResponse.ok) {
+      return undefined;
+    }
+    return validInternalLinkResult;
+  } catch (err) {
+    return undefined;
+  }
+};
+
+export const getAccessibilityInfoLink = async (
+  notificationId: number, // Notification id of the saved form
+  placeId: number, // Published id if available
+  isNew: boolean,
+  router: NextRouter
+): Promise<string | undefined> => {
+  if (notificationId <= 0 && placeId <= 0) {
+    // An accessibility info link cannot be fetched without a published place id
+    return;
+  }
+
+  try {
+    // Send the Cross Site Request Forgery token, otherwise the backend returns the error "CSRF Failed: CSRF token missing or incorrect."
+    const csrftoken = Cookies.get("csrftoken");
+
+    const postData = {
+      published: !isNew,
+      notification_id: notificationId,
+    };
+
+    console.log("SENDING", postData);
+
+    const accessibilityInfoLinkResponse = await fetch(`${getOrigin(router)}/api/accessibility/create_link/${placeId}/`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "X-CSRFToken": csrftoken as string,
+      },
+      body: JSON.stringify(postData),
+    });
+
+    const accessibilityInfoLinkResult = await accessibilityInfoLinkResponse.text();
+    if (accessibilityInfoLinkResponse.ok) {
+      console.log("RESPONSE", accessibilityInfoLinkResult);
+    } else {
+      console.log("FAILED", accessibilityInfoLinkResult);
+    }
+    return accessibilityInfoLinkResult;
+  } catch (err) {
+    console.log("ERROR", err);
+    return undefined;
+  }
+};

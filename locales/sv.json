@@ -109,6 +109,7 @@
       "suggestChange": "Föreslå förändring",
       "modifyOpeningTimes": "Ändra öppettider",
       "notifyOpeningTimes": "Kontrollera eller redigera öppettider",
+      "notifyAccessibility": "Kontrollera eller redigera tillgänglighetsinformationen",
       "notifyClosingDown": "Meddela att stället har lagt ner",
       "notifyNewPlace": "Lägg till ett nytt ställe",
       "giveTip": "Ge ett tips",
@@ -180,6 +181,11 @@
       "completeOpeningTimes": {
         "title": "Lägg till information om öppettiderna",
         "message": "Berätta åt besökarna när ditt ställe har öppet."
+      },
+      "completeAccessibility": {
+        "title": "Lägg till information om platsens tillgänglighet",
+        "message": "Fyll i tillgänglighetsuppgifterna. Berätta för besökarna vad de ska beakta när de kommer till platsen.",
+        "message2": "Tillgänglighetsinformationen för denna plats läggs in i underhållet av Toimipisterekisteri."
       },
       "completePhotos": {
         "title": "Komplettera ställets information med foton",

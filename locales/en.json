@@ -109,6 +109,7 @@
       "suggestChange": "Suggest change",
       "modifyOpeningTimes": "Edit opening times",
       "notifyOpeningTimes": "Check or edit opening times",
+      "notifyAccessibility": "Review or edit accessibility information",
       "notifyClosingDown": "Notify about a location closing down",
       "notifyNewPlace": "Add new location",
       "giveTip": "Give a tip",
@@ -180,6 +181,11 @@
       "completeOpeningTimes": {
         "title": "Provide information about the location’s opening times",
         "message": "Let visitors know when your location is open."
+      },
+      "completeAccessibility": {
+        "title": "Provide information about the location's accessibility",
+        "message": "Fill in accessibility information. Let visitors know what to consider when they arrive.",
+        "message2": "The accessibility information for this location is entered in the maintenance of Toimipisterekisteri."
       },
       "completePhotos": {
         "title": "Add images for better visibility",

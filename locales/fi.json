@@ -109,6 +109,7 @@
       "suggestChange": "Vinkkaa muutoksesta",
       "modifyOpeningTimes": "Muokkaa aukioloaikoja",
       "notifyOpeningTimes": "Tarkista tai muokkaa aukioloaikoja",
+      "notifyAccessibility": "Tarkista tai muokkaa esteettömyystietoja",
       "notifyClosingDown": "Ilmoita kohde lopettaneeksi",
       "notifyNewPlace": "Lisää uusi kohde",
       "giveTip": "Anna vinkki",
@@ -180,6 +181,11 @@
       "completeOpeningTimes": {
         "title": "Täydennä kohteen tietoja aukioloajoilla",
         "message": "Kerro kävijöille, milloin kohteesi on avoinna."
+      },
+      "completeAccessibility": {
+        "title": "Täydennä kohteen esteettömyystiedot",
+        "message": "Täytä kohteen esteettömyystiedot. Kerro kävijöille mitä heidän tulee huomioida saapuessaan paikalle.",
+        "message2": "Tämän kohteen esteettömyystiedot syötetään Toimipisterekisterin ylläpidossa."
       },
       "completePhotos": {
         "title": "Täydennä kohteen tietoja kuvilla",
