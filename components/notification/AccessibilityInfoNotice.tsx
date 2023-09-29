@@ -25,8 +25,10 @@ const AccessibilityInfoNotice = ({ className }: AccessibilityInfoNoticeProps): R
 
   useEffect(() => {
     const checkAccessibilityId = async () => {
+      // If validAccessibilityId is undefined, then an error occurred meaning it's not possible to add accessibility info
+      // If validAccessibilityId is -1, then this place does not exist yet in the accessibility application
       const validAccessibilityId = await getValidAccessibilityId(notificationId, placeId, isNew, router);
-      setAccessibilityAllowed(validAccessibilityId !== undefined && validAccessibilityId.length > 0 && Number(validAccessibilityId) > 0);
+      setAccessibilityAllowed(validAccessibilityId !== undefined && validAccessibilityId.length > 0);
     };
 
     checkAccessibilityId();
