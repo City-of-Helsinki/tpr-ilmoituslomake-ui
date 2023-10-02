@@ -3,13 +3,44 @@ import { NextRouter } from "next/router";
 import Cookies from "js-cookie";
 import { ModerationTranslationAction } from "../state/actions/moderationTranslationTypes";
 import { TranslationAction } from "../state/actions/translationTypes";
-import { ItemType, Toast } from "../types/constants";
+import { ItemType, TaskType, Toast } from "../types/constants";
 import { ChangeRequestSchema, ModerationExtra, ModerationTranslationRequest, Photo, TranslationExtra, User } from "../types/general";
 import { NotificationSchema } from "../types/notification_schema";
 import { TranslationSchema } from "../types/translation_schema";
 import { isModerationTranslationRequestPageValid } from "./moderationValidation";
 import { isTranslationTaskPageValid } from "./translationValidation";
 import getOrigin from "./request";
+
+export const sendAccessibilityEmail = async (currentUser: User | undefined, modifiedTaskId: number, router: NextRouter): Promise<boolean> => {
+  try {
+    if (currentUser?.authenticated) {
+      // Send the Cross Site Request Forgery token, otherwise the backend returns the error "CSRF Failed: CSRF token missing or incorrect."
+      const csrftoken = Cookies.get("csrftoken");
+
+      // Send an email to the notifier informing that their place has been published and about adding accessbility info
+      const emailResponse = await fetch(`${getOrigin(router)}/api/moderation/send_accessibility_email/${modifiedTaskId}/`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "X-CSRFToken": csrftoken as string,
+        },
+        mode: "same-origin",
+      });
+
+      const emailResult = await emailResponse.text();
+      if (emailResponse.ok) {
+        console.log("EMAIL RESPONSE", emailResult);
+        return true;
+      } else {
+        console.log("EMAIL FAILED", emailResult);
+      }
+    }
+  } catch (err) {
+    console.log("ERROR", err);
+  }
+
+  return false;
+};
 
 export const approveModeration = async (
   currentUser: User | undefined,
@@ -32,6 +63,7 @@ export const approveModeration = async (
 
       const {
         moderator: { fullName: moderatorName },
+        taskType,
       } = moderationExtra;
 
       // Check if this task has already been assigned to a moderator
@@ -85,11 +117,17 @@ export const approveModeration = async (
         mode: "same-origin",
         body: JSON.stringify(postData),
       });
+
       if (approveResponse.ok) {
         const approveResult = await approveResponse.json();
         console.log("APPROVE RESPONSE", approveResult);
 
         if (approveResult.id) {
+          // If a new place was approved, automatically send a confirmation email to the notifier
+          if (taskType === TaskType.NewPlace) {
+            await sendAccessibilityEmail(currentUser, modifiedTaskId, router);
+          }
+
           // Reload the current page to update the page statuses
           // router.reload();
           router.push(`/moderation/task/${modifiedTaskId}`);
