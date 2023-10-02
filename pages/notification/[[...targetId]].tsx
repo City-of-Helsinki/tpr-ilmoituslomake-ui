@@ -19,6 +19,7 @@ import Notice from "../../components/common/Notice";
 import InfoFooter from "../../components/notification/InfoFooter";
 import NotificationHeader from "../../components/notification/NotificationHeader";
 import NotificationFooterNav from "../../components/notification/NotificationFooterNav";
+import AccessibilityInfoNotice from "../../components/notification/AccessibilityInfoNotice";
 import Comments from "../../components/notification/Comments";
 import Contact from "../../components/notification/Contact";
 import Description from "../../components/notification/Description";
@@ -46,6 +47,9 @@ const NotificationDetail = (): ReactElement => {
   const pageValid = useSelector((state: RootState) => state.notificationValidation.pageValid);
   const validationSummary = useSelector((state: RootState) => state.notificationValidation.validationSummary);
   const ref = useRef<HTMLHeadingElement>(null);
+
+  const notificationExtra = useSelector((state: RootState) => state.notification.notificationExtra);
+  const { isNew } = notificationExtra;
 
   const [toast, setToast] = useState<Toast>();
   const [modalOpen, setModalOpen] = useState(false);
@@ -133,6 +137,7 @@ const NotificationDetail = (): ReactElement => {
             icon={<IconCheckCircleFill size="xl" aria-hidden />}
             titleKey="notification.message.saveSucceeded.title"
             messageKey="notification.message.saveSucceeded.message"
+            messageKey2={isNew ? "notification.message.sentModal.message2" : undefined}
             focusOnTitle
           />
           <Notice
@@ -142,6 +147,7 @@ const NotificationDetail = (): ReactElement => {
             messageKey="notification.message.completeOpeningTimes.message"
             button={<OpeningTimesButtonNotification buttonTextKey="notification.button.notifyOpeningTimes" buttonVariant="secondary" />}
           />
+          {!isNew && <AccessibilityInfoNotice className={styles.accessibility} />}
 
           <InfoFooter isEditingAllowed={false} />
           <OpeningTimesInfo openModal={openModal} />
@@ -152,7 +158,8 @@ const NotificationDetail = (): ReactElement => {
             <div className={styles.dialog}>
               <h1 id="modal-dialog-title">{i18n.t("notification.message.sentModal.title")}</h1>
               <div id="modal-dialog-description" className={styles.message}>
-                {i18n.t("notification.message.sentModal.message")}
+                <div>{i18n.t("notification.message.sentModal.message")}</div>
+                {isNew && <div>{i18n.t("notification.message.sentModal.message2")}</div>}
               </div>
               <div>
                 <OpeningTimesButtonNotification
