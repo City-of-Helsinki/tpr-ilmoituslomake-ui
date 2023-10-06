@@ -266,6 +266,7 @@ export const getServerSideProps: GetServerSideProps = async ({ req, resolvedUrl,
             }),
             openingTimesId: targetResult.hauki_id,
             openingTimesNotificationId: targetResult.id,
+            isNew: targetResult.id <= 0,
           },
         };
 
