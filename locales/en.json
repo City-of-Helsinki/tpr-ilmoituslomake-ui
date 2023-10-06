@@ -347,11 +347,11 @@
       },
       "permission": {
         "title": "User rights",
-        "notice": "NOTE! You must hold the rights to the images you upload. By uploading the image, you grant Helsinki Marketing the right to distribute it further in an MyHelsinki Open API. You must select one of the image permissions below. See the terms of use for more details.",
+        "notice": "NOTE! You must have the rights to the image you upload. By uploading an image, you grant the City of Helsinki the right to redistribute it in an open interface. You must select one of the image permissions below. See the terms of use for more details.",
         "label": "Photo user rights",
-        "locationOnly": "The image may only be used in connection with the location, e.g. on the MyHelsinki.fi website. The image can also be shared as open data to third parties via the MyHelsinki Open API. Use or transfer of the image for other purposes is prohibited. When using an image, it is essential to mention the source and producer of the image.",
-        "creativeCommons1": "Image courtesy of Creative Commons BY 4.0. license. When using an image, it is essential to mention the source and producer of the image.",
-        "creativeCommons2": "Creative Commons BY 4.0.-license"
+        "locationOnly": "The image may be freely distributed and used in connection with the site. When using the image, the name of the person who took the image and/or the owner of the image must be mentioned. Use or transfer of the image for any other purpose is prohibited.",
+        "creativeCommons1": "The image may be freely distributed and used. When using the image, the name of the person who took the image and/or the owner of the image must be mentioned.",
+        "creativeCommons2": "Creative Commons BY 4.0. license"
       },
       "source": {
         "label": "Image source",
@@ -870,8 +870,8 @@
       "permission": {
         "title": "Käyttöoikeudet",
         "label": "Kuvan käyttöoikeudet",
-        "locationOnly": "Kuvaa saa käyttää ainoastaan ko. kohteen yhteydessä esim. MyHelsinki.fi-sivustolla. Kuvaa voidaan jakaa myös avoimena datana kolmansille osapuolille MyHelsinki-avoimen rajapinnan kautta. Kuvan käyttö tai siirto muihin tarkoituksiin on kielletty. Kuvaa käytettäessä on ehdottomasti mainittava kuvan lähde ja kuvaaja.",
-        "creativeCommons": "Kuvaa saa jakaa Creative Commons BY 4.0.-lisenssillä. Kuvaa käytettäessä on ehdottomasti mainittava kuvan lähde ja kuvaaja."
+        "locationOnly": "Kuvaa saa vapaasti jakaa ja käyttää kohteen yhteydessä. Kuvaa käytettäessä on mainittava kuvan ottajan ja/tai kuvan omistajan nimi. Kuvan käyttö tai siirto muihin tarkoituksiin on kielletty.",
+        "creativeCommons": "Kuvaa saa vapaasti jakaa ja käyttää. Kuvaa käytettäessä on mainittava kuvan ottajan ja/tai kuvan omistajan nimi."
       },
       "source": {
         "label": "Kuvalähde",
