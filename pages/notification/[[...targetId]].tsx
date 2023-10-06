@@ -82,6 +82,7 @@ const NotificationDetail = (): ReactElement => {
         <main id="content" className={`narrowSection ${styles.content}`}>
           <h2 tabIndex={-1}>{`${currentPage} ${i18n.t("notification.main.basic")}`}</h2>
           {toast && <ToastNotification prefix="notification" toast={toast} setToast={setToast} />}
+          {!isNew && <AccessibilityInfoNotice className={styles.accessibility} />}
           <NotificationNotice messageKey="notification.mandatory" />
           {!pageValid && <ValidationSummary prefix="notification" pageValid={pageValid} validationSummary={validationSummary} />}
           <Description />

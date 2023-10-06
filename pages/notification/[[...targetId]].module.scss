@@ -1,4 +1,5 @@
 @import "~hds-design-tokens/lib/all.scss";
+@import "../../styles/mixins";
 
 .content {
   h2 {
@@ -8,6 +9,12 @@
 
   .sent {
     background-color: $color-copper-light;
+  }
+
+  .accessibility {
+    @include media(xl) {
+      flex-wrap: nowrap;
+    }
   }
 }
 
