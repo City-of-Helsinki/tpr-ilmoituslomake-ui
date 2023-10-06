@@ -100,7 +100,7 @@ export const DATETIME_FORMAT = "D.M.YYYY H:mm";
 // export const TIME_FORMAT = "H:mm";
 // export const TIME_FORMAT_HAUKI = "HH:mm:ss";
 export const TERMS_URL = "https://kaupunkialustana.hel.fi/kayttoehdot/";
-export const ACCESSIBILITY_URL = "https://kaupunkialustana.hel.fi/saavutettavuusseloste/";
+export const ACCESSIBILITY_URL = "https://kaupunkialustana.hel.fi/ilmoituslomake/kaupunkialustana-ilmoituslomakkeen-saavutettavuusseloste/";
 export const CONTACT_URL = "https://hel.fi/helsinki/fi/kaupunki-ja-hallinto/osallistu-ja-vaikuta/ota-yhteytta/";
 export const MODERATION_GUIDE_URL =
   "https://helsinginkaupunki.sharepoint.com/:w:/s/KANSLIAKaupunkialusta/Ebs0twXUrRJHpnJez-e3mTMBm4Q9GrHqeVBZCEskeh9kOA";
