@@ -29,6 +29,7 @@ import {
   SET_NOTIFICATION_PHOTO,
   REMOVE_NOTIFICATION_PHOTO,
   SET_NOTIFICATION_COMMENTS,
+  SET_NOTIFICATION_SENDING,
   SET_SENT_NOTIFICATION,
 } from "../../types/constants";
 import { Photo } from "../../types/general";
@@ -57,6 +58,10 @@ const initialState: NotificationState = {
   notificationId: 0,
   notification: { ...INITIAL_NOTIFICATION, location: [0, 0] },
   notificationExtra: { ...INITIAL_NOTIFICATION_EXTRA, locationOriginal: [0, 0] },
+  isSending: {
+    notification: false,
+    tip: false,
+  },
 };
 
 const notification = (state: NotificationState | undefined, action: AnyAction): NotificationState => {
@@ -299,6 +304,15 @@ const notification = (state: NotificationState | undefined, action: AnyAction): 
       return {
         ...state,
         notification: { ...state.notification, comments: action.payload },
+      };
+    }
+
+    case SET_NOTIFICATION_SENDING: {
+      console.log("SET_NOTIFICATION_SENDING", action.payload);
+      const [key, sending] = Object.entries(action.payload)[0];
+      return {
+        ...state,
+        isSending: { ...state.isSending, [key]: sending },
       };
     }
 

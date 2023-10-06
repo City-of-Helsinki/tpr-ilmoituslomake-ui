@@ -23,6 +23,7 @@ import {
   REMOVE_NOTIFICATION_PHOTO,
   SET_NOTIFICATION_COMMENTS,
   SET_NOTIFICATION_TIP,
+  SET_NOTIFICATION_SENDING,
   SET_SENT_NOTIFICATION,
 } from "../../types/constants";
 import {
@@ -148,6 +149,11 @@ interface SetNotificationTipAction extends AnyAction {
   payload: ChangeRequestSchema;
 }
 
+interface SetNotificationSending extends AnyAction {
+  type: typeof SET_NOTIFICATION_SENDING;
+  payload: KeyValueBoolean;
+}
+
 interface SetSentNotificationAction extends AnyAction {
   type: typeof SET_SENT_NOTIFICATION;
   payload: {
@@ -180,4 +186,5 @@ export type NotificationAction =
   | RemoveNotificationPhotoAction
   | SetNotificationCommentsAction
   | SetNotificationTipAction
+  | SetNotificationSending
   | SetSentNotificationAction;

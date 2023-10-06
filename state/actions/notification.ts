@@ -22,6 +22,7 @@ import {
   REMOVE_NOTIFICATION_PHOTO,
   SET_NOTIFICATION_COMMENTS,
   SET_NOTIFICATION_TIP,
+  SET_NOTIFICATION_SENDING,
   SET_SENT_NOTIFICATION,
 } from "../../types/constants";
 import {
@@ -146,6 +147,11 @@ export const setNotificationComments = (value: string): NotificationAction => ({
 export const setNotificationTip = (tip: ChangeRequestSchema): NotificationAction => ({
   type: SET_NOTIFICATION_TIP,
   payload: tip,
+});
+
+export const setNotificationSending = (keyValue: KeyValueBoolean): NotificationAction => ({
+  type: SET_NOTIFICATION_SENDING,
+  payload: keyValue,
 });
 
 export const setSentNotification = (
