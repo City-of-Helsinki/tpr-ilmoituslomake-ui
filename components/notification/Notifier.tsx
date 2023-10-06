@@ -1,12 +1,12 @@
 import React, { Dispatch, ChangeEvent, ReactElement } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useI18n } from "next-localization";
-import { TextInput, RadioButton, SelectionGroup } from "hds-react";
+import { TextInput } from "hds-react";
 import { NotificationAction } from "../../state/actions/notificationTypes";
 import { NotificationValidationAction } from "../../state/actions/notificationValidationTypes";
 import { setNotificationNotifier } from "../../state/actions/notification";
 import { RootState } from "../../state/reducers";
-import { MAX_LENGTH, MAX_LENGTH_EMAIL, MAX_LENGTH_PHONE, NotifierType } from "../../types/constants";
+import { MAX_LENGTH, MAX_LENGTH_EMAIL, MAX_LENGTH_PHONE } from "../../types/constants";
 import { isNotifierFieldValid } from "../../utils/validation";
 
 const Notifier = (): ReactElement => {
@@ -16,12 +16,12 @@ const Notifier = (): ReactElement => {
 
   const notification = useSelector((state: RootState) => state.notification.notification);
   const {
-    notifier: { notifier_type, full_name, email, phone },
+    notifier: { full_name, email, phone },
   } = notification;
 
   const notificationValidation = useSelector((state: RootState) => state.notificationValidation.notificationValidation);
   const {
-    notifier: { notifier_type: notifierTypeValid, full_name: fullNameValid, email: emailValid, phone: phoneValid },
+    notifier: { full_name: fullNameValid, email: emailValid, phone: phoneValid },
   } = notificationValidation;
 
   const updateNotifier = (evt: ChangeEvent<HTMLInputElement>) => {
@@ -37,6 +37,7 @@ const Notifier = (): ReactElement => {
     <div className="formSection">
       <h3>{i18n.t("notification.notifier.title")}</h3>
 
+      {/* NOTE: the notifier type option has been removed, so the notifier is now always the place's representative
       <SelectionGroup
         id="notifierType"
         direction="horizontal"
@@ -70,6 +71,7 @@ const Notifier = (): ReactElement => {
           onChange={updateNotifier}
         />
       </SelectionGroup>
+      */}
 
       <TextInput
         id="fullName"

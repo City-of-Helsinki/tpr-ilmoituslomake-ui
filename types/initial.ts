@@ -1,4 +1,4 @@
-import { ModerationStatus, TaskStatus, TaskType } from "./constants";
+import { ModerationStatus, NotifierType, TaskStatus, TaskType } from "./constants";
 import { ModerationExtra, NotificationExtra, TranslationExtra } from "./general";
 import { ModerationStatusSchema } from "./moderation_status";
 import { NotificationSchema } from "./notification_schema";
@@ -61,7 +61,7 @@ export const INITIAL_NOTIFICATION: NotificationSchema = {
   },
   comments: "",
   notifier: {
-    notifier_type: "",
+    notifier_type: NotifierType.Representative,
     full_name: "",
     email: "",
     phone: "",
