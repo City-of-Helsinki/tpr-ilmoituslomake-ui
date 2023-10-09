@@ -463,6 +463,7 @@ export interface ModerationExtra {
     fullName: string;
     updated_at: string;
   };
+  addressFound?: AddressSearchResult;
   openingTimesId: number;
   openingTimesNotificationId: number;
 }

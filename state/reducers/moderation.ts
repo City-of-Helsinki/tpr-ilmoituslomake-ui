@@ -16,6 +16,7 @@ import {
   SET_MODERATION_MATKO_TAG_OPTIONS,
   SET_MODERATION_EXTRA_KEYWORDS,
   SET_MODERATION_ADDRESS,
+  SET_MODERATION_ADDRESS_FOUND,
   SET_MODERATION_LOCATION,
   SET_MODERATION_CONTACT,
   SET_MODERATION_LINK,
@@ -207,6 +208,14 @@ const moderation = (state: ModerationState | undefined, action: AnyAction): Mode
             [action.payload.language]: { ...(action.payload.language === "sv" ? sv : fi), ...action.payload.value },
           },
         },
+      };
+    }
+
+    case SET_MODERATION_ADDRESS_FOUND: {
+      console.log("SET_MODERATION_ADDRESS_FOUND", action.payload);
+      return {
+        ...state,
+        moderationExtra: { ...state.moderationExtra, addressFound: action.payload },
       };
     }
 

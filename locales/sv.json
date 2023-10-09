@@ -835,11 +835,15 @@
       },
       "neighborhood": {
         "label": "Kaupunginosa"
-      }
+      },
+      "addressNotFound": "Osoite ei löydy.",
+      "locationNotFound": "Osoitteen perusteella kohteelle ei löydy sijaintia kartalle. Lisää kohde kartalle napauttamalla karttaa siinä kohdassa, missä kohde sijaitsee."
     },
     "map": {
       "title": "Kohde kartalla",
       "geocode": "Näytä kartalla",
+      "fetchFinnishAddress": "Hae osoite suomeksi",
+      "fetchSwedishAddress": "Hae osoite ruotsiksi",
       "skipMap": "Ohita kartta"
     },
     "newTasks": {

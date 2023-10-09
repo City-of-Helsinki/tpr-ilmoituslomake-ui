@@ -13,6 +13,7 @@ import {
   SET_MODERATION_MATKO_TAG_OPTIONS,
   SET_MODERATION_EXTRA_KEYWORDS,
   SET_MODERATION_ADDRESS,
+  SET_MODERATION_ADDRESS_FOUND,
   SET_MODERATION_LOCATION,
   SET_MODERATION_CONTACT,
   SET_MODERATION_LINK,
@@ -22,6 +23,7 @@ import {
 } from "../../types/constants";
 import { ModerationAction } from "./moderationTypes";
 import {
+  AddressSearchResult,
   KeyValueString,
   MatkoTagOption,
   ModerationPlaceResults,
@@ -100,6 +102,11 @@ export const setModerationExtraKeywords = (language: string, value: string): Mod
 export const setModerationAddress = (language: string, value: KeyValueString): ModerationAction => ({
   type: SET_MODERATION_ADDRESS,
   payload: { language, value },
+});
+
+export const setModerationAddressFound = (addressFound: AddressSearchResult | undefined): ModerationAction => ({
+  type: SET_MODERATION_ADDRESS_FOUND,
+  payload: addressFound,
 });
 
 export const setModerationLocation = (coordinates: [number, number]): ModerationAction => ({

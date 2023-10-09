@@ -14,6 +14,7 @@ import {
   SET_MODERATION_MATKO_TAG_OPTIONS,
   SET_MODERATION_EXTRA_KEYWORDS,
   SET_MODERATION_ADDRESS,
+  SET_MODERATION_ADDRESS_FOUND,
   SET_MODERATION_LOCATION,
   SET_MODERATION_CONTACT,
   SET_MODERATION_LINK,
@@ -22,6 +23,7 @@ import {
   SET_MODERATION_OPENING_TIMES_ID,
 } from "../../types/constants";
 import {
+  AddressSearchResult,
   KeyValueString,
   MatkoTagOption,
   ModerationPlaceResults,
@@ -102,6 +104,11 @@ interface SetModerationAddressAction extends AnyAction {
   payload: { language: string; value: KeyValueString };
 }
 
+interface SetModerationAddressFoundAction extends AnyAction {
+  type: typeof SET_MODERATION_ADDRESS_FOUND;
+  payload: AddressSearchResult | undefined;
+}
+
 interface SetModerationLocationAction extends AnyAction {
   type: typeof SET_MODERATION_LOCATION;
   payload: [number, number];
@@ -147,6 +154,7 @@ export type ModerationAction =
   | SetModerationMatkoTagOptionsAction
   | SetModerationExtraKeywordsAction
   | SetModerationAddressAction
+  | SetModerationAddressFoundAction
   | SetModerationLocationAction
   | SetModerationContactAction
   | SetModerationLinkAction
