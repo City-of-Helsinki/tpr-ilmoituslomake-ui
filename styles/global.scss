@@ -108,9 +108,10 @@ h5 {
   }
 }
 
-textarea {
-  height: auto !important;
-}
+// Setting height auto allows the textarea rows value to be handled correctly, but then the textarea can't be resized
+// textarea {
+//   height: auto !important;
+// }
 
 input[type="checkbox"] {
   background-color: $color-white;
