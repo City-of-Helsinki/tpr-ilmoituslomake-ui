@@ -37,6 +37,7 @@ const Preview = ({ className, titleKey, includeNotifier, isPlaceInfo }: PreviewP
     phone,
     email,
     website,
+    social_media = [],
     notifier: { notifier_type: notifierType, full_name: notifierFullName, email: notifierEmail, phone: notifierPhone },
   } = notification;
 
@@ -163,6 +164,17 @@ const Preview = ({ className, titleKey, includeNotifier, isPlaceInfo }: PreviewP
           ) : null
         )}
       </div>
+
+      {social_media.length > 0 && (
+        <>
+          <div className={`${styles.gridHeading} ${styles.gridContent}`}>{i18n.t("notification.links.socialMedia.label")}</div>
+          <div className={`${styles.gridPlaceInfo} ${styles.gridContent}`}>
+            {social_media.map(({ title, link }, index) => (
+              <div key={`socialmedia_${index}`}>{`${title}: ${link}`}</div>
+            ))}
+          </div>
+        </>
+      )}
 
       {photos.length > 0 && (
         <>

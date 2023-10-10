@@ -11,6 +11,8 @@ import {
   SET_NOTIFICATION_LOCATION_VALIDATION,
   SET_NOTIFICATION_CONTACT_VALIDATION,
   SET_NOTIFICATION_LINK_VALIDATION,
+  SET_NOTIFICATION_SOCIAL_MEDIA_VALIDATION,
+  REMOVE_NOTIFICATION_SOCIAL_MEDIA_VALIDATION,
   SET_NOTIFICATION_PHOTO_VALIDATION,
   SET_NOTIFICATION_PHOTO_ALT_TEXT_VALIDATION,
   REMOVE_NOTIFICATION_PHOTO_VALIDATION,
@@ -19,7 +21,7 @@ import {
   SET_NOTIFICATION_TIP_VALIDATION_SUMMARY,
 } from "../../types/constants";
 import { KeyValueValidation, Validation } from "../../types/general";
-import { PhotoValidation } from "../../types/notification_validation";
+import { PhotoValidation, SocialMediaValidation } from "../../types/notification_validation";
 import { NotificationValidationAction } from "./notificationValidationTypes";
 
 export const setPageValid = (valid: boolean): NotificationValidationAction => ({
@@ -80,6 +82,19 @@ export const setNotificationContactValidation = (validation: KeyValueValidation)
 export const setNotificationLinkValidation = (validation: KeyValueValidation): NotificationValidationAction => ({
   type: SET_NOTIFICATION_LINK_VALIDATION,
   payload: validation,
+});
+
+export const setNotificationSocialMediaValidation = (
+  index: number,
+  validation: SocialMediaValidation | KeyValueValidation
+): NotificationValidationAction => ({
+  type: SET_NOTIFICATION_SOCIAL_MEDIA_VALIDATION,
+  payload: { index, validation },
+});
+
+export const removeNotificationSocialMediaValidation = (index: number): NotificationValidationAction => ({
+  type: REMOVE_NOTIFICATION_SOCIAL_MEDIA_VALIDATION,
+  payload: index,
 });
 
 export const setNotificationPhotoValidation = (index: number, validation: PhotoValidation | KeyValueValidation): NotificationValidationAction => ({

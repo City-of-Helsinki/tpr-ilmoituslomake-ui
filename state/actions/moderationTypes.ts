@@ -18,6 +18,8 @@ import {
   SET_MODERATION_LOCATION,
   SET_MODERATION_CONTACT,
   SET_MODERATION_LINK,
+  SET_MODERATION_SOCIAL_MEDIA,
+  REMOVE_MODERATION_SOCIAL_MEDIA,
   SET_MODERATION_PHOTO,
   REMOVE_MODERATION_PHOTO,
   SET_MODERATION_OPENING_TIMES_ID,
@@ -31,6 +33,7 @@ import {
   ModerationTaskSearch,
   ModerationTodoResults,
   Photo,
+  SocialMedia,
   TagOption,
 } from "../../types/general";
 
@@ -124,6 +127,16 @@ interface SetModerationLinkAction extends AnyAction {
   payload: KeyValueString;
 }
 
+interface SetModerationSocialMediaAction extends AnyAction {
+  type: typeof SET_MODERATION_SOCIAL_MEDIA;
+  payload: { index: number; value: SocialMedia };
+}
+
+interface RemoveModerationSocialMediaAction extends AnyAction {
+  type: typeof REMOVE_MODERATION_SOCIAL_MEDIA;
+  payload: number;
+}
+
 interface SetModerationPhotoAction extends AnyAction {
   type: typeof SET_MODERATION_PHOTO;
   payload: { index: number; value: Photo };
@@ -158,6 +171,8 @@ export type ModerationAction =
   | SetModerationLocationAction
   | SetModerationContactAction
   | SetModerationLinkAction
+  | SetModerationSocialMediaAction
+  | RemoveModerationSocialMediaAction
   | SetModerationPhotoAction
   | RemoveModerationPhotoAction
   | SetModerationOpeningTimesId;

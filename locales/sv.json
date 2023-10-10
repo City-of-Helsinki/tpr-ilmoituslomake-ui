@@ -399,6 +399,21 @@
       "heading": "Rubrik",
       "placeInfo": "Information om stället"
     },
+    "socialMedia": {
+      "heading": "Sociala media",
+      "title": {
+        "label": "Titel",
+        "tooltipLabel": "Länk till tilläggsuppgifter",
+        "tooltipText": "Här kan du lägga till ställets titel till sociala medier, till exempel Facebook."
+      },
+      "link": {
+        "label": "Länk",
+        "tooltipLabel": "Länk till tilläggsuppgifter",
+        "tooltipText": "Här kan du lägga till ställets länk till sociala medier."
+      },
+      "addNew": "Lägg till ny sociala media",
+      "remove": "Ta bort sociala media"
+    },
     "tags": {
       "title": "Ämnesord",
       "tagSelection": "Val av ämnesord",
@@ -928,6 +943,18 @@
       "address": "Osoite",
       "modifiedLast": "Muokattu viimeksi",
       "publishPermission": "Julkaistu"
+    },
+    "socialMedia": {
+      "heading": "Sosiaalinen media",
+      "title": {
+        "label": "Otsikko"
+      },
+      "link": {
+        "label": "Linkki"
+      },
+      "addNew": "Lisää uusi sosiaalinen media",
+      "remove": "Poista sosiaalinen media",
+      "removed": "Poistettu"
     },
     "tags": {
       "title": "Asiasanat",

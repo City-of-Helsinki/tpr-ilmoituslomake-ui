@@ -28,9 +28,9 @@ const TaskHeaderButtons = ({ isModerated, setToast }: TaskHeaderButtonsProps): R
   const modifiedTask = useSelector((state: RootState) => state.moderation.modifiedTask);
 
   const moderationExtra = useSelector((state: RootState) => state.moderation.moderationExtra);
-  const { photosUuids, photosSelected, photosModified, taskType, taskStatus, openingTimesId } = moderationExtra;
+  const { photosUuids, photosSelected, photosModified, taskType, taskStatus, openingTimesId, uniqueSocialMediaItems } = moderationExtra;
   const moderationStatus = useSelector((state: RootState) => state.moderationStatus.moderationStatus);
-  const { photos: photosStatus } = moderationStatus;
+  const { photos: photosStatus, socialMedia: socialMediaItemsStatus } = moderationStatus;
 
   const [confirmApproval, setConfirmApproval] = useState(false);
   const [confirmRejection, setConfirmRejection] = useState(false);
@@ -208,6 +208,29 @@ const TaskHeaderButtons = ({ isModerated, setToast }: TaskHeaderButtonsProps): R
               sv: moderationStatus.extra_keywords.sv === ModerationStatus.Approved ? modifiedTask.extra_keywords.sv : selectedTask.extra_keywords.sv,
               en: moderationStatus.extra_keywords.en === ModerationStatus.Approved ? modifiedTask.extra_keywords.en : selectedTask.extra_keywords.en,
             },
+            social_media: uniqueSocialMediaItems
+              .map((uniqueItem, index) => {
+                const socialMediaSelected =
+                  selectedTask.social_media && selectedTask.social_media[index] ? selectedTask.social_media[index] : { title: "", link: "" };
+                const socialMediaModified =
+                  modifiedTask.social_media && modifiedTask.social_media[index] ? modifiedTask.social_media[index] : { title: "", link: "" };
+                const socialMediaStatus = socialMediaItemsStatus[index];
+
+                const isSocialMediaItemToBeApproved = modifiedTask.social_media
+                  ? modifiedTask.social_media.some((item) => item.title === uniqueItem.title && item.link === uniqueItem.link)
+                  : false;
+
+                return isSocialMediaItemToBeApproved
+                  ? {
+                      title: getApprovedValue(socialMediaStatus.title, socialMediaSelected.title, socialMediaModified.title),
+                      link: getApprovedValue(socialMediaStatus.link, socialMediaSelected.link, socialMediaModified.link),
+                    }
+                  : {
+                      title: "",
+                      link: "",
+                    };
+              })
+              .filter((item) => !!item.link && item.link.length > 0),
           }
         : modifiedTask;
 

@@ -1,0 +1,39 @@
+@import "~hds-design-tokens/lib/all.scss";
+@import "../../styles/mixins";
+
+.gridSelected {
+  grid-column: 1 / span 2;
+
+  @include media(xs, s) {
+    grid-column: 1 / 1;
+  }
+}
+
+.gridModified {
+  grid-column: 3 / span 2;
+
+  @include media(xs, s) {
+    grid-column: 1 / 1;
+  }
+}
+
+.gridActionButton {
+  grid-column: 5 / 5;
+
+  @include media(m, l) {
+    grid-column: 1 / span 4;
+  }
+
+  @include media(xs, s) {
+    grid-column: 1 / 1;
+  }
+}
+
+.addNewContainer {
+  margin-top: $spacing-layout-s;
+}
+
+.gridButton {
+  margin-right: $spacing-s;
+  margin-bottom: $spacing-s;
+}

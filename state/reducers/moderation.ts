@@ -20,11 +20,13 @@ import {
   SET_MODERATION_LOCATION,
   SET_MODERATION_CONTACT,
   SET_MODERATION_LINK,
+  SET_MODERATION_SOCIAL_MEDIA,
+  REMOVE_MODERATION_SOCIAL_MEDIA,
   SET_MODERATION_PHOTO,
   REMOVE_MODERATION_PHOTO,
   SET_MODERATION_OPENING_TIMES_ID,
 } from "../../types/constants";
-import { Photo } from "../../types/general";
+import { Photo, SocialMedia, SocialMediaSchema } from "../../types/general";
 import { INITIAL_MODERATION_EXTRA, INITIAL_NOTIFICATION } from "../../types/initial";
 
 const initialState: ModerationState = {
@@ -245,6 +247,51 @@ const moderation = (state: ModerationState | undefined, action: AnyAction): Mode
       return {
         ...state,
         modifiedTask: { ...state.modifiedTask, website: { ...state.modifiedTask.website, ...action.payload } },
+      };
+    }
+
+    case SET_MODERATION_SOCIAL_MEDIA: {
+      console.log("SET_MODERATION_SOCIAL_MEDIA", action.payload);
+
+      // If index -1 is specified, add the social media item to both arrays
+      // Otherwise combine the field value with the existing social media item in the modified array
+      const uniqueSocialMediaItems = [
+        ...state.moderationExtra.uniqueSocialMediaItems,
+        ...(action.payload.index === -1 ? [action.payload.value] : []),
+      ];
+      const socialMediaItems = state.modifiedTask.social_media
+        ? [
+            ...state.modifiedTask.social_media.reduce((acc: SocialMedia[], item, index) => {
+              return [...acc, action.payload.index === index ? { ...item, ...action.payload.value } : item];
+            }, []),
+            ...(action.payload.index === -1 ? [action.payload.value] : []),
+          ]
+        : [];
+
+      return {
+        ...state,
+        modifiedTask: { ...state.modifiedTask, social_media: socialMediaItems },
+        moderationExtra: { ...state.moderationExtra, uniqueSocialMediaItems },
+      };
+    }
+
+    case REMOVE_MODERATION_SOCIAL_MEDIA: {
+      console.log("REMOVE_MODERATION_SOCIAL_MEDIA", action.payload);
+
+      // Remove the social media item at the specified index
+      const uniqueSocialMediaItems = state.moderationExtra.uniqueSocialMediaItems.reduce((acc: SocialMediaSchema[], item, index) => {
+        return action.payload === index ? acc : [...acc, item];
+      }, []);
+      const socialMediaItems = state.modifiedTask.social_media
+        ? state.modifiedTask.social_media.reduce((acc: SocialMedia[], item, index) => {
+            return action.payload === index ? acc : [...acc, item];
+          }, [])
+        : [];
+
+      return {
+        ...state,
+        modifiedTask: { ...state.modifiedTask, social_media: socialMediaItems },
+        moderationExtra: { ...state.moderationExtra, uniqueSocialMediaItems },
       };
     }
 

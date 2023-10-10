@@ -399,6 +399,21 @@
       "heading": "Otsikko",
       "placeInfo": "Kohteen tiedot"
     },
+    "socialMedia": {
+      "heading": "Sosiaalinen media",
+      "title": {
+        "label": "Otsikko",
+        "tooltipLabel": "Linkki lisätietoihin",
+        "tooltipText": "Voit lisätä tähän kohteen sosiaallisen median tilin otsikon, esim. Facebook."
+      },
+      "link": {
+        "label": "Linkki",
+        "tooltipLabel": "Linkki lisätietoihin",
+        "tooltipText": "Voit lisätä tähän kohteen sosiaallisen median tilin osoitteen."
+      },
+      "addNew": "Lisää uusi sosiaalinen media",
+      "remove": "Poista sosiaalinen media"
+    },
     "tags": {
       "title": "Asiasanat",
       "tagSelection": "Asiasanojen valinta",
@@ -928,6 +943,18 @@
       "address": "Osoite",
       "modifiedLast": "Muokattu viimeksi",
       "publishPermission": "Julkaistu"
+    },
+    "socialMedia": {
+      "heading": "Sosiaalinen media",
+      "title": {
+        "label": "Otsikko"
+      },
+      "link": {
+        "label": "Linkki"
+      },
+      "addNew": "Lisää uusi sosiaalinen media",
+      "remove": "Poista sosiaalinen media",
+      "removed": "Poistettu"
     },
     "tags": {
       "title": "Asiasanat",

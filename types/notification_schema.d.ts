@@ -97,5 +97,10 @@ export interface NotificationSchema {
     phone: string;
     [k: string]: unknown;
   };
+  social_media?: {
+    title: string;
+    link: string;
+    [k: string]: unknown;
+  }[];
   [k: string]: unknown;
 }

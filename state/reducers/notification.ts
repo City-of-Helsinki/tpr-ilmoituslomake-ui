@@ -26,13 +26,15 @@ import {
   SET_NOTIFICATION_LOCATION,
   SET_NOTIFICATION_CONTACT,
   SET_NOTIFICATION_LINK,
+  SET_NOTIFICATION_SOCIAL_MEDIA,
+  REMOVE_NOTIFICATION_SOCIAL_MEDIA,
   SET_NOTIFICATION_PHOTO,
   REMOVE_NOTIFICATION_PHOTO,
   SET_NOTIFICATION_COMMENTS,
   SET_NOTIFICATION_SENDING,
   SET_SENT_NOTIFICATION,
 } from "../../types/constants";
-import { Photo } from "../../types/general";
+import { Photo, SocialMedia } from "../../types/general";
 import { INITIAL_NOTIFICATION, INITIAL_NOTIFICATION_EXTRA } from "../../types/initial";
 
 const initialState: NotificationState = {
@@ -265,6 +267,41 @@ const notification = (state: NotificationState | undefined, action: AnyAction): 
       return {
         ...state,
         notification: { ...state.notification, website: { ...state.notification.website, ...action.payload } },
+      };
+    }
+
+    case SET_NOTIFICATION_SOCIAL_MEDIA: {
+      console.log("SET_NOTIFICATION_SOCIAL_MEDIA", action.payload);
+
+      // If index -1 is specified, add the social media item to the array
+      // Otherwise combine the field value with the existing social media item in the array
+      const socialMediaItems = state.notification.social_media
+        ? [
+            ...state.notification.social_media.reduce(
+              (acc: SocialMedia[], item, index) => [...acc, action.payload.index === index ? { ...item, ...action.payload.value } : item],
+              []
+            ),
+            ...(action.payload.index === -1 ? [action.payload.value] : []),
+          ]
+        : [];
+
+      return {
+        ...state,
+        notification: { ...state.notification, social_media: socialMediaItems },
+      };
+    }
+
+    case REMOVE_NOTIFICATION_SOCIAL_MEDIA: {
+      console.log("REMOVE_NOTIFICATION_SOCIAL_MEDIA", action.payload);
+
+      // Remove the social media item at the specified index
+      const socialMediaItems = state.notification.social_media
+        ? state.notification.social_media.reduce((acc: SocialMedia[], item, index) => (action.payload === index ? acc : [...acc, item]), [])
+        : [];
+
+      return {
+        ...state,
+        notification: { ...state.notification, social_media: socialMediaItems },
       };
     }
 

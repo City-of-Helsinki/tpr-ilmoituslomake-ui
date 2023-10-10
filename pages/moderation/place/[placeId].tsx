@@ -9,7 +9,7 @@ import { RootState } from "../../../state/reducers";
 import { ModerationStatus, TaskStatus, TaskType, CLEAR_STATE, Toast } from "../../../types/constants";
 import { ModerationPlaceResult } from "../../../types/general";
 import { INITIAL_NOTIFICATION } from "../../../types/initial";
-import { PhotoStatus } from "../../../types/moderation_status";
+import { PhotoStatus, SocialMediaStatus } from "../../../types/moderation_status";
 import { checkUser, getOriginServerSide, getTags, redirectToLogin, redirectToNotAuthorized } from "../../../utils/serverside";
 import Layout from "../../../components/common/Layout";
 import ModerationHeader from "../../../components/moderation/ModerationHeader";
@@ -23,6 +23,7 @@ import LocationModeration from "../../../components/moderation/LocationModeratio
 import MapModeration from "../../../components/moderation/MapModeration";
 import OpeningTimesModeration from "../../../components/moderation/OpeningTimesModeration";
 import PhotosModeration from "../../../components/moderation/PhotosModeration";
+import SocialMediaModeration from "../../../components/moderation/SocialMediaModeration";
 import TagsModeration from "../../../components/moderation/TagsModeration";
 
 const ModerationPlaceDetail = (): ReactElement => {
@@ -53,6 +54,7 @@ const ModerationPlaceDetail = (): ReactElement => {
             <MapModeration />
             <ContactModeration />
             <LinksModeration />
+            <SocialMediaModeration />
           </Collapsible>
           <Collapsible section={3} title={i18n.t("moderation.task.photos")} taskType={taskType} taskStatus={taskStatus}>
             <PhotosModeration />
@@ -138,6 +140,14 @@ export const getServerSideProps: GetServerSideProps = async ({ req, resolvedUrl,
               sv: placeData.extra_keywords.sv.join(", "),
               en: placeData.extra_keywords.en.join(", "),
             },
+            uniqueSocialMediaItems: placeResult.data.social_media
+              ? placeResult.data.social_media.map((item) => {
+                  return {
+                    title: item.title ?? "",
+                    link: item.link ?? "",
+                  };
+                })
+              : [],
             photosUuids: placeResult.data.images.map((image) => image.uuid ?? ""),
             photosSelected: placeResult.data.images.map((image) => {
               return {
@@ -192,6 +202,14 @@ export const getServerSideProps: GetServerSideProps = async ({ req, resolvedUrl,
                 source: ModerationStatus.Unknown,
               } as PhotoStatus;
             }),
+            socialMedia: placeResult.data.social_media
+              ? placeResult.data.social_media.map(() => {
+                  return {
+                    title: ModerationStatus.Unknown,
+                    link: ModerationStatus.Unknown,
+                  } as SocialMediaStatus;
+                })
+              : [],
           },
         };
       } catch (err) {

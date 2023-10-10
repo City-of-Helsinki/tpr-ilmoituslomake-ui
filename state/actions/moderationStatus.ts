@@ -11,13 +11,15 @@ import {
   SET_MODERATION_LOCATION_STATUS,
   SET_MODERATION_CONTACT_STATUS,
   SET_MODERATION_LINK_STATUS,
+  SET_MODERATION_SOCIAL_MEDIA_STATUS,
+  REMOVE_MODERATION_SOCIAL_MEDIA_STATUS,
   SET_MODERATION_PHOTO_STATUS,
   SET_MODERATION_PHOTO_ALT_TEXT_STATUS,
   REMOVE_MODERATION_PHOTO_STATUS,
   SET_MODERATION_OPENING_TIMES_STATUS,
 } from "../../types/constants";
 import { KeyValueStatus } from "../../types/general";
-import { PhotoStatus } from "../../types/moderation_status";
+import { PhotoStatus, SocialMediaStatus } from "../../types/moderation_status";
 import { ModerationStatusAction } from "./moderationStatusTypes";
 
 export const setPageStatus = (status: ModerationStatus): ModerationStatusAction => ({
@@ -73,6 +75,16 @@ export const setModerationContactStatus = (status: KeyValueStatus): ModerationSt
 export const setModerationLinkStatus = (status: KeyValueStatus): ModerationStatusAction => ({
   type: SET_MODERATION_LINK_STATUS,
   payload: status,
+});
+
+export const setModerationSocialMediaStatus = (index: number, status: SocialMediaStatus | KeyValueStatus): ModerationStatusAction => ({
+  type: SET_MODERATION_SOCIAL_MEDIA_STATUS,
+  payload: { index, status },
+});
+
+export const removeModerationSocialMediaStatus = (index: number): ModerationStatusAction => ({
+  type: REMOVE_MODERATION_SOCIAL_MEDIA_STATUS,
+  payload: index,
 });
 
 export const setModerationPhotoStatus = (index: number, status: PhotoStatus | KeyValueStatus): ModerationStatusAction => ({

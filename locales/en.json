@@ -399,6 +399,21 @@
       "heading": "Heading",
       "placeInfo": "Location information"
     },
+    "socialMedia": {
+      "heading": "Social media",
+      "title": {
+        "label": "Title",
+        "tooltipLabel": "Link to further information",
+        "tooltipText": "You can add the location's social media account title here, for example Facebook."
+      },
+      "link": {
+        "label": "Link",
+        "tooltipLabel": "Link to further information",
+        "tooltipText": "You can add the location's social media account link here."
+      },
+      "addNew": "Add new social media",
+      "remove": "Remove social media"
+    },
     "tags": {
       "title": "Tags",
       "tagSelection": "Tag selection",
@@ -928,6 +943,18 @@
       "address": "Osoite",
       "modifiedLast": "Muokattu viimeksi",
       "publishPermission": "Julkaistu"
+    },
+    "socialMedia": {
+      "heading": "Sosiaalinen media",
+      "title": {
+        "label": "Otsikko"
+      },
+      "link": {
+        "label": "Linkki"
+      },
+      "addNew": "Lisää uusi sosiaalinen media",
+      "remove": "Poista sosiaalinen media",
+      "removed": "Poistettu"
     },
     "tags": {
       "title": "Asiasanat",

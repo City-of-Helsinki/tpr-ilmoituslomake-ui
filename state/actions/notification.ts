@@ -18,6 +18,8 @@ import {
   SET_NOTIFICATION_LOCATION,
   SET_NOTIFICATION_CONTACT,
   SET_NOTIFICATION_LINK,
+  SET_NOTIFICATION_SOCIAL_MEDIA,
+  REMOVE_NOTIFICATION_SOCIAL_MEDIA,
   SET_NOTIFICATION_PHOTO,
   REMOVE_NOTIFICATION_PHOTO,
   SET_NOTIFICATION_COMMENTS,
@@ -34,6 +36,7 @@ import {
   NotificationPlaceResults,
   NotificationPlaceSearch,
   Photo,
+  SocialMedia,
   TagOption,
 } from "../../types/general";
 import { NotificationSchema } from "../../types/notification_schema";
@@ -127,6 +130,16 @@ export const setNotificationContact = (keyValue: KeyValueString): NotificationAc
 export const setNotificationLink = (keyValue: KeyValueString): NotificationAction => ({
   type: SET_NOTIFICATION_LINK,
   payload: keyValue,
+});
+
+export const setNotificationSocialMedia = (index: number, value: SocialMedia): NotificationAction => ({
+  type: SET_NOTIFICATION_SOCIAL_MEDIA,
+  payload: { index, value },
+});
+
+export const removeNotificationSocialMedia = (index: number): NotificationAction => ({
+  type: REMOVE_NOTIFICATION_SOCIAL_MEDIA,
+  payload: index,
 });
 
 export const setNotificationPhoto = (index: number, value: Photo): NotificationAction => ({

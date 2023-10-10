@@ -66,6 +66,7 @@ export const INITIAL_NOTIFICATION: NotificationSchema = {
     email: "",
     phone: "",
   },
+  social_media: [],
 };
 
 export const INITIAL_NOTIFICATION_EXTRA: NotificationExtra = {
@@ -150,6 +151,7 @@ export const INITIAL_NOTIFICATION_VALIDATION: NotificationValidationSchema = {
     phone: { valid: true },
   },
   photos: [],
+  social_media: [],
 };
 
 export const INITIAL_TRANSLATION: TranslationSchema = {
@@ -234,6 +236,7 @@ export const INITIAL_MODERATION_EXTRA: ModerationExtra = {
   },
   openingTimesId: 0,
   openingTimesNotificationId: 0,
+  uniqueSocialMediaItems: [],
 };
 
 const getInitialModerationStatus = (moderationStatus: ModerationStatus): ModerationStatusSchema => {
@@ -288,6 +291,7 @@ const getInitialModerationStatus = (moderationStatus: ModerationStatus): Moderat
       en: moderationStatus,
     },
     photos: [],
+    socialMedia: [],
     openingTimes: moderationStatus,
   };
 };
