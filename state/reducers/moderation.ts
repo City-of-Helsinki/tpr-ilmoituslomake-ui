@@ -26,7 +26,7 @@ import {
   REMOVE_MODERATION_PHOTO,
   SET_MODERATION_OPENING_TIMES_ID,
 } from "../../types/constants";
-import { Photo, SocialMedia, SocialMediaSchema } from "../../types/general";
+import { Photo, SocialMedia } from "../../types/general";
 import { INITIAL_MODERATION_EXTRA, INITIAL_NOTIFICATION } from "../../types/initial";
 
 const initialState: ModerationState = {
@@ -255,10 +255,7 @@ const moderation = (state: ModerationState | undefined, action: AnyAction): Mode
 
       // If index -1 is specified, add the social media item to both arrays
       // Otherwise combine the field value with the existing social media item in the modified array
-      const uniqueSocialMediaItems = [
-        ...state.moderationExtra.uniqueSocialMediaItems,
-        ...(action.payload.index === -1 ? [action.payload.value] : []),
-      ];
+      const socialMediaUuids = [...state.moderationExtra.socialMediaUuids, ...(action.payload.index === -1 ? [action.payload.value.uuid] : [])];
       const socialMediaItems = state.modifiedTask.social_media
         ? [
             ...state.modifiedTask.social_media.reduce((acc: SocialMedia[], item, index) => {
@@ -271,7 +268,7 @@ const moderation = (state: ModerationState | undefined, action: AnyAction): Mode
       return {
         ...state,
         modifiedTask: { ...state.modifiedTask, social_media: socialMediaItems },
-        moderationExtra: { ...state.moderationExtra, uniqueSocialMediaItems },
+        moderationExtra: { ...state.moderationExtra, socialMediaUuids },
       };
     }
 
@@ -279,8 +276,8 @@ const moderation = (state: ModerationState | undefined, action: AnyAction): Mode
       console.log("REMOVE_MODERATION_SOCIAL_MEDIA", action.payload);
 
       // Remove the social media item at the specified index
-      const uniqueSocialMediaItems = state.moderationExtra.uniqueSocialMediaItems.reduce((acc: SocialMediaSchema[], item, index) => {
-        return action.payload === index ? acc : [...acc, item];
+      const socialMediaUuids = state.moderationExtra.socialMediaUuids.reduce((acc: string[], uuid, index) => {
+        return action.payload === index ? acc : [...acc, uuid];
       }, []);
       const socialMediaItems = state.modifiedTask.social_media
         ? state.modifiedTask.social_media.reduce((acc: SocialMedia[], item, index) => {
@@ -291,7 +288,7 @@ const moderation = (state: ModerationState | undefined, action: AnyAction): Mode
       return {
         ...state,
         modifiedTask: { ...state.modifiedTask, social_media: socialMediaItems },
-        moderationExtra: { ...state.moderationExtra, uniqueSocialMediaItems },
+        moderationExtra: { ...state.moderationExtra, socialMediaUuids },
       };
     }
 

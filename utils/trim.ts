@@ -81,8 +81,8 @@ export const getTrimmedNotification = (notification: NotificationSchema): Notifi
       en: trimStringField(website.en),
     },
     social_media: social_media?.map((item) => {
-      const { title, link } = item;
-      return { title: trimStringField(title), link: trimStringField(link) };
+      const { uuid, title, link } = item;
+      return { uuid, title: trimStringField(title), link: trimStringField(link) };
     }),
     images,
     comments: trimStringField(comments),

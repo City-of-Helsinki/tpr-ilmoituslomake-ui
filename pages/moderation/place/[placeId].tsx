@@ -140,14 +140,7 @@ export const getServerSideProps: GetServerSideProps = async ({ req, resolvedUrl,
               sv: placeData.extra_keywords.sv.join(", "),
               en: placeData.extra_keywords.en.join(", "),
             },
-            uniqueSocialMediaItems: placeResult.data.social_media
-              ? placeResult.data.social_media.map((item) => {
-                  return {
-                    title: item.title ?? "",
-                    link: item.link ?? "",
-                  };
-                })
-              : [],
+            socialMediaUuids: placeResult.data.social_media ? placeResult.data.social_media.map((item) => item.uuid) : [],
             photosUuids: placeResult.data.images.map((image) => image.uuid ?? ""),
             photosSelected: placeResult.data.images.map((image) => {
               return {

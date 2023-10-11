@@ -2,6 +2,7 @@ import React, { Dispatch, ChangeEvent, ReactElement } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useI18n } from "next-localization";
 import { Button, IconPlus, Notification as HdsNotification, TextInput } from "hds-react";
+import { v4 as uuidv4 } from "uuid";
 import { ModerationAction } from "../../state/actions/moderationTypes";
 import { ModerationStatusAction } from "../../state/actions/moderationStatusTypes";
 import { removeModerationSocialMedia, setModerationSocialMedia } from "../../state/actions/moderation";
@@ -24,7 +25,7 @@ const SocialMediaModeration = (): ReactElement => {
   const { social_media: socialMediaModified = [] } = modifiedTask;
 
   const moderationExtra = useSelector((state: RootState) => state.moderation.moderationExtra);
-  const { taskType, taskStatus, uniqueSocialMediaItems } = moderationExtra;
+  const { taskType, taskStatus, socialMediaUuids } = moderationExtra;
 
   const moderationStatus = useSelector((state: RootState) => state.moderationStatus.moderationStatus);
   const { socialMedia: socialMediaStatus } = moderationStatus;
@@ -38,6 +39,7 @@ const SocialMediaModeration = (): ReactElement => {
   const addSocialMediaItem = () => {
     dispatch(
       setModerationSocialMedia(-1, {
+        uuid: uuidv4(),
         title: "",
         link: "",
         new: true,
@@ -62,10 +64,10 @@ const SocialMediaModeration = (): ReactElement => {
 
   return (
     <div>
-      {uniqueSocialMediaItems.map((uniqueItem, index) => {
+      {socialMediaUuids.map((uuid, index) => {
         const key = `socialmedia_${index}`;
-        const selectedSocialMediaItem = socialMediaSelected.find((sm) => sm.title === uniqueItem.title && sm.link === uniqueItem.link);
-        const modifiedSocialMediaItem = socialMediaModified.find((sm) => sm.title === uniqueItem.title && sm.link === uniqueItem.link);
+        const selectedSocialMediaItem = socialMediaSelected.find((sm) => sm.uuid === uuid);
+        const modifiedSocialMediaItem = socialMediaModified.find((sm) => sm.uuid === uuid);
 
         return (
           <div key={key} className="formSection">

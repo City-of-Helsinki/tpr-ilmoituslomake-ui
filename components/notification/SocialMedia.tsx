@@ -2,6 +2,7 @@ import React, { Dispatch, ChangeEvent, ReactElement } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useI18n } from "next-localization";
 import { Button, IconPlus, TextInput } from "hds-react";
+import { v4 as uuidv4 } from "uuid";
 import { NotificationAction } from "../../state/actions/notificationTypes";
 import { NotificationValidationAction } from "../../state/actions/notificationValidationTypes";
 import { removeNotificationSocialMedia, setNotificationSocialMedia } from "../../state/actions/notification";
@@ -21,7 +22,7 @@ const SocialMedia = (): ReactElement => {
   const { social_media = [] } = notification;
 
   const notificationValidation = useSelector((state: RootState) => state.notificationValidation.notificationValidation);
-  const { social_media: socialMediaValid } = notificationValidation;
+  const { social_media: socialMediaValid = [] } = notificationValidation;
 
   const updateSocialMedia = (index: number, evt: ChangeEvent<HTMLInputElement>) => {
     dispatch(setNotificationSocialMedia(index, { ...social_media[index], [evt.target.name]: evt.target.value }));
@@ -30,6 +31,7 @@ const SocialMedia = (): ReactElement => {
   const addSocialMediaItem = () => {
     dispatch(
       setNotificationSocialMedia(-1, {
+        uuid: uuidv4(),
         title: "",
         link: "",
         new: true,

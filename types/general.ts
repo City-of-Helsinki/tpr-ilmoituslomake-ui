@@ -86,13 +86,8 @@ export interface PhotoTranslation {
   [key: string]: unknown;
 }
 
-export interface SocialMediaSchema {
-  title: string;
-  link: string;
-  [key: string]: unknown;
-}
-
 export interface SocialMedia {
+  uuid: string;
   title: string;
   link: string;
   new?: boolean;
@@ -479,7 +474,7 @@ export interface ModerationExtra {
   addressFound?: AddressSearchResult;
   openingTimesId: number;
   openingTimesNotificationId: number;
-  uniqueSocialMediaItems: SocialMediaSchema[];
+  socialMediaUuids: string[];
 }
 
 export interface ModerationTranslationRequestTaskSearch {

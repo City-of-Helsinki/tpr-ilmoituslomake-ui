@@ -236,7 +236,7 @@ export const INITIAL_MODERATION_EXTRA: ModerationExtra = {
   },
   openingTimesId: 0,
   openingTimesNotificationId: 0,
-  uniqueSocialMediaItems: [],
+  socialMediaUuids: [],
 };
 
 const getInitialModerationStatus = (moderationStatus: ModerationStatus): ModerationStatusSchema => {

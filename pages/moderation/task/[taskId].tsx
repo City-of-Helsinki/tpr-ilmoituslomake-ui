@@ -235,11 +235,11 @@ export const getServerSideProps: GetServerSideProps = async ({ req, resolvedUrl,
           ...newImages.map((image) => image.uuid),
         ].filter((v, i, a) => a.indexOf(v) === i);
 
-        // Make a list of all unique social media items
+        // Make a list of all unique social media uuids
         const originalSocialMediaItems = targetData.social_media || [];
         const modifiedSocialMediaItems = modifiedTask.social_media || [];
-        const uniqueSocialMediaItems = [...originalSocialMediaItems, ...modifiedSocialMediaItems].filter(
-          (item, i, a) => a.findIndex((t) => t.title === item.title && t.link === item.link) === i
+        const socialMediaUuids = [...originalSocialMediaItems.map((item) => item.uuid), ...modifiedSocialMediaItems.map((item) => item.uuid)].filter(
+          (v, i, a) => a.indexOf(v) === i
         );
 
         // For photosSelected, only include a photo if it also exists in the modified images
@@ -280,7 +280,7 @@ export const getServerSideProps: GetServerSideProps = async ({ req, resolvedUrl,
               sv: modifiedTask.extra_keywords.sv.join(", "),
               en: modifiedTask.extra_keywords.en.join(", "),
             },
-            uniqueSocialMediaItems,
+            socialMediaUuids,
             photosUuids: uuids,
             photosSelected: uuids.map((uuid) => {
               const originalImage = originalImages.find((i) => i.uuid === uuid);
@@ -346,7 +346,7 @@ export const getServerSideProps: GetServerSideProps = async ({ req, resolvedUrl,
                   source: ModerationStatus.Unknown,
                 } as PhotoStatus;
               }),
-              socialMedia: uniqueSocialMediaItems.map(() => {
+              socialMedia: socialMediaUuids.map(() => {
                 return {
                   title: ModerationStatus.Unknown,
                   link: ModerationStatus.Unknown,
@@ -374,7 +374,7 @@ export const getServerSideProps: GetServerSideProps = async ({ req, resolvedUrl,
                   source: ModerationStatus.Edited,
                 } as PhotoStatus;
               }),
-              socialMedia: uniqueSocialMediaItems.map(() => {
+              socialMedia: socialMediaUuids.map(() => {
                 return {
                   title: ModerationStatus.Edited,
                   link: ModerationStatus.Edited,

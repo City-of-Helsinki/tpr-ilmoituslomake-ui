@@ -98,6 +98,7 @@ export interface NotificationSchema {
     [k: string]: unknown;
   };
   social_media?: {
+    uuid: string;
     title: string;
     link: string;
     [k: string]: unknown;
