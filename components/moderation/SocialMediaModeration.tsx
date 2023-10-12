@@ -124,6 +124,11 @@ const SocialMediaModeration = (): ReactElement => {
                     )}
                   </div>
                 )}
+                {(taskType === TaskType.ChangeTip ||
+                  taskType === TaskType.AddTip ||
+                  taskType === TaskType.ModeratorChange ||
+                  taskType === TaskType.ModeratorAdd) && <div className={styles.gridSelected} />}
+
                 <div
                   className={
                     taskType === TaskType.NewPlace ||
