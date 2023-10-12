@@ -43,6 +43,10 @@ export interface NotificationState {
   notificationId: number;
   notification: NotificationSchema;
   notificationExtra: NotificationExtra;
+  isSending: {
+    notification: boolean;
+    tip: boolean;
+  };
 }
 
 export interface NotificationValidationState {

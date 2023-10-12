@@ -13,6 +13,12 @@ export interface PhotoStatus {
   [key: string]: ModerationStatus | unknown;
 }
 
+export interface SocialMediaStatus {
+  title: ModerationStatus;
+  link: ModerationStatus;
+  [key: string]: ModerationStatus | unknown;
+}
+
 export interface ModerationStatusSchema {
   name: {
     fi: ModerationStatus;
@@ -69,5 +75,6 @@ export interface ModerationStatusSchema {
     [key: string]: ModerationStatus;
   };
   photos: PhotoStatus[];
+  socialMedia: SocialMediaStatus[];
   openingTimes: ModerationStatus;
 }

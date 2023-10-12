@@ -12,6 +12,8 @@ import {
   SET_NOTIFICATION_LOCATION_VALIDATION,
   SET_NOTIFICATION_CONTACT_VALIDATION,
   SET_NOTIFICATION_LINK_VALIDATION,
+  SET_NOTIFICATION_SOCIAL_MEDIA_VALIDATION,
+  REMOVE_NOTIFICATION_SOCIAL_MEDIA_VALIDATION,
   SET_NOTIFICATION_PHOTO_VALIDATION,
   SET_NOTIFICATION_PHOTO_ALT_TEXT_VALIDATION,
   REMOVE_NOTIFICATION_PHOTO_VALIDATION,
@@ -20,7 +22,7 @@ import {
   SET_NOTIFICATION_TIP_VALIDATION_SUMMARY,
 } from "../../types/constants";
 import { KeyValueValidation, Validation } from "../../types/general";
-import { PhotoValidation } from "../../types/notification_validation";
+import { PhotoValidation, SocialMediaValidation } from "../../types/notification_validation";
 
 interface SetPageValidAction extends AnyAction {
   type: typeof SET_PAGE_VALID;
@@ -82,6 +84,16 @@ interface SetNotificationLinkValidationAction extends AnyAction {
   payload: KeyValueValidation;
 }
 
+interface SetNotificationSocialMediaValidationAction extends AnyAction {
+  type: typeof SET_NOTIFICATION_SOCIAL_MEDIA_VALIDATION;
+  payload: { index: number; validation: SocialMediaValidation | KeyValueValidation };
+}
+
+interface RemoveNotificationSocialMediaValidationAction extends AnyAction {
+  type: typeof REMOVE_NOTIFICATION_SOCIAL_MEDIA_VALIDATION;
+  payload: number;
+}
+
 interface SetNotificationPhotoValidationAction extends AnyAction {
   type: typeof SET_NOTIFICATION_PHOTO_VALIDATION;
   payload: { index: number; validation: PhotoValidation | KeyValueValidation };
@@ -125,6 +137,8 @@ export type NotificationValidationAction =
   | SetNotificationLocationValidationAction
   | SetNotificationContactValidationAction
   | SetNotificationLinkValidationAction
+  | SetNotificationSocialMediaValidationAction
+  | RemoveNotificationSocialMediaValidationAction
   | SetNotificationPhotoValidationAction
   | SetNotificationPhotoAltTextValidationAction
   | RemoveNotificationPhotoValidationAction

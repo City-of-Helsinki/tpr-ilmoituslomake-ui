@@ -18,10 +18,13 @@ import {
   SET_NOTIFICATION_LOCATION,
   SET_NOTIFICATION_CONTACT,
   SET_NOTIFICATION_LINK,
+  SET_NOTIFICATION_SOCIAL_MEDIA,
+  REMOVE_NOTIFICATION_SOCIAL_MEDIA,
   SET_NOTIFICATION_PHOTO,
   REMOVE_NOTIFICATION_PHOTO,
   SET_NOTIFICATION_COMMENTS,
   SET_NOTIFICATION_TIP,
+  SET_NOTIFICATION_SENDING,
   SET_SENT_NOTIFICATION,
 } from "../../types/constants";
 import {
@@ -33,6 +36,7 @@ import {
   NotificationPlaceResults,
   NotificationPlaceSearch,
   Photo,
+  SocialMedia,
   TagOption,
 } from "../../types/general";
 import { NotificationSchema } from "../../types/notification_schema";
@@ -128,6 +132,16 @@ export const setNotificationLink = (keyValue: KeyValueString): NotificationActio
   payload: keyValue,
 });
 
+export const setNotificationSocialMedia = (index: number, value: SocialMedia): NotificationAction => ({
+  type: SET_NOTIFICATION_SOCIAL_MEDIA,
+  payload: { index, value },
+});
+
+export const removeNotificationSocialMedia = (index: number): NotificationAction => ({
+  type: REMOVE_NOTIFICATION_SOCIAL_MEDIA,
+  payload: index,
+});
+
 export const setNotificationPhoto = (index: number, value: Photo): NotificationAction => ({
   type: SET_NOTIFICATION_PHOTO,
   payload: { index, value },
@@ -146,6 +160,11 @@ export const setNotificationComments = (value: string): NotificationAction => ({
 export const setNotificationTip = (tip: ChangeRequestSchema): NotificationAction => ({
   type: SET_NOTIFICATION_TIP,
   payload: tip,
+});
+
+export const setNotificationSending = (keyValue: KeyValueBoolean): NotificationAction => ({
+  type: SET_NOTIFICATION_SENDING,
+  payload: keyValue,
 });
 
 export const setSentNotification = (

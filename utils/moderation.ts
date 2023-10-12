@@ -152,6 +152,108 @@ export const approveModeration = async (
   }
 };
 
+export const saveModerationAsDraft = async (
+  currentUser: User | undefined,
+  modifiedTaskId: number,
+  draftTask: NotificationSchema,
+  draftPhotos: Photo[],
+  openingTimesId: number,
+  moderationExtra: ModerationExtra,
+  router: NextRouter,
+  setToast: Dispatch<SetStateAction<Toast | undefined>>
+): Promise<void> => {
+  try {
+    // TODO - fix notifier validation
+    // const valid = validateNotificationData(modifiedTask);
+    const valid = true;
+
+    if (currentUser?.authenticated && valid) {
+      // Send the Cross Site Request Forgery token, otherwise the backend returns the error "CSRF Failed: CSRF token missing or incorrect."
+      const csrftoken = Cookies.get("csrftoken");
+
+      const {
+        moderator: { fullName: moderatorName },
+      } = moderationExtra;
+
+      // Check if this task has already been assigned to a moderator
+      if (moderatorName.length === 0) {
+        // Assign the moderation task to the current user
+        const assignResponse = await fetch(`${getOrigin(router)}/api/moderation/assign/${modifiedTaskId}/`, {
+          method: "PUT",
+          headers: {
+            "X-CSRFToken": csrftoken as string,
+          },
+        });
+        if (assignResponse.ok) {
+          const assignResult = await assignResponse.json();
+          console.log("ASSIGN RESPONSE", assignResult);
+        } else {
+          setToast(Toast.SaveFailed);
+
+          const assignResult = await assignResponse.text();
+          console.log("ASSIGN FAILED", assignResult);
+        }
+      }
+
+      // Force opening_times to be an empty object for now
+      // The opening times id is a positive number if approved, or 0 if rejected
+      const postData = {
+        data: {
+          ...draftTask,
+          images: draftPhotos.map((photo, index) => {
+            const { uuid, sourceType: source_type, url, altText: alt_text, permission, source, mediaId: media_id } = photo;
+            return { index, uuid, source_type, url, alt_text, permission, source, media_id };
+          }),
+          opening_times: {},
+        },
+        images: draftPhotos.map((photo, index) => {
+          const { uuid, url, preview, base64 } = photo;
+          return { index, uuid, url: photo.new ? url : preview, ...(photo.new && { base64 }) };
+        }),
+        hauki_id: openingTimesId,
+      };
+
+      console.log("SENDING DRAFT", postData);
+
+      // Save the moderation task with the possibly modified data as a draft, not to be published yet
+      const saveResponse = await fetch(`${getOrigin(router)}/api/moderation/todos/${modifiedTaskId}/`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          "X-CSRFToken": csrftoken as string,
+        },
+        mode: "same-origin",
+        body: JSON.stringify(postData),
+      });
+      if (saveResponse.ok) {
+        const saveResult = await saveResponse.json();
+        console.log("SAVE RESPONSE", saveResult);
+
+        if (saveResult.id) {
+          // Reload the current page to update the page statuses
+          // router.reload();
+          router.push(`/moderation/task/${modifiedTaskId}`);
+          setToast(Toast.SaveSucceeded);
+        } else {
+          setToast(Toast.SaveFailed);
+        }
+      } else {
+        setToast(Toast.SaveFailed);
+
+        const saveResult = await saveResponse.text();
+        console.log("SAVE FAILED", saveResult);
+      }
+    } else if (!valid) {
+      setToast(Toast.ValidationFailed);
+    } else {
+      setToast(Toast.NotAuthenticated);
+    }
+  } catch (err) {
+    console.log("ERROR", err);
+    setToast(Toast.SaveFailed);
+  }
+};
+
 export const rejectModeration = async (
   currentUser: User | undefined,
   modifiedTaskId: number,

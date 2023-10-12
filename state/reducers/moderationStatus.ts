@@ -13,12 +13,14 @@ import {
   SET_MODERATION_LOCATION_STATUS,
   SET_MODERATION_CONTACT_STATUS,
   SET_MODERATION_LINK_STATUS,
+  SET_MODERATION_SOCIAL_MEDIA_STATUS,
+  REMOVE_MODERATION_SOCIAL_MEDIA_STATUS,
   SET_MODERATION_PHOTO_STATUS,
   SET_MODERATION_PHOTO_ALT_TEXT_STATUS,
   REMOVE_MODERATION_PHOTO_STATUS,
   SET_MODERATION_OPENING_TIMES_STATUS,
 } from "../../types/constants";
-import { PhotoStatus } from "../../types/moderation_status";
+import { PhotoStatus, SocialMediaStatus } from "../../types/moderation_status";
 import { INITIAL_MODERATION_STATUS } from "../../types/initial";
 
 const initialState: ModerationStatusState = {
@@ -144,6 +146,42 @@ const moderationStatus = (state: ModerationStatusState | undefined, action: AnyA
       return {
         ...state,
         moderationStatus: { ...state.moderationStatus, website: { ...state.moderationStatus.website, ...action.payload } },
+      };
+    }
+
+    case SET_MODERATION_SOCIAL_MEDIA_STATUS: {
+      console.log("SET_MODERATION_SOCIAL_MEDIA_STATUS", action.payload);
+
+      // If index -1 is specified, add the social media item to the array
+      // Otherwise combine the field status with the existing social media item status in the array
+      const socialMediaItems = [
+        ...state.moderationStatus.socialMedia.reduce(
+          (acc: SocialMediaStatus[], socialMediaStatus, index) => [
+            ...acc,
+            action.payload.index === index ? { ...socialMediaStatus, ...action.payload.status } : socialMediaStatus,
+          ],
+          []
+        ),
+        ...(action.payload.index === -1 ? [action.payload.status] : []),
+      ];
+
+      return {
+        ...state,
+        moderationStatus: { ...state.moderationStatus, socialMedia: socialMediaItems },
+      };
+    }
+
+    case REMOVE_MODERATION_SOCIAL_MEDIA_STATUS: {
+      console.log("REMOVE_MODERATION_SOCIAL_MEDIA_STATUS", action.payload);
+
+      // Remove the social media item at the specified index
+      const socialMediaItems = state.moderationStatus.socialMedia.reduce((acc: SocialMediaStatus[], socialMediaStatus, index) => {
+        return action.payload === index ? acc : [...acc, socialMediaStatus];
+      }, []);
+
+      return {
+        ...state,
+        moderationStatus: { ...state.moderationStatus, socialMedia: socialMediaItems },
       };
     }
 

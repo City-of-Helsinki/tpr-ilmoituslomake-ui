@@ -19,10 +19,13 @@ import {
   SET_NOTIFICATION_LOCATION,
   SET_NOTIFICATION_CONTACT,
   SET_NOTIFICATION_LINK,
+  SET_NOTIFICATION_SOCIAL_MEDIA,
+  REMOVE_NOTIFICATION_SOCIAL_MEDIA,
   SET_NOTIFICATION_PHOTO,
   REMOVE_NOTIFICATION_PHOTO,
   SET_NOTIFICATION_COMMENTS,
   SET_NOTIFICATION_TIP,
+  SET_NOTIFICATION_SENDING,
   SET_SENT_NOTIFICATION,
 } from "../../types/constants";
 import {
@@ -34,6 +37,7 @@ import {
   NotificationPlaceResults,
   NotificationPlaceSearch,
   Photo,
+  SocialMedia,
   TagOption,
 } from "../../types/general";
 import { NotificationSchema } from "../../types/notification_schema";
@@ -128,6 +132,16 @@ interface SetNotificationLinkAction extends AnyAction {
   payload: KeyValueString;
 }
 
+interface SetNotificationSocialMediaAction extends AnyAction {
+  type: typeof SET_NOTIFICATION_SOCIAL_MEDIA;
+  payload: { index: number; value: SocialMedia };
+}
+
+interface RemoveNotificationSocialMediaAction extends AnyAction {
+  type: typeof REMOVE_NOTIFICATION_SOCIAL_MEDIA;
+  payload: number;
+}
+
 interface SetNotificationPhotoAction extends AnyAction {
   type: typeof SET_NOTIFICATION_PHOTO;
   payload: { index: number; value: Photo };
@@ -146,6 +160,11 @@ interface SetNotificationCommentsAction extends AnyAction {
 interface SetNotificationTipAction extends AnyAction {
   type: typeof SET_NOTIFICATION_TIP;
   payload: ChangeRequestSchema;
+}
+
+interface SetNotificationSending extends AnyAction {
+  type: typeof SET_NOTIFICATION_SENDING;
+  payload: KeyValueBoolean;
 }
 
 interface SetSentNotificationAction extends AnyAction {
@@ -176,8 +195,11 @@ export type NotificationAction =
   | SetNotificationLocationAction
   | SetNotificationContactAction
   | SetNotificationLinkAction
+  | SetNotificationSocialMediaAction
+  | RemoveNotificationSocialMediaAction
   | SetNotificationPhotoAction
   | RemoveNotificationPhotoAction
   | SetNotificationCommentsAction
   | SetNotificationTipAction
+  | SetNotificationSending
   | SetSentNotificationAction;

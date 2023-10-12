@@ -1,7 +1,7 @@
 import { Dispatch } from "react";
 import { NextRouter } from "next/router";
 import { ModerationAction } from "../state/actions/moderationTypes";
-import { setModerationAddress, setModerationLocation } from "../state/actions/moderation";
+import { setModerationAddress, setModerationAddressFound, setModerationLocation } from "../state/actions/moderation";
 // import getOrigin from "./request";
 import { NEIGHBOURHOOD_URL, SEARCH_URL } from "../types/constants";
 
@@ -57,7 +57,13 @@ export const geocodeModerationAddress = async (
 
     if (geocodeResult.results && geocodeResult.results.length > 0) {
       // Use the first result
-      const { location: resultLocation } = geocodeResult.results[0];
+      const {
+        location: resultLocation,
+        street: resultStreet,
+        number: resultNumber,
+        letter: resultLetter,
+        municipality: resultMunicipality,
+      } = geocodeResult.results[0];
       console.log("USING GEOCODE RESULT", geocodeResult.results[0]);
 
       // Set the location in redux state using the geocoded position
@@ -65,12 +71,17 @@ export const geocodeModerationAddress = async (
       // The geocoder returns the coordinates as lon,lat but Leaflet needs them as lat,lon
       dispatch(setModerationLocation([resultLocation.coordinates[1], resultLocation.coordinates[0]]));
 
-      // Also fetch the neighbourhood for these coordinates
-      getModerationNeighborhood(router, resultLocation.coordinates[0], resultLocation.coordinates[1], dispatch);
+      // Store the address found for display later if needed
+      dispatch(
+        setModerationAddressFound({
+          street: `${resultStreet.name[language] ?? ""} ${resultNumber ?? ""}${resultLetter ?? ""}`,
+          postalCode: "",
+          postOffice: resultMunicipality.name[language] ?? "",
+        })
+      );
     } else {
       dispatch(setModerationLocation([0, 0]));
-      dispatch(setModerationAddress("fi", { neighborhood_id: "", neighborhood: "" }));
-      dispatch(setModerationAddress("sv", { neighborhood_id: "", neighborhood: "" }));
+      dispatch(setModerationAddressFound(undefined));
     }
   }
 };
@@ -85,5 +96,81 @@ export const searchModerationAddress = (
   if (street.length > 0 && postOffice.length > 0) {
     // The Helsinki API does not use postal code
     geocodeModerationAddress(router, street, postOffice, language, dispatch);
+  }
+};
+
+export const geocodeModerationAltAddress = async (
+  router: NextRouter,
+  street: string,
+  postalCode: string,
+  postOffice: string,
+  language: string,
+  dispatch: Dispatch<ModerationAction>
+): Promise<void> => {
+  const altLanguage = language === "fi" ? "sv" : "fi";
+
+  // The Helsinki API does not use postal code
+  const geocodeResponse = await fetch(`${SEARCH_URL}&type=address&input=${street.trim()}&municipality=${postOffice.trim()}&language=${language}`);
+  if (geocodeResponse.ok) {
+    const geocodeResult = await geocodeResponse.json();
+
+    console.log("GEOCODE RESPONSE", geocodeResult);
+
+    if (geocodeResult.results && geocodeResult.results.length > 0) {
+      // Use the first result
+      const {
+        location: resultLocation,
+        street: resultStreet,
+        number: resultNumber,
+        letter: resultLetter,
+        municipality: resultMunicipality,
+      } = geocodeResult.results[0];
+      console.log("USING GEOCODE RESULT", geocodeResult.results[0]);
+
+      // Set the alternative language address
+      dispatch(
+        setModerationAddress(altLanguage, {
+          street: `${resultStreet.name[altLanguage] ?? ""} ${resultNumber ?? ""}${resultLetter ?? ""}`,
+          postal_code: postalCode,
+          post_office: resultMunicipality.name[altLanguage] ?? "",
+        })
+      );
+
+      // Also fetch the neighbourhood for the coordinates
+      getModerationNeighborhood(router, resultLocation.coordinates[0], resultLocation.coordinates[1], dispatch);
+
+      // Store the address found for display later if needed
+      dispatch(
+        setModerationAddressFound({
+          street: `${resultStreet.name[language] ?? ""} ${resultNumber ?? ""}${resultLetter ?? ""}`,
+          postalCode: "",
+          postOffice: resultStreet.municipality ?? "",
+        })
+      );
+    } else {
+      dispatch(setModerationAddress("fi", { neighborhood_id: "", neighborhood: "" }));
+      dispatch(setModerationAddress("sv", { neighborhood_id: "", neighborhood: "" }));
+      dispatch(
+        setModerationAddress(altLanguage, {
+          street: "",
+          postal_code: "",
+          post_office: "",
+        })
+      );
+      dispatch(setModerationAddressFound(undefined));
+    }
+  }
+};
+
+export const searchModerationAltAddress = (
+  router: NextRouter,
+  street: string,
+  postalCode: string,
+  postOffice: string,
+  language: string,
+  dispatch: Dispatch<ModerationAction>
+): void => {
+  if (street.length > 0 && postOffice.length > 0) {
+    geocodeModerationAltAddress(router, street, postalCode, postOffice, language, dispatch);
   }
 };
