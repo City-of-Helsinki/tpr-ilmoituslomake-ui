@@ -4,7 +4,9 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { useI18n } from "next-localization";
 import { Button } from "hds-react";
+import { NotificationAction } from "../../state/actions/notificationTypes";
 import { NotificationValidationAction } from "../../state/actions/notificationValidationTypes";
+import { setNotificationSending } from "../../state/actions/notification";
 import { setNotificationTipValidationSummary, setPageValid } from "../../state/actions/notificationValidation";
 import { RootState } from "../../state/reducers";
 import { Toast } from "../../types/constants";
@@ -18,16 +20,20 @@ interface TipFooterProps {
 
 const TipFooter = ({ setToast }: TipFooterProps): ReactElement => {
   const i18n = useI18n();
+  const dispatch = useDispatch<Dispatch<NotificationAction>>();
   const dispatchValidation = useDispatch<Dispatch<NotificationValidationAction>>();
   const router = useRouter();
 
   const tip = useSelector((state: RootState) => state.notification.tip);
+  const isSending = useSelector((state: RootState) => state.notification.isSending.tip);
 
-  const sendTip = () => {
+  const sendTip = async () => {
     if (isTipPageValid(tip, dispatchValidation)) {
       // The page is valid, so save the tip
       dispatchValidation(setNotificationTipValidationSummary({}));
-      saveTip(tip, router, dispatchValidation, setToast);
+      dispatch(setNotificationSending({ tip: true }));
+      await saveTip(tip, router, dispatchValidation, setToast);
+      dispatch(setNotificationSending({ tip: false }));
       dispatchValidation(setPageValid(true));
     } else {
       // The page is not valid, but set the page to valid then invalid to force the page to show the general validation message
@@ -40,7 +46,9 @@ const TipFooter = ({ setToast }: TipFooterProps): ReactElement => {
   return (
     <div className={styles.tipFooter}>
       <div className={styles.flexButton}>
-        <Button onClick={sendTip}>{i18n.t("notification.button.send")}</Button>
+        <Button onClick={sendTip} disabled={isSending}>
+          {i18n.t("notification.button.send")}
+        </Button>
       </div>
 
       <div className={`${styles.flexButton} ${styles.flexButtonRight}`}>

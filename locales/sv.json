@@ -354,11 +354,11 @@
       },
       "permission": {
         "title": "Nyttjanderätt",
-        "notice": "OBS! Du bör ha rättigheter till det foto du laddar upp till tjänsten. Genom att ladda upp fotot ger du lov till Helsinki Marketing att dela vidare fotot via det öppna gränssnittet MyHelsinki. Du bör välja en av nedanstående bildrättigheter för fotot. Se mer information i bruksvillkoren.",
+        "notice": "OBS! Du måste ha rättigheterna till den bild du laddar upp. Genom att ladda upp en bild ger du Helsingfors stad rätt att vidaredistribuera den i ett öppet gränssnitt. Du måste välja en av bildbehörigheterna nedan. Se användarvillkoren för mer information.",
         "label": "Nyttjanderätt till fotot",
-        "locationOnly": "Fotot får endast användas i samband med stället i fråga, t.ex. på MyHelsinki.fi-webbsidan. Fotot kan även delas som öppen data till tredje parter via det öppna gränssnittet MyHelsinki. Att använda eller flytta fotot för annan avsikt är förbjudet. Vid användning av foto bör bildkälla och fotografens namn anges.",
-        "creativeCommons1": "Bilden får delas med licensen Creative Commons BY 4.0. Vid användning av foto bör bildkälla och fotografens namn anges ",
-        "creativeCommons2": "Creative Commons BY 4.0.-licensen"
+        "locationOnly": "Bilden får fritt distribueras och användas i samband med webbplatsen. Vid användning av bilden måste namnet på den person som tog bilden och/eller ägaren till bilden nämnas. Användning eller överföring av bilden för något annat ändamål är förbjuden.",
+        "creativeCommons1": "Bilden får distribueras och användas fritt. Vid användning av bilden måste namnet på den person som tog bilden och/eller ägaren till bilden nämnas.",
+        "creativeCommons2": "Creative Commons BY 4.0. licens"
       },
       "source": {
         "label": "Bildkälla",
@@ -405,6 +405,21 @@
       "title": "Sammandrag av informationen",
       "heading": "Rubrik",
       "placeInfo": "Information om stället"
+    },
+    "socialMedia": {
+      "heading": "Sociala media",
+      "title": {
+        "label": "Titel",
+        "tooltipLabel": "Länk till tilläggsuppgifter",
+        "tooltipText": "Här kan du lägga till ställets titel till sociala medier, till exempel Facebook."
+      },
+      "link": {
+        "label": "Länk",
+        "tooltipLabel": "Länk till tilläggsuppgifter",
+        "tooltipText": "Här kan du lägga till ställets länk till sociala medier."
+      },
+      "addNew": "Lägg till ny sociala media",
+      "remove": "Ta bort sociala media"
     },
     "tags": {
       "title": "Ämnesord",
@@ -696,14 +711,16 @@
       "requestTranslation": "Pyydä käännös",
       "approveChangeRequest": "Hyväksy pyyntö",
       "rejectChangeRequest": "Hylkää pyyntö",
-      "cancelAdd": "Peruuta lisäys",
-      "cancelChange": "Peruuta muutos",
-      "cancelRemove": "Peruuta poisto",
+      "cancelAdd": "Hylkää lisäys",
+      "cancelChange": "Hylkää muutos",
+      "cancelRemove": "Hylkää poisto",
       "openForModifying": "Avaa muokattavaksi",
       "savePlace": "Tallenna kohde",
+      "savePlaceAsDraft": "Tallenna kohde luonnoksena",
       "removePlace": "Poista kohde",
       "saveIncomplete": "Tallenna keskeneräisenä",
       "saveInformation": "Tallenna",
+      "saveAsDraft": "Tallenna luonnoksena",
       "clearAllSelections": "Poista kaikki valinnat",
       "save": "Tallenna",
       "send": "Lähetä",
@@ -759,10 +776,11 @@
       "approveChangeRequest": "Oletko varma, että haluat tallentaa pyynnön?",
       "rejectChangeRequest": "Oletko varma, että haluat hylätä pyynnön?",
       "savePlace": "Oletko varma, että haluat tallentaa kohteen?",
+      "savePlaceAsDraft": "Oletko varma, että haluat tallentaa kohteen luonnoksena?",
       "removePlace": "Oletko varma, että haluat poistaa kohteen?",
-      "cancelAdd": "Oletko varma, että haluat peruuttaa lisäyksen?",
-      "cancelChange": "Oletko varma, että haluat peruuttaa muutoksen?",
-      "cancelRemove": "Oletko varma, että haluat peruuttaa poiston?",
+      "cancelAdd": "Oletko varma, että haluat hylätä lisäyksen?",
+      "cancelChange": "Oletko varma, että haluat hylätä muutoksen?",
+      "cancelRemove": "Oletko varma, että haluat hylätä poiston?",
       "sendTranslationRequest": "Oletko varma, että haluat lähettää käännöspyynnön?",
       "cancelTranslationRequest": "Oletko varma, että haluat peruuttaa käännöspyynnön?",
       "cancelTranslationRequests": "Oletko varma, että haluat peruuttaa valitut käännöspyynnöt?",
@@ -842,11 +860,15 @@
       },
       "neighborhood": {
         "label": "Kaupunginosa"
-      }
+      },
+      "addressNotFound": "Osoite ei löydy.",
+      "locationNotFound": "Osoitteen perusteella kohteelle ei löydy sijaintia kartalle. Lisää kohde kartalle napauttamalla karttaa siinä kohdassa, missä kohde sijaitsee."
     },
     "map": {
       "title": "Kohde kartalla",
       "geocode": "Näytä kartalla",
+      "fetchFinnishAddress": "Hae osoite suomeksi",
+      "fetchSwedishAddress": "Hae osoite ruotsiksi",
       "skipMap": "Ohita kartta"
     },
     "newTasks": {
@@ -877,8 +899,8 @@
       "permission": {
         "title": "Käyttöoikeudet",
         "label": "Kuvan käyttöoikeudet",
-        "locationOnly": "Kuvaa saa käyttää ainoastaan ko. kohteen yhteydessä esim. MyHelsinki.fi-sivustolla. Kuvaa voidaan jakaa myös avoimena datana kolmansille osapuolille MyHelsinki-avoimen rajapinnan kautta. Kuvan käyttö tai siirto muihin tarkoituksiin on kielletty. Kuvaa käytettäessä on ehdottomasti mainittava kuvan lähde ja kuvaaja.",
-        "creativeCommons": "Kuvaa saa jakaa Creative Commons BY 4.0.-lisenssillä. Kuvaa käytettäessä on ehdottomasti mainittava kuvan lähde ja kuvaaja."
+        "locationOnly": "Kuvaa saa vapaasti jakaa ja käyttää kohteen yhteydessä. Kuvaa käytettäessä on mainittava kuvan ottajan ja/tai kuvan omistajan nimi. Kuvan käyttö tai siirto muihin tarkoituksiin on kielletty.",
+        "creativeCommons": "Kuvaa saa vapaasti jakaa ja käyttää. Kuvaa käytettäessä on mainittava kuvan ottajan ja/tai kuvan omistajan nimi."
       },
       "source": {
         "label": "Kuvalähde",
@@ -931,6 +953,18 @@
       "address": "Osoite",
       "modifiedLast": "Muokattu viimeksi",
       "publishPermission": "Julkaistu"
+    },
+    "socialMedia": {
+      "heading": "Sosiaalinen media",
+      "title": {
+        "label": "Otsikko"
+      },
+      "link": {
+        "label": "Linkki"
+      },
+      "addNew": "Lisää uusi sosiaalinen media",
+      "remove": "Poista sosiaalinen media",
+      "removed": "Poistettu"
     },
     "tags": {
       "title": "Asiasanat",

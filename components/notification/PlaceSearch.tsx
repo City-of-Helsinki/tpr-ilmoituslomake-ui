@@ -96,19 +96,19 @@ const PlaceSearch = (): ReactElement => {
           <div className={styles.gridInput}>
             <SelectionGroup id="ownPlacesOnly" direction="horizontal" label={i18n.t("notification.placeSearch.ownPlacesOnly.label")}>
               <RadioButton
-                id="ownPlacesOnly_yes"
-                label={i18n.t("notification.placeSearch.ownPlacesOnly.yes")}
-                name="ownPlacesOnly"
-                value="yes"
-                checked={ownPlacesOnly}
-                onChange={updateSearchOption}
-              />
-              <RadioButton
                 id="ownPlacesOnly_no"
                 label={i18n.t("notification.placeSearch.ownPlacesOnly.no")}
                 name="ownPlacesOnly"
                 value="no"
                 checked={!ownPlacesOnly}
+                onChange={updateSearchOption}
+              />
+              <RadioButton
+                id="ownPlacesOnly_yes"
+                label={i18n.t("notification.placeSearch.ownPlacesOnly.yes")}
+                name="ownPlacesOnly"
+                value="yes"
+                checked={ownPlacesOnly}
                 onChange={updateSearchOption}
               />
             </SelectionGroup>

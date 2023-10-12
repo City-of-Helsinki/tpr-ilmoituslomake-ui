@@ -14,6 +14,12 @@ export interface PhotoValidation {
   [key: string]: Validation | unknown;
 }
 
+export interface SocialMediaValidation {
+  title: Validation;
+  link: Validation;
+  [key: string]: Validation | unknown;
+}
+
 export interface NotificationValidationSchema {
   inputLanguage: Validation;
   name: {
@@ -80,4 +86,5 @@ export interface NotificationValidationSchema {
     [key: string]: Validation;
   };
   photos: PhotoValidation[];
+  social_media: SocialMediaValidation[];
 }

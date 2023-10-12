@@ -26,12 +26,15 @@ import {
   SET_NOTIFICATION_LOCATION,
   SET_NOTIFICATION_CONTACT,
   SET_NOTIFICATION_LINK,
+  SET_NOTIFICATION_SOCIAL_MEDIA,
+  REMOVE_NOTIFICATION_SOCIAL_MEDIA,
   SET_NOTIFICATION_PHOTO,
   REMOVE_NOTIFICATION_PHOTO,
   SET_NOTIFICATION_COMMENTS,
+  SET_NOTIFICATION_SENDING,
   SET_SENT_NOTIFICATION,
 } from "../../types/constants";
-import { Photo } from "../../types/general";
+import { Photo, SocialMedia } from "../../types/general";
 import { INITIAL_NOTIFICATION, INITIAL_NOTIFICATION_EXTRA } from "../../types/initial";
 
 const initialState: NotificationState = {
@@ -40,7 +43,7 @@ const initialState: NotificationState = {
   zoom: MAP_INITIAL_ZOOM,
   placeSearch: {
     placeName: "",
-    ownPlacesOnly: true,
+    ownPlacesOnly: false,
     searchDone: false,
   },
   placeResults: {
@@ -57,6 +60,10 @@ const initialState: NotificationState = {
   notificationId: 0,
   notification: { ...INITIAL_NOTIFICATION, location: [0, 0] },
   notificationExtra: { ...INITIAL_NOTIFICATION_EXTRA, locationOriginal: [0, 0] },
+  isSending: {
+    notification: false,
+    tip: false,
+  },
 };
 
 const notification = (state: NotificationState | undefined, action: AnyAction): NotificationState => {
@@ -263,6 +270,41 @@ const notification = (state: NotificationState | undefined, action: AnyAction): 
       };
     }
 
+    case SET_NOTIFICATION_SOCIAL_MEDIA: {
+      console.log("SET_NOTIFICATION_SOCIAL_MEDIA", action.payload);
+
+      // If index -1 is specified, add the social media item to the array
+      // Otherwise combine the field value with the existing social media item in the array
+      const socialMediaItems = state.notification.social_media
+        ? [
+            ...state.notification.social_media.reduce(
+              (acc: SocialMedia[], item, index) => [...acc, action.payload.index === index ? { ...item, ...action.payload.value } : item],
+              []
+            ),
+            ...(action.payload.index === -1 ? [action.payload.value] : []),
+          ]
+        : [...(action.payload.index === -1 ? [action.payload.value] : [])];
+
+      return {
+        ...state,
+        notification: { ...state.notification, social_media: socialMediaItems },
+      };
+    }
+
+    case REMOVE_NOTIFICATION_SOCIAL_MEDIA: {
+      console.log("REMOVE_NOTIFICATION_SOCIAL_MEDIA", action.payload);
+
+      // Remove the social media item at the specified index
+      const socialMediaItems = state.notification.social_media
+        ? state.notification.social_media.reduce((acc: SocialMedia[], item, index) => (action.payload === index ? acc : [...acc, item]), [])
+        : [];
+
+      return {
+        ...state,
+        notification: { ...state.notification, social_media: socialMediaItems },
+      };
+    }
+
     case SET_NOTIFICATION_PHOTO: {
       console.log("SET_NOTIFICATION_PHOTO", action.payload);
 
@@ -299,6 +341,15 @@ const notification = (state: NotificationState | undefined, action: AnyAction): 
       return {
         ...state,
         notification: { ...state.notification, comments: action.payload },
+      };
+    }
+
+    case SET_NOTIFICATION_SENDING: {
+      console.log("SET_NOTIFICATION_SENDING", action.payload);
+      const [key, sending] = Object.entries(action.payload)[0];
+      return {
+        ...state,
+        isSending: { ...state.isSending, [key]: sending },
       };
     }
 

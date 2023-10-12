@@ -174,12 +174,16 @@ const Photos = (): ReactElement => {
                 />
 
                 <input className="hidden" type="file" ref={ref} onChange={(evt) => fetchPhoto(index, evt)} />
-                <Button variant="secondary" className="formInput" onClick={() => selectPhoto()}>
-                  {i18n.t("notification.button.selectFromDevice")}
-                </Button>
-                <Button variant="secondary" className="formInput" onClick={() => removePhoto(index)}>
-                  {i18n.t("notification.photos.remove")}
-                </Button>
+                <div className={styles.selectRemove}>
+                  <Button variant="secondary" onClick={() => selectPhoto()}>
+                    {i18n.t("notification.button.selectFromDevice")}
+                  </Button>
+                </div>
+                <div className={styles.selectRemove}>
+                  <Button variant="secondary" onClick={() => removePhoto(index)}>
+                    {i18n.t("notification.photos.remove")}
+                  </Button>
+                </div>
               </>
             )}
 
@@ -205,9 +209,11 @@ const Photos = (): ReactElement => {
                   aria-required
                   disabled={!isNewImage}
                 />
-                <Button variant="secondary" className="formInput" onClick={() => removePhoto(index)}>
-                  {i18n.t("notification.photos.remove")}
-                </Button>
+                <div className={styles.selectRemove}>
+                  <Button variant="secondary" onClick={() => removePhoto(index)}>
+                    {i18n.t("notification.photos.remove")}
+                  </Button>
+                </div>
               </>
             )}
 
@@ -331,17 +337,16 @@ const Photos = (): ReactElement => {
 
       {photos.length < MAX_PHOTOS && (
         <div>
-          <Button
-            variant="secondary"
-            className={styles.addNew}
-            iconRight={<IconUpload aria-hidden />}
-            onClick={() => addPhoto(PhotoSourceType.Device)}
-          >
-            {i18n.t("notification.photos.addNewFromDevice")}
-          </Button>
-          <Button variant="secondary" className={styles.addNew} iconRight={<IconLink aria-hidden />} onClick={() => addPhoto(PhotoSourceType.Link)}>
-            {i18n.t("notification.photos.addNewFromLink")}
-          </Button>
+          <div className={styles.addNew}>
+            <Button variant="secondary" iconRight={<IconUpload aria-hidden />} onClick={() => addPhoto(PhotoSourceType.Device)}>
+              {i18n.t("notification.photos.addNewFromDevice")}
+            </Button>
+          </div>
+          <div className={styles.addNew}>
+            <Button variant="secondary" iconRight={<IconLink aria-hidden />} onClick={() => addPhoto(PhotoSourceType.Link)}>
+              {i18n.t("notification.photos.addNewFromLink")}
+            </Button>
+          </div>
         </div>
       )}
     </div>

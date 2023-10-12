@@ -9,7 +9,7 @@ import { RootState } from "../../../state/reducers";
 import { ModerationStatus, CLEAR_STATE, LANGUAGE_OPTIONS, Toast } from "../../../types/constants";
 import { ModerationTodoSchema, PhotoSchema } from "../../../types/general";
 import { INITIAL_MODERATION_STATUS_EDITED, INITIAL_NOTIFICATION } from "../../../types/initial";
-import { PhotoStatus } from "../../../types/moderation_status";
+import { PhotoStatus, SocialMediaStatus } from "../../../types/moderation_status";
 import { NotificationSchema } from "../../../types/notification_schema";
 import { getTaskStatus, getTaskType } from "../../../utils/conversion";
 import { checkUser, getMatkoTags, getOriginServerSide, getTags, redirectToLogin, redirectToNotAuthorized } from "../../../utils/serverside";
@@ -25,6 +25,7 @@ import LocationModeration from "../../../components/moderation/LocationModeratio
 import MapModeration from "../../../components/moderation/MapModeration";
 import OpeningTimesModeration from "../../../components/moderation/OpeningTimesModeration";
 import PhotosModeration from "../../../components/moderation/PhotosModeration";
+import SocialMediaModeration from "../../../components/moderation/SocialMediaModeration";
 import TagsModeration from "../../../components/moderation/TagsModeration";
 
 const ModerationTaskDetail = (): ReactElement => {
@@ -74,8 +75,16 @@ const ModerationTaskDetail = (): ReactElement => {
           isModerated(moderationStatus.phone),
           isModerated(moderationStatus.email),
         ];
+        const moderated3 = moderationStatus.socialMedia.map((item, index) => {
+          const socialMediaModerated = [
+            isModerated(moderationStatus.socialMedia[index].title),
+            isModerated(moderationStatus.socialMedia[index].link),
+          ];
 
-        return moderated1.every((mod) => mod) && moderated2.every((mod) => mod);
+          return socialMediaModerated.every((mod) => mod);
+        });
+
+        return moderated1.every((mod) => mod) && moderated2.every((mod) => mod) && moderated3.every((mod) => mod);
       }
       case 3: {
         // Photos
@@ -133,6 +142,7 @@ const ModerationTaskDetail = (): ReactElement => {
             <MapModeration />
             <ContactModeration />
             <LinksModeration />
+            <SocialMediaModeration />
           </Collapsible>
           <Collapsible
             section={3}
@@ -225,6 +235,13 @@ export const getServerSideProps: GetServerSideProps = async ({ req, resolvedUrl,
           ...newImages.map((image) => image.uuid),
         ].filter((v, i, a) => a.indexOf(v) === i);
 
+        // Make a list of all unique social media uuids
+        const originalSocialMediaItems = targetData.social_media || [];
+        const modifiedSocialMediaItems = modifiedTask.social_media || [];
+        const socialMediaUuids = [...originalSocialMediaItems.map((item) => item.uuid), ...modifiedSocialMediaItems.map((item) => item.uuid)].filter(
+          (v, i, a) => a.indexOf(v) === i
+        );
+
         // For photosSelected, only include a photo if it also exists in the modified images
         // So if a user has removed a photo, it will not be moderated, just removed
         initialReduxState.moderation = {
@@ -263,6 +280,7 @@ export const getServerSideProps: GetServerSideProps = async ({ req, resolvedUrl,
               sv: modifiedTask.extra_keywords.sv.join(", "),
               en: modifiedTask.extra_keywords.en.join(", "),
             },
+            socialMediaUuids,
             photosUuids: uuids,
             photosSelected: uuids.map((uuid) => {
               const originalImage = originalImages.find((i) => i.uuid === uuid);
@@ -328,6 +346,12 @@ export const getServerSideProps: GetServerSideProps = async ({ req, resolvedUrl,
                   source: ModerationStatus.Unknown,
                 } as PhotoStatus;
               }),
+              socialMedia: socialMediaUuids.map(() => {
+                return {
+                  title: ModerationStatus.Unknown,
+                  link: ModerationStatus.Unknown,
+                } as SocialMediaStatus;
+              }),
             },
           };
         } else {
@@ -349,6 +373,12 @@ export const getServerSideProps: GetServerSideProps = async ({ req, resolvedUrl,
                   permission: ModerationStatus.Edited,
                   source: ModerationStatus.Edited,
                 } as PhotoStatus;
+              }),
+              socialMedia: socialMediaUuids.map(() => {
+                return {
+                  title: ModerationStatus.Edited,
+                  link: ModerationStatus.Edited,
+                } as SocialMediaStatus;
               }),
             },
           };

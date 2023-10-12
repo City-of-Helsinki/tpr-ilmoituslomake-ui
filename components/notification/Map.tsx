@@ -98,14 +98,15 @@ const Map = (): ReactElement => {
         </div>
       )}
 
-      <Button
-        className={styles.resetLocation}
-        variant="secondary"
-        onClick={() => searchAddress(router, streetFi, postOfficeFi, streetSv, postOfficeSv, dispatch)}
-        disabled={!isLocationChanged()}
-      >
-        {i18n.t("notification.map.resetLocation")}
-      </Button>
+      <div className={styles.resetLocation}>
+        <Button
+          variant="secondary"
+          onClick={() => searchAddress(router, streetFi, postOfficeFi, streetSv, postOfficeSv, dispatch)}
+          disabled={!isLocationChanged()}
+        >
+          {i18n.t("notification.map.resetLocation")}
+        </Button>
+      </div>
     </div>
   );
 };

@@ -86,6 +86,14 @@ export interface PhotoTranslation {
   [key: string]: unknown;
 }
 
+export interface SocialMedia {
+  uuid: string;
+  title: string;
+  link: string;
+  new?: boolean;
+  [key: string]: unknown;
+}
+
 export interface TagOption {
   id: number;
   ontologyword: {
@@ -463,8 +471,10 @@ export interface ModerationExtra {
     fullName: string;
     updated_at: string;
   };
+  addressFound?: AddressSearchResult;
   openingTimesId: number;
   openingTimesNotificationId: number;
+  socialMediaUuids: string[];
 }
 
 export interface ModerationTranslationRequestTaskSearch {

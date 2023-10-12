@@ -12,13 +12,15 @@ import {
   SET_MODERATION_LOCATION_STATUS,
   SET_MODERATION_CONTACT_STATUS,
   SET_MODERATION_LINK_STATUS,
+  SET_MODERATION_SOCIAL_MEDIA_STATUS,
+  REMOVE_MODERATION_SOCIAL_MEDIA_STATUS,
   SET_MODERATION_PHOTO_STATUS,
   SET_MODERATION_PHOTO_ALT_TEXT_STATUS,
   REMOVE_MODERATION_PHOTO_STATUS,
   SET_MODERATION_OPENING_TIMES_STATUS,
 } from "../../types/constants";
 import { KeyValueStatus } from "../../types/general";
-import { PhotoStatus } from "../../types/moderation_status";
+import { PhotoStatus, SocialMediaStatus } from "../../types/moderation_status";
 
 interface SetPageStatusAction extends AnyAction {
   type: typeof SET_PAGE_STATUS;
@@ -75,6 +77,15 @@ interface SetModerationLinkStatusAction extends AnyAction {
   payload: KeyValueStatus;
 }
 
+interface SetModerationSocialMediaStatusAction extends AnyAction {
+  type: typeof SET_MODERATION_SOCIAL_MEDIA_STATUS;
+  payload: { index: number; status: SocialMediaStatus | KeyValueStatus };
+}
+
+interface RemoveModerationSocialMediaStatusAction extends AnyAction {
+  type: typeof REMOVE_MODERATION_SOCIAL_MEDIA_STATUS;
+  payload: number;
+}
 interface SetModerationPhotoStatusAction extends AnyAction {
   type: typeof SET_MODERATION_PHOTO_STATUS;
   payload: { index: number; status: PhotoStatus | KeyValueStatus };
@@ -107,6 +118,8 @@ export type ModerationStatusAction =
   | SetModerationLocationStatusAction
   | SetModerationContactStatusAction
   | SetModerationLinkStatusAction
+  | SetModerationSocialMediaStatusAction
+  | RemoveModerationSocialMediaStatusAction
   | SetModerationPhotoStatusAction
   | SetModerationPhotoAltTextStatusAction
   | RemoveModerationPhotoStatusAction

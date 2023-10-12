@@ -11,6 +11,8 @@ import {
 import { NEIGHBOURHOOD_URL, SEARCH_URL } from "../types/constants";
 
 export const getNeighborhood = async (router: NextRouter, lon: number, lat: number, dispatch: Dispatch<NotificationAction>): Promise<void> => {
+  const language = router.locale === "sv" ? "sv" : "fi";
+
   // Fetch the neighbourhood for these coordinates
   // const neighbourhoodResponse = await fetch(`${getOrigin(router)}${NEIGHBOURHOOD_URL}&lon=${lon}&lat=${lat}`);
   const neighbourhoodResponse = await fetch(`${NEIGHBOURHOOD_URL}&lon=${lon}&lat=${lat}`);
@@ -21,14 +23,12 @@ export const getNeighborhood = async (router: NextRouter, lon: number, lat: numb
 
     if (neighbourhoodResult.results && neighbourhoodResult.results.length > 0) {
       // Use the first result
-      const { origin_id: neighborhoodId = "", name: { fi: resultNameFi = "", sv: resultNameSv = "" } = {} } = neighbourhoodResult.results[0];
+      const { origin_id: neighborhoodId = "", name = {} } = neighbourhoodResult.results[0];
       console.log("USING NEIGHBOURHOOD RESULT", neighbourhoodResult.results[0]);
 
-      dispatch(setNotificationAddress("fi", { neighborhood_id: neighborhoodId, neighborhood: resultNameFi }));
-      dispatch(setNotificationAddress("sv", { neighborhood_id: neighborhoodId, neighborhood: resultNameSv }));
+      dispatch(setNotificationAddress(language, { neighborhood_id: neighborhoodId, neighborhood: name[language] ?? "" }));
     } else {
-      dispatch(setNotificationAddress("fi", { neighborhood_id: "", neighborhood: "" }));
-      dispatch(setNotificationAddress("sv", { neighborhood_id: "", neighborhood: "" }));
+      dispatch(setNotificationAddress(language, { neighborhood_id: "", neighborhood: "" }));
     }
   }
 };
@@ -62,6 +62,7 @@ export const geocodeAddress = async (
         number: resultNumber,
         letter: resultLetter,
         postal_code: resultPostalCode,
+        municipality: resultMunicipality,
       } = geocodeResult.results[0];
       console.log("USING GEOCODE RESULT", geocodeResult.results[0]);
 
@@ -81,7 +82,7 @@ export const geocodeAddress = async (
         setNotificationAddressFound({
           street: `${resultStreet.name[language] ?? ""} ${resultNumber ?? ""}${resultLetter ?? ""}`,
           postalCode: resultPostalCode ?? "",
-          postOffice: resultStreet.municipality ?? "",
+          postOffice: resultMunicipality.name[language] ?? "",
         })
       );
     } else {

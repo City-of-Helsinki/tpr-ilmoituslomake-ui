@@ -18,6 +18,7 @@ import {
   setNotificationLocationValidation,
   setNotificationContactValidation,
   setNotificationLinkValidation,
+  setNotificationSocialMediaValidation,
   setNotificationPhotoValidation,
   setNotificationPhotoAltTextValidation,
   setNotificationTipValidation,
@@ -295,6 +296,28 @@ export const isWebsiteValid = (language: string, notification: NotificationSchem
   return result.valid;
 };
 
+export const validateSocialMediaField = (index: number, socialMediaField: string, notification: NotificationSchema): Validation => {
+  const { social_media } = notification;
+  if (!social_media) {
+    return { valid: true };
+  }
+  const socialMediaItem = social_media[index];
+  const schema = string().required("notification.message.fieldRequired");
+  const result = isValid(schema, socialMediaItem[socialMediaField] as string);
+  return result;
+};
+
+export const isSocialMediaFieldValid = (
+  index: number,
+  socialMediaField: string,
+  notification: NotificationSchema,
+  dispatch: Dispatch<NotificationValidationAction>
+): boolean => {
+  const result = validateSocialMediaField(index, socialMediaField, notification);
+  dispatch(setNotificationSocialMediaValidation(index, { [socialMediaField]: result }));
+  return result.valid;
+};
+
 export const validatePhotoBase64 = (index: number, base64: string, notificationExtra: NotificationExtra): Validation => {
   const { photos } = notificationExtra;
   const photo = photos[index];
@@ -394,6 +417,7 @@ export const getPageValidationSummary = (
   notificationExtra: NotificationExtra,
   i18n: I18n<unknown>
 ): KeyValueValidation => {
+  const { social_media = [] } = notification;
   const { inputLanguages, photos } = notificationExtra;
 
   // Check whether all data on the specific page is valid and create a summary of the results
@@ -459,6 +483,19 @@ export const getPageValidationSummary = (
             },
           };
         }, {}),
+        ...social_media.reduce((acc, item, index) => {
+          return {
+            ...acc,
+            [`title_${index}`]: {
+              ...validateSocialMediaField(index, "title", notification),
+              fieldLabel: i18n.t("notification.socialMedia.title.label"),
+            },
+            [`link_${index}`]: {
+              ...validateSocialMediaField(index, "link", notification),
+              fieldLabel: i18n.t("notification.socialMedia.link.label"),
+            },
+          };
+        }, {}),
       };
     }
     case 3: {
@@ -513,6 +550,7 @@ export const isPageValid = (
   notificationExtra: NotificationExtra,
   dispatch: Dispatch<NotificationValidationAction>
 ): boolean => {
+  const { social_media = [] } = notification;
   const { inputLanguages, photos } = notificationExtra;
 
   // Check whether all data on the specific page is valid
@@ -558,7 +596,19 @@ export const isPageValid = (
         isLocationValid(notification, dispatch),
       ];
       const inputValid3 = inputLanguages.map((option) => isWebsiteValid(option, notification, dispatch));
-      return inputValid1.every((valid) => valid) && inputValid2.every((valid) => valid) && inputValid3.every((valid) => valid);
+      const inputValid4 = social_media.map((item, index) => {
+        const socialMediaValid = [
+          isSocialMediaFieldValid(index, "title", notification, dispatch),
+          isSocialMediaFieldValid(index, "link", notification, dispatch),
+        ];
+        return socialMediaValid.every((valid) => valid);
+      });
+      return (
+        inputValid1.every((valid) => valid) &&
+        inputValid2.every((valid) => valid) &&
+        inputValid3.every((valid) => valid) &&
+        inputValid4.every((valid) => valid)
+      );
     }
     case 3: {
       // Photos
