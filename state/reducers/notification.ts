@@ -283,7 +283,7 @@ const notification = (state: NotificationState | undefined, action: AnyAction): 
             ),
             ...(action.payload.index === -1 ? [action.payload.value] : []),
           ]
-        : [];
+        : [...(action.payload.index === -1 ? [action.payload.value] : [])];
 
       return {
         ...state,

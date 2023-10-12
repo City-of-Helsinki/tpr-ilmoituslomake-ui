@@ -263,7 +263,7 @@ const moderation = (state: ModerationState | undefined, action: AnyAction): Mode
             }, []),
             ...(action.payload.index === -1 ? [action.payload.value] : []),
           ]
-        : [];
+        : [...(action.payload.index === -1 ? [action.payload.value] : [])];
 
       return {
         ...state,
