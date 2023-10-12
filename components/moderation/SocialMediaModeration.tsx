@@ -166,9 +166,11 @@ const SocialMediaModeration = (): ReactElement => {
         taskStatus !== TaskStatus.Cancelled && (
           <div className={`gridLayoutContainer moderation ${styles.addNewContainer}`}>
             <div className={styles.gridSelected}>
-              <Button variant="secondary" className={styles.gridButton} iconLeft={<IconPlus aria-hidden />} onClick={() => addSocialMediaItem()}>
-                {i18n.t("moderation.socialMedia.addNew")}
-              </Button>
+              <div className={styles.gridButton}>
+                <Button variant="secondary" iconLeft={<IconPlus aria-hidden />} onClick={() => addSocialMediaItem()}>
+                  {i18n.t("moderation.socialMedia.addNew")}
+                </Button>
+              </div>
             </div>
           </div>
         )}

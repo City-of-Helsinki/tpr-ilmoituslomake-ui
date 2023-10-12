@@ -33,20 +33,21 @@
   img {
     max-width: 100%;
 
+    // HDS 2.0 only has container-width-xl
     @include media(xs) {
-      max-height: $container-width-xs / 2;
+      max-height: $container-width-xl / 8;
     }
 
     @include media(s) {
-      max-height: $container-width-s / 2;
+      max-height: $container-width-xl / 6;
     }
 
     @include media(m) {
-      max-height: $container-width-m / 4;
+      max-height: $container-width-xl / 6;
     }
 
     @include media(l) {
-      max-height: $container-width-l / 4;
+      max-height: $container-width-xl / 5;
     }
 
     @include media(xl) {

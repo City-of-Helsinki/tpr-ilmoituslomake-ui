@@ -106,9 +106,11 @@ const SocialMedia = (): ReactElement => {
               required
               aria-required
             />
-            <Button variant="secondary" className="formInput" onClick={() => removeSocialMediaItem(index)}>
-              {i18n.t("notification.socialMedia.remove")}
-            </Button>
+            <div className="formInput">
+              <Button variant="secondary" onClick={() => removeSocialMediaItem(index)}>
+                {i18n.t("notification.socialMedia.remove")}
+              </Button>
+            </div>
             <hr />
           </div>
         );
