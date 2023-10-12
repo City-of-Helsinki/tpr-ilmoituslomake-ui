@@ -144,7 +144,7 @@ input[type="checkbox"] {
 
 .gridLayoutContainer {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax($spacing-3-xl, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax($spacing-5-xl, 1fr));
   margin-bottom: $spacing-layout-s;
 
   &.moderation {
