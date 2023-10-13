@@ -105,10 +105,11 @@
       "openHelp": "Open help",
       "showMore": "Show more",
       "selectFromDevice": "Select from device",
-      "modifyInformation": "Edit information",
+      "modifyInformation": "Edit location information",
       "suggestChange": "Suggest change",
       "modifyOpeningTimes": "Edit opening times",
       "notifyOpeningTimes": "Check or edit opening times",
+      "notifyAccessibility": "Review or edit accessibility information",
       "notifyClosingDown": "Notify about a location closing down",
       "notifyNewPlace": "Add new location",
       "giveTip": "Give a tip",
@@ -134,7 +135,7 @@
       "send": "Check information and send"
     },
     "index": {
-      "title": "Together we can keep the service’s information up to date!",
+      "title": "Together we can keep the service's information up to date!",
       "message": "Enter location information here and make changes to an existing location.",
       "notify": "Provide location information",
       "terms": "Read terms of use",
@@ -178,8 +179,13 @@
         "message": "You can inform us of new or changed information about your location at any time. Please log in first to edit."
       },
       "completeOpeningTimes": {
-        "title": "Provide information about the location’s opening times",
+        "title": "Provide information about the location's opening times",
         "message": "Let visitors know when your location is open."
+      },
+      "completeAccessibility": {
+        "title": "Provide information about the location's accessibility",
+        "message": "Fill in accessibility information. Let visitors know what to consider when they arrive.",
+        "message2": "The accessibility information for this location is entered in the maintenance of Toimipisterekisteri."
       },
       "completePhotos": {
         "title": "Add images for better visibility",
@@ -187,7 +193,8 @@
       },
       "sentModal": {
         "title": "Almost ready...",
-        "message": "Thank you, the location information has now been submitted for review. Continue by telling when your location is open to the public."
+        "message": "Thank you, the location information has now been submitted for review. Continue by telling when your location is open to the public.",
+        "message2": "Once your company's information has been checked and published, you will be notified by email. The email will also include a link to add accessibility information for your business."
       },
       "close": "Close message",
       "fieldRequired": "$fieldName is mandatory information",
@@ -228,13 +235,13 @@
       },
       "shortDescription": {
         "label": "Short description",
-        "helperText": "Note that the text must not be written in ‘we’ format. Length max. 150 characters",
+        "helperText": "Note that the text must not be written in 'we' format. Length max. 150 characters",
         "tooltipLabel": "Improve findability",
         "tooltipText": "A shorter description makes the location easier to find by a search engine."
       },
       "longDescription": {
         "label": "Detailed description",
-        "helperText": "You can also add information about opening hours here. Note that the text must not be written in ‘we’ format. Length 120 - 4000 characters",
+        "helperText": "You can also add information about opening hours here. Note that the text must not be written in 'we' format. Length 120 - 4000 characters",
         "tooltipLabel": "More detailed description",
         "tooltipText": "If you prefer, you can include a short description here and complete it later as needed."
       }
@@ -286,7 +293,7 @@
       "title": "Notifier information",
       "notifierType": "Choose the option that best represents you",
       "representative": "I represent the location",
-      "notRepresentative": "I don’t represent the location",
+      "notRepresentative": "I don't represent the location",
       "tooltipLabel": "Location representative",
       "tooltipText": "A location representative is the owner or someone else who provides information about the location they represent. For example, a tourist or a local resident does not count as representing the location.",
       "fullName": {
@@ -303,7 +310,7 @@
     "opening": {
       "title": "Opening hours",
       "notice": "Opening hours will be submitted after sending the form.",
-      "temporaryNotice": "For now, we recommend updating your opening hours on your own website or social media channels. Please tell customers in the detailed description section where they can check the location’s current opening hours. Please do not put links in the detailed description, links to websites and social media can be added in the next step.",
+      "temporaryNotice": "For now, we recommend updating your opening hours on your own website or social media channels. Please tell customers in the detailed description section where they can check the location's current opening hours. Please do not put links in the detailed description, links to websites and social media can be added in the next step.",
       "times": {
         "thisWeek": "This week",
         "nextWeek": "Next week",
@@ -365,7 +372,7 @@
     "placeSearch": {
       "title": "All locations",
       "notice": "Search for the location that you want to view or change. You can check the accuracy of the information and report any changes made.",
-      "noticeLoggedOut": "Login to change your own location’s information.",
+      "noticeLoggedOut": "Login to change your own location's information.",
       "placeName": {
         "label": "Search for location by name",
         "helperText": "When the field is empty and you select Search, you will see all locations"
@@ -428,7 +435,7 @@
         "helperText": "Enter a keyword then select from the list below"
       },
       "placeResults": {
-        "label": "Location’s name"
+        "label": "Location's name"
       },
       "addPlaceName": {
         "label": "New location name"
@@ -603,14 +610,14 @@
       "shortDescription": {
         "title": "Short description",
         "label": "Short description",
-        "helperText": "Note that the text must not be written in ‘we’ format",
+        "helperText": "Note that the text must not be written in 'we' format",
         "tooltipLabel": "Improve findability",
         "tooltipText": "A shorter description makes the location easier to find by a search engine."
       },
       "longDescription": {
         "title": "Detailed description",
         "label": "Detailed description",
-        "helperText": "You can also add information about opening hours here. Note that the text must not be written in ‘we’ format",
+        "helperText": "You can also add information about opening hours here. Note that the text must not be written in 'we' format",
         "tooltipLabel": "More detailed description",
         "tooltipText": "If you prefer, you can include a short description here and complete it later as needed."
       }

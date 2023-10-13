@@ -92,7 +92,7 @@ export const INITIAL_NOTIFICATION_EXTRA: NotificationExtra = {
   },
   openingTimesId: 0,
   openingTimesNotificationId: 0,
-  isNew: false,
+  isNew: true,
 };
 
 export const INITIAL_NOTIFICATION_VALIDATION: NotificationValidationSchema = {

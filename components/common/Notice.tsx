@@ -7,11 +7,12 @@ interface NoticeProps {
   icon: ReactNode;
   titleKey?: string;
   messageKey: string;
+  messageKey2?: string;
   button?: ReactNode;
   focusOnTitle?: boolean;
 }
 
-const Notice = ({ className, icon, titleKey, messageKey, button, focusOnTitle }: NoticeProps): ReactElement => {
+const Notice = ({ className, icon, titleKey, messageKey, messageKey2, button, focusOnTitle }: NoticeProps): ReactElement => {
   const i18n = useI18n();
   const ref = useRef<HTMLDivElement>(null);
 
@@ -32,6 +33,7 @@ const Notice = ({ className, icon, titleKey, messageKey, button, focusOnTitle }:
             {i18n.t(titleKey as string)}
           </div>
           <div className={styles.message}>{i18n.t(messageKey)}</div>
+          {messageKey2 && <div className={styles.message2}>{i18n.t(messageKey2)}</div>}
         </div>
       </div>
       <div className={styles.flexButtonContainer}>

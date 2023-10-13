@@ -109,6 +109,7 @@
       "suggestChange": "Föreslå förändring",
       "modifyOpeningTimes": "Ändra öppettider",
       "notifyOpeningTimes": "Kontrollera eller redigera öppettider",
+      "notifyAccessibility": "Kontrollera eller redigera tillgänglighetsuppgifterna",
       "notifyClosingDown": "Meddela att stället har lagt ner",
       "notifyNewPlace": "Lägg till ett nytt ställe",
       "giveTip": "Ge ett tips",
@@ -181,13 +182,19 @@
         "title": "Lägg till information om öppettiderna",
         "message": "Berätta åt besökarna när ditt ställe har öppet."
       },
+      "completeAccessibility": {
+        "title": "Lägg till information om platsens tillgänglighet",
+        "message": "Fyll i tillgänglighetsuppgifterna. Berätta för besökarna vad de ska beakta när de kommer till platsen.",
+        "message2": "Tillgänglighetsinformationen för denna plats läggs in i underhållet av Toimipisterekisteri."
+      },
       "completePhotos": {
         "title": "Komplettera ställets information med foton",
         "message": "Visa åt besökarna hur ditt ställe ser ut."
       },
       "sentModal": {
         "title": "Nästan färdigt...",
-        "message": "Tack, informationen om stället har nu skickats vidare för kontroll. Fortsätt med att anmäla när ditt ställe har öppet för allmänheten."
+        "message": "Tack, informationen om stället har nu skickats vidare för kontroll. Fortsätt med att anmäla när ditt ställe har öppet för allmänheten.",
+        "message2": "När ditt företags uppgifter har kontrollerats och publicerad får du ett meddelande om detta per e-post. Det finns också en länk i e-postmeddelandet som låter dig lägga till tillgänglighetsinformation för ditt företag."
       },
       "close": "Stäng meddelandet",
       "fieldRequired": "$fieldName är obligatorisk",
