@@ -13,15 +13,19 @@ import {
   SET_MODERATION_MATKO_TAG_OPTIONS,
   SET_MODERATION_EXTRA_KEYWORDS,
   SET_MODERATION_ADDRESS,
+  SET_MODERATION_ADDRESS_FOUND,
   SET_MODERATION_LOCATION,
   SET_MODERATION_CONTACT,
   SET_MODERATION_LINK,
+  SET_MODERATION_SOCIAL_MEDIA,
+  REMOVE_MODERATION_SOCIAL_MEDIA,
   SET_MODERATION_PHOTO,
   REMOVE_MODERATION_PHOTO,
   SET_MODERATION_OPENING_TIMES_ID,
 } from "../../types/constants";
 import { ModerationAction } from "./moderationTypes";
 import {
+  AddressSearchResult,
   KeyValueString,
   MatkoTagOption,
   ModerationPlaceResults,
@@ -29,6 +33,7 @@ import {
   ModerationTaskSearch,
   ModerationTodoResults,
   Photo,
+  SocialMedia,
   TagOption,
 } from "../../types/general";
 
@@ -102,6 +107,11 @@ export const setModerationAddress = (language: string, value: KeyValueString): M
   payload: { language, value },
 });
 
+export const setModerationAddressFound = (addressFound: AddressSearchResult | undefined): ModerationAction => ({
+  type: SET_MODERATION_ADDRESS_FOUND,
+  payload: addressFound,
+});
+
 export const setModerationLocation = (coordinates: [number, number]): ModerationAction => ({
   type: SET_MODERATION_LOCATION,
   payload: coordinates,
@@ -115,6 +125,16 @@ export const setModerationContact = (keyValue: KeyValueString): ModerationAction
 export const setModerationLink = (keyValue: KeyValueString): ModerationAction => ({
   type: SET_MODERATION_LINK,
   payload: keyValue,
+});
+
+export const setModerationSocialMedia = (index: number, value: SocialMedia): ModerationAction => ({
+  type: SET_MODERATION_SOCIAL_MEDIA,
+  payload: { index, value },
+});
+
+export const removeModerationSocialMedia = (index: number): ModerationAction => ({
+  type: REMOVE_MODERATION_SOCIAL_MEDIA,
+  payload: index,
 });
 
 export const setModerationPhoto = (index: number, value: Photo): ModerationAction => ({

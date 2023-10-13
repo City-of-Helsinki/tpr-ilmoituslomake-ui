@@ -21,6 +21,7 @@ export const getTrimmedNotification = (notification: NotificationSchema): Notifi
     phone,
     email,
     website,
+    social_media,
     images,
     comments,
     opening_times,
@@ -79,6 +80,10 @@ export const getTrimmedNotification = (notification: NotificationSchema): Notifi
       sv: trimStringField(website.sv),
       en: trimStringField(website.en),
     },
+    social_media: social_media?.map((item) => {
+      const { uuid, title, link } = item;
+      return { uuid, title: trimStringField(title), link: trimStringField(link) };
+    }),
     images,
     comments: trimStringField(comments),
     opening_times,

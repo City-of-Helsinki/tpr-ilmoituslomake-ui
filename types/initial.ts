@@ -1,4 +1,4 @@
-import { ModerationStatus, TaskStatus, TaskType } from "./constants";
+import { ModerationStatus, NotifierType, TaskStatus, TaskType } from "./constants";
 import { ModerationExtra, NotificationExtra, TranslationExtra } from "./general";
 import { ModerationStatusSchema } from "./moderation_status";
 import { NotificationSchema } from "./notification_schema";
@@ -61,11 +61,12 @@ export const INITIAL_NOTIFICATION: NotificationSchema = {
   },
   comments: "",
   notifier: {
-    notifier_type: "",
+    notifier_type: NotifierType.Representative,
     full_name: "",
     email: "",
     phone: "",
   },
+  social_media: [],
 };
 
 export const INITIAL_NOTIFICATION_EXTRA: NotificationExtra = {
@@ -150,6 +151,7 @@ export const INITIAL_NOTIFICATION_VALIDATION: NotificationValidationSchema = {
     phone: { valid: true },
   },
   photos: [],
+  social_media: [],
 };
 
 export const INITIAL_TRANSLATION: TranslationSchema = {
@@ -234,6 +236,7 @@ export const INITIAL_MODERATION_EXTRA: ModerationExtra = {
   },
   openingTimesId: 0,
   openingTimesNotificationId: 0,
+  socialMediaUuids: [],
 };
 
 const getInitialModerationStatus = (moderationStatus: ModerationStatus): ModerationStatusSchema => {
@@ -288,6 +291,7 @@ const getInitialModerationStatus = (moderationStatus: ModerationStatus): Moderat
       en: moderationStatus,
     },
     photos: [],
+    socialMedia: [],
     openingTimes: moderationStatus,
   };
 };

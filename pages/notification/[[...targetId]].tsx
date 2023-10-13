@@ -10,7 +10,7 @@ import { initStore } from "../../state/store";
 import { NotifierType, CLEAR_STATE, SENT_INFO_PAGE, Toast } from "../../types/constants";
 import { INITIAL_NOTIFICATION, INITIAL_NOTIFICATION_EXTRA } from "../../types/initial";
 import { NotificationSchema } from "../../types/notification_schema";
-import { PhotoValidation } from "../../types/notification_validation";
+import { PhotoValidation, SocialMediaValidation } from "../../types/notification_validation";
 import i18nLoader, { defaultLocale } from "../../utils/i18n";
 import { checkUser, redirectToLogin, getOriginServerSide, getPreviousInputLanguages, getTags } from "../../utils/serverside";
 import Layout from "../../components/common/Layout";
@@ -34,6 +34,7 @@ import OpeningTimesInfo from "../../components/notification/OpeningTimesInfo";
 import Photos from "../../components/notification/Photos";
 import Preview from "../../components/notification/Preview";
 import SentInfoHeader from "../../components/notification/SentInfoHeader";
+import SocialMedia from "../../components/notification/SocialMedia";
 import Tags from "../../components/notification/Tags";
 import Terms from "../../components/notification/Terms";
 import ToastNotification from "../../components/common/ToastNotification";
@@ -101,6 +102,7 @@ const NotificationDetail = (): ReactElement => {
           <Map />
           <Contact />
           <Links />
+          <SocialMedia />
           <NotificationFooterNav setToast={setToast} />
         </main>
       )}
@@ -287,6 +289,14 @@ export const getServerSideProps: GetServerSideProps = async ({ req, resolvedUrl,
                 base64: { valid: true },
               } as PhotoValidation;
             }),
+            social_media: dataToUse.social_media
+              ? dataToUse.social_media.map(() => {
+                  return {
+                    title: { valid: true },
+                    link: { valid: true },
+                  } as SocialMediaValidation;
+                })
+              : [],
           },
         };
       } catch (err) {

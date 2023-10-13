@@ -171,6 +171,11 @@ const PhotosModeration = (): ReactElement => {
                     )}
                   </div>
                 )}
+                {(taskType === TaskType.ChangeTip ||
+                  taskType === TaskType.AddTip ||
+                  taskType === TaskType.ModeratorChange ||
+                  taskType === TaskType.ModeratorAdd) && <div className={styles.gridSelected} />}
+
                 <div
                   className={
                     taskType === TaskType.NewPlace ||
@@ -186,19 +191,23 @@ const PhotosModeration = (): ReactElement => {
                   {isNewImage && sourceTypeModified === PhotoSourceType.Device && (
                     <>
                       <input className="hidden" type="file" ref={ref} onChange={(evt) => fetchPhoto(index, evt)} />
-                      <Button variant="secondary" className={styles.gridButton} onClick={() => selectPhoto()}>
-                        {i18n.t("moderation.button.selectFromDevice")}
-                      </Button>
+                      <div className={styles.gridButton}>
+                        <Button variant="secondary" onClick={() => selectPhoto()}>
+                          {i18n.t("moderation.button.selectFromDevice")}
+                        </Button>
+                      </div>
                     </>
                   )}
                   {modifiedImage && (
-                    <Button
-                      variant="secondary"
-                      onClick={() => removePhoto(index)}
-                      disabled={taskStatus === TaskStatus.Closed || taskStatus === TaskStatus.Rejected || taskStatus === TaskStatus.Cancelled}
-                    >
-                      {i18n.t("moderation.photos.remove")}
-                    </Button>
+                    <div className={styles.gridButton}>
+                      <Button
+                        variant="secondary"
+                        onClick={() => removePhoto(index)}
+                        disabled={taskStatus === TaskStatus.Closed || taskStatus === TaskStatus.Rejected || taskStatus === TaskStatus.Cancelled}
+                      >
+                        {i18n.t("moderation.photos.remove")}
+                      </Button>
+                    </div>
                   )}
                 </div>
                 <div className={styles.gridActionButton} />
@@ -305,17 +314,16 @@ const PhotosModeration = (): ReactElement => {
         taskStatus !== TaskStatus.Cancelled && (
           <div className={`gridLayoutContainer moderation ${styles.addNewContainer}`}>
             <div className={styles.gridSelected}>
-              <Button
-                variant="secondary"
-                className={styles.gridButton}
-                iconRight={<IconUpload aria-hidden />}
-                onClick={() => addPhoto(PhotoSourceType.Device)}
-              >
-                {i18n.t("moderation.photos.addNewFromDevice")}
-              </Button>
-              <Button variant="secondary" iconRight={<IconLink aria-hidden />} onClick={() => addPhoto(PhotoSourceType.Link)}>
-                {i18n.t("moderation.photos.addNewFromLink")}
-              </Button>
+              <div className={styles.gridButton}>
+                <Button variant="secondary" iconRight={<IconUpload aria-hidden />} onClick={() => addPhoto(PhotoSourceType.Device)}>
+                  {i18n.t("moderation.photos.addNewFromDevice")}
+                </Button>
+              </div>
+              <div className={styles.gridButton}>
+                <Button variant="secondary" iconRight={<IconLink aria-hidden />} onClick={() => addPhoto(PhotoSourceType.Link)}>
+                  {i18n.t("moderation.photos.addNewFromLink")}
+                </Button>
+              </div>
             </div>
           </div>
         )}

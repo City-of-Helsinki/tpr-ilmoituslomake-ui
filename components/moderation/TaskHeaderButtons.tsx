@@ -6,9 +6,10 @@ import { useI18n } from "next-localization";
 import { Button, IconArrowRight, IconArrowUndo, IconTrash } from "hds-react";
 import { RootState } from "../../state/reducers";
 import { ItemType, ModerationStatus, TaskStatus, TaskType, Toast } from "../../types/constants";
-import { approveModeration, deleteModeration, saveModerationChangeRequest, rejectModeration } from "../../utils/moderation";
-import ModalConfirmation from "../common/ModalConfirmation";
 import { Photo } from "../../types/general";
+import { NotificationSchema } from "../../types/notification_schema";
+import { approveModeration, deleteModeration, saveModerationChangeRequest, rejectModeration, saveModerationAsDraft } from "../../utils/moderation";
+import ModalConfirmation from "../common/ModalConfirmation";
 import styles from "./TaskHeaderButtons.module.scss";
 
 interface TaskHeaderButtonsProps {
@@ -28,14 +29,15 @@ const TaskHeaderButtons = ({ isModerated, setToast }: TaskHeaderButtonsProps): R
   const modifiedTask = useSelector((state: RootState) => state.moderation.modifiedTask);
 
   const moderationExtra = useSelector((state: RootState) => state.moderation.moderationExtra);
-  const { photosUuids, photosSelected, photosModified, taskType, taskStatus, openingTimesId } = moderationExtra;
+  const { photosUuids, photosSelected, photosModified, taskType, taskStatus, openingTimesId, socialMediaUuids } = moderationExtra;
   const moderationStatus = useSelector((state: RootState) => state.moderationStatus.moderationStatus);
-  const { photos: photosStatus } = moderationStatus;
+  const { photos: photosStatus, socialMedia: socialMediaItemsStatus } = moderationStatus;
 
   const [confirmApproval, setConfirmApproval] = useState(false);
   const [confirmRejection, setConfirmRejection] = useState(false);
   const [confirmSave, setConfirmSave] = useState(false);
   const [confirmDeletion, setConfirmDeletion] = useState(false);
+  const [confirmSaveAsDraft, setConfirmSaveAsDraft] = useState(false);
   const [confirmAddCancellation, setConfirmAddCancellation] = useState(false);
   const [confirmChangeCancellation, setConfirmChangeCancellation] = useState(false);
   const [confirmDeleteCancellation, setConfirmDeleteCancellation] = useState(false);
@@ -76,6 +78,14 @@ const TaskHeaderButtons = ({ isModerated, setToast }: TaskHeaderButtonsProps): R
     setConfirmSave(false);
   };
 
+  const openSaveAsDraftConfirmation = () => {
+    setConfirmSaveAsDraft(true);
+  };
+
+  const closeSaveAsDraftConfirmation = () => {
+    setConfirmSaveAsDraft(false);
+  };
+
   const openDeletionConfirmation = () => {
     setConfirmDeletion(true);
   };
@@ -112,10 +122,7 @@ const TaskHeaderButtons = ({ isModerated, setToast }: TaskHeaderButtonsProps): R
     return statusToCheck === ModerationStatus.Approved ? modifiedValue : selectedValue;
   };
 
-  const approveTask = () => {
-    closeApprovalConfirmation();
-    closeSaveConfirmation();
-
+  const getApprovedTask = (): NotificationSchema => {
     // Save the moderated data for new or changed places using approved values only
     // For tip change requests just use the modified values
     const approvedTask =
@@ -208,9 +215,82 @@ const TaskHeaderButtons = ({ isModerated, setToast }: TaskHeaderButtonsProps): R
               sv: moderationStatus.extra_keywords.sv === ModerationStatus.Approved ? modifiedTask.extra_keywords.sv : selectedTask.extra_keywords.sv,
               en: moderationStatus.extra_keywords.en === ModerationStatus.Approved ? modifiedTask.extra_keywords.en : selectedTask.extra_keywords.en,
             },
+            social_media: socialMediaUuids
+              .map((uuid, index) => {
+                const socialMediaSelected = selectedTask.social_media?.find((item) => item.uuid === uuid) || { title: "", link: "" };
+                const socialMediaModified = modifiedTask.social_media?.find((item) => item.uuid === uuid) || { title: "", link: "" };
+                const socialMediaStatus = socialMediaItemsStatus[index];
+
+                const isSocialMediaItemToBeApproved = modifiedTask.social_media
+                  ? modifiedTask.social_media.some((item) => item.uuid === uuid)
+                  : false;
+
+                return isSocialMediaItemToBeApproved
+                  ? {
+                      uuid,
+                      title: getApprovedValue(socialMediaStatus.title, socialMediaSelected.title, socialMediaModified.title),
+                      link: getApprovedValue(socialMediaStatus.link, socialMediaSelected.link, socialMediaModified.link),
+                    }
+                  : {
+                      uuid,
+                      title: "",
+                      link: "",
+                    };
+              })
+              .filter((item) => !!item.link && item.link.length > 0),
           }
         : modifiedTask;
 
+    return approvedTask;
+  };
+
+  const getModifiedPhotos = (): Photo[] => {
+    return photosUuids
+      .map((uuid, index) => {
+        const photoModified = photosModified[index];
+        const { sourceType, mediaId, new: isNewImage } = photoModified;
+        const isPhotoToBeApproved = photosModified.some((photo) => photo.uuid === uuid);
+
+        return isPhotoToBeApproved
+          ? {
+              index,
+              uuid,
+              sourceType,
+              url: photoModified.url,
+              altText: {
+                fi: photoModified.altText.fi ?? "",
+                sv: photoModified.altText.sv ?? "",
+                en: photoModified.altText.en ?? "",
+              },
+              permission: photoModified.permission,
+              source: photoModified.source,
+              mediaId,
+              new: isNewImage,
+              base64: photoModified.base64,
+              preview: photoModified.preview,
+            }
+          : {
+              index,
+              uuid,
+              sourceType: "",
+              url: "",
+              altText: {
+                fi: "",
+                sv: "",
+                en: "",
+              },
+              permission: "",
+              source: "",
+              mediaId: "",
+              new: isNewImage,
+              base64: "",
+              preview: "",
+            };
+      })
+      .filter((photo) => !!photo.url && photo.url.length > 0);
+  };
+
+  const getApprovedPhotos = (): Photo[] => {
     // Save the moderated image data for new or changed places using approved values only
     // For tip change requests, the images are handled by the moderator themselves, so use the modified image values as specified
     // The moderation approval for new images needs both the original url and the proxied preview url
@@ -268,51 +348,28 @@ const TaskHeaderButtons = ({ isModerated, setToast }: TaskHeaderButtonsProps): R
                   };
             })
             .filter((photo) => !!photo.url && photo.url.length > 0)
-        : photosUuids
-            .map((uuid, index) => {
-              const photoModified = photosModified[index];
-              const { sourceType, mediaId, new: isNewImage } = photoModified;
-              const isPhotoToBeApproved = photosModified.some((photo) => photo.uuid === uuid);
+        : getModifiedPhotos();
 
-              return isPhotoToBeApproved
-                ? {
-                    index,
-                    uuid,
-                    sourceType,
-                    url: photoModified.url,
-                    altText: {
-                      fi: photoModified.altText.fi ?? "",
-                      sv: photoModified.altText.sv ?? "",
-                      en: photoModified.altText.en ?? "",
-                    },
-                    permission: photoModified.permission,
-                    source: photoModified.source,
-                    mediaId,
-                    new: isNewImage,
-                    base64: photoModified.base64,
-                    preview: photoModified.preview,
-                  }
-                : {
-                    index,
-                    uuid,
-                    sourceType: "",
-                    url: "",
-                    altText: {
-                      fi: "",
-                      sv: "",
-                      en: "",
-                    },
-                    permission: "",
-                    source: "",
-                    mediaId: "",
-                    new: isNewImage,
-                    base64: "",
-                    preview: "",
-                  };
-            })
-            .filter((photo) => !!photo.url && photo.url.length > 0);
+    return approvedPhotos;
+  };
+
+  const approveTask = () => {
+    closeApprovalConfirmation();
+    closeSaveConfirmation();
+
+    const approvedTask = getApprovedTask();
+    const approvedPhotos = getApprovedPhotos();
 
     approveModeration(currentUser, modifiedTaskId, approvedTask, approvedPhotos, openingTimesId, moderationExtra, router, setToast);
+  };
+
+  const saveTaskAsDraft = () => {
+    closeSaveAsDraftConfirmation();
+
+    const draftTask = modifiedTask;
+    const draftPhotos = getModifiedPhotos();
+
+    saveModerationAsDraft(currentUser, modifiedTaskId, draftTask, draftPhotos, openingTimesId, moderationExtra, router, setToast);
   };
 
   const rejectTask = () => {
@@ -400,6 +457,15 @@ const TaskHeaderButtons = ({ isModerated, setToast }: TaskHeaderButtonsProps): R
               {taskType === TaskType.ChangeTip || taskType === TaskType.ModeratorChange
                 ? i18n.t("moderation.button.cancelChange")
                 : i18n.t("moderation.button.cancelAdd")}
+            </Button>
+          </div>
+          <div className={styles.flexButton}>
+            <Button
+              variant="secondary"
+              onClick={openSaveAsDraftConfirmation}
+              disabled={taskStatus === TaskStatus.Closed || taskStatus === TaskStatus.Rejected || taskStatus === TaskStatus.Cancelled}
+            >
+              {i18n.t("moderation.button.saveAsDraft")}
             </Button>
           </div>
           <div className={styles.flexButton}>
@@ -502,6 +568,18 @@ const TaskHeaderButtons = ({ isModerated, setToast }: TaskHeaderButtonsProps): R
           confirmKey="moderation.button.yes"
           closeCallback={closeSaveConfirmation}
           confirmCallback={approveTask}
+        />
+      )}
+
+      {confirmSaveAsDraft && (
+        <ModalConfirmation
+          open={confirmSaveAsDraft}
+          titleKey="moderation.button.savePlaceAsDraft"
+          messageKey="moderation.confirmation.savePlaceAsDraft"
+          cancelKey="moderation.button.no"
+          confirmKey="moderation.button.yes"
+          closeCallback={closeSaveAsDraftConfirmation}
+          confirmCallback={saveTaskAsDraft}
         />
       )}
 

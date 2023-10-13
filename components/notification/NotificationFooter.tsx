@@ -5,7 +5,7 @@ import { useI18n } from "next-localization";
 import { Button, IconArrowLeft, IconArrowRight } from "hds-react";
 import { NotificationAction } from "../../state/actions/notificationTypes";
 import { NotificationValidationAction } from "../../state/actions/notificationValidationTypes";
-import { setPage } from "../../state/actions/notification";
+import { setNotificationSending, setPage } from "../../state/actions/notification";
 import { setNotificationValidationSummary, setPageValid } from "../../state/actions/notificationValidation";
 import { RootState } from "../../state/reducers";
 import { MAX_PAGE, Toast } from "../../types/constants";
@@ -29,6 +29,7 @@ const NotificationFooter = ({ smallButtons, setToast }: NotificationFooterProps)
   const notificationId = useSelector((state: RootState) => state.notification.notificationId);
   const notification = useSelector((state: RootState) => state.notification.notification);
   const notificationExtra = useSelector((state: RootState) => state.notification.notificationExtra);
+  const isSending = useSelector((state: RootState) => state.notification.isSending.notification);
 
   const previousPage = () => {
     dispatch(setPage(currentPage - 1));
@@ -50,8 +51,10 @@ const NotificationFooter = ({ smallButtons, setToast }: NotificationFooterProps)
     }
   };
 
-  const sendNotification = () => {
-    saveNotification(currentUser, notificationId, notification, notificationExtra, router, dispatch, setToast);
+  const sendNotification = async () => {
+    dispatch(setNotificationSending({ notification: true }));
+    await saveNotification(currentUser, notificationId, notification, notificationExtra, router, dispatch, setToast);
+    dispatch(setNotificationSending({ notification: false }));
   };
 
   const cancelNotification = () => {
@@ -107,14 +110,14 @@ const NotificationFooter = ({ smallButtons, setToast }: NotificationFooterProps)
 
       {currentPage === MAX_PAGE && smallButtons && setToast && (
         <div className={`${styles.flexButton} ${styles.smallButton} ${styles.flexButtonRight}`}>
-          <Button variant="supplementary" size="small" iconRight={<IconArrowRight aria-hidden />} onClick={sendNotification}>
+          <Button variant="supplementary" size="small" iconRight={<IconArrowRight aria-hidden />} onClick={sendNotification} disabled={isSending}>
             {i18n.t("notification.button.send")}
           </Button>
         </div>
       )}
       {currentPage === MAX_PAGE && !smallButtons && setToast && (
         <div className={`${styles.flexButton} ${styles.flexButtonRight}`}>
-          <Button variant="primary" size="default" iconRight={<IconArrowRight aria-hidden />} onClick={sendNotification}>
+          <Button variant="primary" size="default" iconRight={<IconArrowRight aria-hidden />} onClick={sendNotification} disabled={isSending}>
             {i18n.t("notification.button.send")}
           </Button>
         </div>

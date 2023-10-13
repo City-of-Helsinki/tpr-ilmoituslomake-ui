@@ -30,12 +30,13 @@ const ModifyButton = ({
   return (
     <div className={className}>
       {moderationStatus === ModerationStatus.Unknown && !hidden && (
-        <Button
-          className={styles.gridButton}
-          variant="secondary"
-          onClick={() => modifyCallback(fieldName, ModerationStatus.Edited)}
-          disabled={taskStatus === TaskStatus.Closed || taskStatus === TaskStatus.Rejected || taskStatus === TaskStatus.Cancelled}
-        >{`${i18n.t("moderation.button.modify")} ${label ? label.toLowerCase() : ""}`}</Button>
+        <div className={styles.gridButton}>
+          <Button
+            variant="secondary"
+            onClick={() => modifyCallback(fieldName, ModerationStatus.Edited)}
+            disabled={taskStatus === TaskStatus.Closed || taskStatus === TaskStatus.Rejected || taskStatus === TaskStatus.Cancelled}
+          >{`${i18n.t("moderation.button.modify")} ${label ? label.toLowerCase() : ""}`}</Button>
+        </div>
       )}
       {moderationStatus === ModerationStatus.Edited && children}
       {(moderationStatus === ModerationStatus.Approved || moderationStatus === ModerationStatus.Rejected) && (

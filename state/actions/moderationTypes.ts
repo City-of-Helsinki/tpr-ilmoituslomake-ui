@@ -14,14 +14,18 @@ import {
   SET_MODERATION_MATKO_TAG_OPTIONS,
   SET_MODERATION_EXTRA_KEYWORDS,
   SET_MODERATION_ADDRESS,
+  SET_MODERATION_ADDRESS_FOUND,
   SET_MODERATION_LOCATION,
   SET_MODERATION_CONTACT,
   SET_MODERATION_LINK,
+  SET_MODERATION_SOCIAL_MEDIA,
+  REMOVE_MODERATION_SOCIAL_MEDIA,
   SET_MODERATION_PHOTO,
   REMOVE_MODERATION_PHOTO,
   SET_MODERATION_OPENING_TIMES_ID,
 } from "../../types/constants";
 import {
+  AddressSearchResult,
   KeyValueString,
   MatkoTagOption,
   ModerationPlaceResults,
@@ -29,6 +33,7 @@ import {
   ModerationTaskSearch,
   ModerationTodoResults,
   Photo,
+  SocialMedia,
   TagOption,
 } from "../../types/general";
 
@@ -102,6 +107,11 @@ interface SetModerationAddressAction extends AnyAction {
   payload: { language: string; value: KeyValueString };
 }
 
+interface SetModerationAddressFoundAction extends AnyAction {
+  type: typeof SET_MODERATION_ADDRESS_FOUND;
+  payload: AddressSearchResult | undefined;
+}
+
 interface SetModerationLocationAction extends AnyAction {
   type: typeof SET_MODERATION_LOCATION;
   payload: [number, number];
@@ -115,6 +125,16 @@ interface SetModerationContactAction extends AnyAction {
 interface SetModerationLinkAction extends AnyAction {
   type: typeof SET_MODERATION_LINK;
   payload: KeyValueString;
+}
+
+interface SetModerationSocialMediaAction extends AnyAction {
+  type: typeof SET_MODERATION_SOCIAL_MEDIA;
+  payload: { index: number; value: SocialMedia };
+}
+
+interface RemoveModerationSocialMediaAction extends AnyAction {
+  type: typeof REMOVE_MODERATION_SOCIAL_MEDIA;
+  payload: number;
 }
 
 interface SetModerationPhotoAction extends AnyAction {
@@ -147,9 +167,12 @@ export type ModerationAction =
   | SetModerationMatkoTagOptionsAction
   | SetModerationExtraKeywordsAction
   | SetModerationAddressAction
+  | SetModerationAddressFoundAction
   | SetModerationLocationAction
   | SetModerationContactAction
   | SetModerationLinkAction
+  | SetModerationSocialMediaAction
+  | RemoveModerationSocialMediaAction
   | SetModerationPhotoAction
   | RemoveModerationPhotoAction
   | SetModerationOpeningTimesId;

@@ -354,10 +354,10 @@
       },
       "permission": {
         "title": "Käyttöoikeudet",
-        "notice": "HUOM! Sinulla pitää olla oikeudet lataamaasi kuvaan. Lataamalla kuvan myönnät Helsinki Marketingille oikeuden jakaa sitä eteenpäin avoimessa rajapinnassa. Sinun on valittava toinen alla olevista kuvan käyttöoikeuksista. Kts. tarkemmat tiedot käyttöehdoista.",
+        "notice": "HUOM! Sinulla pitää olla oikeudet lataamaasi kuvaan. Lataamalla kuvan myönnät Helsingin kaupungille oikeuden jakaa sitä eteenpäin avoimessa rajapinnassa. Sinun on valittava toinen alla olevista kuvan käyttöoikeuksista. Kts. tarkemmat tiedot käyttöehdoista.",
         "label": "Kuvan käyttöoikeudet",
-        "locationOnly": "Kuvaa saa käyttää ainoastaan ko. kohteen yhteydessä esim. MyHelsinki.fi-sivustolla. Kuvaa voidaan jakaa myös avoimena datana kolmansille osapuolille MyHelsinki-avoimen rajapinnan kautta. Kuvan käyttö tai siirto muihin tarkoituksiin on kielletty. Kuvaa käytettäessä on ehdottomasti mainittava kuvan lähde ja kuvaaja.",
-        "creativeCommons1": "Kuvaa saa jakaa Creative Commons BY 4.0.-lisenssillä. Kuvaa käytettäessä on ehdottomasti mainittava kuvan lähde ja kuvaaja.",
+        "locationOnly": "Kuvaa saa vapaasti jakaa ja käyttää kohteen yhteydessä. Kuvaa käytettäessä on mainittava kuvan ottajan ja/tai kuvan omistajan nimi. Kuvan käyttö tai siirto muihin tarkoituksiin on kielletty.",
+        "creativeCommons1": "Kuvaa saa vapaasti jakaa ja käyttää. Kuvaa käytettäessä on mainittava kuvan ottajan ja/tai kuvan omistajan nimi.",
         "creativeCommons2": "Creative Commons BY 4.0.-lisenssi"
       },
       "source": {
@@ -405,6 +405,21 @@
       "title": "Yhteenveto kohteen tiedoista",
       "heading": "Otsikko",
       "placeInfo": "Kohteen tiedot"
+    },
+    "socialMedia": {
+      "heading": "Sosiaalinen media",
+      "title": {
+        "label": "Otsikko",
+        "tooltipLabel": "Linkki lisätietoihin",
+        "tooltipText": "Voit lisätä tähän kohteen sosiaallisen median tilin otsikon, esim. Facebook."
+      },
+      "link": {
+        "label": "Linkki",
+        "tooltipLabel": "Linkki lisätietoihin",
+        "tooltipText": "Voit lisätä tähän kohteen sosiaallisen median tilin osoitteen."
+      },
+      "addNew": "Lisää uusi sosiaalinen media",
+      "remove": "Poista sosiaalinen media"
     },
     "tags": {
       "title": "Asiasanat",
@@ -696,14 +711,16 @@
       "requestTranslation": "Pyydä käännös",
       "approveChangeRequest": "Hyväksy pyyntö",
       "rejectChangeRequest": "Hylkää pyyntö",
-      "cancelAdd": "Peruuta lisäys",
-      "cancelChange": "Peruuta muutos",
-      "cancelRemove": "Peruuta poisto",
+      "cancelAdd": "Hylkää lisäys",
+      "cancelChange": "Hylkää muutos",
+      "cancelRemove": "Hylkää poisto",
       "openForModifying": "Avaa muokattavaksi",
       "savePlace": "Tallenna kohde",
+      "savePlaceAsDraft": "Tallenna kohde luonnoksena",
       "removePlace": "Poista kohde",
       "saveIncomplete": "Tallenna keskeneräisenä",
       "saveInformation": "Tallenna",
+      "saveAsDraft": "Tallenna luonnoksena",
       "clearAllSelections": "Poista kaikki valinnat",
       "save": "Tallenna",
       "send": "Lähetä",
@@ -759,10 +776,11 @@
       "approveChangeRequest": "Oletko varma, että haluat tallentaa pyynnön?",
       "rejectChangeRequest": "Oletko varma, että haluat hylätä pyynnön?",
       "savePlace": "Oletko varma, että haluat tallentaa kohteen?",
+      "savePlaceAsDraft": "Oletko varma, että haluat tallentaa kohteen luonnoksena?",
       "removePlace": "Oletko varma, että haluat poistaa kohteen?",
-      "cancelAdd": "Oletko varma, että haluat peruuttaa lisäyksen?",
-      "cancelChange": "Oletko varma, että haluat peruuttaa muutoksen?",
-      "cancelRemove": "Oletko varma, että haluat peruuttaa poiston?",
+      "cancelAdd": "Oletko varma, että haluat hylätä lisäyksen?",
+      "cancelChange": "Oletko varma, että haluat hylätä muutoksen?",
+      "cancelRemove": "Oletko varma, että haluat hylätä poiston?",
       "sendTranslationRequest": "Oletko varma, että haluat lähettää käännöspyynnön?",
       "cancelTranslationRequest": "Oletko varma, että haluat peruuttaa käännöspyynnön?",
       "cancelTranslationRequests": "Oletko varma, että haluat peruuttaa valitut käännöspyynnöt?",
@@ -842,11 +860,15 @@
       },
       "neighborhood": {
         "label": "Kaupunginosa"
-      }
+      },
+      "addressNotFound": "Osoite ei löydy.",
+      "locationNotFound": "Osoitteen perusteella kohteelle ei löydy sijaintia kartalle. Lisää kohde kartalle napauttamalla karttaa siinä kohdassa, missä kohde sijaitsee."
     },
     "map": {
       "title": "Kohde kartalla",
       "geocode": "Näytä kartalla",
+      "fetchFinnishAddress": "Hae osoite suomeksi",
+      "fetchSwedishAddress": "Hae osoite ruotsiksi",
       "skipMap": "Ohita kartta"
     },
     "newTasks": {
@@ -877,8 +899,8 @@
       "permission": {
         "title": "Käyttöoikeudet",
         "label": "Kuvan käyttöoikeudet",
-        "locationOnly": "Kuvaa saa käyttää ainoastaan ko. kohteen yhteydessä esim. MyHelsinki.fi-sivustolla. Kuvaa voidaan jakaa myös avoimena datana kolmansille osapuolille MyHelsinki-avoimen rajapinnan kautta. Kuvan käyttö tai siirto muihin tarkoituksiin on kielletty. Kuvaa käytettäessä on ehdottomasti mainittava kuvan lähde ja kuvaaja.",
-        "creativeCommons": "Kuvaa saa jakaa Creative Commons BY 4.0.-lisenssillä. Kuvaa käytettäessä on ehdottomasti mainittava kuvan lähde ja kuvaaja."
+        "locationOnly": "Kuvaa saa vapaasti jakaa ja käyttää kohteen yhteydessä. Kuvaa käytettäessä on mainittava kuvan ottajan ja/tai kuvan omistajan nimi. Kuvan käyttö tai siirto muihin tarkoituksiin on kielletty.",
+        "creativeCommons": "Kuvaa saa vapaasti jakaa ja käyttää. Kuvaa käytettäessä on mainittava kuvan ottajan ja/tai kuvan omistajan nimi."
       },
       "source": {
         "label": "Kuvalähde",
@@ -931,6 +953,18 @@
       "address": "Osoite",
       "modifiedLast": "Muokattu viimeksi",
       "publishPermission": "Julkaistu"
+    },
+    "socialMedia": {
+      "heading": "Sosiaalinen media",
+      "title": {
+        "label": "Otsikko"
+      },
+      "link": {
+        "label": "Linkki"
+      },
+      "addNew": "Lisää uusi sosiaalinen media",
+      "remove": "Poista sosiaalinen media",
+      "removed": "Poistettu"
     },
     "tags": {
       "title": "Asiasanat",
