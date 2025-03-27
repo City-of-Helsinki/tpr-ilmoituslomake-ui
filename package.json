@@ -16,7 +16,7 @@
     "ajv": "^8.8.2",
     "ajv-formats": "^2.1.1",
     "hds-design-tokens": "^2.17.0",
-    "hds-react": "^2.17.0",
+    "hds-react": "3.11",
     "js-cookie": "^3.0.1",
     "leaflet": "^1.7.1",
     "moment": "^2.29.1",

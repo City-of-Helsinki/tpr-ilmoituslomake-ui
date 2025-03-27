@@ -24,7 +24,7 @@ const Moderation = (): ReactElement => {
         <div className={styles.korosTextBox}>
           <h1>{i18n.t("common.redirecting")}</h1>
         </div>
-        <Koros className={styles.koros} type="basic" flipHorizontal />
+        <Koros className={styles.koros} type="basic" />
       </main>
     </Layout>
   );
