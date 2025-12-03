@@ -46,6 +46,7 @@ const Header = ({ includeLanguageSelector, homePagePath, children }: HeaderProps
     }
   }
 
+  /*
   const providerProperties: LoginProviderProps = {
     userManagerSettings: {
       authority: 'https://tunnistamo.dev.hel.ninja/',
@@ -55,7 +56,27 @@ const Header = ({ includeLanguageSelector, homePagePath, children }: HeaderProps
     },
     apiTokensClientSettings: { url: 'https://tunnistamo.dev.hel.ninja/api-tokens/' },
     sessionPollerSettings: { pollIntervalInMs: 300000 },
-  };
+  };*/
+
+  const loginProviderProps: LoginProviderProps = {
+  userManagerSettings: {
+    authority: 'https://tunnistus.dev.hel.ninja/auth/realms/helsinki-tunnistus',
+    client_id: 'tpr-toimipisterekisteri-dev',
+    scope: 'openid profile',
+    redirect_uri: `https://tpr.hel.fi/tprperhe_testi/hkiauth/auth/return`,
+    silent_redirect_uri: `https://tpr.hel.fi/tprperhe_testi/hkiauth/auth/return`,
+    post_logout_redirect_uri: `https://tpr.hel.fi/tprperhe_testi/hkiauth/auth/return`,
+  },
+  apiTokensClientSettings: {
+    url: 'https://tunnistus.dev.hel.ninja/auth/realms/helsinki-tunnistus/protocol/openid-connect/token',
+    queryProps: {
+      grantType: 'urn:ietf:params:oauth:grant-type:uma-ticket',
+      permission: '#access',
+    },
+    audiences: ['tpr-toimipisterekisteri-dev', 'profile-api-dev'],
+  },
+  sessionPollerSettings: { pollIntervalInMs: 10000 },
+};
   
 
   const signIn = () => {
@@ -94,7 +115,7 @@ const Header = ({ includeLanguageSelector, homePagePath, children }: HeaderProps
         frontPageLabel=""
       >
         <LoginProvider
-          {...providerProperties}
+          {...loginProviderProps}
         >
         <WithoutAuthenticatedUser>
           <HdsHeader.LoginButton
@@ -109,9 +130,10 @@ const Header = ({ includeLanguageSelector, homePagePath, children }: HeaderProps
             onClick={signIn}
           >
             </HdsHeader.LoginButton>
+            
           </WithoutAuthenticatedUser>
-          </LoginProvider>
-      
+          
+      <WithAuthenticatedUser>
         <HdsHeader.ActionBarItem
           fixedRightPosition
           id="user"
@@ -131,7 +153,8 @@ const Header = ({ includeLanguageSelector, homePagePath, children }: HeaderProps
             onClick={signOut}
           />
         </HdsHeader.ActionBarItem>
-
+      </WithAuthenticatedUser>
+      </LoginProvider>
         {includeLanguageSelector && (
           <HdsHeader.LanguageSelector
             label={(router.locale || defaultLocale).toUpperCase()}

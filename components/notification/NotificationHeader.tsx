@@ -2,7 +2,7 @@ import React, { Dispatch, ReactElement, RefObject } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useRouter } from "next/router";
 import { useI18n } from "next-localization";
-import { Koros, Navigation } from "hds-react";
+import { Koros, Header as NHeader } from "hds-react";
 import { Stepper, Step, StepLabel, CircularProgress } from "@material-ui/core";
 import { StylesProvider } from "@material-ui/core/styles";
 import Header from "../common/Header";
@@ -30,7 +30,7 @@ const NotificationHeader = ({ headerRef }: NotificationHeaderProps): ReactElemen
   const { name: placeName } = notification;
 
   // The header should only be visible for developer usage
-  const devHeader = false;
+  const devHeader = true;
 
   const changePage = (pageNumber: number) => {
     dispatch(setPage(pageNumber));
@@ -40,43 +40,43 @@ const NotificationHeader = ({ headerRef }: NotificationHeaderProps): ReactElemen
     <>
       <Header>
         {devHeader && (
-          <Navigation.Row>
-            <Navigation.Item
+          <NHeader.NavigationMenu>
+            <NHeader.Link
               className={styles.navigationItem}
               href="#"
               label={i18n.t("notification.page.basic")}
               active={currentPage === 1}
               onClick={() => changePage(1)}
             />
-            <Navigation.Item
+            <NHeader.Link
               className={styles.navigationItem}
               href="#"
               label={i18n.t("notification.page.contact")}
               active={currentPage === 2}
               onClick={() => changePage(2)}
             />
-            <Navigation.Item
+            <NHeader.Link
               className={styles.navigationItem}
               href="#"
               label={i18n.t("notification.page.photos")}
               active={currentPage === 3}
               onClick={() => changePage(3)}
             />
-            <Navigation.Item
+            <NHeader.Link
               className={styles.navigationItem}
               href="#"
               label={i18n.t("notification.page.send")}
               active={currentPage === 4}
               onClick={() => changePage(4)}
             />
-            <Navigation.Item
+            <NHeader.Link
               className={styles.navigationItem}
               href="#"
               label={i18n.t("notification.page.info")}
               active={currentPage === 5}
               onClick={() => changePage(5)}
             />
-          </Navigation.Row>
+          </NHeader.NavigationMenu>
         )}
       </Header>
       <nav className={styles.header} aria-label={i18n.t("notification.navigationHeader")}>
@@ -137,7 +137,7 @@ const NotificationHeader = ({ headerRef }: NotificationHeaderProps): ReactElemen
                 <NotificationFooter smallButtons />
               </div>
             </div>
-            <Koros className={styles.wave} type="basic" flipHorizontal />
+            <Koros className={styles.wave} type="basic" />
           </div>
         </StylesProvider>
       </nav>
