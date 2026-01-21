@@ -340,7 +340,7 @@
       "photo": {
         "title": "Photo",
         "notice1": "Choose high-quality images that best describes your subject. Images should not be overlaid with text, dates, watermarks, or similar.",
-        "notice2": "Images must be at least 1920 x 1080 pixels in size, in JPEG file format, and must not exceed 4 MB in size. Images should preferably be horizontal in orientation."
+        "notice2": "Images must be in JPEG file format, and must not exceed 8 MB in size. Images should preferably be horizontal in orientation."
       },
       "url": {
         "labelDevice": "Select an image from your device",
