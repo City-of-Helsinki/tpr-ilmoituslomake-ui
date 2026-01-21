@@ -69,7 +69,7 @@ const NotificationDetail = (): ReactElement => {
       ref.current.scrollIntoView();
       ref.current.focus();
     }
-  });
+}, [currentPage]);
 
   return (
     <Layout>
