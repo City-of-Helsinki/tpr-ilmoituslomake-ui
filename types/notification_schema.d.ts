@@ -82,11 +82,18 @@ export interface NotificationSchema {
     [k: string]: unknown;
   };
   ontology_ids: number[];
+  certificate_ids: number[];
   matko_ids: number[];
   extra_keywords: {
     fi: string[];
     sv: string[];
     en: string[];
+    [k: string]: unknown;
+  };
+  other_certificates: {
+    fi: string;
+    sv: string;
+    en: string;
     [k: string]: unknown;
   };
   comments: string;

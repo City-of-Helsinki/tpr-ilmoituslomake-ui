@@ -104,6 +104,23 @@ export interface TagOption {
   };
 }
 
+export interface CertificateOption {
+  id: number;
+  certificate_type: string;
+  certificatename: {
+    fi: string;
+    sv: string;
+    en: string;
+    [key: string]: unknown;
+  };
+  url: {
+    fi: string;
+    sv: string;
+    en: string;
+  };
+  displayed_in_myhelsinki: boolean;
+}
+
 export interface MatkoTagOption {
   id: number;
   matkoword: {
@@ -124,7 +141,14 @@ export interface NotificationExtra {
   inputLanguages: string[];
   photos: Photo[];
   tagOptions: TagOption[];
+  certificateOptions: CertificateOption[];
   extraKeywordsText: {
+    fi: string;
+    sv: string;
+    en: string;
+    [key: string]: unknown;
+  };
+  otherCertificates: {
     fi: string;
     sv: string;
     en: string;

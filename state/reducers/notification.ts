@@ -17,8 +17,10 @@ import {
   SET_NOTIFICATION_SHORT_DESCRIPTION,
   SET_NOTIFICATION_LONG_DESCRIPTION,
   SET_NOTIFICATION_TAG,
+  SET_NOTIFICATION_CERTIFICATE,
   SET_NOTIFICATION_TAG_OPTIONS,
   SET_NOTIFICATION_EXTRA_KEYWORDS,
+  SET_NOTIFICATION_OTHER_CERTIFICATE,
   SET_NOTIFICATION_NOTIFIER,
   SET_NOTIFICATION_ADDRESS,
   SET_NOTIFICATION_ADDRESS_FOUND,
@@ -170,6 +172,14 @@ const notification = (state: NotificationState | undefined, action: AnyAction): 
       };
     }
 
+    case SET_NOTIFICATION_CERTIFICATE: {
+      console.log("SET_NOTIFICATION_CERTIFICATE", action.payload);
+      return {
+        ...state,
+        notification: { ...state.notification, certificate_ids: action.payload },
+      };
+    }
+
     case SET_NOTIFICATION_TAG_OPTIONS: {
       console.log("SET_NOTIFICATION_TAG_OPTIONS", action.payload);
       return {
@@ -196,6 +206,27 @@ const notification = (state: NotificationState | undefined, action: AnyAction): 
           ...state.notificationExtra,
           extraKeywordsText: {
             ...state.notificationExtra.extraKeywordsText,
+            [action.payload.language]: action.payload.value,
+          },
+        },
+      };
+    }
+
+    case SET_NOTIFICATION_OTHER_CERTIFICATE: {
+      console.log("SET_NOTIFICATION_OTHER_CERTIFICATE", action.payload);
+      return {
+        ...state,
+        notification: {
+          ...state.notification,
+          other_certificates: {
+            ...state.notification.other_certificates,
+            [action.payload.language]: action.payload.value
+          },
+        },
+        notificationExtra: {
+          ...state.notificationExtra,
+          otherCertificates: {
+            ...state.notificationExtra.otherCertificates,
             [action.payload.language]: action.payload.value,
           },
         },

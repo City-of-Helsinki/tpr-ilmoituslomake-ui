@@ -434,6 +434,15 @@
         "helperText": "Erota asiasanat pilkulla"
       }
     },
+    "certificates": {
+      "title": "Sertifikaatit",
+      "certificateSelection": "Sertifikaattien valinta",
+      "extra": "Muu, mikä?",
+      "add": {
+        "label": "Lisää sertifikaatti",
+        "helperText": "Valitse listalta"
+      }
+    },
     "terms": {
       "heading": "Käyttöehdot",
       "text1": "Palveluun ilmoitettuja ja kerättyjä tietoja käytetään Helsingin kaupungin verkkopalvelussa. Lisäksi tietoja tarjotaan Helsingin kaupungin avoimessa rajapinnassa kolmansille osapuolille. Valokuville valitaan erikseen käyttölupa. Tietokantaa ylläpitää Helsinki kaupunki, jolla on oikeus valita julkaistava materiaali ja editoida tekstiä sopivaan muotoon.",
