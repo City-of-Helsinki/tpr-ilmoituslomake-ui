@@ -8,7 +8,9 @@ import {
   SET_MODERATION_LONG_DESCRIPTION_STATUS,
   SET_MODERATION_TAG_STATUS,
   SET_MODERATION_MATKO_TAG_STATUS,
+  SET_MODERATION_CERTIFICATE_STATUS,
   SET_MODERATION_EXTRA_KEYWORDS_STATUS,
+  SET_MODERATION_OTHER_CERTIFICATE_STATUS,
   SET_MODERATION_ADDRESS_STATUS,
   SET_MODERATION_LOCATION_STATUS,
   SET_MODERATION_CONTACT_STATUS,
@@ -94,11 +96,27 @@ const moderationStatus = (state: ModerationStatusState | undefined, action: AnyA
       };
     }
 
+    case SET_MODERATION_CERTIFICATE_STATUS: {
+      console.log("SET_MODERATION_CERTIFICATE_STATUS", action.payload);
+      return {
+        ...state,
+        moderationStatus: { ...state.moderationStatus, certificate_ids: action.payload },
+      };
+    }
+
     case SET_MODERATION_EXTRA_KEYWORDS_STATUS: {
       console.log("SET_MODERATION_EXTRA_KEYWORDS_STATUS", action.payload);
       return {
         ...state,
         moderationStatus: { ...state.moderationStatus, extra_keywords: { ...state.moderationStatus.extra_keywords, ...action.payload } },
+      };
+    }
+
+    case SET_MODERATION_OTHER_CERTIFICATE_STATUS: {
+      console.log("SET_MODERATION_OTHER_CERTIFICATE_STATUS", action.payload);
+      return {
+        ...state,
+        moderationStatus: { ...state.moderationStatus, other_certificates: { ...state.moderationStatus.other_certificates, ...action.payload } },
       };
     }
 

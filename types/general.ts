@@ -372,6 +372,7 @@ export interface ModerationPlaceSearch {
   district: string;
   ontologyIds: number[];
   matkoIds: number[];
+  certificateIds: number[];
   comment: string;
   publishPermission?: string;
   searchDone: boolean;

@@ -40,6 +40,7 @@ const initialState: ModerationState = {
     district: "",
     ontologyIds: [],
     matkoIds: [],
+    certificateIds: [],
     comment: "",
     searchDone: false,
   },
