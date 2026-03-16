@@ -19,6 +19,7 @@ import {
   SET_NOTIFICATION_TAG,
   SET_NOTIFICATION_CERTIFICATE,
   SET_NOTIFICATION_TAG_OPTIONS,
+  SET_NOTIFICATION_CERTIFICATE_OPTIONS,
   SET_NOTIFICATION_EXTRA_KEYWORDS,
   SET_NOTIFICATION_OTHER_CERTIFICATE,
   SET_NOTIFICATION_NOTIFIER,
@@ -185,6 +186,14 @@ const notification = (state: NotificationState | undefined, action: AnyAction): 
       return {
         ...state,
         notificationExtra: { ...state.notificationExtra, tagOptions: action.payload },
+      };
+    }
+
+    case SET_NOTIFICATION_CERTIFICATE_OPTIONS: {
+      console.log("SET_NOTIFICATION_CERTIFICATE_OPTIONS", action.payload);
+      return {
+        ...state,
+        notificationExtra: { ...state.notificationExtra, certificateOptions: action.payload },
       };
     }
 

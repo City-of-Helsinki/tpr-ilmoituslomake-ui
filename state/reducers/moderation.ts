@@ -12,9 +12,12 @@ import {
   SET_MODERATION_LONG_DESCRIPTION,
   SET_MODERATION_TAG,
   SET_MODERATION_MATKO_TAG,
+  SET_MODERATION_CERTIFICATE,
   SET_MODERATION_TAG_OPTIONS,
   SET_MODERATION_MATKO_TAG_OPTIONS,
+  SET_MODERATION_CERTIFICATE_OPTIONS,
   SET_MODERATION_EXTRA_KEYWORDS,
+  SET_MODERATION_OTHER_CERTIFICATE,
   SET_MODERATION_ADDRESS,
   SET_MODERATION_ADDRESS_FOUND,
   SET_MODERATION_LOCATION,
@@ -158,6 +161,14 @@ const moderation = (state: ModerationState | undefined, action: AnyAction): Mode
       };
     }
 
+    case SET_MODERATION_CERTIFICATE: {
+      console.log("SET_MODERATION_CERTIFICATE", action.payload);
+      return {
+        ...state,
+        modifiedTask: { ...state.modifiedTask, certificate_ids: action.payload },
+      };
+    }
+
     case SET_MODERATION_TAG_OPTIONS: {
       console.log("SET_MODERATION_TAG_OPTIONS", action.payload);
       return {
@@ -171,6 +182,14 @@ const moderation = (state: ModerationState | undefined, action: AnyAction): Mode
       return {
         ...state,
         moderationExtra: { ...state.moderationExtra, matkoTagOptions: action.payload },
+      };
+    }
+
+    case SET_MODERATION_CERTIFICATE_OPTIONS: {
+      console.log("SET_MODERATION_CERTIFICATE_OPTIONS", action.payload);
+      return {
+        ...state,
+        moderationExtra: { ...state.moderationExtra, certificateOptions: action.payload },
       };
     }
 
@@ -192,6 +211,27 @@ const moderation = (state: ModerationState | undefined, action: AnyAction): Mode
           ...state.moderationExtra,
           extraKeywordsTextModified: {
             ...state.moderationExtra.extraKeywordsTextModified,
+            [action.payload.language]: action.payload.value,
+          },
+        },
+      };
+    }
+
+    case SET_MODERATION_OTHER_CERTIFICATE: {
+      console.log("SET_MODERATION_OTHER_CERTIFICATE", action.payload);
+      return {
+        ...state,
+        modifiedTask: {
+          ...state.modifiedTask,
+          other_certificates: {
+            ...state.modifiedTask.other_certificates,
+            [action.payload.language]: action.payload.value
+          },
+        },
+        moderationExtra: {
+          ...state.moderationExtra,
+          otherCertificateTextModified: {
+            ...state.moderationExtra.otherCertificateTextModified,
             [action.payload.language]: action.payload.value,
           },
         },

@@ -5,7 +5,7 @@ import { useI18n } from "next-localization";
 import { Combobox, TextInput } from "hds-react";
 import { NotificationAction } from "../../state/actions/notificationTypes";
 import { NotificationValidationAction } from "../../state/actions/notificationValidationTypes";
-import { setNotificationExtraKeywords, setNotificationCertificate, setNotificationOtherCertificate } from "../../state/actions/notification";
+import { setNotificationCertificate, setNotificationOtherCertificate } from "../../state/actions/notification";
 import { RootState } from "../../state/reducers";
 import { MAX_LENGTH } from "../../types/constants";
 import { OptionType, CertificateOption } from "../../types/general";

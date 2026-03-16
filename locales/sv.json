@@ -987,6 +987,16 @@
         "helperText": "Erota asiasanat pilkulla"
       }
     },
+    "certificates": {
+      "title": "Sertifikaatit",
+      "add": {
+        "label": "Lisää sertifikaatti",
+        "helperText": "Hae tai valitse listalta"
+      },
+      "otherCertificates": {
+        "label": "Muu sertifikaatti"
+      }
+    },
     "task": {
       "title": "Kohteen tiedot",
       "basic": "Perustiedot",

@@ -32,6 +32,7 @@ import {
 } from "../../types/constants";
 import {
   AddressSearchResult,
+  CertificateOption,
   ChangeRequestSchema,
   KeyValueBoolean,
   KeyValueString,
@@ -100,7 +101,7 @@ export const setNotificationCertificate = (values: number[]): NotificationAction
   payload: values,
 });
 
-export const setNotificationCertificateOptions = (options: TagOption[]): NotificationAction => ({
+export const setNotificationCertificateOptions = (options: CertificateOption[]): NotificationAction => ({
   type: SET_NOTIFICATION_CERTIFICATE_OPTIONS,
   payload: options,
 });

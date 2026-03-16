@@ -226,12 +226,23 @@ export const INITIAL_MODERATION_EXTRA: ModerationExtra = {
   photosModified: [],
   tagOptions: [],
   matkoTagOptions: [],
+  certificateOptions: [],
   extraKeywordsTextSelected: {
     fi: "",
     sv: "",
     en: "",
   },
   extraKeywordsTextModified: {
+    fi: "",
+    sv: "",
+    en: "",
+  },
+  otherCertificateTextSelected: {
+    fi: "",
+    sv: "",
+    en: "",
+  },
+  otherCertificateTextModified: {
     fi: "",
     sv: "",
     en: "",
@@ -303,7 +314,13 @@ const getInitialModerationStatus = (moderationStatus: ModerationStatus): Moderat
     },
     ontology_ids: moderationStatus,
     matko_ids: moderationStatus,
+    certificate_ids: moderationStatus,
     extra_keywords: {
+      fi: moderationStatus,
+      sv: moderationStatus,
+      en: moderationStatus,
+    },
+    other_certificates: {
       fi: moderationStatus,
       sv: moderationStatus,
       en: moderationStatus,

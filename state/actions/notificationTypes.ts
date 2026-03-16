@@ -42,6 +42,7 @@ import {
   Photo,
   SocialMedia,
   TagOption,
+  CertificateOption
 } from "../../types/general";
 import { NotificationSchema } from "../../types/notification_schema";
 
@@ -102,7 +103,7 @@ interface SetNotificationCertificateAction extends AnyAction {
 
 interface SetNotificationCertificateOptionsAction extends AnyAction {
   type: typeof SET_NOTIFICATION_CERTIFICATE_OPTIONS;
-  payload: TagOption[];
+  payload: CertificateOption[];
 }
 
 interface SetNotificationExtraKeywordsAction extends AnyAction {

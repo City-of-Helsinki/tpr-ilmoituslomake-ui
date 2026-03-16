@@ -467,6 +467,7 @@ export interface ModerationExtra {
   photosModified: Photo[];
   tagOptions: TagOption[];
   matkoTagOptions: MatkoTagOption[];
+  certificateOptions: CertificateOption[];
   extraKeywordsTextSelected: {
     fi: string;
     sv: string;
@@ -474,6 +475,18 @@ export interface ModerationExtra {
     [key: string]: unknown;
   };
   extraKeywordsTextModified: {
+    fi: string;
+    sv: string;
+    en: string;
+    [key: string]: unknown;
+  };
+  otherCertificateTextSelected: {
+    fi: string;
+    sv: string;
+    en: string;
+    [key: string]: unknown;
+  };
+  otherCertificateTextModified: {
     fi: string;
     sv: string;
     en: string;
