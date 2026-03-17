@@ -70,7 +70,7 @@ const NotificationDetail = (): ReactElement => {
       ref.current.scrollIntoView();
       ref.current.focus();
     }
-}, [currentPage]);
+  }, [currentPage]);
 
   return (
     <Layout>
@@ -89,7 +89,7 @@ const NotificationDetail = (): ReactElement => {
           {!pageValid && <ValidationSummary prefix="notification" pageValid={pageValid} validationSummary={validationSummary} />}
           <Description />
           <Tags />
-          <Certificates/>
+          <Certificates />
           <Notifier />
           <NotificationFooterNav setToast={setToast} />
         </main>

@@ -28,25 +28,24 @@ const Certificates = (): ReactElement => {
   const notificationValidation = useSelector((state: RootState) => state.notificationValidation.notificationValidation);
   const { certificate_ids: tagsValid } = notificationValidation;
 
-  const convertOptions = (options: CertificateOption[]): OptionType[] => 
-  options.map((tag) => ({ id: tag.id, label: tag.certificatename[router.locale || defaultLocale] as string }))
-  .sort((a, b) => {
-      if (a.id === -1) return 1; 
-      if (b.id === -1) return -1; 
+  const convertOptions = (options: CertificateOption[]): OptionType[] =>
+    options
+      .map((tag) => ({ id: tag.id, label: tag.certificatename[router.locale || defaultLocale] as string }))
+      .sort((a, b) => {
+        if (a.id === -1) return 1;
+        if (b.id === -1) return -1;
 
-      return sortByOptionLabel(a, b);
-    });
+        return sortByOptionLabel(a, b);
+      });
 
   const convertValues = (values: number[]): OptionType[] => convertOptions(certificateOptions.filter((tag) => values.includes(tag.id)));
 
   const updateCertificates = (selected: OptionType[]) => {
     dispatch(setNotificationCertificate(selected.map((s) => s.id as number)));
-
   };
 
   const updateOtherCertificate = (evt: ChangeEvent<HTMLInputElement>) => {
     dispatch(setNotificationOtherCertificate(router.locale || defaultLocale, evt.target.value));
-
   };
 
   const validateCertificates = () => {
@@ -72,13 +71,15 @@ const Certificates = (): ReactElement => {
         selectedItemRemoveButtonAriaLabel={i18n.t("notification.button.remove")}
         clearButtonAriaLabel={i18n.t("notification.button.clearAllSelections")}
         invalid={!tagsValid.valid}
-        error={!tagsValid.valid ? i18n.t(tagsValid.message as string).replace("$fieldName", i18n.t("notification.certificates.certificateSelection")) : ""}
+        error={
+          !tagsValid.valid ? i18n.t(tagsValid.message as string).replace("$fieldName", i18n.t("notification.certificates.certificateSelection")) : ""
+        }
         multiselect
       />
 
-      {other ? 
-          (<>
-            <TextInput
+      {other ? (
+        <>
+          <TextInput
             id="otherCertificates"
             className="formInput"
             label={i18n.t("notification.certificates.extra")}
@@ -88,10 +89,10 @@ const Certificates = (): ReactElement => {
             maxLength={MAX_LENGTH}
             onChange={updateOtherCertificate}
           />
-          </>) : 
-          ("")
-      }
-      
+        </>
+      ) : (
+        ""
+      )}
     </div>
   );
 };

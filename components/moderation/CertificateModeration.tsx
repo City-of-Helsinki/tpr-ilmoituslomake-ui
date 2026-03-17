@@ -33,7 +33,9 @@ const CertificateModeration = (): ReactElement => {
   const { certificate_ids: certificatesStatus, other_certificates: otherCertificateStatus } = moderationStatus;
 
   const convertOptions = (options: CertificateOption[]): OptionType[] => {
-    return options.map((certificate) => ({ id: certificate.id, label: certificate.certificatename[router.locale || defaultLocale] as string })).sort(sortByOptionLabel);
+    return options
+      .map((certificate) => ({ id: certificate.id, label: certificate.certificatename[router.locale || defaultLocale] as string }))
+      .sort(sortByOptionLabel);
   };
 
   const convertValues = (values: number[]): OptionType[] => {
