@@ -210,16 +210,26 @@ const TaskHeaderButtons = ({ isModerated, setToast }: TaskHeaderButtonsProps): R
             },
             images: [],
             ontology_ids: moderationStatus.ontology_ids === ModerationStatus.Approved ? modifiedTask.ontology_ids : selectedTask.ontology_ids,
-            certificate_ids: moderationStatus.certificate_ids === ModerationStatus.Approved ? modifiedTask.certificate_ids : selectedTask.certificate_ids,
+            certificate_ids:
+              moderationStatus.certificate_ids === ModerationStatus.Approved ? modifiedTask.certificate_ids : selectedTask.certificate_ids,
             extra_keywords: {
               fi: moderationStatus.extra_keywords.fi === ModerationStatus.Approved ? modifiedTask.extra_keywords.fi : selectedTask.extra_keywords.fi,
               sv: moderationStatus.extra_keywords.sv === ModerationStatus.Approved ? modifiedTask.extra_keywords.sv : selectedTask.extra_keywords.sv,
               en: moderationStatus.extra_keywords.en === ModerationStatus.Approved ? modifiedTask.extra_keywords.en : selectedTask.extra_keywords.en,
             },
             other_certificates: {
-              fi: moderationStatus.other_certificates.fi === ModerationStatus.Approved ? modifiedTask.other_certificates.fi : selectedTask.other_certificates.fi,
-              sv: moderationStatus.other_certificates.sv === ModerationStatus.Approved ? modifiedTask.other_certificates.sv : selectedTask.other_certificates.sv,
-              en: moderationStatus.other_certificates.en === ModerationStatus.Approved ? modifiedTask.other_certificates.en : selectedTask.other_certificates.en,
+              fi:
+                moderationStatus.other_certificates.fi === ModerationStatus.Approved
+                  ? modifiedTask.other_certificates.fi
+                  : selectedTask.other_certificates.fi,
+              sv:
+                moderationStatus.other_certificates.sv === ModerationStatus.Approved
+                  ? modifiedTask.other_certificates.sv
+                  : selectedTask.other_certificates.sv,
+              en:
+                moderationStatus.other_certificates.en === ModerationStatus.Approved
+                  ? modifiedTask.other_certificates.en
+                  : selectedTask.other_certificates.en,
             },
             social_media: socialMediaUuids
               .map((uuid, index) => {

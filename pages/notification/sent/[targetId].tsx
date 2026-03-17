@@ -166,7 +166,7 @@ export const getServerSideProps: GetServerSideProps = async ({ req, params, loca
             ...dataToUse,
             notifier: INITIAL_NOTIFICATION.notifier,
             extra_keywords,
-            other_certificates
+            other_certificates,
           },
           notificationExtra: {
             ...initialReduxState.notification.notificationExtra,

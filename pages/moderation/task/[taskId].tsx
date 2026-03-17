@@ -12,7 +12,15 @@ import { INITIAL_MODERATION_STATUS_EDITED, INITIAL_NOTIFICATION } from "../../..
 import { PhotoStatus, SocialMediaStatus } from "../../../types/moderation_status";
 import { NotificationSchema } from "../../../types/notification_schema";
 import { getTaskStatus, getTaskType } from "../../../utils/conversion";
-import { checkUser, getCertificates, getMatkoTags, getOriginServerSide, getTags, redirectToLogin, redirectToNotAuthorized } from "../../../utils/serverside";
+import {
+  checkUser,
+  getCertificates,
+  getMatkoTags,
+  getOriginServerSide,
+  getTags,
+  redirectToLogin,
+  redirectToNotAuthorized,
+} from "../../../utils/serverside";
 import Layout from "../../../components/common/Layout";
 import ModerationHeader from "../../../components/moderation/ModerationHeader";
 import Collapsible from "../../../components/moderation/Collapsible";
