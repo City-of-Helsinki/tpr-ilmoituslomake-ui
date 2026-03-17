@@ -23,7 +23,7 @@ const PlaceSearch = (): ReactElement => {
 
   const currentUser = useSelector((state: RootState) => state.general.user);
   const placeSearch = useSelector((state: RootState) => state.moderation.placeSearch);
-  const { placeName, language, address, district, ontologyIds, matkoIds, publishPermission } = placeSearch;
+  const { placeName, language, address, district, ontologyIds, matkoIds, certificateIds, publishPermission } = placeSearch;
 
   const moderationExtra = useSelector((state: RootState) => state.moderation.moderationExtra);
   const { tagOptions = [], matkoTagOptions = [] } = moderationExtra;
@@ -66,6 +66,10 @@ const PlaceSearch = (): ReactElement => {
     dispatch(setModerationPlaceSearch({ ...placeSearch, matkoIds: selected.map((s) => s.id as number) }));
   };
 
+  const updateSearchCertificates = (selected: OptionType[]) => {
+    dispatch(setModerationPlaceSearch({ ...placeSearch, certificateIds: selected.map((s) => s.id as number) }));
+  };
+
   const updatePublishPermission = (evt: ChangeEvent<HTMLInputElement>) => {
     dispatch(
       setModerationPlaceSearch({
@@ -83,6 +87,7 @@ const PlaceSearch = (): ReactElement => {
       ...(address.length > 0 && { search_address__contains: address.toLowerCase() }),
       ...(ontologyIds.length > 0 && { data__ontology_ids__contains: ontologyIds }),
       ...(matkoIds.length > 0 && { data__matko_ids__contains: matkoIds }),
+      ...(certificateIds.length > 0 && { data__certificate_ids__contains: certificateIds }),
       ...(publishPermission && { published: publishPermission === "yes" }),
       ...(district.length > 0 && { search_neighborhood: district.toLowerCase() }),
       ...(language.length > 0 && { lang: language }),
@@ -223,6 +228,20 @@ const PlaceSearch = (): ReactElement => {
           value={convertMatkoValues(matkoIds)}
           onChange={updateSearchMatkoTags}
           label={i18n.t("moderation.placeSearch.matko.label")}
+          toggleButtonAriaLabel={i18n.t("notification.button.toggleMenu")}
+          selectedItemRemoveButtonAriaLabel={i18n.t("notification.button.remove")}
+          clearButtonAriaLabel={i18n.t("notification.button.clearAllSelections")}
+          multiselect
+        />
+
+        <Combobox
+          id="certificate"
+          className={styles.gridColumn1}
+          // @ts-ignore: Erroneous error that the type for options should be OptionType[][]
+          options={convertOptions(certificateOptions)}
+          value={convertValues(certificateIds)}
+          onChange={updateSearchCertificates}
+          label={i18n.t("moderation.placeSearch.tag.label")}
           toggleButtonAriaLabel={i18n.t("notification.button.toggleMenu")}
           selectedItemRemoveButtonAriaLabel={i18n.t("notification.button.remove")}
           clearButtonAriaLabel={i18n.t("notification.button.clearAllSelections")}

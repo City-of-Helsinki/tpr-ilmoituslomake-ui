@@ -12,7 +12,7 @@ import { INITIAL_NOTIFICATION, INITIAL_NOTIFICATION_EXTRA } from "../../types/in
 import { NotificationSchema } from "../../types/notification_schema";
 import { PhotoValidation, SocialMediaValidation } from "../../types/notification_validation";
 import i18nLoader, { defaultLocale } from "../../utils/i18n";
-import { checkUser, redirectToLogin, getOriginServerSide, getPreviousInputLanguages, getTags } from "../../utils/serverside";
+import { checkUser, redirectToLogin, getOriginServerSide, getPreviousInputLanguages, getTags, getCertificates } from "../../utils/serverside";
 import Layout from "../../components/common/Layout";
 import Header from "../../components/common/Header";
 import Notice from "../../components/common/Notice";
@@ -36,6 +36,7 @@ import Preview from "../../components/notification/Preview";
 import SentInfoHeader from "../../components/notification/SentInfoHeader";
 import SocialMedia from "../../components/notification/SocialMedia";
 import Tags from "../../components/notification/Tags";
+import Certificates from "../../components/notification/Certificates";
 import Terms from "../../components/notification/Terms";
 import ToastNotification from "../../components/common/ToastNotification";
 import ValidationSummary from "../../components/common/ValidationSummary";
@@ -69,7 +70,7 @@ const NotificationDetail = (): ReactElement => {
       ref.current.scrollIntoView();
       ref.current.focus();
     }
-  });
+}, [currentPage]);
 
   return (
     <Layout>
@@ -88,6 +89,7 @@ const NotificationDetail = (): ReactElement => {
           {!pageValid && <ValidationSummary prefix="notification" pageValid={pageValid} validationSummary={validationSummary} />}
           <Description />
           <Tags />
+          <Certificates/>
           <Notifier />
           <NotificationFooterNav setToast={setToast} />
         </main>
@@ -211,6 +213,8 @@ export const getServerSideProps: GetServerSideProps = async ({ req, resolvedUrl,
   // Note: the previously selected input languages are determined after fetching the data below
   initialReduxState.notification.notificationExtra.inputLanguages = [locale || defaultLocale];
   initialReduxState.notification.notificationExtra.tagOptions = await getTags();
+
+  initialReduxState.notification.notificationExtra.certificateOptions = await getCertificates();
 
   // Try to fetch the notification details for the specified id
   if (params) {

@@ -9,8 +9,10 @@ export const getTrimmedNotification = (notification: NotificationSchema): Notifi
     name: placeName,
     description: { short: shortDesc, long: longDesc },
     ontology_ids,
+    certificate_ids,
     matko_ids,
     extra_keywords,
+    other_certificates,
     notifier: { notifier_type: notifierType, full_name: notifierName, email: notifierEmail, phone: notifierPhone },
     address: {
       fi: { street: streetFi, postal_code: postalCodeFi, post_office: postOfficeFi, neighborhood: neighborhoodFi, neighborhood_id: neighborhoodIdFi },
@@ -47,8 +49,10 @@ export const getTrimmedNotification = (notification: NotificationSchema): Notifi
       },
     },
     ontology_ids,
+    certificate_ids,
     matko_ids,
     extra_keywords,
+    other_certificates,
     notifier: {
       notifier_type: trimStringField(notifierType),
       full_name: trimStringField(notifierName),

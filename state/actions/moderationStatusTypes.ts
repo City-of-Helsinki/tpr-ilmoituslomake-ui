@@ -7,7 +7,9 @@ import {
   SET_MODERATION_LONG_DESCRIPTION_STATUS,
   SET_MODERATION_TAG_STATUS,
   SET_MODERATION_MATKO_TAG_STATUS,
+  SET_MODERATION_CERTIFICATE_STATUS,
   SET_MODERATION_EXTRA_KEYWORDS_STATUS,
+  SET_MODERATION_OTHER_CERTIFICATE_STATUS,
   SET_MODERATION_ADDRESS_STATUS,
   SET_MODERATION_LOCATION_STATUS,
   SET_MODERATION_CONTACT_STATUS,
@@ -52,8 +54,18 @@ interface SetModerationMatkoTagStatusAction extends AnyAction {
   payload: ModerationStatus;
 }
 
+interface SetModerationCertificateStatusAction extends AnyAction {
+  type: typeof SET_MODERATION_CERTIFICATE_STATUS;
+  payload: ModerationStatus;
+}
+
 interface SetModerationExtraKeywordsStatusAction extends AnyAction {
   type: typeof SET_MODERATION_EXTRA_KEYWORDS_STATUS;
+  payload: KeyValueStatus;
+}
+
+interface SetModerationOtherCertificateStatusAction extends AnyAction {
+  type: typeof SET_MODERATION_OTHER_CERTIFICATE_STATUS;
   payload: KeyValueStatus;
 }
 
@@ -113,7 +125,9 @@ export type ModerationStatusAction =
   | SetModerationLongDescriptionStatusAction
   | SetModerationTagStatusAction
   | SetModerationMatkoTagStatusAction
+  | SetModerationCertificateStatusAction
   | SetModerationExtraKeywordsStatusAction
+  | SetModerationOtherCertificateStatusAction
   | SetModerationAddressStatusAction
   | SetModerationLocationStatusAction
   | SetModerationContactStatusAction

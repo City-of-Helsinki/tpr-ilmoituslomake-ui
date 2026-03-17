@@ -70,8 +70,15 @@ export interface NotificationValidationSchema {
     [key: string]: Validation;
   };
   ontology_ids: Validation;
+  certificate_ids: Validation;
   matko_ids: Validation;
   extra_keywords: {
+    fi: Validation;
+    sv: Validation;
+    en: Validation;
+    [key: string]: Validation;
+  };
+  other_certificates: {
     fi: Validation;
     sv: Validation;
     en: Validation;

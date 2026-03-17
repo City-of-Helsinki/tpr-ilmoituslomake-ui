@@ -27,7 +27,9 @@ const Preview = ({ className, titleKey, includeNotifier, isPlaceInfo }: PreviewP
     name: placeName,
     description: { short: shortDesc, long: longDesc },
     ontology_ids,
+    certificate_ids,
     extra_keywords,
+    other_certificates,
     address: {
       fi: { street: streetFi, postal_code: postalCodeFi, post_office: postOfficeFi, neighborhood: neighborhoodFi },
       sv: { street: streetSv, postal_code: postalCodeSv, post_office: postOfficeSv, neighborhood: neighborhoodSv },
@@ -42,7 +44,7 @@ const Preview = ({ className, titleKey, includeNotifier, isPlaceInfo }: PreviewP
   } = notification;
 
   const notificationExtra = useSelector((state: RootState) => state.notification.notificationExtra);
-  const { inputLanguages, tagOptions, photos = [] } = notificationExtra;
+  const { inputLanguages, tagOptions, certificateOptions, photos = [] } = notificationExtra;
 
   const initialCenter = MAP_INITIAL_CENTER;
   const initialZoom = MAP_INITIAL_ZOOM;
@@ -99,6 +101,22 @@ const Preview = ({ className, titleKey, includeNotifier, isPlaceInfo }: PreviewP
           .map((tag) => (
             <div key={`tag_${tag.id}`}>{tag.ontologyword[router.locale || defaultLocale] as string}</div>
           ))}
+      </div>
+      <div className={`${styles.gridHeading} ${styles.gridContent}`}>{i18n.t("notification.certificates.title")}</div>
+      <div className={`${styles.gridPlaceInfo} ${styles.gridContent}`}>
+        {certificateOptions
+          .filter((certificate) => certificate_ids.includes(certificate.id))
+          .map((certificate) => (
+            <div key={`tag_${certificate.id}`}>{certificate.certificatename[router.locale || defaultLocale] as string}</div>
+          ))}
+      </div>
+      <div className={`${styles.gridHeading} ${styles.gridContent}`}>{i18n.t("notification.certificates.otherCertificate")}</div>
+      <div className={`${styles.gridPlaceInfo} ${styles.gridContent}`}>
+        {LANGUAGE_OPTIONS.map((option) =>
+          inputLanguages.includes(option) && (other_certificates[option] as string).length > 0 ? (
+            <div lang={option} key={`placeName_${option}`}>{`${option.toUpperCase()}: ${other_certificates[option] as string}`}</div>
+          ) : null
+        )}
       </div>
       <div className={`${styles.gridHeading} ${styles.gridContent}`}>{i18n.t("notification.tags.extra")}</div>
       <div className={`${styles.gridPlaceInfo} ${styles.gridContent}`}>

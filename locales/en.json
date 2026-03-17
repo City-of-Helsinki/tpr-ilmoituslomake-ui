@@ -434,6 +434,16 @@
         "helperText": "Use a comma to separate the keywords"
       }
     },
+    "certificates": {
+      "title": "Certificates",
+      "certificateSelection": "Certificate selection",
+      "extra": "Other, what?",
+      "otherCertificate": "Other certificate",
+      "add": {
+        "label": "Add certificate",
+        "helperText": "Choose from the list"
+      }
+    },
     "terms": {
       "heading": "Terms of use",
       "text1": "The information reported and collected is used in the City of Helsinki online service. In addition, information is provided to third parties in the City of Helsinki's open interface. Photos are licensed separately. The database is maintained by the City of Helsinki, which has the right to select the material to be published and to edit the text in an appropriate format.",
@@ -976,6 +986,16 @@
       "extraKeywords": {
         "label": "Käyttäjän toivomat lisähakusanat",
         "helperText": "Erota asiasanat pilkulla"
+      }
+    },
+    "certificates": {
+      "title": "Sertifikaatit",
+      "add": {
+        "label": "Lisää sertifikaatti",
+        "helperText": "Hae tai valitse listalta"
+      },
+      "otherCertificates": {
+        "label": "Muu sertifikaatti"
       }
     },
     "task": {

@@ -9,9 +9,12 @@ import {
   SET_MODERATION_LONG_DESCRIPTION,
   SET_MODERATION_TAG,
   SET_MODERATION_MATKO_TAG,
+  SET_MODERATION_CERTIFICATE,
   SET_MODERATION_TAG_OPTIONS,
   SET_MODERATION_MATKO_TAG_OPTIONS,
+  SET_MODERATION_CERTIFICATE_OPTIONS,
   SET_MODERATION_EXTRA_KEYWORDS,
+  SET_MODERATION_OTHER_CERTIFICATE,
   SET_MODERATION_ADDRESS,
   SET_MODERATION_ADDRESS_FOUND,
   SET_MODERATION_LOCATION,
@@ -35,6 +38,7 @@ import {
   Photo,
   SocialMedia,
   TagOption,
+  CertificateOption
 } from "../../types/general";
 
 export const setModerationPlaceSearch = (placeSearch: ModerationPlaceSearch): ModerationAction => ({
@@ -87,6 +91,11 @@ export const setModerationMatkoTag = (values: number[]): ModerationAction => ({
   payload: values,
 });
 
+export const setModerationCertificate = (values: number[]): ModerationAction => ({
+  type: SET_MODERATION_CERTIFICATE,
+  payload: values,
+});
+
 export const setModerationTagOptions = (options: TagOption[]): ModerationAction => ({
   type: SET_MODERATION_TAG_OPTIONS,
   payload: options,
@@ -97,8 +106,18 @@ export const setModerationMatkoTagOptions = (options: MatkoTagOption[]): Moderat
   payload: options,
 });
 
+export const setModerationCertificateOptions = (options: CertificateOption[]): ModerationAction => ({
+  type: SET_MODERATION_CERTIFICATE_OPTIONS,
+  payload: options,
+});
+
 export const setModerationExtraKeywords = (language: string, value: string): ModerationAction => ({
   type: SET_MODERATION_EXTRA_KEYWORDS,
+  payload: { language, value },
+});
+
+export const setModerationOtherCertificate = (language: string, value: string): ModerationAction => ({
+  type: SET_MODERATION_OTHER_CERTIFICATE,
   payload: { language, value },
 });
 

@@ -10,7 +10,10 @@ import {
   SET_NOTIFICATION_LONG_DESCRIPTION,
   SET_NOTIFICATION_TAG,
   SET_NOTIFICATION_TAG_OPTIONS,
+  SET_NOTIFICATION_CERTIFICATE,
+  SET_NOTIFICATION_CERTIFICATE_OPTIONS,
   SET_NOTIFICATION_EXTRA_KEYWORDS,
+  SET_NOTIFICATION_OTHER_CERTIFICATE,
   SET_NOTIFICATION_NOTIFIER,
   SET_NOTIFICATION_ADDRESS,
   SET_NOTIFICATION_ADDRESS_FOUND,
@@ -29,6 +32,7 @@ import {
 } from "../../types/constants";
 import {
   AddressSearchResult,
+  CertificateOption,
   ChangeRequestSchema,
   KeyValueBoolean,
   KeyValueString,
@@ -92,8 +96,23 @@ export const setNotificationTagOptions = (options: TagOption[]): NotificationAct
   payload: options,
 });
 
+export const setNotificationCertificate = (values: number[]): NotificationAction => ({
+  type: SET_NOTIFICATION_CERTIFICATE,
+  payload: values,
+});
+
+export const setNotificationCertificateOptions = (options: CertificateOption[]): NotificationAction => ({
+  type: SET_NOTIFICATION_CERTIFICATE_OPTIONS,
+  payload: options,
+});
+
 export const setNotificationExtraKeywords = (language: string, value: string): NotificationAction => ({
   type: SET_NOTIFICATION_EXTRA_KEYWORDS,
+  payload: { language, value },
+});
+
+export const setNotificationOtherCertificate = (language: string, value: string): NotificationAction => ({
+  type: SET_NOTIFICATION_OTHER_CERTIFICATE,
   payload: { language, value },
 });
 

@@ -434,6 +434,16 @@
         "helperText": "Separera nyckelord med ett komma"
       }
     },
+    "certificates": {
+      "title": "Certifikat",
+      "certificateSelection": "Val av certifikat",
+      "extra": "Annat, vad?",
+      "otherCertificate": "Annat certifikat",
+      "add": {
+        "label": "Lägg till certifikat",
+        "helperText": "Sök eller välj från listan"
+      }
+    },
     "terms": {
       "heading": "Användarvillkor",
       "text1": "Uppgifter som har lämnats eller samlats in i tjänsten används i Helsingfors stads webbtjänster. Dessutom erbjuds data åt tredje parter via Helsingfors stads öppna gränssnitt. För fotografier väljs ett separat användningstillstånd. Helsingfors stad upprätthåller databasen och staden har rätt att välja materialet som publiceras och editera text till ett lämpligt format.",
@@ -976,6 +986,16 @@
       "extraKeywords": {
         "label": "Käyttäjän toivomat lisähakusanat",
         "helperText": "Erota asiasanat pilkulla"
+      }
+    },
+    "certificates": {
+      "title": "Sertifikaatit",
+      "add": {
+        "label": "Lisää sertifikaatti",
+        "helperText": "Hae tai valitse listalta"
+      },
+      "otherCertificates": {
+        "label": "Muu sertifikaatti"
       }
     },
     "task": {

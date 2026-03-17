@@ -6,7 +6,9 @@ import {
   SET_MODERATION_LONG_DESCRIPTION_STATUS,
   SET_MODERATION_TAG_STATUS,
   SET_MODERATION_MATKO_TAG_STATUS,
+  SET_MODERATION_CERTIFICATE_STATUS,
   SET_MODERATION_EXTRA_KEYWORDS_STATUS,
+  SET_MODERATION_OTHER_CERTIFICATE_STATUS,
   SET_MODERATION_ADDRESS_STATUS,
   SET_MODERATION_LOCATION_STATUS,
   SET_MODERATION_CONTACT_STATUS,
@@ -52,8 +54,18 @@ export const setModerationMatkoTagStatus = (status: ModerationStatus): Moderatio
   payload: status,
 });
 
+export const setModerationCertificateStatus = (status: ModerationStatus): ModerationStatusAction => ({
+  type: SET_MODERATION_CERTIFICATE_STATUS,
+  payload: status,
+});
+
 export const setModerationExtraKeywordsStatus = (status: KeyValueStatus): ModerationStatusAction => ({
   type: SET_MODERATION_EXTRA_KEYWORDS_STATUS,
+  payload: status,
+});
+
+export const setModerationOtherCertificateStatus = (status: KeyValueStatus): ModerationStatusAction => ({
+  type: SET_MODERATION_OTHER_CERTIFICATE_STATUS,
   payload: status,
 });
 

@@ -52,6 +52,7 @@ const initialState: ModerationTranslationState = {
     district: "",
     ontologyIds: [],
     matkoIds: [],
+    certificateIds: [],
     comment: "",
     searchDone: false,
   },
