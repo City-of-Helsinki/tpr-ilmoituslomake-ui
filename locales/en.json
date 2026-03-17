@@ -438,6 +438,7 @@
       "title": "Certificates",
       "certificateSelection": "Certificate selection",
       "extra": "Other, what?",
+      "otherCertificate": "Other certificate",
       "add": {
         "label": "Add certificate",
         "helperText": "Choose from the list"

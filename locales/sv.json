@@ -438,6 +438,7 @@
       "title": "Certifikat",
       "certificateSelection": "Val av certifikat",
       "extra": "Annat, vad?",
+      "otherCertificate": "Annat certifikat",
       "add": {
         "label": "Lägg till certifikat",
         "helperText": "Sök eller välj från listan"

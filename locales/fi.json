@@ -438,6 +438,7 @@
       "title": "Sertifikaatit",
       "certificateSelection": "Sertifikaattien valinta",
       "extra": "Muu, mikä?",
+      "otherCertificate": "Muu sertifikaatti",
       "add": {
         "label": "Lisää sertifikaatti",
         "helperText": "Valitse listalta"

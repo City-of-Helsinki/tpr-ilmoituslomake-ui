@@ -102,6 +102,7 @@ const Preview = ({ className, titleKey, includeNotifier, isPlaceInfo }: PreviewP
             <div key={`tag_${tag.id}`}>{tag.ontologyword[router.locale || defaultLocale] as string}</div>
           ))}
       </div>
+      <div className={`${styles.gridHeading} ${styles.gridContent}`}>{i18n.t("notification.certificates.title")}</div>
       <div className={`${styles.gridPlaceInfo} ${styles.gridContent}`}>
         {certificateOptions
           .filter((certificate) => certificate_ids.includes(certificate.id))
@@ -109,11 +110,13 @@ const Preview = ({ className, titleKey, includeNotifier, isPlaceInfo }: PreviewP
             <div key={`tag_${certificate.id}`}>{certificate.certificatename[router.locale || defaultLocale] as string}</div>
           ))}
       </div>
+      <div className={`${styles.gridHeading} ${styles.gridContent}`}>{i18n.t("notification.certificates.otherCertificate")}</div>
       <div className={`${styles.gridPlaceInfo} ${styles.gridContent}`}>
-        {(other_certificates[router.locale || defaultLocale] as string[]).map((otherCertificate, index) => {
-          const key = `otherCertificate_${index}`;
-          return <div key={key}>{otherCertificate}</div>;
-        })}
+        {LANGUAGE_OPTIONS.map((option) =>
+          inputLanguages.includes(option) && (other_certificates[option] as string).length > 0 ? (
+            <div lang={option} key={`placeName_${option}`}>{`${option.toUpperCase()}: ${other_certificates[option] as string}`}</div>
+          ) : null
+        )}
       </div>
       <div className={`${styles.gridHeading} ${styles.gridContent}`}>{i18n.t("notification.tags.extra")}</div>
       <div className={`${styles.gridPlaceInfo} ${styles.gridContent}`}>
