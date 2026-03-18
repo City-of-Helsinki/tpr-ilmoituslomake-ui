@@ -37,7 +37,6 @@ const Info = (): ReactElement => {
       {notificationId > 0 && (
         <main id="content" className={styles.content}>
           <h1>{getDisplayName(router.locale || defaultLocale, placeName)}</h1>
-
           {!currentUser?.authenticated && <div className={styles.noticeLoggedOut}>{i18n.t("notification.placeSearch.noticeLoggedOut")}</div>}
 
           <InfoFooter />
@@ -83,7 +82,7 @@ export const getServerSideProps: GetServerSideProps = async ({ req, params, loca
 
       try {
         // Merge the notification details from the backend, but remove the previous notifier details if present
-        const { notifier, extra_keywords, other_certificates, images, ...dataToUse } = targetResult.data;
+        const { notifier, extra_keywords, images, ...dataToUse } = targetResult.data;
 
         initialReduxState.notification = {
           ...initialReduxState.notification,
@@ -93,7 +92,6 @@ export const getServerSideProps: GetServerSideProps = async ({ req, params, loca
             ...dataToUse,
             notifier: INITIAL_NOTIFICATION.notifier,
             extra_keywords,
-            other_certificates,
           },
           notificationExtra: {
             ...initialReduxState.notification.notificationExtra,
@@ -102,11 +100,6 @@ export const getServerSideProps: GetServerSideProps = async ({ req, params, loca
               fi: extra_keywords.fi.join(", "),
               sv: extra_keywords.sv.join(", "),
               en: extra_keywords.en.join(", "),
-            },
-            otherCertificates: {
-              fi: other_certificates.fi,
-              sv: other_certificates.sv,
-              en: other_certificates.en,
             },
             photos: images.map((image) => {
               return {
