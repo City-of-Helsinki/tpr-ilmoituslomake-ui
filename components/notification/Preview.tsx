@@ -137,7 +137,7 @@ const Preview = ({ className, titleKey, includeNotifier, isPlaceInfo }: PreviewP
       <div className={`${styles.gridPlaceInfo} ${styles.gridContent}`}>
         {LANGUAGE_OPTIONS.map((option) =>
           inputLanguages.includes(option) && (other_certificates_url[option] as string).length > 0 ? (
-            <div lang={option} key={`placeName_${option}`}>{`${option.toUpperCase()}: ${other_certificates[option] as string}`}</div>
+            <div lang={option} key={`placeName_${option}`}>{`${option.toUpperCase()}: ${other_certificates_url[option] as string}`}</div>
           ) : null
         )}
       </div>

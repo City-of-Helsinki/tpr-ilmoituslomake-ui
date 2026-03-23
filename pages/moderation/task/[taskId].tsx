@@ -298,12 +298,22 @@ export const getServerSideProps: GetServerSideProps = async ({ req, resolvedUrl,
               sv: modifiedTask.extra_keywords.sv.join(", "),
               en: modifiedTask.extra_keywords.en.join(", "),
             },
-            otherCertificateTextSelected: {
+            otherCertificatesSelected: {
               fi: targetData.other_certificates.fi,
               sv: targetData.other_certificates.sv,
               en: targetData.other_certificates.en,
             },
-            otherCertificateUrlTextModified: {
+            otherCertificatesModified: {
+              fi: modifiedTask.other_certificates.fi,
+              sv: modifiedTask.other_certificates.sv,
+              en: modifiedTask.other_certificates.en,
+            },
+            otherCertificatesUrlSelected: {
+              fi: targetData.other_certificates_url.fi,
+              sv: targetData.other_certificates_url.sv,
+              en: targetData.other_certificates_url.en,
+            },
+            otherCertificatesUrlModified: {
               fi: modifiedTask.other_certificates_url.fi,
               sv: modifiedTask.other_certificates_url.sv,
               en: modifiedTask.other_certificates_url.en,

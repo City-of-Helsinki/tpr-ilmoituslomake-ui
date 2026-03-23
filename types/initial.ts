@@ -259,22 +259,22 @@ export const INITIAL_MODERATION_EXTRA: ModerationExtra = {
     sv: "",
     en: "",
   },
-  otherCertificateTextSelected: {
+  otherCertificatesSelected: {
     fi: "",
     sv: "",
     en: "",
   },
-  otherCertificateTextModified: {
+  otherCertificatesModified: {
     fi: "",
     sv: "",
     en: "",
   },
-  otherCertificateUrlTextSelected: {
+  otherCertificatesUrlSelected: {
     fi: "",
     sv: "",
     en: "",
   },
-  otherCertificateUrlTextModified: {
+  otherCertificatesUrlModified: {
     fi: "",
     sv: "",
     en: "",

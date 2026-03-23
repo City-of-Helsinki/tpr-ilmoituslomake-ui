@@ -501,25 +501,25 @@ export interface ModerationExtra {
     en: string;
     [key: string]: unknown;
   };
-  otherCertificateTextSelected: {
+  otherCertificatesSelected: {
     fi: string;
     sv: string;
     en: string;
     [key: string]: unknown;
   };
-  otherCertificateTextModified: {
+  otherCertificatesModified: {
     fi: string;
     sv: string;
     en: string;
     [key: string]: unknown;
   };
-  otherCertificateUrlTextSelected: {
+  otherCertificatesUrlSelected: {
     fi: string;
     sv: string;
     en: string;
     [key: string]: unknown;
   };
-  otherCertificateUrlTextModified: {
+  otherCertificatesUrlModified: {
     fi: string;
     sv: string;
     en: string;

@@ -31,6 +31,8 @@ const CertificateModeration = (): ReactElement => {
   const selectedTask = useSelector((state: RootState) => state.moderation.selectedTask);
   const { certificate_ids: certificatesSelected, label_ids: labelsSeleted, no_certificate: noCertificateSelected } = selectedTask;
 
+  console.log("Selected task", selectedTask);
+
   const modifiedTask = useSelector((state: RootState) => state.moderation.modifiedTask);
   const { certificate_ids: certificatesModified, label_ids: labelsModified, no_certificate: noCertificateModified } = modifiedTask;
 
@@ -39,10 +41,14 @@ const CertificateModeration = (): ReactElement => {
     taskStatus, 
     certificateOptions, 
     labelOptions,
-    otherCertificateTextSelected, 
-    otherCertificateTextModified, 
-    otherCertificateUrlTextSelected, 
-    otherCertificateUrlTextModified } = moderationExtra;
+    otherCertificatesSelected, 
+    otherCertificatesModified, 
+    otherCertificatesUrlSelected, 
+    otherCertificatesUrlModified } = moderationExtra;
+
+    console.log("moderation extra", moderationExtra);
+    console.log("other certificate text", otherCertificatesSelected);
+    console.log("other certificate url", otherCertificatesUrlSelected);
 
   const moderationStatus = useSelector((state: RootState) => state.moderationStatus.moderationStatus);
   const { certificate_ids: certificatesStatus, 
@@ -193,8 +199,8 @@ const CertificateModeration = (): ReactElement => {
             id={`otherCertificateText_${option}`}
             key={`otherCertificateText_${option}`}
             fieldName={option}
-            selectedValue={otherCertificateTextSelected[option] as string}
-            modifiedValue={otherCertificateTextModified[option] as string}
+            selectedValue={otherCertificatesSelected[option] as string}
+            modifiedValue={otherCertificatesModified[option] as string}
             moderationStatus={otherCertificateStatus[option]}
             taskType={taskType}
             taskStatus={taskStatus}
@@ -218,8 +224,8 @@ const CertificateModeration = (): ReactElement => {
             id={`otherCertificateUrl_${option}`}
             key={`otherCertificateUrl_${option}`}
             fieldName={option}
-            selectedValue={otherCertificateUrlTextSelected[option] as string}
-            modifiedValue={otherCertificateUrlTextModified[option] as string}
+            selectedValue={otherCertificatesUrlSelected[option] as string}
+            modifiedValue={otherCertificatesUrlModified[option] as string}
             moderationStatus={otherCertificateUrlStatus[option]}
             taskType={taskType}
             taskStatus={taskStatus}
