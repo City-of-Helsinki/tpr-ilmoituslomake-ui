@@ -53,7 +53,8 @@ const PlaceSearch = (): ReactElement => {
 
   const convertMatkoValues = (values: number[]): OptionType[] => convertMatkoOptions(matkoTagOptions.filter((tag) => values.includes(tag.id)));
 
-  const convertCertificateValues = (values: number[]): OptionType[] => convertCertificateOptions(certificateOptions.filter((tag) => values.includes(tag.id)));
+  const convertCertificateValues = (values: number[]): OptionType[] =>
+    convertCertificateOptions(certificateOptions.filter((tag) => values.includes(tag.id)));
 
   const updateSearchText = (evt: ChangeEvent<HTMLInputElement>) => {
     dispatch(setModerationPlaceSearch({ ...placeSearch, [evt.target.name]: evt.target.value }));

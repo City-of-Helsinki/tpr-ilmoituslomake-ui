@@ -244,7 +244,7 @@ export const getServerSideProps: GetServerSideProps = async ({ req, resolvedUrl,
                 : INITIAL_NOTIFICATION.notifier,
             extra_keywords,
             other_certificates,
-            other_certificates_url
+            other_certificates_url,
           },
           notificationExtra: {
             ...initialReduxState.notification.notificationExtra,

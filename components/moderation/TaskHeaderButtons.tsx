@@ -212,8 +212,7 @@ const TaskHeaderButtons = ({ isModerated, setToast }: TaskHeaderButtonsProps): R
             ontology_ids: moderationStatus.ontology_ids === ModerationStatus.Approved ? modifiedTask.ontology_ids : selectedTask.ontology_ids,
             certificate_ids:
               moderationStatus.certificate_ids === ModerationStatus.Approved ? modifiedTask.certificate_ids : selectedTask.certificate_ids,
-            label_ids:
-              moderationStatus.label_ids === ModerationStatus.Approved ? modifiedTask.label_ids : selectedTask.label_ids,
+            label_ids: moderationStatus.label_ids === ModerationStatus.Approved ? modifiedTask.label_ids : selectedTask.label_ids,
             extra_keywords: {
               fi: moderationStatus.extra_keywords.fi === ModerationStatus.Approved ? modifiedTask.extra_keywords.fi : selectedTask.extra_keywords.fi,
               sv: moderationStatus.extra_keywords.sv === ModerationStatus.Approved ? modifiedTask.extra_keywords.sv : selectedTask.extra_keywords.sv,
@@ -247,7 +246,7 @@ const TaskHeaderButtons = ({ isModerated, setToast }: TaskHeaderButtonsProps): R
                   ? modifiedTask.other_certificates_url.en
                   : selectedTask.other_certificates_url.en,
             },
-            
+
             social_media: socialMediaUuids
               .map((uuid, index) => {
                 const socialMediaSelected = selectedTask.social_media?.find((item) => item.uuid === uuid) || { title: "", link: "" };
