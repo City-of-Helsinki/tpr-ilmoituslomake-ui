@@ -83,6 +83,7 @@ export interface NotificationSchema {
   };
   ontology_ids: number[];
   certificate_ids: number[];
+  label_ids: number[];
   matko_ids: number[];
   extra_keywords: {
     fi: string[];
@@ -96,6 +97,13 @@ export interface NotificationSchema {
     en: string;
     [k: string]: unknown;
   };
+  other_certificates_url: {
+    fi: string;
+    sv: string;
+    en: string;
+    [k: string]: unknown;
+  };
+  no_certificate: boolean;
   comments: string;
   notifier: {
     notifier_type: string;

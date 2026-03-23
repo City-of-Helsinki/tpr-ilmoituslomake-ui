@@ -308,6 +308,12 @@
                 "type": "number"
             }
         },
+        "label_ids": {
+            "type": "array",
+            "items": {
+                "type": "number"
+            }
+        },
         "matko_ids": {
             "type": "array",
             "items": {
@@ -352,6 +358,24 @@
                 }
             },
             "required": ["fi", "sv", "en"]
+        },
+        "other_certificates_url": {
+            "type": "object",
+            "properties": {
+                "fi": {
+                    "type": "string"
+                },
+                "sv": {
+                    "type": "string"
+                },
+                "en":  {
+                    "type": "string"
+                }
+            },
+            "required": ["fi", "sv", "en"]
+        },
+        "no_certificate": {
+            "type": "boolean"
         },
         "comments": {
             "type": "string"
@@ -406,9 +430,12 @@
         "opening_times",
         "ontology_ids",
         "certificate_ids",
+        "label_ids",
         "matko_ids",
         "extra_keywords",
         "other_certificates",
+        "other_certificates_url",
+        "no_certificate",
         "comments",
         "notifier"
     ]

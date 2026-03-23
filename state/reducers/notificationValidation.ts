@@ -9,6 +9,7 @@ import {
   SET_NOTIFICATION_LONG_DESCRIPTION_VALIDATION,
   SET_NOTIFICATION_TAG_VALIDATION,
   SET_NOTIFICATION_CERTIFICATE_VALIDATION,
+  SET_NOTIFICATION_LABEL_VALIDATION,
   SET_NOTIFICATION_NOTIFIER_VALIDATION,
   SET_NOTIFICATION_ADDRESS_VALIDATION,
   SET_NOTIFICATION_WHOLE_ADDRESS_VALIDATION,
@@ -112,6 +113,14 @@ const notificationValidation = (state: NotificationValidationState | undefined, 
       return {
         ...state,
         notificationValidation: { ...state.notificationValidation, certificate_ids: action.payload },
+      };
+    }
+
+    case SET_NOTIFICATION_LABEL_VALIDATION: {
+      console.log("SET_NOTIFICATION_LABEL_VALIDATION", action.payload);
+      return {
+        ...state,
+        notificationValidation: { ...state.notificationValidation, label_ids: action.payload },
       };
     }
 

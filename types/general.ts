@@ -41,6 +41,12 @@ export type OptionType = {
   label: string;
 };
 
+export type LabelOptionType = {
+  id: string | number;
+  label: string;
+  checked: boolean;
+};
+
 export interface PhotoSchema {
   uuid: string;
   source_type: string;
@@ -121,6 +127,10 @@ export interface CertificateOption {
   displayed_in_myhelsinki: boolean;
 }
 
+export interface NoCertificate {
+  value: boolean
+}
+
 export interface MatkoTagOption {
   id: number;
   matkoword: {
@@ -142,6 +152,7 @@ export interface NotificationExtra {
   photos: Photo[];
   tagOptions: TagOption[];
   certificateOptions: CertificateOption[];
+  labelOptions: CertificateOption[];
   extraKeywordsText: {
     fi: string;
     sv: string;
@@ -154,6 +165,13 @@ export interface NotificationExtra {
     en: string;
     [key: string]: unknown;
   };
+  otherCertificatesUrl: {
+    fi: string;
+    sv: string;
+    en: string;
+    [key: string]: unknown;
+  };
+  noCertificate: boolean;
   locationOriginal: [number, number];
   addressOriginal: {
     fi: {
@@ -373,6 +391,7 @@ export interface ModerationPlaceSearch {
   ontologyIds: number[];
   matkoIds: number[];
   certificateIds: number[];
+  labelIds: number[];
   comment: string;
   publishPermission?: string;
   searchDone: boolean;
@@ -469,6 +488,7 @@ export interface ModerationExtra {
   tagOptions: TagOption[];
   matkoTagOptions: MatkoTagOption[];
   certificateOptions: CertificateOption[];
+  labelOptions: CertificateOption[];
   extraKeywordsTextSelected: {
     fi: string;
     sv: string;
@@ -493,6 +513,19 @@ export interface ModerationExtra {
     en: string;
     [key: string]: unknown;
   };
+  otherCertificateUrlTextSelected: {
+    fi: string;
+    sv: string;
+    en: string;
+    [key: string]: unknown;
+  };
+  otherCertificateUrlTextModified: {
+    fi: string;
+    sv: string;
+    en: string;
+    [key: string]: unknown;
+  };
+  noCertificate: boolean;
   published: boolean;
   created_at: string;
   updated_at: string;

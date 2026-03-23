@@ -18,10 +18,14 @@ import {
   SET_NOTIFICATION_LONG_DESCRIPTION,
   SET_NOTIFICATION_TAG,
   SET_NOTIFICATION_CERTIFICATE,
+  SET_NOTIFICATION_LABEL,
   SET_NOTIFICATION_TAG_OPTIONS,
   SET_NOTIFICATION_CERTIFICATE_OPTIONS,
+  SET_NOTIFICATION_LABEL_OPTIONS,
   SET_NOTIFICATION_EXTRA_KEYWORDS,
   SET_NOTIFICATION_OTHER_CERTIFICATE,
+  SET_NOTIFICATION_OTHER_CERTIFICATE_URL,
+  SET_NOTIFICATION_NO_CERTIFICATE,
   SET_NOTIFICATION_NOTIFIER,
   SET_NOTIFICATION_ADDRESS,
   SET_NOTIFICATION_ADDRESS_FOUND,
@@ -181,6 +185,14 @@ const notification = (state: NotificationState | undefined, action: AnyAction): 
       };
     }
 
+    case SET_NOTIFICATION_LABEL: {
+      console.log("SET_NOTIFICATION_LABEL", action.payload);
+      return {
+        ...state,
+        notification: { ...state.notification, label_ids: action.payload },
+      };
+    }
+
     case SET_NOTIFICATION_TAG_OPTIONS: {
       console.log("SET_NOTIFICATION_TAG_OPTIONS", action.payload);
       return {
@@ -194,6 +206,14 @@ const notification = (state: NotificationState | undefined, action: AnyAction): 
       return {
         ...state,
         notificationExtra: { ...state.notificationExtra, certificateOptions: action.payload },
+      };
+    }
+
+    case SET_NOTIFICATION_LABEL_OPTIONS: {
+      console.log("SET_NOTIFICATION_LABEL_OPTIONS", action.payload);
+      return {
+        ...state,
+        notificationExtra: { ...state.notificationExtra, labelOptions: action.payload },
       };
     }
 
@@ -239,6 +259,36 @@ const notification = (state: NotificationState | undefined, action: AnyAction): 
             [action.payload.language]: action.payload.value,
           },
         },
+      };
+    }
+
+    case SET_NOTIFICATION_OTHER_CERTIFICATE_URL: {
+      console.log("SET_NOTIFICATION_OTHER_CERTIFICATE_URL", action.payload);
+      return {
+        ...state,
+        notification: {
+          ...state.notification,
+          other_certificates_url: {
+            ...state.notification.other_certificates_url,
+            [action.payload.language]: action.payload.value
+          },
+        },
+        notificationExtra: {
+          ...state.notificationExtra,
+          otherCertificatesUrl: {
+            ...state.notificationExtra.otherCertificatesUrl,
+            [action.payload.language]: action.payload.value,
+          },
+        },
+      };
+    }
+
+
+    case SET_NOTIFICATION_NO_CERTIFICATE: {
+      console.log("SET_NOTIFICATION_NO_CERTIFICATE", action.payload);
+      return {
+        ...state,
+        notification: { ...state.notification, no_certificate: action.payload },
       };
     }
 

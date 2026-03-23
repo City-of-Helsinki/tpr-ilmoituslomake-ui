@@ -7,7 +7,9 @@ import {
   SET_NOTIFICATION_LONG_DESCRIPTION_VALIDATION,
   SET_NOTIFICATION_TAG_VALIDATION,
   SET_NOTIFICATION_CERTIFICATE_VALIDATION,
+  SET_NOTIFICATION_LABEL_VALIDATION,
   SET_NOTIFICATION_OTHER_CERTIFICATE_VALIDATION,
+  SET_NOTIFICATION_OTHER_CERTIFICATE_URL_VALIDATION,
   SET_NOTIFICATION_NOTIFIER_VALIDATION,
   SET_NOTIFICATION_ADDRESS_VALIDATION,
   SET_NOTIFICATION_WHOLE_ADDRESS_VALIDATION,
@@ -61,8 +63,18 @@ interface SetNotificationCertificateValidationAction extends AnyAction {
   payload: Validation;
 }
 
+interface SetNotificationLabelValidationAction extends AnyAction {
+  type: typeof SET_NOTIFICATION_LABEL_VALIDATION;
+  payload: Validation;
+}
+
 interface SetNotificationOtherCertificateValidationAction extends AnyAction {
   type: typeof SET_NOTIFICATION_OTHER_CERTIFICATE_VALIDATION;
+  payload: Validation;
+}
+
+interface SetNotificationOtherCertificateUrlValidationAction extends AnyAction {
+  type: typeof SET_NOTIFICATION_OTHER_CERTIFICATE_URL_VALIDATION;
   payload: Validation;
 }
 
@@ -144,7 +156,9 @@ export type NotificationValidationAction =
   | SetNotificationLongDescriptionValidationAction
   | SetNotificationTagValidationAction
   | SetNotificationCertificateValidationAction
+  | SetNotificationLabelValidationAction
   | SetNotificationOtherCertificateValidationAction 
+  | SetNotificationOtherCertificateUrlValidationAction 
   | SetNotificationNotifierValidationAction
   | SetNotificationAddressValidationAction
   | SetNotificationWholeAddressValidationAction

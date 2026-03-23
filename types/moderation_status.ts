@@ -69,6 +69,7 @@ export interface ModerationStatusSchema {
   ontology_ids: ModerationStatus;
   matko_ids: ModerationStatus;
   certificate_ids: ModerationStatus;
+  label_ids: ModerationStatus;
   extra_keywords: {
     fi: ModerationStatus;
     sv: ModerationStatus;
@@ -81,6 +82,13 @@ export interface ModerationStatusSchema {
     en: ModerationStatus;
     [key: string]: ModerationStatus;
   };
+  other_certificates_url: {
+    fi: ModerationStatus;
+    sv: ModerationStatus;
+    en: ModerationStatus;
+    [key: string]: ModerationStatus;
+  };
+  no_certificate: ModerationStatus;
   photos: PhotoStatus[];
   socialMedia: SocialMediaStatus[];
   openingTimes: ModerationStatus;
