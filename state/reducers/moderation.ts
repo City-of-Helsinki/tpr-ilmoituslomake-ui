@@ -252,8 +252,8 @@ const moderation = (state: ModerationState | undefined, action: AnyAction): Mode
         },
         moderationExtra: {
           ...state.moderationExtra,
-          otherCertificateTextModified: {
-            ...state.moderationExtra.otherCertificateTextModified,
+          otherCertificatesModified: {
+            ...state.moderationExtra.otherCertificatesModified,
             [action.payload.language]: action.payload.value,
           },
         },
@@ -273,8 +273,8 @@ const moderation = (state: ModerationState | undefined, action: AnyAction): Mode
         },
         moderationExtra: {
           ...state.moderationExtra,
-          otherCertificateUrlTextModified: {
-            ...state.moderationExtra.otherCertificateUrlTextModified,
+          otherCertificatesUrlModified: {
+            ...state.moderationExtra.otherCertificatesUrlModified,
             [action.payload.language]: action.payload.value,
           },
         },
