@@ -13,11 +13,15 @@ import {
   SET_MODERATION_TAG,
   SET_MODERATION_MATKO_TAG,
   SET_MODERATION_CERTIFICATE,
+  SET_MODERATION_LABEL,
   SET_MODERATION_TAG_OPTIONS,
   SET_MODERATION_MATKO_TAG_OPTIONS,
   SET_MODERATION_CERTIFICATE_OPTIONS,
+  SET_MODERATION_LABEL_OPTIONS,
   SET_MODERATION_EXTRA_KEYWORDS,
   SET_MODERATION_OTHER_CERTIFICATE,
+  SET_MODERATION_OTHER_CERTIFICATE_URL,
+  SET_MODERATION_NO_CERTIFICATE,
   SET_MODERATION_ADDRESS,
   SET_MODERATION_ADDRESS_FOUND,
   SET_MODERATION_LOCATION,
@@ -41,6 +45,7 @@ const initialState: ModerationState = {
     ontologyIds: [],
     matkoIds: [],
     certificateIds: [],
+    labelIds: [],
     comment: "",
     searchDone: false,
   },
@@ -170,6 +175,14 @@ const moderation = (state: ModerationState | undefined, action: AnyAction): Mode
       };
     }
 
+    case SET_MODERATION_LABEL: {
+      console.log("SET_MODERATION_LABEL", action.payload);
+      return {
+        ...state,
+        modifiedTask: { ...state.modifiedTask, label_ids: action.payload },
+      };
+    }
+
     case SET_MODERATION_TAG_OPTIONS: {
       console.log("SET_MODERATION_TAG_OPTIONS", action.payload);
       return {
@@ -191,6 +204,14 @@ const moderation = (state: ModerationState | undefined, action: AnyAction): Mode
       return {
         ...state,
         moderationExtra: { ...state.moderationExtra, certificateOptions: action.payload },
+      };
+    }
+
+    case SET_MODERATION_LABEL_OPTIONS: {
+      console.log("SET_MODERATION_LABEL_OPTIONS", action.payload);
+      return {
+        ...state,
+        moderationExtra: { ...state.moderationExtra, labelOptions: action.payload },
       };
     }
 
@@ -231,11 +252,40 @@ const moderation = (state: ModerationState | undefined, action: AnyAction): Mode
         },
         moderationExtra: {
           ...state.moderationExtra,
-          otherCertificateTextModified: {
-            ...state.moderationExtra.otherCertificateTextModified,
+          otherCertificatesModified: {
+            ...state.moderationExtra.otherCertificatesModified,
             [action.payload.language]: action.payload.value,
           },
         },
+      };
+    }
+
+    case SET_MODERATION_OTHER_CERTIFICATE_URL: {
+      console.log("SET_MODERATION_OTHER_CERTIFICATE_URL", action.payload);
+      return {
+        ...state,
+        modifiedTask: {
+          ...state.modifiedTask,
+          other_certificates_url: {
+            ...state.modifiedTask.other_certificates_url,
+            [action.payload.language]: action.payload.value
+          },
+        },
+        moderationExtra: {
+          ...state.moderationExtra,
+          otherCertificatesUrlModified: {
+            ...state.moderationExtra.otherCertificatesUrlModified,
+            [action.payload.language]: action.payload.value,
+          },
+        },
+      };
+    }
+
+    case SET_MODERATION_NO_CERTIFICATE: {
+      console.log("SET_MODERATION_NO_CERTIFICATE", action.payload);
+      return {
+        ...state,
+        moderationExtra: { ...state.moderationExtra, noCertificate: action.payload },
       };
     }
 

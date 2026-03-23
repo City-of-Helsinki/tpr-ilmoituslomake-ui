@@ -156,7 +156,7 @@ export const getServerSideProps: GetServerSideProps = async ({ req, params, loca
 
       try {
         // Merge the notification details from the backend, but remove the previous notifier details if present
-        const { notifier, extra_keywords, other_certificates, images, ...dataToUse } = targetResult.data;
+        const { notifier, extra_keywords, other_certificates, other_certificates_url, images, ...dataToUse } = targetResult.data;
 
         initialReduxState.notification = {
           ...initialReduxState.notification,
@@ -167,6 +167,7 @@ export const getServerSideProps: GetServerSideProps = async ({ req, params, loca
             notifier: INITIAL_NOTIFICATION.notifier,
             extra_keywords,
             other_certificates,
+            other_certificates_url
           },
           notificationExtra: {
             ...initialReduxState.notification.notificationExtra,
@@ -180,6 +181,11 @@ export const getServerSideProps: GetServerSideProps = async ({ req, params, loca
               fi: other_certificates.fi,
               sv: other_certificates.sv,
               en: other_certificates.en,
+            },
+            otherCertificatesUrl: {
+              fi: other_certificates_url.fi,
+              sv: other_certificates_url.sv,
+              en: other_certificates_url.en,
             },
             photos: images.map((image) => {
               return {

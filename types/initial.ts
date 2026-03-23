@@ -54,6 +54,7 @@ export const INITIAL_NOTIFICATION: NotificationSchema = {
   opening_times: {},
   ontology_ids: [],
   certificate_ids: [],
+  label_ids: [],
   matko_ids: [],
   extra_keywords: {
     fi: [],
@@ -65,6 +66,12 @@ export const INITIAL_NOTIFICATION: NotificationSchema = {
     sv: "",
     en: "",
   },
+  other_certificates_url: {
+    fi: "",
+    sv: "",
+    en: "",
+  },
+  no_certificate: false,
   comments: "",
   notifier: {
     notifier_type: NotifierType.Representative,
@@ -80,6 +87,7 @@ export const INITIAL_NOTIFICATION_EXTRA: NotificationExtra = {
   photos: [],
   tagOptions: [],
   certificateOptions: [],
+  labelOptions: [],
   extraKeywordsText: {
     fi: "",
     sv: "",
@@ -90,6 +98,12 @@ export const INITIAL_NOTIFICATION_EXTRA: NotificationExtra = {
     sv: "",
     en: "",
   },
+  otherCertificatesUrl: {
+    fi: "",
+    sv: "",
+    en: "",
+  },
+  noCertificate: false,
   locationOriginal: [0, 0],
   addressOriginal: {
     fi: {
@@ -151,6 +165,7 @@ export const INITIAL_NOTIFICATION_VALIDATION: NotificationValidationSchema = {
   },
   ontology_ids: { valid: true },
   certificate_ids: { valid: true },
+  label_ids: { valid: true },
   matko_ids: { valid: true },
   extra_keywords: {
     fi: { valid: true },
@@ -162,6 +177,12 @@ export const INITIAL_NOTIFICATION_VALIDATION: NotificationValidationSchema = {
     sv: { valid: true },
     en: { valid: true },
   },
+  other_certificates_url: {
+    fi: { valid: true },
+    sv: { valid: true },
+    en: { valid: true },
+  },
+  no_certificate: { valid: true },
   notifier: {
     notifier_type: { valid: true },
     full_name: { valid: true },
@@ -227,6 +248,7 @@ export const INITIAL_MODERATION_EXTRA: ModerationExtra = {
   tagOptions: [],
   matkoTagOptions: [],
   certificateOptions: [],
+  labelOptions: [],
   extraKeywordsTextSelected: {
     fi: "",
     sv: "",
@@ -237,16 +259,27 @@ export const INITIAL_MODERATION_EXTRA: ModerationExtra = {
     sv: "",
     en: "",
   },
-  otherCertificateTextSelected: {
+  otherCertificatesSelected: {
     fi: "",
     sv: "",
     en: "",
   },
-  otherCertificateTextModified: {
+  otherCertificatesModified: {
     fi: "",
     sv: "",
     en: "",
   },
+  otherCertificatesUrlSelected: {
+    fi: "",
+    sv: "",
+    en: "",
+  },
+  otherCertificatesUrlModified: {
+    fi: "",
+    sv: "",
+    en: "",
+  },
+  noCertificate: false,
   published: false,
   created_at: "",
   updated_at: "",
@@ -315,6 +348,7 @@ const getInitialModerationStatus = (moderationStatus: ModerationStatus): Moderat
     ontology_ids: moderationStatus,
     matko_ids: moderationStatus,
     certificate_ids: moderationStatus,
+    label_ids: moderationStatus,
     extra_keywords: {
       fi: moderationStatus,
       sv: moderationStatus,
@@ -325,6 +359,12 @@ const getInitialModerationStatus = (moderationStatus: ModerationStatus): Moderat
       sv: moderationStatus,
       en: moderationStatus,
     },
+    other_certificates_url: {
+      fi: moderationStatus,
+      sv: moderationStatus,
+      en: moderationStatus,
+    },
+    no_certificate: moderationStatus,
     photos: [],
     socialMedia: [],
     openingTimes: moderationStatus,

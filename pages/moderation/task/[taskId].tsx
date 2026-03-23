@@ -61,12 +61,15 @@ const ModerationTaskDetail = (): ReactElement => {
           isModerated(moderationStatus.description.long[option]),
           isModerated(moderationStatus.extra_keywords[option]),
           isModerated(moderationStatus.other_certificates[option]),
+          isModerated(moderationStatus.other_certificates_url[option]),
         ]);
         const moderated2 = [isModerated(moderationStatus.ontology_ids)];
 
         const moderated3 = [isModerated(moderationStatus.certificate_ids)];
 
-        return moderated1.every((mod) => mod) && moderated2.every((mod) => mod) && moderated3.every((mod) => mod);
+        const moderated4 = [isModerated(moderationStatus.label_ids)];
+
+        return moderated1.every((mod) => mod) && moderated2.every((mod) => mod) && moderated3.every((mod) => mod)  && moderated4.every((mod) => mod);
       }
       case 2: {
         // Contact
@@ -295,16 +298,27 @@ export const getServerSideProps: GetServerSideProps = async ({ req, resolvedUrl,
               sv: modifiedTask.extra_keywords.sv.join(", "),
               en: modifiedTask.extra_keywords.en.join(", "),
             },
-            otherCertificateTextSelected: {
+            otherCertificatesSelected: {
               fi: targetData.other_certificates.fi,
               sv: targetData.other_certificates.sv,
               en: targetData.other_certificates.en,
             },
-            otherCertificateTextModified: {
+            otherCertificatesModified: {
               fi: modifiedTask.other_certificates.fi,
               sv: modifiedTask.other_certificates.sv,
               en: modifiedTask.other_certificates.en,
             },
+            otherCertificatesUrlSelected: {
+              fi: targetData.other_certificates_url.fi,
+              sv: targetData.other_certificates_url.sv,
+              en: targetData.other_certificates_url.en,
+            },
+            otherCertificatesUrlModified: {
+              fi: modifiedTask.other_certificates_url.fi,
+              sv: modifiedTask.other_certificates_url.sv,
+              en: modifiedTask.other_certificates_url.en,
+            },
+            
             socialMediaUuids,
             photosUuids: uuids,
             photosSelected: uuids.map((uuid) => {

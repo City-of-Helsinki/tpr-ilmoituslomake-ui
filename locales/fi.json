@@ -439,6 +439,9 @@
       "certificateSelection": "Sertifikaattien valinta",
       "extra": "Muu, mikä?",
       "otherCertificate": "Muu sertifikaatti",
+      "otherCertificateUrl": "Muun sertifikaatin URL",
+      "label": "Merkki",
+      "noCertificate": "Ei sertifikaattia",
       "add": {
         "label": "Lisää sertifikaatti",
         "helperText": "Valitse listalta"
@@ -992,6 +995,20 @@
       "title": "Sertifikaatit",
       "add": {
         "label": "Lisää sertifikaatti",
+        "helperText": "Hae tai valitse listalta"
+      },
+      "otherCertificates": {
+        "label": "Muu sertifikaatti"
+      },
+      "otherCertificatesUrl": {
+        "label": "Muun sertifikaatin URL"
+      },
+      "noCertificate": "Ei sertifikaattia"
+    },
+    "labels": {
+      "title": "Merkit",
+      "add": {
+        "label": "Lisää merkki",
         "helperText": "Hae tai valitse listalta"
       },
       "otherCertificates": {

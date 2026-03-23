@@ -230,7 +230,7 @@ export const getServerSideProps: GetServerSideProps = async ({ req, resolvedUrl,
         // Merge the notification details from the backend
         // If the current user matches the notifier and they are the representative of the place, also merge the notifier details
         // In all other cases, remove the previous notifier details
-        const { notifier, extra_keywords, images, ...dataToUse } = targetResult.data;
+        const { notifier, extra_keywords, other_certificates, other_certificates_url, images, ...dataToUse } = targetResult.data;
 
         initialReduxState.notification = {
           ...initialReduxState.notification,
@@ -243,6 +243,8 @@ export const getServerSideProps: GetServerSideProps = async ({ req, resolvedUrl,
                 ? { ...INITIAL_NOTIFICATION.notifier, ...notifier }
                 : INITIAL_NOTIFICATION.notifier,
             extra_keywords,
+            other_certificates,
+            other_certificates_url
           },
           notificationExtra: {
             ...initialReduxState.notification.notificationExtra,
@@ -251,6 +253,16 @@ export const getServerSideProps: GetServerSideProps = async ({ req, resolvedUrl,
               fi: extra_keywords.fi.join(", "),
               sv: extra_keywords.sv.join(", "),
               en: extra_keywords.en.join(", "),
+            },
+            otherCertificates: {
+              fi: other_certificates.fi,
+              sv: other_certificates.sv,
+              en: other_certificates.en,
+            },
+            otherCertificatesUrl: {
+              fi: other_certificates_url.fi,
+              sv: other_certificates_url.sv,
+              en: other_certificates_url.en,
             },
             addressOriginal: dataToUse.address || INITIAL_NOTIFICATION_EXTRA.addressOriginal,
             photos: images.map((image) => {

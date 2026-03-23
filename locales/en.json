@@ -439,6 +439,9 @@
       "certificateSelection": "Certificate selection",
       "extra": "Other, what?",
       "otherCertificate": "Other certificate",
+      "otherCertificateUrl": "Other certificate URL",
+      "label": "Label",
+      "noCertificate": "No certificate",
       "add": {
         "label": "Add certificate",
         "helperText": "Choose from the list"
@@ -996,7 +999,21 @@
       },
       "otherCertificates": {
         "label": "Muu sertifikaatti"
+      },
+      "otherCertificatesUrl": {
+        "label": "Muun sertifikaatin URL"
       }
+    },
+    "labels": {
+      "title": "Merkit",
+      "add": {
+        "label": "Lisää merkki",
+        "helperText": "Hae tai valitse listalta"
+      },
+      "otherCertificates": {
+        "label": "Muu sertifikaatti"
+      },
+      "noCertificate": "Ei sertifikaattia"
     },
     "task": {
       "title": "Kohteen tiedot",
