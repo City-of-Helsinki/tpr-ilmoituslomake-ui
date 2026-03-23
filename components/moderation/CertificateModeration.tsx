@@ -5,16 +5,20 @@ import { useI18n } from "next-localization";
 import { Combobox, TextInput, Checkbox, RadioButton } from "hds-react";
 import { ModerationAction } from "../../state/actions/moderationTypes";
 import { ModerationStatusAction } from "../../state/actions/moderationStatusTypes";
-import { setModerationCertificate, 
-  setModerationLabel, 
-  setModerationOtherCertificate, 
-  setModerationOtherCertificateUrl, 
-  setModerationNoCertificate, } from "../../state/actions/moderation";
-import { setModerationOtherCertificateStatus, 
-  setModerationCertificateStatus, 
-  setModerationLabelStatus, 
-  setModerationOtherCertificateUrlStatus, 
-  setModerationNoCertificateStatus,  } from "../../state/actions/moderationStatus";
+import {
+  setModerationCertificate,
+  setModerationLabel,
+  setModerationOtherCertificate,
+  setModerationOtherCertificateUrl,
+  setModerationNoCertificate,
+} from "../../state/actions/moderation";
+import {
+  setModerationOtherCertificateStatus,
+  setModerationCertificateStatus,
+  setModerationLabelStatus,
+  setModerationOtherCertificateUrlStatus,
+  setModerationNoCertificateStatus,
+} from "../../state/actions/moderationStatus";
 import { RootState } from "../../state/reducers";
 import { LANGUAGE_OPTIONS, ModerationStatus } from "../../types/constants";
 import { OptionType, CertificateOption } from "../../types/general";
@@ -35,21 +39,24 @@ const CertificateModeration = (): ReactElement => {
   const { certificate_ids: certificatesModified, label_ids: labelsModified, no_certificate: noCertificateModified } = modifiedTask;
 
   const moderationExtra = useSelector((state: RootState) => state.moderation.moderationExtra);
-  const { taskType, 
-    taskStatus, 
-    certificateOptions, 
+  const {
+    taskType,
+    taskStatus,
+    certificateOptions,
     labelOptions,
-    otherCertificatesSelected, 
-    otherCertificatesModified, 
-    otherCertificatesUrlSelected, 
-    otherCertificatesUrlModified } = moderationExtra;
+    otherCertificatesSelected,
+    otherCertificatesModified,
+    otherCertificatesUrlSelected,
+    otherCertificatesUrlModified,
+  } = moderationExtra;
 
   const moderationStatus = useSelector((state: RootState) => state.moderationStatus.moderationStatus);
-  const { certificate_ids: certificatesStatus, 
-    label_ids: labelsStatus, 
+  const {
+    certificate_ids: certificatesStatus,
+    label_ids: labelsStatus,
     other_certificates: otherCertificateStatus,
-    other_certificates_url: otherCertificateUrlStatus } = moderationStatus;
-
+    other_certificates_url: otherCertificateUrlStatus,
+  } = moderationStatus;
 
   const convertOptions = (options: CertificateOption[]): OptionType[] => {
     return options
@@ -73,7 +80,7 @@ const CertificateModeration = (): ReactElement => {
     if (cert.certificate_type === "Label") {
       return true;
     } else {
-      return false
+      return false;
     }
   }
 
@@ -83,7 +90,7 @@ const CertificateModeration = (): ReactElement => {
 
   const updateCertificates = (selected: OptionType[]) => {
     dispatch(setModerationCertificate(selected.map((s) => s.id as number)));
-    if (selected.length > 0) { 
+    if (selected.length > 0) {
       setModerationNoCertificate(false);
     } else {
       setModerationNoCertificate(true);
@@ -129,7 +136,6 @@ const CertificateModeration = (): ReactElement => {
 
   return (
     <div className="formSection">
-      
       <div className="gridLayoutContainer moderation">
         <ModerationSection
           id="labelCertificate"
@@ -184,7 +190,7 @@ const CertificateModeration = (): ReactElement => {
           }
         />
       </div>
-      
+
       <div className="languageSection gridLayoutContainer moderation">
         {LANGUAGE_OPTIONS.map((option) => (
           <ModerationSection

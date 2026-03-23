@@ -112,7 +112,6 @@ const Preview = ({ className, titleKey, includeNotifier, isPlaceInfo }: PreviewP
           .map((label) => (
             <div key={`tag_${label.id}`}>{label.certificatename[router.locale || defaultLocale] as string}</div>
           ))}
-        
       </div>
       <div className={`${styles.gridHeading} ${styles.gridContent}`}>{i18n.t("notification.certificates.title")}</div>
       <div className={`${styles.gridPlaceInfo} ${styles.gridContent}`}>
@@ -121,9 +120,7 @@ const Preview = ({ className, titleKey, includeNotifier, isPlaceInfo }: PreviewP
           .map((certificate) => (
             <div key={`tag_${certificate.id}`}>{certificate.certificatename[router.locale || defaultLocale] as string}</div>
           ))}
-          { no_certificate ? (
-          i18n.t("notification.certificates.noCertificate")
-        ) : ("")}
+        {no_certificate ? i18n.t("notification.certificates.noCertificate") : ""}
       </div>
       <div className={`${styles.gridHeading} ${styles.gridContent}`}>{i18n.t("notification.certificates.otherCertificate")}</div>
       <div className={`${styles.gridPlaceInfo} ${styles.gridContent}`}>
