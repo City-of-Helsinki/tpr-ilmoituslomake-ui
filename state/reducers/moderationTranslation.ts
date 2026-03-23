@@ -53,6 +53,7 @@ const initialState: ModerationTranslationState = {
     ontologyIds: [],
     matkoIds: [],
     certificateIds: [],
+    labelIds: [],
     comment: "",
     searchDone: false,
   },
