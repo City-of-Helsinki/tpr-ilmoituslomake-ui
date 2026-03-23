@@ -31,8 +31,6 @@ const CertificateModeration = (): ReactElement => {
   const selectedTask = useSelector((state: RootState) => state.moderation.selectedTask);
   const { certificate_ids: certificatesSelected, label_ids: labelsSeleted, no_certificate: noCertificateSelected } = selectedTask;
 
-  console.log("Selected task", selectedTask);
-
   const modifiedTask = useSelector((state: RootState) => state.moderation.modifiedTask);
   const { certificate_ids: certificatesModified, label_ids: labelsModified, no_certificate: noCertificateModified } = modifiedTask;
 
@@ -46,16 +44,11 @@ const CertificateModeration = (): ReactElement => {
     otherCertificatesUrlSelected, 
     otherCertificatesUrlModified } = moderationExtra;
 
-    console.log("moderation extra", moderationExtra);
-    console.log("other certificate text", otherCertificatesSelected);
-    console.log("other certificate url", otherCertificatesUrlSelected);
-
   const moderationStatus = useSelector((state: RootState) => state.moderationStatus.moderationStatus);
   const { certificate_ids: certificatesStatus, 
     label_ids: labelsStatus, 
     other_certificates: otherCertificateStatus,
-    other_certificates_url: otherCertificateUrlStatus,
-    no_certificate: noCertificateStatus } = moderationStatus;
+    other_certificates_url: otherCertificateUrlStatus } = moderationStatus;
 
 
   const convertOptions = (options: CertificateOption[]): OptionType[] => {
@@ -118,7 +111,6 @@ const CertificateModeration = (): ReactElement => {
   };
 
   const updateOtherCertificateStatus = (language: string, status: ModerationStatus) => {
-    console.log(status);
     dispatchStatus(setModerationOtherCertificateStatus({ [language]: status }));
   };
 
