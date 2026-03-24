@@ -5,6 +5,8 @@ import {
   SET_NOTIFICATION_SHORT_DESCRIPTION_VALIDATION,
   SET_NOTIFICATION_LONG_DESCRIPTION_VALIDATION,
   SET_NOTIFICATION_TAG_VALIDATION,
+  SET_NOTIFICATION_CERTIFICATE_VALIDATION,
+  SET_NOTIFICATION_LABEL_VALIDATION,
   SET_NOTIFICATION_NOTIFIER_VALIDATION,
   SET_NOTIFICATION_ADDRESS_VALIDATION,
   SET_NOTIFICATION_WHOLE_ADDRESS_VALIDATION,
@@ -51,6 +53,16 @@ export const setNotificationLongDescriptionValidation = (validation: KeyValueVal
 
 export const setNotificationTagValidation = (validation: Validation): NotificationValidationAction => ({
   type: SET_NOTIFICATION_TAG_VALIDATION,
+  payload: validation,
+});
+
+export const setNotificationCertificateValidation = (validation: Validation): NotificationValidationAction => ({
+  type: SET_NOTIFICATION_CERTIFICATE_VALIDATION,
+  payload: validation,
+});
+
+export const setNotificationLabelValidation = (validation: Validation): NotificationValidationAction => ({
+  type: SET_NOTIFICATION_LABEL_VALIDATION,
   payload: validation,
 });
 

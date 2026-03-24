@@ -434,6 +434,20 @@
         "helperText": "Erota asiasanat pilkulla"
       }
     },
+    "certificates": {
+      "title": "Sertifikaatit",
+      "certificatesAndLabels": "Sertifikaatit ja merkit",
+      "certificateSelection": "Sertifikaattien valinta",
+      "extra": "Muu, mikä?",
+      "otherCertificate": "Muu sertifikaatti",
+      "otherCertificateUrl": "Muun sertifikaatin URL",
+      "label": "Merkki",
+      "noCertificate": "Ei sertifikaattia",
+      "add": {
+        "label": "Lisää sertifikaatti",
+        "helperText": "Valitse listalta"
+      }
+    },
     "terms": {
       "heading": "Käyttöehdot",
       "text1": "Palveluun ilmoitettuja ja kerättyjä tietoja käytetään Helsingin kaupungin verkkopalvelussa. Lisäksi tietoja tarjotaan Helsingin kaupungin avoimessa rajapinnassa kolmansille osapuolille. Valokuville valitaan erikseen käyttölupa. Tietokantaa ylläpitää Helsinki kaupunki, jolla on oikeus valita julkaistava materiaali ja editoida tekstiä sopivaan muotoon.",
@@ -976,6 +990,30 @@
       "extraKeywords": {
         "label": "Käyttäjän toivomat lisähakusanat",
         "helperText": "Erota asiasanat pilkulla"
+      }
+    },
+    "certificates": {
+      "title": "Sertifikaatit",
+      "add": {
+        "label": "Lisää sertifikaatti",
+        "helperText": "Hae tai valitse listalta"
+      },
+      "otherCertificates": {
+        "label": "Muu sertifikaatti"
+      },
+      "otherCertificatesUrl": {
+        "label": "Muun sertifikaatin URL"
+      },
+      "noCertificate": "Ei sertifikaattia"
+    },
+    "labels": {
+      "title": "Merkit",
+      "add": {
+        "label": "Lisää merkki",
+        "helperText": "Hae tai valitse listalta"
+      },
+      "otherCertificates": {
+        "label": "Muu sertifikaatti"
       }
     },
     "task": {

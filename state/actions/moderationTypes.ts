@@ -12,6 +12,8 @@ import {
   SET_MODERATION_MATKO_TAG,
   SET_MODERATION_TAG_OPTIONS,
   SET_MODERATION_MATKO_TAG_OPTIONS,
+  SET_MODERATION_CERTIFICATE_OPTIONS,
+  SET_MODERATION_LABEL_OPTIONS,
   SET_MODERATION_EXTRA_KEYWORDS,
   SET_MODERATION_ADDRESS,
   SET_MODERATION_ADDRESS_FOUND,
@@ -23,6 +25,11 @@ import {
   SET_MODERATION_PHOTO,
   REMOVE_MODERATION_PHOTO,
   SET_MODERATION_OPENING_TIMES_ID,
+  SET_MODERATION_CERTIFICATE,
+  SET_MODERATION_NO_CERTIFICATE,
+  SET_MODERATION_LABEL,
+  SET_MODERATION_OTHER_CERTIFICATE,
+  SET_MODERATION_OTHER_CERTIFICATE_URL,
 } from "../../types/constants";
 import {
   AddressSearchResult,
@@ -35,6 +42,8 @@ import {
   Photo,
   SocialMedia,
   TagOption,
+  CertificateOption,
+  NoCertificate
 } from "../../types/general";
 
 interface SetModerationPlaceSearchAction extends AnyAction {
@@ -87,9 +96,34 @@ interface SetModerationMatkoTagAction extends AnyAction {
   payload: number[];
 }
 
+interface SetModerationCertificateAction extends AnyAction {
+  type: typeof SET_MODERATION_CERTIFICATE;
+  payload: number[];
+}
+
+interface SetModerationLabelAction extends AnyAction {
+  type: typeof SET_MODERATION_LABEL;
+  payload: number[];
+}
+
 interface SetModerationExtraKeywordsAction extends AnyAction {
   type: typeof SET_MODERATION_EXTRA_KEYWORDS;
   payload: { language: string; value: string };
+}
+
+interface SetModerationOtherCertificateAction extends AnyAction {
+  type: typeof SET_MODERATION_OTHER_CERTIFICATE;
+  payload: { language: string; value: string };
+}
+
+interface SetModerationOtherCertificateUrlAction extends AnyAction {
+  type: typeof SET_MODERATION_OTHER_CERTIFICATE_URL;
+  payload: { language: string; value: string };
+}
+
+interface SetModerationNoCertificateAction extends AnyAction {
+  type: typeof SET_MODERATION_NO_CERTIFICATE;
+  payload: NoCertificate;
 }
 
 interface SetModerationTagOptionsAction extends AnyAction {
@@ -100,6 +134,16 @@ interface SetModerationTagOptionsAction extends AnyAction {
 interface SetModerationMatkoTagOptionsAction extends AnyAction {
   type: typeof SET_MODERATION_MATKO_TAG_OPTIONS;
   payload: MatkoTagOption[];
+}
+
+interface SetModerationCertificateOptionsAction extends AnyAction {
+  type: typeof SET_MODERATION_CERTIFICATE_OPTIONS;
+  payload: CertificateOption[];
+}
+
+interface SetModerationLabelOptionsAction extends AnyAction {
+  type: typeof SET_MODERATION_LABEL_OPTIONS;
+  payload: CertificateOption[];
 }
 
 interface SetModerationAddressAction extends AnyAction {
@@ -163,8 +207,15 @@ export type ModerationAction =
   | SetModerationLongDescriptionAction
   | SetModerationTagAction
   | SetModerationMatkoTagAction
+  | SetModerationCertificateAction
+  | SetModerationLabelAction
+  | SetModerationOtherCertificateAction
+  | SetModerationOtherCertificateUrlAction
+  | SetModerationNoCertificateAction
   | SetModerationTagOptionsAction
   | SetModerationMatkoTagOptionsAction
+  | SetModerationCertificateOptionsAction
+  | SetModerationLabelOptionsAction 
   | SetModerationExtraKeywordsAction
   | SetModerationAddressAction
   | SetModerationAddressFoundAction

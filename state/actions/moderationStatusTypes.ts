@@ -7,7 +7,12 @@ import {
   SET_MODERATION_LONG_DESCRIPTION_STATUS,
   SET_MODERATION_TAG_STATUS,
   SET_MODERATION_MATKO_TAG_STATUS,
+  SET_MODERATION_CERTIFICATE_STATUS,
+  SET_MODERATION_LABEL_STATUS,
   SET_MODERATION_EXTRA_KEYWORDS_STATUS,
+  SET_MODERATION_OTHER_CERTIFICATE_STATUS,
+  SET_MODERATION_OTHER_CERTIFICATE_URL_STATUS,
+  SET_MODERATION_NO_CERTIFICATE_STATUS,
   SET_MODERATION_ADDRESS_STATUS,
   SET_MODERATION_LOCATION_STATUS,
   SET_MODERATION_CONTACT_STATUS,
@@ -52,9 +57,34 @@ interface SetModerationMatkoTagStatusAction extends AnyAction {
   payload: ModerationStatus;
 }
 
+interface SetModerationCertificateStatusAction extends AnyAction {
+  type: typeof SET_MODERATION_CERTIFICATE_STATUS;
+  payload: ModerationStatus;
+}
+
+interface SetModerationLabelStatusAction extends AnyAction {
+  type: typeof SET_MODERATION_LABEL_STATUS;
+  payload: ModerationStatus;
+}
+
 interface SetModerationExtraKeywordsStatusAction extends AnyAction {
   type: typeof SET_MODERATION_EXTRA_KEYWORDS_STATUS;
   payload: KeyValueStatus;
+}
+
+interface SetModerationOtherCertificateStatusAction extends AnyAction {
+  type: typeof SET_MODERATION_OTHER_CERTIFICATE_STATUS;
+  payload: KeyValueStatus;
+}
+
+interface SetModerationOtherCertificateUrlStatusAction extends AnyAction {
+  type: typeof SET_MODERATION_OTHER_CERTIFICATE_URL_STATUS;
+  payload: KeyValueStatus;
+}
+
+interface SetModerationNoCertificateStatusAction extends AnyAction {
+  type: typeof SET_MODERATION_NO_CERTIFICATE_STATUS;
+  payload: ModerationStatus;
 }
 
 interface SetModerationAddressStatusAction extends AnyAction {
@@ -113,7 +143,12 @@ export type ModerationStatusAction =
   | SetModerationLongDescriptionStatusAction
   | SetModerationTagStatusAction
   | SetModerationMatkoTagStatusAction
+  | SetModerationCertificateStatusAction
+  | SetModerationLabelStatusAction
   | SetModerationExtraKeywordsStatusAction
+  | SetModerationOtherCertificateStatusAction
+  | SetModerationOtherCertificateUrlStatusAction
+  | SetModerationNoCertificateStatusAction
   | SetModerationAddressStatusAction
   | SetModerationLocationStatusAction
   | SetModerationContactStatusAction

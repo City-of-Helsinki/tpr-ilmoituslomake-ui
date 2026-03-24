@@ -11,7 +11,13 @@ import {
   SET_NOTIFICATION_LONG_DESCRIPTION,
   SET_NOTIFICATION_TAG,
   SET_NOTIFICATION_TAG_OPTIONS,
+  SET_NOTIFICATION_CERTIFICATE,
+  SET_NOTIFICATION_LABEL,
+  SET_NOTIFICATION_CERTIFICATE_OPTIONS,
   SET_NOTIFICATION_EXTRA_KEYWORDS,
+  SET_NOTIFICATION_OTHER_CERTIFICATE,
+  SET_NOTIFICATION_OTHER_CERTIFICATE_URL,
+  SET_NOTIFICATION_NO_CERTIFICATE,
   SET_NOTIFICATION_NOTIFIER,
   SET_NOTIFICATION_ADDRESS,
   SET_NOTIFICATION_ADDRESS_FOUND,
@@ -39,6 +45,7 @@ import {
   Photo,
   SocialMedia,
   TagOption,
+  CertificateOption
 } from "../../types/general";
 import { NotificationSchema } from "../../types/notification_schema";
 
@@ -92,9 +99,39 @@ interface SetNotificationTagOptionsAction extends AnyAction {
   payload: TagOption[];
 }
 
+interface SetNotificationCertificateAction extends AnyAction {
+  type: typeof SET_NOTIFICATION_CERTIFICATE;
+  payload: number[];
+}
+
+interface SetNotificationLabelAction extends AnyAction {
+  type: typeof SET_NOTIFICATION_LABEL;
+  payload: number[];
+}
+
+interface SetNotificationCertificateOptionsAction extends AnyAction {
+  type: typeof SET_NOTIFICATION_CERTIFICATE_OPTIONS;
+  payload: CertificateOption[];
+}
+
 interface SetNotificationExtraKeywordsAction extends AnyAction {
   type: typeof SET_NOTIFICATION_EXTRA_KEYWORDS;
   payload: { language: string; value: string };
+}
+
+interface SetNotificationOtherCertificateAction extends AnyAction {
+  type: typeof SET_NOTIFICATION_OTHER_CERTIFICATE;
+  payload: { language: string; value: string };
+}
+
+interface SetNotificationOtherCertificateUrlAction extends AnyAction {
+  type: typeof SET_NOTIFICATION_OTHER_CERTIFICATE_URL;
+  payload: { language: string; value: string };
+}
+
+interface SetNotificationNoCertificateAction extends AnyAction {
+  type: typeof SET_NOTIFICATION_NO_CERTIFICATE;
+  payload: boolean;
 }
 
 interface SetNotificationNotifierAction extends AnyAction {
@@ -187,7 +224,13 @@ export type NotificationAction =
   | SetNotificationLongDescriptionAction
   | SetNotificationTagAction
   | SetNotificationTagOptionsAction
+  | SetNotificationCertificateAction
+  | SetNotificationLabelAction
+  | SetNotificationCertificateOptionsAction
   | SetNotificationExtraKeywordsAction
+  | SetNotificationOtherCertificateAction
+  | SetNotificationOtherCertificateUrlAction
+  | SetNotificationNoCertificateAction
   | SetNotificationNotifierAction
   | SetNotificationAddressAction
   | SetNotificationAddressFoundAction

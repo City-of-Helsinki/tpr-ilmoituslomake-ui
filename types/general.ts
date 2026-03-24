@@ -41,6 +41,12 @@ export type OptionType = {
   label: string;
 };
 
+export type LabelOptionType = {
+  id: string | number;
+  label: string;
+  checked: boolean;
+};
+
 export interface PhotoSchema {
   uuid: string;
   source_type: string;
@@ -104,6 +110,27 @@ export interface TagOption {
   };
 }
 
+export interface CertificateOption {
+  id: number;
+  certificate_type: string;
+  certificatename: {
+    fi: string;
+    sv: string;
+    en: string;
+    [key: string]: unknown;
+  };
+  url: {
+    fi: string;
+    sv: string;
+    en: string;
+  };
+  displayed_in_myhelsinki: boolean;
+}
+
+export interface NoCertificate {
+  value: boolean
+}
+
 export interface MatkoTagOption {
   id: number;
   matkoword: {
@@ -124,12 +151,27 @@ export interface NotificationExtra {
   inputLanguages: string[];
   photos: Photo[];
   tagOptions: TagOption[];
+  certificateOptions: CertificateOption[];
+  labelOptions: CertificateOption[];
   extraKeywordsText: {
     fi: string;
     sv: string;
     en: string;
     [key: string]: unknown;
   };
+  otherCertificates: {
+    fi: string;
+    sv: string;
+    en: string;
+    [key: string]: unknown;
+  };
+  otherCertificatesUrl: {
+    fi: string;
+    sv: string;
+    en: string;
+    [key: string]: unknown;
+  };
+  noCertificate: boolean;
   locationOriginal: [number, number];
   addressOriginal: {
     fi: {
@@ -348,6 +390,8 @@ export interface ModerationPlaceSearch {
   district: string;
   ontologyIds: number[];
   matkoIds: number[];
+  certificateIds: number[];
+  labelIds: number[];
   comment: string;
   publishPermission?: string;
   searchDone: boolean;
@@ -443,6 +487,8 @@ export interface ModerationExtra {
   photosModified: Photo[];
   tagOptions: TagOption[];
   matkoTagOptions: MatkoTagOption[];
+  certificateOptions: CertificateOption[];
+  labelOptions: CertificateOption[];
   extraKeywordsTextSelected: {
     fi: string;
     sv: string;
@@ -455,6 +501,31 @@ export interface ModerationExtra {
     en: string;
     [key: string]: unknown;
   };
+  otherCertificatesSelected: {
+    fi: string;
+    sv: string;
+    en: string;
+    [key: string]: unknown;
+  };
+  otherCertificatesModified: {
+    fi: string;
+    sv: string;
+    en: string;
+    [key: string]: unknown;
+  };
+  otherCertificatesUrlSelected: {
+    fi: string;
+    sv: string;
+    en: string;
+    [key: string]: unknown;
+  };
+  otherCertificatesUrlModified: {
+    fi: string;
+    sv: string;
+    en: string;
+    [key: string]: unknown;
+  };
+  noCertificate: boolean;
   published: boolean;
   created_at: string;
   updated_at: string;

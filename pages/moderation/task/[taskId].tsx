@@ -12,7 +12,15 @@ import { INITIAL_MODERATION_STATUS_EDITED, INITIAL_NOTIFICATION } from "../../..
 import { PhotoStatus, SocialMediaStatus } from "../../../types/moderation_status";
 import { NotificationSchema } from "../../../types/notification_schema";
 import { getTaskStatus, getTaskType } from "../../../utils/conversion";
-import { checkUser, getMatkoTags, getOriginServerSide, getTags, redirectToLogin, redirectToNotAuthorized } from "../../../utils/serverside";
+import {
+  checkUser,
+  getCertificates,
+  getMatkoTags,
+  getOriginServerSide,
+  getTags,
+  redirectToLogin,
+  redirectToNotAuthorized,
+} from "../../../utils/serverside";
 import Layout from "../../../components/common/Layout";
 import ModerationHeader from "../../../components/moderation/ModerationHeader";
 import Collapsible from "../../../components/moderation/Collapsible";
@@ -27,6 +35,7 @@ import OpeningTimesModeration from "../../../components/moderation/OpeningTimesM
 import PhotosModeration from "../../../components/moderation/PhotosModeration";
 import SocialMediaModeration from "../../../components/moderation/SocialMediaModeration";
 import TagsModeration from "../../../components/moderation/TagsModeration";
+import CertificateModeration from "../../../components/moderation/CertificateModeration";
 
 const ModerationTaskDetail = (): ReactElement => {
   const i18n = useI18n();
@@ -51,10 +60,16 @@ const ModerationTaskDetail = (): ReactElement => {
           isModerated(moderationStatus.description.short[option]),
           isModerated(moderationStatus.description.long[option]),
           isModerated(moderationStatus.extra_keywords[option]),
+          isModerated(moderationStatus.other_certificates[option]),
+          isModerated(moderationStatus.other_certificates_url[option]),
         ]);
         const moderated2 = [isModerated(moderationStatus.ontology_ids)];
 
-        return moderated1.every((mod) => mod) && moderated2.every((mod) => mod);
+        const moderated3 = [isModerated(moderationStatus.certificate_ids)];
+
+        const moderated4 = [isModerated(moderationStatus.label_ids)];
+
+        return moderated1.every((mod) => mod) && moderated2.every((mod) => mod) && moderated3.every((mod) => mod) && moderated4.every((mod) => mod);
       }
       case 2: {
         // Contact
@@ -130,6 +145,7 @@ const ModerationTaskDetail = (): ReactElement => {
           >
             <DescriptionModeration />
             <TagsModeration />
+            <CertificateModeration />
           </Collapsible>
           <Collapsible
             section={2}
@@ -196,6 +212,8 @@ export const getServerSideProps: GetServerSideProps = async ({ req, resolvedUrl,
 
   initialReduxState.moderation.moderationExtra.tagOptions = await getTags();
   initialReduxState.moderation.moderationExtra.matkoTagOptions = await getMatkoTags();
+
+  initialReduxState.moderation.moderationExtra.certificateOptions = await getCertificates();
 
   // Try to fetch the task details for the specified id
   if (params) {
@@ -280,6 +298,27 @@ export const getServerSideProps: GetServerSideProps = async ({ req, resolvedUrl,
               sv: modifiedTask.extra_keywords.sv.join(", "),
               en: modifiedTask.extra_keywords.en.join(", "),
             },
+            otherCertificatesSelected: {
+              fi: targetData.other_certificates.fi,
+              sv: targetData.other_certificates.sv,
+              en: targetData.other_certificates.en,
+            },
+            otherCertificatesModified: {
+              fi: modifiedTask.other_certificates.fi,
+              sv: modifiedTask.other_certificates.sv,
+              en: modifiedTask.other_certificates.en,
+            },
+            otherCertificatesUrlSelected: {
+              fi: targetData.other_certificates_url.fi,
+              sv: targetData.other_certificates_url.sv,
+              en: targetData.other_certificates_url.en,
+            },
+            otherCertificatesUrlModified: {
+              fi: modifiedTask.other_certificates_url.fi,
+              sv: modifiedTask.other_certificates_url.sv,
+              en: modifiedTask.other_certificates_url.en,
+            },
+
             socialMediaUuids,
             photosUuids: uuids,
             photosSelected: uuids.map((uuid) => {
