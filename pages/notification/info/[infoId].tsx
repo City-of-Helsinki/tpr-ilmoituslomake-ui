@@ -93,7 +93,7 @@ export const getServerSideProps: GetServerSideProps = async ({ req, params, loca
             notifier: INITIAL_NOTIFICATION.notifier,
             extra_keywords,
             other_certificates,
-            other_certificates_url
+            other_certificates_url,
           },
           notificationExtra: {
             ...initialReduxState.notification.notificationExtra,
@@ -132,12 +132,12 @@ export const getServerSideProps: GetServerSideProps = async ({ req, params, loca
             }),
             openingTimesId: targetResult.hauki_id,
             openingTimesNotificationId: targetResult.id,
-          },          
+          },
         };
       } catch (err) {
         console.log("ERROR", err);
-      }    
-    }  
+      }
+    }
   }
 
   return {

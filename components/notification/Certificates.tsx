@@ -6,11 +6,13 @@ import { useMediaQuery } from "react-responsive";
 import { Combobox, TextInput, SelectionGroup, Checkbox } from "hds-react";
 import { NotificationAction } from "../../state/actions/notificationTypes";
 import { NotificationValidationAction } from "../../state/actions/notificationValidationTypes";
-import { setNotificationCertificate, 
-  setNotificationLabel, 
-  setNotificationOtherCertificate, 
+import {
+  setNotificationCertificate,
+  setNotificationLabel,
+  setNotificationOtherCertificate,
   setNotificationOtherCertificateUrl,
-  setNotificationNoCertificate,  } from "../../state/actions/notification";
+  setNotificationNoCertificate,
+} from "../../state/actions/notification";
 import { RootState } from "../../state/reducers";
 import { MAX_LENGTH } from "../../types/constants";
 import { OptionType, CertificateOption, LabelOptionType } from "../../types/general";
@@ -48,7 +50,7 @@ const Certificates = (): ReactElement => {
     if (cert.certificate_type === "Label") {
       return true;
     } else {
-      return false
+      return false;
     }
   }
 
@@ -72,8 +74,10 @@ const Certificates = (): ReactElement => {
   const checkedLabel = (id: number) => {
     if (label_ids.includes(id)) {
       return true;
-    } else { return false; }
-  }
+    } else {
+      return false;
+    }
+  };
 
   const convertLabelOptions = (options: CertificateOption[]): LabelOptionType[] =>
     options
@@ -85,7 +89,7 @@ const Certificates = (): ReactElement => {
         return sortByOptionLabel(a, b);
       });
 
-  const convertValues = (values: number[]): OptionType[] => convertOptions(certificateOptions.filter((tag) => values.includes(tag.id) ));
+  const convertValues = (values: number[]): OptionType[] => convertOptions(certificateOptions.filter((tag) => values.includes(tag.id)));
 
   const updateCertificates = (selected: OptionType[]) => {
     dispatch(setNotificationCertificate(selected.map((s) => s.id as number)));
@@ -99,11 +103,11 @@ const Certificates = (): ReactElement => {
       if (targetValue === -2) {
         idList = [];
       } else {
-        idList = idList.filter(item => item !== -2);
+        idList = idList.filter((item) => item !== -2);
       }
       idList.push(targetValue);
     } else {
-      idList = idList.filter(item => item !== targetValue);
+      idList = idList.filter((item) => item !== targetValue);
     }
     dispatch(setNotificationLabel(idList));
   };
@@ -117,16 +121,14 @@ const Certificates = (): ReactElement => {
   };
 
   const updateNoCertificate = (evt: ChangeEvent<HTMLInputElement>) => {
-      dispatch(
-        setNotificationNoCertificate(!no_certificate)
-      );
-    };
+    dispatch(setNotificationNoCertificate(!no_certificate));
+  };
 
   const validateCertificates = () => {
     isCertificateValid(notification, dispatchValidation);
   };
 
-  const other = notification.certificate_ids.includes(-1); 
+  const other = notification.certificate_ids.includes(-1);
 
   const certificateSelected = notification.certificate_ids.length;
 
@@ -142,7 +144,6 @@ const Certificates = (): ReactElement => {
           className="formInput"
           label={i18n.t("notification.certificates.label")}
         >
-
           {convertLabelOptions(labelCertificates).map((option) => (
             <Checkbox
               id={`input_${option.id}`}
@@ -157,12 +158,7 @@ const Certificates = (): ReactElement => {
         </SelectionGroup>
         {!certificateSelected ? (
           <>
-            <SelectionGroup
-              id="noCertificate"
-              direction="horizontal"
-              className="formInput"
-              label={i18n.t("notification.certificates.noCertificate")}
-            >
+            <SelectionGroup id="noCertificate" direction="horizontal" className="formInput" label={i18n.t("notification.certificates.noCertificate")}>
               <Checkbox
                 id="noCertificateCheck"
                 key="noCertificateCheck"
@@ -174,65 +170,67 @@ const Certificates = (): ReactElement => {
               />
             </SelectionGroup>
           </>
-        ) : ("")}
-
+        ) : (
+          ""
+        )}
       </div>
 
-    { !noCertificate ? (
-      <>
-      <Combobox
-        id="certificate"
-        className="formInput"
-        // @ts-ignore: Erroneous error that the type for options should be OptionType[][]
-        options={convertOptions(mainCertificateOptions)}
-        value={convertValues(certificate_ids)}
-        onChange={updateCertificates}
-        onBlur={validateCertificates}
-        label={i18n.t("notification.certificates.add.label")}
-        helper={i18n.t("notification.certificates.add.helperText")}
-        toggleButtonAriaLabel={i18n.t("notification.button.toggleMenu")}
-        selectedItemRemoveButtonAriaLabel={i18n.t("notification.button.remove")}
-        clearButtonAriaLabel={i18n.t("notification.button.clearAllSelections")}
-        invalid={!tagsValid.valid}
-        error={
-          !tagsValid.valid ? i18n.t(tagsValid.message as string).replace("$fieldName", i18n.t("notification.certificates.certificateSelection")) : ""
-        }
-        multiselect
-        required={!no_certificate}
-        aria-required={!no_certificate}
-      />
-
-      {other ? (
+      {!noCertificate ? (
         <>
-          <TextInput
-            id="otherCertificates"
+          <Combobox
+            id="certificate"
             className="formInput"
-            label={i18n.t("notification.certificates.otherCertificate")}
-            helperText=""
-            name="otherCertificates"
-            value={otherCertificates[router.locale || defaultLocale] as string}
-            maxLength={MAX_LENGTH}
-            onChange={updateOtherCertificate}
+            // @ts-ignore: Erroneous error that the type for options should be OptionType[][]
+            options={convertOptions(mainCertificateOptions)}
+            value={convertValues(certificate_ids)}
+            onChange={updateCertificates}
+            onBlur={validateCertificates}
+            label={i18n.t("notification.certificates.add.label")}
+            helper={i18n.t("notification.certificates.add.helperText")}
+            toggleButtonAriaLabel={i18n.t("notification.button.toggleMenu")}
+            selectedItemRemoveButtonAriaLabel={i18n.t("notification.button.remove")}
+            clearButtonAriaLabel={i18n.t("notification.button.clearAllSelections")}
+            invalid={!tagsValid.valid}
+            error={
+              !tagsValid.valid
+                ? i18n.t(tagsValid.message as string).replace("$fieldName", i18n.t("notification.certificates.certificateSelection"))
+                : ""
+            }
+            multiselect
+            required={!no_certificate}
+            aria-required={!no_certificate}
           />
-          <TextInput
-            id="otherCertificatesUrl"
-            className="formInput"
-            label={i18n.t("notification.certificates.otherCertificateUrl")}
-            helperText=""
-            name="otherCertificatesUrl"
-            value={otherCertificatesUrl[router.locale || defaultLocale] as string}
-            maxLength={MAX_LENGTH}
-            onChange={updateOtherCertificateUrl}
-          />
+
+          {other ? (
+            <>
+              <TextInput
+                id="otherCertificates"
+                className="formInput"
+                label={i18n.t("notification.certificates.otherCertificate")}
+                helperText=""
+                name="otherCertificates"
+                value={otherCertificates[router.locale || defaultLocale] as string}
+                maxLength={MAX_LENGTH}
+                onChange={updateOtherCertificate}
+              />
+              <TextInput
+                id="otherCertificatesUrl"
+                className="formInput"
+                label={i18n.t("notification.certificates.otherCertificateUrl")}
+                helperText=""
+                name="otherCertificatesUrl"
+                value={otherCertificatesUrl[router.locale || defaultLocale] as string}
+                maxLength={MAX_LENGTH}
+                onChange={updateOtherCertificateUrl}
+              />
+            </>
+          ) : (
+            ""
+          )}
         </>
       ) : (
         ""
       )}
-
-    </>
-    ) : ("")
-    }
-      
     </div>
   );
 };

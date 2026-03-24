@@ -69,7 +69,7 @@ const ModerationTaskDetail = (): ReactElement => {
 
         const moderated4 = [isModerated(moderationStatus.label_ids)];
 
-        return moderated1.every((mod) => mod) && moderated2.every((mod) => mod) && moderated3.every((mod) => mod)  && moderated4.every((mod) => mod);
+        return moderated1.every((mod) => mod) && moderated2.every((mod) => mod) && moderated3.every((mod) => mod) && moderated4.every((mod) => mod);
       }
       case 2: {
         // Contact
@@ -318,7 +318,7 @@ export const getServerSideProps: GetServerSideProps = async ({ req, resolvedUrl,
               sv: modifiedTask.other_certificates_url.sv,
               en: modifiedTask.other_certificates_url.en,
             },
-            
+
             socialMediaUuids,
             photosUuids: uuids,
             photosSelected: uuids.map((uuid) => {
