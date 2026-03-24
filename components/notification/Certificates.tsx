@@ -136,7 +136,7 @@ const Certificates = (): ReactElement => {
 
   return (
     <div className="formSection">
-      <h3>{i18n.t("notification.certificates.title")}</h3>
+      <h3>{i18n.t("notification.certificates.certificatesAndLabels")}</h3>
       <div className="labelSelection">
         <SelectionGroup
           id="certificateLabels"
