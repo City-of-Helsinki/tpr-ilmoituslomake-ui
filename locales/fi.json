@@ -436,6 +436,7 @@
     },
     "certificates": {
       "title": "Sertifikaatit",
+      "certificatesAndLabels": "Sertifikaatit ja merkit",
       "certificateSelection": "Sertifikaattien valinta",
       "extra": "Muu, mikä?",
       "otherCertificate": "Muu sertifikaatti",

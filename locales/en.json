@@ -436,6 +436,7 @@
     },
     "certificates": {
       "title": "Certificates",
+      "certificatesAndLabels": "Certificates and labels",
       "certificateSelection": "Certificate selection",
       "extra": "Other, what?",
       "otherCertificate": "Other certificate",

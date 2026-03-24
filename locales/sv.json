@@ -435,7 +435,8 @@
       }
     },
     "certificates": {
-      "title": "Certifikat",
+      "title": "Certifikats",
+      "certificatesAndLabels": "Certifikats och märkens",
       "certificateSelection": "Val av certifikat",
       "extra": "Annat, vad?",
       "otherCertificate": "Annat certifikat",
