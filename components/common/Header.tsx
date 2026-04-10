@@ -10,7 +10,6 @@ import {
   IconSignin,
   IconSignout,
   LoginProvider,
-  LoginProviderProps,
   Button,
   LoginButton,
   Logo,
