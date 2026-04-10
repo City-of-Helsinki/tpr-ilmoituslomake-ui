@@ -82,7 +82,7 @@ const Header = ({ includeLanguageSelector, homePagePath, children }: HeaderProps
       <HdsHeader.SkipLink 
         skipTo="#content"
         label={i18n.t("common.header.skipToContent")}></HdsHeader.SkipLink>
-      {children}
+      
       <HdsHeader.ActionBar
         logo={<Logo src={logoSrcFromLanguage()} alt={i18n.t("common.header.title")} />}
         logoHref={`${router.basePath}${homePagePath}/`}
@@ -137,6 +137,7 @@ const Header = ({ includeLanguageSelector, homePagePath, children }: HeaderProps
           </HdsHeader.LanguageSelector>
         )}
       </HdsHeader.ActionBar>
+        {children}
     </DynamicHeader>
   );
 };
