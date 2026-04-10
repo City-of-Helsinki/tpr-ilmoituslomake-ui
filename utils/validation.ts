@@ -12,6 +12,7 @@ import {
   setNotificationShortDescriptionValidation,
   setNotificationLongDescriptionValidation,
   setNotificationTagValidation,
+  setNotificationCertificateValidation,
   setNotificationNotifierValidation,
   setNotificationAddressValidation,
   setNotificationWholeAddressValidation,
@@ -136,9 +137,22 @@ export const validateTag = (notification: NotificationSchema): Validation => {
   return result;
 };
 
+export const validateCertificate = (notification: NotificationSchema): Validation => {
+  // No validation on initial release but validator included for potential future maximum/minimum options
+  const valid = true;
+  const result = { valid, message: undefined };
+  return result;
+};
+
 export const isTagValid = (notification: NotificationSchema, dispatch: Dispatch<NotificationValidationAction>): boolean => {
   const result = validateTag(notification);
   dispatch(setNotificationTagValidation(result));
+  return result.valid;
+};
+
+export const isCertificateValid = (notification: NotificationSchema, dispatch: Dispatch<NotificationValidationAction>): boolean => {
+  const result = validateCertificate(notification);
+  dispatch(setNotificationCertificateValidation(result));
   return result.valid;
 };
 

@@ -3,7 +3,7 @@
 import { IncomingMessage } from "http";
 import { Redirect } from "next";
 import { LANGUAGE_OPTIONS } from "../types/constants";
-import { MatkoTagOption, TagOption, User } from "../types/general";
+import { MatkoTagOption, TagOption, CertificateOption, User } from "../types/general";
 
 export const getOriginServerSide = (): string => {
   // The server-side calls should use the local backend directly
@@ -67,6 +67,17 @@ export const getTags = async (): Promise<TagOption[]> => {
   if (tagResponse.ok) {
     const tagResult = await (tagResponse.json() as Promise<TagOption[]>);
     return tagResult;
+  }
+  return [];
+};
+
+export const getCertificates = async (): Promise<CertificateOption[]> => {
+
+  const certificateResponse = await fetch(`${getOriginServerSide()}/api/certificates/?format=json`);
+  if (certificateResponse.ok) {
+    const certificateResult = await (certificateResponse.json() as Promise<CertificateOption[]>);
+
+    return certificateResult;
   }
   return [];
 };

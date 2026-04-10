@@ -13,7 +13,7 @@ import { CLEAR_STATE } from "../../../types/constants";
 import { INITIAL_NOTIFICATION } from "../../../types/initial";
 import { NotificationSchema } from "../../../types/notification_schema";
 import i18nLoader, { defaultLocale } from "../../../utils/i18n";
-import { checkUser, getOriginServerSide, getPreviousInputLanguages, getTags } from "../../../utils/serverside";
+import { checkUser, getOriginServerSide, getPreviousInputLanguages, getTags, getCertificates } from "../../../utils/serverside";
 import { getDisplayName } from "../../../utils/helper";
 import Layout from "../../../components/common/Layout";
 import Header from "../../../components/common/Header";
@@ -142,6 +142,8 @@ export const getServerSideProps: GetServerSideProps = async ({ req, params, loca
 
   initialReduxState.notification.notificationExtra.tagOptions = await getTags();
 
+  initialReduxState.notification.notificationExtra.certificateOptions = await getCertificates();
+
   // Try to fetch the notification details for the specified id
   if (params) {
     const { targetId } = params;
@@ -154,7 +156,7 @@ export const getServerSideProps: GetServerSideProps = async ({ req, params, loca
 
       try {
         // Merge the notification details from the backend, but remove the previous notifier details if present
-        const { notifier, extra_keywords, images, ...dataToUse } = targetResult.data;
+        const { notifier, extra_keywords, other_certificates, other_certificates_url, images, ...dataToUse } = targetResult.data;
 
         initialReduxState.notification = {
           ...initialReduxState.notification,
@@ -164,6 +166,8 @@ export const getServerSideProps: GetServerSideProps = async ({ req, params, loca
             ...dataToUse,
             notifier: INITIAL_NOTIFICATION.notifier,
             extra_keywords,
+            other_certificates,
+            other_certificates_url,
           },
           notificationExtra: {
             ...initialReduxState.notification.notificationExtra,
@@ -172,6 +176,16 @@ export const getServerSideProps: GetServerSideProps = async ({ req, params, loca
               fi: extra_keywords.fi.join(", "),
               sv: extra_keywords.sv.join(", "),
               en: extra_keywords.en.join(", "),
+            },
+            otherCertificates: {
+              fi: other_certificates.fi,
+              sv: other_certificates.sv,
+              en: other_certificates.en,
+            },
+            otherCertificatesUrl: {
+              fi: other_certificates_url.fi,
+              sv: other_certificates_url.sv,
+              en: other_certificates_url.en,
             },
             photos: images.map((image) => {
               return {
