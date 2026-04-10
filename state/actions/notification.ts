@@ -129,7 +129,7 @@ export const setNotificationOtherCertificateUrl = (language: string, value: stri
   payload: { language, value },
 });
 
-export const setNotificationNoCertificate = ( value: boolean ): NotificationAction => ({
+export const setNotificationNoCertificate = (value: boolean): NotificationAction => ({
   type: SET_NOTIFICATION_NO_CERTIFICATE,
   payload: value,
 });

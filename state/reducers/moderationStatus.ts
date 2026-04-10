@@ -134,7 +134,10 @@ const moderationStatus = (state: ModerationStatusState | undefined, action: AnyA
       console.log("SET_MODERATION_OTHER_CERTIFICATE_URL_STATUS", action.payload);
       return {
         ...state,
-        moderationStatus: { ...state.moderationStatus, other_certificates_url: { ...state.moderationStatus.other_certificates_url, ...action.payload } },
+        moderationStatus: {
+          ...state.moderationStatus,
+          other_certificates_url: { ...state.moderationStatus.other_certificates_url, ...action.payload },
+        },
       };
     }
 
