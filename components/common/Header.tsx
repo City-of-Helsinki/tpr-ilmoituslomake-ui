@@ -1,9 +1,22 @@
-import React, { ReactElement } from "react";
+import React, { ReactElement, useState } from "react";
 import { useSelector } from "react-redux";
 import dynamic from "next/dynamic";
 import { useRouter } from "next/router";
 import { useI18n } from "next-localization";
-import { Header as HdsHeader,  IconSearch, IconUser, IconSignin, IconSignout, LoginProvider, LoginProviderProps, LoginButton, Logo, logoFi, logoSv, logoSvDark, WithoutAuthenticatedUser, WithAuthenticatedUser } from "hds-react";
+import { Header as HdsHeader,  
+  IconSearch, IconUser, 
+  IconSignin, 
+  IconSignout, 
+  LoginProvider, 
+  LoginProviderProps, 
+  Button, 
+  LoginButton, 
+  Logo, 
+  logoFi, 
+  logoSv, 
+  logoSvDark, 
+  WithoutAuthenticatedUser, 
+  WithAuthenticatedUser } from "hds-react";
 import { defaultLocale } from "../../utils/i18n";
 import { RootState } from "../../state/reducers";
 import getOrigin from "../../utils/request";
@@ -18,7 +31,7 @@ interface HeaderProps {
 // NOTE: The HDS Navigation component does not currently work for mobile views when server-side rendering
 // A workaround for this is to only use the Navigation component on the client-side
 // @ts-ignore: A dynamic import must be used to force client-side rendering regardless of the typescript errors
-const DynamicNavigation = dynamic(() => import("hds-react").then((hds) => hds.Navigation), { ssr: false });
+//const DynamicNavigation = dynamic(() => import("hds-react").then((hds) => hds.Navigation), { ssr: false });
 const DynamicHeader = dynamic(() => import("hds-react").then((hds) => hds.Header), { ssr: false });
 
 const Header = ({ includeLanguageSelector, homePagePath, children }: HeaderProps): ReactElement => {
@@ -46,39 +59,6 @@ const Header = ({ includeLanguageSelector, homePagePath, children }: HeaderProps
     }
   }
 
-  /*
-  const providerProperties: LoginProviderProps = {
-    userManagerSettings: {
-      authority: 'https://tunnistamo.dev.hel.ninja/',
-      client_id: 'exampleapp-ui-dev',
-      scope: 'openid profile email',
-      redirect_uri: 'https://service.fi/callback',
-    },
-    apiTokensClientSettings: { url: 'https://tunnistamo.dev.hel.ninja/api-tokens/' },
-    sessionPollerSettings: { pollIntervalInMs: 300000 },
-  };*/
-
-  const loginProviderProps: LoginProviderProps = {
-  userManagerSettings: {
-    authority: 'https://tunnistus.dev.hel.ninja/auth/realms/helsinki-tunnistus',
-    client_id: 'tpr-toimipisterekisteri-dev',
-    scope: 'openid profile',
-    redirect_uri: `https://tpr.hel.fi/tprperhe_testi/hkiauth/auth/return`,
-    silent_redirect_uri: `https://tpr.hel.fi/tprperhe_testi/hkiauth/auth/return`,
-    post_logout_redirect_uri: `https://tpr.hel.fi/tprperhe_testi/hkiauth/auth/return`,
-  },
-  apiTokensClientSettings: {
-    url: 'https://tunnistus.dev.hel.ninja/auth/realms/helsinki-tunnistus/protocol/openid-connect/token',
-    queryProps: {
-      grantType: 'urn:ietf:params:oauth:grant-type:uma-ticket',
-      permission: '#access',
-    },
-    audiences: ['tpr-toimipisterekisteri-dev', 'profile-api-dev'],
-  },
-  sessionPollerSettings: { pollIntervalInMs: 10000 },
-};
-  
-
   const signIn = () => {
     const {
       location: { pathname },
@@ -92,8 +72,6 @@ const Header = ({ includeLanguageSelector, homePagePath, children }: HeaderProps
     await fetch(`${getOrigin(router)}/api/user/logout`);
     window.open("https://api.hel.fi/sso/openid/end-session/", "_self");
   };
-
-  
 
   return (
     <DynamicHeader
@@ -114,47 +92,40 @@ const Header = ({ includeLanguageSelector, homePagePath, children }: HeaderProps
         aria-label={i18n.t("common.header.openMenu")}
         frontPageLabel=""
       >
-        <LoginProvider
-          {...loginProviderProps}
-        >
-        <WithoutAuthenticatedUser>
-          <HdsHeader.LoginButton
-            id="login"
-            aria-label={i18n.t("common.header.login")}
-            errorLabel="error"
-            errorCloseAriaLabel="Close error"
-            errorText="Error"
-            label={i18n.t("common.header.login")}
-            loggingInText="Login"
-            icon={<IconUser/>}
+        
+        
+        {!currentUser?.authenticated && (
+          <Button
+            className="fixedRightPosition fit-content"
+            iconLeft={<IconSignin aria-hidden />}
             onClick={signIn}
+            theme="black"
+            variant="supplementary"
           >
-            </HdsHeader.LoginButton>
-            
-          </WithoutAuthenticatedUser>
-          
-      <WithAuthenticatedUser>
-        <HdsHeader.ActionBarItem
-          fixedRightPosition
-          id="user"
-          aria-label={i18n.t("common.header.userInfo")}
-          avatar={initials}
-          icon={<IconUser/>}
-          label={i18n.t("common.header.userInfo")}
-          //authenticated={currentUser?.authenticated}
-          //userName={currentUser?.first_name || currentUser?.email}
-          
-        >
-          
-          <HdsHeader.ActionBarSubItem
-            href="#"
-            iconRight={<IconSignout aria-hidden />}
-            label={i18n.t("common.header.logout")}
-            onClick={signOut}
-          />
-        </HdsHeader.ActionBarItem>
-      </WithAuthenticatedUser>
-      </LoginProvider>
+            {i18n.t("common.header.login")}
+          </Button>
+        )}
+                
+
+        {currentUser?.authenticated && (
+          <HdsHeader.ActionBarItem
+            fixedRightPosition
+            id="user"
+            aria-label={i18n.t("common.header.userInfo")}
+            avatar={initials}
+            icon={<IconUser />}
+            label={i18n.t("common.header.userInfo") + ` (${currentUser?.first_name || currentUser?.email})`}
+
+          >
+            <HdsHeader.ActionBarSubItem
+              href="#"
+              iconRight={<IconSignout aria-hidden />}
+              label={i18n.t("common.header.logout")}
+              onClick={signOut}
+            />
+          </HdsHeader.ActionBarItem>
+        )}
+
         {includeLanguageSelector && (
           <HdsHeader.LanguageSelector
             label={(router.locale || defaultLocale).toUpperCase()}
