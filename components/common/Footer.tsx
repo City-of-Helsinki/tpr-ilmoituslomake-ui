@@ -8,9 +8,8 @@ const Footer = (): ReactElement => {
   const i18n = useI18n();
 
   return (
-    
     <HdsFooter korosType="basic" className={styles.footer} title={i18n.t("common.footer.title")}>
-      <HdsFooter.Navigation >
+      <HdsFooter.Navigation>
         <HdsFooter.Link as="a" href={CONTACT_URL} label={i18n.t("common.footer.contact")} icon={<IconArrowRight aria-hidden />} />
       </HdsFooter.Navigation>
       <HdsFooter.Base 

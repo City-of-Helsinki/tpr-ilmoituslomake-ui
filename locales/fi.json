@@ -340,7 +340,7 @@
       "photo": {
         "title": "Kuva",
         "notice1": "Valitse kohdetta parhaiten kuvaavat houkuttelevat ja korkealaatuiset kuvat. Kuvien päälle ei tule lisätä tekstiä, päivämääriä, vesileimoja tai muuta vastaavaa.",
-        "notice2": "Kuvien koko tulee olla vähintään 1920 x 1080 pikseliä, tiedoston JPEG-muodossa, eikä sen koko saa ylittää 4 MB:a. Kuvat tulee olla mielellään vaakatasossa."
+        "notice2": "Tiedoston tulee olla JPEG-muodossa, eikä sen koko saa ylittää 8 MB:a. Kuvien tulee olla mielellään vaakatasossa."
       },
       "url": {
         "labelDevice": "Valitse kuva laitteeltasi",

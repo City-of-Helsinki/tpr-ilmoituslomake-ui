@@ -43,7 +43,7 @@ import {
   SocialMedia,
   TagOption,
   CertificateOption,
-  NoCertificate
+  NoCertificate,
 } from "../../types/general";
 
 interface SetModerationPlaceSearchAction extends AnyAction {
@@ -215,7 +215,7 @@ export type ModerationAction =
   | SetModerationTagOptionsAction
   | SetModerationMatkoTagOptionsAction
   | SetModerationCertificateOptionsAction
-  | SetModerationLabelOptionsAction 
+  | SetModerationLabelOptionsAction
   | SetModerationExtraKeywordsAction
   | SetModerationAddressAction
   | SetModerationAddressFoundAction

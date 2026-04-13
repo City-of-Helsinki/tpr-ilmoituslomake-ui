@@ -72,7 +72,6 @@ export const getTags = async (): Promise<TagOption[]> => {
 };
 
 export const getCertificates = async (): Promise<CertificateOption[]> => {
-
   const certificateResponse = await fetch(`${getOriginServerSide()}/api/certificates/?format=json`);
   if (certificateResponse.ok) {
     const certificateResult = await (certificateResponse.json() as Promise<CertificateOption[]>);

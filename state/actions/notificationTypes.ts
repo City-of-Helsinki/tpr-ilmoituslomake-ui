@@ -45,7 +45,7 @@ import {
   Photo,
   SocialMedia,
   TagOption,
-  CertificateOption
+  CertificateOption,
 } from "../../types/general";
 import { NotificationSchema } from "../../types/notification_schema";
 

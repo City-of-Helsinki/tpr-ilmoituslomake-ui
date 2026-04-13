@@ -249,7 +249,7 @@ const notification = (state: NotificationState | undefined, action: AnyAction): 
           ...state.notification,
           other_certificates: {
             ...state.notification.other_certificates,
-            [action.payload.language]: action.payload.value
+            [action.payload.language]: action.payload.value,
           },
         },
         notificationExtra: {
@@ -270,7 +270,7 @@ const notification = (state: NotificationState | undefined, action: AnyAction): 
           ...state.notification,
           other_certificates_url: {
             ...state.notification.other_certificates_url,
-            [action.payload.language]: action.payload.value
+            [action.payload.language]: action.payload.value,
           },
         },
         notificationExtra: {
@@ -282,7 +282,6 @@ const notification = (state: NotificationState | undefined, action: AnyAction): 
         },
       };
     }
-
 
     case SET_NOTIFICATION_NO_CERTIFICATE: {
       console.log("SET_NOTIFICATION_NO_CERTIFICATE", action.payload);
