@@ -115,7 +115,7 @@ const NotificationSent = (): ReactElement => {
                 </Button>
               </div>
             </div>
-            <Koros className={styles.wave} type="storm" />
+            <Koros className={styles.wave} />
           </Dialog>
         </main>
       )}
