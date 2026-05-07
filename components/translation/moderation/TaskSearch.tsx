@@ -28,7 +28,8 @@ interface TaskSearchProps {
 
 const TaskSearch = ({ showStatus, setShowStatus }: TaskSearchProps): ReactElement => {
   const i18n = useI18n();
-  const dispatch = useDispatch<Dispatch<ModerationTranslationAction>>();
+  //const dispatch = useDispatch<Dispatch<ModerationTranslationAction>>();
+  const dispatch = useDispatch();
   const router = useRouter();
 
   const taskSearch = useSelector((state: RootState) => state.moderationTranslation.taskSearch);
@@ -36,21 +37,29 @@ const TaskSearch = ({ showStatus, setShowStatus }: TaskSearchProps): ReactElemen
   const taskResults = useSelector((state: RootState) => state.moderationTranslation.taskResults);
   const { results } = taskResults;
 
-  const convertOptions = (options: string[]): OptionType[] => options.map((option) => ({ id: option, label: option }));
+  const convertOptions = (options: string[]): OptionType[] => options.map((option) => ({ value: option, label: option }));
 
   const requestOptions = useMemo(
-    () => [{ id: "", label: "" }, ...convertOptions(results.map((result) => result.formattedRequest).filter((v, i, a) => a.indexOf(v) === i))],
+    () => [{ value: "", label: "" }, ...convertOptions(results.map((result) => result.formattedRequest).filter((v, i, a) => a.indexOf(v) === i))],
     [results]
   );
 
-  const convertValue = (value: string | undefined): OptionType | undefined => requestOptions.find((t) => t.id === value);
+  const convertValue = (value: string | undefined): OptionType | undefined => requestOptions.find((t) => t.value === value);
 
   const updateSearchText = (evt: ChangeEvent<HTMLInputElement>) => {
     dispatch(setModerationTranslationTaskSearch({ ...taskSearch, [evt.target.name]: evt.target.value }));
   };
 
+  /*
   const updateSearchRequestOption = (selected: OptionType) => {
-    dispatch(setModerationTranslationTaskSearch({ ...taskSearch, request: selected.id as string }));
+    dispatch(setModerationTranslationTaskSearch({ ...taskSearch, request: selected.value as string }));
+  };*/
+
+  const updateSearchRequestOption = (selectedOptions: OptionType[]) => {
+    const selected = selectedOptions && selectedOptions.length > 0 ? selectedOptions[0] : null;
+    if (selected) {
+      dispatch(setModerationTranslationTaskSearch({ ...taskSearch, request: selected.value as string }));
+    }
   };
 
   const searchTasks = async () => {
@@ -99,8 +108,12 @@ const TaskSearch = ({ showStatus, setShowStatus }: TaskSearchProps): ReactElemen
 
   // If specified, search all tasks on first render only, using a workaround utilising useEffect with empty dependency array
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  const useMountEffect = (fun: () => void) => useEffect(fun, []);
-  useMountEffect(searchTasks);
+  //const useMountEffect = (fun: () => void) => useEffect(fun, []);
+  //useMountEffect(searchTasks);
+
+  useEffect(() => {
+    searchTasks();
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <div className={`formSection ${styles.taskSearch}`}>
@@ -122,12 +135,15 @@ const TaskSearch = ({ showStatus, setShowStatus }: TaskSearchProps): ReactElemen
           <Select
             id="request"
             className={styles.gridInputRequest}
-            options={requestOptions}
-            value={convertValue(searchRequest)}
+            options={requestOptions as (string | Partial<{ value: string; label: string }>)[]}
+            value={searchRequest}
             onChange={updateSearchRequestOption}
-            label={i18n.t("moderation.translation.taskSearch.request.label")}
-            selectedItemRemoveButtonAriaLabel={i18n.t("moderation.button.remove")}
-            clearButtonAriaLabel={i18n.t("moderation.button.clearAllSelections")}
+            texts={{
+              label: i18n.t("moderation.translation.taskSearch.request.label"),
+              tagRemoveSelectionAriaLabel: i18n.t("moderation.button.remove"),
+              tagsClearAllButton: i18n.t("moderation.button.clearAllSelections")
+            }}
+            
           />
         )}
         <div className={styles.gridButton}>

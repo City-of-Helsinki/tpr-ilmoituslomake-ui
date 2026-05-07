@@ -12,8 +12,10 @@ import styles from "./Contact.module.scss";
 
 const Contact = (): ReactElement => {
   const i18n = useI18n();
-  const dispatch = useDispatch<Dispatch<NotificationAction>>();
-  const dispatchValidation = useDispatch<Dispatch<NotificationValidationAction>>();
+  //const dispatch = useDispatch<Dispatch<NotificationAction>>();
+  //const dispatchValidation = useDispatch<Dispatch<NotificationValidationAction>>();
+  const dispatch = useDispatch();
+  const dispatchValidation = useDispatch();
 
   const notification = useSelector((state: RootState) => state.notification.notification);
   const { businessid, phone, email } = notification;
@@ -25,6 +27,7 @@ const Contact = (): ReactElement => {
     dispatch(setNotificationContact({ [evt.target.name]: evt.target.value }));
   };
 
+  /*
   const validateContact = (evt: ChangeEvent<HTMLInputElement>) => {
     let targetValue = "";
     switch (evt.target.name) {
@@ -46,6 +49,30 @@ const Contact = (): ReactElement => {
     }
     dispatch(setNotificationContact({ [evt.target.name]: targetValue }));
     isContactFieldValid(evt.target.name, notification, dispatchValidation);
+  };*/
+
+  const validateContact = (evt: ChangeEvent<HTMLInputElement | HTMLDivElement>) => {
+    const target = evt.target as HTMLInputElement;
+    let targetValue = "";
+    switch (target.name) {
+      case "businessid": {
+        targetValue = businessid ? businessid.trim() : "";
+        break;
+      }
+      case "email": {
+        targetValue = email.trim();
+        break;
+      }
+      case "phone": {
+        targetValue = phone.trim();
+        break;
+      }
+      default: {
+        targetValue = "";
+      }
+    }
+    dispatch(setNotificationContact({ [target.name]: targetValue }));
+    isContactFieldValid(target.name, notification, dispatchValidation);
   };
 
   return (

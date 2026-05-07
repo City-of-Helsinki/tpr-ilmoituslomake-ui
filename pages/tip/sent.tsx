@@ -3,7 +3,7 @@ import { GetServerSideProps } from "next";
 import Head from "next/head";
 import Link from "next/link";
 import { useI18n } from "next-localization";
-import { Button, IconCheckCircleFill } from "hds-react";
+import { Button, ButtonVariant, IconCheckCircleFill, IconSize } from "hds-react";
 import { initStore } from "../../state/store";
 import { CLEAR_STATE } from "../../types/constants";
 import i18nLoader from "../../utils/i18n";
@@ -25,7 +25,7 @@ const TipSent = (): ReactElement => {
       <main id="content" className={styles.content}>
         <Notice
           className={styles.sent}
-          icon={<IconCheckCircleFill size="xl" aria-hidden />}
+          icon={<IconCheckCircleFill size={IconSize.ExtraLarge} aria-hidden />}
           titleKey="notification.message.tipSaveSucceeded.title"
           messageKey="notification.message.tipSaveSucceeded.message"
           focusOnTitle
@@ -34,7 +34,7 @@ const TipSent = (): ReactElement => {
         <div className={styles.footer}>
           <div className="flexSpace" />
           <Link href="/">
-            <Button variant="secondary">{i18n.t("notification.button.close")}</Button>
+            <Button variant={ButtonVariant.Secondary}>{i18n.t("notification.button.close")}</Button>
           </Link>
         </div>
       </main>

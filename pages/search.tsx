@@ -3,7 +3,7 @@ import { GetServerSideProps } from "next";
 import Head from "next/head";
 import Link from "next/link";
 import { useI18n } from "next-localization";
-import { Button, IconArrowLeft } from "hds-react";
+import { Button, ButtonVariant, IconArrowLeft } from "hds-react";
 import { initStore } from "../state/store";
 import { CLEAR_STATE } from "../types/constants";
 import i18nLoader from "../utils/i18n";
@@ -26,7 +26,7 @@ const NotificationSearch = (): ReactElement => {
         <PlaceSearch />
         <PlaceResults />
         <Link href="/">
-          <Button variant="secondary" iconLeft={<IconArrowLeft aria-hidden />}>
+          <Button variant={ButtonVariant.Secondary} iconStart={<IconArrowLeft aria-hidden />}>
             {i18n.t("notification.button.returnToStart")}
           </Button>
         </Link>

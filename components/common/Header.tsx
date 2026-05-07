@@ -10,6 +10,7 @@ import { Header as HdsHeader,
   LoginProvider, 
   LoginProviderProps, 
   Button, 
+  ButtonVariant,
   LoginButton, 
   Logo, 
   logoFi, 
@@ -97,10 +98,10 @@ const Header = ({ includeLanguageSelector, homePagePath, children }: HeaderProps
         {!currentUser?.authenticated && (
           <Button
             className="fixedRightPosition fit-content"
-            iconLeft={<IconSignin aria-hidden />}
+            iconStart={<IconSignin aria-hidden />}
             onClick={signIn}
-            theme="black"
-            variant="supplementary"
+            
+            variant={ButtonVariant.Supplementary}
           >
             {i18n.t("common.header.login")}
           </Button>
@@ -119,7 +120,7 @@ const Header = ({ includeLanguageSelector, homePagePath, children }: HeaderProps
           >
             <HdsHeader.ActionBarSubItem
               href="#"
-              iconRight={<IconSignout aria-hidden />}
+              iconEnd={<IconSignout aria-hidden />}
               label={i18n.t("common.header.logout")}
               onClick={signOut}
             />

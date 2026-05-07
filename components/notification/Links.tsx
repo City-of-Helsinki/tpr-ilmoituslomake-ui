@@ -11,8 +11,10 @@ import { isWebsiteValid } from "../../utils/validation";
 
 const Links = (): ReactElement => {
   const i18n = useI18n();
-  const dispatch = useDispatch<Dispatch<NotificationAction>>();
-  const dispatchValidation = useDispatch<Dispatch<NotificationValidationAction>>();
+  //const dispatch = useDispatch<Dispatch<NotificationAction>>();
+  //const dispatchValidation = useDispatch<Dispatch<NotificationValidationAction>>();
+  const dispatch = useDispatch();
+  const dispatchValidation = useDispatch();
 
   const notification = useSelector((state: RootState) => state.notification.notification);
   const { website } = notification;
@@ -27,9 +29,16 @@ const Links = (): ReactElement => {
     dispatch(setNotificationLink({ [evt.target.name]: evt.target.value }));
   };
 
+  /*
   const validateWebsite = (evt: ChangeEvent<HTMLInputElement>) => {
     dispatch(setNotificationLink({ [evt.target.name]: (website[evt.target.name] as string).trim() }));
     isWebsiteValid(evt.target.name, notification, dispatchValidation);
+  };*/
+
+  const validateWebsite = (evt: ChangeEvent<HTMLInputElement | HTMLDivElement>) => {
+    const target = evt.target as HTMLInputElement;
+    dispatch(setNotificationLink({ [target.name]: (website[target.name] as string).trim() }));
+    isWebsiteValid(target.name, notification, dispatchValidation);
   };
 
   return (

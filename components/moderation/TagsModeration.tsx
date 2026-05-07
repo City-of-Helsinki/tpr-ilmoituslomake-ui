@@ -2,7 +2,7 @@ import React, { ChangeEvent, Dispatch, ReactElement } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useRouter } from "next/router";
 import { useI18n } from "next-localization";
-import { Combobox, TextInput } from "hds-react";
+import { Select, TextInput } from "hds-react";
 import { ModerationAction } from "../../state/actions/moderationTypes";
 import { ModerationStatusAction } from "../../state/actions/moderationStatusTypes";
 import { setModerationExtraKeywords, setModerationMatkoTag, setModerationTag } from "../../state/actions/moderation";
@@ -16,8 +16,10 @@ import ModerationSection from "./ModerationSection";
 
 const TagsModeration = (): ReactElement => {
   const i18n = useI18n();
-  const dispatch = useDispatch<Dispatch<ModerationAction>>();
-  const dispatchStatus = useDispatch<Dispatch<ModerationStatusAction>>();
+  //const dispatch = useDispatch<Dispatch<ModerationAction>>();
+  //const dispatchStatus = useDispatch<Dispatch<ModerationStatusAction>>();
+  const dispatch = useDispatch();
+  const dispatchStatus = useDispatch();
   const router = useRouter();
 
   const selectedTask = useSelector((state: RootState) => state.moderation.selectedTask);
@@ -33,11 +35,11 @@ const TagsModeration = (): ReactElement => {
   const { ontology_ids: tagsStatus, extra_keywords: extraKeywordsStatus, matko_ids: matkoTagsStatus } = moderationStatus;
 
   const convertOptions = (options: TagOption[]): OptionType[] => {
-    return options.map((tag) => ({ id: tag.id, label: tag.ontologyword[router.locale || defaultLocale] as string })).sort(sortByOptionLabel);
+    return options.map((tag) => ({ value: tag.id, label: tag.ontologyword[router.locale || defaultLocale] as string })).sort(sortByOptionLabel);
   };
 
   const convertMatkoOptions = (options: MatkoTagOption[]): OptionType[] => {
-    return options.map((tag) => ({ id: tag.id, label: tag.matkoword[router.locale || defaultLocale] as string })).sort(sortByOptionLabel);
+    return options.map((tag) => ({ value: tag.id, label: tag.matkoword[router.locale || defaultLocale] as string })).sort(sortByOptionLabel);
   };
 
   const convertValues = (values: number[]): OptionType[] => {
@@ -49,11 +51,11 @@ const TagsModeration = (): ReactElement => {
   };
 
   const updateTags = (selected: OptionType[]) => {
-    dispatch(setModerationTag(selected.map((s) => s.id as number)));
+    dispatch(setModerationTag(selected.map((s) => s.value as number)));
   };
 
   const updateMatkoTags = (selected: OptionType[]) => {
-    dispatch(setModerationMatkoTag(selected.map((s) => s.id as number)));
+    dispatch(setModerationMatkoTag(selected.map((s) => s.value as number)));
   };
 
   const updateExtraKeywords = (evt: ChangeEvent<HTMLInputElement>) => {
@@ -88,15 +90,18 @@ const TagsModeration = (): ReactElement => {
           changeCallback={updateTags}
           statusCallback={updateTagStatus}
           ModerationComponent={
-            <Combobox
+            <Select
               id="tag"
+              // @ts-ignore: Erroneous error that the type for options should be OptionType[][]
               options={convertOptions(tagOptions)}
-              label={i18n.t("moderation.tags.title")}
-              helper={tagsStatus === ModerationStatus.Edited ? i18n.t("moderation.tags.add.helperText") : undefined}
-              toggleButtonAriaLabel={i18n.t("moderation.button.toggleMenu")}
-              selectedItemRemoveButtonAriaLabel={i18n.t("moderation.button.remove")}
-              clearButtonAriaLabel={i18n.t("moderation.button.clearAllSelections")}
-              multiselect
+              texts={{
+                label: i18n.t("moderation.tags.title"),
+                assistive: tagsStatus === ModerationStatus.Edited ? i18n.t("moderation.tags.add.helperText") : undefined,
+                dropdownButtonAriaLabel: i18n.t("moderation.button.toggleMenu"),
+                tagRemoveSelectionAriaLabel: i18n.t("moderation.button.remove"),
+                tagsClearAllButton: i18n.t("moderation.button.clearAllSelections"),
+              }}
+              multiSelect
             />
           }
         />
@@ -140,15 +145,18 @@ const TagsModeration = (): ReactElement => {
           changeCallback={updateMatkoTags}
           statusCallback={updateMatkoTagStatus}
           ModerationComponent={
-            <Combobox
+            <Select
               id="tag"
+              // @ts-ignore: Erroneous error that the type for options should be OptionType[][]
               options={convertMatkoOptions(matkoTagOptions)}
-              label={i18n.t("moderation.tags.matko")}
-              helper={matkoTagsStatus === ModerationStatus.Edited ? i18n.t("moderation.tags.add.helperText") : undefined}
-              toggleButtonAriaLabel={i18n.t("moderation.button.toggleMenu")}
-              selectedItemRemoveButtonAriaLabel={i18n.t("moderation.button.remove")}
-              clearButtonAriaLabel={i18n.t("moderation.button.clearAllSelections")}
-              multiselect
+              texts={{
+                label: i18n.t("moderation.tags.matko"),
+                assistive: matkoTagsStatus === ModerationStatus.Edited ? i18n.t("moderation.tags.add.helperText") : undefined,
+                dropdownButtonAriaLabel: i18n.t("moderation.button.toggleMenu"),
+                tagRemoveSelectionAriaLabel: i18n.t("moderation.button.remove"),
+                tagsClearAllButton: i18n.t("moderation.button.clearAllSelections"),
+              }}
+              multiSelect
             />
           }
         />

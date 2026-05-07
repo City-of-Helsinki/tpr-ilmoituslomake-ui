@@ -2,10 +2,11 @@ import React, { ReactElement } from "react";
 import { useSelector } from "react-redux";
 import { RootState } from "../../state/reducers";
 import OpeningTimesButton from "../common/OpeningTimesButton";
+import { ButtonVariant } from "hds-react";
 
 interface OpeningTimesButtonNotificationProps {
   buttonTextKey: string;
-  buttonVariant: "primary" | "secondary";
+  buttonVariant: ButtonVariant.Primary | ButtonVariant.Secondary;
   closeModal?: () => void;
 }
 

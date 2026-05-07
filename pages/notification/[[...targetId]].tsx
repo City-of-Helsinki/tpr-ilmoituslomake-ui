@@ -3,8 +3,8 @@ import { useSelector } from "react-redux";
 import { GetServerSideProps } from "next";
 import Head from "next/head";
 import { useI18n } from "next-localization";
-import { IconCheckCircleFill, IconClockPlus, Koros, Link as HdsLink } from "hds-react";
-import { Dialog } from "@material-ui/core";
+import { IconCheckCircleFill, IconClockPlus, Koros, Link as HdsLink, IconSize, LinkSize, ButtonVariant } from "hds-react";
+import { Dialog } from "@mui/material";
 import { RootState } from "../../state/reducers";
 import { initStore } from "../../state/store";
 import { NotifierType, CLEAR_STATE, SENT_INFO_PAGE, Toast } from "../../types/constants";
@@ -139,7 +139,7 @@ const NotificationDetail = (): ReactElement => {
 
           <Notice
             className={styles.sent}
-            icon={<IconCheckCircleFill size="xl" aria-hidden />}
+            icon={<IconCheckCircleFill size={IconSize.ExtraLarge} aria-hidden />}
             titleKey="notification.message.saveSucceeded.title"
             messageKey="notification.message.saveSucceeded.message"
             messageKey2={isNew ? "notification.message.sentModal.message2" : undefined}
@@ -147,10 +147,10 @@ const NotificationDetail = (): ReactElement => {
           />
           <Notice
             className={styles.opening}
-            icon={<IconClockPlus size="xl" aria-hidden />}
+            icon={<IconClockPlus size={IconSize.ExtraLarge} aria-hidden />}
             titleKey="notification.message.completeOpeningTimes.title"
             messageKey="notification.message.completeOpeningTimes.message"
-            button={<OpeningTimesButtonNotification buttonTextKey="notification.button.notifyOpeningTimes" buttonVariant="secondary" />}
+            button={<OpeningTimesButtonNotification buttonTextKey="notification.button.notifyOpeningTimes" buttonVariant={ButtonVariant.Secondary} />}
           />
           {!isNew && <AccessibilityInfoNotice className={styles.accessibility} />}
 
@@ -169,17 +169,17 @@ const NotificationDetail = (): ReactElement => {
               <div>
                 <OpeningTimesButtonNotification
                   buttonTextKey="notification.button.continueToOpeningTimes"
-                  buttonVariant="primary"
+                  buttonVariant={ButtonVariant.Primary}
                   closeModal={closeModal}
                 />
               </div>
               <div className={styles.link}>
-                <HdsLink href="#" size="M" disableVisitedStyles onClick={closeModal}>
+                <HdsLink href="#" size={LinkSize.Medium} disableVisitedStyles onClick={closeModal}>
                   {i18n.t("notification.button.noOpeningTimes")}
                 </HdsLink>
               </div>
               <div className={styles.link}>
-                <HdsLink href="#" size="M" disableVisitedStyles onClick={closeModal}>
+                <HdsLink href="#" size={LinkSize.Medium} disableVisitedStyles onClick={closeModal}>
                   {i18n.t("notification.button.continueLater")}
                 </HdsLink>
               </div>

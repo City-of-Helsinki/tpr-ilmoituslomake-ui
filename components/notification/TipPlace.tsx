@@ -1,4 +1,4 @@
-import React, { Dispatch, ChangeEvent, ReactElement, useEffect, useState } from "react";
+import React, { Dispatch, ChangeEvent, FocusEvent, ReactElement, useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useRouter } from "next/router";
 import { useI18n } from "next-localization";
@@ -18,8 +18,10 @@ import styles from "./TipPlace.module.scss";
 
 const TipPlace = (): ReactElement => {
   const i18n = useI18n();
-  const dispatch = useDispatch<Dispatch<NotificationAction>>();
-  const dispatchValidation = useDispatch<Dispatch<NotificationValidationAction>>();
+  //const dispatch = useDispatch<Dispatch<NotificationAction>>();
+  //const dispatchValidation = useDispatch<Dispatch<NotificationValidationAction>>();
+  const dispatch = useDispatch();
+  const dispatchValidation = useDispatch();
   const router = useRouter();
 
   const [selectedPlace, setSelectedPlace] = useState<string>("");
@@ -34,7 +36,12 @@ const TipPlace = (): ReactElement => {
     dispatch(setNotificationTip({ ...tip, [evt.target.name]: evt.target.value }));
   };
 
+  /*
   const validateDetails = (evt: ChangeEvent<HTMLInputElement>) => {
+    isTipFieldValid(evt.target.name, tip, dispatchValidation);
+  };*/
+
+  const validateDetails = (evt: FocusEvent<HTMLInputElement>) => {
     isTipFieldValid(evt.target.name, tip, dispatchValidation);
   };
 
@@ -56,8 +63,12 @@ const TipPlace = (): ReactElement => {
 
   // If specified, search for the specified place on first render only, using a workaround utilising useEffect with empty dependency array
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  const useMountEffect = (fun: () => void) => useEffect(fun, []);
-  useMountEffect(preselectPlaceOnMount);
+  //const useMountEffect = (fun: () => void) => useEffect(fun, []);
+  //useMountEffect(preselectPlaceOnMount);
+
+  useEffect(() => {
+    preselectPlaceOnMount();
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <div className="formItem">

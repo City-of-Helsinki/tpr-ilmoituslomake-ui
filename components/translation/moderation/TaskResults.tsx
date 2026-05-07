@@ -4,7 +4,7 @@ import dynamic from "next/dynamic";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useI18n } from "next-localization";
-import { Checkbox, Link as HdsLink } from "hds-react";
+import { Checkbox, Link as HdsLink, LinkSize } from "hds-react";
 import { ModerationTranslationAction } from "../../../state/actions/moderationTranslationTypes";
 import { setModerationTranslationSelectedTasks } from "../../../state/actions/moderationTranslation";
 import { RootState } from "../../../state/reducers";
@@ -26,7 +26,8 @@ interface TaskResultsProps {
 
 const TaskResults = ({ showStatus, showResults, setShowResults }: TaskResultsProps): ReactElement => {
   const i18n = useI18n();
-  const dispatch = useDispatch<Dispatch<ModerationTranslationAction>>();
+  //const dispatch = useDispatch<Dispatch<ModerationTranslationAction>>();
+  const dispatch = useDispatch();
   const router = useRouter();
 
   const taskResults = useSelector((state: RootState) => state.moderationTranslation.taskResults);
@@ -149,13 +150,13 @@ const TaskResults = ({ showStatus, showResults, setShowResults }: TaskResultsPro
                         onChange={updateSelectedTasks}
                       />
 
-                      <Link href={`/moderation/translation/task/${taskId}`}>
-                        <HdsLink href="#" size="M" disableVisitedStyles>
+                      
+                        <HdsLink href={`/moderation/translation/task/${taskId}`} size={LinkSize.Medium} disableVisitedStyles>
                           {`${getDisplayName(router.locale || defaultLocale, name, undefined, i18n.t("moderation.translation.taskResults.empty"))}${
                             targetId ? ` (${targetId})` : ""
                           }`}
                         </HdsLink>
-                      </Link>
+                      
                     </div>
                   </div>
                   <div className={`${styles.gridColumn2} ${styles.gridContent}`}>

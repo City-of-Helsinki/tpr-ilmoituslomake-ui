@@ -1,6 +1,6 @@
 import React, { ReactElement } from "react";
 import { useI18n } from "next-localization";
-import { Footer as HdsFooter, IconArrowRight, IconArrowUp, IconLinkExternal, Logo, logoFi } from "hds-react";
+import { Footer as HdsFooter, IconArrowRight, IconArrowUp, IconLinkExternal, Logo, logoFi, LogoSize } from "hds-react";
 import { ACCESSIBILITY_URL, CONTACT_URL, TERMS_URL } from "../../types/constants";
 import styles from "./Footer.module.scss";
 
@@ -15,7 +15,7 @@ const Footer = (): ReactElement => {
       </HdsFooter.Navigation>
       <HdsFooter.Base 
         copyrightHolder={i18n.t("common.footer.copyright")} copyrightText={i18n.t("common.footer.rightsReserved")}
-        logo={<Logo src={logoFi} size="medium" alt={i18n.t("common.header.titleAlt")} />}
+        logo={<Logo src={logoFi} size={LogoSize.Medium} alt={i18n.t("common.header.titleAlt")} />}
         backToTopLabel={i18n.t("common.footer.backToTop")}
         >
         <HdsFooter.Link as="a" target="_blank" href={TERMS_URL} icon={<IconLinkExternal aria-hidden />} label={i18n.t("common.footer.terms")} />

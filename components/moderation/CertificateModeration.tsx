@@ -2,7 +2,7 @@ import React, { ChangeEvent, Dispatch, ReactElement } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useRouter } from "next/router";
 import { useI18n } from "next-localization";
-import { Combobox, TextInput, Checkbox, RadioButton } from "hds-react";
+import { Select, TextInput, Checkbox, RadioButton } from "hds-react";
 import { ModerationAction } from "../../state/actions/moderationTypes";
 import { ModerationStatusAction } from "../../state/actions/moderationStatusTypes";
 import {
@@ -28,8 +28,10 @@ import ModerationSection from "./ModerationSection";
 
 const CertificateModeration = (): ReactElement => {
   const i18n = useI18n();
-  const dispatch = useDispatch<Dispatch<ModerationAction>>();
-  const dispatchStatus = useDispatch<Dispatch<ModerationStatusAction>>();
+  //const dispatch = useDispatch<Dispatch<ModerationAction>>();
+  //const dispatchStatus = useDispatch<Dispatch<ModerationStatusAction>>();
+  const dispatch = useDispatch();
+  const dispatchStatus = useDispatch();
   const router = useRouter();
 
   const selectedTask = useSelector((state: RootState) => state.moderation.selectedTask);
@@ -60,7 +62,7 @@ const CertificateModeration = (): ReactElement => {
 
   const convertOptions = (options: CertificateOption[]): OptionType[] => {
     return options
-      .map((certificate) => ({ id: certificate.id, label: certificate.certificatename[router.locale || defaultLocale] as string }))
+      .map((certificate) => ({ value: certificate.id, label: certificate.certificatename[router.locale || defaultLocale] as string }))
       .sort(sortByOptionLabel);
   };
 
@@ -89,7 +91,7 @@ const CertificateModeration = (): ReactElement => {
   const labelCertificates = certificateOptions.filter(filterLabels);
 
   const updateCertificates = (selected: OptionType[]) => {
-    dispatch(setModerationCertificate(selected.map((s) => s.id as number)));
+    dispatch(setModerationCertificate(selected.map((s) => s.value as number)));
     if (selected.length > 0) {
       setModerationNoCertificate(false);
     } else {
@@ -98,7 +100,7 @@ const CertificateModeration = (): ReactElement => {
   };
 
   const updateLabels = (selected: OptionType[]) => {
-    dispatch(setModerationLabel(selected.map((s) => s.id as number)));
+    dispatch(setModerationLabel(selected.map((s) => s.value as number)));
   };
 
   const updateOtherCertificate = (evt: ChangeEvent<HTMLInputElement>) => {
@@ -150,15 +152,18 @@ const CertificateModeration = (): ReactElement => {
           changeCallback={updateLabels}
           statusCallback={updateLabelsStatus}
           ModerationComponent={
-            <Combobox
+            <Select
               id="labelList"
+              // @ts-ignore: Erroneous error that the type for options should be OptionType[][]
               options={convertOptions(labelCertificates)}
-              label={i18n.t("moderation.labels.title")}
-              helper={labelsStatus === ModerationStatus.Edited ? i18n.t("moderation.certificates.add.helperText") : undefined}
-              toggleButtonAriaLabel={i18n.t("moderation.button.toggleMenu")}
-              selectedItemRemoveButtonAriaLabel={i18n.t("moderation.button.remove")}
-              clearButtonAriaLabel={i18n.t("moderation.button.clearAllSelections")}
-              multiselect
+              texts={{
+                label: i18n.t("moderation.labels.title"),
+                assistive: labelsStatus === ModerationStatus.Edited ? i18n.t("moderation.certificates.add.helperText") : undefined,
+                dropdownButtonAriaLabel: i18n.t("moderation.button.toggleMenu"),
+                tagRemoveSelectionAriaLabel: i18n.t("moderation.button.remove"),
+                tagsClearAllButton: i18n.t("moderation.button.clearAllSelections"),
+              }}
+              multiSelect
             />
           }
         />
@@ -177,15 +182,18 @@ const CertificateModeration = (): ReactElement => {
           changeCallback={updateCertificates}
           statusCallback={updateCertificateStatus}
           ModerationComponent={
-            <Combobox
+            <Select
               id="certificateList"
+              // @ts-ignore: Erroneous error that the type for options should be OptionType[][]
               options={convertOptions(mainCertificateOptions)}
-              label={i18n.t("moderation.certificates.title")}
-              helper={certificatesStatus === ModerationStatus.Edited ? i18n.t("moderation.certificates.add.helperText") : undefined}
-              toggleButtonAriaLabel={i18n.t("moderation.button.toggleMenu")}
-              selectedItemRemoveButtonAriaLabel={i18n.t("moderation.button.remove")}
-              clearButtonAriaLabel={i18n.t("moderation.button.clearAllSelections")}
-              multiselect
+              texts={{
+                  label: i18n.t("moderation.certificates.title"),
+                  assistive: certificatesStatus === ModerationStatus.Edited ? i18n.t("moderation.certificates.add.helperText") : undefined,
+                  dropdownButtonAriaLabel: i18n.t("moderation.button.toggleMenu"),
+                  tagRemoveSelectionAriaLabel: i18n.t("moderation.button.remove"),
+                  tagsClearAllButton: i18n.t("moderation.button.clearAllSelections"),
+              }}
+              multiSelect
             />
           }
         />

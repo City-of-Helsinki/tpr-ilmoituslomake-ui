@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useI18n } from "next-localization";
-import { Button, Link as HdsLink } from "hds-react";
+import { Button, ButtonVariant, Link as HdsLink, LinkSize } from "hds-react";
 import moment from "moment";
 import { ModerationAction } from "../../state/actions/moderationTypes";
 import { setModerationTaskResults } from "../../state/actions/moderation";
@@ -22,7 +22,8 @@ interface TaskResultsProps {
 
 const TaskResults = ({ showStatus }: TaskResultsProps): ReactElement => {
   const i18n = useI18n();
-  const dispatch = useDispatch<Dispatch<ModerationAction>>();
+  //const dispatch = useDispatch<Dispatch<ModerationAction>>();
+  const dispatch = useDispatch();
   const router = useRouter();
 
   const taskResults = useSelector((state: RootState) => state.moderation.taskResults);
@@ -134,8 +135,8 @@ const TaskResults = ({ showStatus }: TaskResultsProps): ReactElement => {
                 <Fragment key={`taskresult_${id}`}>
                   <div className={`${styles.gridColumn1} ${styles.gridContent}`}>
                     <div className={styles.flexItem}>
-                      <Link href={`/moderation/task/${id}`}>
-                        <HdsLink href="#" size="M" disableVisitedStyles>
+                      
+                        <HdsLink href={`/moderation/task/${id}`} size={LinkSize.Medium} disableVisitedStyles>
                           {`${getDisplayName(
                             router.locale || defaultLocale,
                             name,
@@ -143,7 +144,7 @@ const TaskResults = ({ showStatus }: TaskResultsProps): ReactElement => {
                             taskType === TaskType.ModeratorAdd ? i18n.t("moderation.taskResults.emptyMod") : i18n.t("moderation.taskResults.empty")
                           )}${targetId ? ` (${targetId})` : ""}`}
                         </HdsLink>
-                      </Link>
+                      
                     </div>
                   </div>
                   <div className={`${styles.gridColumn2} ${styles.gridContent}`}>
@@ -172,7 +173,7 @@ const TaskResults = ({ showStatus }: TaskResultsProps): ReactElement => {
 
       <div className={styles.nextResults}>
         {next && (
-          <Button variant="secondary" onClick={fetchMoreResults}>
+          <Button variant={ButtonVariant.Secondary} onClick={fetchMoreResults}>
             {i18n.t("moderation.button.showMore")}
           </Button>
         )}

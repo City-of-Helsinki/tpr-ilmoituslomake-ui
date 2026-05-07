@@ -1,7 +1,7 @@
 import React, { Dispatch, ReactElement } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useI18n } from "next-localization";
-import { Button } from "hds-react";
+import { Button, ButtonVariant } from "hds-react";
 import moment from "moment";
 import { ModerationTranslationAction } from "../../../state/actions/moderationTranslationTypes";
 import { setModerationTranslationTaskResults } from "../../../state/actions/moderationTranslation";
@@ -12,7 +12,8 @@ import { getTaskStatus, getTaskType } from "../../../utils/conversion";
 
 const MoreResultsButton = (): ReactElement => {
   const i18n = useI18n();
-  const dispatch = useDispatch<Dispatch<ModerationTranslationAction>>();
+  //const dispatch = useDispatch<Dispatch<ModerationTranslationAction>>();
+  const dispatch = useDispatch();
 
   const taskResults = useSelector((state: RootState) => state.moderationTranslation.taskResults);
   const { results, count, next } = taskResults;
@@ -59,7 +60,7 @@ const MoreResultsButton = (): ReactElement => {
   return (
     <div>
       {next && (
-        <Button variant="secondary" onClick={fetchMoreResults}>
+        <Button variant={ButtonVariant.Secondary} onClick={fetchMoreResults}>
           {i18n.t("moderation.button.showMore")}
         </Button>
       )}

@@ -3,7 +3,7 @@ import { GetServerSideProps } from "next";
 import Head from "next/head";
 import Link from "next/link";
 import { useI18n } from "next-localization";
-import { Button, IconPenLine, IconPlusCircle, IconSearch, IconStar, Koros, Link as HdsLink } from "hds-react";
+import { Button, ButtonVariant, IconPenLine, IconPlusCircle, IconSearch, IconSize, IconStar, Koros, Link as HdsLink, LinkSize } from "hds-react";
 import { initStore } from "../state/store";
 import { ACCESSIBILITY_URL, CLEAR_STATE, TERMS_URL } from "../types/constants";
 import i18nLoader from "../utils/i18n";
@@ -33,7 +33,7 @@ const Main = (): ReactElement => {
           <div>
             <HdsLink
               href={TERMS_URL}
-              size="M"
+              size={LinkSize.Medium}
               openInNewTab
               openInNewTabAriaLabel={i18n.t("common.opensInANewTab")}
               external
@@ -46,7 +46,7 @@ const Main = (): ReactElement => {
           <div>
             <HdsLink
               href={ACCESSIBILITY_URL}
-              size="M"
+              size={LinkSize.Medium}
               openInNewTab
               openInNewTabAriaLabel={i18n.t("common.opensInANewTab")}
               external
@@ -62,45 +62,45 @@ const Main = (): ReactElement => {
 
         <Notice
           className={styles.checkPlace}
-          icon={<IconSearch size="xl" aria-hidden />}
+          icon={<IconSearch size={IconSize.ExtraLarge} aria-hidden />}
           titleKey="notification.message.checkPlace.title"
           messageKey="notification.message.checkPlace.message"
           button={
             <Link href="/search">
-              <Button variant="secondary">{i18n.t("notification.button.checkPlace")}</Button>
+              <Button variant={ButtonVariant.Secondary}>{i18n.t("notification.button.checkPlace")}</Button>
             </Link>
           }
         />
         <Notice
           className={styles.modifyOwnPlace}
-          icon={<IconStar size="xl" aria-hidden />}
+          icon={<IconStar size={IconSize.ExtraLarge} aria-hidden />}
           titleKey="notification.message.modifyOwnPlace.title"
           messageKey="notification.message.modifyOwnPlace.message"
           button={
             <Link href="/search?own=1">
-              <Button variant="secondary">{i18n.t("notification.button.modifyOwnPlace")}</Button>
+              <Button variant={ButtonVariant.Secondary}>{i18n.t("notification.button.modifyOwnPlace")}</Button>
             </Link>
           }
         />
         <Notice
           className={styles.newPlace}
-          icon={<IconPlusCircle size="xl" aria-hidden />}
+          icon={<IconPlusCircle size={IconSize.ExtraLarge} aria-hidden />}
           titleKey="notification.message.notifyNewPlace.title"
           messageKey="notification.message.notifyNewPlace.message"
           button={
             <Link href="/notification">
-              <Button variant="secondary">{i18n.t("notification.button.notifyNewPlace")}</Button>
+              <Button variant={ButtonVariant.Secondary}>{i18n.t("notification.button.notifyNewPlace")}</Button>
             </Link>
           }
         />
         <Notice
           className={styles.giveTip}
-          icon={<IconPenLine size="xl" aria-hidden />}
+          icon={<IconPenLine size={IconSize.ExtraLarge} aria-hidden />}
           titleKey="notification.message.giveTip.title"
           messageKey="notification.message.giveTip.message"
           button={
             <Link href="/tip">
-              <Button variant="secondary">{i18n.t("notification.button.giveTip")}</Button>
+              <Button variant={ButtonVariant.Secondary}>{i18n.t("notification.button.giveTip")}</Button>
             </Link>
           }
         />

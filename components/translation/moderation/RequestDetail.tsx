@@ -16,12 +16,13 @@ interface RequestDetailProps {
 
 const RequestDetail = ({ requestStatus }: RequestDetailProps): ReactElement => {
   const i18n = useI18n();
-  const dispatch = useDispatch<Dispatch<ModerationTranslationAction>>();
+  //const dispatch = useDispatch<Dispatch<ModerationTranslationAction>>();
+  const dispatch = useDispatch();
 
   const requestDetail = useSelector((state: RootState) => state.moderationTranslation.requestDetail);
   const { language, translator, message, tasks } = requestDetail;
   const { from: translateFrom, to: translateTo } = language;
-  const translationLanguage = translateFrom && translateTo ? `${translateFrom}-${translateTo}` : "";
+  const translationLanguage = translateFrom && translateTo ? `${translateFrom}-${translateTo}` : undefined;
   const taskStatus = useMemo(() => requestStatus(tasks), [requestStatus, tasks]);
 
   const requestValidation = useSelector((state: RootState) => state.moderationTranslation.requestValidation);
@@ -30,24 +31,30 @@ const RequestDetail = ({ requestStatus }: RequestDetailProps): ReactElement => {
   const translators = useSelector((state: RootState) => state.moderationTranslation.translators);
 
   const languageOptions = TRANSLATION_OPTIONS.map((option) => {
-    return { id: `${option.from}-${option.to}`, label: `${option.from.toUpperCase()}-${option.to.toUpperCase()}` };
+    return { value: `${option.from}-${option.to}`, label: `${option.from.toUpperCase()}-${option.to.toUpperCase()}` };
   });
 
   const translatorOptions = translators.map((option) => {
-    return { id: option.uuid, label: `${option.first_name} ${option.last_name}` };
+    return { value: option.uuid, label: `${option.first_name} ${option.last_name}` };
   });
 
-  const convertValueWithLanguageId = (value: string | undefined): OptionType | undefined => languageOptions.find((l) => l.id === value);
+  //const convertValueWithLanguageId = (value: string | undefined): OptionType | undefined => languageOptions.find((l) => l.value === value);
 
-  const convertValueWithTranslatorId = (value: string | undefined): OptionType | undefined => translatorOptions.find((l) => l.id === value);
+  //const convertValueWithTranslatorId = (value: string | undefined): OptionType | undefined => translatorOptions.find((l) => l.value === value);
 
-  const updateRequestTranslator = (selected: OptionType) => {
-    dispatch(setModerationTranslationRequest({ ...requestDetail, translator: selected.id as string }));
+  const updateRequestTranslator = (selectedOptions: OptionType[]) => {
+    const selected = selectedOptions?.[0];
+    if (selected) {
+      dispatch(setModerationTranslationRequest({ ...requestDetail, translator: selected.value as string }));
+    }
   };
 
-  const updateRequestLanguage = (selected: OptionType) => {
-    const languageParts = (selected.id as string).split("-");
-    dispatch(setModerationTranslationRequest({ ...requestDetail, language: { from: languageParts[0], to: languageParts[1] } }));
+  const updateRequestLanguage = (selectedOptions: OptionType[]) => {
+    const selected = selectedOptions?.[0];
+    if (selected) {
+      const languageParts = (selected.value as string).split("-");
+      dispatch(setModerationTranslationRequest({ ...requestDetail, language: { from: languageParts[0], to: languageParts[1] } }));
+    }
   };
 
   const updateRequestMessage = (evt: ChangeEvent<HTMLTextAreaElement>) => {
@@ -76,18 +83,18 @@ const RequestDetail = ({ requestStatus }: RequestDetailProps): ReactElement => {
           id="translator"
           className="formInput disabledTextColor"
           options={translatorOptions}
-          value={convertValueWithTranslatorId(translator)}
+          value={translator}
           onChange={updateRequestTranslator}
           onBlur={validateRequestTranslator}
-          label={i18n.t("moderation.translation.request.translator.label")}
-          selectedItemRemoveButtonAriaLabel={i18n.t("moderation.button.remove")}
-          clearButtonAriaLabel={i18n.t("moderation.button.clearAllSelections")}
-          invalid={!translatorValid.valid}
-          error={
-            !translatorValid.valid
+          texts={{
+            label: i18n.t("moderation.translation.request.translator.label"),
+            tagRemoveSelectionAriaLabel: i18n.t("moderation.button.remove"),
+            tagsClearAllButton: i18n.t("moderation.button.clearAllSelections"),
+            error: translatorValid.valid
               ? i18n.t(translatorValid.message as string).replace("$fieldName", i18n.t("moderation.translation.request.translator.label"))
               : ""
-          }
+          }}
+          invalid={!translatorValid.valid}
           required
           aria-required
           disabled={taskStatus === TaskStatus.Closed || taskStatus === TaskStatus.Rejected || taskStatus === TaskStatus.Cancelled}
@@ -97,18 +104,18 @@ const RequestDetail = ({ requestStatus }: RequestDetailProps): ReactElement => {
           id="translationLanguage"
           className="formInput disabledTextColor"
           options={languageOptions}
-          value={convertValueWithLanguageId(translationLanguage)}
+          value={translationLanguage}
           onChange={updateRequestLanguage}
           onBlur={validateRequestTranslationLanguage}
-          label={i18n.t("moderation.translation.request.translationLanguage.label")}
-          selectedItemRemoveButtonAriaLabel={i18n.t("moderation.button.remove")}
-          clearButtonAriaLabel={i18n.t("moderation.button.clearAllSelections")}
-          invalid={!languageValid.valid}
-          error={
-            !languageValid.valid
+          texts={{
+            label: i18n.t("moderation.translation.request.translationLanguage.label"),
+            tagRemoveSelectionAriaLabel: i18n.t("moderation.button.remove"),
+            tagsClearAllButton: i18n.t("moderation.button.clearAllSelections"),
+            error: !languageValid.valid
               ? i18n.t(languageValid.message as string).replace("$fieldName", i18n.t("moderation.translation.request.translationLanguage.label"))
               : ""
-          }
+          }}
+          invalid={!languageValid.valid}
           required
           aria-required
           disabled={taskStatus === TaskStatus.Closed || taskStatus === TaskStatus.Rejected || taskStatus === TaskStatus.Cancelled}

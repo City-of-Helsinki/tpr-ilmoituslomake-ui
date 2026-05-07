@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useI18n } from "next-localization";
-import { Button, IconLocation, IconStarFill, Link as HdsLink } from "hds-react";
+import { Button, ButtonVariant, IconLocation, IconSize, IconStarFill, Link as HdsLink, LinkSize } from "hds-react";
 import moment from "moment";
 import { NotificationAction } from "../../state/actions/notificationTypes";
 import { setNotificationPlaceResults } from "../../state/actions/notification";
@@ -17,7 +17,8 @@ import styles from "./PlaceResults.module.scss";
 
 const PlaceResults = (): ReactElement => {
   const i18n = useI18n();
-  const dispatch = useDispatch<Dispatch<NotificationAction>>();
+  //const dispatch = useDispatch<Dispatch<NotificationAction>>();
+  const dispatch = useDispatch();
   const router = useRouter();
 
   const currentUser = useSelector((state: RootState) => state.general.user);
@@ -112,11 +113,11 @@ const PlaceResults = (): ReactElement => {
                 <Fragment key={`placeresult_${id}`}>
                   <div className={`${styles.gridContent} ${styles.firstColumn} ${styles.gridButton}`}>
                     <div className={styles.nameContainer}>
-                      <Link href={`/notification/info/${id}`}>
-                        <HdsLink href="#" size="M" disableVisitedStyles>
+                      
+                        <HdsLink href={`/notification/info/${id}`} size={LinkSize.Medium} disableVisitedStyles>
                           {getDisplayName(router.locale || defaultLocale, name)}
                         </HdsLink>
-                      </Link>
+                      
                     </div>
                   </div>
                   <div className={`${styles.gridContent} ${styles.middleColumn} ${showOwnPlaces ? styles.ownPlaces : ""}`}>
@@ -153,7 +154,7 @@ const PlaceResults = (): ReactElement => {
 
       <div className={styles.nextResults}>
         {next && (
-          <Button variant="secondary" onClick={fetchMoreResults}>
+          <Button variant={ButtonVariant.Secondary} onClick={fetchMoreResults}>
             {i18n.t("notification.button.showMore")}
           </Button>
         )}
@@ -162,12 +163,12 @@ const PlaceResults = (): ReactElement => {
       {searchDone && (
         <Notice
           className={styles.newPlace}
-          icon={<IconLocation size="xl" aria-hidden />}
+          icon={<IconLocation size={IconSize.Large} aria-hidden />}
           titleKey="notification.placeResults.newPlace.title"
           messageKey="notification.placeResults.newPlace.notice"
           button={
             <Link href="/notification">
-              <Button variant="secondary">{i18n.t("notification.button.notifyNewPlace")}</Button>
+              <Button variant={ButtonVariant.Secondary}>{i18n.t("notification.button.notifyNewPlace")}</Button>
             </Link>
           }
         />

@@ -9,7 +9,9 @@
     justify-content: flex-end;
 
     button {
-      margin-left: $spacing-s;
+      margin-left: $spacing-xs;
+
+      overflow-wrap: normal;
 
       &.approveSecondary {
         color: $color-success;
