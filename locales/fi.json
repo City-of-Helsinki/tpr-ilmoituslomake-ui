@@ -203,7 +203,7 @@
       "fieldTooLong": "$fieldName on liian pitkä",
       "fieldTooShort": "$fieldName on liian lyhyt",
       "fieldNotJpeg": "Valitun kuvan formaatti on virheellinen, kuvien tulee olla JPEG-muotoinen",
-      "fieldImageTooLarge": "Valitun kuvan koko on liian suuri, ei sen koko saa ylittää 4 MB:a",
+      "fieldImageTooLarge": "Valitun kuvan koko on liian suuri, ei sen koko saa ylittää 8 MB:a",
       "fieldLanguage": "Yksi kieli on pakollinen",
       "fieldOther": "Tarkista tieto"
     },
@@ -340,7 +340,7 @@
       "photo": {
         "title": "Kuva",
         "notice1": "Valitse kohdetta parhaiten kuvaavat houkuttelevat ja korkealaatuiset kuvat. Kuvien päälle ei tule lisätä tekstiä, päivämääriä, vesileimoja tai muuta vastaavaa.",
-        "notice2": "Kuvien koko tulee olla vähintään 1920 x 1080 pikseliä, tiedoston JPEG-muodossa, eikä sen koko saa ylittää 4 MB:a. Kuvat tulee olla mielellään vaakatasossa."
+        "notice2": "Tiedoston tulee olla JPEG-muodossa, eikä sen koko saa ylittää 8 MB:a. Kuvien tulee olla mielellään vaakatasossa."
       },
       "url": {
         "labelDevice": "Valitse kuva laitteeltasi",
@@ -535,7 +535,7 @@
       "fieldTooLong": "$fieldName is too long",
       "fieldTooShort": "$fieldName is too short",
       "fieldNotJpeg": "The format of the selected image is incorrect, images must be in JPEG format",
-      "fieldImageTooLarge": "The size of the selected image is too large, it must not exceed 4 MB in size",
+      "fieldImageTooLarge": "The size of the selected image is too large, it must not exceed 8 MB in size",
       "fieldLanguage": "At least one language is mandatory",
       "fieldOther": "Check information"
     },
