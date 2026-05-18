@@ -5,6 +5,10 @@
 
   .gridInput {
     grid-column: span 4;
+    
+    * {
+       margin-bottom: 0 !important;
+    }
   }
 
   .gridButton {

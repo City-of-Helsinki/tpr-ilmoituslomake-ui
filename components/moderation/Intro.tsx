@@ -78,7 +78,7 @@ const Intro = (): ReactElement => {
           </div>
         </div>
       </div>
-      <Koros className={styles.wave} type="basic"  />
+      <Koros className={styles.wave} type="basic" rotate="180deg" />
     </div>
   );
 };

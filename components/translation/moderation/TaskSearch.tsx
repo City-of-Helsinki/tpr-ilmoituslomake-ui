@@ -106,6 +106,8 @@ const TaskSearch = ({ showStatus, setShowStatus }: TaskSearchProps): ReactElemen
     }
   };
 
+  console.log("request options", taskResults, requestOptions);
+
   // If specified, search all tasks on first render only, using a workaround utilising useEffect with empty dependency array
   // eslint-disable-next-line react-hooks/exhaustive-deps
   //const useMountEffect = (fun: () => void) => useEffect(fun, []);
@@ -131,7 +133,7 @@ const TaskSearch = ({ showStatus, setShowStatus }: TaskSearchProps): ReactElemen
           maxLength={MAX_LENGTH}
           onChange={updateSearchText}
         />
-        {requestOptions.length > 0 && (
+        {(taskResults.results.length > 0) && (
           <Select
             id="request"
             className={styles.gridInputRequest}

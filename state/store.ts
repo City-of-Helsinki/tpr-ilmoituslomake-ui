@@ -1,34 +1,39 @@
 import { useMemo } from "react";
-import { createStore, applyMiddleware } from "redux";
-//import { configureStore as configureReduxStore } from "@reduxjs/toolkit";
+import { configureStore, type PreloadedState } from "@reduxjs/toolkit";
 import type { Store } from "redux";
-import thunkMiddleware from "redux-thunk";
-import { RootState, rootReducer } from "./reducers";
+import { rootReducer, RootState } from "./reducers";
 
+// Keep a reference to the store
 let store: Store<RootState> | undefined;
 
-const configureStore = (initialState?: RootState): Store<RootState> => {
-  return createStore(rootReducer, initialState, applyMiddleware(thunkMiddleware));
+// Function to create a new store using RTK
+const createReduxStore = (preloadedState?: PreloadedState<RootState>) => {
+  return configureStore({
+    reducer: rootReducer,
+    preloadedState,
+    // RTK includes thunk middleware by default. 
+    middleware: (getDefaultMiddleware) => getDefaultMiddleware(),
+  });
 };
 
+// Initialize the store with optional preloaded state, handling SSR/SSG
 export const initStore = (preloadedState?: RootState): Store<RootState> => {
-  let newStore = store || configureStore(preloadedState);
+  let newStore = store ?? createReduxStore(preloadedState);
 
-  // After navigating to a page with an initial Redux state, merge that state
-  // with the current state in the store, and create a new store
+  // Merge preloadedState with existing store state if needed (e.g., for navigation)
   if (preloadedState && store) {
-    newStore = configureStore({
+    newStore = createReduxStore({
       ...store.getState(),
       ...preloadedState,
     });
-    // Reset the current store
-    store = undefined;
+    store = undefined; // Reset the current store to allow the new merged store to be used
   }
 
-  // For SSG and SSR always create a new store
+  // For SSR/SSG always create a new store
   if (typeof window === "undefined") {
     return newStore;
   }
+
   // Create the store once in the client
   if (!store) {
     store = newStore;
@@ -37,8 +42,7 @@ export const initStore = (preloadedState?: RootState): Store<RootState> => {
   return newStore;
 };
 
-export const useStore = (initialState?: RootState): Store<RootState> => {
-  return useMemo(() => initStore(initialState), [initialState]);
+// Hook to use the store in React components
+export const useStore = (preloadedState?: RootState): Store<RootState> => {
+  return useMemo(() => initStore(preloadedState), [preloadedState]);
 };
-
-export default useStore;

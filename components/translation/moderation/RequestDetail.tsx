@@ -74,6 +74,14 @@ const RequestDetail = ({ requestStatus }: RequestDetailProps): ReactElement => {
     isModerationTranslationRequestFieldValid(evt.target.name, evt.target.id, requestDetail, dispatch);
   };
 
+  const translatorValidError = translatorValid.message ? i18n.t(translatorValid.message as string).replace("$fieldName", i18n.t("moderation.translation.request.translator.label")) : i18n.t("moderation.translation.request.translator.label");
+
+  const languageValidError = languageValid.message ? i18n.t(languageValid.message as string).replace("$fieldName", i18n.t("moderation.translation.request.translationLanguage.label")) : i18n.t("moderation.translation.request.translationLanguage.label");
+
+  const messageValidError = messageValid.message ? i18n.t(messageValid.message as string).replace("$fieldName", i18n.t("moderation.translation.request.message.label")) : i18n.t("moderation.translation.request.message.label");
+
+  console.log("translatr  options", translators);
+
   return (
     <div className="formSection">
       <h2 className="moderation">{i18n.t("moderation.translation.request.translationDetails")}</h2>
@@ -91,7 +99,7 @@ const RequestDetail = ({ requestStatus }: RequestDetailProps): ReactElement => {
             tagRemoveSelectionAriaLabel: i18n.t("moderation.button.remove"),
             tagsClearAllButton: i18n.t("moderation.button.clearAllSelections"),
             error: translatorValid.valid
-              ? i18n.t(translatorValid.message as string).replace("$fieldName", i18n.t("moderation.translation.request.translator.label"))
+              ? translatorValidError
               : ""
           }}
           invalid={!translatorValid.valid}
@@ -111,9 +119,7 @@ const RequestDetail = ({ requestStatus }: RequestDetailProps): ReactElement => {
             label: i18n.t("moderation.translation.request.translationLanguage.label"),
             tagRemoveSelectionAriaLabel: i18n.t("moderation.button.remove"),
             tagsClearAllButton: i18n.t("moderation.button.clearAllSelections"),
-            error: !languageValid.valid
-              ? i18n.t(languageValid.message as string).replace("$fieldName", i18n.t("moderation.translation.request.translationLanguage.label"))
-              : ""
+            error: !languageValid.valid ? languageValidError : ""
           }}
           invalid={!languageValid.valid}
           required
@@ -132,7 +138,7 @@ const RequestDetail = ({ requestStatus }: RequestDetailProps): ReactElement => {
           invalid={!messageValid.valid}
           errorText={
             !messageValid.valid
-              ? i18n.t(messageValid.message as string).replace("$fieldName", i18n.t("moderation.translation.request.message.label"))
+              ? messageValidError
               : ""
           }
           required

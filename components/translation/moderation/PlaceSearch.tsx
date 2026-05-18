@@ -148,8 +148,8 @@ const PlaceSearch = (): ReactElement => {
         <Select
           id="language"
           className={styles.gridColumn2}
-          options={[{ label: i18n.t("moderation.placeSearch.language.all"), value: "" }, ...languageOptions]}
-          value={convertValueWithId(language)?.toString() || ""}
+          options={languageOptions}
+          value={convertValueWithId(language)?.value.toString() || ""}
           onChange={updateSearchLanguage}
           texts={{
             label: i18n.t("moderation.placeSearch.language.label"),
@@ -191,7 +191,6 @@ const PlaceSearch = (): ReactElement => {
           value={district}
           onChange={updateSearchText}
         />
-
         <Select
           id="tag"
           className={styles.gridColumn1}
@@ -199,10 +198,12 @@ const PlaceSearch = (): ReactElement => {
           options={convertOptions(tagOptions)}
           value={convertValues(ontologyIds) as any}
           onChange={updateSearchTags}
-          label={i18n.t("moderation.placeSearch.tag.label")}
-          toggleButtonAriaLabel={i18n.t("notification.button.toggleMenu")}
-          selectedItemRemoveButtonAriaLabel={i18n.t("notification.button.remove")}
-          clearButtonAriaLabel={i18n.t("notification.button.clearAllSelections")}
+          texts={{
+              label: i18n.t("moderation.placeSearch.tag.label"),
+              dropdownButtonAriaLabel: i18n.t("moderation.button.toggleMenu"),
+              tagRemoveSelectionAriaLabel: i18n.t("moderation.button.remove"),
+              tagsClearAllButton: i18n.t("moderation.button.clearAllSelections")
+          }}
           multiSelect
         />
 
@@ -213,24 +214,12 @@ const PlaceSearch = (): ReactElement => {
           options={convertMatkoOptions(matkoTagOptions)}
           value={convertMatkoValues(matkoIds) as any}
           onChange={updateSearchMatkoTags}
-          label={i18n.t("moderation.placeSearch.matko.label")}
-          toggleButtonAriaLabel={i18n.t("notification.button.toggleMenu")}
-          selectedItemRemoveButtonAriaLabel={i18n.t("notification.button.remove")}
-          clearButtonAriaLabel={i18n.t("notification.button.clearAllSelections")}
-          multiSelect
-        />
-
-        <Select
-          id="certificate"
-          className={styles.gridColumn1}
-          // @ts-ignore: Erroneous error that the type for options should be OptionType[][]
-          options={convertOptions(certificateOptions)}
-          value={convertValues(certificateIds) as any}
-          onChange={updateSearchCertificates}
-          label={i18n.t("moderation.placeSearch.tag.label")}
-          toggleButtonAriaLabel={i18n.t("notification.button.toggleMenu")}
-          selectedItemRemoveButtonAriaLabel={i18n.t("notification.button.remove")}
-          clearButtonAriaLabel={i18n.t("notification.button.clearAllSelections")}
+          texts={{
+              label: i18n.t("moderation.placeSearch.matko.label"),
+              dropdownButtonAriaLabel: i18n.t("moderation.button.toggleMenu"),
+              tagRemoveSelectionAriaLabel: i18n.t("moderation.button.remove"),
+              tagsClearAllButton: i18n.t("moderation.button.clearAllSelections")
+          }}
           multiSelect
         />
 
