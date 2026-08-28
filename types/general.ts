@@ -128,7 +128,7 @@ export interface CertificateOption {
 }
 
 export interface NoCertificate {
-  value: boolean
+  value: boolean;
 }
 
 export interface MatkoTagOption {
