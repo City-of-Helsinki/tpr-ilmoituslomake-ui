@@ -1,6 +1,6 @@
 import React, { ReactElement } from "react";
 import { useI18n } from "next-localization";
-import { Koros, Link as HdsLink } from "hds-react";
+import { Koros, Link as HdsLink, LinkSize } from "hds-react";
 import { Email } from "react-obfuscate-email";
 import { TRANSLATION_CONTACTS, TRANSLATION_GUIDE_URL } from "../../types/constants";
 import styles from "./Intro.module.scss";
@@ -16,7 +16,7 @@ const Intro = (): ReactElement => {
           {i18n.t("translation.intro.info1")}
           <HdsLink
             href={TRANSLATION_GUIDE_URL}
-            size="M"
+            size={LinkSize.Medium}
             openInNewTab
             openInNewTabAriaLabel={i18n.t("common.opensInANewTab")}
             external

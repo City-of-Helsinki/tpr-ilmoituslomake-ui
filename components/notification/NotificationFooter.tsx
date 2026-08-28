@@ -2,7 +2,7 @@ import React, { Dispatch, ReactElement, SetStateAction } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useRouter } from "next/router";
 import { useI18n } from "next-localization";
-import { Button, IconArrowLeft, IconArrowRight } from "hds-react";
+import { Button, ButtonSize, ButtonVariant, IconArrowLeft, IconArrowRight } from "hds-react";
 import { NotificationAction } from "../../state/actions/notificationTypes";
 import { NotificationValidationAction } from "../../state/actions/notificationValidationTypes";
 import { setNotificationSending, setPage } from "../../state/actions/notification";
@@ -20,8 +20,10 @@ interface NotificationFooterProps {
 
 const NotificationFooter = ({ smallButtons, setToast }: NotificationFooterProps): ReactElement => {
   const i18n = useI18n();
-  const dispatch = useDispatch<Dispatch<NotificationAction>>();
-  const dispatchValidation = useDispatch<Dispatch<NotificationValidationAction>>();
+  //const dispatch = useDispatch<Dispatch<NotificationAction>>();
+  //const dispatchValidation = useDispatch<Dispatch<NotificationValidationAction>>();
+  const dispatch = useDispatch();
+  const dispatchValidation = useDispatch();
   const router = useRouter();
 
   const currentPage = useSelector((state: RootState) => state.notification.page);
@@ -65,14 +67,14 @@ const NotificationFooter = ({ smallButtons, setToast }: NotificationFooterProps)
     <div className={styles.notificationFooter}>
       {currentPage === 1 && smallButtons && (
         <div className={`${styles.flexButton} ${styles.smallButton}`}>
-          <Button variant="supplementary" size="small" iconLeft={<IconArrowLeft aria-hidden />} onClick={cancelNotification}>
+          <Button variant={ButtonVariant.Supplementary} size={ButtonSize.Small} iconStart={<IconArrowLeft aria-hidden />} onClick={cancelNotification}>
             {i18n.t("notification.button.cancel")}
           </Button>
         </div>
       )}
       {currentPage === 1 && !smallButtons && (
         <div className={styles.flexButton}>
-          <Button variant="secondary" size="default" iconLeft={<IconArrowLeft aria-hidden />} onClick={cancelNotification}>
+          <Button variant={ButtonVariant.Secondary} size={ButtonSize.Medium} iconStart={<IconArrowLeft aria-hidden />} onClick={cancelNotification}>
             {i18n.t("notification.button.cancel")}
           </Button>
         </div>
@@ -80,14 +82,14 @@ const NotificationFooter = ({ smallButtons, setToast }: NotificationFooterProps)
 
       {currentPage > 1 && smallButtons && (
         <div className={`${styles.flexButton} ${styles.smallButton}`}>
-          <Button variant="supplementary" size="small" iconLeft={<IconArrowLeft aria-hidden />} onClick={previousPage}>
+          <Button variant={ButtonVariant.Supplementary} size={ButtonSize.Small} iconStart={<IconArrowLeft aria-hidden />} onClick={previousPage}>
             {i18n.t("notification.button.previous")}
           </Button>
         </div>
       )}
       {currentPage > 1 && !smallButtons && (
         <div className={styles.flexButton}>
-          <Button variant="secondary" size="default" iconLeft={<IconArrowLeft aria-hidden />} onClick={previousPage}>
+          <Button variant={ButtonVariant.Secondary} size={ButtonSize.Medium} iconStart={<IconArrowLeft aria-hidden />} onClick={previousPage}>
             {i18n.t("notification.button.previous")}
           </Button>
         </div>
@@ -95,14 +97,14 @@ const NotificationFooter = ({ smallButtons, setToast }: NotificationFooterProps)
 
       {currentPage < MAX_PAGE && smallButtons && (
         <div className={`${styles.flexButton} ${styles.smallButton} ${styles.flexButtonRight}`}>
-          <Button variant="supplementary" size="small" iconRight={<IconArrowRight aria-hidden />} onClick={nextPage}>
+        <Button variant={ButtonVariant.Supplementary} size={ButtonSize.Small} iconEnd={<IconArrowRight aria-hidden />} onClick={nextPage}>
             {i18n.t("notification.button.next")}
           </Button>
         </div>
       )}
       {currentPage < MAX_PAGE && !smallButtons && (
         <div className={`${styles.flexButton} ${styles.flexButtonRight}`}>
-          <Button variant="primary" size="default" iconRight={<IconArrowRight aria-hidden />} onClick={nextPage}>
+          <Button variant={ButtonVariant.Primary} size={ButtonSize.Medium} iconEnd={<IconArrowRight aria-hidden />} onClick={nextPage}>
             {i18n.t("notification.button.next")}
           </Button>
         </div>
@@ -110,14 +112,14 @@ const NotificationFooter = ({ smallButtons, setToast }: NotificationFooterProps)
 
       {currentPage === MAX_PAGE && smallButtons && setToast && (
         <div className={`${styles.flexButton} ${styles.smallButton} ${styles.flexButtonRight}`}>
-          <Button variant="supplementary" size="small" iconRight={<IconArrowRight aria-hidden />} onClick={sendNotification} disabled={isSending}>
+          <Button variant={ButtonVariant.Supplementary} size={ButtonSize.Small} iconEnd={<IconArrowRight aria-hidden />} onClick={sendNotification} disabled={isSending}>
             {i18n.t("notification.button.send")}
           </Button>
         </div>
       )}
       {currentPage === MAX_PAGE && !smallButtons && setToast && (
         <div className={`${styles.flexButton} ${styles.flexButtonRight}`}>
-          <Button variant="primary" size="default" iconRight={<IconArrowRight aria-hidden />} onClick={sendNotification} disabled={isSending}>
+          <Button variant={ButtonVariant.Primary} size={ButtonSize.Medium} iconEnd={<IconArrowRight aria-hidden />} onClick={sendNotification} disabled={isSending}>
             {i18n.t("notification.button.send")}
           </Button>
         </div>

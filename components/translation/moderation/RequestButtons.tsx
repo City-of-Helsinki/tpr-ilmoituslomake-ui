@@ -2,7 +2,7 @@ import React, { Dispatch, ReactElement, SetStateAction, useMemo, useState } from
 import { useSelector, useDispatch } from "react-redux";
 import { useRouter } from "next/router";
 import { useI18n } from "next-localization";
-import { Button, IconArrowRight } from "hds-react";
+import { Button, ButtonVariant, IconArrowRight } from "hds-react";
 import {
   setModerationTranslationRequestPageValid,
   setModerationTranslationRequestValidationSummary,
@@ -27,7 +27,8 @@ interface RequestButtonsProps {
 
 const RequestButtons = ({ requestStatus, setToast }: RequestButtonsProps): ReactElement => {
   const i18n = useI18n();
-  const dispatchValidation = useDispatch<Dispatch<ModerationTranslationAction>>();
+  //const dispatchValidation = useDispatch<Dispatch<ModerationTranslationAction>>();
+  const dispatchValidation = useDispatch();
   const router = useRouter();
 
   const currentUser = useSelector((state: RootState) => state.general.user);
@@ -105,7 +106,7 @@ const RequestButtons = ({ requestStatus, setToast }: RequestButtonsProps): React
       {taskType === TaskType.Translation && (
         <div className={styles.buttonRow}>
           <div className={styles.flexButton}>
-            <Button variant="secondary" onClick={checkUnsavedChanges}>
+            <Button variant={ButtonVariant.Secondary} onClick={checkUnsavedChanges}>
               {i18n.t("moderation.button.close")}
             </Button>
           </div>
@@ -113,7 +114,7 @@ const RequestButtons = ({ requestStatus, setToast }: RequestButtonsProps): React
           {requestId > 0 && (
             <div className={styles.flexButton}>
               <Button
-                variant="secondary"
+                variant={ButtonVariant.Secondary}
                 onClick={openCancelConfirmation}
                 disabled={
                   taskStatus === TaskStatus.InProgress ||
@@ -128,7 +129,7 @@ const RequestButtons = ({ requestStatus, setToast }: RequestButtonsProps): React
           )}
           <div className={`${styles.flexButton} ${styles.sendButton}`}>
             <Button
-              iconRight={<IconArrowRight aria-hidden />}
+              iconEnd={<IconArrowRight aria-hidden />}
               onClick={openSaveConfirmation}
               disabled={taskStatus === TaskStatus.Closed || taskStatus === TaskStatus.Rejected || taskStatus === TaskStatus.Cancelled}
             >

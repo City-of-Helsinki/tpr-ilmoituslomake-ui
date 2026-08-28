@@ -4,7 +4,7 @@ import dynamic from "next/dynamic";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useI18n } from "next-localization";
-import { Button, Checkbox, Link as HdsLink } from "hds-react";
+import { Button, ButtonVariant, Checkbox, Link as HdsLink, LinkSize } from "hds-react";
 import { ModerationTranslationAction } from "../../../state/actions/moderationTranslationTypes";
 import { setModerationTranslationSelectedRequests } from "../../../state/actions/moderationTranslation";
 import { RootState } from "../../../state/reducers";
@@ -27,7 +27,8 @@ interface RequestResultsProps {
 
 const RequestResults = ({ showStatus, showResults, setShowResults }: RequestResultsProps): ReactElement => {
   const i18n = useI18n();
-  const dispatch = useDispatch<Dispatch<ModerationTranslationAction>>();
+  //const dispatch = useDispatch<Dispatch<ModerationTranslationAction>>();
+  const dispatch = useDispatch();
   const router = useRouter();
 
   const currentUser = useSelector((state: RootState) => state.general.user);
@@ -181,7 +182,7 @@ const RequestResults = ({ showStatus, showResults, setShowResults }: RequestResu
             requestResults.length
           } ${i18n.t("moderation.translation.requestResults.requests")}`}</h2>
           <div className="flexSpace" />
-          <Button variant="secondary" onClick={openCancelConfirmation}>
+          <Button variant={ButtonVariant.Secondary} onClick={openCancelConfirmation}>
             {i18n.t("moderation.button.cancelTranslationRequests")}
           </Button>
         </div>
@@ -247,11 +248,11 @@ const RequestResults = ({ showStatus, showResults, setShowResults }: RequestResu
                         disabled={status === TaskStatus.InProgress || status === TaskStatus.Closed}
                       />
 
-                      <Link href={`/moderation/translation/request/${requestId}`}>
-                        <HdsLink href="#" size="M" disableVisitedStyles>
+                      
+                        <HdsLink href={`/moderation/translation/request/${requestId}`} size={LinkSize.Medium} disableVisitedStyles>
                           {formattedRequest}
                         </HdsLink>
-                      </Link>
+                      
                     </div>
                   </div>
                   <div className={`${styles.gridColumn2} ${styles.gridContent}`}>

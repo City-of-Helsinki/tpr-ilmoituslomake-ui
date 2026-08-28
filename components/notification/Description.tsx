@@ -15,8 +15,11 @@ const DynamicInputLanguage = dynamic(() => import("./InputLanguage"), { ssr: fal
 
 const Description = (): ReactElement => {
   const i18n = useI18n();
-  const dispatch = useDispatch<Dispatch<NotificationAction>>();
-  const dispatchValidation = useDispatch<Dispatch<NotificationValidationAction>>();
+  //const dispatch = useDispatch<Dispatch<NotificationAction>>();
+  //const dispatchValidation = useDispatch<Dispatch<NotificationValidationAction>>();
+  const dispatch = useDispatch();
+  const dispatchValidation = useDispatch();
+
 
   // Fetch values from redux state
   const notification = useSelector((state: RootState) => state.notification.notification);
@@ -48,9 +51,10 @@ const Description = (): ReactElement => {
   };
 
   // Functions for validating values and storing the results in redux state
-  const validateName = (evt: ChangeEvent<HTMLInputElement>) => {
-    dispatch(setNotificationName({ [evt.target.name]: (placeName[evt.target.name] as string).trim() }));
-    isNameValid(evt.target.name, notification, dispatchValidation);
+  const validateName = (evt: ChangeEvent<HTMLInputElement | HTMLDivElement>) => {
+    const target = evt.target as HTMLInputElement;
+    dispatch(setNotificationName({ [target.name]: (placeName[target.name] as string).trim() }));
+    isNameValid(target.name, notification, dispatchValidation);
   };
 
   const validateShortDescription = (evt: ChangeEvent<HTMLTextAreaElement>) => {

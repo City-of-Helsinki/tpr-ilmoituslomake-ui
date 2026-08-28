@@ -3,10 +3,11 @@ import { useSelector } from "react-redux";
 import { RootState } from "../../state/reducers";
 import { TaskStatus } from "../../types/constants";
 import OpeningTimesButton from "../common/OpeningTimesButton";
+import { ButtonVariant } from "hds-react";
 
 interface OpeningTimesButtonModerationProps {
   buttonTextKey: string;
-  buttonVariant: "primary" | "secondary";
+  buttonVariant: ButtonVariant.Primary | ButtonVariant.Secondary;
 }
 
 const OpeningTimesButtonModeration = ({ buttonTextKey, buttonVariant }: OpeningTimesButtonModerationProps): ReactElement => {

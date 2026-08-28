@@ -6,6 +6,7 @@ import { I18nProvider } from "next-localization";
 import { useRouter } from "next/router";
 import { defaultLocale } from "../utils/i18n";
 import { useStore } from "../state/store";
+// @ts-ignore: SCSS module declarations are handled by the build toolchain
 import "../styles/global.scss";
 
 const App = ({ Component, pageProps }: AppProps): ReactElement => {

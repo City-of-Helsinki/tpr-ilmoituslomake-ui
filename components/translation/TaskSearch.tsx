@@ -2,7 +2,7 @@ import React, { Dispatch, ChangeEvent, ReactElement, useEffect, useMemo } from "
 import { useSelector, useDispatch } from "react-redux";
 import { useRouter } from "next/router";
 import { useI18n } from "next-localization";
-import { Button, Select, TextInput } from "hds-react";
+import { Button, Select, TextInput, type Option } from "hds-react";
 import moment from "moment";
 import { TranslationAction } from "../../state/actions/translationTypes";
 import { setTranslationTaskResults, setTranslationTaskSearch } from "../../state/actions/translation";
@@ -15,7 +15,8 @@ import styles from "./TaskSearch.module.scss";
 
 const TaskSearch = (): ReactElement => {
   const i18n = useI18n();
-  const dispatch = useDispatch<Dispatch<TranslationAction>>();
+  //const dispatch = useDispatch<Dispatch<TranslationAction>>();
+  const dispatch = useDispatch();
   const router = useRouter();
 
   const taskSearch = useSelector((state: RootState) => state.translation.taskSearch);
@@ -23,22 +24,31 @@ const TaskSearch = (): ReactElement => {
   const taskResults = useSelector((state: RootState) => state.translation.taskResults);
   const { results } = taskResults;
 
-  const convertOptions = (options: string[]): OptionType[] => options.map((option) => ({ id: option, label: option }));
+  const convertOptions = (options: string[]): OptionType[] => options.map((option) => ({ value: option, label: option }));
 
   const requestOptions = useMemo(
-    () => [{ id: "", label: "" }, ...convertOptions(results.map((result) => result.formattedRequest).filter((v, i, a) => a.indexOf(v) === i))],
+    () => [{ value: "", label: "" }, ...convertOptions(results.map((result) => result.formattedRequest).filter((v, i, a) => a.indexOf(v) === i))],
     [results]
   );
 
-  const convertValue = (value: string | undefined): OptionType | undefined => requestOptions.find((t) => t.id === value);
+  //const convertValue = (value: string | undefined): OptionType | undefined => requestOptions.find((t) => t.value === value);
+  const convertValue = (value: string | undefined): string | undefined => value;
 
   const updateSearchText = (evt: ChangeEvent<HTMLInputElement>) => {
     dispatch(setTranslationTaskSearch({ ...taskSearch, [evt.target.name]: evt.target.value }));
   };
 
+  /*
   const updateSearchRequestOption = (selected: OptionType) => {
-    dispatch(setTranslationTaskSearch({ ...taskSearch, request: selected.id as string }));
-  };
+    dispatch(setTranslationTaskSearch({ ...taskSearch, request: selected.value as string }));
+  };*/
+
+  const updateSearchRequestOption = (selectedOptions: OptionType[]) => {
+      const selected = selectedOptions && selectedOptions.length > 0 ? selectedOptions[0] : null;
+      if (selected) {
+        dispatch(setTranslationTaskSearch(({ ...taskSearch, request: selected.value as string })));
+      }
+    };
 
   const searchTasks = async () => {
     const taskResponse = await fetch(`${getOrigin(router)}/api/translation/todos/find/?search=${placeName.trim()}`);
@@ -78,8 +88,12 @@ const TaskSearch = (): ReactElement => {
 
   // If specified, search all tasks on first render only, using a workaround utilising useEffect with empty dependency array
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  const useMountEffect = (fun: () => void) => useEffect(fun, []);
-  useMountEffect(searchTasks);
+  //const useMountEffect = (fun: () => void) => useEffect(fun, []);
+  //useMountEffect(searchTasks);
+
+  useEffect(() => {
+    searchTasks();
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <div className={`formSection ${styles.taskSearch}`}>
@@ -99,12 +113,14 @@ const TaskSearch = (): ReactElement => {
           <Select
             id="request"
             className={styles.gridInputRequest}
-            options={requestOptions}
-            value={convertValue(searchRequest)}
+            options={requestOptions as (string | Partial<{ value: string; label: string }>)[]}
+            value={searchRequest}
             onChange={updateSearchRequestOption}
-            label={i18n.t("translation.taskSearch.request.label")}
-            selectedItemRemoveButtonAriaLabel={i18n.t("translation.button.remove")}
-            clearButtonAriaLabel={i18n.t("translation.button.clearAllSelections")}
+            texts={{
+              label: i18n.t("translation.taskSearch.request.label"),
+              tagRemoveSelectionAriaLabel: i18n.t("translation.button.remove"),
+              tagsClearAllButton: i18n.t("translation.button.clearAllSelections")
+            }}
           />
         )}
         <div className={styles.gridButton}>

@@ -1,6 +1,6 @@
 import React, { ReactElement, ReactNode, useState, useEffect } from "react";
 import { useI18n } from "next-localization";
-import { Button, IconMinus, IconPlus } from "hds-react";
+import { Button, ButtonSize, ButtonVariant, IconMinus, IconPlus } from "hds-react";
 import { TaskStatus, TaskType } from "../../types/constants";
 import TaskStatusLabel from "../common/TaskStatusLabel";
 import styles from "./Collapsible.module.scss";
@@ -60,13 +60,21 @@ const Collapsible = ({ section, title, taskType, taskStatus, isModerated, forceE
         </div>
         <div className={styles.button}>
           {expanded && (
-            <Button variant="secondary" size="small" aria-label={i18n.t("moderation.button.collapse")} onClick={toggle}>
-              <IconMinus aria-hidden />
+            <Button variant={ButtonVariant.Secondary} 
+            size={ButtonSize.Small} 
+            aria-label={i18n.t("moderation.button.collapse")} 
+            iconStart={<IconMinus aria-hidden />}
+            onClick={toggle}>
+              {i18n.t("moderation.button.collapse")}
             </Button>
           )}
           {!expanded && (
-            <Button variant="secondary" size="small" aria-label={i18n.t("moderation.button.expand")} onClick={toggle}>
-              <IconPlus aria-hidden />
+            <Button variant={ButtonVariant.Secondary} 
+            size={ButtonSize.Small} 
+            aria-label={i18n.t("moderation.button.expand")} 
+            iconStart={<IconPlus aria-hidden />}
+            onClick={toggle}>
+              {i18n.t("moderation.button.expand")}
             </Button>
           )}
         </div>

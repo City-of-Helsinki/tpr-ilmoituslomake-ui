@@ -1,12 +1,12 @@
 import React, { ReactElement } from "react";
 import { useRouter } from "next/router";
 import { useI18n } from "next-localization";
-import { Button, IconLinkExternal } from "hds-react";
+import { Button, ButtonVariant, IconLinkExternal } from "hds-react";
 import { getAccessibilityInfoLink } from "../../utils/save";
 
 interface AccessibilityInfoButtonProps {
   buttonTextKey: string;
-  buttonVariant: "primary" | "secondary";
+  buttonVariant: ButtonVariant.Primary | ButtonVariant.Secondary;
   disabled?: boolean;
   notificationId: number;
   placeId: number;
@@ -39,12 +39,12 @@ const AccessibilityInfoButton = ({
   return (
     <Button
       variant={buttonVariant}
-      iconRight={<IconLinkExternal aria-hidden />}
+      iconEnd={<IconLinkExternal aria-hidden />}
       onClick={openExternalAccessibilityApp}
       disabled={disabled || (notificationId <= 0 && placeId <= 0)}
+      aria-label={i18n.t("common.opensInANewTab")}
     >
       {i18n.t(buttonTextKey)}
-      <span className="screenReaderOnly"> {i18n.t("common.opensInANewTab")}</span>
     </Button>
   );
 };

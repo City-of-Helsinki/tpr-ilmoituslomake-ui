@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useI18n } from "next-localization";
-import { Button, IconPlus, Koros, Link as HdsLink } from "hds-react";
+import { Button, IconPlus, Koros, Link as HdsLink, LinkSize } from "hds-react";
 import { RootState } from "../../state/reducers";
 import { ItemType, MODERATION_GUIDE_URL, Toast } from "../../types/constants";
 import { saveModerationChangeRequest } from "../../utils/moderation";
@@ -37,7 +37,7 @@ const Intro = (): ReactElement => {
           {i18n.t("moderation.intro.info1")}
           <HdsLink
             href={`${router.basePath}/`}
-            size="M"
+            size={LinkSize.Medium}
             openInNewTab
             openInNewTabAriaLabel={i18n.t("common.opensInANewTab")}
             external
@@ -52,7 +52,7 @@ const Intro = (): ReactElement => {
         <div className="formInput">
           <HdsLink
             href={MODERATION_GUIDE_URL}
-            size="M"
+            size={LinkSize.Medium}
             openInNewTab
             openInNewTabAriaLabel={i18n.t("common.opensInANewTab")}
             external
@@ -72,13 +72,13 @@ const Intro = (): ReactElement => {
             </Link>
           </div>
           <div className={styles.flexButton}>
-            <Button className={styles.primary} iconLeft={<IconPlus aria-hidden />} onClick={makeNewPlaceChangeRequest}>
+            <Button className={styles.primary} iconStart={<IconPlus aria-hidden />} onClick={makeNewPlaceChangeRequest}>
               {i18n.t("moderation.button.addNewPlace")}
             </Button>
           </div>
         </div>
       </div>
-      <Koros className={styles.wave} type="basic" />
+      <Koros className={styles.wave} type="basic" rotate="180deg" />
     </div>
   );
 };

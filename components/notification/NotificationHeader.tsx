@@ -3,8 +3,8 @@ import { useSelector, useDispatch } from "react-redux";
 import { useRouter } from "next/router";
 import { useI18n } from "next-localization";
 import { Koros, Header as NHeader } from "hds-react";
-import { Stepper, Step, StepLabel, CircularProgress } from "@material-ui/core";
-import { StylesProvider } from "@material-ui/core/styles";
+import { Stepper, Step, StepLabel, CircularProgress } from "@mui/material";
+import { StylesProvider } from "@mui/styles";
 import Header from "../common/Header";
 import { NotificationAction } from "../../state/actions/notificationTypes";
 import { setPage } from "../../state/actions/notification";
@@ -21,7 +21,8 @@ interface NotificationHeaderProps {
 
 const NotificationHeader = ({ headerRef }: NotificationHeaderProps): ReactElement => {
   const i18n = useI18n();
-  const dispatch = useDispatch<Dispatch<NotificationAction>>();
+  //const dispatch = useDispatch<Dispatch<NotificationAction>>();
+  const dispatch = useDispatch();
   const router = useRouter();
 
   const currentPage = useSelector((state: RootState) => state.notification.page);

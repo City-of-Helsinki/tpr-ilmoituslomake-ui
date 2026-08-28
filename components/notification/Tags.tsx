@@ -2,7 +2,7 @@ import React, { ChangeEvent, Dispatch, ReactElement } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useRouter } from "next/router";
 import { useI18n } from "next-localization";
-import { Combobox, TextInput } from "hds-react";
+import { Select,  TextInput } from "hds-react";
 import { NotificationAction } from "../../state/actions/notificationTypes";
 import { NotificationValidationAction } from "../../state/actions/notificationValidationTypes";
 import { setNotificationExtraKeywords, setNotificationTag } from "../../state/actions/notification";
@@ -15,8 +15,10 @@ import { isTagValid } from "../../utils/validation";
 
 const Tags = (): ReactElement => {
   const i18n = useI18n();
-  const dispatch = useDispatch<Dispatch<NotificationAction>>();
-  const dispatchValidation = useDispatch<Dispatch<NotificationValidationAction>>();
+  //const dispatch = useDispatch<Dispatch<NotificationAction>>();
+ // const dispatchValidation = useDispatch<Dispatch<NotificationValidationAction>>();
+  const dispatch = useDispatch();
+  const dispatchValidation = useDispatch();
   const router = useRouter();
 
   const notification = useSelector((state: RootState) => state.notification.notification);
@@ -29,12 +31,12 @@ const Tags = (): ReactElement => {
   const { ontology_ids: tagsValid } = notificationValidation;
 
   const convertOptions = (options: TagOption[]): OptionType[] =>
-    options.map((tag) => ({ id: tag.id, label: tag.ontologyword[router.locale || defaultLocale] as string })).sort(sortByOptionLabel);
+    options.map((tag) => ({ value: tag.id, label: tag.ontologyword[router.locale || defaultLocale] as string })).sort(sortByOptionLabel);
 
   const convertValues = (values: number[]): OptionType[] => convertOptions(tagOptions.filter((tag) => values.includes(tag.id)));
 
   const updateTags = (selected: OptionType[]) => {
-    dispatch(setNotificationTag(selected.map((s) => s.id as number)));
+    dispatch(setNotificationTag(selected.map((s) => s.value as number)));
   };
 
   const updateExtraKeywordsText = (evt: ChangeEvent<HTMLInputElement>) => {
@@ -48,24 +50,26 @@ const Tags = (): ReactElement => {
   return (
     <div className="formSection">
       <h3>{i18n.t("notification.tags.title")}</h3>
-      <Combobox
+      <Select
         id="tag"
         className="formInput"
         // @ts-ignore: Erroneous error that the type for options should be OptionType[][]
         options={convertOptions(tagOptions)}
-        value={convertValues(ontology_ids)}
+        value={convertValues(ontology_ids) as unknown as string[]}
         onChange={updateTags}
         onBlur={validateTags}
-        label={i18n.t("notification.tags.add.label")}
-        helper={i18n.t("notification.tags.add.helperText")}
-        toggleButtonAriaLabel={i18n.t("notification.button.toggleMenu")}
-        selectedItemRemoveButtonAriaLabel={i18n.t("notification.button.remove")}
-        clearButtonAriaLabel={i18n.t("notification.button.clearAllSelections")}
+        texts={{
+          label: i18n.t("notification.tags.add.label"),
+          assistive: i18n.t("notification.tags.add.helperText"),
+          dropdownButtonAriaLabel: i18n.t("notification.button.toggleMenu"),
+          tagRemoveSelectionAriaLabel: i18n.t("notification.button.remove"),
+          tagsClearAllButton: i18n.t("notification.button.clearAllSelections"),
+        }}
         invalid={!tagsValid.valid}
         error={!tagsValid.valid ? i18n.t(tagsValid.message as string).replace("$fieldName", i18n.t("notification.tags.tagSelection")) : ""}
         required
         aria-required
-        multiselect
+        multiSelect
       />
 
       <TextInput

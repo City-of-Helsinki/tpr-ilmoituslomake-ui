@@ -13,7 +13,8 @@ import styles from "./PlaceSearch.module.scss";
 
 const PlaceSearch = (): ReactElement => {
   const i18n = useI18n();
-  const dispatch = useDispatch<Dispatch<NotificationAction>>();
+  //const dispatch = useDispatch<Dispatch<NotificationAction>>();
+  const dispatch = useDispatch();
   const router = useRouter();
 
   const currentUser = useSelector((state: RootState) => state.general.user);
@@ -67,8 +68,14 @@ const PlaceSearch = (): ReactElement => {
 
   // If specified, search all places on first render only, using a workaround utilising useEffect with empty dependency array
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  const useMountEffect = (fun: () => void) => useEffect(fun, []);
-  useMountEffect(showOwnPlaces ? searchPlaces : () => {});
+  //const useMountEffect = (fun: () => void) => useEffect(fun, []);
+  //useMountEffect(showOwnPlaces ? searchPlaces : () => {});
+
+  useEffect(() => {
+    if (showOwnPlaces) {
+      searchPlaces();
+    }
+  }, [showOwnPlaces]); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <div className={`formSection ${styles.placeSearch}`}>

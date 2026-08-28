@@ -1,7 +1,7 @@
 import React, { Dispatch, ChangeEvent, ReactElement, useRef } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useI18n } from "next-localization";
-import { Button, IconLink, IconUpload, Link as HdsLink, RadioButton, SelectionGroup, TextArea, TextInput } from "hds-react";
+import { Button, ButtonVariant, IconLink, IconUpload, Link as HdsLink, LinkSize, RadioButton, SelectionGroup, TextArea, TextInput } from "hds-react";
 import { v4 as uuidv4 } from "uuid";
 import { NotificationAction } from "../../state/actions/notificationTypes";
 import { NotificationValidationAction } from "../../state/actions/notificationValidationTypes";
@@ -24,8 +24,10 @@ import styles from "./Photos.module.scss";
 
 const Photos = (): ReactElement => {
   const i18n = useI18n();
-  const dispatch = useDispatch<Dispatch<NotificationAction>>();
-  const dispatchValidation = useDispatch<Dispatch<NotificationValidationAction>>();
+  //const dispatch = useDispatch<Dispatch<NotificationAction>>();
+  //const dispatchValidation = useDispatch<Dispatch<NotificationValidationAction>>();
+  const dispatch = useDispatch();
+  const dispatchValidation = useDispatch();
   const ref = useRef<HTMLInputElement>(null);
 
   const notificationExtra = useSelector((state: RootState) => state.notification.notificationExtra);
@@ -91,9 +93,11 @@ const Photos = (): ReactElement => {
     isPhotoFieldValid(index, "url", notificationExtra, dispatchValidation);
   };
 
-  const validatePhoto = (index: number, evt: ChangeEvent<HTMLInputElement>) => {
-    dispatch(setNotificationPhoto(index, { ...photos[index], [evt.target.name]: (photos[index][evt.target.name] as string).trim() }));
-    isPhotoFieldValid(index, evt.target.name, notificationExtra, dispatchValidation);
+  const validatePhoto = (index: number, evt: ChangeEvent<HTMLInputElement | HTMLDivElement>) => {
+    const target = evt.target as HTMLInputElement;
+
+    dispatch(setNotificationPhoto(index, { ...photos[index], [target.name]: (photos[index][target.name] as string).trim() }));
+    isPhotoFieldValid(index, target.name, notificationExtra, dispatchValidation);
   };
 
   const validatePhotoAltText = (index: number, evt: ChangeEvent<HTMLTextAreaElement>) => {
@@ -110,11 +114,12 @@ const Photos = (): ReactElement => {
     isPhotoBase64Valid(index, base64, notificationExtra, dispatchValidation);
   };
 
-  const fetchPhoto = async (index: number, evt: ChangeEvent<HTMLInputElement>) => {
+  const fetchPhoto = async (index: number, evt: ChangeEvent<HTMLInputElement | HTMLDivElement>) => {
+    const target = evt.target as HTMLInputElement;
     const { new: isNewImage, sourceType, url } = photos[index];
 
-    if (isNewImage && sourceType === PhotoSourceType.Device && evt && evt.target && evt.target.files && evt.target.files.length > 0) {
-      const file = evt.target.files[0];
+    if (isNewImage && sourceType === PhotoSourceType.Device && evt && evt.target && target.files && target.files.length > 0) {
+      const file = target.files[0];
       dispatchValidation(setNotificationPhotoValidation(index, { url: { valid: true }, base64: { valid: true } }));
 
       // Read the image file and store it as a base64 string
@@ -175,12 +180,12 @@ const Photos = (): ReactElement => {
 
                 <input className="hidden" type="file" ref={ref} onChange={(evt) => fetchPhoto(index, evt)} />
                 <div className={styles.selectRemove}>
-                  <Button variant="secondary" onClick={() => selectPhoto()}>
+                  <Button variant={ButtonVariant.Secondary} onClick={() => selectPhoto()}>
                     {i18n.t("notification.button.selectFromDevice")}
                   </Button>
                 </div>
                 <div className={styles.selectRemove}>
-                  <Button variant="secondary" onClick={() => removePhoto(index)}>
+                  <Button variant={ButtonVariant.Secondary} onClick={() => removePhoto(index)}>
                     {i18n.t("notification.photos.remove")}
                   </Button>
                 </div>
@@ -210,7 +215,7 @@ const Photos = (): ReactElement => {
                   disabled={!isNewImage}
                 />
                 <div className={styles.selectRemove}>
-                  <Button variant="secondary" onClick={() => removePhoto(index)}>
+                  <Button variant={ButtonVariant.Secondary} onClick={() => removePhoto(index)}>
                     {i18n.t("notification.photos.remove")}
                   </Button>
                 </div>
@@ -296,7 +301,7 @@ const Photos = (): ReactElement => {
                 <div className={styles.creativeCommonsLink}>
                   <HdsLink
                     href="https://creativecommons.org/licenses/by/4.0/"
-                    size="M"
+                    size={LinkSize.Medium}
                     openInNewTab
                     openInNewTabAriaLabel={i18n.t("common.opensInANewTab")}
                     external
@@ -338,12 +343,12 @@ const Photos = (): ReactElement => {
       {photos.length < MAX_PHOTOS && (
         <div>
           <div className={styles.addNew}>
-            <Button variant="secondary" iconRight={<IconUpload aria-hidden />} onClick={() => addPhoto(PhotoSourceType.Device)}>
+            <Button variant={ButtonVariant.Secondary} iconEnd={<IconUpload aria-hidden />} onClick={() => addPhoto(PhotoSourceType.Device)}>
               {i18n.t("notification.photos.addNewFromDevice")}
             </Button>
           </div>
           <div className={styles.addNew}>
-            <Button variant="secondary" iconRight={<IconLink aria-hidden />} onClick={() => addPhoto(PhotoSourceType.Link)}>
+            <Button variant={ButtonVariant.Secondary} iconEnd={<IconLink aria-hidden />} onClick={() => addPhoto(PhotoSourceType.Link)}>
               {i18n.t("notification.photos.addNewFromLink")}
             </Button>
           </div>

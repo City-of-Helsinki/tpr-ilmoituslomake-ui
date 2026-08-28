@@ -37,12 +37,12 @@ export interface KeyValueStatus {
 }
 
 export type OptionType = {
-  id: string | number;
+  value: string | number;
   label: string;
 };
 
 export type LabelOptionType = {
-  id: string | number;
+  value: string | number;
   label: string;
   checked: boolean;
 };

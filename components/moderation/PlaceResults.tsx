@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useI18n } from "next-localization";
-import { Button, Link as HdsLink } from "hds-react";
+import { Button, ButtonVariant, Link as HdsLink, LinkSize } from "hds-react";
 import moment from "moment";
 import { ModerationAction } from "../../state/actions/moderationTypes";
 import { setModerationPlaceResults } from "../../state/actions/moderation";
@@ -16,7 +16,8 @@ import styles from "./PlaceResults.module.scss";
 
 const PlaceResults = (): ReactElement => {
   const i18n = useI18n();
-  const dispatch = useDispatch<Dispatch<ModerationAction>>();
+  //const dispatch = useDispatch<Dispatch<ModerationAction>>();
+  const dispatch = useDispatch();
   const router = useRouter();
 
   const placeResults = useSelector((state: RootState) => state.moderation.placeResults);
@@ -97,11 +98,11 @@ const PlaceResults = (): ReactElement => {
                 <Fragment key={`placeresult_${targetId}`}>
                   <div className={`${styles.gridColumn1} ${styles.gridContent}`}>
                     <div className={styles.flexItem}>
-                      <Link href={`/moderation/place/${targetId}`}>
-                        <HdsLink href="#" size="M" disableVisitedStyles>
+                      
+                        <HdsLink href={`/moderation/place/${targetId}`} size={LinkSize.Medium} disableVisitedStyles>
                           {`${getDisplayName(router.locale || defaultLocale, name)}${targetId ? ` (${targetId})` : ""}`}
                         </HdsLink>
-                      </Link>
+                      
                     </div>
                   </div>
                   <div className={`${styles.gridColumn2} ${styles.gridContent}`}>
@@ -136,7 +137,7 @@ const PlaceResults = (): ReactElement => {
 
       <div className={styles.nextResults}>
         {next && (
-          <Button variant="secondary" onClick={fetchMoreResults}>
+          <Button variant={ButtonVariant.Secondary} onClick={fetchMoreResults}>
             {i18n.t("moderation.button.showMore")}
           </Button>
         )}

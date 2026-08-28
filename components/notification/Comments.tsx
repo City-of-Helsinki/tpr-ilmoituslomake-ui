@@ -10,7 +10,8 @@ import styles from "./Comments.module.scss";
 
 const Comments = (): ReactElement => {
   const i18n = useI18n();
-  const dispatch = useDispatch<Dispatch<NotificationAction>>();
+  //const dispatch = useDispatch<Dispatch<NotificationAction>>();
+  const dispatch = useDispatch();
 
   const notification = useSelector((state: RootState) => state.notification.notification);
   const { comments } = notification;

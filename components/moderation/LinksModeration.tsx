@@ -12,8 +12,10 @@ import ModerationSection from "./ModerationSection";
 
 const LinksModeration = (): ReactElement => {
   const i18n = useI18n();
-  const dispatch = useDispatch<Dispatch<ModerationAction>>();
-  const dispatchStatus = useDispatch<Dispatch<ModerationStatusAction>>();
+  //const dispatch = useDispatch<Dispatch<ModerationAction>>();
+  //const dispatchStatus = useDispatch<Dispatch<ModerationStatusAction>>();
+  const dispatch = useDispatch();
+  const dispatchStatus = useDispatch();
 
   const selectedTask = useSelector((state: RootState) => state.moderation.selectedTask);
   const { website: websiteSelected } = selectedTask;

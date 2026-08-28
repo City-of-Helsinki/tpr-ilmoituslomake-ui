@@ -5,8 +5,8 @@ import Head from "next/head";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useI18n } from "next-localization";
-import { Button, IconCheckCircleFill, IconClockPlus, IconInfoCircle, IconLinkExternal, IconPhotoPlus, Koros } from "hds-react";
-import { Dialog } from "@material-ui/core";
+import { Button, ButtonVariant, IconCheckCircleFill, IconClockPlus, IconInfoCircle, IconLinkExternal, IconPhotoPlus, IconSize, Koros } from "hds-react";
+import { Dialog } from "@mui/material";
 import { RootState } from "../../../state/reducers";
 import { initStore } from "../../../state/store";
 import { CLEAR_STATE } from "../../../types/constants";
@@ -50,39 +50,38 @@ const NotificationSent = (): ReactElement => {
             <h1>{getDisplayName(router.locale || defaultLocale, placeName)}</h1>
             <div className={styles.flexButton}>
               <Link href="/notification">
-                <Button variant="secondary">{i18n.t("notification.button.notifyNewPlace")}</Button>
+                <Button variant={ButtonVariant.Secondary}>{i18n.t("notification.button.notifyNewPlace")}</Button>
               </Link>
             </div>
           </div>
 
           <Notice
             className={styles.sent}
-            icon={<IconCheckCircleFill size="xl" aria-hidden />}
+            icon={<IconCheckCircleFill size={IconSize.ExtraLarge} aria-hidden />}
             titleKey="notification.message.saveSucceeded.title"
             messageKey="notification.message.saveSucceeded.message"
             focusOnTitle
           />
           <Notice
             className={styles.opening}
-            icon={<IconClockPlus size="xl" aria-hidden />}
+            icon={<IconClockPlus size={IconSize.ExtraLarge} aria-hidden />}
             titleKey="notification.message.completeOpeningTimes.title"
             messageKey="notification.message.completeOpeningTimes.message"
             button={
-              <Button variant="secondary" iconRight={<IconLinkExternal aria-hidden />}>
+              <Button variant={ButtonVariant.Secondary} iconEnd={<IconLinkExternal aria-hidden  />} aria-label={i18n.t("common.opensInANewTab")}>
                 {i18n.t("notification.button.notifyOpeningTimes")}
-                <span className="screenReaderOnly"> {i18n.t("common.opensInANewTab")}</span>
               </Button>
             }
           />
           {photos.length === 0 && (
             <Notice
               className={styles.photos}
-              icon={<IconPhotoPlus size="xl" aria-hidden />}
+              icon={<IconPhotoPlus size={IconSize.ExtraLarge} aria-hidden />}
               titleKey="notification.message.completePhotos.title"
               messageKey="notification.message.completePhotos.message"
               button={
                 <Link href={`/notification/${notificationId}`}>
-                  <Button variant="secondary">{i18n.t("notification.button.modifyInformation")}</Button>
+                  <Button variant={ButtonVariant.Secondary}>{i18n.t("notification.button.modifyInformation")}</Button>
                 </Link>
               }
             />
@@ -99,18 +98,17 @@ const NotificationSent = (): ReactElement => {
                 {i18n.t("notification.message.sentModal.message")}
               </div>
               <div>
-                <Button iconRight={<IconLinkExternal aria-hidden />}>
+                <Button iconEnd={<IconLinkExternal aria-hidden />} aria-label={i18n.t("common.opensInANewTab")}>
                   {i18n.t("notification.button.continueToOpeningTimes")}
-                  <span className="screenReaderOnly"> {i18n.t("common.opensInANewTab")}</span>
                 </Button>
               </div>
               <div>
-                <Button variant="supplementary" iconRight={<IconInfoCircle aria-hidden />} onClick={closeModal}>
+                <Button variant={ButtonVariant.Supplementary} iconEnd={<IconInfoCircle aria-hidden />} onClick={closeModal}>
                   {i18n.t("notification.button.noOpeningTimes")}
                 </Button>
               </div>
               <div>
-                <Button variant="supplementary" iconRight={<IconInfoCircle aria-hidden />} onClick={closeModal}>
+                <Button variant={ButtonVariant.Supplementary} iconEnd={<IconInfoCircle aria-hidden />} onClick={closeModal}>
                   {i18n.t("notification.button.continueLater")}
                 </Button>
               </div>

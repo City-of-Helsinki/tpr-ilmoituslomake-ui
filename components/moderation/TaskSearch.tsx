@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import dynamic from "next/dynamic";
 import { useRouter } from "next/router";
 import { useI18n } from "next-localization";
-import { Button, Select, TextInput } from "hds-react";
+import { Button, Select, TextInput, type Option } from "hds-react";
 import moment from "moment";
 import { ModerationAction } from "../../state/actions/moderationTypes";
 import { setModerationTaskSearch, setModerationTaskResults } from "../../state/actions/moderation";
@@ -18,7 +18,7 @@ import styles from "./TaskSearch.module.scss";
 const DynamicTaskStatusFilter = dynamic(() => import("./TaskStatusFilter"), { ssr: false });
 
 type OptionTypeWithEnumId = {
-  id: TaskType;
+  value: string;
   label: string;
 };
 
@@ -29,32 +29,44 @@ interface TaskSearchProps {
 
 const TaskSearch = ({ showStatus, setShowStatus }: TaskSearchProps): ReactElement => {
   const i18n = useI18n();
-  const dispatch = useDispatch<Dispatch<ModerationAction>>();
+  //const dispatch = useDispatch<Dispatch<ModerationAction>>();
+  const dispatch = useDispatch();
   const router = useRouter();
 
   const taskSearch = useSelector((state: RootState) => state.moderation.taskSearch);
   const { placeName, taskType } = taskSearch;
 
   const taskTypeOptions = [
-    { id: TaskType.Unknown, label: i18n.t("moderation.taskSearch.taskType.all") },
-    { id: TaskType.PlaceChange, label: i18n.t("moderation.taskType.placeChange") },
-    { id: TaskType.NewPlace, label: i18n.t("moderation.taskType.newPlace") },
-    { id: TaskType.ChangeTip, label: i18n.t("moderation.taskType.changeTip") },
-    { id: TaskType.AddTip, label: i18n.t("moderation.taskType.addTip") },
-    { id: TaskType.RemoveTip, label: i18n.t("moderation.taskType.removeTip") },
-    { id: TaskType.ModeratorChange, label: i18n.t("moderation.taskType.moderatorChange") },
-    { id: TaskType.ModeratorAdd, label: i18n.t("moderation.taskType.moderatorAdd") },
-    { id: TaskType.ModeratorRemove, label: i18n.t("moderation.taskType.moderatorRemove") },
+    { value: TaskType.Unknown.toString(), label: i18n.t("moderation.taskSearch.taskType.all") },
+    { value: TaskType.PlaceChange.toString(), label: i18n.t("moderation.taskType.placeChange") },
+    { value: TaskType.NewPlace.toString(), label: i18n.t("moderation.taskType.newPlace") },
+    { value: TaskType.ChangeTip.toString(), label: i18n.t("moderation.taskType.changeTip") },
+    { value: TaskType.AddTip.toString(), label: i18n.t("moderation.taskType.addTip") },
+    { value: TaskType.RemoveTip.toString(), label: i18n.t("moderation.taskType.removeTip") },
+    { value: TaskType.ModeratorChange.toString(), label: i18n.t("moderation.taskType.moderatorChange") },
+    { value: TaskType.ModeratorAdd.toString(), label: i18n.t("moderation.taskType.moderatorAdd") },
+    { value: TaskType.ModeratorRemove.toString(), label: i18n.t("moderation.taskType.moderatorRemove") },
   ];
 
-  const convertValue = (value: string | undefined): OptionTypeWithEnumId | undefined => taskTypeOptions.find((t) => t.id === value);
+  const convertValue = (value: string | undefined): OptionTypeWithEnumId | undefined => taskTypeOptions.find((t) => t.value === value);
 
   const updateSearchText = (evt: ChangeEvent<HTMLInputElement>) => {
     dispatch(setModerationTaskSearch({ ...taskSearch, [evt.target.name]: evt.target.value }));
   };
 
+  /*
   const updateSearchTaskType = (selected: OptionTypeWithEnumId) => {
     dispatch(setModerationTaskSearch({ ...taskSearch, taskType: selected.id }));
+  };*/
+
+  const updateSearchTaskType = (selectedOptions: Option[]) => {
+    const selected = selectedOptions[0] as OptionTypeWithEnumId | undefined;
+    dispatch(
+      setModerationTaskSearch({
+        ...taskSearch,
+        taskType: selected?.value as TaskType ?? TaskType.Unknown,
+      })
+    );
   };
 
   const searchTasks = async () => {
@@ -64,6 +76,7 @@ const TaskSearch = ({ showStatus, setShowStatus }: TaskSearchProps): ReactElemen
       const taskResult = await (taskResponse.json() as Promise<{ count: number; next: string; results: ModerationTodoResult[] }>);
 
       console.log("TASK RESPONSE", taskResult);
+      console.log("task type", taskTypeOptions);
 
       if (taskResult && taskResult.results && taskResult.results.length > 0) {
         const { results, count, next } = taskResult;
@@ -98,8 +111,14 @@ const TaskSearch = ({ showStatus, setShowStatus }: TaskSearchProps): ReactElemen
 
   // Search all tasks on first render only, using a workaround utilising useEffect with empty dependency array
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  const useMountEffect = (fun: () => void) => useEffect(fun, []);
-  useMountEffect(searchTasks);
+  //const useMountEffect = (fun: () => void) => useEffect(fun, []);
+  //useMountEffect(searchTasks);
+
+  console.log(taskType);
+
+  useEffect(() => {
+    searchTasks();
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <div className="formSection">
@@ -117,11 +136,13 @@ const TaskSearch = ({ showStatus, setShowStatus }: TaskSearchProps): ReactElemen
           id="taskType"
           className={styles.gridInput}
           options={taskTypeOptions}
-          value={convertValue(taskType)}
+          value={taskType.toString() || ""}
           onChange={updateSearchTaskType}
-          label={i18n.t("moderation.taskSearch.taskType.label")}
-          selectedItemRemoveButtonAriaLabel={i18n.t("moderation.button.remove")}
-          clearButtonAriaLabel={i18n.t("moderation.button.clearAllSelections")}
+          texts={{
+            label: i18n.t("moderation.taskSearch.taskType.label"),
+            tagRemoveSelectionAriaLabel: i18n.t("moderation.button.remove"),
+            tagsClearAllButton: i18n.t("moderation.button.clearAllSelections")
+          }}
         />
         <div className={styles.gridButton}>
           <Button onClick={searchTasks}>{i18n.t("moderation.button.search")}</Button>

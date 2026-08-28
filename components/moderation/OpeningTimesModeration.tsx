@@ -14,12 +14,15 @@ import OpeningTimesText from "../common/OpeningTimesText";
 import ActionButton from "./ActionButton";
 import OpeningTimesButtonModeration from "./OpeningTimesButtonModeration";
 import styles from "./OpeningTimesModeration.module.scss";
+import { ButtonVariant } from "hds-react";
 
 const OpeningTimesModeration = (): ReactElement => {
   const i18n = useI18n();
   const router = useRouter();
-  const dispatch = useDispatch<Dispatch<ModerationAction>>();
-  const dispatchStatus = useDispatch<Dispatch<ModerationStatusAction>>();
+  //const dispatch = useDispatch<Dispatch<ModerationAction>>();
+  //const dispatchStatus = useDispatch<Dispatch<ModerationStatusAction>>();
+  const dispatch = useDispatch();
+  const dispatchStatus = useDispatch();
 
   const selectedTaskId = useSelector((state: RootState) => state.moderation.selectedTaskId);
 
@@ -116,8 +119,13 @@ const OpeningTimesModeration = (): ReactElement => {
 
   // Get the opening times on first render only, using a workaround utilising useEffect with empty dependency array
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  const useMountEffect = (fun: () => void) => useEffect(fun, []);
-  useMountEffect(getOpeningTimesOnMount);
+  //const useMountEffect = (fun: () => void) => useEffect(fun, []);
+  // useMountEffect(getOpeningTimesOnMount);
+
+  useEffect(() =>{
+    getOpeningTimesOnMount();
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+  
 
   if (taskType === TaskType.RemoveTip || taskType === TaskType.ModeratorRemove || taskType === TaskType.PlaceInfo) {
     return (
@@ -171,7 +179,7 @@ const OpeningTimesModeration = (): ReactElement => {
           />
 
           <div className={styles.gridModified}>
-            <OpeningTimesButtonModeration buttonTextKey="moderation.button.modifyOpeningTimes" buttonVariant="secondary" />
+            <OpeningTimesButtonModeration buttonTextKey="moderation.button.modifyOpeningTimes" buttonVariant={ButtonVariant.Secondary} />
           </div>
         </div>
       </div>

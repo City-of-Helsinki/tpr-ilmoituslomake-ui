@@ -2,7 +2,7 @@ import React, { Dispatch, ReactElement, SetStateAction } from "react";
 import { useSelector } from "react-redux";
 import { useRouter } from "next/router";
 import { useI18n } from "next-localization";
-import { IconCheck, IconCross } from "hds-react";
+import { IconCheck, IconCross, IconSize } from "hds-react";
 import moment from "moment";
 import { RootState } from "../../state/reducers";
 import { DATETIME_FORMAT, NotifierType, TaskType, Toast } from "../../types/constants";
@@ -96,12 +96,12 @@ const TaskHeader = ({ isModerated, toast, setToast }: TaskHeaderProps): ReactEle
             </div>
             {notifier_type === NotifierType.Representative ? (
               <>
-                <IconCheck size="s" aria-hidden />
+                <IconCheck size={IconSize.Small} aria-hidden />
                 <div>{i18n.t("moderation.taskHeader.representative")}</div>
               </>
             ) : (
               <>
-                <IconCross size="s" aria-hidden />
+                <IconCross size={IconSize.Small} aria-hidden />
                 <div>{i18n.t("moderation.taskHeader.notRepresentative")}</div>
               </>
             )}

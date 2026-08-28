@@ -1,7 +1,7 @@
 import React, { Dispatch, ChangeEvent, ReactElement } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useI18n } from "next-localization";
-import { Button, IconPlus, TextInput } from "hds-react";
+import { Button, ButtonVariant, IconPlus, TextInput } from "hds-react";
 import { v4 as uuidv4 } from "uuid";
 import { NotificationAction } from "../../state/actions/notificationTypes";
 import { NotificationValidationAction } from "../../state/actions/notificationValidationTypes";
@@ -15,8 +15,10 @@ import styles from "./SocialMedia.module.scss";
 
 const SocialMedia = (): ReactElement => {
   const i18n = useI18n();
-  const dispatch = useDispatch<Dispatch<NotificationAction>>();
-  const dispatchValidation = useDispatch<Dispatch<NotificationValidationAction>>();
+  //const dispatch = useDispatch<Dispatch<NotificationAction>>();
+  //const dispatchValidation = useDispatch<Dispatch<NotificationValidationAction>>();
+  const dispatch = useDispatch();
+  const dispatchValidation = useDispatch();
 
   const notification = useSelector((state: RootState) => state.notification.notification);
   const { social_media = [] } = notification;
@@ -50,11 +52,12 @@ const SocialMedia = (): ReactElement => {
     dispatchValidation(removeNotificationSocialMediaValidation(index));
   };
 
-  const validateSocialMedia = (index: number, evt: ChangeEvent<HTMLInputElement>) => {
+  const validateSocialMedia = (index: number, evt: ChangeEvent<HTMLInputElement | HTMLDivElement>) => {
+    const target = evt.target as HTMLInputElement;
     dispatch(
-      setNotificationSocialMedia(index, { ...social_media[index], [evt.target.name]: (social_media[index][evt.target.name] as string).trim() })
+      setNotificationSocialMedia(index, { ...social_media[index], [target.name]: (social_media[index][target.name] as string).trim() })
     );
-    isSocialMediaFieldValid(index, evt.target.name, notification, dispatchValidation);
+    isSocialMediaFieldValid(index, target.name, notification, dispatchValidation);
   };
 
   return (
@@ -107,7 +110,7 @@ const SocialMedia = (): ReactElement => {
               aria-required
             />
             <div className="formInput">
-              <Button variant="secondary" onClick={() => removeSocialMediaItem(index)}>
+              <Button variant={ButtonVariant.Secondary} onClick={() => removeSocialMediaItem(index)}>
                 {i18n.t("notification.socialMedia.remove")}
               </Button>
             </div>
@@ -117,7 +120,7 @@ const SocialMedia = (): ReactElement => {
       })}
 
       <div>
-        <Button variant="secondary" iconLeft={<IconPlus aria-hidden />} onClick={() => addSocialMediaItem()}>
+        <Button variant={ButtonVariant.Secondary} iconStart={<IconPlus aria-hidden />} onClick={() => addSocialMediaItem()}>
           {i18n.t("notification.socialMedia.addNew")}
         </Button>
       </div>

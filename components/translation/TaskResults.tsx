@@ -4,7 +4,7 @@ import dynamic from "next/dynamic";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useI18n } from "next-localization";
-import { Link as HdsLink } from "hds-react";
+import { Link as HdsLink, LinkSize } from "hds-react";
 import { RootState } from "../../state/reducers";
 import { TaskStatus } from "../../types/constants";
 import { TranslationTodoResult } from "../../types/general";
@@ -98,13 +98,13 @@ const TaskResults = ({ showStatus, showResults, setShowStatus, setShowResults }:
                 <Fragment key={`taskresult_${taskId}`}>
                   <div className={`${styles.gridColumn1} ${styles.gridContent} ${styles.gridButton}`}>
                     <div className={styles.flexItem}>
-                      <Link href={`/translation/task/${taskId}`}>
-                        <HdsLink href="#" size="M" disableVisitedStyles>
+                      
+                        <HdsLink href={`/translation/task/${taskId}`} size={LinkSize.Medium} disableVisitedStyles>
                           {`${getDisplayName(router.locale || defaultLocale, name, undefined, i18n.t("translation.taskResults.empty"))}${
                             targetId ? ` (${targetId})` : ""
                           }`}
                         </HdsLink>
-                      </Link>
+                      
                     </div>
                   </div>
                   <div className={`${styles.gridColumn2} ${styles.gridContent}`}>

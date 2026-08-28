@@ -1,7 +1,7 @@
 import React, { ReactElement, useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useRouter } from "next/router";
-import { IconPersonWheelchair } from "hds-react";
+import { ButtonVariant, IconPersonWheelchair, IconSize } from "hds-react";
 import { RootState } from "../../state/reducers";
 import AccessibilityInfoButton from "../common/AccessibilityInfoButton";
 import Notice from "../common/Notice";
@@ -39,7 +39,7 @@ const AccessibilityInfoNotice = ({ className }: AccessibilityInfoNoticeProps): R
   return (
     <Notice
       className={className}
-      icon={<IconPersonWheelchair size="xl" aria-hidden />}
+      icon={<IconPersonWheelchair size={IconSize.ExtraLarge} aria-hidden />}
       titleKey="notification.message.completeAccessibility.title"
       messageKey={
         isAccessibilityAllowed ? "notification.message.completeAccessibility.message" : "notification.message.completeAccessibility.message2"
@@ -47,7 +47,7 @@ const AccessibilityInfoNotice = ({ className }: AccessibilityInfoNoticeProps): R
       button={
         <AccessibilityInfoButton
           buttonTextKey="notification.button.notifyAccessibility"
-          buttonVariant="secondary"
+          buttonVariant={ButtonVariant.Secondary}
           disabled={!isAccessibilityAllowed}
           notificationId={notificationId}
           placeId={placeId}

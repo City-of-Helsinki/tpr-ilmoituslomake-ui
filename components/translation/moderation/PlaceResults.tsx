@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useI18n } from "next-localization";
-import { Button, Checkbox, Link as HdsLink } from "hds-react";
+import { Button, ButtonVariant, Checkbox, Link as HdsLink, LinkSize } from "hds-react";
 import moment from "moment";
 import { ModerationTranslationAction } from "../../../state/actions/moderationTranslationTypes";
 import { setModerationTranslationPlaceResults, setModerationTranslationSelectedPlaces } from "../../../state/actions/moderationTranslation";
@@ -16,7 +16,8 @@ import styles from "./PlaceResults.module.scss";
 
 const PlaceResults = (): ReactElement => {
   const i18n = useI18n();
-  const dispatch = useDispatch<Dispatch<ModerationTranslationAction>>();
+  //const dispatch = useDispatch<Dispatch<ModerationTranslationAction>>();
+  const dispatch = useDispatch();
   const router = useRouter();
 
   const placeResults = useSelector((state: RootState) => state.moderationTranslation.placeResults);
@@ -91,7 +92,7 @@ const PlaceResults = (): ReactElement => {
           <Checkbox id="selectAllPlaces" label={i18n.t("moderation.placeResults.selectAll")} checked={isAllSelected} onChange={selectAllPlaces} />
           <div className="flexSpace" />
           <Link href={`/moderation/translation/request?ids=${selectedPlaceIds.join()}`}>
-            <Button variant="secondary">{i18n.t("moderation.button.requestSelectedTranslation")}</Button>
+            <Button variant={ButtonVariant.Secondary}>{i18n.t("moderation.button.requestSelectedTranslation")}</Button>
           </Link>
         </div>
       )}
@@ -135,11 +136,11 @@ const PlaceResults = (): ReactElement => {
                         onChange={updateSelectedPlaces}
                       />
 
-                      <Link href={`/moderation/place/${targetId}`}>
-                        <HdsLink href="#" size="M" disableVisitedStyles>
+                      
+                        <HdsLink href={`/moderation/place/${targetId}`} size={LinkSize.Medium} disableVisitedStyles>
                           {`${getDisplayName(router.locale || defaultLocale, name)}${targetId ? ` (${targetId})` : ""}`}
                         </HdsLink>
-                      </Link>
+                      
                     </div>
                   </div>
                   <div className={`${styles.gridColumn2} ${styles.gridContent}`}>
@@ -174,7 +175,7 @@ const PlaceResults = (): ReactElement => {
 
       <div className={styles.nextResults}>
         {next && (
-          <Button variant="secondary" onClick={fetchMoreResults}>
+          <Button variant={ButtonVariant.Secondary} onClick={fetchMoreResults}>
             {i18n.t("moderation.button.showMore")}
           </Button>
         )}

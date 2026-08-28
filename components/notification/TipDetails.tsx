@@ -11,8 +11,10 @@ import { isTipFieldValid } from "../../utils/validation";
 
 const TipDetails = (): ReactElement => {
   const i18n = useI18n();
-  const dispatch = useDispatch<Dispatch<NotificationAction>>();
-  const dispatchValidation = useDispatch<Dispatch<NotificationValidationAction>>();
+  //const dispatch = useDispatch<Dispatch<NotificationAction>>();
+  //const dispatchValidation = useDispatch<Dispatch<NotificationValidationAction>>();
+  const dispatch = useDispatch();
+  const dispatchValidation = useDispatch();
 
   const tip = useSelector((state: RootState) => state.notification.tip);
   const { user_comments, user_details } = tip;

@@ -2,7 +2,7 @@ import React, { ReactElement, Fragment, useEffect, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useI18n } from "next-localization";
-import { Button, Link as HdsLink } from "hds-react";
+import { Button, Link as HdsLink, LinkSize } from "hds-react";
 import moment from "moment";
 import { DATETIME_FORMAT, TaskType } from "../../types/constants";
 import { ModerationTodoResult } from "../../types/general";
@@ -46,8 +46,12 @@ const NewTasks = (): ReactElement => {
 
   // Search all tasks on first render only, using a workaround utilising useEffect with empty dependency array
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  const useMountEffect = (fun: () => void) => useEffect(fun, []);
-  useMountEffect(searchTasks);
+  //const useMountEffect = (fun: () => void) => useEffect(fun, []);
+  // useMountEffect(searchTasks);
+  useEffect(() => {
+    searchTasks();
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+  
 
   return (
     <div className={`formSection ${styles.newTasks}`}>
@@ -77,11 +81,11 @@ const NewTasks = (): ReactElement => {
               <Fragment key={`taskresult_${id}`}>
                 <div className={`${styles.gridColumn1} ${styles.gridContent}`}>
                   <div className={styles.flexItem}>
-                    <Link href={`/moderation/task/${id}`}>
-                      <HdsLink href="#" size="M" disableVisitedStyles>
+                    
+                      <HdsLink href={`/moderation/task/${id}`} size={LinkSize.Medium} disableVisitedStyles>
                         {`${getDisplayName(router.locale || defaultLocale, name, user_place_name)}${targetId ? ` (${targetId})` : ""}`}
                       </HdsLink>
-                    </Link>
+                    
                   </div>
                 </div>
                 <div className={`${styles.gridColumn2} ${styles.gridContent}`}>
