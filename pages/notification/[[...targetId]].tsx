@@ -184,7 +184,7 @@ const NotificationDetail = (): ReactElement => {
                 </HdsLink>
               </div>
             </div>
-            <Koros className={styles.wave}  />
+            <Koros className={styles.wave} />
           </Dialog>
         </main>
       )}

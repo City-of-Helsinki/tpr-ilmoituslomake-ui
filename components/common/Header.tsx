@@ -36,16 +36,14 @@ interface HeaderProps {
 const DynamicHeader = dynamic(() => import("hds-react").then((hds) => hds.Header), { ssr: false });
 
 const Header = ({ includeLanguageSelector, homePagePath, children }: HeaderProps): ReactElement => {
-  
-
   const i18n = useI18n();
   const router = useRouter();
 
   const currentUser = useSelector((state: RootState) => state.general.user);
 
-  const initials = currentUser ? (currentUser?.first_name.charAt(0) + currentUser?.last_name.charAt(0)) : "";
+  const initials = currentUser ? currentUser?.first_name.charAt(0) + currentUser?.last_name.charAt(0) : "";
 
-  const [lang, setLang] = React.useState('fi');
+  const [lang, setLang] = React.useState("fi");
 
   const changeLanguage = (locale: string) => {
     // Use the shallow option to avoid a server-side render in order to preserve the state
@@ -59,7 +57,7 @@ const Header = ({ includeLanguageSelector, homePagePath, children }: HeaderProps
     } else {
       return logoFi;
     }
-  }
+  };
 
   const signIn = () => {
     const {
@@ -79,12 +77,9 @@ const Header = ({ includeLanguageSelector, homePagePath, children }: HeaderProps
     <DynamicHeader
       // @ts-ignore: The HDS Navigation component comes from a dynamic import, see above for details
       aria-label={i18n.t("common.header.openMenu")}
-      
     >
-      <HdsHeader.SkipLink 
-        skipTo="#content"
-        label={i18n.t("common.header.skipToContent")}></HdsHeader.SkipLink>
-      
+      <HdsHeader.SkipLink skipTo="#content" label={i18n.t("common.header.skipToContent")}></HdsHeader.SkipLink>
+
       <HdsHeader.ActionBar
         logo={<Logo src={logoSrcFromLanguage()} alt={i18n.t("common.header.title")} />}
         logoHref={`${router.basePath}${homePagePath}/${lang}`}
@@ -94,8 +89,6 @@ const Header = ({ includeLanguageSelector, homePagePath, children }: HeaderProps
         aria-label={i18n.t("common.header.openMenu")}
         frontPageLabel=""
       >
-        
-        
         {!currentUser?.authenticated && (
           <Button
             className="fixedRightPosition fit-content"
@@ -107,7 +100,6 @@ const Header = ({ includeLanguageSelector, homePagePath, children }: HeaderProps
             {i18n.t("common.header.login")}
           </Button>
         )}
-                
 
         {currentUser?.authenticated && (
           <HdsHeader.ActionBarItem
@@ -117,7 +109,6 @@ const Header = ({ includeLanguageSelector, homePagePath, children }: HeaderProps
             avatar={initials}
             icon={<IconUser />}
             label={i18n.t("common.header.userInfo") + ` (${currentUser?.first_name || currentUser?.email})`}
-
           >
             <HdsHeader.ActionBarSubItem
               href="#"
@@ -129,17 +120,14 @@ const Header = ({ includeLanguageSelector, homePagePath, children }: HeaderProps
         )}
 
         {includeLanguageSelector && (
-          <HdsHeader.LanguageSelector
-            label={(router.locale || defaultLocale).toUpperCase()}
-            aria-label={i18n.t("common.header.selectLanguage")}
-          >
+          <HdsHeader.LanguageSelector label={(router.locale || defaultLocale).toUpperCase()} aria-label={i18n.t("common.header.selectLanguage")}>
             <HdsHeader.ActionBarSubItem href="#" lang="fi" label="Suomeksi" onClick={() => changeLanguage("fi")} />
             <HdsHeader.ActionBarSubItem href="#" lang="sv" label="På svenska" onClick={() => changeLanguage("sv")} />
             <HdsHeader.ActionBarSubItem href="#" lang="en" label="In English" onClick={() => changeLanguage("en")} />
           </HdsHeader.LanguageSelector>
         )}
       </HdsHeader.ActionBar>
-        {children}
+      {children}
     </DynamicHeader>
   );
 };

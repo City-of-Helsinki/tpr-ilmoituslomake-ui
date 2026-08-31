@@ -247,7 +247,7 @@ const moderation = (state: ModerationState | undefined, action: AnyAction): Mode
           ...state.modifiedTask,
           other_certificates: {
             ...state.modifiedTask.other_certificates,
-            [action.payload.language]: action.payload.value
+            [action.payload.language]: action.payload.value,
           },
         },
         moderationExtra: {
@@ -268,7 +268,7 @@ const moderation = (state: ModerationState | undefined, action: AnyAction): Mode
           ...state.modifiedTask,
           other_certificates_url: {
             ...state.modifiedTask.other_certificates_url,
-            [action.payload.language]: action.payload.value
+            [action.payload.language]: action.payload.value,
           },
         },
         moderationExtra: {
