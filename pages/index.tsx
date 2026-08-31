@@ -26,7 +26,7 @@ const Main = (): ReactElement => {
         <div className={styles.korosTextBox}>
           <h1>{i18n.t("notification.index.title")}</h1>
         </div>
-        <Koros className={styles.koros} type="basic" />
+        <Koros className={styles.koros} rotate="180deg" type="basic" />
 
         <div className={styles.infoTextBox}>{i18n.t("notification.index.message")}</div>
         <div className={styles.infoLinkContainer}>
