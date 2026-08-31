@@ -48,6 +48,7 @@ const Header = ({ includeLanguageSelector, homePagePath, children }: HeaderProps
   const changeLanguage = (locale: string) => {
     // Use the shallow option to avoid a server-side render in order to preserve the state
     router.push(router.pathname, router.asPath, { locale, shallow: true });
+    setLang(locale);
   };
 
   const logoSrcFromLanguage = () => {
@@ -81,7 +82,7 @@ const Header = ({ includeLanguageSelector, homePagePath, children }: HeaderProps
 
       <HdsHeader.ActionBar
         logo={<Logo src={logoSrcFromLanguage()} alt={i18n.t("common.header.title")} />}
-        logoHref={`${router.basePath}${homePagePath}/`}
+        logoHref={`${router.basePath}${homePagePath}/${lang}`}
         title={i18n.t("common.header.title")}
         titleAriaLabel={i18n.t("common.header.titleAlt")}
         titleHref={`${router.basePath}${homePagePath}/`}
