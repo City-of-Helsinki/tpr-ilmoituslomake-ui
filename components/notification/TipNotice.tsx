@@ -1,4 +1,5 @@
 import React, { ReactElement } from "react";
+import { useRouter } from "next/router";
 import { useSelector } from "react-redux";
 import Link from "next/link";
 import { useI18n } from "next-localization";
@@ -12,6 +13,7 @@ interface TipNoticeProps {
 
 const TipNotice = ({ selectedPlaceName }: TipNoticeProps): ReactElement => {
   const i18n = useI18n();
+  const router = useRouter();
 
   const tip = useSelector((state: RootState) => state.notification.tip);
   const { target } = tip;
@@ -22,7 +24,7 @@ const TipNotice = ({ selectedPlaceName }: TipNoticeProps): ReactElement => {
       <div className={styles.notice}>{i18n.t("notification.tip.loginNotice.notice")}</div>
       <div className={styles.link}>
         
-          <HdsLink href={`/notification/${target}`} size={LinkSize.Medium} disableVisitedStyles>
+          <HdsLink href={`${router.basePath}/notification/${target}`} size={LinkSize.Medium} disableVisitedStyles>
             {selectedPlaceName}
           </HdsLink>
         

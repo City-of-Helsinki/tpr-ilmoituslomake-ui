@@ -137,7 +137,7 @@ const PlaceResults = (): ReactElement => {
                       />
 
                       
-                        <HdsLink href={`/moderation/place/${targetId}`} size={LinkSize.Medium} disableVisitedStyles>
+                        <HdsLink href={`${router.basePath}/moderation/place/${targetId}`} size={LinkSize.Medium} disableVisitedStyles>
                           {`${getDisplayName(router.locale || defaultLocale, name)}${targetId ? ` (${targetId})` : ""}`}
                         </HdsLink>
                       

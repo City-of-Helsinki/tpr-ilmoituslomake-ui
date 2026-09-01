@@ -82,7 +82,7 @@ const NewTasks = (): ReactElement => {
                 <div className={`${styles.gridColumn1} ${styles.gridContent}`}>
                   <div className={styles.flexItem}>
                     
-                      <HdsLink href={`/moderation/task/${id}`} size={LinkSize.Medium} disableVisitedStyles>
+                      <HdsLink href={`${router.basePath}/moderation/task/${id}`} size={LinkSize.Medium} disableVisitedStyles>
                         {`${getDisplayName(router.locale || defaultLocale, name, user_place_name)}${targetId ? ` (${targetId})` : ""}`}
                       </HdsLink>
                     
