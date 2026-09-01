@@ -114,7 +114,7 @@ const PlaceResults = (): ReactElement => {
                   <div className={`${styles.gridContent} ${styles.firstColumn} ${styles.gridButton}`}>
                     <div className={styles.nameContainer}>
                       
-                        <HdsLink href={`/notification/info/${id}`} size={LinkSize.Medium} disableVisitedStyles>
+                        <HdsLink href={`${router.basePath}/notification/info/${id}`} size={LinkSize.Medium} disableVisitedStyles>
                           {getDisplayName(router.locale || defaultLocale, name)}
                         </HdsLink>
                       

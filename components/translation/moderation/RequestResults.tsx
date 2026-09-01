@@ -249,7 +249,7 @@ const RequestResults = ({ showStatus, showResults, setShowResults }: RequestResu
                       />
 
                       
-                        <HdsLink href={`/moderation/translation/request/${requestId}`} size={LinkSize.Medium} disableVisitedStyles>
+                        <HdsLink href={`${router.basePath}/moderation/translation/request/${requestId}`} size={LinkSize.Medium} disableVisitedStyles>
                           {formattedRequest}
                         </HdsLink>
                       

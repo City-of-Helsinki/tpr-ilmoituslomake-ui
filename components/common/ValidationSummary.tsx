@@ -1,4 +1,5 @@
 import React, { ReactElement, useEffect, useRef } from "react";
+import { useRouter } from "next/router";
 import { useI18n } from "next-localization";
 import { Link as HdsLink, Notification as HdsNotification, LinkSize, NotificationSize } from "hds-react";
 import { KeyValueValidation } from "../../types/general";
@@ -12,6 +13,7 @@ interface ValidationSummaryProps {
 
 const ValidationSummary = ({ prefix, pageValid, validationSummary }: ValidationSummaryProps): ReactElement => {
   const i18n = useI18n();
+  const router = useRouter();
   const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -33,7 +35,7 @@ const ValidationSummary = ({ prefix, pageValid, validationSummary }: ValidationS
             .map((key) => {
               return (
                 <div key={key}>
-                  <HdsLink href={`#${key}`} size={LinkSize.Medium} disableVisitedStyles>
+                  <HdsLink href={`${router.basePath}/#${key}`} size={LinkSize.Medium} disableVisitedStyles>
                     {i18n.t(validationSummary[key].message as string).replace("$fieldName", validationSummary[key].fieldLabel as string)}
                   </HdsLink>
                 </div>

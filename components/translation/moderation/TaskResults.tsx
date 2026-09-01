@@ -151,7 +151,7 @@ const TaskResults = ({ showStatus, showResults, setShowResults }: TaskResultsPro
                       />
 
                       
-                        <HdsLink href={`/moderation/translation/task/${taskId}`} size={LinkSize.Medium} disableVisitedStyles>
+                        <HdsLink href={`${router.basePath}/moderation/translation/task/${taskId}`} size={LinkSize.Medium} disableVisitedStyles>
                           {`${getDisplayName(router.locale || defaultLocale, name, undefined, i18n.t("moderation.translation.taskResults.empty"))}${
                             targetId ? ` (${targetId})` : ""
                           }`}

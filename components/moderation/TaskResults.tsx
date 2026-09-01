@@ -111,7 +111,7 @@ const TaskResults = ({ showStatus }: TaskResultsProps): ReactElement => {
       {searchDone && filteredTaskResults.length === 0 && <h2 className="moderation">{i18n.t("moderation.taskResults.notFound")}</h2>}
 
       {filteredTaskResults.length > 0 && (
-        <div className={`gridLayoutContainer ${styles.results}`}>
+        <div className={`gridLayoutContainer results ${styles.results}`}>
           <div className={`${styles.gridColumn1} ${styles.gridHeader} moderation`}>
             <div className={styles.flexItem}>{i18n.t("moderation.taskResults.nameId")}</div>
           </div>
@@ -136,7 +136,7 @@ const TaskResults = ({ showStatus }: TaskResultsProps): ReactElement => {
                   <div className={`${styles.gridColumn1} ${styles.gridContent}`}>
                     <div className={styles.flexItem}>
                       
-                        <HdsLink href={`/moderation/task/${id}`} size={LinkSize.Medium} disableVisitedStyles>
+                        <HdsLink href={`${router.basePath}/moderation/task/${id}`} size={LinkSize.Medium} disableVisitedStyles>
                           {`${getDisplayName(
                             router.locale || defaultLocale,
                             name,
