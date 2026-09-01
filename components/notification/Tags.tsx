@@ -2,7 +2,7 @@ import React, { ChangeEvent, Dispatch, ReactElement } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useRouter } from "next/router";
 import { useI18n } from "next-localization";
-import { Select,  TextInput } from "hds-react";
+import { Select,  TextInput, defaultFilter } from "hds-react";
 import { NotificationAction } from "../../state/actions/notificationTypes";
 import { NotificationValidationAction } from "../../state/actions/notificationValidationTypes";
 import { setNotificationExtraKeywords, setNotificationTag } from "../../state/actions/notification";
@@ -65,6 +65,7 @@ const Tags = (): ReactElement => {
           tagRemoveSelectionAriaLabel: i18n.t("notification.button.remove"),
           tagsClearAllButton: i18n.t("notification.button.clearAllSelections"),
         }}
+        filter={defaultFilter}
         invalid={!tagsValid.valid}
         error={!tagsValid.valid ? i18n.t(tagsValid.message as string).replace("$fieldName", i18n.t("notification.tags.tagSelection")) : ""}
         required

@@ -127,6 +127,12 @@ input[type="checkbox"] {
   margin-bottom: $spacing-layout-l;
 }
 
+.labelSelection {
+  .formInput {
+    margin-bottom: $spacing-layout-s;
+  }
+}
+
 .narrowSection {
   @include media(xl) {
     max-width: $container-width-xl / 1.3;
