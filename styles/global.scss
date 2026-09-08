@@ -133,6 +133,43 @@ input[type="checkbox"] {
   }
 }
 
+// Custom style mods
+.Select-module_labels__2FlKK {
+  align-items: center !important;
+}
+
+.HeaderActionBarItemButton-module_buttonContent__3JeY0 span {
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+}
+
+.HeaderActionBarItemButton-module_buttonContent__3JeY0 {
+  display: flex !important;
+}
+
+button.HeaderActionBarItemButton-module_actionBarItemButton__2ALyH {
+  flex-direction: row !important;
+}
+
+.HeaderActionBarItemButton-module_labelOnRight__3mel8 {
+  display: flex !important;
+}
+
+.HeaderActionBarItemButton-module_actionBarItemButtonLabel__12Iec {
+  padding-top: 6px;
+  padding-left: 4px;
+}
+
+button.HeaderActionBarItemButton-module_actionBarItemButton__2ALyH .HeaderActionBarItemButton-module_avatar__11aei {
+  height: 46px;
+  padding-top: 4px;
+}
+
+button.HeaderActionBarItemButton-module_actionBarItemButton__2ALyH:hover {
+  text-decoration: none;
+}
+
 .narrowSection {
   @include media(xl) {
     max-width: $container-width-xl / 1.3;
