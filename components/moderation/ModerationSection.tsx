@@ -104,7 +104,7 @@ const ModerationSection = ({
       } else if (
         Array.isArray(selectedValue) &&
         Array.isArray(modifiedValue) &&
-        selectedValue.map((s) => s.id).join() !== modifiedValue.map((m) => m.id).join()
+        selectedValue.map((s) => s.value).join() !== modifiedValue.map((m) => m.value).join()
       ) {
         // Combobox selected and modified values are different, and there is a value
         statusCallback(fieldName, ModerationStatus.Edited);

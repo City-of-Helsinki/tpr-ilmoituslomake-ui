@@ -21,7 +21,7 @@ const TaskStatusLabel = ({ prefix, status, includeIcons }: TaskStatusLabelProps)
     }
     case TaskStatus.Closed: {
       return (
-        <StatusLabel type="success" iconLeft={includeIcons && <IconCheck />}>
+        <StatusLabel type="success" iconStart={includeIcons && <IconCheck />}>
           {i18n.t(`${prefix}.taskStatus.closed`)}
         </StatusLabel>
       );

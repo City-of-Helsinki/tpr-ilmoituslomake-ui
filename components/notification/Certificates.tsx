@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { useRouter } from "next/router";
 import { useI18n } from "next-localization";
 import { useMediaQuery } from "react-responsive";
-import { Combobox, TextInput, SelectionGroup, Checkbox } from "hds-react";
+import { Select, TextInput, SelectionGroup, Checkbox, defaultFilter } from "hds-react";
 import { NotificationAction } from "../../state/actions/notificationTypes";
 import { NotificationValidationAction } from "../../state/actions/notificationValidationTypes";
 import {
@@ -23,8 +23,10 @@ import styles from "./InputLanguage.module.scss";
 
 const Certificates = (): ReactElement => {
   const i18n = useI18n();
-  const dispatch = useDispatch<Dispatch<NotificationAction>>();
-  const dispatchValidation = useDispatch<Dispatch<NotificationValidationAction>>();
+  //const dispatch = useDispatch<Dispatch<NotificationAction>>();
+  //const dispatchValidation = useDispatch<Dispatch<NotificationValidationAction>>();
+  const dispatch = useDispatch();
+  const dispatchValidation = useDispatch();
   const router = useRouter();
 
   // Note: this only works for client-side rendering
@@ -63,10 +65,10 @@ const Certificates = (): ReactElement => {
 
   const convertOptions = (options: CertificateOption[]): OptionType[] =>
     options
-      .map((tag) => ({ id: tag.id, label: tag.certificatename[router.locale || defaultLocale] as string }))
+      .map((tag) => ({ value: tag.id, label: tag.certificatename[router.locale || defaultLocale] as string }))
       .sort((a, b) => {
-        if (a.id === -1) return 1;
-        if (b.id === -1) return -1;
+        if (a.value === -1) return 1;
+        if (b.value === -1) return -1;
 
         return sortByOptionLabel(a, b);
       });
@@ -81,10 +83,10 @@ const Certificates = (): ReactElement => {
 
   const convertLabelOptions = (options: CertificateOption[]): LabelOptionType[] =>
     options
-      .map((tag) => ({ id: tag.id, checked: checkedLabel(tag.id), label: tag.certificatename[router.locale || defaultLocale] as string }))
+      .map((tag) => ({ value: tag.id, checked: checkedLabel(tag.id), label: tag.certificatename[router.locale || defaultLocale] as string }))
       .sort((a, b) => {
-        if (a.id === -2) return 1;
-        if (b.id === -2) return -1;
+        if (a.value === -2) return 1;
+        if (b.value === -2) return -1;
 
         return sortByOptionLabel(a, b);
       });
@@ -92,7 +94,7 @@ const Certificates = (): ReactElement => {
   const convertValues = (values: number[]): OptionType[] => convertOptions(certificateOptions.filter((tag) => values.includes(tag.id)));
 
   const updateCertificates = (selected: OptionType[]) => {
-    dispatch(setNotificationCertificate(selected.map((s) => s.id as number)));
+    dispatch(setNotificationCertificate(selected.map((s) => s.value as number)));
   };
 
   const updateLabelCertificate = (evt: ChangeEvent<HTMLInputElement>) => {
@@ -146,12 +148,12 @@ const Certificates = (): ReactElement => {
         >
           {convertLabelOptions(labelCertificates).map((option) => (
             <Checkbox
-              id={`input_${option.id}`}
-              key={`input_${option.id}`}
+              id={`input_${option.value}`}
+              key={`input_${option.value}`}
               label={option.label}
-              name={option.id as string}
-              value={option.id as string}
-              checked={label_ids.includes(Number(option.id))}
+              name={option.value as string}
+              value={option.value as string}
+              checked={label_ids.includes(Number(option.value))}
               onChange={updateLabelCertificate}
             />
           ))}
@@ -177,26 +179,29 @@ const Certificates = (): ReactElement => {
 
       {!noCertificate ? (
         <>
-          <Combobox
+          <Select
             id="certificate"
             className="formInput"
             // @ts-ignore: Erroneous error that the type for options should be OptionType[][]
             options={convertOptions(mainCertificateOptions)}
-            value={convertValues(certificate_ids)}
+            value={convertValues(certificate_ids) as unknown as string[]}
             onChange={updateCertificates}
+            filter={defaultFilter}
             onBlur={validateCertificates}
-            label={i18n.t("notification.certificates.add.label")}
-            helper={i18n.t("notification.certificates.add.helperText")}
-            toggleButtonAriaLabel={i18n.t("notification.button.toggleMenu")}
-            selectedItemRemoveButtonAriaLabel={i18n.t("notification.button.remove")}
-            clearButtonAriaLabel={i18n.t("notification.button.clearAllSelections")}
+            texts={{
+              label: i18n.t("notification.certificates.add.label"),
+              assistive: i18n.t("notification.certificates.add.helperText"),
+              dropdownButtonAriaLabel: i18n.t("notification.button.toggleMenu"),
+              tagRemoveSelectionAriaLabel: i18n.t("notification.button.remove"),
+              tagsClearAllButton: i18n.t("notification.button.clearAllSelections"),
+            }}
             invalid={!tagsValid.valid}
             error={
               !tagsValid.valid
                 ? i18n.t(tagsValid.message as string).replace("$fieldName", i18n.t("notification.certificates.certificateSelection"))
                 : ""
             }
-            multiselect
+            multiSelect
             required={!no_certificate}
             aria-required={!no_certificate}
           />

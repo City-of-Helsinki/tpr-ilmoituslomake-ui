@@ -157,8 +157,8 @@ export type NotificationValidationAction =
   | SetNotificationTagValidationAction
   | SetNotificationCertificateValidationAction
   | SetNotificationLabelValidationAction
-  | SetNotificationOtherCertificateValidationAction 
-  | SetNotificationOtherCertificateUrlValidationAction 
+  | SetNotificationOtherCertificateValidationAction
+  | SetNotificationOtherCertificateUrlValidationAction
   | SetNotificationNotifierValidationAction
   | SetNotificationAddressValidationAction
   | SetNotificationWholeAddressValidationAction

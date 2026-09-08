@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useI18n } from "next-localization";
-import { Button, IconArrowRight, IconArrowUndo, IconTrash } from "hds-react";
+import { Button, ButtonVariant, IconArrowRight, IconArrowUndo, IconTrash } from "hds-react";
 import { RootState } from "../../state/reducers";
 import { ItemType, ModerationStatus, TaskStatus, TaskType, Toast } from "../../types/constants";
 import { Photo } from "../../types/general";
@@ -426,7 +426,7 @@ const TaskHeaderButtons = ({ isModerated, setToast }: TaskHeaderButtonsProps): R
           {(taskStatus === TaskStatus.Closed || taskStatus === TaskStatus.Rejected || taskStatus === TaskStatus.Cancelled) && selectedTaskId > 0 && (
             <div className={styles.flexButton}>
               <Button
-                variant="secondary"
+                variant={ButtonVariant.Secondary}
                 onClick={() => makePlaceInfoChangeRequest(ItemType.ChangeRequestChange)}
                 disabled={taskStatus !== TaskStatus.Closed && taskStatus !== TaskStatus.Rejected && taskStatus !== TaskStatus.Cancelled}
               >
@@ -434,11 +434,11 @@ const TaskHeaderButtons = ({ isModerated, setToast }: TaskHeaderButtonsProps): R
               </Button>
             </div>
           )}
-          {/* <Button variant="secondary">{i18n.t("moderation.button.requestTranslation")}</Button> */}
+          {/* <Button variant={ButtonVariant.Secondary}>{i18n.t("moderation.button.requestTranslation")}</Button> */}
           <div className={styles.flexButton}>
             <Button
-              variant="secondary"
-              iconRight={<IconArrowUndo aria-hidden />}
+              variant={ButtonVariant.Secondary}
+              iconEnd={<IconArrowUndo aria-hidden />}
               onClick={openRejectionConfirmation}
               disabled={taskStatus === TaskStatus.Closed || taskStatus === TaskStatus.Rejected || taskStatus === TaskStatus.Cancelled}
             >
@@ -447,7 +447,7 @@ const TaskHeaderButtons = ({ isModerated, setToast }: TaskHeaderButtonsProps): R
           </div>
           <div className={styles.flexButton}>
             <Button
-              iconRight={<IconArrowRight aria-hidden />}
+              iconEnd={<IconArrowRight aria-hidden />}
               onClick={openApprovalConfirmation}
               disabled={!isModerated || taskStatus === TaskStatus.Closed || taskStatus === TaskStatus.Rejected || taskStatus === TaskStatus.Cancelled}
             >
@@ -466,7 +466,7 @@ const TaskHeaderButtons = ({ isModerated, setToast }: TaskHeaderButtonsProps): R
           {(taskStatus === TaskStatus.Closed || taskStatus === TaskStatus.Rejected || taskStatus === TaskStatus.Cancelled) && selectedTaskId > 0 && (
             <div className={styles.flexButton}>
               <Button
-                variant="secondary"
+                variant={ButtonVariant.Secondary}
                 onClick={() => makePlaceInfoChangeRequest(ItemType.ChangeRequestChange)}
                 disabled={taskStatus !== TaskStatus.Closed && taskStatus !== TaskStatus.Rejected && taskStatus !== TaskStatus.Cancelled}
               >
@@ -477,8 +477,8 @@ const TaskHeaderButtons = ({ isModerated, setToast }: TaskHeaderButtonsProps): R
           {/* <Button variant="secondary">{i18n.t("moderation.button.requestTranslation")}</Button> */}
           <div className={styles.flexButton}>
             <Button
-              variant="secondary"
-              iconRight={<IconArrowUndo aria-hidden />}
+              variant={ButtonVariant.Secondary}
+              iconEnd={<IconArrowUndo aria-hidden />}
               onClick={
                 taskType === TaskType.ChangeTip || taskType === TaskType.ModeratorChange
                   ? openChangeCancellationConfirmation
@@ -493,7 +493,7 @@ const TaskHeaderButtons = ({ isModerated, setToast }: TaskHeaderButtonsProps): R
           </div>
           <div className={styles.flexButton}>
             <Button
-              variant="secondary"
+              variant={ButtonVariant.Secondary}
               onClick={openSaveAsDraftConfirmation}
               disabled={taskStatus === TaskStatus.Closed || taskStatus === TaskStatus.Rejected || taskStatus === TaskStatus.Cancelled}
             >
@@ -502,7 +502,7 @@ const TaskHeaderButtons = ({ isModerated, setToast }: TaskHeaderButtonsProps): R
           </div>
           <div className={styles.flexButton}>
             <Button
-              iconRight={<IconArrowRight aria-hidden />}
+              iconEnd={<IconArrowRight aria-hidden />}
               onClick={openSaveConfirmation}
               disabled={!isModerated || taskStatus === TaskStatus.Closed || taskStatus === TaskStatus.Rejected || taskStatus === TaskStatus.Cancelled}
             >
@@ -517,8 +517,8 @@ const TaskHeaderButtons = ({ isModerated, setToast }: TaskHeaderButtonsProps): R
           <div className="flexSpace" />
           <div className={styles.flexButton}>
             <Button
-              variant="secondary"
-              iconRight={<IconArrowUndo aria-hidden />}
+              variant={ButtonVariant.Secondary}
+              iconEnd={<IconArrowUndo aria-hidden />}
               onClick={openDeleteCancellationConfirmation}
               disabled={taskStatus === TaskStatus.Closed || taskStatus === TaskStatus.Rejected || taskStatus === TaskStatus.Cancelled}
             >
@@ -527,7 +527,8 @@ const TaskHeaderButtons = ({ isModerated, setToast }: TaskHeaderButtonsProps): R
           </div>
           <div className={styles.flexButton}>
             <Button
-              iconRight={<IconTrash aria-hidden />}
+              variant={ButtonVariant.Secondary}
+              iconEnd={<IconTrash aria-hidden />}
               onClick={openDeletionConfirmation}
               disabled={taskStatus === TaskStatus.Closed || taskStatus === TaskStatus.Rejected || taskStatus === TaskStatus.Cancelled}
             >
@@ -541,13 +542,13 @@ const TaskHeaderButtons = ({ isModerated, setToast }: TaskHeaderButtonsProps): R
         <div className={styles.buttonRow}>
           <div className={`${styles.flexButton} ${styles.returnButton}`}>
             <Link href="/moderation/place">
-              <Button variant="secondary">{i18n.t("moderation.button.returnToSearch")}</Button>
+              <Button variant={ButtonVariant.Secondary}>{i18n.t("moderation.button.returnToSearch")}</Button>
             </Link>
           </div>
           <div className="flexSpace" />
           <div className={styles.flexButton}>
             <Button
-              variant="secondary"
+              variant={ButtonVariant.Secondary}
               onClick={() => makePlaceInfoChangeRequest(ItemType.ChangeRequestChange)}
               disabled={taskStatus === TaskStatus.Closed || taskStatus === TaskStatus.Rejected || taskStatus === TaskStatus.Cancelled}
             >
@@ -556,8 +557,8 @@ const TaskHeaderButtons = ({ isModerated, setToast }: TaskHeaderButtonsProps): R
           </div>
           <div className={styles.flexButton}>
             <Button
-              variant="secondary"
-              iconRight={<IconTrash aria-hidden />}
+              variant={ButtonVariant.Secondary}
+              iconEnd={<IconTrash aria-hidden />}
               onClick={() => makePlaceInfoChangeRequest(ItemType.ChangeRequestDelete)}
               disabled={taskStatus === TaskStatus.Closed || taskStatus === TaskStatus.Rejected || taskStatus === TaskStatus.Cancelled}
             >

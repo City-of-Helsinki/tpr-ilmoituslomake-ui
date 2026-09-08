@@ -1,6 +1,6 @@
 import React, { ReactElement } from "react";
 import { useI18n } from "next-localization";
-import { Button, IconCheck, IconCross } from "hds-react";
+import { Button, ButtonSize, ButtonVariant, IconCheck, IconCross } from "hds-react";
 import { ModerationStatus, TaskStatus } from "../../types/constants";
 import styles from "./ActionButton.module.scss";
 
@@ -27,13 +27,14 @@ const ActionButton = ({ id, className, fieldName, moderationStatus, taskStatus, 
                 ? styles.approveSecondary
                 : ""
             }
-            variant="secondary"
-            size="small"
+            variant={ButtonVariant.Secondary}
+            size={ButtonSize.Small}
             aria-label={i18n.t("moderation.button.approve")}
             onClick={() => actionCallback(fieldName, ModerationStatus.Approved)}
             disabled={taskStatus === TaskStatus.Closed || taskStatus === TaskStatus.Rejected || taskStatus === TaskStatus.Cancelled}
+            iconStart={ <IconCheck aria-hidden />}
           >
-            <IconCheck aria-hidden />
+            {i18n.t("moderation.button.approve")}
           </Button>
           <Button
             className={
@@ -41,13 +42,13 @@ const ActionButton = ({ id, className, fieldName, moderationStatus, taskStatus, 
                 ? styles.rejectSecondary
                 : ""
             }
-            variant="secondary"
-            size="small"
+            variant={ButtonVariant.Secondary}
+            size={ButtonSize.Small}
             aria-label={i18n.t("moderation.button.reject")}
             onClick={() => actionCallback(fieldName, ModerationStatus.Rejected)}
             disabled={taskStatus === TaskStatus.Closed || taskStatus === TaskStatus.Rejected || taskStatus === TaskStatus.Cancelled}
-          >
-            <IconCross aria-hidden />
+            iconStart={<IconCross aria-hidden />}
+          >{i18n.t("moderation.button.reject")}
           </Button>
         </div>
       )}
@@ -55,8 +56,8 @@ const ActionButton = ({ id, className, fieldName, moderationStatus, taskStatus, 
         <div className={styles.buttonRow}>
           <Button
             className={styles.approve}
-            iconLeft={<IconCheck aria-hidden />}
-            variant="success"
+            iconStart={<IconCheck aria-hidden />}
+            variant={ButtonVariant.Success}
             onClick={() => actionCallback(fieldName, ModerationStatus.Edited)}
             disabled={taskStatus === TaskStatus.Closed || taskStatus === TaskStatus.Rejected || taskStatus === TaskStatus.Cancelled}
           >
@@ -68,8 +69,8 @@ const ActionButton = ({ id, className, fieldName, moderationStatus, taskStatus, 
         <div className={styles.buttonRow}>
           <Button
             className={styles.reject}
-            iconLeft={<IconCross aria-hidden />}
-            variant="danger"
+            iconStart={<IconCross aria-hidden />}
+            variant={ButtonVariant.Danger}
             onClick={() => actionCallback(fieldName, ModerationStatus.Edited)}
             disabled={taskStatus === TaskStatus.Closed || taskStatus === TaskStatus.Rejected || taskStatus === TaskStatus.Cancelled}
           >

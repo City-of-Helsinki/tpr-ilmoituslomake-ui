@@ -11,8 +11,10 @@ import { isNotifierFieldValid } from "../../utils/validation";
 
 const Notifier = (): ReactElement => {
   const i18n = useI18n();
-  const dispatch = useDispatch<Dispatch<NotificationAction>>();
-  const dispatchValidation = useDispatch<Dispatch<NotificationValidationAction>>();
+  //const dispatch = useDispatch<Dispatch<NotificationAction>>();
+  //const dispatchValidation = useDispatch<Dispatch<NotificationValidationAction>>();
+  const dispatch = useDispatch();
+  const dispatchValidation = useDispatch();
 
   const notification = useSelector((state: RootState) => state.notification.notification);
   const {
@@ -28,9 +30,10 @@ const Notifier = (): ReactElement => {
     dispatch(setNotificationNotifier({ [evt.target.name]: evt.target.value }));
   };
 
-  const validateNotifier = (evt: ChangeEvent<HTMLInputElement>) => {
-    dispatch(setNotificationNotifier({ [evt.target.name]: (notification.notifier[evt.target.name] as string).trim() }));
-    isNotifierFieldValid(evt.target.name, notification, dispatchValidation);
+  const validateNotifier = (evt: ChangeEvent<HTMLInputElement | HTMLDivElement>) => {
+    const target = evt.target as HTMLInputElement;
+    dispatch(setNotificationNotifier({ [target.name]: (notification.notifier[target.name] as string).trim() }));
+    isNotifierFieldValid(target.name, notification, dispatchValidation);
   };
 
   return (

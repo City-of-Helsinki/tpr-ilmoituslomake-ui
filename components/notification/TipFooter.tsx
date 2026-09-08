@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useI18n } from "next-localization";
-import { Button } from "hds-react";
+import { Button, ButtonVariant } from "hds-react";
 import { NotificationAction } from "../../state/actions/notificationTypes";
 import { NotificationValidationAction } from "../../state/actions/notificationValidationTypes";
 import { setNotificationSending } from "../../state/actions/notification";
@@ -20,8 +20,10 @@ interface TipFooterProps {
 
 const TipFooter = ({ setToast }: TipFooterProps): ReactElement => {
   const i18n = useI18n();
-  const dispatch = useDispatch<Dispatch<NotificationAction>>();
-  const dispatchValidation = useDispatch<Dispatch<NotificationValidationAction>>();
+  //const dispatch = useDispatch<Dispatch<NotificationAction>>();
+  //const dispatchValidation = useDispatch<Dispatch<NotificationValidationAction>>();
+  const dispatch = useDispatch();
+  const dispatchValidation = useDispatch();
   const router = useRouter();
 
   const tip = useSelector((state: RootState) => state.notification.tip);
@@ -53,7 +55,7 @@ const TipFooter = ({ setToast }: TipFooterProps): ReactElement => {
 
       <div className={`${styles.flexButton} ${styles.flexButtonRight}`}>
         <Link href="/">
-          <Button variant="secondary">{i18n.t("notification.button.close")}</Button>
+          <Button variant={ButtonVariant.Secondary}>{i18n.t("notification.button.close")}</Button>
         </Link>
       </div>
     </div>

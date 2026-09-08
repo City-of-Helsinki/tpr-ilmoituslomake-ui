@@ -2,7 +2,7 @@ import React, { Dispatch, ReactElement } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useRouter } from "next/router";
 import { useI18n } from "next-localization";
-import { Button, IconAlertCircleFill, IconCrossCircleFill, IconInfoCircle } from "hds-react";
+import { Button, ButtonSize, ButtonVariant, IconAlertCircleFill, IconCrossCircleFill, IconInfoCircle } from "hds-react";
 import { setModerationTranslationRequest } from "../../../state/actions/moderationTranslation";
 import { ModerationTranslationAction } from "../../../state/actions/moderationTranslationTypes";
 import { RootState } from "../../../state/reducers";
@@ -15,7 +15,8 @@ import styles from "./RequestPlaces.module.scss";
 
 const RequestPlaces = (): ReactElement => {
   const i18n = useI18n();
-  const dispatch = useDispatch<Dispatch<ModerationTranslationAction>>();
+  //const dispatch = useDispatch<Dispatch<ModerationTranslationAction>>();
+  const dispatch = useDispatch();
   const router = useRouter();
 
   const requestDetail = useSelector((state: RootState) => state.moderationTranslation.requestDetail);
@@ -49,8 +50,8 @@ const RequestPlaces = (): ReactElement => {
             <div key={key} className={styles.placeItem}>
               <span className={styles.placeName}>{getDisplayName(router.locale || defaultLocale, name)}</span>
               <Button
-                variant="secondary"
-                size="small"
+                variant={ButtonVariant.Secondary}
+                size={ButtonSize.Small}
                 aria-label={i18n.t("moderation.button.collapse")}
                 onClick={() => removePlaceFromSelection(placeId)}
                 disabled={
@@ -59,8 +60,10 @@ const RequestPlaces = (): ReactElement => {
                   taskStatus === TaskStatus.Rejected ||
                   taskStatus === TaskStatus.Cancelled
                 }
+                iconStart=<IconCrossCircleFill aria-hidden />
               >
-                <IconCrossCircleFill aria-hidden />
+                {i18n.t("moderation.button.collapse")}
+                
               </Button>
             </div>
           );

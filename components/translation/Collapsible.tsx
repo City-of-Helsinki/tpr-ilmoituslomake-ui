@@ -1,6 +1,6 @@
 import React, { ReactElement, ReactNode, useState, useEffect } from "react";
 import { useI18n } from "next-localization";
-import { Button, IconMinus, IconPlus } from "hds-react";
+import { Button, ButtonSize, ButtonVariant, IconMinus, IconPlus } from "hds-react";
 import { TaskStatus } from "../../types/constants";
 import TaskStatusLabel from "../common/TaskStatusLabel";
 import styles from "./Collapsible.module.scss";
@@ -51,13 +51,13 @@ const Collapsible = ({ prefix, section, title, taskStatus, isTranslated, forceEx
         </div>
         <div className={styles.button}>
           {expanded && (
-            <Button variant="secondary" size="small" aria-label={i18n.t(`${prefix}.button.collapse`)} onClick={toggle}>
-              <IconMinus aria-hidden />
+            <Button variant={ButtonVariant.Secondary} size={ButtonSize.Small} aria-label={i18n.t(`${prefix}.button.collapse`)} onClick={toggle} iconStart={<IconMinus aria-hidden />}>
+              {i18n.t(`${prefix}.button.collapse`)}
             </Button>
           )}
           {!expanded && (
-            <Button variant="secondary" size="small" aria-label={i18n.t(`${prefix}.button.expand`)} onClick={toggle}>
-              <IconPlus aria-hidden />
+            <Button variant={ButtonVariant.Secondary} size={ButtonSize.Small} aria-label={i18n.t(`${prefix}.button.expand`)} onClick={toggle} iconStart={<IconPlus aria-hidden />}>
+              {i18n.t(`${prefix}.button.expand`)}
             </Button>
           )}
         </div>

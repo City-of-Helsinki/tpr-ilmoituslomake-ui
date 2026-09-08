@@ -1,7 +1,7 @@
 import React, { Dispatch, ChangeEvent, ReactElement, useRef } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useI18n } from "next-localization";
-import { Button, IconLink, IconUpload, Notification as HdsNotification, TextArea, TextInput } from "hds-react";
+import { Button, ButtonVariant, IconLink, IconUpload, Notification as HdsNotification, TextArea, TextInput, NotificationSize } from "hds-react";
 import { v4 as uuidv4 } from "uuid";
 import { ModerationAction } from "../../state/actions/moderationTypes";
 import { ModerationStatusAction } from "../../state/actions/moderationStatusTypes";
@@ -17,8 +17,10 @@ import styles from "./PhotosModeration.module.scss";
 
 const PhotosModeration = (): ReactElement => {
   const i18n = useI18n();
-  const dispatch = useDispatch<Dispatch<ModerationAction>>();
-  const dispatchStatus = useDispatch<Dispatch<ModerationStatusAction>>();
+  //const dispatch = useDispatch<Dispatch<ModerationAction>>();
+  //const dispatchStatus = useDispatch<Dispatch<ModerationStatusAction>>();
+  const dispatch = useDispatch();
+  const dispatchStatus = useDispatch();
   const ref = useRef<HTMLInputElement>(null);
 
   const moderationExtra = useSelector((state: RootState) => state.moderation.moderationExtra);
@@ -165,7 +167,7 @@ const PhotosModeration = (): ReactElement => {
                 {(taskType === TaskType.NewPlace || taskType === TaskType.PlaceChange) && (
                   <div className={styles.gridSelected}>
                     {!modifiedImage && (
-                      <HdsNotification size="small" type="alert">
+                      <HdsNotification size={NotificationSize.Small} type="alert">
                         {i18n.t(`moderation.photos.removed`)}
                       </HdsNotification>
                     )}
@@ -192,7 +194,7 @@ const PhotosModeration = (): ReactElement => {
                     <>
                       <input className="hidden" type="file" ref={ref} onChange={(evt) => fetchPhoto(index, evt)} />
                       <div className={styles.gridButton}>
-                        <Button variant="secondary" onClick={() => selectPhoto()}>
+                        <Button variant={ButtonVariant.Secondary} onClick={() => selectPhoto()}>
                           {i18n.t("moderation.button.selectFromDevice")}
                         </Button>
                       </div>
@@ -201,7 +203,7 @@ const PhotosModeration = (): ReactElement => {
                   {modifiedImage && (
                     <div className={styles.gridButton}>
                       <Button
-                        variant="secondary"
+                        variant={ButtonVariant.Secondary}
                         onClick={() => removePhoto(index)}
                         disabled={taskStatus === TaskStatus.Closed || taskStatus === TaskStatus.Rejected || taskStatus === TaskStatus.Cancelled}
                       >
@@ -315,12 +317,12 @@ const PhotosModeration = (): ReactElement => {
           <div className={`gridLayoutContainer moderation ${styles.addNewContainer}`}>
             <div className={styles.gridSelected}>
               <div className={styles.gridButton}>
-                <Button variant="secondary" iconRight={<IconUpload aria-hidden />} onClick={() => addPhoto(PhotoSourceType.Device)}>
+                <Button variant={ButtonVariant.Secondary} iconEnd={<IconUpload aria-hidden />} onClick={() => addPhoto(PhotoSourceType.Device)}>
                   {i18n.t("moderation.photos.addNewFromDevice")}
                 </Button>
               </div>
               <div className={styles.gridButton}>
-                <Button variant="secondary" iconRight={<IconLink aria-hidden />} onClick={() => addPhoto(PhotoSourceType.Link)}>
+                <Button variant={ButtonVariant.Secondary} iconEnd={<IconLink aria-hidden />} onClick={() => addPhoto(PhotoSourceType.Link)}>
                   {i18n.t("moderation.photos.addNewFromLink")}
                 </Button>
               </div>

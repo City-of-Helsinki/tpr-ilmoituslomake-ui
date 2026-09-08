@@ -2,7 +2,7 @@ import React, { Dispatch, ReactElement, SetStateAction, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { NextRouter, useRouter } from "next/router";
 import { useI18n } from "next-localization";
-import { Button, IconArrowRight } from "hds-react";
+import { Button, ButtonVariant, IconArrowRight } from "hds-react";
 import { setTranslationTaskPageValid, setTranslationTaskValidationSummary } from "../../state/actions/translation";
 import { TranslationAction } from "../../state/actions/translationTypes";
 import { RootState } from "../../state/reducers";
@@ -34,7 +34,8 @@ interface TaskHeaderButtonsProps {
 
 const TaskHeaderButtons = ({ prefix, backHref, isModeration, saveTranslation, setToast }: TaskHeaderButtonsProps): ReactElement => {
   const i18n = useI18n();
-  const dispatchValidation = useDispatch<Dispatch<TranslationAction>>();
+  //const dispatchValidation = useDispatch<Dispatch<TranslationAction>>();
+  const dispatchValidation = useDispatch();
   const router = useRouter();
 
   const currentUser = useSelector((state: RootState) => state.general.user);
@@ -124,14 +125,14 @@ const TaskHeaderButtons = ({ prefix, backHref, isModeration, saveTranslation, se
       {taskType === TaskType.Translation && (
         <div className={styles.buttonRow}>
           <div className={styles.flexButton}>
-            <Button variant="secondary" onClick={checkUnsavedChanges}>
+            <Button variant={ButtonVariant.Secondary} onClick={checkUnsavedChanges}>
               {i18n.t(`${prefix}.button.back`)}
             </Button>
           </div>
           <div className="flexSpace" />
           <div className={styles.flexButton}>
             <Button
-              variant="secondary"
+              variant={ButtonVariant.Secondary}
               onClick={openSaveDraftConfirmation}
               disabled={taskStatus === TaskStatus.Closed || taskStatus === TaskStatus.Rejected || taskStatus === TaskStatus.Cancelled}
             >
@@ -141,7 +142,7 @@ const TaskHeaderButtons = ({ prefix, backHref, isModeration, saveTranslation, se
           {!isModeration && (
             <div className={`${styles.flexButton} ${styles.sendButton}`}>
               <Button
-                iconRight={<IconArrowRight aria-hidden />}
+                iconEnd={<IconArrowRight aria-hidden />}
                 onClick={openSendConfirmation}
                 disabled={taskStatus === TaskStatus.Closed || taskStatus === TaskStatus.Rejected || taskStatus === TaskStatus.Cancelled}
               >
@@ -152,7 +153,7 @@ const TaskHeaderButtons = ({ prefix, backHref, isModeration, saveTranslation, se
           {isModeration && (
             <div className={`${styles.flexButton} ${styles.saveButton}`}>
               <Button
-                iconRight={<IconArrowRight aria-hidden />}
+                iconEnd={<IconArrowRight aria-hidden />}
                 onClick={openSaveConfirmation}
                 disabled={taskStatus === TaskStatus.Closed || taskStatus === TaskStatus.Rejected || taskStatus === TaskStatus.Cancelled}
               >

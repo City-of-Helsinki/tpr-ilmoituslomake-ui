@@ -2,7 +2,7 @@ import React, { ReactElement } from "react";
 import { useSelector } from "react-redux";
 import Link from "next/link";
 import { useI18n } from "next-localization";
-import { Button } from "hds-react";
+import { Button, ButtonVariant } from "hds-react";
 import { RootState } from "../../state/reducers";
 import styles from "./InfoFooter.module.scss";
 
@@ -21,28 +21,28 @@ const InfoFooter = ({ isEditingAllowed }: InfoFooterProps): ReactElement => {
       {currentUser?.authenticated && isEditingAllowed && (
         <div className={styles.flexButton}>
           <Link href={`/notification/${notificationId}`}>
-            <Button variant="secondary">{i18n.t("notification.button.modifyInformation")}</Button>
+            <Button variant={ButtonVariant.Secondary}>{i18n.t("notification.button.modifyInformation")}</Button>
           </Link>
         </div>
       )}
       {!currentUser?.authenticated && isEditingAllowed && (
         <div className={styles.flexButton}>
           <Link href={`/tip/${notificationId}`}>
-            <Button variant="secondary">{i18n.t("notification.button.suggestChange")}</Button>
+            <Button variant={ButtonVariant.Secondary}>{i18n.t("notification.button.suggestChange")}</Button>
           </Link>
         </div>
       )}
       {isEditingAllowed && (
         <div className={styles.flexButton}>
           <Link href={`/tip/${notificationId}`}>
-            <Button variant="secondary">{i18n.t("notification.button.notifyClosingDown")}</Button>
+            <Button variant={ButtonVariant.Secondary}>{i18n.t("notification.button.notifyClosingDown")}</Button>
           </Link>
         </div>
       )}
       <div className="flexSpace" />
       <div className={`${styles.flexButton} ${styles.returnButton}`}>
         <Link href="/search">
-          <Button variant="secondary">{i18n.t("notification.button.close")}</Button>
+          <Button variant={ButtonVariant.Secondary}>{i18n.t("notification.button.close")}</Button>
         </Link>
       </div>
     </div>

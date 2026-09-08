@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import dynamic from "next/dynamic";
 import { useRouter } from "next/router";
 import { useI18n } from "next-localization";
-import { Button, IconPlaybackNext } from "hds-react";
+import { Button, ButtonSize, ButtonVariant, IconPlaybackNext } from "hds-react";
 import { RootState } from "../../state/reducers";
 import { NotifierType, PhotoPermission, LANGUAGE_OPTIONS, MAP_INITIAL_CENTER, MAP_INITIAL_ZOOM } from "../../types/constants";
 import { defaultLocale } from "../../utils/i18n";
@@ -173,7 +173,7 @@ const Preview = ({ className, titleKey, includeNotifier, isPlaceInfo }: PreviewP
       </div>
       <div className={`${styles.gridHeading} ${styles.gridContent}`}>{i18n.t("notification.map.title")}</div>
       <div className={`${styles.gridPlaceInfo} ${styles.gridContent}`}>
-        <Button variant="supplementary" size="small" className="visibleOnFocusOnly" iconRight={<IconPlaybackNext aria-hidden />} onClick={skipMap}>
+        <Button variant={ButtonVariant.Supplementary} size={ButtonSize.Small} className="visibleOnFocusOnly" iconEnd={<IconPlaybackNext aria-hidden />} onClick={skipMap}>
           {i18n.t("notification.map.skipMap")}
         </Button>
         <MapWrapper

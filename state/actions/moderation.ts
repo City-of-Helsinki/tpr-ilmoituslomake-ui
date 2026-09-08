@@ -43,7 +43,7 @@ import {
   SocialMedia,
   TagOption,
   CertificateOption,
-  NoCertificate
+  NoCertificate,
 } from "../../types/general";
 
 export const setModerationPlaceSearch = (placeSearch: ModerationPlaceSearch): ModerationAction => ({

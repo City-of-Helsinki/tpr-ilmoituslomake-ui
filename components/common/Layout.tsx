@@ -15,7 +15,9 @@ const Layout = ({ children }: LayoutProps): ReactElement => {
     // Restore the proper layout styling after client-side rendering here
     if (ref.current) {
       ref.current.className = styles.layout;
+      return;
     }
+    return;
   });
 
   return (

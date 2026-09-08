@@ -1,6 +1,6 @@
 import React, { ReactElement, ReactNode } from "react";
 import { useI18n } from "next-localization";
-import { Button, IconPen } from "hds-react";
+import { Button, ButtonSize, ButtonVariant, IconPen } from "hds-react";
 import { ModerationStatus, TaskStatus } from "../../types/constants";
 import styles from "./ModifyButton.module.scss";
 
@@ -32,7 +32,7 @@ const ModifyButton = ({
       {moderationStatus === ModerationStatus.Unknown && !hidden && (
         <div className={styles.gridButton}>
           <Button
-            variant="secondary"
+            variant={ButtonVariant.Secondary}
             onClick={() => modifyCallback(fieldName, ModerationStatus.Edited)}
             disabled={taskStatus === TaskStatus.Closed || taskStatus === TaskStatus.Rejected || taskStatus === TaskStatus.Cancelled}
           >{`${i18n.t("moderation.button.modify")} ${label ? label.toLowerCase() : ""}`}</Button>
@@ -44,9 +44,9 @@ const ModifyButton = ({
           {children}
           {!hidden && (
             <Button
-              variant="supplementary"
-              size="small"
-              iconLeft={<IconPen aria-hidden />}
+              variant={ButtonVariant.Supplementary}
+              size={ButtonSize.Small}
+              iconStart={<IconPen aria-hidden />}
               onClick={() => modifyCallback(fieldName, ModerationStatus.Edited)}
               disabled={taskStatus === TaskStatus.Closed || taskStatus === TaskStatus.Rejected || taskStatus === TaskStatus.Cancelled}
             >

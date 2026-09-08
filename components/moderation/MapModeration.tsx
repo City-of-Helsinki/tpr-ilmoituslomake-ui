@@ -2,7 +2,7 @@ import React, { Dispatch, ReactElement, useCallback, useEffect, useState } from 
 import { useSelector, useDispatch } from "react-redux";
 import dynamic from "next/dynamic";
 import { useI18n } from "next-localization";
-import { Button, IconPlaybackNext } from "hds-react";
+import { Button, ButtonSize, ButtonVariant, IconPlaybackNext } from "hds-react";
 import { ModerationAction } from "../../state/actions/moderationTypes";
 import { ModerationStatusAction } from "../../state/actions/moderationStatusTypes";
 import { setModerationLocation } from "../../state/actions/moderation";
@@ -17,8 +17,10 @@ const MapWrapper = dynamic(() => import("../common/MapWrapper"), { ssr: false })
 
 const MapModeration = (): ReactElement => {
   const i18n = useI18n();
-  const dispatch = useDispatch<Dispatch<ModerationAction>>();
-  const dispatchStatus = useDispatch<Dispatch<ModerationStatusAction>>();
+  //const dispatch = useDispatch<Dispatch<ModerationAction>>();
+  //const dispatchStatus = useDispatch<Dispatch<ModerationStatusAction>>();
+  const dispatch = useDispatch();
+  const dispatchStatus = useDispatch();
 
   const selectedTask = useSelector((state: RootState) => state.moderation.selectedTask);
   const { location: locationSelected } = selectedTask;
@@ -119,10 +121,10 @@ const MapModeration = (): ReactElement => {
 
           <div className={styles.gridSelected}>
             <Button
-              variant="supplementary"
-              size="small"
+              variant={ButtonVariant.Supplementary}
+              size={ButtonSize.Small}
               className="visibleOnFocusOnly"
-              iconRight={<IconPlaybackNext aria-hidden />}
+              iconEnd={<IconPlaybackNext aria-hidden />}
               onClick={skipMap}
             >
               {i18n.t("moderation.map.skipMap")}
@@ -168,10 +170,10 @@ const MapModeration = (): ReactElement => {
 
           <div className={styles.gridSelected}>
             <Button
-              variant="supplementary"
-              size="small"
+              variant={ButtonVariant.Supplementary}
+              size={ButtonSize.Small}
               className="visibleOnFocusOnly"
-              iconRight={<IconPlaybackNext aria-hidden />}
+              iconEnd={<IconPlaybackNext aria-hidden />}
               onClick={skipMap}
             >
               {i18n.t("moderation.map.skipMap")}

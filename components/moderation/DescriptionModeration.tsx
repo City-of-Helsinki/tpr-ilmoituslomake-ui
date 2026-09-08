@@ -16,8 +16,10 @@ import ModerationSection from "./ModerationSection";
 
 const DescriptionModeration = (): ReactElement => {
   const i18n = useI18n();
-  const dispatch = useDispatch<Dispatch<ModerationAction>>();
-  const dispatchStatus = useDispatch<Dispatch<ModerationStatusAction>>();
+  //const dispatch = useDispatch<Dispatch<ModerationAction>>();
+  //const dispatchStatus = useDispatch<Dispatch<ModerationStatusAction>>();
+  const dispatch = useDispatch();
+  const dispatchStatus = useDispatch();
 
   // Fetch values from redux state
   const selectedTask = useSelector((state: RootState) => state.moderation.selectedTask);

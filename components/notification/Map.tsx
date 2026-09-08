@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { useRouter } from "next/router";
 import dynamic from "next/dynamic";
 import { useI18n } from "next-localization";
-import { Button, IconAlertCircle, IconPlaybackNext } from "hds-react";
+import { Button, ButtonSize, ButtonVariant, IconAlertCircle, IconPlaybackNext } from "hds-react";
 import { LatLngExpression } from "leaflet";
 import { setMapView, setNotificationLocation } from "../../state/actions/notification";
 import { NotificationAction } from "../../state/actions/notificationTypes";
@@ -17,8 +17,10 @@ const MapWrapper = dynamic(() => import("../common/MapWrapper"), { ssr: false })
 
 const Map = (): ReactElement => {
   const i18n = useI18n();
-  const dispatch = useDispatch<Dispatch<NotificationAction>>();
-  const dispatchValidation = useDispatch<Dispatch<NotificationValidationAction>>();
+  //const dispatch = useDispatch<Dispatch<NotificationAction>>();
+  //const dispatchValidation = useDispatch<Dispatch<NotificationValidationAction>>();
+  const dispatch = useDispatch();
+  const dispatchValidation = useDispatch();
   const router = useRouter();
 
   const mapCenter = useSelector((state: RootState) => state.notification.center);
@@ -73,7 +75,7 @@ const Map = (): ReactElement => {
   return (
     <div className="formSection">
       <h3>{i18n.t("notification.map.title")}</h3>
-      <Button variant="supplementary" size="small" className="visibleOnFocusOnly" iconRight={<IconPlaybackNext aria-hidden />} onClick={skipMap}>
+      <Button variant={ButtonVariant.Supplementary} size={ButtonSize.Small} className="visibleOnFocusOnly" iconEnd={<IconPlaybackNext aria-hidden />} onClick={skipMap}>
         {i18n.t("notification.map.skipMap")}
       </Button>
 
@@ -100,7 +102,7 @@ const Map = (): ReactElement => {
 
       <div className={styles.resetLocation}>
         <Button
-          variant="secondary"
+          variant={ButtonVariant.Secondary}
           onClick={() => searchAddress(router, streetFi, postOfficeFi, streetSv, postOfficeSv, dispatch)}
           disabled={!isLocationChanged()}
         >

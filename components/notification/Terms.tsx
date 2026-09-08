@@ -1,6 +1,6 @@
 import React, { ReactElement } from "react";
 import { useI18n } from "next-localization";
-import { Link as HdsLink } from "hds-react";
+import { Link as HdsLink, LinkSize } from "hds-react";
 import { TERMS_URL } from "../../types/constants";
 import styles from "./Terms.module.scss";
 
@@ -16,7 +16,7 @@ const Terms = (): ReactElement => {
           <div className={styles.creativeCommonsLink}>
             <HdsLink
               href={TERMS_URL}
-              size="M"
+              size={LinkSize.Medium}
               openInNewTab
               openInNewTabAriaLabel={i18n.t("common.opensInANewTab")}
               external

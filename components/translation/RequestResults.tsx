@@ -2,8 +2,8 @@ import React, { Dispatch, ReactElement, SetStateAction, Fragment, useCallback, u
 import { useSelector, useDispatch } from "react-redux";
 import dynamic from "next/dynamic";
 import { useI18n } from "next-localization";
-import { Link as HdsLink } from "hds-react";
-import { LinearProgress } from "@material-ui/core";
+import { Link as HdsLink, LinkSize } from "hds-react";
+import { LinearProgress } from "@mui/material";
 import { TranslationAction } from "../../state/actions/translationTypes";
 import { setTranslationTaskSearch } from "../../state/actions/translation";
 import { RootState } from "../../state/reducers";
@@ -25,7 +25,8 @@ interface RequestResultsProps {
 
 const RequestResults = ({ showStatus, showResults, setShowStatus, setShowResults }: RequestResultsProps): ReactElement => {
   const i18n = useI18n();
-  const dispatch = useDispatch<Dispatch<TranslationAction>>();
+  //const dispatch = useDispatch<Dispatch<TranslationAction>>();
+  const dispatch = useDispatch();
 
   const taskResults = useSelector((state: RootState) => state.translation.taskResults);
   const { results } = taskResults;
@@ -164,7 +165,7 @@ const RequestResults = ({ showStatus, showResults, setShowStatus, setShowResults
                 <Fragment key={`requestresult_${requestId}`}>
                   <div className={`${styles.gridColumn1} ${styles.gridContent}`}>
                     <div className={styles.flexItem}>
-                      <HdsLink href="#" size="M" disableVisitedStyles onClick={() => updateSearchRequestOption(formattedRequest)}>
+                      <HdsLink href="#" size={LinkSize.Medium} disableVisitedStyles onClick={() => updateSearchRequestOption(formattedRequest)}>
                         {formattedRequest}
                       </HdsLink>
                     </div>

@@ -5,7 +5,9 @@ const i18nLoader = async (
   isModeration?: boolean,
   isTranslation?: boolean
 ): Promise<{ [locale: string]: { [key: string]: unknown } }> => {
-  const { default: lngDict = {} } = await import(`../locales/${locale || defaultLocale}.json`);
+  // dynamic import() resolves to an empty server chunk in Next.js 13; require() reads the file correctly on the server
+  // eslint-disable-next-line @typescript-eslint/no-var-requires
+  const lngDict = require(`../locales/${locale || defaultLocale}.json`) as { [key: string]: unknown };
 
   // Only return the sections needed in order to reduce page size
   if (isModeration) {

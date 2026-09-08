@@ -2,7 +2,7 @@ import React, { Dispatch, ChangeEvent, ReactElement, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useRouter } from "next/router";
 import { useI18n } from "next-localization";
-import { Button, Checkbox, Combobox, IconPlus, Select, SelectionGroup, TextInput } from "hds-react";
+import { Button, ButtonVariant, Checkbox, IconPlus, Select, SelectionGroup, TextInput } from "hds-react";
 import moment from "moment";
 import { ModerationAction } from "../../state/actions/moderationTypes";
 import { setModerationPlaceSearch, clearModerationPlaceSearch, setModerationPlaceResults } from "../../state/actions/moderation";
@@ -18,7 +18,8 @@ import styles from "./PlaceSearch.module.scss";
 
 const PlaceSearch = (): ReactElement => {
   const i18n = useI18n();
-  const dispatch = useDispatch<Dispatch<ModerationAction>>();
+  //const dispatch = useDispatch<Dispatch<ModerationAction>>();
+  const dispatch = useDispatch();
   const router = useRouter();
 
   const currentUser = useSelector((state: RootState) => state.general.user);
@@ -31,23 +32,23 @@ const PlaceSearch = (): ReactElement => {
   const [toast, setToast] = useState<Toast>();
 
   const languageOptions = [
-    { id: "", label: "" },
-    { id: "fi", label: i18n.t("moderation.placeSearch.language.fi") },
-    { id: "sv", label: i18n.t("moderation.placeSearch.language.sv") },
-    { id: "en", label: i18n.t("moderation.placeSearch.language.en") },
+    { id: "", value: "", label: "" },
+    { id: "fi", value: "fi", label: i18n.t("moderation.placeSearch.language.fi") },
+    { id: "sv", value: "sv", label: i18n.t("moderation.placeSearch.language.sv") },
+    { id: "en", value: "en", label: i18n.t("moderation.placeSearch.language.en") },
   ];
   const publishPermissionOptions = ["yes", "no"];
 
   const convertValueWithId = (value: string | undefined): OptionType | undefined => languageOptions.find((l) => l.id === value);
 
   const convertOptions = (options: TagOption[]): OptionType[] =>
-    options.map((tag) => ({ id: tag.id, label: tag.ontologyword[router.locale || defaultLocale] as string })).sort(sortByOptionLabel);
+    options.map((tag) => ({ value: tag.id, label: tag.ontologyword[router.locale || defaultLocale] as string })).sort(sortByOptionLabel);
 
   const convertMatkoOptions = (options: MatkoTagOption[]): OptionType[] =>
-    options.map((tag) => ({ id: tag.id, label: tag.matkoword[router.locale || defaultLocale] as string })).sort(sortByOptionLabel);
+    options.map((tag) => ({ value: tag.id, label: tag.matkoword[router.locale || defaultLocale] as string })).sort(sortByOptionLabel);
 
   const convertCertificateOptions = (options: CertificateOption[]): OptionType[] =>
-    options.map((tag) => ({ id: tag.id, label: tag.certificatename[router.locale || defaultLocale] as string })).sort(sortByOptionLabel);
+    options.map((tag) => ({ value: tag.id, label: tag.certificatename[router.locale || defaultLocale] as string })).sort(sortByOptionLabel);
 
   const convertValues = (values: number[]): OptionType[] => convertOptions(tagOptions.filter((tag) => values.includes(tag.id)));
 
@@ -60,20 +61,26 @@ const PlaceSearch = (): ReactElement => {
     dispatch(setModerationPlaceSearch({ ...placeSearch, [evt.target.name]: evt.target.value }));
   };
 
+  /*
   const updateSearchLanguage = (selected: OptionType) => {
-    dispatch(setModerationPlaceSearch({ ...placeSearch, language: selected ? (selected.id as string) : "" }));
+    dispatch(setModerationPlaceSearch({ ...placeSearch, language: selected ? (selected.value as string) : "" }));
+  };*/
+
+
+  const updateSearchLanguage = (selected: OptionType[]) => {
+    dispatch(setModerationPlaceSearch({ ...placeSearch, language: selected && selected.length > 0 ? (selected[0].value as string) : "" }));
   };
 
   const updateSearchTags = (selected: OptionType[]) => {
-    dispatch(setModerationPlaceSearch({ ...placeSearch, ontologyIds: selected.map((s) => s.id as number) }));
+    dispatch(setModerationPlaceSearch({ ...placeSearch, ontologyIds: selected.map((s) => s.value as number) }));
   };
 
   const updateSearchMatkoTags = (selected: OptionType[]) => {
-    dispatch(setModerationPlaceSearch({ ...placeSearch, matkoIds: selected.map((s) => s.id as number) }));
+    dispatch(setModerationPlaceSearch({ ...placeSearch, matkoIds: selected.map((s) => s.value as number) }));
   };
 
   const updateSearchCertificates = (selected: OptionType[]) => {
-    dispatch(setModerationPlaceSearch({ ...placeSearch, certificateIds: selected.map((s) => s.id as number) }));
+    dispatch(setModerationPlaceSearch({ ...placeSearch, certificateIds: selected.map((s) => s.value as number) }));
   };
 
   const updatePublishPermission = (evt: ChangeEvent<HTMLInputElement>) => {
@@ -150,7 +157,7 @@ const PlaceSearch = (): ReactElement => {
         <h1 className="moderation">{i18n.t("moderation.placeSearch.title")}</h1>
         <div className="flexSpace" />
         <div>
-          <Button className={styles.primary} iconLeft={<IconPlus aria-hidden />} onClick={makeNewPlaceChangeRequest}>
+          <Button className={styles.primary} iconStart={<IconPlus aria-hidden />} onClick={makeNewPlaceChangeRequest}>
             {i18n.t("moderation.button.addNewPlace")}
           </Button>
         </div>
@@ -171,11 +178,13 @@ const PlaceSearch = (): ReactElement => {
           id="language"
           className={styles.gridColumn2}
           options={languageOptions}
-          value={convertValueWithId(language)}
+          value={language}
           onChange={updateSearchLanguage}
-          label={i18n.t("moderation.placeSearch.language.label")}
-          selectedItemRemoveButtonAriaLabel={i18n.t("moderation.button.remove")}
-          clearButtonAriaLabel={i18n.t("moderation.button.clearAllSelections")}
+          texts={{
+            label: i18n.t("moderation.placeSearch.language.label"),
+            tagRemoveSelectionAriaLabel: i18n.t("moderation.button.remove"),
+            tagsClearAllButton: i18n.t("moderation.button.clearAllSelections")
+          }}
         />
         <SelectionGroup
           id="publishPermission"
@@ -212,46 +221,52 @@ const PlaceSearch = (): ReactElement => {
           onChange={updateSearchText}
         />
 
-        <Combobox
+        <Select
           id="tag"
           className={styles.gridColumn1}
           // @ts-ignore: Erroneous error that the type for options should be OptionType[][]
           options={convertOptions(tagOptions)}
-          value={convertValues(ontologyIds)}
+          value={convertValues(ontologyIds) as any}
           onChange={updateSearchTags}
-          label={i18n.t("moderation.placeSearch.tag.label")}
-          toggleButtonAriaLabel={i18n.t("notification.button.toggleMenu")}
-          selectedItemRemoveButtonAriaLabel={i18n.t("notification.button.remove")}
-          clearButtonAriaLabel={i18n.t("notification.button.clearAllSelections")}
-          multiselect
+          texts={{
+            label: i18n.t("moderation.placeSearch.tag.label"),
+            dropdownButtonAriaLabel: i18n.t("moderation.button.toggleMenu"),
+            tagRemoveSelectionAriaLabel: i18n.t("moderation.button.remove"),
+            tagsClearAllButton: i18n.t("moderation.button.clearAllSelections")
+          }}
+          multiSelect
         />
 
-        <Combobox
+        <Select
           id="matkoTag"
           className={styles.gridColumn2}
           // @ts-ignore: Erroneous error that the type for options should be OptionType[][]
           options={convertMatkoOptions(matkoTagOptions)}
-          value={convertMatkoValues(matkoIds)}
+          value={convertMatkoValues(matkoIds) as any}
           onChange={updateSearchMatkoTags}
-          label={i18n.t("moderation.placeSearch.matko.label")}
-          toggleButtonAriaLabel={i18n.t("notification.button.toggleMenu")}
-          selectedItemRemoveButtonAriaLabel={i18n.t("notification.button.remove")}
-          clearButtonAriaLabel={i18n.t("notification.button.clearAllSelections")}
-          multiselect
+          texts={{
+              label: i18n.t("moderation.placeSearch.matko.label"),
+              dropdownButtonAriaLabel: i18n.t("moderation.button.toggleMenu"),
+              tagRemoveSelectionAriaLabel: i18n.t("moderation.button.remove"),
+              tagsClearAllButton: i18n.t("moderation.button.clearAllSelections")
+          }}
+          multiSelect
         />
 
-        <Combobox
+        <Select
           id="certificate"
           className={styles.gridColumn1}
           // @ts-ignore: Erroneous error that the type for options should be OptionType[][]
           options={convertCertificateOptions(certificateOptions)}
-          value={convertCertificateValues(certificateIds)}
+          value={convertCertificateValues(certificateIds) as any}
           onChange={updateSearchCertificates}
-          label={i18n.t("moderation.placeSearch.tag.label")}
-          toggleButtonAriaLabel={i18n.t("notification.button.toggleMenu")}
-          selectedItemRemoveButtonAriaLabel={i18n.t("notification.button.remove")}
-          clearButtonAriaLabel={i18n.t("notification.button.clearAllSelections")}
-          multiselect
+          texts={{
+            label: i18n.t("moderation.placeSearch.certificate.label"),
+            dropdownButtonAriaLabel: i18n.t("moderation.button.toggleMenu"),
+            tagRemoveSelectionAriaLabel: i18n.t("moderation.button.remove"),
+            tagsClearAllButton: i18n.t("moderation.button.clearAllSelections")
+          }}
+          multiSelect
         />
 
         <div className={`${styles.gridColumn1} ${styles.searchButtons}`}>
@@ -259,7 +274,7 @@ const PlaceSearch = (): ReactElement => {
             <Button onClick={searchPlaces}>{i18n.t("moderation.button.search")}</Button>
           </div>
           <div className={styles.flexButton}>
-            <Button variant="secondary" onClick={clearPlaceSearch}>
+            <Button variant={ButtonVariant.Secondary} onClick={clearPlaceSearch}>
               {i18n.t("moderation.button.clear")}
             </Button>
           </div>

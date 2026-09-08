@@ -15,7 +15,8 @@ interface DescriptionTranslationProps {
 
 const DescriptionTranslation = ({ prefix, buttonsPrefix }: DescriptionTranslationProps): ReactElement => {
   const i18n = useI18n();
-  const dispatch = useDispatch<Dispatch<TranslationAction>>();
+  //const dispatch = useDispatch<Dispatch<TranslationAction>>();
+  const dispatch = useDispatch();
 
   // Fetch values from redux state
   const selectedTask = useSelector((state: RootState) => state.translation.selectedTask);

@@ -11,7 +11,8 @@ import styles from "./TipType.module.scss";
 
 const TipType = (): ReactElement => {
   const i18n = useI18n();
-  const dispatch = useDispatch<Dispatch<NotificationAction>>();
+  //const dispatch = useDispatch<Dispatch<NotificationAction>>();
+  const dispatch = useDispatch();
 
   // Note: this only works for client-side rendering
   const isScreenSizeXS = useMediaQuery({ query: `only screen and (max-width: ${styles.max_breakpoint_xs})` });

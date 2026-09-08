@@ -1,7 +1,7 @@
 import React, { Dispatch, ChangeEvent, ReactElement } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useI18n } from "next-localization";
-import { Button, IconPlus, Notification as HdsNotification, TextInput } from "hds-react";
+import { Button, ButtonVariant, IconPlus, Notification as HdsNotification, NotificationSize, TextInput } from "hds-react";
 import { v4 as uuidv4 } from "uuid";
 import { ModerationAction } from "../../state/actions/moderationTypes";
 import { ModerationStatusAction } from "../../state/actions/moderationStatusTypes";
@@ -15,8 +15,10 @@ import styles from "./SocialMediaModeration.module.scss";
 
 const SocialMediaModeration = (): ReactElement => {
   const i18n = useI18n();
-  const dispatch = useDispatch<Dispatch<ModerationAction>>();
-  const dispatchStatus = useDispatch<Dispatch<ModerationStatusAction>>();
+  //const dispatch = useDispatch<Dispatch<ModerationAction>>();
+  //const dispatchStatus = useDispatch<Dispatch<ModerationStatusAction>>();
+  const dispatch = useDispatch();
+  const dispatchStatus = useDispatch();
 
   const selectedTask = useSelector((state: RootState) => state.moderation.selectedTask);
   const { social_media: socialMediaSelected = [] } = selectedTask;
@@ -118,7 +120,7 @@ const SocialMediaModeration = (): ReactElement => {
                 {(taskType === TaskType.NewPlace || taskType === TaskType.PlaceChange) && (
                   <div className={styles.gridSelected}>
                     {!modifiedSocialMediaItem && (
-                      <HdsNotification size="small" type="alert">
+                      <HdsNotification size={NotificationSize.Small} type="alert">
                         {i18n.t(`moderation.socialMedia.removed`)}
                       </HdsNotification>
                     )}
@@ -143,7 +145,7 @@ const SocialMediaModeration = (): ReactElement => {
                 >
                   {modifiedSocialMediaItem && (
                     <Button
-                      variant="secondary"
+                      variant={ButtonVariant.Secondary}
                       onClick={() => removeSocialMediaItem(index)}
                       disabled={taskStatus === TaskStatus.Closed || taskStatus === TaskStatus.Rejected || taskStatus === TaskStatus.Cancelled}
                     >
@@ -172,7 +174,7 @@ const SocialMediaModeration = (): ReactElement => {
           <div className={`gridLayoutContainer moderation ${styles.addNewContainer}`}>
             <div className={styles.gridSelected}>
               <div className={styles.gridButton}>
-                <Button variant="secondary" iconLeft={<IconPlus aria-hidden />} onClick={() => addSocialMediaItem()}>
+                <Button variant={ButtonVariant.Secondary} iconStart={<IconPlus aria-hidden />} onClick={() => addSocialMediaItem()}>
                   {i18n.t("moderation.socialMedia.addNew")}
                 </Button>
               </div>

@@ -1,7 +1,7 @@
 import React, { ReactElement } from "react";
 import { useI18n } from "next-localization";
 import { useRouter } from "next/router";
-import { Navigation } from "hds-react";
+import { Header as HdsHeader } from "hds-react";
 import Header from "../common/Header";
 import styles from "./ModerationHeader.module.scss";
 
@@ -47,29 +47,29 @@ const ModerationHeader = (props: ModerationHeaderProps): ReactElement => {
 
   return (
     <Header includeLanguageSelector={false} homePagePath="/moderation/front">
-      <Navigation.Row variant="inline">
-        <Navigation.Item
+      <HdsHeader.NavigationMenu className={styles.navigation}>
+        <HdsHeader.Link
           className={styles.navigationItem}
           href="#"
           label={`${i18n.t("moderation.page.front")}`}
           active={currentPage === 1}
           onClick={() => changePage(1)}
         />
-        <Navigation.Item
+        <HdsHeader.Link
           className={styles.navigationItem}
           href="#"
           label={`${i18n.t("moderation.page.place")}`}
           active={currentPage === 2}
           onClick={() => changePage(2)}
         />
-        <Navigation.Item
+        <HdsHeader.Link
           className={styles.navigationItem}
           href="#"
           label={`${i18n.t("moderation.page.task")}`}
           active={currentPage === 3}
           onClick={() => changePage(3)}
         />
-        <Navigation.Item
+        <HdsHeader.Link
           className={styles.navigationItem}
           href="#"
           label={`${i18n.t("moderation.page.translation")}`}
@@ -77,7 +77,7 @@ const ModerationHeader = (props: ModerationHeaderProps): ReactElement => {
           onClick={() => changePage(4)}
         />
         {/*
-        <Navigation.Item
+        <HdsHeader.Link
           className={styles.navigationItem}
           href="#"
           label={`${i18n.t("moderation.page.organisation")}`}
@@ -85,7 +85,7 @@ const ModerationHeader = (props: ModerationHeaderProps): ReactElement => {
           onClick={() => changePage(5)}
         />
         */}
-      </Navigation.Row>
+      </HdsHeader.NavigationMenu>
     </Header>
   );
 };

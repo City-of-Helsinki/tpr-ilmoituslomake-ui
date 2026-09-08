@@ -1,8 +1,8 @@
-import React, { Dispatch, ChangeEvent, ReactElement, useCallback, useEffect, useState } from "react";
+import React, { Dispatch, ChangeEvent, FocusEvent, ReactElement, useCallback, useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useRouter } from "next/router";
 import { useI18n } from "next-localization";
-import { Notification as HdsNotification, TextInput } from "hds-react";
+import { Notification as HdsNotification, NotificationSize, TextInput } from "hds-react";
 import { NotificationAction } from "../../state/actions/notificationTypes";
 import { NotificationValidationAction } from "../../state/actions/notificationValidationTypes";
 import { setNotificationAddress } from "../../state/actions/notification";
@@ -14,8 +14,10 @@ import styles from "./Location.module.scss";
 
 const Location = (): ReactElement => {
   const i18n = useI18n();
-  const dispatch = useDispatch<Dispatch<NotificationAction>>();
-  const dispatchValidation = useDispatch<Dispatch<NotificationValidationAction>>();
+  //const dispatch = useDispatch<Dispatch<NotificationAction>>();
+  //const dispatchValidation = useDispatch<Dispatch<NotificationValidationAction>>();
+  const dispatch = useDispatch();
+  const dispatchValidation = useDispatch                ();
   const router = useRouter();
   const [fieldFocus, setFieldFocus] = useState<boolean>(false);
 
@@ -44,6 +46,7 @@ const Location = (): ReactElement => {
     setFieldFocus(true);
   };
 
+  /*
   const validateAddress = (language: string, evt: ChangeEvent<HTMLInputElement>) => {
     dispatch(
       setNotificationAddress(language, {
@@ -51,6 +54,18 @@ const Location = (): ReactElement => {
       })
     );
     isAddressFieldValid(language, evt.target.name, notification, dispatchValidation);
+    // isWholeAddressValid(language, notification, notificationExtra, dispatchValidation);
+    setFieldFocus(false);
+  };*/
+
+  const validateAddress = (language: string, evt: FocusEvent<HTMLInputElement | HTMLDivElement>) => {
+    const target = evt.target as HTMLInputElement;
+    dispatch(
+      setNotificationAddress(language, {
+        [target.name]: ((notification.address[language] as { [k: string]: unknown })[target.name] as string).trim(),
+      })
+    );
+    isAddressFieldValid(language, target.name, notification, dispatchValidation);
     // isWholeAddressValid(language, notification, notificationExtra, dispatchValidation);
     setFieldFocus(false);
   };
@@ -238,12 +253,12 @@ const Location = (): ReactElement => {
       )}
 
       {isAddressComplete() && !wholeAddressValid.valid && !addressFound && (
-        <HdsNotification size="small" className={styles.invalidAddress} type="alert">
+        <HdsNotification size={NotificationSize.Small} className={styles.invalidAddress} type="alert">
           {i18n.t(`notification.location.addressNotFound`)}
         </HdsNotification>
       )}
       {isAddressComplete() && !wholeAddressValid.valid && addressFound && (
-        <HdsNotification size="small" className={styles.invalidAddress} type="alert">
+        <HdsNotification size={NotificationSize.Small} className={styles.invalidAddress} type="alert">
           {`${i18n.t("notification.location.addressIncorrect")}: ${addressFound.street}, ${addressFound.postalCode} ${addressFound.postOffice}`}
         </HdsNotification>
       )}

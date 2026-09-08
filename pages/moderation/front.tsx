@@ -34,7 +34,7 @@ const ModerationFront = (): ReactElement => {
           messageKey="common.todo"
           button={
             <Link href="/moderation/organisation">
-              <Button variant="secondary" iconLeft={<IconArrowRight aria-hidden />}>
+              <Button variant="secondary" iconStart={<IconArrowRight aria-hidden />}>
                 {i18n.t("moderation.organisationNotice.manageOrganisation")}
               </Button>
             </Link>
@@ -47,7 +47,7 @@ const ModerationFront = (): ReactElement => {
           messageKey="common.todo"
           button={
             <Link href="/moderation/translation">
-              <Button variant="secondary" iconLeft={<IconArrowRight aria-hidden />}>
+              <Button variant="secondary" iconStart={<IconArrowRight aria-hidden />}>
                 {i18n.t("moderation.translationNotice.manageTranslation")}
               </Button>
             </Link>

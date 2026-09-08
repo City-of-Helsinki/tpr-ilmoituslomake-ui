@@ -41,10 +41,11 @@ const OpeningTimesInfo = ({ isPlaceInfo, openModal }: OpeningTimesInfoProps): Re
     }
   };
 
-  // Get the opening times on first render only, using a workaround utilising useEffect with empty dependency array
+  // Get the opening times on first render only
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  const useMountEffect = (fun: () => void) => useEffect(fun, []);
-  useMountEffect(getOpeningTimesOnMount);
+  useEffect(() => {
+    getOpeningTimesOnMount();
+  }, []);
 
   return !openingTimes || openingTimes.length === 0 ? (
     <></>

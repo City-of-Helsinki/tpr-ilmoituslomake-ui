@@ -2,7 +2,7 @@ import React, { Dispatch, ChangeEvent, ReactElement, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useRouter } from "next/router";
 import { useI18n } from "next-localization";
-import { Button, Notification as HdsNotification, TextInput } from "hds-react";
+import { Button, ButtonVariant, Notification as HdsNotification, NotificationSize, TextInput } from "hds-react";
 import { ModerationAction } from "../../state/actions/moderationTypes";
 import { ModerationStatusAction } from "../../state/actions/moderationStatusTypes";
 import { setModerationAddress } from "../../state/actions/moderation";
@@ -16,8 +16,10 @@ import styles from "./LocationModeration.module.scss";
 const LocationModeration = (): ReactElement => {
   const i18n = useI18n();
   const router = useRouter();
-  const dispatch = useDispatch<Dispatch<ModerationAction>>();
-  const dispatchStatus = useDispatch<Dispatch<ModerationStatusAction>>();
+  //const dispatch = useDispatch<Dispatch<ModerationAction>>();
+  //const dispatchStatus = useDispatch<Dispatch<ModerationStatusAction>>();
+  const dispatch = useDispatch();
+  const dispatchStatus = useDispatch();
 
   const selectedTask = useSelector((state: RootState) => state.moderation.selectedTask);
   const {
@@ -243,21 +245,21 @@ const LocationModeration = (): ReactElement => {
           <div className={styles.gridSelected} />
           <div className={styles.gridModified}>
             <Button
-              variant="secondary"
+              variant={ButtonVariant.Secondary}
               onClick={searchAddressFi}
               disabled={taskStatus === TaskStatus.Closed || taskStatus === TaskStatus.Rejected || taskStatus === TaskStatus.Cancelled}
             >
               {i18n.t("moderation.map.geocode")}
             </Button>
             <Button
-              variant="secondary"
+              variant={ButtonVariant.Secondary}
               onClick={searchAltAddressFi}
               disabled={taskStatus === TaskStatus.Closed || taskStatus === TaskStatus.Rejected || taskStatus === TaskStatus.Cancelled}
             >
               {i18n.t("moderation.map.fetchSwedishAddress")}
             </Button>
             {!addressFound && addressLanguage === "fi" && (
-              <HdsNotification size="small" className={styles.invalidAddress} type="alert">
+              <HdsNotification size={NotificationSize.Small} className={styles.invalidAddress} type="alert">
                 {addressError}
               </HdsNotification>
             )}
@@ -392,21 +394,21 @@ const LocationModeration = (): ReactElement => {
           <div className={styles.gridSelected} />
           <div className={styles.gridModified}>
             <Button
-              variant="secondary"
+              variant={ButtonVariant.Secondary}
               onClick={searchAddressSv}
               disabled={taskStatus === TaskStatus.Closed || taskStatus === TaskStatus.Rejected || taskStatus === TaskStatus.Cancelled}
             >
               {i18n.t("moderation.map.geocode")}
             </Button>
             <Button
-              variant="secondary"
+              variant={ButtonVariant.Secondary}
               onClick={searchAltAddressSv}
               disabled={taskStatus === TaskStatus.Closed || taskStatus === TaskStatus.Rejected || taskStatus === TaskStatus.Cancelled}
             >
               {i18n.t("moderation.map.fetchFinnishAddress")}
             </Button>
             {!addressFound && addressLanguage === "sv" && (
-              <HdsNotification size="small" className={styles.invalidAddress} type="alert">
+              <HdsNotification size={NotificationSize.Small} className={styles.invalidAddress} type="alert">
                 {addressError}
               </HdsNotification>
             )}
