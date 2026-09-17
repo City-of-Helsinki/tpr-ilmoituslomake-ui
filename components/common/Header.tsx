@@ -22,6 +22,7 @@ import { defaultLocale } from "../../utils/i18n";
 import { RootState } from "../../state/reducers";
 import getOrigin from "../../utils/request";
 import { string } from "yup";
+import { MAIN_URL } from "../../types/constants";
 
 interface HeaderProps {
   includeLanguageSelector?: boolean;
@@ -82,10 +83,10 @@ const Header = ({ includeLanguageSelector, homePagePath, children }: HeaderProps
 
       <HdsHeader.ActionBar
         logo={<Logo src={logoSrcFromLanguage()} alt={i18n.t("common.header.title")} />}
-        logoHref={`${router.basePath}${homePagePath}/${lang}`}
+        logoHref={`${MAIN_URL}/${lang}`}
         title={i18n.t("common.header.title")}
         titleAriaLabel={i18n.t("common.header.titleAlt")}
-        titleHref={`${router.basePath}${homePagePath}/`}
+        titleHref={`${MAIN_URL}/${lang}`}
         aria-label={i18n.t("common.header.openMenu")}
         frontPageLabel=""
       >
