@@ -83,10 +83,10 @@ const Header = ({ includeLanguageSelector, homePagePath, children }: HeaderProps
 
       <HdsHeader.ActionBar
         logo={<Logo src={logoSrcFromLanguage()} alt={i18n.t("common.header.title")} />}
-        logoHref={`${MAIN_URL}/${lang}`}
+        logoHref={`${MAIN_URL}${lang}`}
         title={i18n.t("common.header.title")}
         titleAriaLabel={i18n.t("common.header.titleAlt")}
-        titleHref={`${MAIN_URL}/${lang}`}
+        titleHref={`${MAIN_URL}${lang}`}
         aria-label={i18n.t("common.header.openMenu")}
         frontPageLabel=""
       >
