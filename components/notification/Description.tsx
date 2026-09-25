@@ -2,7 +2,7 @@ import React, { Dispatch, ChangeEvent, ReactElement } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import dynamic from "next/dynamic";
 import { useI18n } from "next-localization";
-import { TextInput, TextArea } from "hds-react";
+import { TextInput, TextArea, Tooltip } from "hds-react";
 import { NotificationAction } from "../../state/actions/notificationTypes";
 import { NotificationValidationAction } from "../../state/actions/notificationValidationTypes";
 import { setNotificationName, setNotificationShortDescription, setNotificationLongDescription } from "../../state/actions/notification";
@@ -121,9 +121,11 @@ const Description = (): ReactElement => {
               onChange={updateShortDescription}
               onBlur={validateShortDescription}
               helperText={i18n.t("notification.description.shortDescription.helperText")}
-              tooltipButtonLabel={i18n.t("notification.button.openHelp")}
-              tooltipLabel={i18n.t("notification.description.shortDescription.tooltipLabel")}
-              tooltipText={i18n.t("notification.description.shortDescription.tooltipText")}
+              tooltip={
+                <Tooltip tooltipLabel={i18n.t("notification.description.shortDescription.tooltipLabel")} buttonLabel={i18n.t("notification.button.openHelp")}>
+                  {i18n.t("notification.description.shortDescription.tooltipText")}
+                </Tooltip>
+              }
               invalid={!shortDescValid[option].valid}
               errorText={!shortDescValid[option].valid ? i18n.t(shortDescValid[option].message as string).replace("$fieldName", label) : ""}
               required
@@ -151,9 +153,11 @@ const Description = (): ReactElement => {
               onChange={updateLongDescription}
               onBlur={validateLongDescription}
               helperText={`${i18n.t("notification.description.longDescription.helperText")} (${(longDesc[option] as string).length})`}
-              tooltipButtonLabel={i18n.t("notification.button.openHelp")}
-              tooltipLabel={i18n.t("notification.description.longDescription.tooltipLabel")}
-              tooltipText={i18n.t("notification.description.longDescription.tooltipText")}
+              tooltip={
+                <Tooltip tooltipLabel={i18n.t("notification.description.longDescription.tooltipLabel")} buttonLabel={i18n.t("notification.button.openHelp")}>
+                  {i18n.t("notification.description.longDescription.tooltipText")}
+                </Tooltip>
+              }
               invalid={!longDescValid[option].valid}
               errorText={!longDescValid[option].valid ? i18n.t(longDescValid[option].message as string).replace("$fieldName", label) : ""}
               required

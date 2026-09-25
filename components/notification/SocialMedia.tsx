@@ -1,7 +1,7 @@
 import React, { Dispatch, ChangeEvent, ReactElement } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useI18n } from "next-localization";
-import { Button, ButtonVariant, IconPlus, TextInput } from "hds-react";
+import { Button, ButtonVariant, IconPlus, TextInput, Tooltip } from "hds-react";
 import { v4 as uuidv4 } from "uuid";
 import { NotificationAction } from "../../state/actions/notificationTypes";
 import { NotificationValidationAction } from "../../state/actions/notificationValidationTypes";
@@ -82,9 +82,11 @@ const SocialMedia = (): ReactElement => {
                   ? i18n.t(socialMediaValid[index].title.message as string).replace("$fieldName", i18n.t("notification.socialMedia.title.label"))
                   : ""
               }
-              tooltipButtonLabel={i18n.t("notification.button.openHelp")}
-              tooltipLabel={i18n.t("notification.socialMedia.title.tooltipLabel")}
-              tooltipText={i18n.t("notification.socialMedia.title.tooltipText")}
+              tooltip={
+                <Tooltip tooltipLabel={i18n.t("notification.socialMedia.title.tooltipLabel")} buttonLabel={i18n.t("notification.button.openHelp")}>
+                  {i18n.t("notification.socialMedia.title.tooltipText")}
+                </Tooltip>
+              }
               required
               aria-required
             />
@@ -103,9 +105,11 @@ const SocialMedia = (): ReactElement => {
                   ? i18n.t(socialMediaValid[index].link.message as string).replace("$fieldName", i18n.t("notification.socialMedia.link.label"))
                   : ""
               }
-              tooltipButtonLabel={i18n.t("notification.button.openHelp")}
-              tooltipLabel={i18n.t("notification.socialMedia.link.tooltipLabel")}
-              tooltipText={i18n.t("notification.socialMedia.link.tooltipText")}
+              tooltip={
+                <Tooltip tooltipLabel={i18n.t("notification.socialMedia.link.tooltipLabel")} buttonLabel={i18n.t("notification.button.openHelp")}>
+                  {i18n.t("notification.socialMedia.link.tooltipText")}
+                </Tooltip>
+              }
               required
               aria-required
             />

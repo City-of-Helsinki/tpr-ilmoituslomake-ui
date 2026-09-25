@@ -1,7 +1,7 @@
 import React, { Dispatch, ChangeEvent, ReactElement, useRef } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useI18n } from "next-localization";
-import { Button, ButtonVariant, IconLink, IconUpload, Link as HdsLink, LinkSize, RadioButton, SelectionGroup, TextArea, TextInput } from "hds-react";
+import { Button, ButtonVariant, IconLink, IconUpload, Link as HdsLink, LinkSize, RadioButton, SelectionGroup, TextArea, TextInput, Tooltip } from "hds-react";
 import { v4 as uuidv4 } from "uuid";
 import { NotificationAction } from "../../state/actions/notificationTypes";
 import { NotificationValidationAction } from "../../state/actions/notificationValidationTypes";
@@ -250,9 +250,11 @@ const Photos = (): ReactElement => {
                         onChange={(evt) => updatePhotoAltText(index, evt)}
                         onBlur={(evt) => validatePhotoAltText(index, evt)}
                         helperText={i18n.t("notification.photos.altText.helperText")}
-                        tooltipButtonLabel={i18n.t("notification.button.openHelp")}
-                        tooltipLabel={i18n.t("notification.photos.altText.tooltipLabel")}
-                        tooltipText={i18n.t("notification.photos.altText.tooltipText")}
+                        tooltip={
+                          <Tooltip tooltipLabel={i18n.t("notification.photos.altText.tooltipLabel")} buttonLabel={i18n.t("notification.button.openHelp")}>
+                            {i18n.t("notification.photos.altText.tooltipText")}
+                          </Tooltip>
+                        }
                         invalid={!photosValid[index].altText[option].valid}
                         errorText={
                           !photosValid[index].altText[option].valid
@@ -303,7 +305,7 @@ const Photos = (): ReactElement => {
                     href="https://creativecommons.org/licenses/by/4.0/"
                     size={LinkSize.Medium}
                     openInNewTab
-                    openInNewTabAriaLabel={i18n.t("common.opensInANewTab")}
+                    openInNewTabLabel={i18n.t("common.opensInANewTab")}
                     external
                     openInExternalDomainAriaLabel={i18n.t("common.opensExternal")}
                     disableVisitedStyles
@@ -327,9 +329,11 @@ const Photos = (): ReactElement => {
                       ? i18n.t(photosValid[index].source.message as string).replace("$fieldName", i18n.t("notification.photos.source.label"))
                       : ""
                   }
-                  tooltipButtonLabel={i18n.t("notification.button.openHelp")}
-                  tooltipLabel={i18n.t("notification.photos.source.tooltipLabel")}
-                  tooltipText={i18n.t("notification.photos.source.tooltipText")}
+                  tooltip={
+                    <Tooltip tooltipLabel={i18n.t("notification.photos.source.tooltipLabel")} buttonLabel={i18n.t("notification.button.openHelp")}>
+                      {i18n.t("notification.photos.source.tooltipText")}
+                    </Tooltip>
+                  }
                   required
                   aria-required
                 />

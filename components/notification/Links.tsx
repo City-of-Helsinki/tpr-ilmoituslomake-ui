@@ -1,7 +1,7 @@
 import React, { Dispatch, ChangeEvent, ReactElement } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useI18n } from "next-localization";
-import { TextInput } from "hds-react";
+import { TextInput, Tooltip } from "hds-react";
 import { NotificationAction } from "../../state/actions/notificationTypes";
 import { NotificationValidationAction } from "../../state/actions/notificationValidationTypes";
 import { setNotificationLink } from "../../state/actions/notification";
@@ -61,9 +61,11 @@ const Links = (): ReactElement => {
               maxLength={MAX_LENGTH_URL}
               onChange={updateWebsite}
               onBlur={validateWebsite}
-              tooltipButtonLabel={i18n.t("notification.button.openHelp")}
-              tooltipLabel={i18n.t("notification.links.website.tooltipLabel")}
-              tooltipText={i18n.t("notification.links.website.tooltipText")}
+              tooltip={
+                <Tooltip tooltipLabel={i18n.t("notification.links.website.tooltipLabel")} buttonLabel={i18n.t("notification.button.openHelp")}>
+                  {i18n.t("notification.links.website.tooltipText")}
+                </Tooltip>
+              }
               invalid={!websiteValid[option].valid}
               errorText={!websiteValid[option].valid ? i18n.t(websiteValid[option].message as string).replace("$fieldName", label) : ""}
             />
