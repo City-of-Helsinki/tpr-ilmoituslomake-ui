@@ -1,18 +1,18 @@
-@import "~hds-design-tokens/lib/all.scss";
-@import "../../styles/mixins";
+@use "~hds-design-tokens/lib/all.scss";
+@use "../../styles/mixins";
 
 .preview {
   .title {
-    margin-top: $spacing-layout-m;
+    margin-top: all.$spacing-layout-m;
   }
 
-  margin-bottom: $spacing-layout-l;
+  margin-bottom: all.$spacing-layout-l;
 
   // $spacing-4-xl = 4rem = 64px
-  grid-template-columns: minmax(2 * $spacing-4-xl, 1fr) minmax(4 * $spacing-4-xl, 2fr);
+  grid-template-columns: minmax(2 * all.$spacing-4-xl, 1fr) minmax(4 * all.$spacing-4-xl, 2fr);
 
-  @include media(xs, s) {
-    grid-template-columns: minmax(4 * $spacing-4-xl, 1fr);
+  @include mixins.media(xs, s) {
+    grid-template-columns: minmax(4 * all.$spacing-4-xl, 1fr);
   }
 
   column-gap: 0;
@@ -21,7 +21,7 @@
   .gridHeading {
     grid-column: 1 / 1;
 
-    @include media(xs, s) {
+    @include mixins.media(xs, s) {
       grid-column: 1 / 1;
     }
   }
@@ -29,16 +29,16 @@
   .gridPlaceInfo {
     grid-column: 2 / 2;
 
-    @include media(xs, s) {
+    @include mixins.media(xs, s) {
       grid-column: 1 / 1;
     }
   }
 
   .gridHeader {
-    padding: $spacing-xs;
+    padding: all.$spacing-xs;
     margin: 0;
 
-    @include media(xs, s) {
+    @include mixins.media(xs, s) {
       display: none;
     }
   }
@@ -46,58 +46,58 @@
   .headerLine {
     grid-column: 1 / span 2;
 
-    @include media(xs, s) {
+    @include mixins.media(xs, s) {
       display: none;
     }
   }
 
   .gridSubHeader {
-    padding: $spacing-xs;
+    padding: all.$spacing-xs;
     margin: 0;
   }
 
   .gridContent {
-    padding: $spacing-xs;
+    padding: all.$spacing-xs;
     overflow-wrap: break-word;
     word-wrap: break-word;
 
     &:nth-child(4n + 1),
     &:nth-child(4n + 2) {
-      background-color: $color-silver-light;
+      background-color: all.$color-silver-light;
     }
 
-    @include media(xs) {
+    @include mixins.media(xs) {
       &:nth-child(2n) {
-        margin-bottom: $spacing-xs;
+        margin-bottom: all.$spacing-xs;
       }
     }
 
-    @include media(s) {
+    @include mixins.media(s) {
       &:nth-child(2n) {
-        margin-bottom: $spacing-s;
+        margin-bottom: all.$spacing-s;
       }
     }
 
     .map {
       // HDS 2.0 only has container-width-xl
-      @include media(xs) {
-        height: $container-width-xl / 8;
+      @include mixins.media(xs) {
+        height: all.$container-width-xl / 8;
       }
 
-      @include media(s) {
-        height: $container-width-xl / 6;
+      @include mixins.media(s) {
+        height: all.$container-width-xl / 6;
       }
 
-      @include media(m) {
-        height: $container-width-xl / 6;
+      @include mixins.media(m) {
+        height: all.$container-width-xl / 6;
       }
 
-      @include media(l) {
-        height: $container-width-xl / 5;
+      @include mixins.media(l) {
+        height: all.$container-width-xl / 5;
       }
 
-      @include media(xl) {
-        height: $container-width-xl / 4;
+      @include mixins.media(xl) {
+        height: all.$container-width-xl / 4;
       }
     }
 
@@ -106,24 +106,24 @@
         max-width: 100%;
 
         // HDS 2.0 only has container-width-xl
-        @include media(xs) {
-          max-height: $container-width-xl / 8;
+        @include mixins.media(xs) {
+          max-height: all.$container-width-xl / 8;
         }
 
-        @include media(s) {
-          max-height: $container-width-xl / 6;
+        @include mixins.media(s) {
+          max-height: all.$container-width-xl / 6;
         }
 
-        @include media(m) {
-          max-height: $container-width-xl / 6;
+        @include mixins.media(m) {
+          max-height: all.$container-width-xl / 6;
         }
 
-        @include media(l) {
-          max-height: $container-width-xl / 5;
+        @include mixins.media(l) {
+          max-height: all.$container-width-xl / 5;
         }
 
-        @include media(xl) {
-          max-height: $container-width-xl / 4;
+        @include mixins.media(xl) {
+          max-height: all.$container-width-xl / 4;
         }
       }
     }

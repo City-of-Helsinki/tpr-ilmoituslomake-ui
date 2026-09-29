@@ -1,4 +1,4 @@
-@import "~hds-design-tokens/lib/all.scss";
+@use "~hds-design-tokens/lib/all.scss";
 
 .taskHeaderButtons {
   .buttonRow {
@@ -6,11 +6,11 @@
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: flex-end;
-    margin-bottom: $spacing-xs;
+    margin-bottom: all.$spacing-xs;
 
     .flexButton {
-      margin-left: $spacing-s;
-      margin-bottom: $spacing-s;
+      margin-left: all.$spacing-s;
+      margin-bottom: all.$spacing-s;
     }
 
     .returnButton {

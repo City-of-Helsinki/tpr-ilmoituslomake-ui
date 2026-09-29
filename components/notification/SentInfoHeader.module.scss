@@ -1,4 +1,4 @@
-@import "~hds-design-tokens/lib/all.scss";
+@use "~hds-design-tokens/lib/all.scss";
 
 .sentHeader {
   display: flex;
@@ -7,7 +7,7 @@
   align-items: center;
 
   h1 {
-    color: $color-bus;
+    color: all.$color-bus;
   }
 
   .flexButton {

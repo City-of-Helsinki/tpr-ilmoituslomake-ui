@@ -1,21 +1,21 @@
-@import "~hds-design-tokens/lib/all.scss";
+@use "~hds-design-tokens/lib/all.scss";
 
 .collapsible {
-  margin-bottom: $spacing-layout-s;
+  margin-bottom: all.$spacing-layout-s;
 
   .header {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    margin-bottom: $spacing-layout-s;
+    margin-bottom: all.$spacing-layout-s;
 
     .section {
       display: flex;
       flex-direction: row;
       align-items: center;
       flex-grow: 0;
-      padding: 0 $spacing-l;
-      background-color: $color-copper-light;
+      padding: 0 all.$spacing-l;
+      background-color: all.$color-copper-light;
     }
 
     .title {
@@ -23,8 +23,8 @@
       flex-direction: row;
       align-items: center;
       flex-grow: 1;
-      padding: 0 $spacing-l;
-      background-color: $color-fog-light;
+      padding: 0 all.$spacing-l;
+      background-color: all.$color-fog-light;
     }
 
     .status {
@@ -33,8 +33,8 @@
       align-items: center;
       justify-content: flex-end;
       flex-grow: 1;
-      padding: 0 $spacing-l;
-      background-color: $color-fog-light;
+      padding: 0 all.$spacing-l;
+      background-color: all.$color-fog-light;
     }
 
     .button {
@@ -42,19 +42,19 @@
       flex-direction: row;
       align-items: center;
       flex-grow: 0;
-      background-color: $color-fog-light;
+      background-color: all.$color-fog-light;
 
       button {
-        color: $color-black;
+        color: all.$color-black;
         border: 0;
 
         &:hover {
-          outline: solid $color-bus 3px !important;
+          outline: solid all.$color-bus 3px !important;
           outline-offset: 4px !important;
         }
 
         &:focus::after {
-          border-color: $color-bus;
+          border-color: all.$color-bus;
         }
       }
     }

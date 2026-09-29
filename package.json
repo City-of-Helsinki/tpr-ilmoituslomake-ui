@@ -17,7 +17,6 @@
     "@eslint/eslintrc": "^3.3.5",
     "@mui/icons-material": "^5.13.0",
     "@mui/material": "^5.13.0",
-    "@mui/styles": "6.4.8",
     "@reduxjs/toolkit": "^1.9.5",
     "ajv": "^8.8.2",
     "ajv-formats": "^2.1.1",
@@ -38,6 +37,7 @@
     "react-responsive": "^8.2.0",
     "redux": "^4.1.2",
     "redux-thunk": "^2.4.1",
+    "sass-migrator": "^2.6.1",
     "uuid": "^8.3.2",
     "yup": "^0.32.11"
   },

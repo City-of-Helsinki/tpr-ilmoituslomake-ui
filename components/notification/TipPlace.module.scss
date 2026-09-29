@@ -1,22 +1,22 @@
-@import "~hds-design-tokens/lib/all.scss";
+@use "~hds-design-tokens/lib/all.scss";
 
 .placeNameNotice {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  margin-left: -$spacing-s;
-  margin-right: -$spacing-s;
+  margin-left: -(all.$spacing-s);
+  margin-right: -(all.$spacing-s);
 
   .placeName {
     flex-grow: 1;
-    margin-left: $spacing-s;
-    margin-right: $spacing-s;
+    margin-left: all.$spacing-s;
+    margin-right: all.$spacing-s;
   }
 
   .notice {
-    max-width: $container-width-xl / 2;
-    margin-bottom: $spacing-layout-s;
-    margin-left: $spacing-s;
-    margin-right: $spacing-s;
+    max-width: all.$container-width-xl / 2;
+    margin-bottom: all.$spacing-layout-s;
+    margin-left: all.$spacing-s;
+    margin-right: all.$spacing-s;
   }
 }

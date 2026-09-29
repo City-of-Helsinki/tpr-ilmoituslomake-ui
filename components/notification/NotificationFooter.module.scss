@@ -1,5 +1,5 @@
-@import "~hds-design-tokens/lib/all.scss";
-@import "../../styles/mixins";
+@use "~hds-design-tokens/lib/all.scss";
+@use "../../styles/mixins";
 
 .notificationFooter {
   display: flex;
@@ -10,12 +10,12 @@
     flex-grow: 1;
     display: flex;
     flex-direction: row;
-    margin-right: $spacing-s;
-    margin-bottom: $spacing-s;
+    margin-right: all.$spacing-s;
+    margin-bottom: all.$spacing-s;
     justify-content: flex-start;
     z-index: 1;
 
-    @include media(xs) {
+    @include mixins.media(xs) {
       margin-right: 0;
       justify-content: center;
     }
@@ -29,7 +29,7 @@
     margin-right: 0;
     justify-content: flex-end;
 
-    @include media(xs) {
+    @include mixins.media(xs) {
       justify-content: center;
     }
   }

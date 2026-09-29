@@ -4,7 +4,6 @@ import { useRouter } from "next/router";
 import { useI18n } from "next-localization";
 import { Koros, Header as NHeader } from "hds-react";
 import { Stepper, Step, StepLabel, CircularProgress } from "@mui/material";
-import { StylesProvider } from "@mui/styles";
 import Header from "../common/Header";
 import { NotificationAction } from "../../state/actions/notificationTypes";
 import { setPage } from "../../state/actions/notification";
@@ -81,7 +80,6 @@ const NotificationHeader = ({ headerRef }: NotificationHeaderProps): ReactElemen
         )}
       </Header>
       <nav className={styles.header} aria-label={i18n.t("notification.navigationHeader")}>
-        <StylesProvider injectFirst>
           <div className={styles.tabletContainer}>
             <h1 ref={headerRef}>
               {notificationId > 0
@@ -140,7 +138,6 @@ const NotificationHeader = ({ headerRef }: NotificationHeaderProps): ReactElemen
             </div>
             <Koros className={styles.wave} type="basic" />
           </div>
-        </StylesProvider>
       </nav>
     </>
   );

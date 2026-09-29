@@ -1,8 +1,8 @@
-@import "~hds-design-tokens/lib/all.scss";
-@import "../../styles/mixins";
+@use "~hds-design-tokens/lib/all.scss";
+@use "../../styles/mixins";
 
 .openingTimes {
   .results {
-    padding: 0 $spacing-xs;
+    padding: 0 all.$spacing-xs;
   }
 }

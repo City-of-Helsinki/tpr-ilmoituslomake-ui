@@ -1,7 +1,7 @@
-@import "~hds-design-tokens/lib/all.scss";
+@use "~hds-design-tokens/lib/all.scss";
 
 .notice {
-  border: solid $color-bus 0;
-  border-left-width: $spacing-2-xs;
-  padding: $spacing-xs;
+  border: solid all.$color-bus 0;
+  border-left-width: all.$spacing-2-xs;
+  padding: all.$spacing-xs;
 }

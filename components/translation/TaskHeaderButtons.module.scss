@@ -1,15 +1,15 @@
-@import "~hds-design-tokens/lib/all.scss";
+@use "~hds-design-tokens/lib/all.scss";
 
 .taskHeaderButtons {
   .buttonRow {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    margin-bottom: $spacing-xs;
+    margin-bottom: all.$spacing-xs;
 
     .flexButton {
-      margin-right: $spacing-s;
-      margin-bottom: $spacing-s;
+      margin-right: all.$spacing-s;
+      margin-bottom: all.$spacing-s;
     }
 
     .sendButton,

@@ -2,8 +2,8 @@
 // @import "~hds-core/lib/base.css";
 // @import "~hds-core/lib/components/all.css";
 // @import "~hds-core/lib/icons/all.css";
-@import "~hds-design-tokens/lib/all.scss";
-@import "mixins";
+@use "~hds-design-tokens/lib/all.scss";
+@use "mixins";
 @import "leaflet/dist/leaflet.css";
 
 html,
@@ -42,69 +42,69 @@ body {
 }
 
 h1 {
-  font-size: $fontsize-heading-xl !important;
+  font-size: all.$fontsize-heading-xl !important;
 
   &.moderation,
   &.translation {
-    font-size: $fontsize-heading-l !important;
+    font-size: all.$fontsize-heading-l !important;
   }
 
-  @include media(xs) {
-    font-size: $fontsize-heading-l !important;
+  @include mixins.media(xs) {
+    font-size: all.$fontsize-heading-l !important;
   }
 }
 
 h2 {
-  font-size: $fontsize-heading-l !important;
+  font-size: all.$fontsize-heading-l !important;
 
   &.moderation,
   &.translation {
-    font-size: $fontsize-heading-m !important;
+    font-size: all.$fontsize-heading-m !important;
   }
 
-  @include media(xs) {
-    font-size: $fontsize-heading-m !important;
+  @include mixins.media(xs) {
+    font-size: all.$fontsize-heading-m !important;
   }
 }
 
 h3 {
-  font-size: $fontsize-heading-m !important;
+  font-size: all.$fontsize-heading-m !important;
 
   &.moderation,
   &.translation {
-    font-size: $fontsize-heading-s !important;
+    font-size: all.$fontsize-heading-s !important;
   }
 
-  @include media(xs) {
-    font-size: $fontsize-heading-s !important;
+  @include mixins.media(xs) {
+    font-size: all.$fontsize-heading-s !important;
   }
 }
 
 h4 {
-  font-size: $fontsize-heading-s !important;
+  font-size: all.$fontsize-heading-s !important;
   margin: 0;
 
   &.moderation,
   &.translation {
-    font-size: $fontsize-heading-xs !important;
+    font-size: all.$fontsize-heading-xs !important;
   }
 
-  @include media(xs) {
-    font-size: $fontsize-heading-xs !important;
+  @include mixins.media(xs) {
+    font-size: all.$fontsize-heading-xs !important;
   }
 }
 
 h5 {
-  font-size: $fontsize-heading-xs !important;
+  font-size: all.$fontsize-heading-xs !important;
   margin: 0;
 
   &.moderation,
   &.translation {
-    font-size: $fontsize-heading-xxs !important;
+    font-size: all.$fontsize-heading-xxs !important;
   }
 
-  @include media(xs) {
-    font-size: $fontsize-heading-xxs !important;
+  @include mixins.media(xs) {
+    font-size: all.$fontsize-heading-xxs !important;
   }
 }
 
@@ -114,22 +114,22 @@ h5 {
 // }
 
 input[type="checkbox"] {
-  background-color: $color-white;
+  background-color: all.$color-white;
 }
 
 .disabledTextColor input[disabled],
 .disabledTextColor textarea[disabled],
 .disabledTextColor input[type="checkbox"][disabled] + label {
-  color: $color-black-70 !important;
+  color: all.$color-black-70 !important;
 }
 
 .formSection {
-  margin-bottom: $spacing-layout-l;
+  margin-bottom: all.$spacing-layout-l;
 }
 
 .labelSelection {
   .formInput {
-    margin-bottom: $spacing-layout-s;
+    margin-bottom: all.$spacing-layout-s;
   }
 }
 
@@ -171,14 +171,14 @@ button.HeaderActionBarItemButton-module_actionBarItemButton__2ALyH:hover {
 }
 
 .narrowSection {
-  @include media(xl) {
-    max-width: $container-width-xl / 1.3;
-    margin-left: $spacing-layout-l;
+  @include mixins.media(xl) {
+    max-width: all.$container-width-xl / 1.3;
+    margin-left: all.$spacing-layout-l;
   }
 }
 
 .formInput {
-  margin-bottom: $spacing-layout-s;
+  margin-bottom: all.$spacing-layout-s;
 }
 
 .formNotification {
@@ -187,45 +187,45 @@ button.HeaderActionBarItemButton-module_actionBarItemButton__2ALyH:hover {
 
 .gridLayoutContainer {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax($spacing-5-xl, 1fr));
-  margin-bottom: $spacing-layout-s;
+  grid-template-columns: repeat(auto-fit, minmax(all.$spacing-5-xl, 1fr));
+  margin-bottom: all.$spacing-layout-s;
 
   &.moderation {
-    padding-left: $spacing-s;
+    padding-left: all.$spacing-s;
   }
 
-  @include media(xs) {
-    column-gap: $spacing-xs;
-    row-gap: $spacing-xs;
+  @include mixins.media(xs) {
+    column-gap: all.$spacing-xs;
+    row-gap: all.$spacing-xs;
   }
 
-  @include media(s) {
-    column-gap: $spacing-s;
-    row-gap: $spacing-s;
+  @include mixins.media(s) {
+    column-gap: all.$spacing-s;
+    row-gap: all.$spacing-s;
   }
 
-  @include media(m, l, xl) {
-    column-gap: $spacing-m;
-    row-gap: $spacing-m;
+  @include mixins.media(m, l, xl) {
+    column-gap: all.$spacing-m;
+    row-gap: all.$spacing-m;
   }
 }
 
 .gridHeader {
-  background-color: $color-fog-light;
-  padding: $spacing-xs;
+  background-color: all.$color-fog-light;
+  padding: all.$spacing-xs;
 }
 
 .languageSection {
-  border: solid $color-copper-light 0;
-  border-left-width: $spacing-2-xs;
-  padding-left: $spacing-2-xs;
+  border: solid all.$color-copper-light 0;
+  border-left-width: all.$spacing-2-xs;
+  padding-left: all.$spacing-2-xs;
 
   &.moderation {
-    padding-left: $spacing-2-xs;
+    padding-left: all.$spacing-2-xs;
   }
 
   h3 {
-    color: $color-bus;
+    color: all.$color-bus;
   }
 }
 
@@ -256,35 +256,35 @@ button:hover {
 }
 
 .MuiStepIcon-root {
-  color: $color-black-70;
+  color: all.$color-black-70;
 }
 
 .MuiStepIcon-root.MuiStepIcon-active,
 .MuiStepIcon-root.MuiStepIcon-completed {
-  color: $color-bus;
+  color: all.$color-bus;
 }
 
 .MuiStepConnector-line {
-  border-color: $color-black-70;
+  border-color: all.$color-black-70;
 }
 
 .MuiLinearProgress-root {
-  height: $spacing-m !important;
-  border-radius: $spacing-s;
+  height: all.$spacing-m !important;
+  border-radius: all.$spacing-s;
 }
 
 .MuiLinearProgress-bar {
-  border-radius: $spacing-s;
+  border-radius: all.$spacing-s;
 }
 
 .MuiLinearProgress-barColorPrimary {
-  background-color: $color-copper !important;
+  background-color: all.$color-copper !important;
 }
 
 .MuiLinearProgress-colorPrimary {
-  background-color: $color-silver !important;
+  background-color: all.$color-silver !important;
 }
 
 .leaflet-container *:focus {
-  outline: solid $color-bus 2px !important;
+  outline: solid all.$color-bus 2px !important;
 }

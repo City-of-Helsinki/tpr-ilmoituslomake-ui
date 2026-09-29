@@ -1,18 +1,18 @@
-@import "~hds-design-tokens/lib/all.scss";
-@import "../../styles/mixins";
+@use "~hds-design-tokens/lib/all.scss";
+@use "../../styles/mixins";
 
 .content {
   h2 {
-    color: $color-bus;
+    color: all.$color-bus;
     outline: none;
   }
 
   .sent {
-    background-color: $color-copper-light;
+    background-color: all.$color-copper-light;
   }
 
   .accessibility {
-    @include media(xl) {
+    @include mixins.media(xl) {
       flex-wrap: nowrap;
     }
   }
@@ -20,25 +20,25 @@
 
 .dialog {
   text-align: center;
-  padding: $spacing-m;
+  padding: all.$spacing-m;
 
   h1 {
-    color: $color-bus;
+    color: all.$color-bus;
   }
 
   div {
-    margin: $spacing-s;
+    margin: all.$spacing-s;
 
     &.link {
-      margin-top: $spacing-xl;
+      margin-top: all.$spacing-xl;
     }
   }
 
   .message {
-    margin-bottom: $spacing-l;
+    margin-bottom: all.$spacing-l;
   }
 }
 
 .wave {
-  fill: $color-copper-light;
+  fill: all.$color-copper-light;
 }
