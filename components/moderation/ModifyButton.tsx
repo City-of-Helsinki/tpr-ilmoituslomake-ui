@@ -16,13 +16,13 @@ interface ModifyButtonProps {
 }
 
 const ModifyButton = ({
-  className,
-  label,
+  className = "",
+  label = undefined,
   fieldName,
   moderationStatus,
   taskStatus,
   modifyCallback,
-  hidden,
+  hidden = false,
   children,
 }: ModifyButtonProps): ReactElement => {
   const i18n = useI18n();
@@ -57,12 +57,6 @@ const ModifyButton = ({
       )}
     </div>
   );
-};
-
-ModifyButton.defaultProps = {
-  className: "",
-  label: undefined,
-  hidden: false,
 };
 
 export default ModifyButton;

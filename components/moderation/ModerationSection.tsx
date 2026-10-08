@@ -1,6 +1,7 @@
 import React, { ChangeEvent, FocusEvent, ReactElement, cloneElement } from "react";
 import { ModerationStatus, TaskStatus, TaskType } from "../../types/constants";
 import { OptionType } from "../../types/general";
+import { Tooltip } from "hds-react";
 import ActionButton from "./ActionButton";
 import ModifyButton from "./ModifyButton";
 import styles from "./ModerationSection.module.scss";
@@ -37,27 +38,27 @@ interface ModerationSectionProps {
 const ModerationSection = ({
   id,
   fieldName,
-  selectedValue,
-  modifiedValue,
+  selectedValue = undefined,
+  modifiedValue = undefined,
   moderationStatus,
   taskType,
   taskStatus,
-  selectedHeaderText,
-  modifiedHeaderText,
-  helperText,
-  tooltipButtonLabel,
-  tooltipLabel,
-  tooltipText,
-  modifyButtonLabel,
-  modifyButtonHidden,
-  actionButtonHidden,
-  bypassModifiedFieldCheck,
-  forceDisabled,
+  selectedHeaderText = undefined,
+  modifiedHeaderText = undefined,
+  helperText = undefined,
+  tooltipButtonLabel = undefined,
+  tooltipLabel = undefined,
+  tooltipText = undefined,
+  modifyButtonLabel = undefined,
+  modifyButtonHidden = false,
+  actionButtonHidden = false,
+  bypassModifiedFieldCheck = false,
+  forceDisabled = false,
   changeCallback,
-  blurCallback,
+  blurCallback = undefined,
   statusCallback,
   ModerationComponent,
-  isSelectionGroupWrapper,
+  isSelectionGroupWrapper = false,
 }: ModerationSectionProps): ReactElement => {
   if (taskType === TaskType.RemoveTip || taskType === TaskType.ModeratorRemove || taskType === TaskType.PlaceInfo) {
     return (
@@ -146,9 +147,15 @@ const ModerationSection = ({
             onChange: changeCallback,
             onBlur: blurCallback,
             helperText: moderationStatus === ModerationStatus.Edited ? helperText : undefined,
-            tooltipButtonLabel: moderationStatus === ModerationStatus.Edited ? tooltipButtonLabel : undefined,
-            tooltipLabel: moderationStatus === ModerationStatus.Edited ? tooltipLabel : undefined,
-            tooltipText: moderationStatus === ModerationStatus.Edited ? tooltipText : undefined,
+            tooltip:
+            moderationStatus === ModerationStatus.Edited && tooltipText ? (
+              <Tooltip
+                buttonLabel={tooltipButtonLabel}
+                tooltipLabel={tooltipLabel}
+              >
+                {tooltipText}
+              </Tooltip>
+            ) : undefined,
             disabled:
               moderationStatus === ModerationStatus.Approved ||
               moderationStatus === ModerationStatus.Rejected ||
@@ -173,24 +180,6 @@ const ModerationSection = ({
   }
 
   return <></>;
-};
-
-ModerationSection.defaultProps = {
-  selectedValue: undefined,
-  modifiedValue: undefined,
-  selectedHeaderText: undefined,
-  modifiedHeaderText: undefined,
-  helperText: undefined,
-  tooltipButtonLabel: undefined,
-  tooltipLabel: undefined,
-  tooltipText: undefined,
-  modifyButtonLabel: undefined,
-  modifyButtonHidden: false,
-  actionButtonHidden: false,
-  bypassModifiedFieldCheck: false,
-  forceDisabled: false,
-  blurCallback: undefined,
-  isSelectionGroupWrapper: false,
 };
 
 export default ModerationSection;

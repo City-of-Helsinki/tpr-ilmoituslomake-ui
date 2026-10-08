@@ -15,7 +15,7 @@ interface PhotosTranslationProps {
   index: number;
 }
 
-const PhotosTranslation = ({ prefix, buttonsPrefix, index }: PhotosTranslationProps): ReactElement => {
+const PhotosTranslation = ({ prefix, buttonsPrefix = undefined, index }: PhotosTranslationProps): ReactElement => {
   const i18n = useI18n();
   //const dispatch = useDispatch<Dispatch<TranslationAction>>();
   const dispatch = useDispatch();
@@ -113,10 +113,6 @@ const PhotosTranslation = ({ prefix, buttonsPrefix, index }: PhotosTranslationPr
       </div>
     </div>
   );
-};
-
-PhotosTranslation.defaultProps = {
-  buttonsPrefix: undefined,
 };
 
 export default PhotosTranslation;

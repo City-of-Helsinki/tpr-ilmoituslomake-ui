@@ -17,7 +17,7 @@ interface AccessibilityInfoButtonProps {
 const AccessibilityInfoButton = ({
   buttonTextKey,
   buttonVariant,
-  disabled,
+  disabled = false,
   notificationId,
   placeId,
   isNew,
@@ -47,11 +47,6 @@ const AccessibilityInfoButton = ({
       {i18n.t(buttonTextKey)}
     </Button>
   );
-};
-
-AccessibilityInfoButton.defaultProps = {
-  disabled: false,
-  closeModal: undefined,
 };
 
 export default AccessibilityInfoButton;

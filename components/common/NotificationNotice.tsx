@@ -8,7 +8,7 @@ interface NoticeProps {
   messageKey2?: string;
 }
 
-const NotificationNotice = ({ className, messageKey, messageKey2 }: NoticeProps): ReactElement => {
+const NotificationNotice = ({ className = undefined, messageKey, messageKey2 = undefined }: NoticeProps): ReactElement => {
   const i18n = useI18n();
 
   return (
@@ -23,11 +23,6 @@ const NotificationNotice = ({ className, messageKey, messageKey2 }: NoticeProps)
       {messageKey2 && i18n.t(messageKey2)}
     </div>
   );
-};
-
-NotificationNotice.defaultProps = {
-  className: undefined,
-  messageKey2: undefined,
 };
 
 export default NotificationNotice;

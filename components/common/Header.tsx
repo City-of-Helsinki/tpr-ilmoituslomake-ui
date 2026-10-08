@@ -35,7 +35,7 @@ interface HeaderProps {
 //const DynamicNavigation = dynamic(() => import("hds-react").then((hds) => hds.Navigation), { ssr: false });
 const DynamicHeader = dynamic(() => import("hds-react").then((hds) => hds.Header), { ssr: false });
 
-const Header = ({ includeLanguageSelector, homePagePath, children }: HeaderProps): ReactElement => {
+const Header = ({ includeLanguageSelector = true, homePagePath = "", children = [] }: HeaderProps): ReactElement => {
   const i18n = useI18n();
   const router = useRouter();
 
@@ -130,12 +130,6 @@ const Header = ({ includeLanguageSelector, homePagePath, children }: HeaderProps
       {children}
     </DynamicHeader>
   );
-};
-
-Header.defaultProps = {
-  includeLanguageSelector: true,
-  homePagePath: "",
-  children: [],
 };
 
 export default Header;

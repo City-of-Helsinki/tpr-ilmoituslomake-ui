@@ -13,7 +13,7 @@ interface DescriptionTranslationProps {
   buttonsPrefix?: string;
 }
 
-const DescriptionTranslation = ({ prefix, buttonsPrefix }: DescriptionTranslationProps): ReactElement => {
+const DescriptionTranslation = ({ prefix, buttonsPrefix = undefined }: DescriptionTranslationProps): ReactElement => {
   const i18n = useI18n();
   //const dispatch = useDispatch<Dispatch<TranslationAction>>();
   const dispatch = useDispatch();
@@ -153,10 +153,6 @@ const DescriptionTranslation = ({ prefix, buttonsPrefix }: DescriptionTranslatio
       </div>
     </div>
   );
-};
-
-DescriptionTranslation.defaultProps = {
-  buttonsPrefix: undefined,
 };
 
 export default DescriptionTranslation;

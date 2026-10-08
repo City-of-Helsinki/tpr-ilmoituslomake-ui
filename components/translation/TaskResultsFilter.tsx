@@ -11,7 +11,7 @@ interface TaskResultsFilterProps {
   isHorizontalWhenXS?: boolean;
 }
 
-const TaskResultsFilter = ({ prefix, showResults, setShowResults, isHorizontalWhenXS }: TaskResultsFilterProps): ReactElement => {
+const TaskResultsFilter = ({ prefix, showResults, setShowResults, isHorizontalWhenXS = false }: TaskResultsFilterProps): ReactElement => {
   const i18n = useI18n();
 
   // Note: this only works for client-side rendering
@@ -40,10 +40,6 @@ const TaskResultsFilter = ({ prefix, showResults, setShowResults, isHorizontalWh
       </SelectionGroup>
     </div>
   );
-};
-
-TaskResultsFilter.defaultProps = {
-  isHorizontalWhenXS: false,
 };
 
 export default TaskResultsFilter;

@@ -18,7 +18,7 @@ interface NotificationFooterProps {
   setToast?: Dispatch<SetStateAction<Toast | undefined>>;
 }
 
-const NotificationFooter = ({ smallButtons, setToast }: NotificationFooterProps): ReactElement => {
+const NotificationFooter = ({ smallButtons = false, setToast = undefined }: NotificationFooterProps): ReactElement => {
   const i18n = useI18n();
   //const dispatch = useDispatch<Dispatch<NotificationAction>>();
   //const dispatchValidation = useDispatch<Dispatch<NotificationValidationAction>>();
@@ -126,11 +126,6 @@ const NotificationFooter = ({ smallButtons, setToast }: NotificationFooterProps)
       )}
     </div>
   );
-};
-
-NotificationFooter.defaultProps = {
-  smallButtons: false,
-  setToast: undefined,
 };
 
 export default NotificationFooter;

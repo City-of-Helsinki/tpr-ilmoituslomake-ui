@@ -18,7 +18,7 @@ interface PreviewProps {
   isPlaceInfo?: boolean;
 }
 
-const Preview = ({ className, titleKey, includeNotifier, isPlaceInfo }: PreviewProps): ReactElement => {
+const Preview = ({ className = undefined, titleKey = undefined, includeNotifier = false, isPlaceInfo = false }: PreviewProps): ReactElement => {
   const i18n = useI18n();
   const router = useRouter();
 
@@ -250,13 +250,6 @@ const Preview = ({ className, titleKey, includeNotifier, isPlaceInfo }: PreviewP
       )}
     </div>
   );
-};
-
-Preview.defaultProps = {
-  className: undefined,
-  titleKey: undefined,
-  includeNotifier: false,
-  isPlaceInfo: false,
 };
 
 export default Preview;

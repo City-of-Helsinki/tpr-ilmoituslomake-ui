@@ -15,7 +15,7 @@ interface CollapsibleProps {
   children: ReactNode;
 }
 
-const Collapsible = ({ section, title, taskType, taskStatus, isModerated, forceExpanded, children }: CollapsibleProps): ReactElement => {
+const Collapsible = ({ section, title, taskType, taskStatus, isModerated = false, forceExpanded = undefined, children }: CollapsibleProps): ReactElement => {
   const i18n = useI18n();
   const [expanded, setExpanded] = useState<boolean>(false);
 
@@ -82,11 +82,6 @@ const Collapsible = ({ section, title, taskType, taskStatus, isModerated, forceE
       <div className={expanded ? styles.expanded : styles.collapsed}>{children}</div>
     </div>
   );
-};
-
-Collapsible.defaultProps = {
-  isModerated: false,
-  forceExpanded: undefined,
 };
 
 export default Collapsible;

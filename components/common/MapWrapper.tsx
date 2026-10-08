@@ -20,13 +20,13 @@ interface MapWrapperProps {
 
 const MapWrapper = ({
   id,
-  className,
+  className = "",
   initialCenter,
   initialZoom,
   location,
-  setLocation,
-  setMapView,
-  setMapReady,
+  setLocation = undefined,
+  setMapView = undefined,
+  setMapReady = undefined,
   draggableMarker,
 }: MapWrapperProps): ReactElement => {
   const i18n = useI18n();
@@ -126,13 +126,6 @@ const MapWrapper = ({
       )}
     </MapContainer>
   );
-};
-
-MapWrapper.defaultProps = {
-  className: "",
-  setLocation: undefined,
-  setMapView: undefined,
-  setMapReady: undefined,
 };
 
 export default MapWrapper;

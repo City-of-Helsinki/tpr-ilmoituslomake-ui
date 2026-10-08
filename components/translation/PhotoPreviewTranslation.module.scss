@@ -23,23 +23,23 @@
 
     // HDS 2.0 only has container-width-xl
     @include mixins.media(xs) {
-      max-height: all.$container-width-xl / 8;
+      max-height: calc(all.$container-width-xl / 8);
     }
 
     @include mixins.media(s) {
-      max-height: all.$container-width-xl / 6;
+      max-height: calc(all.$container-width-xl / 6);
     }
 
     @include mixins.media(m) {
-      max-height: all.$container-width-xl / 6;
+      max-height: calc(all.$container-width-xl / 6);
     }
 
     @include mixins.media(l) {
-      max-height: all.$container-width-xl / 5;
+      max-height: calc(all.$container-width-xl / 5);
     }
 
     @include mixins.media(xl) {
-      max-height: all.$container-width-xl / 4;
+      max-height: calc(all.$container-width-xl / 4);
     }
   }
 }

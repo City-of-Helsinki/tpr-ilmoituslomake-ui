@@ -14,7 +14,7 @@
   }
 
   .notice {
-    max-width: all.$container-width-xl / 2;
+    max-width: calc(all.$container-width-xl / 2);
     margin-bottom: all.$spacing-layout-s;
     margin-left: all.$spacing-s;
     margin-right: all.$spacing-s;

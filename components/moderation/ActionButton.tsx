@@ -14,7 +14,7 @@ interface ActionButtonProps {
   hidden?: boolean;
 }
 
-const ActionButton = ({ id, className, fieldName, moderationStatus, taskStatus, actionCallback, hidden }: ActionButtonProps): ReactElement => {
+const ActionButton = ({ id = undefined, className = "", fieldName, moderationStatus, taskStatus, actionCallback, hidden = false }: ActionButtonProps): ReactElement => {
   const i18n = useI18n();
 
   return (
@@ -80,12 +80,6 @@ const ActionButton = ({ id, className, fieldName, moderationStatus, taskStatus, 
       )}
     </div>
   );
-};
-
-ActionButton.defaultProps = {
-  id: undefined,
-  className: "",
-  hidden: false,
 };
 
 export default ActionButton;

@@ -17,7 +17,7 @@ interface TaskHeaderButtonsProps {
   setToast: Dispatch<SetStateAction<Toast | undefined>>;
 }
 
-const TaskHeaderButtons = ({ isModerated, setToast }: TaskHeaderButtonsProps): ReactElement => {
+const TaskHeaderButtons = ({ isModerated = false, setToast }: TaskHeaderButtonsProps): ReactElement => {
   const i18n = useI18n();
   const router = useRouter();
 
@@ -665,10 +665,6 @@ const TaskHeaderButtons = ({ isModerated, setToast }: TaskHeaderButtonsProps): R
       )}
     </div>
   );
-};
-
-TaskHeaderButtons.defaultProps = {
-  isModerated: false,
 };
 
 export default TaskHeaderButtons;
