@@ -17,15 +17,15 @@ interface SelectionGroupWrapperProps {
 
 const SelectionGroupWrapper = ({
   id,
-  className,
+  className = "",
   horizontal,
   label,
-  radiobuttonname,
+  radiobuttonname = "",
   radioButtonLabels,
   radioButtonValues,
-  value,
-  onChange,
-  disabled,
+  value = undefined,
+  onChange = undefined,
+  disabled = false,
 }: SelectionGroupWrapperProps): ReactElement => {
   return (
     <SelectionGroup id={id} className={className} direction={horizontal ? "horizontal" : "vertical"} label={label} disabled={disabled}>
@@ -42,14 +42,6 @@ const SelectionGroupWrapper = ({
       ))}
     </SelectionGroup>
   );
-};
-
-SelectionGroupWrapper.defaultProps = {
-  className: "",
-  radiobuttonname: "",
-  value: undefined,
-  onChange: undefined,
-  disabled: false,
 };
 
 export default SelectionGroupWrapper;

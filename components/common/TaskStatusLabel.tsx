@@ -9,7 +9,7 @@ interface TaskStatusLabelProps {
   includeIcons?: boolean;
 }
 
-const TaskStatusLabel = ({ prefix, status, includeIcons }: TaskStatusLabelProps): ReactElement | null => {
+const TaskStatusLabel = ({ prefix, status, includeIcons = false }: TaskStatusLabelProps): ReactElement | null => {
   const i18n = useI18n();
 
   switch (status) {
@@ -36,10 +36,6 @@ const TaskStatusLabel = ({ prefix, status, includeIcons }: TaskStatusLabelProps)
       return null;
     }
   }
-};
-
-TaskStatusLabel.defaultProps = {
-  includeIcons: false,
 };
 
 export default TaskStatusLabel;

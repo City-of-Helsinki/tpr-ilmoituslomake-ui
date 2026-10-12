@@ -188,11 +188,11 @@ const CertificateModeration = (): ReactElement => {
               // @ts-ignore: Erroneous error that the type for options should be OptionType[][]
               options={convertOptions(mainCertificateOptions)}
               texts={{
-                  label: i18n.t("moderation.certificates.title"),
-                  assistive: certificatesStatus === ModerationStatus.Edited ? i18n.t("moderation.certificates.add.helperText") : undefined,
-                  dropdownButtonAriaLabel: i18n.t("moderation.button.toggleMenu"),
-                  tagRemoveSelectionAriaLabel: i18n.t("moderation.button.remove"),
-                  tagsClearAllButton: i18n.t("moderation.button.clearAllSelections"),
+                label: i18n.t("moderation.certificates.title"),
+                assistive: certificatesStatus === ModerationStatus.Edited ? i18n.t("moderation.certificates.add.helperText") : undefined,
+                dropdownButtonAriaLabel: i18n.t("moderation.button.toggleMenu"),
+                tagRemoveSelectionAriaLabel: i18n.t("moderation.button.remove"),
+                tagsClearAllButton: i18n.t("moderation.button.clearAllSelections"),
               }}
               multiSelect
               filter={defaultFilter}

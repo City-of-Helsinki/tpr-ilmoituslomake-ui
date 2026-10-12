@@ -15,7 +15,15 @@ interface CollapsibleProps {
   children: ReactNode;
 }
 
-const Collapsible = ({ section, title, taskType, taskStatus, isModerated, forceExpanded, children }: CollapsibleProps): ReactElement => {
+const Collapsible = ({
+  section,
+  title,
+  taskType,
+  taskStatus,
+  isModerated = false,
+  forceExpanded = undefined,
+  children,
+}: CollapsibleProps): ReactElement => {
   const i18n = useI18n();
   const [expanded, setExpanded] = useState<boolean>(false);
 
@@ -60,20 +68,24 @@ const Collapsible = ({ section, title, taskType, taskStatus, isModerated, forceE
         </div>
         <div className={styles.button}>
           {expanded && (
-            <Button variant={ButtonVariant.Secondary} 
-            size={ButtonSize.Small} 
-            aria-label={i18n.t("moderation.button.collapse")} 
-            iconStart={<IconMinus aria-hidden />}
-            onClick={toggle}>
+            <Button
+              variant={ButtonVariant.Secondary}
+              size={ButtonSize.Small}
+              aria-label={i18n.t("moderation.button.collapse")}
+              iconStart={<IconMinus aria-hidden />}
+              onClick={toggle}
+            >
               {i18n.t("moderation.button.collapse")}
             </Button>
           )}
           {!expanded && (
-            <Button variant={ButtonVariant.Secondary} 
-            size={ButtonSize.Small} 
-            aria-label={i18n.t("moderation.button.expand")} 
-            iconStart={<IconPlus aria-hidden />}
-            onClick={toggle}>
+            <Button
+              variant={ButtonVariant.Secondary}
+              size={ButtonSize.Small}
+              aria-label={i18n.t("moderation.button.expand")}
+              iconStart={<IconPlus aria-hidden />}
+              onClick={toggle}
+            >
               {i18n.t("moderation.button.expand")}
             </Button>
           )}
@@ -82,11 +94,6 @@ const Collapsible = ({ section, title, taskType, taskStatus, isModerated, forceE
       <div className={expanded ? styles.expanded : styles.collapsed}>{children}</div>
     </div>
   );
-};
-
-Collapsible.defaultProps = {
-  isModerated: false,
-  forceExpanded: undefined,
 };
 
 export default Collapsible;

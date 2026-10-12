@@ -3,21 +3,24 @@ import { useSelector } from "react-redux";
 import dynamic from "next/dynamic";
 import { useRouter } from "next/router";
 import { useI18n } from "next-localization";
-import { Header as HdsHeader,  
-  IconSearch, IconUser, 
-  IconSignin, 
-  IconSignout, 
-  LoginProvider, 
-  LoginProviderProps, 
-  Button, 
+import {
+  Header as HdsHeader,
+  IconSearch,
+  IconUser,
+  IconSignin,
+  IconSignout,
+  LoginProvider,
+  LoginProviderProps,
+  Button,
   ButtonVariant,
-  LoginButton, 
-  Logo, 
-  logoFi, 
-  logoSv, 
-  logoSvDark, 
-  WithoutAuthenticatedUser, 
-  WithAuthenticatedUser } from "hds-react";
+  LoginButton,
+  Logo,
+  logoFi,
+  logoSv,
+  logoSvDark,
+  WithoutAuthenticatedUser,
+  WithAuthenticatedUser,
+} from "hds-react";
 import { defaultLocale } from "../../utils/i18n";
 import { RootState } from "../../state/reducers";
 import getOrigin from "../../utils/request";
@@ -36,7 +39,7 @@ interface HeaderProps {
 //const DynamicNavigation = dynamic(() => import("hds-react").then((hds) => hds.Navigation), { ssr: false });
 const DynamicHeader = dynamic(() => import("hds-react").then((hds) => hds.Header), { ssr: false });
 
-const Header = ({ includeLanguageSelector, homePagePath, children }: HeaderProps): ReactElement => {
+const Header = ({ includeLanguageSelector = true, homePagePath = "", children = [] }: HeaderProps): ReactElement => {
   const i18n = useI18n();
   const router = useRouter();
 
@@ -95,7 +98,6 @@ const Header = ({ includeLanguageSelector, homePagePath, children }: HeaderProps
             className="fixedRightPosition fit-content"
             iconStart={<IconSignin aria-hidden />}
             onClick={signIn}
-            
             variant={ButtonVariant.Supplementary}
           >
             {i18n.t("common.header.login")}
@@ -111,12 +113,7 @@ const Header = ({ includeLanguageSelector, homePagePath, children }: HeaderProps
             icon={<IconUser />}
             label={i18n.t("common.header.userInfo") + ` (${currentUser?.first_name || currentUser?.email})`}
           >
-            <HdsHeader.ActionBarSubItem
-              href="#"
-              iconEnd={<IconSignout aria-hidden />}
-              label={i18n.t("common.header.logout")}
-              onClick={signOut}
-            />
+            <HdsHeader.ActionBarSubItem href="#" iconEnd={<IconSignout aria-hidden />} label={i18n.t("common.header.logout")} onClick={signOut} />
           </HdsHeader.ActionBarItem>
         )}
 
@@ -131,12 +128,6 @@ const Header = ({ includeLanguageSelector, homePagePath, children }: HeaderProps
       {children}
     </DynamicHeader>
   );
-};
-
-Header.defaultProps = {
-  includeLanguageSelector: true,
-  homePagePath: "",
-  children: [],
 };
 
 export default Header;

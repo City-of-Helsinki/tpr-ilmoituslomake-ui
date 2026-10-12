@@ -18,7 +18,7 @@ const Intro = (): ReactElement => {
             href={TRANSLATION_GUIDE_URL}
             size={LinkSize.Medium}
             openInNewTab
-            openInNewTabAriaLabel={i18n.t("common.opensInANewTab")}
+            openInNewTabLabel={i18n.t("common.opensInANewTab")}
             external
             openInExternalDomainAriaLabel={i18n.t("common.opensExternal")}
             disableVisitedStyles

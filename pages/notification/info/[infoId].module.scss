@@ -1,11 +1,11 @@
-@import "~hds-design-tokens/lib/all.scss";
+@use "~hds-design-tokens/lib/all.scss";
 
 .content {
   h1 {
-    color: $color-bus;
+    color: all.$color-bus;
   }
 
   .noticeLoggedOut {
-    margin-bottom: $spacing-layout-xs;
+    margin-bottom: all.$spacing-layout-xs;
   }
 }

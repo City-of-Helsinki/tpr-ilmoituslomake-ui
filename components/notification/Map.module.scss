@@ -1,8 +1,8 @@
-@import "~hds-design-tokens/lib/all.scss";
+@use "~hds-design-tokens/lib/all.scss";
 
 .geocode {
-  background-color: $color-copper-light;
-  padding: $spacing-m;
+  background-color: all.$color-copper-light;
+  padding: all.$spacing-m;
 }
 
 .map {
@@ -10,17 +10,17 @@
 }
 
 .resetLocation {
-  margin-top: $spacing-layout-s;
+  margin-top: all.$spacing-layout-s;
 }
 
 .invalidLocation {
   display: flex;
   flex-direction: row;
   align-items: center;
-  color: $color-error;
-  margin-top: $spacing-layout-s;
+  color: all.$color-error;
+  margin-top: all.$spacing-layout-s;
 
   span {
-    margin-left: $spacing-2-xs;
+    margin-left: all.$spacing-2-xs;
   }
 }

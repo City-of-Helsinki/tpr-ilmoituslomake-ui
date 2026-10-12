@@ -1,17 +1,17 @@
-@import "~hds-design-tokens/lib/all.scss";
-@import "../../styles/mixins";
+@use "~hds-design-tokens/lib/all.scss";
+@use "../../styles/mixins";
 
 .showStatus {
   display: flex;
   flex-direction: row;
   align-items: flex-start;
-  margin-bottom: $spacing-xs;
+  margin-bottom: all.$spacing-xs;
 
   .showResultsLabel {
-    margin-top: $spacing-s;
+    margin-top: all.$spacing-s;
   }
 
   fieldset {
-    margin-left: $spacing-s;
+    margin-left: all.$spacing-s;
   }
 }

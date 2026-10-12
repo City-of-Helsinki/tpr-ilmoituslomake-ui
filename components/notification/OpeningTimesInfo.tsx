@@ -13,7 +13,7 @@ interface OpeningTimesInfoProps {
   openModal?: () => void;
 }
 
-const OpeningTimesInfo = ({ isPlaceInfo, openModal }: OpeningTimesInfoProps): ReactElement => {
+const OpeningTimesInfo = ({ isPlaceInfo = false, openModal = undefined }: OpeningTimesInfoProps): ReactElement => {
   const i18n = useI18n();
   const router = useRouter();
 
@@ -42,7 +42,7 @@ const OpeningTimesInfo = ({ isPlaceInfo, openModal }: OpeningTimesInfoProps): Re
   };
 
   // Get the opening times on first render only
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+
   useEffect(() => {
     getOpeningTimesOnMount();
   }, []);
@@ -56,11 +56,6 @@ const OpeningTimesInfo = ({ isPlaceInfo, openModal }: OpeningTimesInfoProps): Re
       <OpeningTimesText className={styles.results} openingTimes={openingTimes} />
     </div>
   );
-};
-
-OpeningTimesInfo.defaultProps = {
-  isPlaceInfo: false,
-  openModal: undefined,
 };
 
 export default OpeningTimesInfo;

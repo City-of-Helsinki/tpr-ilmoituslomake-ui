@@ -1,7 +1,7 @@
-@import "~hds-design-tokens/lib/all.scss";
+@use "~hds-design-tokens/lib/all.scss";
 
 .action {
-  margin-top: $spacing-layout-xs;
+  margin-top: all.$spacing-layout-xs;
 
   .buttonRow {
     display: flex;
@@ -9,18 +9,18 @@
     justify-content: flex-end;
 
     button {
-      margin-left: $spacing-xs;
+      margin-left: all.$spacing-xs;
 
       overflow-wrap: normal;
 
       &.approveSecondary {
-        color: $color-success;
-        border-color: $color-success;
+        color: all.$color-success;
+        border-color: all.$color-success;
       }
 
       &.rejectSecondary {
-        color: $color-error;
-        border-color: $color-error;
+        color: all.$color-error;
+        border-color: all.$color-error;
       }
     }
   }

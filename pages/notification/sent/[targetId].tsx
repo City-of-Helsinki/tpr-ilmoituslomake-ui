@@ -5,7 +5,17 @@ import Head from "next/head";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useI18n } from "next-localization";
-import { Button, ButtonVariant, IconCheckCircleFill, IconClockPlus, IconInfoCircle, IconLinkExternal, IconPhotoPlus, IconSize, Koros } from "hds-react";
+import {
+  Button,
+  ButtonVariant,
+  IconCheckCircleFill,
+  IconClockPlus,
+  IconInfoCircle,
+  IconLinkExternal,
+  IconPhotoPlus,
+  IconSize,
+  Koros,
+} from "hds-react";
 import { Dialog } from "@mui/material";
 import { RootState } from "../../../state/reducers";
 import { initStore } from "../../../state/store";
@@ -68,7 +78,7 @@ const NotificationSent = (): ReactElement => {
             titleKey="notification.message.completeOpeningTimes.title"
             messageKey="notification.message.completeOpeningTimes.message"
             button={
-              <Button variant={ButtonVariant.Secondary} iconEnd={<IconLinkExternal aria-hidden  />} aria-label={i18n.t("common.opensInANewTab")}>
+              <Button variant={ButtonVariant.Secondary} iconEnd={<IconLinkExternal aria-hidden />} aria-label={i18n.t("common.opensInANewTab")}>
                 {i18n.t("notification.button.notifyOpeningTimes")}
               </Button>
             }

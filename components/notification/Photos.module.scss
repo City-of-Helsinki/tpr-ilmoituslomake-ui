@@ -1,56 +1,56 @@
-@import "~hds-design-tokens/lib/all.scss";
-@import "../../styles/mixins";
+@use "~hds-design-tokens/lib/all.scss";
+@use "../../styles/mixins";
 
 .photos {
   h5,
   .notice {
-    margin-bottom: $spacing-layout-xs;
+    margin-bottom: all.$spacing-layout-xs;
   }
 
   button {
-    margin-right: $spacing-s;
+    margin-right: all.$spacing-s;
   }
 
   .imagePreview {
-    margin-bottom: $spacing-layout-xs;
+    margin-bottom: all.$spacing-layout-xs;
 
     img {
       max-width: 100%;
 
       // HDS 2.0 only has container-width-xl
-      @include media(xs) {
-        max-height: $container-width-xl / 8;
+      @include mixins.media(xs) {
+        max-height: calc(all.$container-width-xl / 8);
       }
 
-      @include media(s) {
-        max-height: $container-width-xl / 6;
+      @include mixins.media(s) {
+        max-height: calc(all.$container-width-xl / 6);
       }
 
-      @include media(m) {
-        max-height: $container-width-xl / 6;
+      @include mixins.media(m) {
+        max-height: calc(all.$container-width-xl / 6);
       }
 
-      @include media(l) {
-        max-height: $container-width-xl / 5;
+      @include mixins.media(l) {
+        max-height: calc(all.$container-width-xl / 5);
       }
 
-      @include media(xl) {
-        max-height: $container-width-xl / 4;
+      @include mixins.media(xl) {
+        max-height: calc(all.$container-width-xl / 4);
       }
     }
   }
 
   .creativeCommonsLink {
-    margin: $spacing-2-xs 0 $spacing-layout-s $spacing-layout-s;
+    margin: all.$spacing-2-xs 0 all.$spacing-layout-s all.$spacing-layout-s;
   }
 
   .selectRemove {
     display: inline-block;
-    margin-bottom: $spacing-layout-s;
+    margin-bottom: all.$spacing-layout-s;
   }
 
   .addNew {
     display: inline-block;
-    margin-top: $spacing-layout-s;
+    margin-top: all.$spacing-layout-s;
   }
 }

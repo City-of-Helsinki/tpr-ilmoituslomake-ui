@@ -135,16 +135,14 @@ const TaskResults = ({ showStatus }: TaskResultsProps): ReactElement => {
                 <Fragment key={`taskresult_${id}`}>
                   <div className={`${styles.gridColumn1} ${styles.gridContent}`}>
                     <div className={styles.flexItem}>
-                      
-                        <HdsLink href={`${router.basePath}/moderation/task/${id}`} size={LinkSize.Medium} disableVisitedStyles>
-                          {`${getDisplayName(
-                            router.locale || defaultLocale,
-                            name,
-                            user_place_name,
-                            taskType === TaskType.ModeratorAdd ? i18n.t("moderation.taskResults.emptyMod") : i18n.t("moderation.taskResults.empty")
-                          )}${targetId ? ` (${targetId})` : ""}`}
-                        </HdsLink>
-                      
+                      <HdsLink href={`${router.basePath}/moderation/task/${id}`} size={LinkSize.Medium} disableVisitedStyles>
+                        {`${getDisplayName(
+                          router.locale || defaultLocale,
+                          name,
+                          user_place_name,
+                          taskType === TaskType.ModeratorAdd ? i18n.t("moderation.taskResults.emptyMod") : i18n.t("moderation.taskResults.empty")
+                        )}${targetId ? ` (${targetId})` : ""}`}
+                      </HdsLink>
                     </div>
                   </div>
                   <div className={`${styles.gridColumn2} ${styles.gridContent}`}>

@@ -2,7 +2,7 @@ import React, { Dispatch, ChangeEvent, ReactElement } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useRouter } from "next/router";
 import { useI18n } from "next-localization";
-import { Button, ButtonVariant, Checkbox,Select, SelectionGroup, TextInput } from "hds-react";
+import { Button, ButtonVariant, Checkbox, Select, SelectionGroup, TextInput } from "hds-react";
 import moment from "moment";
 import { ModerationTranslationAction } from "../../../state/actions/moderationTranslationTypes";
 import {
@@ -199,10 +199,10 @@ const PlaceSearch = (): ReactElement => {
           value={convertValues(ontologyIds) as any}
           onChange={updateSearchTags}
           texts={{
-              label: i18n.t("moderation.placeSearch.tag.label"),
-              dropdownButtonAriaLabel: i18n.t("moderation.button.toggleMenu"),
-              tagRemoveSelectionAriaLabel: i18n.t("moderation.button.remove"),
-              tagsClearAllButton: i18n.t("moderation.button.clearAllSelections")
+            label: i18n.t("moderation.placeSearch.tag.label"),
+            dropdownButtonAriaLabel: i18n.t("moderation.button.toggleMenu"),
+            tagRemoveSelectionAriaLabel: i18n.t("moderation.button.remove"),
+            tagsClearAllButton: i18n.t("moderation.button.clearAllSelections"),
           }}
           multiSelect
         />
@@ -215,10 +215,10 @@ const PlaceSearch = (): ReactElement => {
           value={convertMatkoValues(matkoIds) as any}
           onChange={updateSearchMatkoTags}
           texts={{
-              label: i18n.t("moderation.placeSearch.matko.label"),
-              dropdownButtonAriaLabel: i18n.t("moderation.button.toggleMenu"),
-              tagRemoveSelectionAriaLabel: i18n.t("moderation.button.remove"),
-              tagsClearAllButton: i18n.t("moderation.button.clearAllSelections")
+            label: i18n.t("moderation.placeSearch.matko.label"),
+            dropdownButtonAriaLabel: i18n.t("moderation.button.toggleMenu"),
+            tagRemoveSelectionAriaLabel: i18n.t("moderation.button.remove"),
+            tagsClearAllButton: i18n.t("moderation.button.clearAllSelections"),
           }}
           multiSelect
         />

@@ -18,8 +18,8 @@ interface OpeningTimesButtonProps {
 const OpeningTimesButton = ({
   buttonTextKey,
   buttonVariant,
-  disabled,
-  closeModal,
+  disabled = false,
+  closeModal = undefined,
   notificationId,
   placeId,
   openingTimesId,
@@ -54,11 +54,6 @@ const OpeningTimesButton = ({
       {i18n.t(buttonTextKey)}
     </Button>
   );
-};
-
-OpeningTimesButton.defaultProps = {
-  disabled: false,
-  closeModal: undefined,
 };
 
 export default OpeningTimesButton;

@@ -17,7 +17,7 @@ interface ModalConfirmationProps {
 const ModalConfirmation = ({
   open,
   closeCallback,
-  titleKey,
+  titleKey = "",
   messageKey,
   cancelKey,
   confirmKey,
@@ -40,10 +40,6 @@ const ModalConfirmation = ({
       </div>
     </Dialog>
   );
-};
-
-ModalConfirmation.defaultProps = {
-  titleKey: "",
 };
 
 export default ModalConfirmation;

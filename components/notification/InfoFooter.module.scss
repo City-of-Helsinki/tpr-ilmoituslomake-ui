@@ -1,4 +1,4 @@
-@import "~hds-design-tokens/lib/all.scss";
+@use "~hds-design-tokens/lib/all.scss";
 
 .footer {
   display: flex;
@@ -6,8 +6,8 @@
   flex-wrap: wrap;
 
   .flexButton {
-    margin-right: $spacing-s;
-    margin-bottom: $spacing-s;
+    margin-right: all.$spacing-s;
+    margin-bottom: all.$spacing-s;
   }
 
   .returnButton {

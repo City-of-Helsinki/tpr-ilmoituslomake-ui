@@ -37,7 +37,15 @@ interface TaskHeaderProps {
   setToast: Dispatch<SetStateAction<Toast | undefined>>;
 }
 
-const TaskHeader = ({ prefix, buttonsPrefix, backHref, isModeration, saveTranslation, toast, setToast }: TaskHeaderProps): ReactElement => {
+const TaskHeader = ({
+  prefix,
+  buttonsPrefix = undefined,
+  backHref,
+  isModeration,
+  saveTranslation,
+  toast = undefined,
+  setToast,
+}: TaskHeaderProps): ReactElement => {
   const i18n = useI18n();
   const router = useRouter();
 
@@ -117,11 +125,6 @@ const TaskHeader = ({ prefix, buttonsPrefix, backHref, isModeration, saveTransla
       </div>
     </div>
   );
-};
-
-TaskHeader.defaultProps = {
-  buttonsPrefix: undefined,
-  toast: undefined,
 };
 
 export default TaskHeader;

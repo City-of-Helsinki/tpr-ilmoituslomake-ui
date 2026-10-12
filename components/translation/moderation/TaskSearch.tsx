@@ -107,7 +107,7 @@ const TaskSearch = ({ showStatus, setShowStatus }: TaskSearchProps): ReactElemen
   };
 
   // If specified, search all tasks on first render only, using a workaround utilising useEffect with empty dependency array
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+
   //const useMountEffect = (fun: () => void) => useEffect(fun, []);
   //useMountEffect(searchTasks);
 
@@ -131,7 +131,7 @@ const TaskSearch = ({ showStatus, setShowStatus }: TaskSearchProps): ReactElemen
           maxLength={MAX_LENGTH}
           onChange={updateSearchText}
         />
-        {(taskResults.results.length > 0) && (
+        {taskResults.results.length > 0 && (
           <Select
             id="request"
             className={styles.gridInputRequest}
@@ -141,9 +141,8 @@ const TaskSearch = ({ showStatus, setShowStatus }: TaskSearchProps): ReactElemen
             texts={{
               label: i18n.t("moderation.translation.taskSearch.request.label"),
               tagRemoveSelectionAriaLabel: i18n.t("moderation.button.remove"),
-              tagsClearAllButton: i18n.t("moderation.button.clearAllSelections")
+              tagsClearAllButton: i18n.t("moderation.button.clearAllSelections"),
             }}
-            
           />
         )}
         <div className={styles.gridButton}>

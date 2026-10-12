@@ -1,19 +1,19 @@
-@import "~hds-design-tokens/lib/all.scss";
+@use "~hds-design-tokens/lib/all.scss";
 
 .placeSearch {
   h1 {
-    color: $color-bus;
+    color: all.$color-bus;
   }
 
   .noticeLoggedOut {
-    margin-top: $spacing-layout-xs;
+    margin-top: all.$spacing-layout-xs;
   }
 
   .search {
     align-items: center;
-    background-color: $color-copper-light;
-    padding: $spacing-m;
-    margin-top: $spacing-layout-xs;
+    background-color: all.$color-copper-light;
+    padding: all.$spacing-m;
+    margin-top: all.$spacing-layout-xs;
 
     .gridInput {
       grid-column: 1 / span 3;

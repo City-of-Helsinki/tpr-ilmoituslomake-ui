@@ -15,7 +15,15 @@ interface CollapsibleProps {
   children: ReactNode;
 }
 
-const Collapsible = ({ prefix, section, title, taskStatus, isTranslated, forceExpanded, children }: CollapsibleProps): ReactElement => {
+const Collapsible = ({
+  prefix,
+  section,
+  title,
+  taskStatus,
+  isTranslated = false,
+  forceExpanded = undefined,
+  children,
+}: CollapsibleProps): ReactElement => {
   const i18n = useI18n();
   const [expanded, setExpanded] = useState<boolean>(false);
 
@@ -51,12 +59,24 @@ const Collapsible = ({ prefix, section, title, taskStatus, isTranslated, forceEx
         </div>
         <div className={styles.button}>
           {expanded && (
-            <Button variant={ButtonVariant.Secondary} size={ButtonSize.Small} aria-label={i18n.t(`${prefix}.button.collapse`)} onClick={toggle} iconStart={<IconMinus aria-hidden />}>
+            <Button
+              variant={ButtonVariant.Secondary}
+              size={ButtonSize.Small}
+              aria-label={i18n.t(`${prefix}.button.collapse`)}
+              onClick={toggle}
+              iconStart={<IconMinus aria-hidden />}
+            >
               {i18n.t(`${prefix}.button.collapse`)}
             </Button>
           )}
           {!expanded && (
-            <Button variant={ButtonVariant.Secondary} size={ButtonSize.Small} aria-label={i18n.t(`${prefix}.button.expand`)} onClick={toggle} iconStart={<IconPlus aria-hidden />}>
+            <Button
+              variant={ButtonVariant.Secondary}
+              size={ButtonSize.Small}
+              aria-label={i18n.t(`${prefix}.button.expand`)}
+              onClick={toggle}
+              iconStart={<IconPlus aria-hidden />}
+            >
               {i18n.t(`${prefix}.button.expand`)}
             </Button>
           )}
@@ -65,11 +85,6 @@ const Collapsible = ({ prefix, section, title, taskStatus, isTranslated, forceEx
       <div className={expanded ? styles.expanded : styles.collapsed}>{children}</div>
     </div>
   );
-};
-
-Collapsible.defaultProps = {
-  isTranslated: false,
-  forceExpanded: undefined,
 };
 
 export default Collapsible;

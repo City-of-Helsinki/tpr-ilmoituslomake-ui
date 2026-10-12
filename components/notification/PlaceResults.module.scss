@@ -1,31 +1,31 @@
-@import "~hds-design-tokens/lib/all.scss";
-@import "../../styles/mixins";
+@use "~hds-design-tokens/lib/all.scss";
+@use "../../styles/mixins";
 
 .placeResults {
   .results {
     column-gap: 0;
 
     // $spacing-4-xl = 4rem = 64px
-    grid-template-columns: minmax(2 * $spacing-4-xl, 2fr) minmax(4 * $spacing-4-xl, 4fr) minmax(1 * $spacing-4-xl, 1fr);
+    grid-template-columns: minmax(2 * all.$spacing-4-xl, 2fr) minmax(4 * all.$spacing-4-xl, 4fr) minmax(1 * all.$spacing-4-xl, 1fr);
 
-    @include media(xs, s) {
-      grid-template-columns: minmax(3 * $spacing-4-xl, 3fr) minmax(1 * $spacing-4-xl, 1fr);
+    @include mixins.media(xs, s) {
+      grid-template-columns: minmax(3 * all.$spacing-4-xl, 3fr) minmax(1 * all.$spacing-4-xl, 1fr);
       row-gap: 0;
     }
 
     .gridContent {
       display: flex;
       flex-direction: row;
-      border: 2px solid $color-black-50;
+      border: 2px solid all.$color-black-50;
 
       &.firstColumn {
         grid-column: 1 / 1;
 
-        @include media(m, l, xl) {
+        @include mixins.media(m, l, xl) {
           border-right: 0;
         }
 
-        @include media(xs, s) {
+        @include mixins.media(xs, s) {
           grid-column: 1 / span 2;
           border-bottom: 0;
         }
@@ -33,18 +33,18 @@
 
       &.middleColumn {
         grid-column: 2 / span 2;
-        padding: $spacing-xs 0px;
+        padding: all.$spacing-xs 0px;
 
         &.ownPlaces {
           grid-column: 2 / 2;
           border-right: 0;
         }
 
-        @include media(m, l, xl) {
+        @include mixins.media(m, l, xl) {
           border-left: 0;
         }
 
-        @include media(xs, s) {
+        @include mixins.media(xs, s) {
           grid-column: 1 / span 2;
           border-top: 0;
 
@@ -53,12 +53,12 @@
           }
         }
 
-        @include media(xs) {
-          margin-bottom: $spacing-xs;
+        @include mixins.media(xs) {
+          margin-bottom: all.$spacing-xs;
         }
 
-        @include media(s) {
-          margin-bottom: $spacing-s;
+        @include mixins.media(s) {
+          margin-bottom: all.$spacing-s;
         }
       }
 
@@ -67,35 +67,35 @@
         justify-content: flex-end;
         border-left: 0;
 
-        @include media(xs, s) {
+        @include mixins.media(xs, s) {
           grid-column: 2 / 2;
           border-top: 0;
         }
 
-        @include media(xs) {
-          margin-bottom: $spacing-xs;
+        @include mixins.media(xs) {
+          margin-bottom: all.$spacing-xs;
         }
 
-        @include media(s) {
-          margin-bottom: $spacing-s;
+        @include mixins.media(s) {
+          margin-bottom: all.$spacing-s;
         }
       }
 
       &.gridButton {
-        background-color: $color-copper-light;
+        background-color: all.$color-copper-light;
         padding: 0;
-        font-size: $fontsize-heading-s;
+        font-size: all.$fontsize-heading-s;
       }
 
       svg {
         flex-shrink: 0;
-        margin: 0px $spacing-2-xs;
+        margin: 0px all.$spacing-2-xs;
       }
 
       .nameContainer {
         display: flex;
         flex-direction: row;
-        margin: $spacing-xs;
+        margin: all.$spacing-xs;
       }
 
       .addressContainer {
@@ -109,20 +109,20 @@
         flex-direction: column;
 
         .ownPlace {
-          background-color: $color-bus;
-          color: $color-white;
+          background-color: all.$color-bus;
+          color: all.$color-white;
           display: flex;
           flex-direction: row;
           align-items: center;
 
           .ownPlaceLabel {
-            margin-right: $spacing-2-xs;
+            margin-right: all.$spacing-2-xs;
 
-            @include media(s, m, l, xl) {
+            @include mixins.media(s, m, l, xl) {
               display: block;
             }
 
-            @include media(xs) {
+            @include mixins.media(xs) {
               display: none;
             }
           }
@@ -132,14 +132,14 @@
   }
 
   .nextResults {
-    margin-bottom: $spacing-layout-l;
+    margin-bottom: all.$spacing-layout-l;
   }
 
   .newPlace {
-    background-color: $color-copper-light;
+    background-color: all.$color-copper-light;
   }
 
   .notFoundTip {
-    margin-bottom: $spacing-layout-l;
+    margin-bottom: all.$spacing-layout-l;
   }
 }

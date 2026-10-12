@@ -98,11 +98,9 @@ const PlaceResults = (): ReactElement => {
                 <Fragment key={`placeresult_${targetId}`}>
                   <div className={`${styles.gridColumn1} ${styles.gridContent}`}>
                     <div className={styles.flexItem}>
-                      
-                        <HdsLink href={`${router.basePath}/moderation/place/${targetId}`} size={LinkSize.Medium} disableVisitedStyles>
-                          {`${getDisplayName(router.locale || defaultLocale, name)}${targetId ? ` (${targetId})` : ""}`}
-                        </HdsLink>
-                      
+                      <HdsLink href={`${router.basePath}/moderation/place/${targetId}`} size={LinkSize.Medium} disableVisitedStyles>
+                        {`${getDisplayName(router.locale || defaultLocale, name)}${targetId ? ` (${targetId})` : ""}`}
+                      </HdsLink>
                     </div>
                   </div>
                   <div className={`${styles.gridColumn2} ${styles.gridContent}`}>

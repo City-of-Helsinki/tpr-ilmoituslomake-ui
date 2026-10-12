@@ -1,12 +1,12 @@
-@import "~hds-design-tokens/lib/all.scss";
-@import "../../styles/mixins";
+@use "~hds-design-tokens/lib/all.scss";
+@use "../../styles/mixins";
 
 .inputLanguage {
-  background-color: $color-copper-light;
-  padding: $spacing-m !important;
-  margin-bottom: $spacing-layout-s;
+  background-color: all.$color-copper-light;
+  padding: all.$spacing-m !important;
+  margin-bottom: all.$spacing-layout-s;
 
   input {
-    background-color: $color-white;
+    background-color: all.$color-white;
   }
 }

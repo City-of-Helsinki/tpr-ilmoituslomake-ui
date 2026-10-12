@@ -7,7 +7,7 @@ interface OpeningProps {
   temporaryNotice?: boolean;
 }
 
-const Opening = ({ temporaryNotice }: OpeningProps): ReactElement => {
+const Opening = ({ temporaryNotice = false }: OpeningProps): ReactElement => {
   const i18n = useI18n();
 
   return (
@@ -19,10 +19,6 @@ const Opening = ({ temporaryNotice }: OpeningProps): ReactElement => {
       <div className={styles.notice}>{temporaryNotice ? i18n.t("notification.opening.temporaryNotice") : i18n.t("notification.opening.notice")}</div>
     </div>
   );
-};
-
-Opening.defaultProps = {
-  temporaryNotice: false,
 };
 
 export default Opening;

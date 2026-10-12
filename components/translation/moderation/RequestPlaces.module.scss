@@ -1,4 +1,4 @@
-@import "~hds-design-tokens/lib/all.scss";
+@use "~hds-design-tokens/lib/all.scss";
 
 .placeContainer {
   display: flex;
@@ -9,26 +9,26 @@
     display: flex;
     flex-direction: row;
     align-items: center;
-    background-color: $color-bus;
-    margin-bottom: $spacing-2-xs;
+    background-color: all.$color-bus;
+    margin-bottom: all.$spacing-2-xs;
 
     .placeName {
       flex-grow: 1;
-      color: $color-white;
-      margin-left: $spacing-s;
+      color: all.$color-white;
+      margin-left: all.$spacing-s;
     }
 
     button {
-      color: $color-white;
+      color: all.$color-white;
       border: 0;
 
       &:hover {
-        color: $color-black;
+        color: all.$color-black;
       }
 
       &:disabled {
-        color: $color-black-40;
-        background-color: $color-black-10;
+        color: all.$color-black-40;
+        background-color: all.$color-black-10;
       }
     }
   }
@@ -39,11 +39,11 @@
     align-items: flex-end;
 
     .icon {
-      margin-right: $spacing-2-xs;
+      margin-right: all.$spacing-2-xs;
     }
 
     &.error {
-      color: $color-error;
+      color: all.$color-error;
     }
   }
 }
