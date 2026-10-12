@@ -136,11 +136,9 @@ const PlaceResults = (): ReactElement => {
                         onChange={updateSelectedPlaces}
                       />
 
-                      
-                        <HdsLink href={`${router.basePath}/moderation/place/${targetId}`} size={LinkSize.Medium} disableVisitedStyles>
-                          {`${getDisplayName(router.locale || defaultLocale, name)}${targetId ? ` (${targetId})` : ""}`}
-                        </HdsLink>
-                      
+                      <HdsLink href={`${router.basePath}/moderation/place/${targetId}`} size={LinkSize.Medium} disableVisitedStyles>
+                        {`${getDisplayName(router.locale || defaultLocale, name)}${targetId ? ` (${targetId})` : ""}`}
+                      </HdsLink>
                     </div>
                   </div>
                   <div className={`${styles.gridColumn2} ${styles.gridContent}`}>

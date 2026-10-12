@@ -113,11 +113,9 @@ const PlaceResults = (): ReactElement => {
                 <Fragment key={`placeresult_${id}`}>
                   <div className={`${styles.gridContent} ${styles.firstColumn} ${styles.gridButton}`}>
                     <div className={styles.nameContainer}>
-                      
-                        <HdsLink href={`${router.basePath}/notification/info/${id}`} size={LinkSize.Medium} disableVisitedStyles>
-                          {getDisplayName(router.locale || defaultLocale, name)}
-                        </HdsLink>
-                      
+                      <HdsLink href={`${router.basePath}/notification/info/${id}`} size={LinkSize.Medium} disableVisitedStyles>
+                        {getDisplayName(router.locale || defaultLocale, name)}
+                      </HdsLink>
                     </div>
                   </div>
                   <div className={`${styles.gridContent} ${styles.middleColumn} ${showOwnPlaces ? styles.ownPlaces : ""}`}>

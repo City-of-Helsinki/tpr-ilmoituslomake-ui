@@ -12,7 +12,15 @@ interface NoticeProps {
   focusOnTitle?: boolean;
 }
 
-const Notice = ({ className = undefined, icon, titleKey = "", messageKey, messageKey2, button = undefined, focusOnTitle = false }: NoticeProps): ReactElement => {
+const Notice = ({
+  className = undefined,
+  icon,
+  titleKey = "",
+  messageKey,
+  messageKey2,
+  button = undefined,
+  focusOnTitle = false,
+}: NoticeProps): ReactElement => {
   const i18n = useI18n();
   const ref = useRef<HTMLDivElement>(null);
 

@@ -74,11 +74,17 @@ const RequestDetail = ({ requestStatus }: RequestDetailProps): ReactElement => {
     isModerationTranslationRequestFieldValid(evt.target.name, evt.target.id, requestDetail, dispatch);
   };
 
-  const translatorValidError = translatorValid.message ? i18n.t(translatorValid.message as string).replace("$fieldName", i18n.t("moderation.translation.request.translator.label")) : i18n.t("moderation.translation.request.translator.label");
+  const translatorValidError = translatorValid.message
+    ? i18n.t(translatorValid.message as string).replace("$fieldName", i18n.t("moderation.translation.request.translator.label"))
+    : i18n.t("moderation.translation.request.translator.label");
 
-  const languageValidError = languageValid.message ? i18n.t(languageValid.message as string).replace("$fieldName", i18n.t("moderation.translation.request.translationLanguage.label")) : i18n.t("moderation.translation.request.translationLanguage.label");
+  const languageValidError = languageValid.message
+    ? i18n.t(languageValid.message as string).replace("$fieldName", i18n.t("moderation.translation.request.translationLanguage.label"))
+    : i18n.t("moderation.translation.request.translationLanguage.label");
 
-  const messageValidError = messageValid.message ? i18n.t(messageValid.message as string).replace("$fieldName", i18n.t("moderation.translation.request.message.label")) : i18n.t("moderation.translation.request.message.label");
+  const messageValidError = messageValid.message
+    ? i18n.t(messageValid.message as string).replace("$fieldName", i18n.t("moderation.translation.request.message.label"))
+    : i18n.t("moderation.translation.request.message.label");
 
   console.log("translatr  options", translators);
 
@@ -98,9 +104,7 @@ const RequestDetail = ({ requestStatus }: RequestDetailProps): ReactElement => {
             label: i18n.t("moderation.translation.request.translator.label"),
             tagRemoveSelectionAriaLabel: i18n.t("moderation.button.remove"),
             tagsClearAllButton: i18n.t("moderation.button.clearAllSelections"),
-            error: translatorValid.valid
-              ? translatorValidError
-              : ""
+            error: translatorValid.valid ? translatorValidError : "",
           }}
           invalid={!translatorValid.valid}
           required
@@ -119,7 +123,7 @@ const RequestDetail = ({ requestStatus }: RequestDetailProps): ReactElement => {
             label: i18n.t("moderation.translation.request.translationLanguage.label"),
             tagRemoveSelectionAriaLabel: i18n.t("moderation.button.remove"),
             tagsClearAllButton: i18n.t("moderation.button.clearAllSelections"),
-            error: !languageValid.valid ? languageValidError : ""
+            error: !languageValid.valid ? languageValidError : "",
           }}
           invalid={!languageValid.valid}
           required
@@ -136,11 +140,7 @@ const RequestDetail = ({ requestStatus }: RequestDetailProps): ReactElement => {
           onChange={updateRequestMessage}
           onBlur={validateRequestMessage}
           invalid={!messageValid.valid}
-          errorText={
-            !messageValid.valid
-              ? messageValidError
-              : ""
-          }
+          errorText={!messageValid.valid ? messageValidError : ""}
           required
           aria-required
           disabled={taskStatus === TaskStatus.Closed || taskStatus === TaskStatus.Rejected || taskStatus === TaskStatus.Cancelled}

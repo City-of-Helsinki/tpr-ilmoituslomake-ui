@@ -2,7 +2,7 @@ import React, { ChangeEvent, Dispatch, ReactElement } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useRouter } from "next/router";
 import { useI18n } from "next-localization";
-import { Select,  TextInput, defaultFilter } from "hds-react";
+import { Select, TextInput, defaultFilter } from "hds-react";
 import { NotificationAction } from "../../state/actions/notificationTypes";
 import { NotificationValidationAction } from "../../state/actions/notificationValidationTypes";
 import { setNotificationExtraKeywords, setNotificationTag } from "../../state/actions/notification";
@@ -16,7 +16,7 @@ import { isTagValid } from "../../utils/validation";
 const Tags = (): ReactElement => {
   const i18n = useI18n();
   //const dispatch = useDispatch<Dispatch<NotificationAction>>();
- // const dispatchValidation = useDispatch<Dispatch<NotificationValidationAction>>();
+  // const dispatchValidation = useDispatch<Dispatch<NotificationValidationAction>>();
   const dispatch = useDispatch();
   const dispatchValidation = useDispatch();
   const router = useRouter();

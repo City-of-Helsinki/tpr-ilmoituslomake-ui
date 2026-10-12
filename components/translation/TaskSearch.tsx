@@ -44,11 +44,11 @@ const TaskSearch = (): ReactElement => {
   };*/
 
   const updateSearchRequestOption = (selectedOptions: OptionType[]) => {
-      const selected = selectedOptions && selectedOptions.length > 0 ? selectedOptions[0] : null;
-      if (selected) {
-        dispatch(setTranslationTaskSearch(({ ...taskSearch, request: selected.value as string })));
-      }
-    };
+    const selected = selectedOptions && selectedOptions.length > 0 ? selectedOptions[0] : null;
+    if (selected) {
+      dispatch(setTranslationTaskSearch({ ...taskSearch, request: selected.value as string }));
+    }
+  };
 
   const searchTasks = async () => {
     const taskResponse = await fetch(`${getOrigin(router)}/api/translation/todos/find/?search=${placeName.trim()}`);
@@ -87,7 +87,7 @@ const TaskSearch = (): ReactElement => {
   };
 
   // If specified, search all tasks on first render only, using a workaround utilising useEffect with empty dependency array
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+
   //const useMountEffect = (fun: () => void) => useEffect(fun, []);
   //useMountEffect(searchTasks);
 
@@ -119,7 +119,7 @@ const TaskSearch = (): ReactElement => {
             texts={{
               label: i18n.t("translation.taskSearch.request.label"),
               tagRemoveSelectionAriaLabel: i18n.t("translation.button.remove"),
-              tagsClearAllButton: i18n.t("translation.button.clearAllSelections")
+              tagsClearAllButton: i18n.t("translation.button.clearAllSelections"),
             }}
           />
         )}

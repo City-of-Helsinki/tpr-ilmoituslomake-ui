@@ -148,14 +148,11 @@ const ModerationSection = ({
             onBlur: blurCallback,
             helperText: moderationStatus === ModerationStatus.Edited ? helperText : undefined,
             tooltip:
-            moderationStatus === ModerationStatus.Edited && tooltipText ? (
-              <Tooltip
-                buttonLabel={tooltipButtonLabel}
-                tooltipLabel={tooltipLabel}
-              >
-                {tooltipText}
-              </Tooltip>
-            ) : undefined,
+              moderationStatus === ModerationStatus.Edited && tooltipText ? (
+                <Tooltip buttonLabel={tooltipButtonLabel} tooltipLabel={tooltipLabel}>
+                  {tooltipText}
+                </Tooltip>
+              ) : undefined,
             disabled:
               moderationStatus === ModerationStatus.Approved ||
               moderationStatus === ModerationStatus.Rejected ||

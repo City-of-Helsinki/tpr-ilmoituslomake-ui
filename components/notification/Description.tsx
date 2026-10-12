@@ -20,7 +20,6 @@ const Description = (): ReactElement => {
   const dispatch = useDispatch();
   const dispatchValidation = useDispatch();
 
-
   // Fetch values from redux state
   const notification = useSelector((state: RootState) => state.notification.notification);
   const {
@@ -122,7 +121,10 @@ const Description = (): ReactElement => {
               onBlur={validateShortDescription}
               helperText={i18n.t("notification.description.shortDescription.helperText")}
               tooltip={
-                <Tooltip tooltipLabel={i18n.t("notification.description.shortDescription.tooltipLabel")} buttonLabel={i18n.t("notification.button.openHelp")}>
+                <Tooltip
+                  tooltipLabel={i18n.t("notification.description.shortDescription.tooltipLabel")}
+                  buttonLabel={i18n.t("notification.button.openHelp")}
+                >
                   {i18n.t("notification.description.shortDescription.tooltipText")}
                 </Tooltip>
               }
@@ -154,7 +156,10 @@ const Description = (): ReactElement => {
               onBlur={validateLongDescription}
               helperText={`${i18n.t("notification.description.longDescription.helperText")} (${(longDesc[option] as string).length})`}
               tooltip={
-                <Tooltip tooltipLabel={i18n.t("notification.description.longDescription.tooltipLabel")} buttonLabel={i18n.t("notification.button.openHelp")}>
+                <Tooltip
+                  tooltipLabel={i18n.t("notification.description.longDescription.tooltipLabel")}
+                  buttonLabel={i18n.t("notification.button.openHelp")}
+                >
                   {i18n.t("notification.description.longDescription.tooltipText")}
                 </Tooltip>
               }

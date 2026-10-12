@@ -63,7 +63,6 @@ const RequestPlaces = (): ReactElement => {
                 iconStart=<IconCrossCircleFill aria-hidden />
               >
                 {i18n.t("moderation.button.collapse")}
-                
               </Button>
             </div>
           );

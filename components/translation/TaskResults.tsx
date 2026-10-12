@@ -98,13 +98,11 @@ const TaskResults = ({ showStatus, showResults, setShowStatus, setShowResults }:
                 <Fragment key={`taskresult_${taskId}`}>
                   <div className={`${styles.gridColumn1} ${styles.gridContent} ${styles.gridButton}`}>
                     <div className={styles.flexItem}>
-                      
-                        <HdsLink href={`${router.basePath}/translation/task/${taskId}`} size={LinkSize.Medium} disableVisitedStyles>
-                          {`${getDisplayName(router.locale || defaultLocale, name, undefined, i18n.t("translation.taskResults.empty"))}${
-                            targetId ? ` (${targetId})` : ""
-                          }`}
-                        </HdsLink>
-                      
+                      <HdsLink href={`${router.basePath}/translation/task/${taskId}`} size={LinkSize.Medium} disableVisitedStyles>
+                        {`${getDisplayName(router.locale || defaultLocale, name, undefined, i18n.t("translation.taskResults.empty"))}${
+                          targetId ? ` (${targetId})` : ""
+                        }`}
+                      </HdsLink>
                     </div>
                   </div>
                   <div className={`${styles.gridColumn2} ${styles.gridContent}`}>

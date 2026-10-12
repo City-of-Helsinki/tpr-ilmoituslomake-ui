@@ -26,7 +26,12 @@ const ValidationSummary = ({ prefix, pageValid, validationSummary }: ValidationS
 
   return (
     <div className={styles.validationSummary} ref={ref} tabIndex={-1}>
-      <HdsNotification size={NotificationSize.Medium} className="formNotification" type="error" label={i18n.t(`${prefix}.message.validationFailed.title`)}>
+      <HdsNotification
+        size={NotificationSize.Medium}
+        className="formNotification"
+        type="error"
+        label={i18n.t(`${prefix}.message.validationFailed.title`)}
+      >
         <div>{i18n.t(`${prefix}.message.validationFailed.message`)}</div>
 
         <div className={styles.linkContainer}>

@@ -14,7 +14,15 @@ interface ActionButtonProps {
   hidden?: boolean;
 }
 
-const ActionButton = ({ id = undefined, className = "", fieldName, moderationStatus, taskStatus, actionCallback, hidden = false }: ActionButtonProps): ReactElement => {
+const ActionButton = ({
+  id = undefined,
+  className = "",
+  fieldName,
+  moderationStatus,
+  taskStatus,
+  actionCallback,
+  hidden = false,
+}: ActionButtonProps): ReactElement => {
   const i18n = useI18n();
 
   return (
@@ -32,7 +40,7 @@ const ActionButton = ({ id = undefined, className = "", fieldName, moderationSta
             aria-label={i18n.t("moderation.button.approve")}
             onClick={() => actionCallback(fieldName, ModerationStatus.Approved)}
             disabled={taskStatus === TaskStatus.Closed || taskStatus === TaskStatus.Rejected || taskStatus === TaskStatus.Cancelled}
-            iconStart={ <IconCheck aria-hidden />}
+            iconStart={<IconCheck aria-hidden />}
           >
             {i18n.t("moderation.button.approve")}
           </Button>
@@ -48,7 +56,8 @@ const ActionButton = ({ id = undefined, className = "", fieldName, moderationSta
             onClick={() => actionCallback(fieldName, ModerationStatus.Rejected)}
             disabled={taskStatus === TaskStatus.Closed || taskStatus === TaskStatus.Rejected || taskStatus === TaskStatus.Cancelled}
             iconStart={<IconCross aria-hidden />}
-          >{i18n.t("moderation.button.reject")}
+          >
+            {i18n.t("moderation.button.reject")}
           </Button>
         </div>
       )}

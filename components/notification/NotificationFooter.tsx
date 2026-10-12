@@ -67,7 +67,12 @@ const NotificationFooter = ({ smallButtons = false, setToast = undefined }: Noti
     <div className={styles.notificationFooter}>
       {currentPage === 1 && smallButtons && (
         <div className={`${styles.flexButton} ${styles.smallButton}`}>
-          <Button variant={ButtonVariant.Supplementary} size={ButtonSize.Small} iconStart={<IconArrowLeft aria-hidden />} onClick={cancelNotification}>
+          <Button
+            variant={ButtonVariant.Supplementary}
+            size={ButtonSize.Small}
+            iconStart={<IconArrowLeft aria-hidden />}
+            onClick={cancelNotification}
+          >
             {i18n.t("notification.button.cancel")}
           </Button>
         </div>
@@ -97,7 +102,7 @@ const NotificationFooter = ({ smallButtons = false, setToast = undefined }: Noti
 
       {currentPage < MAX_PAGE && smallButtons && (
         <div className={`${styles.flexButton} ${styles.smallButton} ${styles.flexButtonRight}`}>
-        <Button variant={ButtonVariant.Supplementary} size={ButtonSize.Small} iconEnd={<IconArrowRight aria-hidden />} onClick={nextPage}>
+          <Button variant={ButtonVariant.Supplementary} size={ButtonSize.Small} iconEnd={<IconArrowRight aria-hidden />} onClick={nextPage}>
             {i18n.t("notification.button.next")}
           </Button>
         </div>
@@ -112,14 +117,26 @@ const NotificationFooter = ({ smallButtons = false, setToast = undefined }: Noti
 
       {currentPage === MAX_PAGE && smallButtons && setToast && (
         <div className={`${styles.flexButton} ${styles.smallButton} ${styles.flexButtonRight}`}>
-          <Button variant={ButtonVariant.Supplementary} size={ButtonSize.Small} iconEnd={<IconArrowRight aria-hidden />} onClick={sendNotification} disabled={isSending}>
+          <Button
+            variant={ButtonVariant.Supplementary}
+            size={ButtonSize.Small}
+            iconEnd={<IconArrowRight aria-hidden />}
+            onClick={sendNotification}
+            disabled={isSending}
+          >
             {i18n.t("notification.button.send")}
           </Button>
         </div>
       )}
       {currentPage === MAX_PAGE && !smallButtons && setToast && (
         <div className={`${styles.flexButton} ${styles.flexButtonRight}`}>
-          <Button variant={ButtonVariant.Primary} size={ButtonSize.Medium} iconEnd={<IconArrowRight aria-hidden />} onClick={sendNotification} disabled={isSending}>
+          <Button
+            variant={ButtonVariant.Primary}
+            size={ButtonSize.Medium}
+            iconEnd={<IconArrowRight aria-hidden />}
+            onClick={sendNotification}
+            disabled={isSending}
+          >
             {i18n.t("notification.button.send")}
           </Button>
         </div>

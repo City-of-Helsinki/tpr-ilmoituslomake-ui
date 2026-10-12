@@ -64,7 +64,7 @@ const TaskSearch = ({ showStatus, setShowStatus }: TaskSearchProps): ReactElemen
     dispatch(
       setModerationTaskSearch({
         ...taskSearch,
-        taskType: selected?.value as TaskType ?? TaskType.Unknown,
+        taskType: (selected?.value as TaskType) ?? TaskType.Unknown,
       })
     );
   };
@@ -110,7 +110,7 @@ const TaskSearch = ({ showStatus, setShowStatus }: TaskSearchProps): ReactElemen
   };
 
   // Search all tasks on first render only, using a workaround utilising useEffect with empty dependency array
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+
   //const useMountEffect = (fun: () => void) => useEffect(fun, []);
   //useMountEffect(searchTasks);
 
@@ -141,7 +141,7 @@ const TaskSearch = ({ showStatus, setShowStatus }: TaskSearchProps): ReactElemen
           texts={{
             label: i18n.t("moderation.taskSearch.taskType.label"),
             tagRemoveSelectionAriaLabel: i18n.t("moderation.button.remove"),
-            tagsClearAllButton: i18n.t("moderation.button.clearAllSelections")
+            tagsClearAllButton: i18n.t("moderation.button.clearAllSelections"),
           }}
         />
         <div className={styles.gridButton}>

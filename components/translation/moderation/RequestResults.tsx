@@ -248,11 +248,9 @@ const RequestResults = ({ showStatus, showResults, setShowResults }: RequestResu
                         disabled={status === TaskStatus.InProgress || status === TaskStatus.Closed}
                       />
 
-                      
-                        <HdsLink href={`${router.basePath}/moderation/translation/request/${requestId}`} size={LinkSize.Medium} disableVisitedStyles>
-                          {formattedRequest}
-                        </HdsLink>
-                      
+                      <HdsLink href={`${router.basePath}/moderation/translation/request/${requestId}`} size={LinkSize.Medium} disableVisitedStyles>
+                        {formattedRequest}
+                      </HdsLink>
                     </div>
                   </div>
                   <div className={`${styles.gridColumn2} ${styles.gridContent}`}>

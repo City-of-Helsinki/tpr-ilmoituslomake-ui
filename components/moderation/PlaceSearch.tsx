@@ -66,7 +66,6 @@ const PlaceSearch = (): ReactElement => {
     dispatch(setModerationPlaceSearch({ ...placeSearch, language: selected ? (selected.value as string) : "" }));
   };*/
 
-
   const updateSearchLanguage = (selected: OptionType[]) => {
     dispatch(setModerationPlaceSearch({ ...placeSearch, language: selected && selected.length > 0 ? (selected[0].value as string) : "" }));
   };
@@ -183,7 +182,7 @@ const PlaceSearch = (): ReactElement => {
           texts={{
             label: i18n.t("moderation.placeSearch.language.label"),
             tagRemoveSelectionAriaLabel: i18n.t("moderation.button.remove"),
-            tagsClearAllButton: i18n.t("moderation.button.clearAllSelections")
+            tagsClearAllButton: i18n.t("moderation.button.clearAllSelections"),
           }}
         />
         <SelectionGroup
@@ -232,7 +231,7 @@ const PlaceSearch = (): ReactElement => {
             label: i18n.t("moderation.placeSearch.tag.label"),
             dropdownButtonAriaLabel: i18n.t("moderation.button.toggleMenu"),
             tagRemoveSelectionAriaLabel: i18n.t("moderation.button.remove"),
-            tagsClearAllButton: i18n.t("moderation.button.clearAllSelections")
+            tagsClearAllButton: i18n.t("moderation.button.clearAllSelections"),
           }}
           multiSelect
         />
@@ -245,10 +244,10 @@ const PlaceSearch = (): ReactElement => {
           value={convertMatkoValues(matkoIds) as any}
           onChange={updateSearchMatkoTags}
           texts={{
-              label: i18n.t("moderation.placeSearch.matko.label"),
-              dropdownButtonAriaLabel: i18n.t("moderation.button.toggleMenu"),
-              tagRemoveSelectionAriaLabel: i18n.t("moderation.button.remove"),
-              tagsClearAllButton: i18n.t("moderation.button.clearAllSelections")
+            label: i18n.t("moderation.placeSearch.matko.label"),
+            dropdownButtonAriaLabel: i18n.t("moderation.button.toggleMenu"),
+            tagRemoveSelectionAriaLabel: i18n.t("moderation.button.remove"),
+            tagsClearAllButton: i18n.t("moderation.button.clearAllSelections"),
           }}
           multiSelect
         />
@@ -264,7 +263,7 @@ const PlaceSearch = (): ReactElement => {
             label: i18n.t("moderation.placeSearch.certificate.label"),
             dropdownButtonAriaLabel: i18n.t("moderation.button.toggleMenu"),
             tagRemoveSelectionAriaLabel: i18n.t("moderation.button.remove"),
-            tagsClearAllButton: i18n.t("moderation.button.clearAllSelections")
+            tagsClearAllButton: i18n.t("moderation.button.clearAllSelections"),
           }}
           multiSelect
         />

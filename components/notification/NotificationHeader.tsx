@@ -80,64 +80,64 @@ const NotificationHeader = ({ headerRef }: NotificationHeaderProps): ReactElemen
         )}
       </Header>
       <nav className={styles.header} aria-label={i18n.t("notification.navigationHeader")}>
-          <div className={styles.tabletContainer}>
-            <h1 ref={headerRef}>
-              {notificationId > 0
-                ? `${i18n.t("notification.headerModify")}: ${getDisplayName(router.locale || defaultLocale, placeName)}`
-                : i18n.t("notification.headerNew")}
-            </h1>
-            <Stepper classes={{ root: styles.stepper }} activeStep={currentPage - 1} alternativeLabel>
-              <Step>
-                <StepLabel>
-                  {i18n.t("notification.page.basic")}
-                  {currentPage === 1 && <span className="screenReaderOnly"> {i18n.t("notification.page.current")}</span>}
-                  {currentPage > 1 && <span className="screenReaderOnly"> {i18n.t("notification.page.completed")}</span>}
-                </StepLabel>
-              </Step>
-              <Step>
-                <StepLabel>
-                  {i18n.t("notification.page.contact")}
-                  {currentPage === 2 && <span className="screenReaderOnly"> {i18n.t("notification.page.current")}</span>}
-                  {currentPage > 2 && <span className="screenReaderOnly"> {i18n.t("notification.page.completed")}</span>}
-                </StepLabel>
-              </Step>
-              <Step>
-                <StepLabel>
-                  {i18n.t("notification.page.photos")}
-                  {currentPage === 3 && <span className="screenReaderOnly"> {i18n.t("notification.page.current")}</span>}
-                  {currentPage > 3 && <span className="screenReaderOnly"> {i18n.t("notification.page.completed")}</span>}
-                </StepLabel>
-              </Step>
-              <Step>
-                <StepLabel>
-                  {i18n.t("notification.page.send")}
-                  {currentPage === 4 && <span className="screenReaderOnly"> {i18n.t("notification.page.current")}</span>}
-                </StepLabel>
-              </Step>
-            </Stepper>
-          </div>
+        <div className={styles.tabletContainer}>
+          <h1 ref={headerRef}>
+            {notificationId > 0
+              ? `${i18n.t("notification.headerModify")}: ${getDisplayName(router.locale || defaultLocale, placeName)}`
+              : i18n.t("notification.headerNew")}
+          </h1>
+          <Stepper classes={{ root: styles.stepper }} activeStep={currentPage - 1} alternativeLabel>
+            <Step>
+              <StepLabel>
+                {i18n.t("notification.page.basic")}
+                {currentPage === 1 && <span className="screenReaderOnly"> {i18n.t("notification.page.current")}</span>}
+                {currentPage > 1 && <span className="screenReaderOnly"> {i18n.t("notification.page.completed")}</span>}
+              </StepLabel>
+            </Step>
+            <Step>
+              <StepLabel>
+                {i18n.t("notification.page.contact")}
+                {currentPage === 2 && <span className="screenReaderOnly"> {i18n.t("notification.page.current")}</span>}
+                {currentPage > 2 && <span className="screenReaderOnly"> {i18n.t("notification.page.completed")}</span>}
+              </StepLabel>
+            </Step>
+            <Step>
+              <StepLabel>
+                {i18n.t("notification.page.photos")}
+                {currentPage === 3 && <span className="screenReaderOnly"> {i18n.t("notification.page.current")}</span>}
+                {currentPage > 3 && <span className="screenReaderOnly"> {i18n.t("notification.page.completed")}</span>}
+              </StepLabel>
+            </Step>
+            <Step>
+              <StepLabel>
+                {i18n.t("notification.page.send")}
+                {currentPage === 4 && <span className="screenReaderOnly"> {i18n.t("notification.page.current")}</span>}
+              </StepLabel>
+            </Step>
+          </Stepper>
+        </div>
 
-          <div className={styles.mobileContainer}>
-            <div className={styles.mobileHeader}>
-              <div className={styles.progressContainer}>
-                <div className={styles.progressItem}>
-                  <CircularProgress classes={{ root: styles.progress }} variant="determinate" value={(100 * currentPage) / MAX_PAGE} />
-                </div>
-                <div className={styles.progressItem}>
-                  <div className={styles.progressText}>{`${currentPage} / ${MAX_PAGE}`}</div>
-                </div>
+        <div className={styles.mobileContainer}>
+          <div className={styles.mobileHeader}>
+            <div className={styles.progressContainer}>
+              <div className={styles.progressItem}>
+                <CircularProgress classes={{ root: styles.progress }} variant="determinate" value={(100 * currentPage) / MAX_PAGE} />
               </div>
-              <div>
-                <div className={styles.mobileHeaderText}>
-                  {notificationId > 0
-                    ? `${i18n.t("notification.headerModify")}: ${getDisplayName(router.locale || defaultLocale, placeName)}`
-                    : i18n.t("notification.headerNew")}
-                </div>
-                <NotificationFooter smallButtons />
+              <div className={styles.progressItem}>
+                <div className={styles.progressText}>{`${currentPage} / ${MAX_PAGE}`}</div>
               </div>
             </div>
-            <Koros className={styles.wave} type="basic" />
+            <div>
+              <div className={styles.mobileHeaderText}>
+                {notificationId > 0
+                  ? `${i18n.t("notification.headerModify")}: ${getDisplayName(router.locale || defaultLocale, placeName)}`
+                  : i18n.t("notification.headerNew")}
+              </div>
+              <NotificationFooter smallButtons />
+            </div>
           </div>
+          <Koros className={styles.wave} type="basic" />
+        </div>
       </nav>
     </>
   );

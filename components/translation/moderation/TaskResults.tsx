@@ -150,13 +150,11 @@ const TaskResults = ({ showStatus, showResults, setShowResults }: TaskResultsPro
                         onChange={updateSelectedTasks}
                       />
 
-                      
-                        <HdsLink href={`${router.basePath}/moderation/translation/task/${taskId}`} size={LinkSize.Medium} disableVisitedStyles>
-                          {`${getDisplayName(router.locale || defaultLocale, name, undefined, i18n.t("moderation.translation.taskResults.empty"))}${
-                            targetId ? ` (${targetId})` : ""
-                          }`}
-                        </HdsLink>
-                      
+                      <HdsLink href={`${router.basePath}/moderation/translation/task/${taskId}`} size={LinkSize.Medium} disableVisitedStyles>
+                        {`${getDisplayName(router.locale || defaultLocale, name, undefined, i18n.t("moderation.translation.taskResults.empty"))}${
+                          targetId ? ` (${targetId})` : ""
+                        }`}
+                      </HdsLink>
                     </div>
                   </div>
                   <div className={`${styles.gridColumn2} ${styles.gridContent}`}>

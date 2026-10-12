@@ -79,15 +79,11 @@ const TranslationSection = ({
           onChange: changeCallback,
           onBlur: blurCallback,
           helperText,
-          tooltip:
-            tooltipText ? (
-              <Tooltip
-                buttonLabel={tooltipButtonLabel}
-                tooltipLabel={tooltipLabel}
-              >
-                {tooltipText}
-              </Tooltip>
-            ) : undefined,
+          tooltip: tooltipText ? (
+            <Tooltip buttonLabel={tooltipButtonLabel} tooltipLabel={tooltipLabel}>
+              {tooltipText}
+            </Tooltip>
+          ) : undefined,
           disabled: taskStatus === TaskStatus.Closed || taskStatus === TaskStatus.Rejected || taskStatus === TaskStatus.Cancelled || forceDisabled,
           radiobuttonname: isSelectionGroupWrapper ? `${id}_Translated` : undefined,
           invalid,

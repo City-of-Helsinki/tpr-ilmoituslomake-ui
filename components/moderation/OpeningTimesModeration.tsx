@@ -118,14 +118,13 @@ const OpeningTimesModeration = (): ReactElement => {
   };
 
   // Get the opening times on first render only, using a workaround utilising useEffect with empty dependency array
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+
   //const useMountEffect = (fun: () => void) => useEffect(fun, []);
   // useMountEffect(getOpeningTimesOnMount);
 
-  useEffect(() =>{
+  useEffect(() => {
     getOpeningTimesOnMount();
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
-  
 
   if (taskType === TaskType.RemoveTip || taskType === TaskType.ModeratorRemove || taskType === TaskType.PlaceInfo) {
     return (

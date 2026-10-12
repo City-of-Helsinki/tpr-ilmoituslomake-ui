@@ -54,9 +54,7 @@ const SocialMedia = (): ReactElement => {
 
   const validateSocialMedia = (index: number, evt: ChangeEvent<HTMLInputElement | HTMLDivElement>) => {
     const target = evt.target as HTMLInputElement;
-    dispatch(
-      setNotificationSocialMedia(index, { ...social_media[index], [target.name]: (social_media[index][target.name] as string).trim() })
-    );
+    dispatch(setNotificationSocialMedia(index, { ...social_media[index], [target.name]: (social_media[index][target.name] as string).trim() }));
     isSocialMediaFieldValid(index, target.name, notification, dispatchValidation);
   };
 

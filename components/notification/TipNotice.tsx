@@ -23,11 +23,9 @@ const TipNotice = ({ selectedPlaceName }: TipNoticeProps): ReactElement => {
       <div className={styles.heading}>{i18n.t("notification.tip.loginNotice.title")}</div>
       <div className={styles.notice}>{i18n.t("notification.tip.loginNotice.notice")}</div>
       <div className={styles.link}>
-        
-          <HdsLink href={`${router.basePath}/notification/${target}`} size={LinkSize.Medium} disableVisitedStyles>
-            {selectedPlaceName}
-          </HdsLink>
-        
+        <HdsLink href={`${router.basePath}/notification/${target}`} size={LinkSize.Medium} disableVisitedStyles>
+          {selectedPlaceName}
+        </HdsLink>
       </div>
     </div>
   );

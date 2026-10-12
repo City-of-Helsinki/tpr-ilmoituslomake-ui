@@ -12,8 +12,9 @@ const Footer = (): ReactElement => {
       <HdsFooter.Navigation>
         <HdsFooter.Link as="a" href={CONTACT_URL} label={i18n.t("common.footer.contact")} icon={<IconArrowRight aria-hidden />} />
       </HdsFooter.Navigation>
-      <HdsFooter.Base 
-        copyrightHolder={i18n.t("common.footer.copyright")} copyrightText={i18n.t("common.footer.rightsReserved")}
+      <HdsFooter.Base
+        copyrightHolder={i18n.t("common.footer.copyright")}
+        copyrightText={i18n.t("common.footer.rightsReserved")}
         logo={<Logo src={logoFi} size={LogoSize.Medium} alt={i18n.t("common.header.titleAlt")} />}
         backToTopLabel={i18n.t("common.footer.backToTop")}
       >

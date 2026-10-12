@@ -173,7 +173,13 @@ const Preview = ({ className = undefined, titleKey = undefined, includeNotifier 
       </div>
       <div className={`${styles.gridHeading} ${styles.gridContent}`}>{i18n.t("notification.map.title")}</div>
       <div className={`${styles.gridPlaceInfo} ${styles.gridContent}`}>
-        <Button variant={ButtonVariant.Supplementary} size={ButtonSize.Small} className="visibleOnFocusOnly" iconEnd={<IconPlaybackNext aria-hidden />} onClick={skipMap}>
+        <Button
+          variant={ButtonVariant.Supplementary}
+          size={ButtonSize.Small}
+          className="visibleOnFocusOnly"
+          iconEnd={<IconPlaybackNext aria-hidden />}
+          onClick={skipMap}
+        >
           {i18n.t("notification.map.skipMap")}
         </Button>
         <MapWrapper

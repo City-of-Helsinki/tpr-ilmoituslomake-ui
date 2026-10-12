@@ -11,12 +11,13 @@ const createReduxStore = (preloadedState?: PreloadedState<RootState>) => {
   return configureStore({
     reducer: rootReducer,
     preloadedState,
-    // RTK includes thunk middleware by default. 
-    middleware: (getDefaultMiddleware) => getDefaultMiddleware({
-      immutableCheck: {
-        warnAfter: 100,
-      },
-    }),
+    // RTK includes thunk middleware by default.
+    middleware: (getDefaultMiddleware) =>
+      getDefaultMiddleware({
+        immutableCheck: {
+          warnAfter: 100,
+        },
+      }),
   });
 };
 

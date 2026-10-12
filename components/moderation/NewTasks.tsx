@@ -45,13 +45,12 @@ const NewTasks = (): ReactElement => {
   };
 
   // Search all tasks on first render only, using a workaround utilising useEffect with empty dependency array
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+
   //const useMountEffect = (fun: () => void) => useEffect(fun, []);
   // useMountEffect(searchTasks);
   useEffect(() => {
     searchTasks();
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
-  
 
   return (
     <div className={`formSection ${styles.newTasks}`}>
@@ -81,11 +80,9 @@ const NewTasks = (): ReactElement => {
               <Fragment key={`taskresult_${id}`}>
                 <div className={`${styles.gridColumn1} ${styles.gridContent}`}>
                   <div className={styles.flexItem}>
-                    
-                      <HdsLink href={`${router.basePath}/moderation/task/${id}`} size={LinkSize.Medium} disableVisitedStyles>
-                        {`${getDisplayName(router.locale || defaultLocale, name, user_place_name)}${targetId ? ` (${targetId})` : ""}`}
-                      </HdsLink>
-                    
+                    <HdsLink href={`${router.basePath}/moderation/task/${id}`} size={LinkSize.Medium} disableVisitedStyles>
+                      {`${getDisplayName(router.locale || defaultLocale, name, user_place_name)}${targetId ? ` (${targetId})` : ""}`}
+                    </HdsLink>
                   </div>
                 </div>
                 <div className={`${styles.gridColumn2} ${styles.gridContent}`}>

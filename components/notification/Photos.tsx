@@ -1,7 +1,19 @@
 import React, { Dispatch, ChangeEvent, ReactElement, useRef } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useI18n } from "next-localization";
-import { Button, ButtonVariant, IconLink, IconUpload, Link as HdsLink, LinkSize, RadioButton, SelectionGroup, TextArea, TextInput, Tooltip } from "hds-react";
+import {
+  Button,
+  ButtonVariant,
+  IconLink,
+  IconUpload,
+  Link as HdsLink,
+  LinkSize,
+  RadioButton,
+  SelectionGroup,
+  TextArea,
+  TextInput,
+  Tooltip,
+} from "hds-react";
 import { v4 as uuidv4 } from "uuid";
 import { NotificationAction } from "../../state/actions/notificationTypes";
 import { NotificationValidationAction } from "../../state/actions/notificationValidationTypes";
@@ -251,7 +263,10 @@ const Photos = (): ReactElement => {
                         onBlur={(evt) => validatePhotoAltText(index, evt)}
                         helperText={i18n.t("notification.photos.altText.helperText")}
                         tooltip={
-                          <Tooltip tooltipLabel={i18n.t("notification.photos.altText.tooltipLabel")} buttonLabel={i18n.t("notification.button.openHelp")}>
+                          <Tooltip
+                            tooltipLabel={i18n.t("notification.photos.altText.tooltipLabel")}
+                            buttonLabel={i18n.t("notification.button.openHelp")}
+                          >
                             {i18n.t("notification.photos.altText.tooltipText")}
                           </Tooltip>
                         }

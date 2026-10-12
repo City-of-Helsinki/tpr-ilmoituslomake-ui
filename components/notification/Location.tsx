@@ -17,7 +17,7 @@ const Location = (): ReactElement => {
   //const dispatch = useDispatch<Dispatch<NotificationAction>>();
   //const dispatchValidation = useDispatch<Dispatch<NotificationValidationAction>>();
   const dispatch = useDispatch();
-  const dispatchValidation = useDispatch                ();
+  const dispatchValidation = useDispatch();
   const router = useRouter();
   const [fieldFocus, setFieldFocus] = useState<boolean>(false);
 

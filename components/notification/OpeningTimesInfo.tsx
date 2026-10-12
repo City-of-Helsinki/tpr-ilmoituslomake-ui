@@ -42,7 +42,7 @@ const OpeningTimesInfo = ({ isPlaceInfo = false, openModal = undefined }: Openin
   };
 
   // Get the opening times on first render only
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+
   useEffect(() => {
     getOpeningTimesOnMount();
   }, []);
