@@ -22,7 +22,7 @@
     "ajv-formats": "^2.1.1",
     "globals": "^17.6.0",
     "hds-design-tokens": "^5.2.2",
-    "hds-react": "^5.2.2",
+    "hds-react": "^5.2.3",
     "js-cookie": "^3.0.1",
     "leaflet": "^1.7.1",
     "moment": "^2.29.1",
