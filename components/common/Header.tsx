@@ -25,6 +25,7 @@ import { defaultLocale } from "../../utils/i18n";
 import { RootState } from "../../state/reducers";
 import getOrigin from "../../utils/request";
 import { string } from "yup";
+import styles from "./Header.module.scss";
 
 interface HeaderProps {
   includeLanguageSelector?: boolean;
@@ -78,6 +79,7 @@ const Header = ({ includeLanguageSelector = true, homePagePath = "", children = 
 
   return (
     <DynamicHeader
+      className={styles.header}
       // @ts-ignore: The HDS Navigation component comes from a dynamic import, see above for details
       aria-label={i18n.t("common.header.openMenu")}
     >
@@ -93,14 +95,14 @@ const Header = ({ includeLanguageSelector = true, homePagePath = "", children = 
         frontPageLabel=""
       >
         {!currentUser?.authenticated && (
-          <Button
+          <HdsHeader.ActionBarButton
+            id="login"
             className="fixedRightPosition fit-content"
-            iconStart={<IconSignin aria-hidden />}
+            icon={<IconSignin aria-hidden />}
             onClick={signIn}
-            variant={ButtonVariant.Supplementary}
+            label={i18n.t("common.header.login")}
           >
-            {i18n.t("common.header.login")}
-          </Button>
+          </HdsHeader.ActionBarButton>
         )}
 
         {currentUser?.authenticated && (

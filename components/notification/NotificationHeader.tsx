@@ -15,7 +15,7 @@ import styles from "./NotificationHeader.module.scss";
 import NotificationFooter from "./NotificationFooter";
 
 interface NotificationHeaderProps {
-  headerRef: RefObject<HTMLHeadingElement>;
+  headerRef: RefObject<HTMLHeadingElement | null>;
 }
 
 const NotificationHeader = ({ headerRef }: NotificationHeaderProps): ReactElement => {

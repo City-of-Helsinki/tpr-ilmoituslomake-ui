@@ -56,7 +56,7 @@ const MapWrapper = ({
 
   // Use a ref to store the previous location, as described in the React hooks docs
   const usePrevious = (value: [number, number]) => {
-    const ref = useRef<[number, number]>();
+    const ref = useRef<[number, number] | undefined>(undefined);
     useEffect(() => {
       ref.current = value;
     });

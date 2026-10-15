@@ -1,4 +1,4 @@
-import React, { ChangeEvent, FocusEvent, ReactElement, cloneElement } from "react";
+import React, { ChangeEvent, FocusEvent, ReactElement, ReactNode, cloneElement } from "react";
 import { ModerationStatus, TaskStatus, TaskType } from "../../types/constants";
 import { OptionType } from "../../types/general";
 import { Tooltip } from "hds-react";
@@ -31,8 +31,20 @@ interface ModerationSectionProps {
     | ((selected: OptionType[]) => void);
   blurCallback?: (evt: FocusEvent<HTMLInputElement>) => void;
   statusCallback: (fieldName: string, status: ModerationStatus) => void;
-  ModerationComponent: ReactElement;
+  ModerationComponent: ReactElement<ModerationComponentProps>;
   isSelectionGroupWrapper?: boolean;
+}
+
+interface ModerationComponentProps {
+  id?: string;
+  className?: string;
+  value?: string | OptionType[];
+  onChange?: ModerationSectionProps["changeCallback"];
+  onBlur?: ModerationSectionProps["blurCallback"];
+  disabled?: boolean;
+  radiobuttonname?: string;
+  helperText?: string;
+  tooltip?: ReactNode;
 }
 
 const ModerationSection = ({

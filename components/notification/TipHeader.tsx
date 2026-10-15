@@ -5,7 +5,7 @@ import { RootState } from "../../state/reducers";
 import styles from "./TipHeader.module.scss";
 
 interface TipHeaderProps {
-  headerRef: RefObject<HTMLHeadingElement>;
+  headerRef: RefObject<HTMLHeadingElement | null>;
 }
 
 const TipHeader = ({ headerRef }: TipHeaderProps): ReactElement => {

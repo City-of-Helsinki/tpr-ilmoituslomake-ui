@@ -1,0 +1,35 @@
+.header {
+  :global([class*="HeaderActionBarItemButton-module_buttonContent__"] span) {
+    display: flex !important;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+  }
+
+  :global([class*="HeaderActionBarItemButton-module_buttonContent__"]) {
+    display: flex !important;
+  }
+
+  :global(button[class*="HeaderActionBarItemButton-module_actionBarItemButton__"]) {
+    flex-direction: row !important;
+  }
+
+  :global([class*="HeaderActionBarItemButton-module_labelOnRight__"]) {
+    display: flex !important;
+  }
+
+  :global([class*="HeaderActionBarItemButton-module_actionBarItemButtonLabel__"]) {
+    padding-top: 6px;
+    padding-left: 4px;
+  }
+
+  :global(button[class*="HeaderActionBarItemButton-module_buttonContent__"] [class*="HeaderActionBarItemButton-module_avatar__"]) {
+    height: 46px !important;
+    padding-top: 4px;
+  }
+
+  :global(button[class*="HeaderActionBarItemButton-module_actionBarItemButton__"]:hover),
+  :global(button[class*="HeaderActionBarItemButton-module_actionBarItemButton__"]:hover span) {
+    text-decoration: none !important;
+  }
+}
