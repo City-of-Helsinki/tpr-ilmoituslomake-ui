@@ -1,11 +1,20 @@
-import React, { ReactElement } from "react";
+import React, { ReactElement, useEffect, useState } from "react";
 import { useI18n } from "next-localization";
 import { Footer as HdsFooter, IconArrowRight, IconArrowUp, IconLinkExternal, Logo, logoFi, LogoSize } from "hds-react";
 import { ACCESSIBILITY_URL, CONTACT_URL, TERMS_URL } from "../../types/constants";
 import styles from "./Footer.module.scss";
 
-const Footer = (): ReactElement => {
+const Footer = (): ReactElement | null => {
+  const [isMounted, setIsMounted] = useState(false);
   const i18n = useI18n();
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
+
+  if (!isMounted) {
+    return null;
+  }
 
   return (
     <HdsFooter korosType="basic" className={styles.footer} title={i18n.t("common.footer.title")}>

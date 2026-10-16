@@ -1,4 +1,4 @@
-import React, { ChangeEvent, FocusEvent, ReactElement, cloneElement } from "react";
+import React, { ChangeEvent, FocusEvent, ReactElement, ReactNode, cloneElement } from "react";
 import { TaskStatus, TaskType } from "../../types/constants";
 import { OptionType } from "../../types/general";
 import { Tooltip } from "hds-react";
@@ -27,8 +27,25 @@ interface TranslationSectionProps {
     | ((evt: ChangeEvent<HTMLTextAreaElement>) => void)
     | ((selected: OptionType[]) => void);
   blurCallback?: ((evt: FocusEvent<HTMLInputElement>) => void) | ((evt: FocusEvent<HTMLTextAreaElement>) => void);
-  TranslationComponent: ReactElement;
+  TranslationComponent: ReactElement<TranslationComponentProps>;
   isSelectionGroupWrapper?: boolean;
+}
+
+interface TranslationComponentProps {
+  id?: string;
+  className?: string;
+  label?: string;
+  value?: string | OptionType[];
+  onChange?: TranslationSectionProps["changeCallback"];
+  onBlur?: TranslationSectionProps["blurCallback"];
+  disabled?: boolean;
+  radiobuttonname?: string;
+  helperText?: string;
+  tooltip?: ReactNode;
+  invalid?: boolean;
+  errorText?: string;
+  required?: boolean;
+  "aria-required"?: boolean;
 }
 
 const TranslationSection = ({
