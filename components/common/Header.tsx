@@ -26,6 +26,7 @@ import { RootState } from "../../state/reducers";
 import getOrigin from "../../utils/request";
 import { string } from "yup";
 import styles from "./Header.module.scss";
+import { MAIN_URL } from "../../types/constants";
 
 interface HeaderProps {
   includeLanguageSelector?: boolean;
