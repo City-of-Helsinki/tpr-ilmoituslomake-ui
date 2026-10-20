@@ -1,10 +1,10 @@
-@import "~hds-design-tokens/lib/all.scss";
+@use "~hds-design-tokens/lib/all.scss";
 
 .content {
-  margin-top: $spacing-l;
+  margin-top: all.$spacing-l;
 
   .sent {
-    background-color: $color-copper-light;
+    background-color: all.$color-copper-light;
   }
 
   .footer {

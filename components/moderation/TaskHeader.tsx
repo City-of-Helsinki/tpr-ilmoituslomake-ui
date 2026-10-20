@@ -19,7 +19,7 @@ interface TaskHeaderProps {
   setToast: Dispatch<SetStateAction<Toast | undefined>>;
 }
 
-const TaskHeader = ({ isModerated, toast, setToast }: TaskHeaderProps): ReactElement => {
+const TaskHeader = ({ isModerated = false, toast = undefined, setToast }: TaskHeaderProps): ReactElement => {
   const i18n = useI18n();
   const router = useRouter();
 
@@ -154,11 +154,6 @@ const TaskHeader = ({ isModerated, toast, setToast }: TaskHeaderProps): ReactEle
       </div>
     </div>
   );
-};
-
-TaskHeader.defaultProps = {
-  isModerated: false,
-  toast: undefined,
 };
 
 export default TaskHeader;

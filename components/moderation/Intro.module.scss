@@ -1,8 +1,8 @@
-@import "~hds-design-tokens/lib/all.scss";
+@use "~hds-design-tokens/lib/all.scss";
 
 .intro {
-  background-color: $color-copper-light;
-  padding: $spacing-m;
+  background-color: all.$color-copper-light;
+  padding: all.$spacing-m;
 
   .title {
     overflow-wrap: break-word;
@@ -15,18 +15,18 @@
     flex-wrap: wrap;
 
     .flexButton {
-      margin-right: $spacing-s;
-      margin-bottom: $spacing-s;
+      margin-right: all.$spacing-s;
+      margin-bottom: all.$spacing-s;
 
       .primary {
         &:not(:hover) {
-          background-color: $color-bus;
+          background-color: all.$color-bus;
         }
       }
 
       .secondary {
         &:not(:hover) {
-          background-color: $color-white;
+          background-color: all.$color-white;
         }
       }
     }
@@ -34,5 +34,5 @@
 }
 
 .wave {
-  fill: $color-copper-light;
+  fill: all.$color-copper-light;
 }

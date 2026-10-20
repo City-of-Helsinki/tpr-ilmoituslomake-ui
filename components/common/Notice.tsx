@@ -12,7 +12,15 @@ interface NoticeProps {
   focusOnTitle?: boolean;
 }
 
-const Notice = ({ className, icon, titleKey, messageKey, messageKey2, button, focusOnTitle }: NoticeProps): ReactElement => {
+const Notice = ({
+  className = undefined,
+  icon,
+  titleKey = "",
+  messageKey,
+  messageKey2,
+  button = undefined,
+  focusOnTitle = false,
+}: NoticeProps): ReactElement => {
   const i18n = useI18n();
   const ref = useRef<HTMLDivElement>(null);
 
@@ -41,13 +49,6 @@ const Notice = ({ className, icon, titleKey, messageKey, messageKey2, button, fo
       </div>
     </div>
   );
-};
-
-Notice.defaultProps = {
-  className: undefined,
-  titleKey: "",
-  button: undefined,
-  focusOnTitle: false,
 };
 
 export default Notice;

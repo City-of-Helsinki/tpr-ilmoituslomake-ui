@@ -1,10 +1,10 @@
-@import "~hds-design-tokens/lib/all.scss";
-@import "../../styles/mixins";
+@use "~hds-design-tokens/lib/all.scss";
+@use "../../styles/mixins";
 
 .gridSelected {
   grid-column: 1 / 1;
 
-  @include media(xs, s) {
+  @include mixins.media(xs, s) {
     grid-column: 1 / 1;
   }
 }
@@ -12,7 +12,7 @@
 .gridTranslated {
   grid-column: 2 / 2;
 
-  @include media(xs, s) {
+  @include mixins.media(xs, s) {
     grid-column: 1 / 1;
   }
 }

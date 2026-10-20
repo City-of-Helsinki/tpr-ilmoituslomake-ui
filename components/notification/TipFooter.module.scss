@@ -1,5 +1,5 @@
-@import "~hds-design-tokens/lib/all.scss";
-@import "../../styles/mixins";
+@use "~hds-design-tokens/lib/all.scss";
+@use "../../styles/mixins";
 
 .tipFooter {
   display: flex;
@@ -9,8 +9,8 @@
   .flexButton {
     display: flex;
     flex-direction: row;
-    margin-right: $spacing-s;
-    margin-bottom: $spacing-s;
+    margin-right: all.$spacing-s;
+    margin-bottom: all.$spacing-s;
     justify-content: flex-start;
   }
 

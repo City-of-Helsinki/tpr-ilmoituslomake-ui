@@ -1,5 +1,5 @@
 import { useMemo } from "react";
-import { configureStore, type PreloadedState } from "@reduxjs/toolkit";
+import { configureStore } from "@reduxjs/toolkit";
 import type { Store } from "redux";
 import { rootReducer, RootState } from "./reducers";
 
@@ -7,12 +7,17 @@ import { rootReducer, RootState } from "./reducers";
 let store: Store<RootState> | undefined;
 
 // Function to create a new store using RTK
-const createReduxStore = (preloadedState?: PreloadedState<RootState>) => {
+const createReduxStore = (preloadedState?: RootState) => {
   return configureStore({
     reducer: rootReducer,
     preloadedState,
-    // RTK includes thunk middleware by default. 
-    middleware: (getDefaultMiddleware) => getDefaultMiddleware(),
+    // RTK includes thunk middleware by default.
+    middleware: (getDefaultMiddleware) =>
+      getDefaultMiddleware({
+        immutableCheck: {
+          warnAfter: 100,
+        },
+      }),
   });
 };
 

@@ -10,7 +10,7 @@ interface TaskStatusFilterProps {
   isHorizontalWhenXS?: boolean;
 }
 
-const TaskStatusFilter = ({ showStatus, setShowStatus, isHorizontalWhenXS }: TaskStatusFilterProps): ReactElement => {
+const TaskStatusFilter = ({ showStatus, setShowStatus, isHorizontalWhenXS = false }: TaskStatusFilterProps): ReactElement => {
   const i18n = useI18n();
 
   // Note: this only works for client-side rendering
@@ -55,10 +55,6 @@ const TaskStatusFilter = ({ showStatus, setShowStatus, isHorizontalWhenXS }: Tas
       </SelectionGroup>
     </div>
   );
-};
-
-TaskStatusFilter.defaultProps = {
-  isHorizontalWhenXS: false,
 };
 
 export default TaskStatusFilter;

@@ -1,10 +1,10 @@
-@import "~hds-design-tokens/lib/all.scss";
+@use "~hds-design-tokens/lib/all.scss";
 
 .intro {
-  background-color: $color-copper-light;
-  padding: $spacing-m;
+  background-color: all.$color-copper-light;
+  padding: all.$spacing-m;
 }
 
 .wave {
-  fill: $color-copper-light;
+  fill: all.$color-copper-light;
 }

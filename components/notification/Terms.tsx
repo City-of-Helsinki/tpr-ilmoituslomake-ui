@@ -18,7 +18,7 @@ const Terms = (): ReactElement => {
               href={TERMS_URL}
               size={LinkSize.Medium}
               openInNewTab
-              openInNewTabAriaLabel={i18n.t("common.opensInANewTab")}
+              openInNewTabLabel={i18n.t("common.opensInANewTab")}
               external
               openInExternalDomainAriaLabel={i18n.t("common.opensExternal")}
               disableVisitedStyles

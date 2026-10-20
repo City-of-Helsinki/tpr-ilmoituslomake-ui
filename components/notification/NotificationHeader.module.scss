@@ -1,90 +1,90 @@
-@import "~hds-design-tokens/lib/all.scss";
-@import "../../styles/mixins";
+@use "~hds-design-tokens/lib/all.scss";
+@use "../../styles/mixins";
 
 .header h1 {
-  color: $color-bus;
+  color: all.$color-bus;
 }
 
 .navigationItem:after {
-  background-color: $color-bus !important;
+  background-color: all.$color-bus !important;
 }
 
 .tabletContainer {
-  @include media(xs, s) {
+  @include mixins.media(xs, s) {
     display: none;
   }
 
-  @include media(m, l, xl) {
+  @include mixins.media(m, l, xl) {
     display: block;
   }
 
   .stepper {
     padding: 0;
 
-    @include media(m) {
-      margin-left: -$spacing-layout-m;
+    @include mixins.media(m) {
+      margin-left: -(all.$spacing-layout-m);
     }
 
-    @include media(l) {
-      margin-left: -$spacing-layout-l;
+    @include mixins.media(l) {
+      margin-left: -(all.$spacing-layout-l);
     }
 
-    @include media(xl) {
-      max-width: $container-width-xl / 1.3;
+    @include mixins.media(xl) {
+      max-width: calc(all.$container-width-xl / 1.3);
       margin-left: 0;
     }
   }
 }
 
 .mobileContainer {
-  @include media(xs, s) {
+  @include mixins.media(xs, s) {
     display: block;
   }
 
-  @include media(m, l, xl) {
+  @include mixins.media(m, l, xl) {
     display: none;
   }
 
   .mobileHeader {
     display: flex;
     flex-direction: row;
-    background-color: $color-copper-light;
+    background-color: all.$color-copper-light;
 
-    @include media(xs) {
-      height: $spacing-layout-l;
-      padding-top: $spacing-s;
-      padding-left: $spacing-s;
+    @include mixins.media(xs) {
+      height: all.$spacing-layout-l;
+      padding-top: all.$spacing-s;
+      padding-left: all.$spacing-s;
     }
 
-    @include media(s) {
-      height: $spacing-layout-xl;
-      padding-top: $spacing-m;
-      padding-left: $spacing-m;
+    @include mixins.media(s) {
+      height: all.$spacing-layout-xl;
+      padding-top: all.$spacing-m;
+      padding-left: all.$spacing-m;
     }
 
     .mobileHeaderText {
-      margin-left: $spacing-m;
+      margin-left: all.$spacing-m;
       font-weight: 700;
-      color: $color-bus;
+      color: all.$color-bus;
 
-      @include media(xs) {
-        font-size: $fontsize-heading-xs !important;
+      @include mixins.media(xs) {
+        font-size: all.$fontsize-heading-xs !important;
       }
 
-      @include media(s) {
-        font-size: $fontsize-heading-m !important;
+      @include mixins.media(s) {
+        font-size: all.$fontsize-heading-m !important;
       }
     }
 
     .progressContainer {
       position: relative;
 
-      @include media(xs) {
-        width: $spacing-layout-l;
+      @include mixins.media(xs) {
+        width: all.$spacing-layout-l;
       }
 
-      @include media(s) {
-        width: $spacing-layout-xl;
+      @include mixins.media(s) {
+        width: all.$spacing-layout-xl;
       }
 
       .progressItem {
@@ -99,31 +99,31 @@
         height: 100%;
 
         .progress {
-          @include media(xs) {
-            width: $spacing-layout-l !important;
-            height: $spacing-layout-l !important;
+          @include mixins.media(xs) {
+            width: all.$spacing-layout-l !important;
+            height: all.$spacing-layout-l !important;
           }
 
-          @include media(s) {
-            width: $spacing-layout-xl !important;
-            height: $spacing-layout-xl !important;
+          @include mixins.media(s) {
+            width: all.$spacing-layout-xl !important;
+            height: all.$spacing-layout-xl !important;
           }
 
           circle {
-            fill: $color-white;
+            fill: all.$color-white;
           }
         }
 
         .progressText {
           font-weight: 700;
-          color: $color-bus;
+          color: all.$color-bus;
 
-          @include media(xs) {
-            font-size: $fontsize-heading-xs !important;
+          @include mixins.media(xs) {
+            font-size: all.$fontsize-heading-xs !important;
           }
 
-          @include media(s) {
-            font-size: $fontsize-heading-m !important;
+          @include mixins.media(s) {
+            font-size: all.$fontsize-heading-m !important;
           }
         }
       }
@@ -131,6 +131,6 @@
   }
 
   .wave {
-    fill: $color-copper-light;
+    fill: all.$color-copper-light;
   }
 }

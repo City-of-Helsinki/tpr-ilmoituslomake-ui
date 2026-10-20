@@ -1,19 +1,19 @@
-@import "~hds-design-tokens/lib/all.scss";
+@use "~hds-design-tokens/lib/all.scss";
 
 .tipNotice {
-  background-color: $color-copper-light;
-  padding: $spacing-m;
+  background-color: all.$color-copper-light;
+  padding: all.$spacing-m;
 
   .heading {
     display: flex;
     flex-direction: row;
     align-items: flex-end;
     font-weight: 700;
-    font-size: $fontsize-body-l;
+    font-size: all.$fontsize-body-l;
   }
 
   .notice,
   .link {
-    margin-top: $spacing-s;
+    margin-top: all.$spacing-s;
   }
 }

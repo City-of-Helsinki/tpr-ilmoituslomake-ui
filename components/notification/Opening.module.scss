@@ -1,23 +1,23 @@
-@import "~hds-design-tokens/lib/all.scss";
+@use "~hds-design-tokens/lib/all.scss";
 
 .opening {
-  background-color: $color-silver-light;
-  padding: $spacing-m;
-  margin-top: $spacing-layout-s;
+  background-color: all.$color-silver-light;
+  padding: all.$spacing-m;
+  margin-top: all.$spacing-layout-s;
 
   .heading {
     display: flex;
     flex-direction: row;
     align-items: flex-end;
     font-weight: 700;
-    font-size: $fontsize-body-l;
+    font-size: all.$fontsize-body-l;
   }
 
   .icon {
-    margin-right: $spacing-2-xs;
+    margin-right: all.$spacing-2-xs;
   }
 
   .notice {
-    margin-top: $spacing-s;
+    margin-top: all.$spacing-s;
   }
 }

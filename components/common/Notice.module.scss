@@ -1,17 +1,17 @@
-@import "~hds-design-tokens/lib/all.scss";
-@import "../../styles/mixins";
+@use "~hds-design-tokens/lib/all.scss";
+@use "../../styles/mixins";
 
 .notice {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  margin-bottom: $spacing-layout-s;
-  border: solid $color-bus 0;
-  border-left-width: $spacing-2-xs;
-  background-color: $color-fog-light;
+  margin-bottom: all.$spacing-layout-s;
+  border: solid all.$color-bus 0;
+  border-left-width: all.$spacing-2-xs;
+  background-color: all.$color-fog-light;
 
   > div {
-    margin: $spacing-s;
+    margin: all.$spacing-s;
   }
 
   .flexText {
@@ -20,29 +20,29 @@
     flex-direction: row;
 
     .icon {
-      color: $color-bus;
+      color: all.$color-bus;
     }
 
     .text {
-      margin-left: $spacing-xl;
-      @include media(xs) {
-        margin-left: $spacing-s;
+      margin-left: all.$spacing-xl;
+      @include mixins.media(xs) {
+        margin-left: all.$spacing-s;
       }
 
       // $spacing-4-xl = 4rem = 64px
-      max-width: 8 * $spacing-4-xl;
-      @include media(xl) {
-        max-width: 12 * $spacing-4-xl;
+      max-width: 8 * all.$spacing-4-xl;
+      @include mixins.media(xl) {
+        max-width: 12 * all.$spacing-4-xl;
       }
 
       .title {
-        margin-bottom: $spacing-s;
-        font-size: $fontsize-heading-m;
+        margin-bottom: all.$spacing-s;
+        font-size: all.$fontsize-heading-m;
         font-weight: 700;
         outline: none;
 
-        @include media(xs) {
-          font-size: $fontsize-heading-s;
+        @include mixins.media(xs) {
+          font-size: all.$fontsize-heading-s;
         }
       }
 
@@ -50,7 +50,7 @@
       // }
 
       .message2 {
-        margin-top: $spacing-s;
+        margin-top: all.$spacing-s;
       }
     }
   }
@@ -63,10 +63,10 @@
 
     .flexButton {
       button {
-        width: 4 * $spacing-4-xl - $spacing-2-xs;
+        width: 4 * all.$spacing-4-xl - all.$spacing-2-xs;
 
         &:not(:hover) {
-          background-color: $color-white;
+          background-color: all.$color-white;
         }
       }
     }

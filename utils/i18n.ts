@@ -6,7 +6,7 @@ const i18nLoader = async (
   isTranslation?: boolean
 ): Promise<{ [locale: string]: { [key: string]: unknown } }> => {
   // dynamic import() resolves to an empty server chunk in Next.js 13; require() reads the file correctly on the server
-  // eslint-disable-next-line @typescript-eslint/no-var-requires
+
   const lngDict = require(`../locales/${locale || defaultLocale}.json`) as { [key: string]: unknown };
 
   // Only return the sections needed in order to reduce page size

@@ -75,7 +75,13 @@ const Map = (): ReactElement => {
   return (
     <div className="formSection">
       <h3>{i18n.t("notification.map.title")}</h3>
-      <Button variant={ButtonVariant.Supplementary} size={ButtonSize.Small} className="visibleOnFocusOnly" iconEnd={<IconPlaybackNext aria-hidden />} onClick={skipMap}>
+      <Button
+        variant={ButtonVariant.Supplementary}
+        size={ButtonSize.Small}
+        className="visibleOnFocusOnly"
+        iconEnd={<IconPlaybackNext aria-hidden />}
+        onClick={skipMap}
+      >
         {i18n.t("notification.map.skipMap")}
       </Button>
 

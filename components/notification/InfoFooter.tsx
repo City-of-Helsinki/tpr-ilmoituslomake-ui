@@ -10,7 +10,7 @@ interface InfoFooterProps {
   isEditingAllowed?: boolean;
 }
 
-const InfoFooter = ({ isEditingAllowed }: InfoFooterProps): ReactElement => {
+const InfoFooter = ({ isEditingAllowed = true }: InfoFooterProps): ReactElement => {
   const i18n = useI18n();
 
   const currentUser = useSelector((state: RootState) => state.general.user);
@@ -47,10 +47,6 @@ const InfoFooter = ({ isEditingAllowed }: InfoFooterProps): ReactElement => {
       </div>
     </div>
   );
-};
-
-InfoFooter.defaultProps = {
-  isEditingAllowed: true,
 };
 
 export default InfoFooter;

@@ -35,7 +35,7 @@ const Main = (): ReactElement => {
               href={TERMS_URL}
               size={LinkSize.Medium}
               openInNewTab
-              openInNewTabAriaLabel={i18n.t("common.opensInANewTab")}
+              openInNewTabLabel={i18n.t("common.opensInANewTab")}
               external
               openInExternalDomainAriaLabel={i18n.t("common.opensExternal")}
               disableVisitedStyles
@@ -48,7 +48,7 @@ const Main = (): ReactElement => {
               href={ACCESSIBILITY_URL}
               size={LinkSize.Medium}
               openInNewTab
-              openInNewTabAriaLabel={i18n.t("common.opensInANewTab")}
+              openInNewTabLabel={i18n.t("common.opensInANewTab")}
               external
               openInExternalDomainAriaLabel={i18n.t("common.opensExternal")}
               disableVisitedStyles

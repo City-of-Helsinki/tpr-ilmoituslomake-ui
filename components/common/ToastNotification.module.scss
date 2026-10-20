@@ -1,5 +1,5 @@
-@import "~hds-design-tokens/lib/all.scss";
+@use "~hds-design-tokens/lib/all.scss";
 
 .toastNotification {
-  margin-bottom: $spacing-s;
+  margin-bottom: all.$spacing-s;
 }

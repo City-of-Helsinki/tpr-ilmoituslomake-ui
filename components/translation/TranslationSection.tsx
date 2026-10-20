@@ -1,6 +1,7 @@
-import React, { ChangeEvent, FocusEvent, ReactElement, cloneElement } from "react";
+import React, { ChangeEvent, FocusEvent, ReactElement, ReactNode, cloneElement } from "react";
 import { TaskStatus, TaskType } from "../../types/constants";
 import { OptionType } from "../../types/general";
+import { Tooltip } from "hds-react";
 import styles from "./TranslationSection.module.scss";
 
 interface TranslationSectionProps {
@@ -26,32 +27,49 @@ interface TranslationSectionProps {
     | ((evt: ChangeEvent<HTMLTextAreaElement>) => void)
     | ((selected: OptionType[]) => void);
   blurCallback?: ((evt: FocusEvent<HTMLInputElement>) => void) | ((evt: FocusEvent<HTMLTextAreaElement>) => void);
-  TranslationComponent: ReactElement;
+  TranslationComponent: ReactElement<TranslationComponentProps>;
   isSelectionGroupWrapper?: boolean;
+}
+
+interface TranslationComponentProps {
+  id?: string;
+  className?: string;
+  label?: string;
+  value?: string | OptionType[];
+  onChange?: TranslationSectionProps["changeCallback"];
+  onBlur?: TranslationSectionProps["blurCallback"];
+  disabled?: boolean;
+  radiobuttonname?: string;
+  helperText?: string;
+  tooltip?: ReactNode;
+  invalid?: boolean;
+  errorText?: string;
+  required?: boolean;
+  "aria-required"?: boolean;
 }
 
 const TranslationSection = ({
   id,
   translateFrom,
   translateTo,
-  selectedValue,
-  translatedValue,
+  selectedValue = undefined,
+  translatedValue = undefined,
   taskType,
   taskStatus,
-  selectedHeaderText,
-  translatedHeaderText,
-  helperText,
-  tooltipButtonLabel,
-  tooltipLabel,
-  tooltipText,
-  forceDisabled,
-  invalid,
-  errorText,
-  required,
+  selectedHeaderText = undefined,
+  translatedHeaderText = undefined,
+  helperText = undefined,
+  tooltipButtonLabel = undefined,
+  tooltipLabel = undefined,
+  tooltipText = undefined,
+  forceDisabled = false,
+  invalid = false,
+  errorText = undefined,
+  required = false,
   changeCallback,
-  blurCallback,
+  blurCallback = undefined,
   TranslationComponent,
-  isSelectionGroupWrapper,
+  isSelectionGroupWrapper = false,
 }: TranslationSectionProps): ReactElement => {
   if (taskType === TaskType.Translation) {
     const { label } = TranslationComponent.props;
@@ -78,9 +96,11 @@ const TranslationSection = ({
           onChange: changeCallback,
           onBlur: blurCallback,
           helperText,
-          tooltipButtonLabel,
-          tooltipLabel,
-          tooltipText,
+          tooltip: tooltipText ? (
+            <Tooltip buttonLabel={tooltipButtonLabel} tooltipLabel={tooltipLabel}>
+              {tooltipText}
+            </Tooltip>
+          ) : undefined,
           disabled: taskStatus === TaskStatus.Closed || taskStatus === TaskStatus.Rejected || taskStatus === TaskStatus.Cancelled || forceDisabled,
           radiobuttonname: isSelectionGroupWrapper ? `${id}_Translated` : undefined,
           invalid,
@@ -93,23 +113,6 @@ const TranslationSection = ({
   }
 
   return <></>;
-};
-
-TranslationSection.defaultProps = {
-  selectedValue: undefined,
-  translatedValue: undefined,
-  selectedHeaderText: undefined,
-  translatedHeaderText: undefined,
-  helperText: undefined,
-  tooltipButtonLabel: undefined,
-  tooltipLabel: undefined,
-  tooltipText: undefined,
-  forceDisabled: false,
-  invalid: false,
-  errorText: undefined,
-  required: false,
-  blurCallback: undefined,
-  isSelectionGroupWrapper: false,
 };
 
 export default TranslationSection;

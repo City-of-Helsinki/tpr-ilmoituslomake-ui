@@ -1,4 +1,4 @@
-@import "~hds-design-tokens/lib/all.scss";
+@use "~hds-design-tokens/lib/all.scss";
 
 .statusRow {
   display: flex;
@@ -6,10 +6,10 @@
 
   .statusItem {
     flex-grow: 1;
-    padding: 0 $spacing-l;
+    padding: 0 all.$spacing-l;
 
     > div {
-      padding: $spacing-2-xs 0;
+      padding: all.$spacing-2-xs 0;
     }
   }
 }
@@ -21,10 +21,10 @@
 .counts {
   .count {
     font-weight: 700;
-    margin-right: $spacing-3-xs;
+    margin-right: all.$spacing-3-xs;
   }
 
   .label {
-    margin-right: $spacing-xs;
+    margin-right: all.$spacing-xs;
   }
 }

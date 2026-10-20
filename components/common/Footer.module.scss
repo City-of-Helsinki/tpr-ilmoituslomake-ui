@@ -1,7 +1,7 @@
-@import "~hds-design-tokens/lib/all.scss";
+@use "~hds-design-tokens/lib/all.scss";
 
 .footer {
-  margin-top: $spacing-layout-l;
+  margin-top: all.$spacing-layout-l;
 
   h2 {
     color: initial;
@@ -9,10 +9,10 @@
   }
 
   div {
-    fill: $color-black-5;
+    fill: all.$color-black-5;
   }
 
   &:before {
-    background-color: $color-black-5 !important;
+    background-color: all.$color-black-5 !important;
   }
 }

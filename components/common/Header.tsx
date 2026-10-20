@@ -3,25 +3,30 @@ import { useSelector } from "react-redux";
 import dynamic from "next/dynamic";
 import { useRouter } from "next/router";
 import { useI18n } from "next-localization";
-import { Header as HdsHeader,  
-  IconSearch, IconUser, 
-  IconSignin, 
-  IconSignout, 
-  LoginProvider, 
-  LoginProviderProps, 
-  Button, 
+import {
+  Header as HdsHeader,
+  IconSearch,
+  IconUser,
+  IconSignin,
+  IconSignout,
+  LoginProvider,
+  LoginProviderProps,
+  Button,
   ButtonVariant,
-  LoginButton, 
-  Logo, 
-  logoFi, 
-  logoSv, 
-  logoSvDark, 
-  WithoutAuthenticatedUser, 
-  WithAuthenticatedUser } from "hds-react";
+  LoginButton,
+  Logo,
+  logoFi,
+  logoSv,
+  logoSvDark,
+  WithoutAuthenticatedUser,
+  WithAuthenticatedUser,
+} from "hds-react";
 import { defaultLocale } from "../../utils/i18n";
 import { RootState } from "../../state/reducers";
 import getOrigin from "../../utils/request";
 import { string } from "yup";
+import styles from "./Header.module.scss";
+import { MAIN_URL } from "../../types/constants";
 
 interface HeaderProps {
   includeLanguageSelector?: boolean;
@@ -35,7 +40,7 @@ interface HeaderProps {
 //const DynamicNavigation = dynamic(() => import("hds-react").then((hds) => hds.Navigation), { ssr: false });
 const DynamicHeader = dynamic(() => import("hds-react").then((hds) => hds.Header), { ssr: false });
 
-const Header = ({ includeLanguageSelector, homePagePath, children }: HeaderProps): ReactElement => {
+const Header = ({ includeLanguageSelector = true, homePagePath = "", children = [] }: HeaderProps): ReactElement => {
   const i18n = useI18n();
   const router = useRouter();
 
@@ -75,6 +80,7 @@ const Header = ({ includeLanguageSelector, homePagePath, children }: HeaderProps
 
   return (
     <DynamicHeader
+      className={styles.header}
       // @ts-ignore: The HDS Navigation component comes from a dynamic import, see above for details
       aria-label={i18n.t("common.header.openMenu")}
     >
@@ -82,23 +88,22 @@ const Header = ({ includeLanguageSelector, homePagePath, children }: HeaderProps
 
       <HdsHeader.ActionBar
         logo={<Logo src={logoSrcFromLanguage()} alt={i18n.t("common.header.title")} />}
-        logoHref={`${router.basePath}${homePagePath}/${lang}`}
+        logoHref={`${MAIN_URL}${lang}`}
         title={i18n.t("common.header.title")}
         titleAriaLabel={i18n.t("common.header.titleAlt")}
-        titleHref={`${router.basePath}${homePagePath}/`}
+        titleHref={`${MAIN_URL}${lang}`}
         aria-label={i18n.t("common.header.openMenu")}
         frontPageLabel=""
       >
         {!currentUser?.authenticated && (
-          <Button
+          <HdsHeader.ActionBarButton
+            id="login"
             className="fixedRightPosition fit-content"
-            iconStart={<IconSignin aria-hidden />}
+            icon={<IconSignin aria-hidden />}
             onClick={signIn}
-            
-            variant={ButtonVariant.Supplementary}
+            label={i18n.t("common.header.login")}
           >
-            {i18n.t("common.header.login")}
-          </Button>
+          </HdsHeader.ActionBarButton>
         )}
 
         {currentUser?.authenticated && (
@@ -110,12 +115,7 @@ const Header = ({ includeLanguageSelector, homePagePath, children }: HeaderProps
             icon={<IconUser />}
             label={i18n.t("common.header.userInfo") + ` (${currentUser?.first_name || currentUser?.email})`}
           >
-            <HdsHeader.ActionBarSubItem
-              href="#"
-              iconEnd={<IconSignout aria-hidden />}
-              label={i18n.t("common.header.logout")}
-              onClick={signOut}
-            />
+            <HdsHeader.ActionBarSubItem href="#" iconEnd={<IconSignout aria-hidden />} label={i18n.t("common.header.logout")} onClick={signOut} />
           </HdsHeader.ActionBarItem>
         )}
 
@@ -130,12 +130,6 @@ const Header = ({ includeLanguageSelector, homePagePath, children }: HeaderProps
       {children}
     </DynamicHeader>
   );
-};
-
-Header.defaultProps = {
-  includeLanguageSelector: true,
-  homePagePath: "",
-  children: [],
 };
 
 export default Header;

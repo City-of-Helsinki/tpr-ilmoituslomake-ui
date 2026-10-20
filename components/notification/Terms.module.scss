@@ -1,22 +1,22 @@
-@import "~hds-design-tokens/lib/all.scss";
+@use "~hds-design-tokens/lib/all.scss";
 
 .terms {
-  background-color: $color-fog-light;
-  padding: $spacing-m;
+  background-color: all.$color-fog-light;
+  padding: all.$spacing-m;
 
   .heading {
     display: flex;
     flex-direction: row;
     align-items: flex-end;
     font-weight: 700;
-    font-size: $fontsize-body-l;
+    font-size: all.$fontsize-body-l;
   }
 
   .notice {
-    margin-top: $spacing-s;
+    margin-top: all.$spacing-s;
 
     .creativeCommonsLink {
-      margin: $spacing-xs 0;
+      margin: all.$spacing-xs 0;
     }
   }
 }

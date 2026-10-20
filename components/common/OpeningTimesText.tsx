@@ -11,7 +11,7 @@ interface OpeningTimesTextProps {
   openingTimes: OpeningTimeResult[];
 }
 
-const OpeningTimesText = ({ className, openingTimes }: OpeningTimesTextProps): ReactElement => {
+const OpeningTimesText = ({ className = "", openingTimes }: OpeningTimesTextProps): ReactElement => {
   const i18n = useI18n();
   const router = useRouter();
 
@@ -40,10 +40,6 @@ const OpeningTimesText = ({ className, openingTimes }: OpeningTimesTextProps): R
   ) : (
     <div className={`${styles.openingTimesResults} ${className}`}>{renderOpeningTimes(router.locale || defaultLocale)}</div>
   );
-};
-
-OpeningTimesText.defaultProps = {
-  className: "",
 };
 
 export default OpeningTimesText;
