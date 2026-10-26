@@ -94,6 +94,11 @@ const PlaceSearch = (): ReactElement => {
           value={placeName}
           maxLength={MAX_LENGTH}
           onChange={updateSearchText}
+          onKeyUp={(e) => {
+                        if (e.key === "Enter") {
+                            searchPlaces();
+                        }
+                    }}
         />
         <div className={styles.gridButton}>
           <Button onClick={searchPlaces}>{i18n.t("notification.button.search")}</Button>

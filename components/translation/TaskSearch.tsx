@@ -108,6 +108,11 @@ const TaskSearch = (): ReactElement => {
           value={placeName}
           maxLength={MAX_LENGTH}
           onChange={updateSearchText}
+          onKeyUp={(e) => {
+                        if (e.key === "Enter") {
+                            searchTasks();
+                        }
+                    }}
         />
         {requestOptions.length > 0 && (
           <Select

@@ -172,6 +172,11 @@ const PlaceSearch = (): ReactElement => {
           name="placeName"
           value={placeName}
           onChange={updateSearchText}
+          onKeyUp={(e) => {
+                        if (e.key === "Enter") {
+                            searchPlaces();
+                        }
+                    }}
         />
         <Select
           id="language"
