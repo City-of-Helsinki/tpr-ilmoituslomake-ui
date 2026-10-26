@@ -101,7 +101,7 @@ export const DATETIME_FORMAT = "D.M.YYYY H:mm";
 // export const TIME_FORMAT_HAUKI = "HH:mm:ss";
 export const TERMS_URL = "https://kaupunkialustana.hel.fi/kayttoehdot/";
 export const ACCESSIBILITY_URL = "https://kaupunkialustana.hel.fi/ilmoituslomake/kaupunkialustana-ilmoituslomakkeen-saavutettavuusseloste/";
-export const CONTACT_URL = "https://hel.fi/helsinki/fi/kaupunki-ja-hallinto/osallistu-ja-vaikuta/ota-yhteytta/";
+export const CONTACT_URL = "https://palautteet.hel.fi/";
 export const MODERATION_GUIDE_URL =
   "https://helsinginkaupunki.sharepoint.com/:w:/s/KANSLIAKaupunkialusta/Ebs0twXUrRJHpnJez-e3mTMBm4Q9GrHqeVBZCEskeh9kOA";
 export const TRANSLATION_GUIDE_URL = "https://kaupunkialustana.hel.fi/ilmoituslomake/kaannokset/";
@@ -115,6 +115,7 @@ export const MAP_MIN_ZOOM = 10;
 export const MAP_MAX_ZOOM = 18;
 export const SEARCH_URL = "https://api.hel.fi/servicemap/v2/search/?format=json";
 export const NEIGHBOURHOOD_URL = "https://api.hel.fi/servicemap/v2/administrative_division/?type=neighborhood";
+export const PROFILE_URL = "https://profiili.hel.fi/login";
 // export const SEARCH_URL = "/helapi/servicemap/v2/search/?format=json";
 // export const NEIGHBOURHOOD_URL = "/helapi/servicemap/v2/administrative_division/?type=neighborhood";
 

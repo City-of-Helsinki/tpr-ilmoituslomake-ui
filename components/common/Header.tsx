@@ -25,6 +25,7 @@ import { defaultLocale } from "../../utils/i18n";
 import { RootState } from "../../state/reducers";
 import getOrigin from "../../utils/request";
 import { string } from "yup";
+import { PROFILE_URL } from "../../types/constants";
 import styles from "./Header.module.scss";
 
 interface HeaderProps {
@@ -90,7 +91,7 @@ const Header = ({ includeLanguageSelector = true, homePagePath = "", children = 
         logoHref={`${router.basePath}${homePagePath}/${lang}`}
         title={i18n.t("common.header.title")}
         titleAriaLabel={i18n.t("common.header.titleAlt")}
-        titleHref={`${router.basePath}${homePagePath}/`}
+        titleHref={`${router.basePath}${homePagePath}/${lang}`}
         aria-label={i18n.t("common.header.openMenu")}
         frontPageLabel=""
       >
@@ -114,6 +115,7 @@ const Header = ({ includeLanguageSelector = true, homePagePath = "", children = 
             icon={<IconUser />}
             label={i18n.t("common.header.userInfo") + ` (${currentUser?.first_name || currentUser?.email})`}
           >
+            <HdsHeader.ActionBarSubItem href={PROFILE_URL} label={i18n.t("common.header.profile")} />
             <HdsHeader.ActionBarSubItem href="#" iconEnd={<IconSignout aria-hidden />} label={i18n.t("common.header.logout")} onClick={signOut} />
           </HdsHeader.ActionBarItem>
         )}

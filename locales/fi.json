@@ -8,7 +8,8 @@
       "selectLanguage": "Valitse kieli, ändra språk, select language",
       "userInfo": "Käyttäjätiedot",
       "login": "Kirjaudu sisään",
-      "logout": "Kirjaudu ulos"
+      "logout": "Kirjaudu ulos",
+      "profile": "Helsinki-profiili"
     },
     "footer": {
       "title": "Kaupunkialusta",
