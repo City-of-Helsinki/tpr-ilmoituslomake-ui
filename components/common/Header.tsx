@@ -27,6 +27,7 @@ import getOrigin from "../../utils/request";
 import { string } from "yup";
 import { PROFILE_URL } from "../../types/constants";
 import styles from "./Header.module.scss";
+import { MAIN_URL } from "../../types/constants";
 
 interface HeaderProps {
   includeLanguageSelector?: boolean;
@@ -88,10 +89,10 @@ const Header = ({ includeLanguageSelector = true, homePagePath = "", children = 
 
       <HdsHeader.ActionBar
         logo={<Logo src={logoSrcFromLanguage()} alt={i18n.t("common.header.title")} />}
-        logoHref={`${router.basePath}${homePagePath}/${lang}`}
+        logoHref={`${MAIN_URL}${lang}`}
         title={i18n.t("common.header.title")}
         titleAriaLabel={i18n.t("common.header.titleAlt")}
-        titleHref={`${router.basePath}${homePagePath}/${lang}`}
+        titleHref={`${MAIN_URL}${lang}`}
         aria-label={i18n.t("common.header.openMenu")}
         frontPageLabel=""
       >
