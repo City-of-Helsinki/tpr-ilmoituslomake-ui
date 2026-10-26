@@ -8,7 +8,8 @@
       "selectLanguage": "Valitse kieli, ändra språk, select language",
       "userInfo": "Användar information",
       "login": "Logga in",
-      "logout": "Logga ut"
+      "logout": "Logga ut",
+      "profile": "Helsinki Profile"
     },
     "footer": {
       "title": "Stadsplattform",
