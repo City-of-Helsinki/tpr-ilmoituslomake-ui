@@ -2,7 +2,7 @@ import React, { ChangeEvent, Dispatch, ReactElement } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useRouter } from "next/router";
 import { useI18n } from "next-localization";
-import { Select, TextInput } from "hds-react";
+import { Select, TextInput, defaultFilter } from "hds-react";
 import { ModerationAction } from "../../state/actions/moderationTypes";
 import { ModerationStatusAction } from "../../state/actions/moderationStatusTypes";
 import { setModerationExtraKeywords, setModerationMatkoTag, setModerationTag } from "../../state/actions/moderation";
@@ -102,6 +102,7 @@ const TagsModeration = (): ReactElement => {
                 tagsClearAllButton: i18n.t("moderation.button.clearAllSelections"),
               }}
               multiSelect
+              filter={defaultFilter}
             />
           }
         />
@@ -157,6 +158,7 @@ const TagsModeration = (): ReactElement => {
                 tagsClearAllButton: i18n.t("moderation.button.clearAllSelections"),
               }}
               multiSelect
+              filter={defaultFilter}
             />
           }
         />
