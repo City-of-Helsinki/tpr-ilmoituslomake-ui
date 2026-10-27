@@ -25,6 +25,7 @@ import { defaultLocale } from "../../utils/i18n";
 import { RootState } from "../../state/reducers";
 import getOrigin from "../../utils/request";
 import { string } from "yup";
+import { PROFILE_URL } from "../../types/constants";
 import styles from "./Header.module.scss";
 import { MAIN_URL } from "../../types/constants";
 
@@ -115,6 +116,7 @@ const Header = ({ includeLanguageSelector = true, homePagePath = "", children = 
             icon={<IconUser />}
             label={i18n.t("common.header.userInfo") + ` (${currentUser?.first_name || currentUser?.email})`}
           >
+            <HdsHeader.ActionBarSubItem href={PROFILE_URL} label={i18n.t("common.header.profile")} />
             <HdsHeader.ActionBarSubItem href="#" iconEnd={<IconSignout aria-hidden />} label={i18n.t("common.header.logout")} onClick={signOut} />
           </HdsHeader.ActionBarItem>
         )}
