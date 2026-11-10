@@ -131,6 +131,11 @@ const TaskSearch = ({ showStatus, setShowStatus }: TaskSearchProps): ReactElemen
           name="placeName"
           value={placeName}
           onChange={updateSearchText}
+          onKeyUp={(e) => {
+                        if (e.key === "Enter") {
+                            searchTasks();
+                        }
+                    }}
         />
         <Select
           id="taskType"

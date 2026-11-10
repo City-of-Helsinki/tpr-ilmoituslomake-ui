@@ -130,6 +130,11 @@ const TaskSearch = ({ showStatus, setShowStatus }: TaskSearchProps): ReactElemen
           value={placeName}
           maxLength={MAX_LENGTH}
           onChange={updateSearchText}
+          onKeyUp={(e) => {
+                        if (e.key === "Enter") {
+                            searchTasks();
+                        }
+                    }}
         />
         {taskResults.results.length > 0 && (
           <Select
