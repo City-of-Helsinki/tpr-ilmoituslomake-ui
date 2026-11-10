@@ -14,7 +14,7 @@ import {
   setNotificationNoCertificate,
 } from "../../state/actions/notification";
 import { RootState } from "../../state/reducers";
-import { MAX_LENGTH } from "../../types/constants";
+import { LANGUAGE_OPTIONS, MAX_LENGTH } from "../../types/constants";
 import { OptionType, CertificateOption, LabelOptionType } from "../../types/general";
 import { sortByOptionLabel } from "../../utils/helper";
 import { defaultLocale } from "../../utils/i18n";
@@ -94,7 +94,14 @@ const Certificates = (): ReactElement => {
   const convertValues = (values: number[]): OptionType[] => convertOptions(certificateOptions.filter((tag) => values.includes(tag.id)));
 
   const updateCertificates = (selected: OptionType[]) => {
-    dispatch(setNotificationCertificate(selected.map((s) => s.value as number)));
+    const ids = selected.map((s) => s.value as number);
+    dispatch(setNotificationCertificate(ids));
+    if (!ids.includes(-1)) {
+      LANGUAGE_OPTIONS.forEach((language) => {
+        dispatch(setNotificationOtherCertificate(language, ""));
+        dispatch(setNotificationOtherCertificateUrl(language, ""));
+      });
+    }
   };
 
   const updateLabelCertificate = (evt: ChangeEvent<HTMLInputElement>) => {

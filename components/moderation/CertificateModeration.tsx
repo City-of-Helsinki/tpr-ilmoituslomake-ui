@@ -91,7 +91,14 @@ const CertificateModeration = (): ReactElement => {
   const labelCertificates = certificateOptions.filter(filterLabels);
 
   const updateCertificates = (selected: OptionType[]) => {
-    dispatch(setModerationCertificate(selected.map((s) => s.value as number)));
+    const ids = selected.map((s) => s.value as number);
+    dispatch(setModerationCertificate(ids));
+    if (!ids.includes(-1)) {
+      LANGUAGE_OPTIONS.forEach((language) => {
+        dispatch(setModerationOtherCertificate(language, ""));
+        dispatch(setModerationOtherCertificateUrl(language, ""));
+      });
+    }
     if (selected.length > 0) {
       setModerationNoCertificate(false);
     } else {
